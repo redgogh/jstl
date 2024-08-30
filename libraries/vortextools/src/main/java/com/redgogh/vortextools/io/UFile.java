@@ -33,12 +33,14 @@ import java.util.List;
 import static com.redgogh.vortextools.Assert.quietly;
 import static com.redgogh.vortextools.Assert.xassert;
 import static com.redgogh.vortextools.Optional.optionalIfError;
+import static com.redgogh.vortextools.StringUtils.strcut;
+import static com.redgogh.vortextools.StringUtils.streq;
 
 /**
  * UFile 对象，增强 {@code File} 对象操作，添加更多实用函数以便在开发中
  * 提高效率，代码简洁。
  */
-public class UFile extends File implements Closeable {
+public class UFile extends File {
 
     /**
      * 空的 <code>File</code> 数组对象
@@ -59,7 +61,7 @@ public class UFile extends File implements Closeable {
      * @throws  NullPointerException
      *          If the <code>pathname</code> argument is <code>null</code>
      */
-    public UFile(@NotNull String pathname) {
+    public UFile(String pathname) {
         super(pathname);
     }
 
@@ -88,7 +90,7 @@ public class UFile extends File implements Closeable {
      * @throws  NullPointerException
      *          If <code>child</code> is <code>null</code>
      */
-    public UFile(String parent, @NotNull String child) {
+    public UFile(String parent, String child) {
         super(parent, child);
     }
 
@@ -117,7 +119,7 @@ public class UFile extends File implements Closeable {
      * @throws  NullPointerException
      *          If <code>child</code> is <code>null</code>
      */
-    public UFile(File parent, @NotNull String child) {
+    public UFile(File parent, String child) {
         super(parent, child);
     }
 
@@ -157,7 +159,7 @@ public class UFile extends File implements Closeable {
      * @see java.net.URI
      * @since 1.4
      */
-    public UFile(@NotNull URI uri) {
+    public UFile(URI uri) {
         super(uri);
     }
 
@@ -167,8 +169,39 @@ public class UFile extends File implements Closeable {
      *
      * @param file java.io 下的 File 对象实例
      */
-    public UFile(@NotNull File file) {
+    public UFile(File file) {
         this(file.getPath());
+    }
+
+    /**
+     * @return 返回一个干净的文件名称，指不带扩展后缀的
+     *         文件名
+     */
+    public String getCleanName() {
+        String name = getName();
+        return strcut(getName(), 0, name.lastIndexOf("."));
+    }
+
+    /**
+     * 比较两个文件的扩展类型是否一致。如果扩展名一致的话则返回 `true`。文件
+     * 的扩展名需要带 '.'，如：.pdf
+     *
+     * @param extension 文件扩展名
+     * @return 当前 UFile 文件和 {@code extension} 一致返回 `true`
+     */
+    public boolean typeEquals(Object extension) {
+        return streq(extension, getExtension());
+    }
+
+    /**
+     * @return 返回文件扩展名（后缀）
+     */
+    public String getExtension() {
+        String name = getName();
+        int index = name.indexOf(".");
+        if (index == -1)
+            return "";
+        return strcut(getName(), index, 0);
     }
 
     private boolean staticForceDeleteDirectory(UFile dir) {
@@ -599,7 +632,6 @@ public class UFile extends File implements Closeable {
      * 不再支持随机读写访问，并释放出文件描述符句柄。如果需要重新使用
      * 随机读写访问功能，重新打开文件描述符即可，
      */
-    @Override
     public void close() {
         checkOpen();
         IOUtils.closeQuietly(accessFile);

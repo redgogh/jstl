@@ -21,7 +21,7 @@ package com.redgogh.libraries.springframework.boot.web.configuration;
 /* Creates on 2022/12/23. */
 
 import com.alibaba.fastjson2.JSONObject;
-import com.redgogh.vortextools.ApiTemplateResult;
+import com.redgogh.vortextools.R;
 import com.redgogh.vortextools.BeanUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
@@ -64,7 +64,7 @@ public class GlobalExceptionHandler extends ExceptionHandlerExceptionResolver {
         return configuration.toJavaObject(HandlerConfiguration.class);
     }
 
-    private static void configure(ApiTemplateResult<String> apiTemplateResult, @NotNull String message) {
+    private static void configure(R<String> apiTemplateResult, @NotNull String message) {
         /* 判断有没有扩展值 */
         message = message.trim();
         next: if (message.startsWith("%x")) {
@@ -96,10 +96,10 @@ public class GlobalExceptionHandler extends ExceptionHandlerExceptionResolver {
      * 业务异常捕获
      */
     @ExceptionHandler(value = Exception.class)
-    public ApiTemplateResult<String> exceptionHandler(HttpServletRequest request, Exception e) {
+    public R<String> exceptionHandler(HttpServletRequest request, Exception e) {
         e.printStackTrace();
         String message = e.getMessage();
-        ApiTemplateResult<String> apiTemplateResult = ApiTemplateResult.failed();
+        R<String> apiTemplateResult = R.failed();
         configure(apiTemplateResult, message);
         return apiTemplateResult;
     }
@@ -108,14 +108,14 @@ public class GlobalExceptionHandler extends ExceptionHandlerExceptionResolver {
      * 参数校验异常捕获
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ApiTemplateResult<String>
+    public R<String>
     methodArgumentNotValidExceptionHandler(HttpServletRequest request, MethodArgumentNotValidException e) {
         String errorMessage = "";
         List<ObjectError> errors = e.getBindingResult().getAllErrors();
         for (ObjectError objectError : errors) {
             errorMessage = objectError.getDefaultMessage();
         }
-        return ApiTemplateResult.failed(errorMessage);
+        return R.failed(errorMessage);
     }
 
 }

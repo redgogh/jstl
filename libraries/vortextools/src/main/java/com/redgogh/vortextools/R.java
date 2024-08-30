@@ -39,7 +39,7 @@ import static com.redgogh.vortextools.StringUtils.strwfmt;
  * @author RedGogh
  */
 @Data
-public class ApiTemplateResult<T> implements Serializable {
+public class R<T> implements Serializable {
 
     /**
      * API 接口状态码
@@ -58,10 +58,10 @@ public class ApiTemplateResult<T> implements Serializable {
      */
     private Long timestamp = DateFormatter.currentTimestamp();
 
-    public ApiTemplateResult() {
+    public R() {
     }
 
-    public ApiTemplateResult(String code, T data, String err, Object... args) {
+    public R(String code, T data, String err, Object... args) {
         this.code = code;
         this.data = data;
         this.err = strwfmt(err, args);
@@ -71,32 +71,32 @@ public class ApiTemplateResult<T> implements Serializable {
     /// success
     /////////////////////////////////////////////////////////////////////////////////
 
-    public static <T> ApiTemplateResult<T> ok() {
+    public static <T> R<T> ok() {
         return ok((T) null);
     }
 
-    public static <T> ApiTemplateResult<T> ok(T data) {
+    public static <T> R<T> ok(T data) {
         return ok("200", data, "请求成功");
     }
 
-    public static <T> ApiTemplateResult<T> ok(String code, T data, String message, Object... args) {
-        return new ApiTemplateResult<>(code, data, message, args);
+    public static <T> R<T> ok(String code, T data, String message, Object... args) {
+        return new R<>(code, data, message, args);
     }
 
     /////////////////////////////////////////////////////////////////////////////////
     /// failed
     /////////////////////////////////////////////////////////////////////////////////
 
-    public static <T> ApiTemplateResult<T> failed() {
+    public static <T> R<T> failed() {
         return failed("请求失败");
     }
 
-    public static <T> ApiTemplateResult<T> failed(String message) {
+    public static <T> R<T> failed(String message) {
         return failed("500", null, message);
     }
 
-    public static <T> ApiTemplateResult<T> failed(String code, T data, String message, Object... args) {
-        return new ApiTemplateResult<>(code, data, message, args);
+    public static <T> R<T> failed(String code, T data, String message, Object... args) {
+        return new R<>(code, data, message, args);
     }
 
     /////////////////////////////////////////////////////////////////////////////////
