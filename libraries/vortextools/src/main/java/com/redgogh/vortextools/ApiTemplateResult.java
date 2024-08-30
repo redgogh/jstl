@@ -25,6 +25,7 @@ package com.redgogh.vortextools;
 
 /* Creates on 2023/5/13. */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.redgogh.vortextools.time.DateFormatter;
 import lombok.Data;
 
@@ -102,6 +103,7 @@ public class ApiTemplateResult<T> implements Serializable {
     /// not static
     /////////////////////////////////////////////////////////////////////////////////
 
+    @JsonIgnore
     public boolean isError() {
         return !streq("200", code);
     }

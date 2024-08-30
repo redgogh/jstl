@@ -12,6 +12,7 @@
     <artifactId>vortextools</artifactId>
 
     <properties>
+        <jackson.annotation.version>2.15.2</jackson.annotation.version>
         <fastjson.version>2.0.26</fastjson.version>
         <joda-time.version>2.12.2</joda-time.version>
         <java-jwt.version>4.3.0</java-jwt.version>
@@ -26,6 +27,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.annotation.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.ow2.asm</groupId>
             <artifactId>asm</artifactId>
