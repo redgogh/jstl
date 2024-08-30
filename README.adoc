@@ -27,6 +27,8 @@ JDK21 是 OpenJDK 的一个 LTS 版本，通常我们可以选择不同的发行
 
 === 构建
 
+构建项目前请**务必**按照 link:install.txt[install.txt] 中描述的模块按顺序安装到把本地。否则在执行 `clean` 或 `package` 等命令的时候会抛出找不到依赖版本的异常。
+
 本项目使用 Maven 进行构建，你需要在你本地的环境变量中添加 Maven 的 `/bin` 目录地址，并指定 Maven Home
 
     MAVEN_HOME=<your maven home>
