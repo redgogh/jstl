@@ -15,4 +15,3 @@ spring:
 routes:
   uri:
     opensso: lb://OPEN-SSO
-    kaiheiloft: lb://KAIHEILOFT

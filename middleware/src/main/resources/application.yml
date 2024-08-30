@@ -1,11 +1,11 @@
 server:
-  port: 3002
+  port: 8001
   servlet:
-    context-path: /scms
+    context-path: /middle
 
 spring:
   application:
-    name: KAIHEILOFT
+    name: CHIM-MIDDLE
   profiles:
     active: dev
   jackson:
