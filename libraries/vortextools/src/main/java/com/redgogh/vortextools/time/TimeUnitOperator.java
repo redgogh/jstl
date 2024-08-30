@@ -25,6 +25,7 @@ package com.redgogh.vortextools.time;
 
 /* Creates on 2022/3/30. */
 
+import com.redgogh.vortextools.Upgrade;
 import org.joda.time.DateTime;
 
 /**
@@ -70,6 +71,8 @@ public enum TimeUnitOperator {
      *
      * @return 加上对应 TimeUnits + unit 后的日期
      */
+    @Upgrade(features = "JDK17:EnhanceSwitch")
+    @SuppressWarnings("EnhancedSwitchMigration")
     public UDate add(UDate date, int unit) {
         DateTime calc = new DateTime(date);
         DateTime retval = null;
@@ -121,6 +124,8 @@ public enum TimeUnitOperator {
      *
      * @return 减去对应 TimeUnits - unit 后的日期
      */
+    @Upgrade(features = "JDK17:EnhanceSwitch")
+    @SuppressWarnings("EnhancedSwitchMigration")
     public UDate minus(UDate date, int unit) {
         DateTime calc = new DateTime(date);
         DateTime retval = null;
