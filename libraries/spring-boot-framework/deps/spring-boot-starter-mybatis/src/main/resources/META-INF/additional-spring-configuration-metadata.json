@@ -1,0 +1,14 @@
+{"properties": [
+  {
+    "name": "mybatis-plus.enable-primary-generator.dataCenterId",
+    "type": "java.lang.Integer",
+    "sourceType": "com.redgogh.springframework.boot.ibatis.SnowflakeIdGenerator",
+    "description": "数据中心ID"
+  },
+  {
+    "name": "mybatis-plus.enable-primary-generator.machineId",
+    "type": "java.lang.Integer",
+    "sourceType": "com.redgogh.springframework.boot.ibatis.SnowflakeIdGenerator",
+    "description": "机器ID"
+  }
+]}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/large-module-libs/spring-cloud-enhance-parent-module/dependencies/spring-cloud-starter-enhance-nacos/pom.xml" />
+        <option value="$PROJECT_DIR$/large-module-libs/spring-cloud-enhance-parent-module/spring-cloud-openfeign-api/pom.xml" />
+        <option value="$PROJECT_DIR$/large-module-libs/spring-cloud-enhance-parent-module/dependencies/spring-cloud-starter-enhance-openfeign/pom.xml" />
+        <option value="$PROJECT_DIR$/large-module-libs/spring-cloud-enhance-parent-module/pom.xml" />
+        <option value="$PROJECT_DIR$/large-module-libs/springboot-framework-libs/pom.xml" />
+        <option value="$PROJECT_DIR$/large-module-libs/springcloud-framework-libs/dependencies/spring-cloud-starter-enhance-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/libraries/springboot/deps/starter-web/pom.xml" />
+        <option value="$PROJECT_DIR$/libraries/springboot/deps/mysql-for-jpa/pom.xml" />
+        <option value="$PROJECT_DIR$/libraries/springboot/deps/mysql-for-mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/libraries/springboot/pom.xml" />
+        <option value="$PROJECT_DIR$/configuration/spring-boot-configuration-banner-text/pom.xml" />
+        <option value="$PROJECT_DIR$/configuration/spring-cloud-configuration-discovery-nacos/pom.xml" />
+        <option value="$PROJECT_DIR$/configuration/pom.xml" />
+        <option value="$PROJECT_DIR$/libraries/pom.xml" />
+        <option value="$PROJECT_DIR$/libraries/springcloud/api-service/pom.xml" />
+        <option value="$PROJECT_DIR$/opensso/api/pom.xml" />
+        <option value="$PROJECT_DIR$/api/pom.xml" />
+        <option value="$PROJECT_DIR$/libraries/spring-cloud-framework/deps/spring-cloud-starter-openfeign/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="azul-21" project-jdk-type="JavaSDK" />
+</project>

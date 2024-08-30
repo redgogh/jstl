@@ -1,0 +1,200 @@
+#!/bin/bash
+
+# ************************************************************************
+#
+# Copyright (C) 2020 RedGogh All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# ************************************************************************
+
+# @Author     RedGogh
+# @CreateTime 2023/06/08
+
+#
+# SpringBoot 应用名称
+#
+SPRING_APPLICATION_NAME=
+
+#
+# JVM启动参数
+#
+JVM_OPTS="-server -XX:+HeapDumpOnOutOfMemoryError"
+JVM_OPT_MIN_MEMORY="512m"
+JVM_OPT_MAX_MEMORY="1024m"
+
+ATORCH=".atorch"
+APPLICATION_LOG_OUTPUT="$SPRING_APPLICATION_NAME.log"
+
+#
+# JVM 以及 springboot 启动参数选项
+#
+start() {
+  if [ $# == 1 ]; then
+    echo "ERROR - Illegal argument, not select execute spring application name."
+    exit 1
+  fi
+  SPRING_APPLICATION_NAME=${!#}
+  shift
+  while getopts "hf:x:X:V:u:" opt; do
+    case ${opt} in
+      f )
+        JVM_OPTS="$JVM_OPTS -Dspring.profiles.active=$OPTARG"
+        ;;
+      x )
+        JVM_OPT_MIN_MEMORY="$OPTARG"
+        ;;
+      X )
+        JVM_OPT_MAX_MEMORY="$OPTARG"
+        ;;
+      V )
+        REMOTE_DEBUG_PORT=5005
+        MAYBE_OPTION="$OPTARG"
+        if [ "${MAYBE_OPTION:0:1}" = "-" ]; then
+          # 如果参数是命令，往右移动一位参数
+          set -- "$MAYBE_OPTION" "$@"
+        else
+          REMOTE_DEBUG_PORT=$OPTARG
+        fi
+        JVM_OPTS="$JVM_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:$REMOTE_DEBUG_PORT"
+        ;;
+      u )
+        case ${OPTARG} in
+          zgc* )
+            local ZGC_HEAP_SIZE=""
+            ZGC_HEAP_SIZE=$(echo "$OPTARG" | awk -F: '{if ($2) print $2; else print "2g"}')
+            JVM_OPTS="$JVM_OPTS -XX:+UseZGC -XX:ZHeapSize=$ZGC_HEAP_SIZE"
+            ;;
+          g1* )
+            JVM_OPTS="$JVM_OPTS -XX:+UseG1GC"
+            ;;
+          cms* )
+            JVM_OPTS="$JVM_OPTS -XX:+UseConcMarkSweepGC"
+            ;;
+        esac
+        # 打印GC日志
+        # JVM_OPTS="$JVM_OPTS -XX:+PrintGCDetails -XX:+PrintGC"
+        ;;
+      h )
+        echo "INFO - Help command options:"
+        echo "         -f <args>  设置SpringBoot active profiles参数"
+        echo "         -x <args>  设置Jvm最小堆内存参数"
+        echo "         -X <args>  设置Jvm最大堆内存参数"
+        echo "         -V <args>  可选参数，设置远程调试端口号。默认5005！"
+        echo "         -u <args>  设置使用GC，示例 -u zgc:4g 表示使用ZGC，ZGC堆大小为4g"
+        echo "                    除了zgc以外还可以设置，cms（并发标记清除gc）、g1（g1垃圾回收器）"
+        echo ""
+        echo "         -h         帮助文档"
+        exit 0
+        ;;
+      \? )
+        echo "ERROR - Invalid option: -$OPTARG" 1>&2
+        exit 1
+        ;;
+      * )
+        break
+        ;;
+    esac
+  done
+
+  if [ -n "$SPRING_ACTIVE_PROFILE" ]; then
+    echo "$SPRING_ACTIVE_PROFILE"
+  fi
+
+  cat /dev/null > $ATORCH
+  echo "$SPRING_APPLICATION_NAME" >> $ATORCH
+  local RUNCMD="java $JVM_OPTS -Xms$JVM_OPT_MIN_MEMORY -Xmx$JVM_OPT_MAX_MEMORY -jar $SPRING_APPLICATION_NAME.jar"
+  echo "$RUNCMD" >> $ATORCH
+  nohup $RUNCMD > $APPLICATION_LOG_OUTPUT 2>&1 < /dev/null & tail -f $APPLICATION_LOG_OUTPUT
+}
+
+#
+# 重启 SpringBoot 应用并按照上次的启动参数启动
+#
+restart() {
+  stop
+  local RUNCMD
+        RUNCMD=$(sed -n '2p' $ATORCH)
+  nohup $RUNCMD > $APPLICATION_LOG_OUTPUT 2>&1 < /dev/null & tail -f $APPLICATION_LOG_OUTPUT
+}
+
+#
+# 停止当前正在运行的程序
+#
+stop() {
+  local ATORCH_APPLICATION_NAME
+        ATORCH_APPLICATION_NAME=$(sed -n '1p' $ATORCH)
+  local PID
+        PID=$(pgrep -f "$ATORCH_APPLICATION_NAME")
+  # 杀死进程
+  if [ -n "$PID" ]; then
+    kill -9 "$PID"
+    echo "INFO - Kill process success, the pid is: $PID"
+  else
+    echo "WARN - No anything process can kill."
+  fi
+}
+
+#
+# 查询服务运行状态
+#
+status() {
+  local ATORCH_APPLICATION_NAME=$(sed -n '1p' $ATORCH)
+  local RUNCMD=$(sed -n '2p' $ATORCH)
+  local PID=$(pgrep -f "$ATORCH_APPLICATION_NAME")
+  if [ -n "$PID" ]; then
+    # 获取进程信息
+    CPU="$(ps -p $PID -o %cpu --no-headers)"
+    MEM="$(ps -p $PID -o %mem --no-headers)"
+    VSZ="$(ps -p $PID -o vsz --no-headers)"
+    RSS="$(ps -p $PID -o rss --no-headers)"
+    PROCESS_STATE="$(ps -p $PID -o state=)"
+    TERMINAL="$(ps -o tty= -p $PID)"
+    # 获取运行时间
+    UPTIME="$(awk '{print $14}' /proc/$PID/stat)"
+      # 将秒转换为时分秒格式
+      UPTIME_HOURS=$((UPTIME / 3600))
+      UPTIME_MINUTES=$((UPTIME % 3600 / 60))
+      UPTIME_SECONDS=$((UPTIME % 60))
+    # 输出进程状态信息
+    echo -e "\033[1;32m●\033[0m $ATORCH_APPLICATION_NAME -server from torch <status> command service"
+    echo -e "   Start/Run active ($RUNCMD)"
+    echo    "     └─CPU:$CPU%"
+    echo    "     └─Memory: $MEM%"
+    echo    "     └─VSZ: ${VSZ}kb"
+    echo    "     └─RSS: ${RSS}kb"
+    echo    "   Main PID: $PID"
+    echo    " process status: $PROCESS_STATE"
+    echo    " terminal status: $TERMINAL"
+    echo    " start & run time: ${UPTIME_HOURS}h/${UPTIME_MINUTES}m/${UPTIME_SECONDS}s"
+  fi
+}
+
+#
+# Main
+#
+case $1 in
+  start )
+    start "$@" ;;
+  stop )
+    stop "$@" ;;
+  restart )
+    restart "$@" ;;
+  status )
+    status "$@" ;;
+  * )
+    echo "ERROR - The run command only has: start/stop/restart." >&2
+    echo "        It looks like:" >&2
+    echo "          ./torch <start/stop/restart> ..." >&2
+    exit 1
+esac

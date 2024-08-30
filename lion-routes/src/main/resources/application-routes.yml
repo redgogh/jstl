@@ -1,0 +1,34 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        ##############################################
+        ### 微服务路由
+        ##############################################
+        - id: OPENSSO
+          uri: ${routes.uri.opensso}
+          predicates:
+            - Path=/opensso/**
+
+        - id: KAIHEILOFT
+          uri: ${routes.uri.kaiheiloft}
+          predicates:
+            - Path=/kaiheiloft/**
+
+        ##############################################
+        ### 登录注册路由
+        ##############################################
+
+        - id: SIGN_IN
+          uri: ${routes.uri.opensso}
+          predicates:
+            - Path=/sign-in
+          filters:
+            - RewritePath=/sign-in, /opensso/users/sign-in
+
+        - id: SIGN_UP
+          uri: ${routes.uri.opensso}
+          predicates:
+            - Path=/sign-up
+          filters:
+            - RewritePath=/sign-up, /opensso/users/sign-up

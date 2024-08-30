@@ -1,0 +1,12 @@
+server:
+  port: 3002
+  servlet:
+    context-path: /scms
+
+spring:
+  application:
+    name: KAIHEILOFT
+  profiles:
+    active: dev
+  jackson:
+    property-naming-strategy: SNAKE_CASE

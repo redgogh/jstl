@@ -1,0 +1,7 @@
+lion-routes:
+  path:
+    black:
+      - /**/built-in-iface/**
+    white:
+      - /sign-in
+      - /sign-up

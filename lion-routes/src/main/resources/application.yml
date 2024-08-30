@@ -1,0 +1,18 @@
+server:
+  port: 2018
+
+spring:
+  application:
+    name: LION-ROUTES
+  profiles:
+    active: dev
+    include: ${spring.profiles.active}, routes, nacos-${spring.profiles.active}
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: on
+routes:
+  uri:
+    opensso: lb://OPEN-SSO
+    kaiheiloft: lb://KAIHEILOFT
