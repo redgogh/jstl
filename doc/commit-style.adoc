@@ -35,6 +35,18 @@ git update-index --no-assume-unchanged src/resources/application-dev.yml
 
 这样 git 又会继续追踪这个文件的修改状态，使得你可以提交这个文件。好了，步入正题。
 
+== 准备工作
+
+在开始前请先执行以下配置.
+
+**设置用户信息：** 配置你的用户名和电子邮件地址作为提交记录中的作者信息。
+
+[shell]
+----
+git config --global user.name "<作者名称>"
+git config --global user.email "<邮箱地址>"
+----
+
 == COMMIT
 
 这个段落介绍我们在团队协作开发过程中，我们需要遵守哪些提交规范能够让我们更好的去管理项目以及多人协同开发工作。首先明令禁止类似 `update` 这种提交说明，这种提交是无意义的。
