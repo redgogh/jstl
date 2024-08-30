@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileSecurityController {
 
     @Autowired
-
     private FileSecurityService fileSecurityService;
 
     /**
