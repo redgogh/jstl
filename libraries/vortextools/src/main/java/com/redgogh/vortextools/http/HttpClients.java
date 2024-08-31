@@ -27,6 +27,7 @@ package com.redgogh.vortextools.http;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.redgogh.vortextools.Upgrade;
 import com.redgogh.vortextools.exception.HttpRequestException;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
@@ -404,6 +405,8 @@ public class HttpClients {
      * @param responseType
      *        响应数据类型
      */
+    @Upgrade(features = "OpenJDK17/EnhancedSwitchMigration")
+    @SuppressWarnings("EnhancedSwitchMigration")
     private static Object parseResponseObject(Response response, ResponseType responseType)
             throws IOException {
         ResponseBody body = response.body();
