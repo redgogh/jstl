@@ -1,4 +1,4 @@
-package com.redgogh.middleware.service;
+package com.redgogh.security.service;
 
 import com.redgogh.vortextools.io.UFile;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
-package com.redgogh.middleware.controller;
+package com.redgogh.security.controller;
 
-import com.redgogh.middleware.service.FileSecurityService;
+import com.redgogh.security.service.FileSecurityService;
 import com.redgogh.vortextools.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

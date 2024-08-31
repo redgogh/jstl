@@ -1,4 +1,4 @@
-package com.redgogh.middleware;
+package com.redgogh.security;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
