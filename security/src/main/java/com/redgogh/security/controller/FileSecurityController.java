@@ -1,7 +1,7 @@
 package com.redgogh.security.controller;
 
 import com.redgogh.security.service.FileSecurityService;
-import com.redgogh.vortextools.R;
+import com.redgogh.libraries.springframework.boot.web.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -21,7 +21,7 @@ package com.redgogh.libraries.springframework.boot.web.configuration;
 /* Creates on 2022/12/23. */
 
 import com.alibaba.fastjson2.JSONObject;
-import com.redgogh.vortextools.R;
+import com.redgogh.libraries.springframework.boot.web.R;
 import com.redgogh.vortextools.BeanUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
@@ -89,7 +89,7 @@ public class GlobalExceptionHandler extends ExceptionHandlerExceptionResolver {
             BeanUtils.copyProperties(configuration, apiTemplateResult);
             return;
         }
-        apiTemplateResult.setErr(message);
+        apiTemplateResult.setMessage(message);
     }
 
     /**

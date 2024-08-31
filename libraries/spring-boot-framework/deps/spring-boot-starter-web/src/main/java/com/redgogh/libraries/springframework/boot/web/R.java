@@ -1,4 +1,4 @@
-package com.redgogh.vortextools;
+package com.redgogh.libraries.springframework.boot.web;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -26,6 +26,7 @@ package com.redgogh.vortextools;
 /* Creates on 2023/5/13. */
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.redgogh.libraries.springframework.boot.web.utils.WebRequests;
 import com.redgogh.vortextools.time.DateFormatter;
 import lombok.Data;
 
@@ -42,6 +43,10 @@ import static com.redgogh.vortextools.StringUtils.strwfmt;
 public class R<T> implements Serializable {
 
     /**
+     * 请求id
+     */
+    private String request = WebRequests.getRequestId();
+    /**
      * API 接口状态码
      */
     private String code;
@@ -52,7 +57,7 @@ public class R<T> implements Serializable {
     /**
      * 错误信息
      */
-    private String err;
+    private String message;
     /**
      * 时间戳
      */
@@ -61,10 +66,10 @@ public class R<T> implements Serializable {
     public R() {
     }
 
-    public R(String code, T data, String err, Object... args) {
+    public R(String code, T data, String message, Object... args) {
         this.code = code;
         this.data = data;
-        this.err = strwfmt(err, args);
+        this.message = strwfmt(message, args);
     }
 
     /////////////////////////////////////////////////////////////////////////////////
@@ -109,7 +114,7 @@ public class R<T> implements Serializable {
     }
 
     public void throwIfError() {
-        xassert(!isError(), "%x[code: %s] %s", code, err);
+        xassert(!isError(), "%x[code: %s] %s", code, message);
     }
 
     public T as() {

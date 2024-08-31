@@ -26,6 +26,13 @@ public class WebRequests {
     }
 
     /**
+     * 获取请求 id
+     */
+    public static String getRequestId() {
+        return getHttpServletRequest().getRequestId();
+    }
+
+    /**
      * 获取用户真实ip
      */
     public static String getInetHostAddress() {
