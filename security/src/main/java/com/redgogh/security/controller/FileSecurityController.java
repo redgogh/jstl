@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author RedGogh
  */
 @RestController
-@RequestMapping("/security")
+@RequestMapping("/")
 public class FileSecurityController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class FileSecurityController {
     /**
      * 文件安全检查
      */
-    @GetMapping("/check")
+    @GetMapping("/check-file")
     public R<Boolean> check(@RequestParam("document") MultipartFile document) {
         return R.ok(fileSecurityService.checkFileSecurity(document));
     }
