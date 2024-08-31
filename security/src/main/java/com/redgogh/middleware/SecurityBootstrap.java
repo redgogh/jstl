@@ -34,8 +34,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @EnableValidExcept
 @SpringBootApplication
-public class MiddlewareBootstrap {
+public class SecurityBootstrap {
     public static void main(String[] args) {
-        SpringApplicationBootstrap.run(MiddlewareBootstrap.class, args);
+        SpringApplicationBootstrap.run(SecurityBootstrap.class, args);
     }
 }
