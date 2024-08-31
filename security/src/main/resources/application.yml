@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: CHIM-MIDDLE
+    name: CHIM-SECURITY-SERVER
   profiles:
     active: dev
   jackson:

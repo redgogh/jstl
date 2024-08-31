@@ -9,7 +9,7 @@
         <version>v1.0.0</version>
     </parent>
 
-    <artifactId>middleware</artifactId>
+    <artifactId>security</artifactId>
 
     <properties>
     </properties>

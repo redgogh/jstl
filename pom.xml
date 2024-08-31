@@ -10,7 +10,7 @@
 
     <modules>
         <module>lion-routes</module>
-        <module>middleware</module>
+        <module>security</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -56,14 +56,14 @@
     <file url="file://$PROJECT_DIR$/libraries/vortextools/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lion-routes/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lion-routes/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/middleware/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/middleware/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/msrv/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/msrv/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/opensso/api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/opensso/api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/opensso/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/opensso/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/security/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>
