@@ -36,6 +36,7 @@ public interface Logger {
      * @return 当前日志对象是否是一个有效的日志对象实例，如果不是
      *         则返回 <code>false</code>
      */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     boolean isValid();
 
     /**
@@ -92,6 +93,21 @@ public interface Logger {
      *        格式化参数
      */
     void error(String message, Object... args);
+
+    /**
+     * 打印 【error】 级别的日志信息到控制台，如果有使用日志框架，那么会
+     * 根据日志框架的配置输出到日志文件中。
+     *
+     * @param message
+     *        日志信息
+     *
+     * @param e
+     *        异常对象
+     *
+     * @param args
+     *        格式化参数
+     */
+    void error(String message, Throwable e, Object... args);
 
 }
 

@@ -71,5 +71,10 @@ public class Slf4jLogger implements Logger {
         logger.error(strwfmt(message, args));
     }
 
+    @Override
+    public void error(String message, Throwable e, Object... args) {
+        logger.error(strwfmt(message, args), e);
+    }
+
 }
 

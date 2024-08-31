@@ -40,4 +40,14 @@ public class LoggingExample {
         logger.error("ERROR");
     }
 
+    @Test
+    public void loggingErrorLevelExample() {
+        try {
+            Object o = null;
+            o.hashCode();
+        } catch (Exception e) {
+            logger.error("loggingErrorLevelExample --- %s", e, "ERROR");
+        }
+    }
+
 }

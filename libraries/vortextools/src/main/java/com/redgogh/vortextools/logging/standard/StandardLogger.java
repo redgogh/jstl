@@ -25,10 +25,15 @@ package com.redgogh.vortextools.logging.standard;
 
 /* Creates on 2019/11/05. */
 
+import com.redgogh.vortextools.io.IOUtils;
 import com.redgogh.vortextools.logging.Logger;
 import com.redgogh.vortextools.time.DateFormatter;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import static com.redgogh.vortextools.StringUtils.strwfmt;
+import static com.redgogh.vortextools.io.IOUtils.stdout;
 
 /**
  * @author RedGogh   
@@ -75,7 +80,16 @@ public class StandardLogger implements Logger {
         logprint(classpath, "ERROR", message, args);
     }
 
+    @Override
+    public void error(String message, Throwable e, Object... args) {
+        logprint(classpath, "ERROR", e, message, args);
+    }
+
     private static void logprint(String classpath, String level, String message, Object... args) {
+        logprint(classpath, level, null, message, args);
+    }
+
+    private static void logprint(String classpath, String level, Throwable e, String message, Object... args) {
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
         StackTraceElement stackTraceElement = stackTrace[stackTrace.length - 1];
         System.out.printf("%s %s [%s] %s --- %s\n",
@@ -84,6 +98,10 @@ public class StandardLogger implements Logger {
                 stackTraceElement.getMethodName(),
                 classpath,
                 strwfmt(message, args));
+
+        if (e != null) {
+            e.printStackTrace(stdout);
+        }
     }
 
 }
