@@ -47,6 +47,16 @@ object StringUtils {
     private val patternCompiled: WeakHashMap<String, Pattern> = WeakHashMap()
 
     /**
+     * 获取字符串长度，如果参数 [wstr] 为 `null` 则返回 `0`，
+     * 并且不会抛出空指针异常。
+     *
+     * @param wstr 任意字符串对象引用
+     * @return 字符串长度
+     */
+    @JvmStatic
+    fun strlen(wstr: Any?): Int = if (wstr != null) atos(wstr).length else 0
+
+    /**
      * 将字符串全部转为大写格式。
      *
      * @param wstr 字符串对象引用
