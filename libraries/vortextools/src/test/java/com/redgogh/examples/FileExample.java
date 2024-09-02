@@ -23,44 +23,44 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.vortextools.io.UFile;
+import com.redgogh.vortextools.io.File;
 import org.junit.Test;
 
 import static com.redgogh.vortextools.AnyObjects.printf;
 
 @SuppressWarnings("ALL")
-public class UFIleExample {
+public class FileExample {
 
     /**
      * 随机读写访问测试
      */
     @Test
     public void randomAccessExample() {
-        UFile uFile = new UFile(".dat");
+        File file = new File(".dat");
 
         // write float
-        uFile.open();
+        file.open();
         {
             float writeValue = 114.514f;
-            uFile.writeFloat(writeValue);
+            file.writeFloat(writeValue);
             printf("-------------------------------------------------------------------\n");
-            printf("UFile random access write float example, write value: %f\n", writeValue);
+            printf("File random access write float example, write value: %f\n", writeValue);
         }
-        uFile.close();
+        file.close();
 
             printf("-------------------------------------------------------------------\n");
 
         // read float
-        uFile.open();
+        file.open();
         {
             float readValue = 0.0f;
-            readValue = uFile.readFloat();
-            printf("UFile random access read float example, read value: %f\n", readValue);
+            readValue = file.readFloat();
+            printf("File random access read float example, read value: %f\n", readValue);
             printf("-------------------------------------------------------------------\n");
         }
-        uFile.close();
+        file.close();
 
-        uFile.forceDelete();
+        file.forceDelete();
     }
 
     /**
@@ -68,23 +68,23 @@ public class UFIleExample {
      */
     @Test
     public void randomAccessWriteExample() {
-        UFile uFile = new UFile(".dat");
+        File file = new File(".dat");
 
-        uFile.open();
+        file.open();
 
-        uFile.writeInt(1001);
-        uFile.writeInt(1002);
-        uFile.writeInt(1003);
+        file.writeInt(1001);
+        file.writeInt(1002);
+        file.writeInt(1003);
 
-        uFile.seek(0);
+        file.seek(0);
 
         printf("----------------------------------------------------\n");
-        printf("random access write example read(0): %s\n", uFile.readInt());
-        printf("random access write example read(1): %s\n", uFile.readInt());
-        printf("random access write example read(2): %s\n", uFile.readInt());
+        printf("random access write example read(0): %s\n", file.readInt());
+        printf("random access write example read(1): %s\n", file.readInt());
+        printf("random access write example read(2): %s\n", file.readInt());
         printf("----------------------------------------------------\n");
 
-        uFile.forceDelete();
+        file.forceDelete();
     }
 
 }

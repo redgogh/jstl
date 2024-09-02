@@ -33,17 +33,17 @@ import java.io.FileNotFoundException;
 /**
  * 文件输入流
  */
-public class UFileByteReader extends FileInputStream {
+public class FileByteReader extends FileInputStream {
 
-    public UFileByteReader(@NotNull String name) throws FileNotFoundException {
+    public FileByteReader(@NotNull String name) throws FileNotFoundException {
         super(name);
     }
 
-    public UFileByteReader(@NotNull File file) throws FileNotFoundException {
+    public FileByteReader(@NotNull File file) throws FileNotFoundException {
         super(file);
     }
 
-    public UFileByteReader(@NotNull FileDescriptor fdObj) {
+    public FileByteReader(@NotNull FileDescriptor fdObj) {
         super(fdObj);
     }
 

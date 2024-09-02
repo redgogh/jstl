@@ -29,9 +29,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.redgogh.vortextools.Upgrade;
 import com.redgogh.vortextools.exception.HttpRequestException;
-import com.redgogh.vortextools.io.UFile;
+import com.redgogh.vortextools.io.File;
 import okhttp3.*;
-import okhttp3.internal.http.HttpMethod;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -386,7 +385,7 @@ public class HttpClients {
 
             for (Map.Entry<String, Object> entry : formbody.entrySet()) {
                 Object value = entry.getValue();
-                if (value instanceof UFile file) {
+                if (value instanceof File file) {
                     builder.addFormDataPart(entry.getKey(), file.getName(),
                             RequestBody.create(file, MediaType.parse("text/plain")));
                 } else {

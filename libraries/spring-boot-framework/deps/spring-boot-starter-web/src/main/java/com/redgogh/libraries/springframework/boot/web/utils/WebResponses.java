@@ -27,7 +27,7 @@ package com.redgogh.libraries.springframework.boot.web.utils;
 
 import com.redgogh.vortextools.exception.IOWriteException;
 import com.redgogh.vortextools.io.IOUtils;
-import com.redgogh.vortextools.io.UFile;
+import com.redgogh.vortextools.io.File;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
@@ -48,7 +48,7 @@ public class WebResponses {
      * @param file
      *        文件对象
      */
-    public static void addFileHeader(HttpServletResponse response, UFile file) {
+    public static void addFileHeader(HttpServletResponse response, File file) {
         try {
             response.reset();
             response.setContentType("application/octet-stream");

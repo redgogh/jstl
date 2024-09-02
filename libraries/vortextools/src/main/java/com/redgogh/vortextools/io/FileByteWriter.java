@@ -30,17 +30,17 @@ import java.io.*;
 /**
  * 文件输出流
  */
-public class UFileByteWriter extends FileOutputStream {
+public class FileByteWriter extends FileOutputStream {
 
-    public UFileByteWriter(@NotNull String name) throws FileNotFoundException {
+    public FileByteWriter(@NotNull String name) throws FileNotFoundException {
         super(name);
     }
 
-    public UFileByteWriter(@NotNull File file) throws FileNotFoundException {
+    public FileByteWriter(@NotNull File file) throws FileNotFoundException {
         super(file);
     }
 
-    public UFileByteWriter(@NotNull FileDescriptor fdObj) {
+    public FileByteWriter(@NotNull FileDescriptor fdObj) {
         super(fdObj);
     }
 

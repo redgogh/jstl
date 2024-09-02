@@ -24,7 +24,6 @@ package com.redgogh.vortextools.io;
 \* -------------------------------------------------------------------------------- */
 
 import com.redgogh.vortextools.collection.Collects;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.net.URI;
@@ -37,15 +36,15 @@ import static com.redgogh.vortextools.StringUtils.strcut;
 import static com.redgogh.vortextools.StringUtils.streq;
 
 /**
- * UFile 对象，增强 {@code File} 对象操作，添加更多实用函数以便在开发中
+ * File 对象，增强 {@code File} 对象操作，添加更多实用函数以便在开发中
  * 提高效率，代码简洁。
  */
-public class UFile extends File {
+public class File extends java.io.File {
 
     /**
      * 空的 <code>File</code> 数组对象
      */
-    private static final File[] EMPTY_FILE_ARRAY = new File[0];
+    private static final java.io.File[] EMPTY_FILE_ARRAY = new java.io.File[0];
 
     /**
      * 文件随机读写访问对象
@@ -61,7 +60,7 @@ public class UFile extends File {
      * @throws  NullPointerException
      *          If the <code>pathname</code> argument is <code>null</code>
      */
-    public UFile(String pathname) {
+    public File(String pathname) {
         super(pathname);
     }
 
@@ -90,7 +89,7 @@ public class UFile extends File {
      * @throws  NullPointerException
      *          If <code>child</code> is <code>null</code>
      */
-    public UFile(String parent, String child) {
+    public File(String parent, String child) {
         super(parent, child);
     }
 
@@ -119,7 +118,7 @@ public class UFile extends File {
      * @throws  NullPointerException
      *          If <code>child</code> is <code>null</code>
      */
-    public UFile(File parent, String child) {
+    public File(java.io.File parent, String child) {
         super(parent, child);
     }
 
@@ -159,17 +158,17 @@ public class UFile extends File {
      * @see java.net.URI
      * @since 1.4
      */
-    public UFile(URI uri) {
+    public File(URI uri) {
         super(uri);
     }
 
     /**
-     * 通过一个 {@link File} 对象来构建一个 {@link UFile} 对象实例，并且参数 File
+     * 通过一个 {@link java.io.File} 对象来构建一个 {@link File} 对象实例，并且参数 File
      * 不能是空的。
      *
      * @param file java.io 下的 File 对象实例
      */
-    public UFile(File file) {
+    public File(java.io.File file) {
         this(file.getPath());
     }
 
@@ -187,7 +186,7 @@ public class UFile extends File {
      * 的扩展名需要带 '.'，如：.pdf
      *
      * @param extension 文件扩展名
-     * @return 当前 UFile 文件和 {@code extension} 一致返回 `true`
+     * @return 当前 File 文件和 {@code extension} 一致返回 `true`
      */
     public boolean typeEquals(Object extension) {
         return streq(extension, getExtension());
@@ -204,9 +203,9 @@ public class UFile extends File {
         return strcut(getName(), index, 0);
     }
 
-    private boolean staticForceDeleteDirectory(UFile dir) {
-        List<UFile> children = Collects.listMap(dir.listFiles(), UFile::new);
-        for (UFile child : children) {
+    private boolean staticForceDeleteDirectory(File dir) {
+        List<File> children = Collects.listMap(dir.listFiles(), File::new);
+        for (File child : children) {
             if (child.isFile()) {
                 child.forceDeleteFile();
             } else {
@@ -262,9 +261,9 @@ public class UFile extends File {
      * @param autoCreate 文件不存在时是否创建
      * @return 打开描述符后的文件输入流对象
      */
-    private UFileByteReader openByteReader(boolean autoCreate) {
+    private FileByteReader openByteReader(boolean autoCreate) {
         checkFile(autoCreate);
-        return quietly(() -> new UFileByteReader(this));
+        return quietly(() -> new FileByteReader(this));
     }
 
     /**
@@ -277,9 +276,9 @@ public class UFile extends File {
      * @param autoCreate 文件不存在时是否创建
      * @return 打开描述符后的文件输出流对象
      */
-    private UFileByteWriter openByteWriter(boolean autoCreate) {
+    private FileByteWriter openByteWriter(boolean autoCreate) {
         checkFile(autoCreate);
-        return quietly(() -> new UFileByteWriter(this));
+        return quietly(() -> new FileByteWriter(this));
     }
 
     /**
@@ -288,7 +287,7 @@ public class UFile extends File {
      *
      * @return 打开描述符后的文件输入流对象
      */
-    public UFileByteReader openByteReader() {
+    public FileByteReader openByteReader() {
         return openByteReader(true);
     }
 
@@ -298,7 +297,7 @@ public class UFile extends File {
      *
      * @return 打开描述符后的文件输入流对象
      */
-    public UFileByteWriter openByteWriter() {
+    public FileByteWriter openByteWriter() {
         return openByteWriter(true);
     }
 
@@ -308,7 +307,7 @@ public class UFile extends File {
      *
      * @return 打开描述符后的文件输入流对象
      */
-    public UFileByteReader openByteReaderDisabled() {
+    public FileByteReader openByteReaderDisabled() {
         return openByteReader(false);
     }
 
@@ -318,7 +317,7 @@ public class UFile extends File {
      *
      * @return 打开描述符后的文件输出流对象
      */
-    public UFileByteWriter openByteWriterDisabled() {
+    public FileByteWriter openByteWriterDisabled() {
         return openByteWriter(false);
     }
 
@@ -333,7 +332,7 @@ public class UFile extends File {
     }
 
     /**
-     * 打开文件描述符，使得 <code>UFile</code> 文件对象支持系统随机读写
+     * 打开文件描述符，使得 <code>File</code> 文件对象支持系统随机读写
      * 访问。随机读写机制能够更灵活的操作文件内容，并写入。性能更高。
      * 同时当文件打开成功以后，当前对象将支持所有随机读写访问函数。
      * <p>
@@ -351,7 +350,7 @@ public class UFile extends File {
     }
 
     /**
-     * 打开文件描述符，使得 <code>UFile</code> 文件对象支持系统随机读写
+     * 打开文件描述符，使得 <code>File</code> 文件对象支持系统随机读写
      * 访问。随机读写机制能够更灵活的操作文件内容，并写入。性能更高。
      * 同时当文件打开成功以后，当前对象将支持所有随机读写访问函数。
      * <p>
@@ -628,7 +627,7 @@ public class UFile extends File {
     }
 
     /**
-     * 关闭文件描述符，当文件描述符被关闭后，<code>UFile</code> 对象将
+     * 关闭文件描述符，当文件描述符被关闭后，<code>File</code> 对象将
      * 不再支持随机读写访问，并释放出文件描述符句柄。如果需要重新使用
      * 随机读写访问功能，重新打开文件描述符即可，
      */

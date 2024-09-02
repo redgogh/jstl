@@ -27,7 +27,7 @@ package com.redgogh.examples;
 
 import com.redgogh.vortextools.http.FormBodyBuilder;
 import com.redgogh.vortextools.http.HttpClients;
-import com.redgogh.vortextools.io.UFile;
+import com.redgogh.vortextools.io.File;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")
@@ -36,7 +36,7 @@ public class HttpClientsExample {
     @Test
     public void callFormBodyExample() {
         FormBodyBuilder formBodyBuilder = new FormBodyBuilder();
-        formBodyBuilder.put("document", new UFile("src/main/java/com/redgogh/vortextools/ArrayUtils.java"));
+        formBodyBuilder.put("document", new File("src/main/java/com/redgogh/vortextools/ArrayUtils.java"));
         System.out.println(HttpClients.post("http://127.0.0.1:8001/security/check-file", formBodyBuilder));
     }
 

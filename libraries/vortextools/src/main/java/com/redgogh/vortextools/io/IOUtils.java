@@ -91,9 +91,9 @@ public class IOUtils {
      *
      * @return 返回所有文件中的字节数据
      */
-    public static byte[] read(File file) {
+    public static byte[] read(java.io.File file) {
         xassert(file != null && file.isFile(), "文件不能为空且不能是目录！");
-        return read(new UFile(file).openByteReader());
+        return read(new File(file).openByteReader());
     }
 
     /**
@@ -196,7 +196,7 @@ public class IOUtils {
      *
      * @return 从文件描述符中读取到的字符串文本
      */
-    public static String strread(File file) {
+    public static String strread(java.io.File file) {
         return new String(read(file));
     }
 
@@ -230,10 +230,10 @@ public class IOUtils {
      *        输入流
      *
      * @param file
-     *        {@link UFile} 文件对象实例（如果文件不存在，则会创建）
+     *        {@link File} 文件对象实例（如果文件不存在，则会创建）
      */
-    public static void write(InputStream input, UFile file) {
-        UFileByteWriter writer = null;
+    public static void write(InputStream input, File file) {
+        FileByteWriter writer = null;
         try {
             writer = file.openByteWriter();
             write(input, writer);
@@ -255,9 +255,9 @@ public class IOUtils {
      *        字符串
      *
      * @param file
-     *        {@link UFile} 文件对象实例（如果文件不存在，则会创建）
+     *        {@link File} 文件对象实例（如果文件不存在，则会创建）
      */
-    public static void write(String input, UFile file) {
+    public static void write(String input, File file) {
         write(input.getBytes(), file);
     }
 
@@ -273,8 +273,8 @@ public class IOUtils {
      * @param file
      *        指定输出流
      */
-    public static void write(byte[] b, UFile file) {
-        UFileByteWriter writer = null;
+    public static void write(byte[] b, File file) {
+        FileByteWriter writer = null;
         try {
             writer = file.openByteWriterDisabled();
             write(b, writer);

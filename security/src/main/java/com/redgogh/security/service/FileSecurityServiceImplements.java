@@ -1,6 +1,6 @@
 package com.redgogh.security.service;
 
-import com.redgogh.vortextools.io.UFile;
+import com.redgogh.vortextools.io.File;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,7 +14,7 @@ public class FileSecurityServiceImplements implements FileSecurityService {
 
     @Override
     public boolean checkFileSecurity(MultipartFile document) {
-        return new UFile(document.getOriginalFilename()).typeEquals(".pdf");
+        return new File(document.getOriginalFilename()).typeEquals(".pdf");
     }
 
 }
