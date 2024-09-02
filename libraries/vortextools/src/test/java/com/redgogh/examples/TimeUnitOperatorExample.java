@@ -27,7 +27,7 @@ import com.redgogh.vortextools.time.TimeUnitOperator;
 import com.redgogh.vortextools.time.UDate;
 import org.junit.Test;
 
-import static com.redgogh.vortextools.RedGogh.printf;
+import static com.redgogh.vortextools.AnyObjects.printf;
 
 @SuppressWarnings("ALL")
 public class TimeUnitOperatorExample {

@@ -30,7 +30,7 @@ import org.junit.Test;
 import java.awt.*;
 import java.util.List;
 
-import static com.redgogh.vortextools.RedGogh.printf;
+import static com.redgogh.vortextools.AnyObjects.printf;
 
 @SuppressWarnings("ALL")
 public class UClassExample {

@@ -25,7 +25,7 @@ package com.redgogh.examples;
 
 import org.junit.Test;
 
-import static com.redgogh.vortextools.RedGogh.atos;
+import static com.redgogh.vortextools.AnyObjects.atos;
 
 @SuppressWarnings("ALL")
 public class StringExample {

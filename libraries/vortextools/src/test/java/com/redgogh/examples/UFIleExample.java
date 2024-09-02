@@ -26,7 +26,7 @@ package com.redgogh.examples;
 import com.redgogh.vortextools.io.UFile;
 import org.junit.Test;
 
-import static com.redgogh.vortextools.RedGogh.printf;
+import static com.redgogh.vortextools.AnyObjects.printf;
 
 @SuppressWarnings("ALL")
 public class UFIleExample {

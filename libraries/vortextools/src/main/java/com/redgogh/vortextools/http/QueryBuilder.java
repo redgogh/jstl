@@ -27,7 +27,7 @@ package com.redgogh.vortextools.http;
 
 import java.util.HashMap;
 
-import static com.redgogh.vortextools.RedGogh.atos;
+import static com.redgogh.vortextools.AnyObjects.atos;
 import static com.redgogh.vortextools.StringUtils.strwfmt;
 
 /**

@@ -25,8 +25,8 @@ package com.redgogh.vortextools
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.redgogh.vortextools.AnyObjects.atos
 import com.redgogh.vortextools.Optional.optionalIfError
-import com.redgogh.vortextools.RedGogh.atos
 import java.util.*
 import java.util.regex.Pattern
 

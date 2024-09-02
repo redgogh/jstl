@@ -25,8 +25,8 @@ package com.redgogh.examples;
 
 import org.junit.Test;
 
-import static com.redgogh.vortextools.RedGogh.atobool;
-import static com.redgogh.vortextools.RedGogh.printf;
+import static com.redgogh.vortextools.AnyObjects.atobool;
+import static com.redgogh.vortextools.AnyObjects.printf;
 
 @SuppressWarnings("ALL")
 public class RedGoghExample {
