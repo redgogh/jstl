@@ -24,7 +24,7 @@ public class FileSecurityController {
     /**
      * 文件安全检查
      */
-    @PostMapping("/check-file")
+    @PostMapping("/check/file")
     public R<Boolean> check(@RequestParam("document") MultipartFile document) {
         return R.ok(fileSecurityService.checkFileSecurity(document));
     }
