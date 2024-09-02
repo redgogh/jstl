@@ -24,7 +24,7 @@ package com.redgogh.examples;
 \* -------------------------------------------------------------------------------- */
 
 import com.redgogh.vortextools.time.TimeUnitOperator;
-import com.redgogh.vortextools.time.UDate;
+import com.redgogh.vortextools.time.Date;
 import org.junit.Test;
 
 import static com.redgogh.vortextools.AnyObjects.printf;
@@ -49,19 +49,19 @@ public class TimeUnitOperatorExample {
     }
 
     /**
-     * UDate：时间加一周
+     * Date：时间加一周
      */
     @Test
     public void udateAddOperateExample() {
-        printf("UDate WEEKs add 1 week example: %s\n", new UDate().add(TimeUnitOperator.WEEKS, 1));
+        printf("Date WEEKs add 1 week example: %s\n", new Date().add(TimeUnitOperator.WEEKS, 1));
     }
 
     /**
-     * UDate：时间减一周
+     * Date：时间减一周
      */
     @Test
     public void udateMinusOperateExample() {
-        printf("UDate WEEKs minus 1 week example: %s\n", new UDate().minus(TimeUnitOperator.WEEKS, 1));
+        printf("Date WEEKs minus 1 week example: %s\n", new Date().minus(TimeUnitOperator.WEEKS, 1));
     }
 
 }

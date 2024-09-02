@@ -24,24 +24,24 @@ package com.redgogh.examples;
 \* -------------------------------------------------------------------------------- */
 
 import com.redgogh.vortextools.time.DateFormatter;
-import com.redgogh.vortextools.time.UDate;
+import com.redgogh.vortextools.time.Date;
 import org.junit.Test;
 
 import static com.redgogh.vortextools.AnyObjects.printf;
 
 @SuppressWarnings("ALL")
-public class UDateExample {
+public class DateExample {
 
-    private UDate x = new UDate("yyyy-MM-dd HH:mm:ss", "2019-10-10 01:00:02");
-    private UDate y = new UDate("yyyy-MM-dd HH:mm:ss", "2019-10-10 01:00:03");
+    private Date x = new Date("yyyy-MM-dd HH:mm:ss", "2019-10-10 01:00:02");
+    private Date y = new Date("yyyy-MM-dd HH:mm:ss", "2019-10-10 01:00:03");
 
     /**
      * 使用表达式创建日期
      */
     @Test
     public void patternToCreateUDateExample() {
-        UDate uDate = new UDate("yyyy-MM-dd", "2019-10-10");
-        printf("pattern of yyyy-MM-dd to create UDate: %s\n", DateFormatter.fmt(uDate));
+        Date date = new Date("yyyy-MM-dd", "2019-10-10");
+        printf("pattern of yyyy-MM-dd to create Date: %s\n", date);
     }
 
     /**
@@ -49,11 +49,11 @@ public class UDateExample {
      */
     @Test
     public void dateCompareExample() {
-        printf("UDate x  < y compare result is: %s\n", x.lt(y));
-        printf("UDate x  > y compare result is: %s\n", x.gt(y));
-        printf("UDate x == y compare result is: %s\n", x.eq(y));
-        printf("UDate x <= y compare result is: %s\n", x.lteq(y));
-        printf("UDate x >= y compare result is: %s\n", x.gteq(y));
+        printf("Date x  < y compare result is: %s\n", x.lt(y));
+        printf("Date x  > y compare result is: %s\n", x.gt(y));
+        printf("Date x == y compare result is: %s\n", x.eq(y));
+        printf("Date x <= y compare result is: %s\n", x.lteq(y));
+        printf("Date x >= y compare result is: %s\n", x.gteq(y));
     }
 
 }

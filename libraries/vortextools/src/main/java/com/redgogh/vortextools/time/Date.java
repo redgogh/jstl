@@ -25,12 +25,11 @@ package com.redgogh.vortextools.time;
 
 /* Creates on 2022/3/30. */
 
-import java.util.Date;
-
 /**
- * UDate 日期对象
+ * Date 日期对象，使用的时候注意不要用到 {@link java.util.Date}
+ * 日期类了哦 ~
  */
-public class UDate extends Date {
+public class Date extends java.util.Date {
 
     /**
      * Allocates a <code>Date</code> object and initializes it so that
@@ -39,7 +38,7 @@ public class UDate extends Date {
      *
      * @see     java.lang.System#currentTimeMillis()
      */
-    public UDate() {
+    public Date() {
         super();
     }
 
@@ -52,17 +51,17 @@ public class UDate extends Date {
      * @param   date   the milliseconds since January 1, 1970, 00:00:00 GMT.
      * @see     java.lang.System#currentTimeMillis()
      */
-    public UDate(long date) {
+    public Date(long date) {
         super(date);
     }
 
     /**
-     * 分配一个 <code>UDate</code> 对象并使用 <code>Date</code> 对象
+     * 分配一个 <code>Date</code> 对象并使用 <code>Date</code> 对象
      * 初始化。
      *
      * @param date 日期对象
      */
-    public UDate(Date date) {
+    public Date(java.util.Date date) {
         this(date.getTime());
     }
 
@@ -81,7 +80,7 @@ public class UDate extends Date {
      * or <code>GregorianCalendar(year + 1900, month, date)</code>.
      */
     @Deprecated
-    public UDate(int year, int month, int date) {
+    public Date(int year, int month, int date) {
         super(year, month, date);
     }
 
@@ -104,7 +103,7 @@ public class UDate extends Date {
      * month, date, hrs, min)</code>.
      */
     @Deprecated
-    public UDate(int year, int month, int date, int hrs, int min) {
+    public Date(int year, int month, int date, int hrs, int min) {
         super(year, month, date, hrs, min);
     }
 
@@ -128,7 +127,7 @@ public class UDate extends Date {
      * month, date, hrs, min, sec)</code>.
      */
     @Deprecated
-    public UDate(int year, int month, int date, int hrs, int min, int sec) {
+    public Date(int year, int month, int date, int hrs, int min, int sec) {
         super(year, month, date, hrs, min, sec);
     }
 
@@ -136,7 +135,7 @@ public class UDate extends Date {
      * Allocates a <code>Date</code> object and initializes it so that
      * it represents the date and time indicated by the string
      * <code>s</code>, which is interpreted as if by the
-     * {@link Date#parse} method.
+     * {@link java.util.Date#parse} method.
      *
      * @param   s   a string representation of the date.
      * @see     java.text.DateFormat
@@ -145,78 +144,78 @@ public class UDate extends Date {
      * replaced by <code>DateFormat.parse(String s)</code>.
      */
     @Deprecated
-    public UDate(String s) {
+    public Date(String s) {
         super(s);
     }
 
     /**
-     * 使用字符串来创建 {@code UDate} 对象示例，可以手动指定日期正则
+     * 使用字符串来创建 {@code Date} 对象示例，可以手动指定日期正则
      * 表达是，如：{@code yyyy-MM-dd HH:mm:ss} 之类的。
      *
      * @param pattern 表达式
      * @param value   日期值
      */
-    public UDate(String pattern, String value) {
+    public Date(String pattern, String value) {
         this(DateFormatter.parse(pattern, value));
     }
 
     /**
-     * 当前 {@code UDate} 日期实例与另一个 {@code UDate} 日期
+     * 当前 {@code Date} 日期实例与另一个 {@code Date} 日期
      * 实例做比较，比较当前日期是否小于参数 {@code date} 日期。
      * 如果小于则返回 `true`。
      *
      * @param date 被比较的日期对象实例
      * @return 如果当前日期小于 {@code date} 则返回 `true`
      */
-    public boolean lt(UDate date) {
+    public boolean lt(Date date) {
         return this.getTime() < date.getTime();
     }
 
     /**
-     * 当前 {@code UDate} 日期实例与另一个 {@code UDate} 日期
+     * 当前 {@code Date} 日期实例与另一个 {@code Date} 日期
      * 实例做比较，比较当前日期是否大于参数 {@code date} 日期。
      * 如果大于则返回 `true`。
      *
      * @param date 被比较的日期对象实例
      * @return 如果当前日期大于 {@code date} 则返回 `true`
      */
-    public boolean gt(UDate date) {
+    public boolean gt(Date date) {
         return this.getTime() > date.getTime();
     }
 
     /**
-     * 当前 {@code UDate} 日期实例与另一个 {@code UDate} 日期
+     * 当前 {@code Date} 日期实例与另一个 {@code Date} 日期
      * 实例做比较，比较当前日期是否等于参数 {@code date} 日期。
      * 如果等于则返回 `true`。
      *
      * @param date 被比较的日期对象实例
      * @return 如果当前日期等于 {@code date} 则返回 `true`
      */
-    public boolean eq(UDate date) {
+    public boolean eq(Date date) {
         return this.getTime() == date.getTime();
     }
 
     /**
-     * 当前 {@code UDate} 日期实例与另一个 {@code UDate} 日期
+     * 当前 {@code Date} 日期实例与另一个 {@code Date} 日期
      * 实例做比较，比较当前日期是否小于等于参数 {@code date} 日期。
      * 如果小于等于则返回 `true`。
      *
      * @param date 被比较的日期对象实例
      * @return 如果当前日期小于等于 {@code date} 则返回 `true`
      */
-    public boolean lteq(UDate date) {
+    public boolean lteq(Date date) {
         return lt(date) || eq(date);
     }
 
     /**
-     * 当前 {@code UDate} 日期实例与另一个 {@code UDate} 日期
+     * 当前 {@code Date} 日期实例与另一个 {@code Date} 日期
      * 实例做比较，比较当前日期是否大于等于参数 {@code date} 日期。
      * 如果大于等于则返回 `true`。
      *
      * @param date 被比较的日期对象实例
      * @return 如果当前日期大于等于 {@code date} 则返回 `true`
      */
-    public boolean gteq(UDate date) {
+    public boolean gteq(Date date) {
         return gt(date) || eq(date);
     }
 
@@ -232,9 +231,9 @@ public class UDate extends Date {
      * @param value
      *        添加的单位数
      *
-     * @return 当前 {@code UDate} 对象引用
+     * @return 当前 {@code Date} 对象引用
      */
-    public UDate add(TimeUnitOperator op, int value) {
+    public Date add(TimeUnitOperator op, int value) {
         setTime(op.add(this, value).getTime());
         return this;
     }
@@ -251,15 +250,15 @@ public class UDate extends Date {
      * @param value
      *        添加的单位数
      *
-     * @return 当前 {@code UDate} 对象引用
+     * @return 当前 {@code Date} 对象引用
      */
-    public UDate minus(TimeUnitOperator op, int value) {
+    public Date minus(TimeUnitOperator op, int value) {
         setTime(op.minus(this, value).getTime());
         return this;
     }
 
     /**
-     * 当前 <code>UDate</code> 对象格式化转字符串，通过 {@link DateFormatter#fmt(UDate)}
+     * 当前 <code>Date</code> 对象格式化转字符串，通过 {@link DateFormatter#fmt(Date)}
      * 默认的格式化函数进行格式化。规则为：yyyy-MM-dd HH:mm:ss
      *
      * @return 格式化后的日期字符串（yyyy-MM-dd HH:mm:ss）
@@ -270,7 +269,7 @@ public class UDate extends Date {
     }
 
     /**
-     * 自定义格式化，将当前 <code>UDate</code> 对象格式化转字符串，格式化规则可以
+     * 自定义格式化，将当前 <code>Date</code> 对象格式化转字符串，格式化规则可以
      * 自定义。
      *
      * @return 格式化后的日期字符串

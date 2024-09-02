@@ -47,9 +47,9 @@ public class DateFormatter {
      *  接口层 */
     interface Formatter {
         /** 将日期格式化成字符串 */
-        String format(UDate date);
+        String format(Date date);
         /** 将字符串解析成日期 */
-        UDate parse(String text);
+        Date parse(String text);
     }
 
     /**
@@ -63,20 +63,20 @@ public class DateFormatter {
         }
 
         @Override
-        public String format(UDate date) {
+        public String format(Date date) {
             return sdf.format(date);
         }
 
         @Override
         @SneakyThrows
-        public UDate parse(String text) {
-            return new UDate(sdf.parse(text));
+        public Date parse(String text) {
+            return new Date(sdf.parse(text));
         }
     }
 
     /** 返回当前时间 */
-    public static UDate now() {
-        return new UDate();
+    public static Date now() {
+        return new Date();
     }
 
     /** 当前时间戳 */
@@ -107,7 +107,7 @@ public class DateFormatter {
      *
      * @return 格式化后的字符串
      */
-    public static String fmt(UDate date) {
+    public static String fmt(Date date) {
         return fmt(defaultFormatPattern, date);
     }
 
@@ -141,11 +141,11 @@ public class DateFormatter {
      *
      * @return 格式化后的字符串
      */
-    public static String fmt(String pattern, UDate date) {
+    public static String fmt(String pattern, Date date) {
         return compileFormatter(pattern).format(date);
     }
 
-    public static UDate parse(String text) {
+    public static Date parse(String text) {
         return parse(defaultFormatPattern, text);
     }
 
@@ -164,7 +164,7 @@ public class DateFormatter {
      *
      * @return 解析后的字符串
      */
-    public static UDate parse(String pattern, String text) {
+    public static Date parse(String pattern, String text) {
         return compileFormatter(pattern).parse(text);
     }
 

@@ -53,7 +53,7 @@ public enum TimeUnitOperator {
     YEARS,
     ;
 
-    public UDate add(int value) {
+    public Date add(int value) {
         return add(DateFormatter.now(), value);
     }
 
@@ -73,7 +73,7 @@ public enum TimeUnitOperator {
      */
     @Upgrade(features = "OpenJDK17/EnhancedSwitchMigration")
     @SuppressWarnings("EnhancedSwitchMigration")
-    public UDate add(UDate date, int unit) {
+    public Date add(Date date, int unit) {
         DateTime calc = new DateTime(date);
         DateTime retval = null;
         switch (this) {
@@ -103,10 +103,10 @@ public enum TimeUnitOperator {
                 break;
         }
         ;
-        return new UDate(retval.toDate());
+        return new Date(retval.toDate());
     }
 
-    public UDate minus(int unit) {
+    public Date minus(int unit) {
         return minus(DateFormatter.now(), unit);
     }
 
@@ -126,7 +126,7 @@ public enum TimeUnitOperator {
      */
     @Upgrade(features = "OpenJDK17/EnhancedSwitchMigration")
     @SuppressWarnings("EnhancedSwitchMigration")
-    public UDate minus(UDate date, int unit) {
+    public Date minus(Date date, int unit) {
         DateTime calc = new DateTime(date);
         DateTime retval = null;
         switch (this) {
@@ -156,7 +156,7 @@ public enum TimeUnitOperator {
                 break;
         }
         ;
-        return new UDate(retval.toDate());
+        return new Date(retval.toDate());
     }
 
 }
