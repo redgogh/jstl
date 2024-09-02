@@ -27,6 +27,7 @@ import com.redgogh.vortextools.time.DateFormatter;
 import com.redgogh.vortextools.time.Date;
 import org.junit.Test;
 
+import static com.redgogh.vortextools.AnyObjects.atobool;
 import static com.redgogh.vortextools.AnyObjects.printf;
 
 @SuppressWarnings("ALL")
@@ -40,8 +41,15 @@ public class DateExample {
      */
     @Test
     public void patternToCreateUDateExample() {
-        Date date = new Date("yyyy-MM-dd", "2019-10-10");
-        printf("pattern of yyyy-MM-dd to create Date: %s\n", date);
+        Date date = new Date("yyyy-MM-dd HH:mm:ss", "2019-10-08 11:45:14");
+        printf("pattern of yyyy-MM-dd HH:mm:ss to create Date: %s\n", date);
+        printf("year:                                          %s\n", date.getYear());
+        printf("month:                                         %s\n", date.getMonth());
+        printf("day:                                           %s\n", date.getDay());
+        printf("week:                                          %s\n", date.getWeekOfMonth());
+        printf("hour:                                          %s\n", date.getHours());
+        printf("minutes:                                       %s\n", date.getMinutes());
+        printf("seconds:                                       %s\n", date.getSeconds());
     }
 
     /**

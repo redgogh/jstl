@@ -25,6 +25,8 @@ package com.redgogh.vortextools.time;
 
 /* Creates on 2022/3/30. */
 
+import java.util.Calendar;
+
 /**
  * Date 日期对象，使用的时候注意不要用到 {@link java.util.Date}
  * 日期类了哦 ~
@@ -220,7 +222,7 @@ public class Date extends java.util.Date {
     }
 
     /**
-     * #brief：将指定日期对象加上 (value * op) <p>
+     * #brief：将指定日期对象加上 (value * op) 
      *
      * 将指定日期对象加上 (value * op)。假设需要让一个日期对象加一天，可以
      * 这样使用：{@code udate.add(TimeUintOperator.DAY, 1)}。
@@ -239,7 +241,7 @@ public class Date extends java.util.Date {
     }
 
     /**
-     * #brief：将指定日期对象减去 (value * op) <p>
+     * #brief：将指定日期对象减去 (value * op) 
      *
      * 将指定日期对象减去 (value * op)。假设需要让一个日期对象减去一天，可以
      * 这样使用：{@code udate.minus(TimeUintOperator.DAY, 1)}。
@@ -255,6 +257,134 @@ public class Date extends java.util.Date {
     public Date minus(TimeUnitOperator op, int value) {
         setTime(op.minus(this, value).getTime());
         return this;
+    }
+
+    /**
+     * 获取当前对象的年份。
+     * 
+     * 该方法使用 `Calendar` 类获取当前对象（假设为 `Date` 或类似对象）的年份部分。
+     * 方法内部会创建一个 `Calendar` 实例，并将当前对象的时间设置到该实例中，
+     * 然后从 `Calendar` 中提取出年份并返回。
+     *
+     * @return 当前对象的年份，类型为 int。
+     */
+    @SuppressWarnings("deprecation")
+    public int getYear() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this);
+        return calendar.get(Calendar.YEAR);
+    }
+
+    /**
+     * 获取当前对象的月份。
+     * 
+     * 该方法使用 `Calendar` 类获取当前对象（假设为 `Date` 或类似对象）的月份部分。
+     * 方法内部创建一个 `Calendar` 实例，将当前对象的时间设置到该实例中，
+     * 然后从 `Calendar` 中提取出月份并返回。
+     *
+     * @return 当前对象的月份，类型为 int。注意：月份是从 0 开始的（1 月为 0，2 月为 1，
+     *         依此类推）所以返回结果需要 + 1。
+     */
+    @SuppressWarnings({"deprecation", "MagicConstant"})
+    public int getMonth() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this);
+        return calendar.get(Calendar.MONTH) + 1;
+    }
+
+    /**
+     * 获取当前对象的日期（即日）。
+     * 
+     * 该方法使用 `Calendar` 类获取当前对象（假设为 `Date` 或类似对象）的日期部分。
+     * 方法内部创建一个 `Calendar` 实例，将当前对象的时间设置到该实例中，
+     * 然后从 `Calendar` 中提取出日期并返回。
+     *
+     * @return 当前对象的日期，类型为 int。
+     */
+    @SuppressWarnings("deprecation")
+    public int getDay() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this);
+        return calendar.get(Calendar.DAY_OF_MONTH);
+    }
+
+    /**
+     * 获取当前对象在一年中的第几周。
+     * 
+     * 该方法使用 `Calendar` 类获取当前对象（假设为 `Date` 或类似对象）在一年中的周数。
+     * 方法内部创建一个 `Calendar` 实例，将当前对象的时间设置到该实例中，
+     * 然后从 `Calendar` 中提取出年份中的周数并返回。
+     *
+     * @return 当前对象在一年中的第几周，类型为 int。
+     */
+    public int getWeekOfYear() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this);
+        return calendar.get(Calendar.WEEK_OF_YEAR);
+    }
+
+    /**
+     * 获取当前对象在一个月中的第几周。
+     * 
+     * 该方法使用 `Calendar` 类获取当前对象（假设为 `Date` 或类似对象）在一个月中的周数。
+     * 方法内部创建一个 `Calendar` 实例，将当前对象的时间设置到该实例中，
+     * 然后从 `Calendar` 中提取出一个月中的周数并返回。
+     *
+     * @return 当前对象在一个月中的第几周，类型为 int。
+     */
+    public int getWeekOfMonth() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this);
+        return calendar.get(Calendar.WEEK_OF_MONTH);
+    }
+
+    /**
+     * 获取当前对象的小时数（12 小时制）。
+     *
+     * 该方法使用 `Calendar` 类获取当前对象（假设为 `Date` 或类似对象）的小时部分，
+     * 使用的是 12 小时制。
+     * 方法内部创建一个 `Calendar` 实例，将当前对象的时间设置到该实例中，
+     * 然后从 `Calendar` 中提取出小时数并返回。
+     *
+     * @return 当前对象的小时数（12 小时制），类型为 int。
+     */
+    @SuppressWarnings("deprecation")
+    public int getHours() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this);
+        return calendar.get(Calendar.HOUR);
+    }
+
+    /**
+     * 获取当前对象的分钟数。
+     *
+     * 该方法使用 `Calendar` 类获取当前对象（假设为 `Date` 或类似对象）的分钟部分。
+     * 方法内部创建一个 `Calendar` 实例，将当前对象的时间设置到该实例中，
+     * 然后从 `Calendar` 中提取出分钟数并返回。
+     *
+     * @return 当前对象的分钟数，类型为 int。
+     */
+    @SuppressWarnings("deprecation")
+    public int getMinutes() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this);
+        return calendar.get(Calendar.MINUTE);
+    }
+
+    /**
+     * 获取当前对象的秒数。
+     *
+     * 该方法使用 `Calendar` 类获取当前对象（假设为 `Date` 或类似对象）的秒部分。
+     * 方法内部创建一个 `Calendar` 实例，将当前对象的时间设置到该实例中，
+     * 然后从 `Calendar` 中提取出秒数并返回。
+     *
+     * @return 当前对象的秒数，类型为 int。
+     */
+    @SuppressWarnings("deprecation")
+    public int getSeconds() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this);
+        return calendar.get(Calendar.SECOND);
     }
 
     /**
