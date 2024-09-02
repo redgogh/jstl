@@ -64,4 +64,16 @@ public class DateExample {
         printf("Date x >= y compare result is: %s\n", x.gteq(y));
     }
 
+    /**
+     * 计算时间差
+     */
+    @Test
+    public void dateDiffInExample() {
+        Date a = new Date("2018-01-01 00:00:02");
+        Date b = new Date("2018-01-01 00:00:05");
+        printf("date diff in days result is: %s\n", a.diffInDays(b));
+        printf("date diff in hours result is: %s\n", a.diffInHours(b));
+        printf("date diff in seconds result is: %s\n", a.diffInSeconds(b));
+    }
+
 }

@@ -26,6 +26,7 @@ package com.redgogh.vortextools.time;
 /* Creates on 2022/3/30. */
 
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Date 日期对象，使用的时候注意不要用到 {@link java.util.Date}
@@ -146,20 +147,17 @@ public class Date extends java.util.Date {
     }
 
     /**
-     * Allocates a <code>Date</code> object and initializes it so that
-     * it represents the date and time indicated by the string
-     * <code>s</code>, which is interpreted as if by the
-     * {@link java.util.Date#parse} method.
+     * 使用指定的日期时间字符串初始化一个 `Date` 对象。
+     * <p>
+     * 该构造函数将日期时间字符串解析为 `Date` 对象。默认的日期时间格式为
+     * "yyyy-MM-dd HH:mm:ss"，即年-月-日 时:分:秒。
      *
-     * @param   s   a string representation of the date.
-     * @see     java.text.DateFormat
-     * @see     java.util.Date#parse(java.lang.String)
-     * @deprecated As of JDK version 1.1,
-     * replaced by <code>DateFormat.parse(String s)</code>.
+     * @param value 日期时间字符串，必须符合 "yyyy-MM-dd HH:mm:ss" 格式。
+     *
+     * @throws IllegalArgumentException 如果传入的字符串不符合预期的日期时间格式或无法解析。
      */
-    @Deprecated
-    public Date(String s) {
-        super(s);
+    public Date(String value) {
+        this("yyyy-MM-dd HH:mm:ss", value);
     }
 
     /**
@@ -381,6 +379,66 @@ public class Date extends java.util.Date {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(this);
         return calendar.get(Calendar.MINUTE);
+    }
+
+    /**
+     * 计算当前对象与指定日期之间的天数差。
+     * <p>
+     * 该方法通过获取当前对象和指定日期的时间戳（以毫秒为单位），
+     * 计算它们之间的绝对差值，并将其转换为天数返回。
+     *
+     * @param date 要比较的日期。
+     * @return 当前对象与指定日期之间的天数差，类型为 int。
+     */
+    public int diffInDays(Date date) {
+        long a = this.getTime();
+        long b = date.getTime();
+        return (int) TimeUnit.MILLISECONDS.toDays(Math.abs(a - b));
+    }
+
+    /**
+     * 计算当前对象与指定日期之间的小时差。
+     * <p>
+     * 该方法通过获取当前对象和指定日期的时间戳（以毫秒为单位），
+     * 计算它们之间的绝对差值，并将其转换为小时数返回。
+     *
+     * @param date 要比较的日期。
+     * @return 当前对象与指定日期之间的小时差，类型为 int。
+     */
+    public int diffInHours(Date date) {
+        long a = this.getTime();
+        long b = date.getTime();
+        return (int) TimeUnit.MILLISECONDS.toHours(Math.abs(a - b));
+    }
+
+    /**
+     * 计算当前对象与指定日期之间的分钟差。
+     * <p>
+     * 该方法通过获取当前对象和指定日期的时间戳（以毫秒为单位），
+     * 计算它们之间的绝对差值，并将其转换为分钟数返回。
+     *
+     * @param date 要比较的日期。
+     * @return 当前对象与指定日期之间的分钟差，类型为 int。
+     */
+    public int diffInMinutes(Date date) {
+        long a = this.getTime();
+        long b = date.getTime();
+        return (int) TimeUnit.MILLISECONDS.toMinutes(Math.abs(a - b));
+    }
+
+    /**
+     * 计算当前对象与指定日期之间的秒数差。
+     * <p>
+     * 该方法通过获取当前对象和指定日期的时间戳（以毫秒为单位），
+     * 计算它们之间的绝对差值，并将其转换为秒数返回。
+     *
+     * @param date 要比较的日期。
+     * @return 当前对象与指定日期之间的秒数差，类型为 int。
+     */
+    public int diffInSeconds(Date date) {
+        long a = this.getTime();
+        long b = date.getTime();
+        return (int) TimeUnit.MILLISECONDS.toSeconds(Math.abs(a - b));
     }
 
     /**
