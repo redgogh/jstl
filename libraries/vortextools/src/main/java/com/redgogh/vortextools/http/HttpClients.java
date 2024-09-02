@@ -29,13 +29,16 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.redgogh.vortextools.Upgrade;
 import com.redgogh.vortextools.exception.HttpRequestException;
+import com.redgogh.vortextools.io.UFile;
 import okhttp3.*;
+import okhttp3.internal.http.HttpMethod;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import static com.redgogh.vortextools.AnyObjects.atos;
 import static com.redgogh.vortextools.Assert.xassert;
 
 /**
@@ -56,6 +59,11 @@ public class HttpClients {
         BYTE_STRING,
         BYTE_STREAM,
         CHAR_STREAM,
+    }
+
+    enum HttpMethod {
+        GET,
+        POST
     }
 
     /**
@@ -370,12 +378,37 @@ public class HttpClients {
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .build();
 
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
-                param instanceof String ? (String) param : JSON.toJSONString(param));
+        Object requestBody;
+
+        if (param instanceof FormBodyBuilder formbody) {
+            MultipartBody.Builder builder = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM);
+
+            for (Map.Entry<String, Object> entry : formbody.entrySet()) {
+                Object value = entry.getValue();
+                if (value instanceof UFile file) {
+                    builder.addFormDataPart(entry.getKey(), file.getName(),
+                            RequestBody.create(file, MediaType.parse("text/plain")));
+                } else {
+                    builder.addFormDataPart(entry.getKey(), atos(value));
+                }
+            }
+
+            requestBody = builder.build();
+        } else {
+            requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
+                    param instanceof String ? (String) param : JSON.toJSONString(param));
+        }
 
         Request.Builder requestBuilder = new Request.Builder()
-                .url(url)
-                .post(requestBody);
+                .url(url);
+
+        /* 添加 body */
+        switch (requestBody) {
+            case MultipartBody body -> requestBuilder.post(body);
+            case RequestBody body -> requestBuilder.post(body);
+            default -> throw new IllegalStateException("Unexpected value: " + requestBody);
+        }
 
         /* 添加 Header */
         if (headers != null && !headers.isEmpty())
