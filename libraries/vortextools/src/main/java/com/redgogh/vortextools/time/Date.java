@@ -30,6 +30,18 @@ import java.util.Calendar;
 /**
  * Date 日期对象，使用的时候注意不要用到 {@link java.util.Date}
  * 日期类了哦 ~
+ * <p>
+ * 在多线程环境下需要注意，如果需要使用和 {@link Date#setTime}
+ * 函数有关的方法，或者说需要多个线程修改内部的 time 变量的情况下
+ * 会导致线程不安全。所以请尽量避免在多线程环境下多个线程同时对一个
+ * 日期对象进行读写操作。如果需要请搭配 `ThreadLocal` 等线程安全
+ * 工具使用。
+ * <p>
+ * 因为 jdk 的日期类最初设计问题，所以本质上并不是 {@code Date} 对象线程
+ * 不安全，而是和日期操作有关的 {@code Calendar} 类，它是全局共享的，然后
+ * Date 又使用了 Calendar 做日期的计算操作。所以 Calendar 类是线程不安全的
+ * 然后 Date 类有依赖 Calendar 提供的函数，这也就间接导致了 Date 也是不安全
+ * 的。
  */
 public class Date extends java.util.Date {
 
@@ -223,7 +235,7 @@ public class Date extends java.util.Date {
 
     /**
      * #brief：将指定日期对象加上 (value * op) 
-     *
+     * <p>
      * 将指定日期对象加上 (value * op)。假设需要让一个日期对象加一天，可以
      * 这样使用：{@code udate.add(TimeUintOperator.DAY, 1)}。
      *
@@ -294,7 +306,7 @@ public class Date extends java.util.Date {
 
     /**
      * 获取当前对象的日期（即日）。
-     * 
+     * <p>
      * 该方法使用 `Calendar` 类获取当前对象（假设为 `Date` 或类似对象）的日期部分。
      * 方法内部创建一个 `Calendar` 实例，将当前对象的时间设置到该实例中，
      * 然后从 `Calendar` 中提取出日期并返回。
@@ -310,7 +322,7 @@ public class Date extends java.util.Date {
 
     /**
      * 获取当前对象在一年中的第几周。
-     * 
+     * <p>
      * 该方法使用 `Calendar` 类获取当前对象（假设为 `Date` 或类似对象）在一年中的周数。
      * 方法内部创建一个 `Calendar` 实例，将当前对象的时间设置到该实例中，
      * 然后从 `Calendar` 中提取出年份中的周数并返回。
@@ -325,7 +337,7 @@ public class Date extends java.util.Date {
 
     /**
      * 获取当前对象在一个月中的第几周。
-     * 
+     * <p>
      * 该方法使用 `Calendar` 类获取当前对象（假设为 `Date` 或类似对象）在一个月中的周数。
      * 方法内部创建一个 `Calendar` 实例，将当前对象的时间设置到该实例中，
      * 然后从 `Calendar` 中提取出一个月中的周数并返回。
@@ -340,7 +352,7 @@ public class Date extends java.util.Date {
 
     /**
      * 获取当前对象的小时数（12 小时制）。
-     *
+     * <p>
      * 该方法使用 `Calendar` 类获取当前对象（假设为 `Date` 或类似对象）的小时部分，
      * 使用的是 12 小时制。
      * 方法内部创建一个 `Calendar` 实例，将当前对象的时间设置到该实例中，
@@ -357,7 +369,7 @@ public class Date extends java.util.Date {
 
     /**
      * 获取当前对象的分钟数。
-     *
+     * <p>
      * 该方法使用 `Calendar` 类获取当前对象（假设为 `Date` 或类似对象）的分钟部分。
      * 方法内部创建一个 `Calendar` 实例，将当前对象的时间设置到该实例中，
      * 然后从 `Calendar` 中提取出分钟数并返回。
@@ -373,7 +385,7 @@ public class Date extends java.util.Date {
 
     /**
      * 获取当前对象的秒数。
-     *
+     * <p>
      * 该方法使用 `Calendar` 类获取当前对象（假设为 `Date` 或类似对象）的秒部分。
      * 方法内部创建一个 `Calendar` 实例，将当前对象的时间设置到该实例中，
      * 然后从 `Calendar` 中提取出秒数并返回。
