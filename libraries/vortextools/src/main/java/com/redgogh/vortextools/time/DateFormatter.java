@@ -56,8 +56,6 @@ public class DateFormatter {
      * 使用 SimpleDateFormatter 实现的 Formatter 接口。
      */
     static class LocalSimpleDateFormatter implements Formatter {
-        /* 使用 ThreadLocal 包装 SimpleDateFormatter 避免多线程下出现线程
-        *  安全问题。 */
         private final SimpleDateFormat sdf;
 
         LocalSimpleDateFormatter(String pattern) {
