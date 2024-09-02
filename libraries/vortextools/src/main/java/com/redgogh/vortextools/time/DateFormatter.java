@@ -58,22 +58,21 @@ public class DateFormatter {
     static class LocalSimpleDateFormatter implements Formatter {
         /* 使用 ThreadLocal 包装 SimpleDateFormatter 避免多线程下出现线程
         *  安全问题。 */
-        private final ThreadLocal<SimpleDateFormat> sdf =
-                new ThreadLocal<>();
+        private final SimpleDateFormat sdf;
 
         LocalSimpleDateFormatter(String pattern) {
-            this.sdf.set(new SimpleDateFormat(pattern));
+            this.sdf = new SimpleDateFormat(pattern);
         }
 
         @Override
         public String format(UDate date) {
-            return sdf.get().format(date);
+            return sdf.format(date);
         }
 
         @Override
         @SneakyThrows
         public UDate parse(String text) {
-            return new UDate(sdf.get().parse(text));
+            return new UDate(sdf.parse(text));
         }
     }
 
