@@ -226,6 +226,7 @@ object AnyObjects {
      * @throws NullPointerException `sub` 子字符串参数不能为空
      * @throws ArrayIndexOutOfBoundsException 如果参数 `len` 超出整个子字符串的大小后会抛出数组越界异常。
      */
+    @JvmStatic
     fun atos(obj: Any?, off: Int, len: Int): String {
         return atos(atos(obj), off, len)
     }

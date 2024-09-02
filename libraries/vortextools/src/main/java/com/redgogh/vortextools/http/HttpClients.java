@@ -215,7 +215,7 @@ public class HttpClients {
         Object retval;
 
         /* 构建参数 */
-        url = arguments.argConcat(url);
+        url = arguments.argConcatBuild(url);
 
         OkHttpClient client = new OkHttpClient()
                 .newBuilder()

@@ -25,7 +25,8 @@ package com.redgogh.vortextools.http;
 
 /* Creates on 2023/6/26. */
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static com.redgogh.vortextools.AnyObjects.atos;
 import static com.redgogh.vortextools.StringUtils.strwfmt;
@@ -33,18 +34,18 @@ import static com.redgogh.vortextools.StringUtils.strwfmt;
 /**
  * @author RedGogh   
  */
-public class QueryBuilder extends HashMap<String, String> {
+public class QueryBuilder extends LinkedHashMap<String, String> {
 
     /** 参数拼接 */
-    public String argConcat(String url) {
+    public String argConcatBuild(String url) {
         if (isEmpty())
             return url;
 
         StringBuilder builder = new StringBuilder();
 
-        for (Entry<String, String> entry : entrySet())
+        for (Map.Entry<String, String> entry : entrySet())
             builder.append(strwfmt("%s=%s&", entry.getKey(), entry.getValue()));
-        String finalArguments = atos(builder.toString().toCharArray(), 0, -1); /* 删掉最后一个字符 ‘&’ */
+        String finalArguments = atos(builder, 0, -1); /* 删掉最后一个字符 ‘&’ */
 
         return strwfmt("%s?%s", url, finalArguments);
     }
