@@ -150,6 +150,77 @@ public class UDate extends Date {
     }
 
     /**
+     * 使用字符串来创建 {@code UDate} 对象示例，可以手动指定日期正则
+     * 表达是，如：{@code yyyy-MM-dd HH:mm:ss} 之类的。
+     *
+     * @param pattern 表达式
+     * @param value   日期值
+     */
+    public UDate(String pattern, String value) {
+        this(DateFormatter.parse(pattern, value));
+    }
+
+    /**
+     * 当前 {@code UDate} 日期实例与另一个 {@code UDate} 日期
+     * 实例做比较，比较当前日期是否小于参数 {@code date} 日期。
+     * 如果小于则返回 `true`。
+     *
+     * @param date 被比较的日期对象实例
+     * @return 如果当前日期小于 {@code date} 则返回 `true`
+     */
+    public boolean lt(UDate date) {
+        return this.getTime() < date.getTime();
+    }
+
+    /**
+     * 当前 {@code UDate} 日期实例与另一个 {@code UDate} 日期
+     * 实例做比较，比较当前日期是否大于参数 {@code date} 日期。
+     * 如果大于则返回 `true`。
+     *
+     * @param date 被比较的日期对象实例
+     * @return 如果当前日期大于 {@code date} 则返回 `true`
+     */
+    public boolean gt(UDate date) {
+        return this.getTime() > date.getTime();
+    }
+
+    /**
+     * 当前 {@code UDate} 日期实例与另一个 {@code UDate} 日期
+     * 实例做比较，比较当前日期是否等于参数 {@code date} 日期。
+     * 如果等于则返回 `true`。
+     *
+     * @param date 被比较的日期对象实例
+     * @return 如果当前日期等于 {@code date} 则返回 `true`
+     */
+    public boolean eq(UDate date) {
+        return this.getTime() == date.getTime();
+    }
+
+    /**
+     * 当前 {@code UDate} 日期实例与另一个 {@code UDate} 日期
+     * 实例做比较，比较当前日期是否小于等于参数 {@code date} 日期。
+     * 如果小于等于则返回 `true`。
+     *
+     * @param date 被比较的日期对象实例
+     * @return 如果当前日期小于等于 {@code date} 则返回 `true`
+     */
+    public boolean lteq(UDate date) {
+        return lt(date) || eq(date);
+    }
+
+    /**
+     * 当前 {@code UDate} 日期实例与另一个 {@code UDate} 日期
+     * 实例做比较，比较当前日期是否大于等于参数 {@code date} 日期。
+     * 如果大于等于则返回 `true`。
+     *
+     * @param date 被比较的日期对象实例
+     * @return 如果当前日期大于等于 {@code date} 则返回 `true`
+     */
+    public boolean gteq(UDate date) {
+        return gt(date) || eq(date);
+    }
+
+    /**
      * #brief：将指定日期对象加上 (value * op) <p>
      *
      * 将指定日期对象加上 (value * op)。假设需要让一个日期对象加一天，可以
