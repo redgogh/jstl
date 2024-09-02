@@ -1,9 +1,9 @@
 package com.redgogh.security.controller;
 
-import com.redgogh.security.service.FileSecurityService;
 import com.redgogh.libraries.springframework.boot.web.R;
+import com.redgogh.security.service.FileSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +24,7 @@ public class FileSecurityController {
     /**
      * 文件安全检查
      */
-    @GetMapping("/check-file")
+    @PostMapping("/check-file")
     public R<Boolean> check(@RequestParam("document") MultipartFile document) {
         return R.ok(fileSecurityService.checkFileSecurity(document));
     }
