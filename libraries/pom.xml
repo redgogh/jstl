@@ -16,9 +16,10 @@
     </modules>
 
     <properties>
+        <kotlin.version>2.0.20</kotlin.version>
+        <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
         <spring-boot.version>3.1.4</spring-boot.version>
         <lombok.version>1.18.30</lombok.version>
-        <kotlin.version>1.8.20</kotlin.version>
         <junit.version>4.13.2</junit.version>
         <jackson-module-kotlin.version>2.14.2</jackson-module-kotlin.version>
         <java.compiler.version>21</java.compiler.version>
@@ -31,6 +32,17 @@
                 <groupId>com.redgogh.libraries</groupId>
                 <artifactId>jdkext</artifactId>
                 <version>v1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-stdlib</artifactId>
+                <version>${kotlin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-test</artifactId>
+                <version>${kotlin.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

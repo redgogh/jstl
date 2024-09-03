@@ -11,13 +11,13 @@
     <modules>
         <module>lion-routes</module>
         <module>security</module>
+        <module>libraries/workdoc</module>
     </modules>
     <packaging>pom</packaging>
 
     <properties>
         <spring-boot.version>3.0.3</spring-boot.version>
         <lombok.version>1.18.30</lombok.version>
-        <kotlin.version>1.8.20</kotlin.version>
         <junit.version>4.13.2</junit.version>
         <jackson-module-kotlin.version>2.14.2</jackson-module-kotlin.version>
         <java.compiler.version>21</java.compiler.version>

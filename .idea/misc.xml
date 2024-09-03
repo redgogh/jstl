@@ -30,6 +30,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/configuration/lang-kotlin-starter-configuration/pom.xml" />
         <option value="$PROJECT_DIR$/webocr/pom.xml" />
       </set>
     </option>

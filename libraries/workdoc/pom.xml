@@ -2,25 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>libraries</artifactId>
         <groupId>com.redgogh.libraries</groupId>
         <version>v1.0.0</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jdkext</artifactId>
+    <groupId>com.redgogh</groupId>
+    <artifactId>workdoc</artifactId>
 
     <properties>
-        <fastjson.version>2.0.26</fastjson.version>
-        <joda-time.version>2.12.2</joda-time.version>
-        <java-jwt.version>4.3.0</java-jwt.version>
-        <okhttp.version>4.10.0</okhttp.version>
-        <ip2region.version>2.6.1</ip2region.version>
-        <slf4j.version>1.7.21</slf4j.version>
-        <scala.version>2.10.4</scala.version>
-        <apache-poi.version>5.2.3</apache-poi.version>
-        <asm.version>9.5</asm.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
@@ -32,26 +27,6 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>${joda-time.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>okhttp</artifactId>
-            <version>${okhttp.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
         </dependency>
     </dependencies>
 
