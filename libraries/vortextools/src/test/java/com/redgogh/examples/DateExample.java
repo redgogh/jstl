@@ -76,4 +76,15 @@ public class DateExample {
         printf("date diff in seconds result is: %s\n", a.diffInSeconds(b));
     }
 
+    /**
+     * 计算日期是否在某个区间内
+     */
+    @Test
+    public void betweenExample() {
+        Date x = new Date("2018-01-01 00:00:05");
+        Date y = new Date("2019-01-01 00:00:05");
+        Date a = new Date("2018-12-31 00:00:05");
+        System.out.println(a.between(x, y));
+    }
+
 }

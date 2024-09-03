@@ -232,6 +232,19 @@ public class Date extends java.util.Date {
     }
 
     /**
+     * 判断当前对象是否在指定的开始日期和结束日期之间（包含边界）。
+     * <p>
+     * 该方法检查当前对象的日期是否大于等于开始日期，并且小于等于结束日期。
+     *
+     * @param begin 开始日期，作为比较的下限。
+     * @param end 结束日期，作为比较的上限。
+     * @return 如果当前对象在指定的开始和结束日期之间（包含边界），则返回 true；否则返回 false。
+     */
+    public boolean between(Date begin, Date end) {
+        return begin.lteq(this) && end.gteq(this);
+    }
+
+    /**
      * #brief：将指定日期对象加上 (value * op) 
      * <p>
      * 将指定日期对象加上 (value * op)。假设需要让一个日期对象加一天，可以
