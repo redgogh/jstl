@@ -173,6 +173,30 @@ public class File extends java.io.File {
     }
 
     /**
+     * 将指定的路径名字符串包装为自定义的 `File` 对象。
+     * <p>
+     * 该方法接收一个表示文件路径的字符串，并将其包装为当前定义的自定义 `File` 对象，以便进一步处理。
+     *
+     * @param pathname 要包装的文件路径名字符串。
+     * @return 一个新的 `File` 对象，包装了传入的文件路径名字符串。
+     */
+    public static File wrap(String pathname) {
+        return new File(pathname);
+    }
+
+    /**
+     * 将指定的 `java.io.File` 对象包装为自定义的 `File` 对象。
+     * <p>
+     * 该方法接收一个标准的 `java.io.File` 对象，并将其包装为当前定义的自定义 `File` 对象，以便进一步处理。
+     *
+     * @param file 要包装的 `java.io.File` 对象。
+     * @return 一个新的 `File` 对象，包装了传入的 `java.io.File` 对象。
+     */
+    public static File wrap(java.io.File file) {
+        return new File(file);
+    }
+
+    /**
      * @return 返回一个干净的文件名称，指不带扩展后缀的
      *         文件名
      */
