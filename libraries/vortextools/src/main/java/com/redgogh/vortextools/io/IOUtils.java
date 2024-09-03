@@ -31,7 +31,7 @@ import com.redgogh.vortextools.exception.IOWriteException;
 
 import java.io.*;
 
-import static com.redgogh.vortextools.Assert.quietly;
+import static com.redgogh.vortextools.Assert.throwIfError;
 import static com.redgogh.vortextools.Assert.xassert;
 
 /**
@@ -77,7 +77,7 @@ public class IOUtils {
      */
     public static void closeQuietly(Closeable closeable) {
         if (closeable != null)
-            quietly(closeable::close);
+            throwIfError(closeable::close);
     }
 
     /**
@@ -371,7 +371,7 @@ public class IOUtils {
      */
     public static void write(byte[] b, int off, int len,
                              OutputStream stream) {
-        quietly(() -> stream.write(b, off, len));
+        throwIfError(() -> stream.write(b, off, len));
     }
 
 }

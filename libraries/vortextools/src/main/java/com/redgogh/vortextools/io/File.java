@@ -29,7 +29,7 @@ import java.io.*;
 import java.net.URI;
 import java.util.List;
 
-import static com.redgogh.vortextools.Assert.quietly;
+import static com.redgogh.vortextools.Assert.throwIfError;
 import static com.redgogh.vortextools.Assert.xassert;
 import static com.redgogh.vortextools.Optional.optionalIfError;
 import static com.redgogh.vortextools.StringUtils.strcut;
@@ -271,7 +271,7 @@ public class File extends java.io.File {
      */
     private void checkFile(boolean autoCreate) {
         if (autoCreate && !exists())
-            quietly(this::createNewFile);
+            throwIfError(this::createNewFile);
         xassert(exists(), "%s （系统找不到指定的文件，文件不存在）", getPath());
     }
 
@@ -287,7 +287,7 @@ public class File extends java.io.File {
      */
     private FileByteReader openByteReader(boolean autoCreate) {
         checkFile(autoCreate);
-        return quietly(() -> new FileByteReader(this));
+        return throwIfError(() -> new FileByteReader(this));
     }
 
     /**
@@ -302,7 +302,7 @@ public class File extends java.io.File {
      */
     private FileByteWriter openByteWriter(boolean autoCreate) {
         checkFile(autoCreate);
-        return quietly(() -> new FileByteWriter(this));
+        return throwIfError(() -> new FileByteWriter(this));
     }
 
     /**
@@ -415,7 +415,7 @@ public class File extends java.io.File {
      */
     public int skipBytes(int n) {
         checkOpen();
-        return quietly(() -> accessFile.skipBytes(n));
+        return throwIfError(() -> accessFile.skipBytes(n));
     }
 
     /**
@@ -432,7 +432,7 @@ public class File extends java.io.File {
      */
     public void seek(long pos) {
         checkOpen();
-        quietly(() -> accessFile.seek(pos));
+        throwIfError(() -> accessFile.seek(pos));
     }
 
     /**
@@ -450,7 +450,7 @@ public class File extends java.io.File {
      */
     public int read() {
         checkOpen();
-        return quietly(() -> accessFile.read());
+        return throwIfError(() -> accessFile.read());
     }
 
     /**
@@ -465,7 +465,7 @@ public class File extends java.io.File {
      */
     public void read(byte[] b) {
         checkOpen();
-        quietly(() -> accessFile.read(b));
+        throwIfError(() -> accessFile.read(b));
     }
 
     /**
@@ -484,7 +484,7 @@ public class File extends java.io.File {
      */
     public void read(byte[] b, int off, int len) {
         checkOpen();
-        quietly(() -> accessFile.read(b, off, len));
+        throwIfError(() -> accessFile.read(b, off, len));
     }
 
     /**
@@ -499,7 +499,7 @@ public class File extends java.io.File {
      */
     public int readInt() {
         checkOpen();
-        return quietly(() -> accessFile.readInt());
+        return throwIfError(() -> accessFile.readInt());
     }
 
     /**
@@ -514,7 +514,7 @@ public class File extends java.io.File {
      */
     public long readLong() {
         checkOpen();
-        return quietly(() -> accessFile.readLong());
+        return throwIfError(() -> accessFile.readLong());
     }
 
     /**
@@ -529,7 +529,7 @@ public class File extends java.io.File {
      */
     public float readFloat() {
         checkOpen();
-        return quietly(() -> accessFile.readFloat());
+        return throwIfError(() -> accessFile.readFloat());
     }
 
     /**
@@ -544,7 +544,7 @@ public class File extends java.io.File {
      */
     public double readDouble() {
         checkOpen();
-        return quietly(() -> accessFile.readDouble());
+        return throwIfError(() -> accessFile.readDouble());
     }
 
     /**
@@ -558,7 +558,7 @@ public class File extends java.io.File {
      */
     public void write(byte b) {
         checkOpen();
-        quietly(() -> accessFile.write(b));
+        throwIfError(() -> accessFile.write(b));
     }
 
     /**
@@ -572,7 +572,7 @@ public class File extends java.io.File {
      */
     public void write(byte[] b) {
         checkOpen();
-        quietly(() -> accessFile.write(b));
+        throwIfError(() -> accessFile.write(b));
     }
 
     /**
@@ -591,7 +591,7 @@ public class File extends java.io.File {
      */
     public void write(byte[] b, int off, int len) {
         checkOpen();
-        quietly(() -> accessFile.write(b, off, len));
+        throwIfError(() -> accessFile.write(b, off, len));
     }
 
     /**
@@ -605,7 +605,7 @@ public class File extends java.io.File {
      */
     public void writeInt(int value) {
         checkOpen();
-        quietly(() -> accessFile.writeInt(value));
+        throwIfError(() -> accessFile.writeInt(value));
     }
 
     /**
@@ -619,7 +619,7 @@ public class File extends java.io.File {
      */
     public void writeLong(long value) {
         checkOpen();
-        quietly(() -> accessFile.writeLong(value));
+        throwIfError(() -> accessFile.writeLong(value));
     }
 
     /**
@@ -633,7 +633,7 @@ public class File extends java.io.File {
      */
     public void writeFloat(float value) {
         checkOpen();
-        quietly(() -> accessFile.writeFloat(value));
+        throwIfError(() -> accessFile.writeFloat(value));
     }
 
     /**
@@ -647,7 +647,7 @@ public class File extends java.io.File {
      */
     public void writeDouble(double value) {
         checkOpen();
-        quietly(() -> accessFile.writeDouble(value));
+        throwIfError(() -> accessFile.writeDouble(value));
     }
 
     /**

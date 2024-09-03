@@ -37,7 +37,7 @@ import java.util.Base64;
 import java.util.UUID;
 
 import static com.redgogh.vortextools.AnyObjects.atos;
-import static com.redgogh.vortextools.Assert.quietly;
+import static com.redgogh.vortextools.Assert.throwIfError;
 import static com.redgogh.vortextools.StringUtils.*;
 
 /**
@@ -306,7 +306,7 @@ public final class Cryptographic {
 
         @Override
         public String url(String source, String enc) {
-            return quietly(() -> URLDecoder.decode(source, enc));
+            return throwIfError(() -> URLDecoder.decode(source, enc));
         }
     };
 

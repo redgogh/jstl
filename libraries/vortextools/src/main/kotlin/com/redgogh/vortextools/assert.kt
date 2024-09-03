@@ -143,7 +143,7 @@ object Assert {
      *
      */
     @JvmStatic
-    fun iquietly(function: VoidFunction) {
+    fun ignore(function: VoidFunction) {
         try {
             function.apply()
         } catch (e: Throwable) {
@@ -160,7 +160,7 @@ object Assert {
      *
      */
     @JvmStatic
-    fun quietly(function: VoidFunction) = quietly(function, null)
+    fun throwIfError(function: VoidFunction) = throwIfError(function, null)
 
     /**
      * 闭包函数接口，安静地捕获一个异常并抛出。避免 try/catch 代码占用太多
@@ -173,7 +173,7 @@ object Assert {
      *
      */
     @JvmStatic
-    fun quietly(function: VoidFunction, vfmt: String?, vararg args: Any) {
+    fun throwIfError(function: VoidFunction, vfmt: String?, vararg args: Any) {
         try {
             function.apply()
         } catch (e: Throwable) {
@@ -191,7 +191,7 @@ object Assert {
      *
      */
     @JvmStatic
-    fun <T> quietly(function: TypeFunction<T>): T = quietly(function, null)
+    fun <T> throwIfError(function: TypeFunction<T>): T = throwIfError(function, null)
 
     /**
      * 闭包函数接口，安静地捕获一个异常并抛出。避免 try/catch 代码占用太多
@@ -205,7 +205,7 @@ object Assert {
      *
      */
     @JvmStatic
-    fun <T> quietly(function: TypeFunction<T>, vfmt: String?, vararg args: Any): T {
+    fun <T> throwIfError(function: TypeFunction<T>, vfmt: String?, vararg args: Any): T {
         try {
             return function.apply()
         } catch (e: Throwable) {

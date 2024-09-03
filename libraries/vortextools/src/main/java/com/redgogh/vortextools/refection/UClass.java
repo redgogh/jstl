@@ -34,7 +34,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
-import static com.redgogh.vortextools.Assert.quietly;
+import static com.redgogh.vortextools.Assert.throwIfError;
 import static com.redgogh.vortextools.Assert.throwIfNull;
 import static com.redgogh.vortextools.collection.Collects.*;
 
@@ -70,7 +70,7 @@ public class UClass {
     }
 
     public static UClass forName(String className) {
-        Class<?> clazz = (Class<?>) quietly(() -> Class.forName(className));
+        Class<?> clazz = (Class<?>) throwIfError(() -> Class.forName(className));
         return new UClass(clazz);
     }
 
@@ -191,7 +191,7 @@ public class UClass {
     }
 
     public Object staticInvoke(String name, Object... args) {
-        return quietly(() -> {
+        return throwIfError(() -> {
             Method method = args == null ? descriptor.getDeclaredMethod(name) :
                     descriptor.getDeclaredMethod(name, toClassArray(args));
             return method.invoke(null, args);

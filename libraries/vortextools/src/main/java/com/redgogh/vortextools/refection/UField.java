@@ -141,13 +141,13 @@ public class UField {
          * 获取当前属性中的值
          */
         public Object read() {
-            return quietly(() -> field.get(instance));
+            return throwIfError(() -> field.get(instance));
         }
         /**
          * 设置当前属性中的值
          */
         public void write(Object value) {
-            quietly(() -> field.set(instance, value));
+            throwIfError(() -> field.set(instance, value));
         }
     }
 
@@ -259,7 +259,7 @@ public class UField {
      *        目标对象实例
      */
     public static void copyIgnoreError(Object src, Object dest, String name) {
-        iquietly(() -> copy(src, dest, name));
+        ignore(() -> copy(src, dest, name));
     }
 
     /**
