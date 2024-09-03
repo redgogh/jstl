@@ -27,14 +27,14 @@ package com.redgogh.libraries.springframework.boot.web;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.redgogh.libraries.springframework.boot.web.utils.WebRequests;
-import com.redgogh.vortextools.time.DateFormatter;
+import com.redgogh.jdkext.time.DateFormatter;
 import lombok.Data;
 
 import java.io.Serializable;
 
-import static com.redgogh.vortextools.Assert.xassert;
-import static com.redgogh.vortextools.StringUtils.streq;
-import static com.redgogh.vortextools.StringUtils.strwfmt;
+import static com.redgogh.jdkext.Assert.xassert;
+import static com.redgogh.jdkext.StringUtils.streq;
+import static com.redgogh.jdkext.StringUtils.strwfmt;
 
 /**
  * @author RedGogh

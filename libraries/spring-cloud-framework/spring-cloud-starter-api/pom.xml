@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>com.redgogh.libraries</groupId>
-            <artifactId>vortextools</artifactId>
+            <artifactId>jdkext</artifactId>
         </dependency>
     </dependencies>
 

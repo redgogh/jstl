@@ -15,6 +15,8 @@
     <file url="file://$PROJECT_DIR$/configuration/spring-cloud-configuration-discovery-nacos/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/configuration/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/configuration/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/jdkext/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/libraries/jdkext/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libraries/spring-boot-framework/deps/predefined/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libraries/spring-boot-framework/deps/predefined/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libraries/spring-boot-framework/deps/predefined/src/main/resources/lib" charset="UTF-8" />
@@ -52,8 +54,6 @@
     <file url="file://$PROJECT_DIR$/libraries/spring-cloud-framework/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libraries/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libraries/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libraries/vortextools/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libraries/vortextools/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lion-routes/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lion-routes/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/msrv/src/main/java" charset="UTF-8" />

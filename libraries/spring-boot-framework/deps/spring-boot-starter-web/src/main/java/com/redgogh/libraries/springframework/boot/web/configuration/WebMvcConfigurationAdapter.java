@@ -27,7 +27,7 @@ package com.redgogh.libraries.springframework.boot.web.configuration;
 
 import com.redgogh.libraries.springframework.boot.web.configuration.interceptors.AfterRequestInterceptor;
 import com.redgogh.libraries.springframework.boot.web.configuration.interceptors.BeforeRequestInterceptor;
-import com.redgogh.vortextools.collection.Collects;
+import com.redgogh.jdkext.collection.Collects;
 import lombok.Data;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.InitializingBean;

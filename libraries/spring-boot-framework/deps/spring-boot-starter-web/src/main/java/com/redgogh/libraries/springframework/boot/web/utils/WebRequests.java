@@ -8,8 +8,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.Objects;
 
-import static com.redgogh.vortextools.StringUtils.strnemp;
-import static com.redgogh.vortextools.StringUtils.strtok;
+import static com.redgogh.jdkext.StringUtils.strnemp;
+import static com.redgogh.jdkext.StringUtils.strtok;
 
 /**
  * @author lts

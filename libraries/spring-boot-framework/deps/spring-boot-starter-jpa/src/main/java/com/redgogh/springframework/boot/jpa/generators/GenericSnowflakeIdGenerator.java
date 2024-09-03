@@ -20,7 +20,7 @@ package com.redgogh.springframework.boot.jpa.generators;
 
 /* Creates on 2023/6/25. */
 
-import com.redgogh.vortextools.generators.SnowflakeGenerator;
+import com.redgogh.jdkext.generators.SnowflakeGenerator;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
