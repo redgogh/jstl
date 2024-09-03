@@ -23,6 +23,7 @@ package com.redgogh.jdkext.io;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.redgogh.jdkext.SystemOS;
 import com.redgogh.jdkext.collection.Collects;
 
 import java.io.*;
@@ -32,8 +33,7 @@ import java.util.List;
 import static com.redgogh.jdkext.Assert.throwIfError;
 import static com.redgogh.jdkext.Assert.xassert;
 import static com.redgogh.jdkext.Optional.optionalIfError;
-import static com.redgogh.jdkext.StringUtils.strcut;
-import static com.redgogh.jdkext.StringUtils.streq;
+import static com.redgogh.jdkext.StringUtils.*;
 
 /**
  * File 对象，增强 {@code File} 对象操作，添加更多实用函数以便在开发中
@@ -46,10 +46,39 @@ public class File extends java.io.File {
      */
     private static final java.io.File[] EMPTY_FILE_ARRAY = new java.io.File[0];
 
+    private static final String PATHNAME_DESKTOP_VARIABLE = "Desktop://";
+
     /**
      * 文件随机读写访问对象
      */
     private RandomAccessFile accessFile;
+
+    /**
+     * #brief: 快速访问指定路径
+     *
+     * 该函数用于在 Windows 操作系统上对指定路径进行快速替换操作。
+     * 如果传入的路径以特定的桌面路径变量（{@code PATHNAME_DESKTOP_VARIABLE}）开头，
+     * 将替换为实际的用户桌面路径。
+     *
+     * 注意事项：
+     * - 该函数仅在 Windows 操作系统上执行替换操作，其他操作系统则直接返回原始路径。
+     * - 确保 {@code PATHNAME_DESKTOP_VARIABLE} 已正确定义且匹配预期的路径格式。
+     *
+     * @param pathname
+     *        要进行快速访问转换的路径字符串
+     *
+     * @return 如果是 Windows 操作系统且路径匹配桌面路径变量，返回替换后的路径；
+     *         否则，返回原始路径
+     */
+    private static String quickAccessPath(String pathname) {
+        if (SystemOS.isWindows()) {
+            /* Conversation Desktop */
+            if (pathname.startsWith(PATHNAME_DESKTOP_VARIABLE))
+                return pathname.replace(PATHNAME_DESKTOP_VARIABLE, SystemOS.getUserHome("Desktop/"));
+        }
+
+        return pathname;
+    }
 
     /**
      * Creates a new <code>File</code> instance by converting the given
@@ -61,7 +90,7 @@ public class File extends java.io.File {
      *          If the <code>pathname</code> argument is <code>null</code>
      */
     public File(String pathname) {
-        super(pathname);
+        super(quickAccessPath(pathname));
     }
 
     /**

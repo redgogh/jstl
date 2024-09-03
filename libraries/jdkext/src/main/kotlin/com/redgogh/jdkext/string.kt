@@ -164,7 +164,7 @@ object StringUtils {
     @JvmStatic
     fun strhas(wstr: Any?, vararg list: String): Boolean {
         for (item in list) {
-            if (streq(atos(wstr), item))
+            if (atos(wstr).contains(item))
                 return true
         }
         return false
@@ -181,7 +181,7 @@ object StringUtils {
     @JvmStatic
     fun strihas(wstr: Any?, vararg list: String): Boolean {
         for (item in list) {
-            if (strieq(atos(wstr), item))
+            if (strhas(strlower(wstr), strlower(item)))
                 return true
         }
         return false

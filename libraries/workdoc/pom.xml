@@ -13,6 +13,7 @@
     <artifactId>workdoc</artifactId>
 
     <properties>
+        <poi-tl.version>1.12.2</poi-tl.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,13 +21,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib</artifactId>
+            <groupId>com.deepoove</groupId>
+            <artifactId>poi-tl</artifactId>
+            <version>${poi-tl.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test</artifactId>
-            <scope>test</scope>
+            <groupId>com.redgogh.libraries</groupId>
+            <artifactId>jdkext</artifactId>
         </dependency>
     </dependencies>
 
