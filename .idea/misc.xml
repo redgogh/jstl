@@ -28,6 +28,8 @@
         <option value="$PROJECT_DIR$/libraries/spring-cloud-framework/deps/spring-cloud-starter-openfeign/pom.xml" />
         <option value="$PROJECT_DIR$/libraries/workdoc/pom.xml" />
         <option value="$PROJECT_DIR$/feginrcall/pom.xml" />
+        <option value="$PROJECT_DIR$/lib64/spring-cloud-framework/deps/spring-cloud-starter-discovery-nacos/pom.xml" />
+        <option value="$PROJECT_DIR$/lib64/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

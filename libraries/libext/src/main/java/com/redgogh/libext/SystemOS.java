@@ -1,7 +1,6 @@
 package com.redgogh.libext;
 
-import static com.redgogh.libext.StringUtils.strihas;
-import static com.redgogh.libext.StringUtils.strrepall;
+import static com.redgogh.libext.StringUtils.*;
 
 public class SystemOS {
 
@@ -53,7 +52,7 @@ public class SystemOS {
      * @return 返回当前用户的主目录路径，如果 {@code concat} 不为空，则在路径后附加该子路径
      */
     public static String getUserHome(String sub) {
-        String home = strrepall(System.getProperty("user.home"), "\\\\", "/");
+        String home = strrep(System.getProperty("user.home"), "\\\\", "/");
         if (sub != null)
             return home + "/" + sub;
         return home;

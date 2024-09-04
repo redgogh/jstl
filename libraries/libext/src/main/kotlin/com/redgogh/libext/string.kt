@@ -197,7 +197,7 @@ object StringUtils {
      * @return 返回替换后的值
      */
     @JvmStatic
-    fun strrepall(wstr: Any?, regexp: String, newValue: String): String =
+    fun strrep(wstr: Any?, regexp: String, newValue: String): String =
             atos(wstr).replace(Regex(regexp), newValue)
 
     /**
