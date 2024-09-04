@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Black">
     <option name="sdkName" value="System Python 3.12" />
@@ -25,6 +26,7 @@
         <option value="$PROJECT_DIR$/opensso/api/pom.xml" />
         <option value="$PROJECT_DIR$/api/pom.xml" />
         <option value="$PROJECT_DIR$/libraries/spring-cloud-framework/deps/spring-cloud-starter-openfeign/pom.xml" />
+        <option value="$PROJECT_DIR$/libraries/workdoc/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

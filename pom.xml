@@ -10,9 +10,7 @@
 
     <modules>
         <module>lion-routes</module>
-<<<<<<< HEAD
         <module>security</module>
-        <module>libraries/workdoc</module>
     </modules>
     <packaging>pom</packaging>
 
