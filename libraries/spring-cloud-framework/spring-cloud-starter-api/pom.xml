@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>com.redgogh.libraries</groupId>
-            <artifactId>jdkext</artifactId>
+            <artifactId>libext</artifactId>
         </dependency>
     </dependencies>
 

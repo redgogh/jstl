@@ -21,7 +21,7 @@ package com.redgogh.springframework.boot.ibatis;
 /* Creates on 2023/1/13. */
 
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
-import com.redgogh.jdkext.generators.SnowflakeGenerator;
+import com.redgogh.libext.generators.SnowflakeGenerator;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 

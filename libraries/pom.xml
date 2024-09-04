@@ -12,7 +12,7 @@
     <modules>
         <module>spring-boot-framework</module>
         <module>spring-cloud-framework</module>
-        <module>jdkext</module>
+        <module>libext</module>
     </modules>
 
     <properties>
@@ -30,7 +30,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.redgogh.libraries</groupId>
-                <artifactId>jdkext</artifactId>
+                <artifactId>libext</artifactId>
                 <version>v1.0.0</version>
             </dependency>
             <dependency>

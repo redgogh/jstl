@@ -27,11 +27,13 @@
         <option value="$PROJECT_DIR$/api/pom.xml" />
         <option value="$PROJECT_DIR$/libraries/spring-cloud-framework/deps/spring-cloud-starter-openfeign/pom.xml" />
         <option value="$PROJECT_DIR$/libraries/workdoc/pom.xml" />
+        <option value="$PROJECT_DIR$/feginrcall/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/configuration/lang-kotlin-starter-configuration/pom.xml" />
+        <option value="$PROJECT_DIR$/libraries/officekit/pom.xml" />
         <option value="$PROJECT_DIR$/libraries/workdoc/pom.xml" />
         <option value="$PROJECT_DIR$/webocr/pom.xml" />
       </set>

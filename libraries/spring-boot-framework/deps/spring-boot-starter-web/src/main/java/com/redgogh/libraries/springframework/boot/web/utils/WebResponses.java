@@ -25,14 +25,14 @@ package com.redgogh.libraries.springframework.boot.web.utils;
 
 /* Creates on 2023/5/18. */
 
-import com.redgogh.jdkext.exception.IOWriteException;
-import com.redgogh.jdkext.io.IOUtils;
-import com.redgogh.jdkext.io.File;
+import com.redgogh.libext.exception.IOWriteException;
+import com.redgogh.libext.io.IOUtils;
+import com.redgogh.libext.io.File;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import static com.redgogh.jdkext.StringUtils.*;
+import static com.redgogh.libext.StringUtils.*;
 
 /**
  * @author RedGogh

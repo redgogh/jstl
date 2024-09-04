@@ -31,8 +31,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.redgogh.jdkext.StreamMapping;
-import com.redgogh.jdkext.collection.Collects;
+import com.redgogh.libext.StreamMapping;
+import com.redgogh.libext.collection.Collects;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
@@ -40,7 +40,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import static com.redgogh.jdkext.collection.Collects.listMap;
+import static com.redgogh.libext.collection.Collects.listMap;
 
 /**
  * @author RedGogh
