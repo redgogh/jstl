@@ -241,8 +241,23 @@ public class File extends java.io.File {
      * @param extension 文件扩展名
      * @return 当前 File 文件和 {@code extension} 一致返回 `true`
      */
-    public boolean typeEquals(Object extension) {
+    public boolean typeEquals(String extension) {
         return streq(extension, getExtension());
+    }
+
+    /**
+     * #brief: 检查文件扩展名是否匹配
+     *
+     * 该函数用于检查当前对象的文件扩展名是否匹配指定的扩展名列表。
+     *
+     * @param extensions
+     *        需要匹配的文件扩展名列表，可变参数形式
+     *
+     * @return 如果当前对象的扩展名与任一指定的扩展名匹配，返回 {@code true}；
+     *         否则返回 {@code false}
+     */
+    public boolean typeMatch(String... extensions) {
+        return strhas(getExtension(), extensions);
     }
 
     /**

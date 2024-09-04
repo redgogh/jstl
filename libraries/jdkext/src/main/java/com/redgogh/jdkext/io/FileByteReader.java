@@ -23,6 +23,8 @@ package com.redgogh.jdkext.io;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.redgogh.jdkext.logging.Logger;
+import com.redgogh.jdkext.logging.LoggerFactory;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -35,6 +37,12 @@ import java.io.FileNotFoundException;
  */
 public class FileByteReader extends FileInputStream {
 
+    private static final Logger logger = LoggerFactory.getLogger(FileByteReader.class);
+
+    public interface FileByteReaderResource {
+        void apply(FileByteReader byteReader);
+    }
+
     public FileByteReader(@NotNull String name) throws FileNotFoundException {
         super(name);
     }
@@ -45,6 +53,32 @@ public class FileByteReader extends FileInputStream {
 
     public FileByteReader(@NotNull FileDescriptor fdObj) {
         super(fdObj);
+    }
+
+    /**
+     * #brief: 调用文件字节读取资源
+     *
+     * 该函数用于调用指定的 {@code FileByteReaderResource} 对象，并对其应用当前对象。
+     * 在调用过程中，如果发生异常，会记录错误日志。
+     * 函数执行完后，无论是否发生异常，都会尝试关闭当前对象的资源。
+     *
+     * 注意事项：
+     * - 确保传入的 {@code fileByteReaderResource} 参数为非空且已经正确初始化。
+     * - 异常被捕获后不会抛出，错误详情会记录在日志中。
+     * - 使用 {@code IOUtils.closeQuietly(this)} 方法在 {@code finally} 块中关闭资源，
+     *   不会抛出关闭异常。
+     *
+     * @param fileByteReaderResource
+     *        需要应用的文件字节读取资源对象
+     */
+    public void call(FileByteReaderResource fileByteReaderResource) {
+        try {
+            fileByteReaderResource.apply(this);
+        } catch (Exception e) {
+            logger.error("FileByteReader call error!", e);
+        } finally {
+            IOUtils.closeQuietly(this);
+        }
     }
 
 }
