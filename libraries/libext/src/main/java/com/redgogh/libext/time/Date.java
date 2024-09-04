@@ -282,6 +282,12 @@ public class Date extends java.util.Date {
         return this;
     }
 
+    private Calendar initCalendar() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this);
+        return calendar;
+    }
+
     /**
      * 获取当前对象的年份。
      * 
@@ -293,9 +299,7 @@ public class Date extends java.util.Date {
      */
     @SuppressWarnings("deprecation")
     public int getYear() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(this);
-        return calendar.get(Calendar.YEAR);
+        return initCalendar().get(Calendar.YEAR);
     }
 
     /**
@@ -310,9 +314,7 @@ public class Date extends java.util.Date {
      */
     @SuppressWarnings({"deprecation", "MagicConstant"})
     public int getMonth() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(this);
-        return calendar.get(Calendar.MONTH) + 1;
+        return initCalendar().get(Calendar.MONTH) + 1;
     }
 
     /**
@@ -326,9 +328,7 @@ public class Date extends java.util.Date {
      */
     @SuppressWarnings("deprecation")
     public int getDay() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(this);
-        return calendar.get(Calendar.DAY_OF_MONTH);
+        return initCalendar().get(Calendar.DAY_OF_MONTH);
     }
 
     /**
@@ -341,9 +341,7 @@ public class Date extends java.util.Date {
      * @return 当前对象在一年中的第几周，类型为 int。
      */
     public int getWeekOfYear() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(this);
-        return calendar.get(Calendar.WEEK_OF_YEAR);
+        return initCalendar().get(Calendar.WEEK_OF_YEAR);
     }
 
     /**
@@ -356,9 +354,7 @@ public class Date extends java.util.Date {
      * @return 当前对象在一个月中的第几周，类型为 int。
      */
     public int getWeekOfMonth() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(this);
-        return calendar.get(Calendar.WEEK_OF_MONTH);
+        return initCalendar().get(Calendar.WEEK_OF_MONTH);
     }
 
     /**
@@ -373,9 +369,7 @@ public class Date extends java.util.Date {
      */
     @SuppressWarnings("deprecation")
     public int getHours() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(this);
-        return calendar.get(Calendar.HOUR);
+        return initCalendar().get(Calendar.HOUR);
     }
 
     /**
@@ -389,9 +383,7 @@ public class Date extends java.util.Date {
      */
     @SuppressWarnings("deprecation")
     public int getMinutes() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(this);
-        return calendar.get(Calendar.MINUTE);
+        return initCalendar().get(Calendar.MINUTE);
     }
 
     /**
@@ -465,9 +457,7 @@ public class Date extends java.util.Date {
      */
     @SuppressWarnings("deprecation")
     public int getSeconds() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(this);
-        return calendar.get(Calendar.SECOND);
+        return initCalendar().get(Calendar.SECOND);
     }
 
     /**
