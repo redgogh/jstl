@@ -10,9 +10,10 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>spring-boot-framework</module>
-        <module>spring-cloud-framework</module>
-        <module>libext</module>
+        <module>spring/spring-boot-framework</module>
+        <module>spring/spring-cloud-framework</module>
+        <module>tools</module>
+        <module>office</module>
     </modules>
 
     <properties>
@@ -30,7 +31,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.redgogh.libraries</groupId>
-                <artifactId>libext</artifactId>
+                <artifactId>tools</artifactId>
                 <version>v1.0.0</version>
             </dependency>
             <dependency>

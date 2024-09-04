@@ -56,7 +56,7 @@
         </dependency>
         <dependency>
             <groupId>com.redgogh.libraries</groupId>
-            <artifactId>libext</artifactId>
+            <artifactId>tools</artifactId>
         </dependency>
     </dependencies>
 

@@ -25,7 +25,7 @@ package com.redgogh.lionroutes.framework;
 
 /* Create on 2023/8/11 */
 
-import com.redgogh.libext.collection.Collects;
+import com.redgogh.tools.collection.Collects;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.http.HttpStatus;
@@ -36,7 +36,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-import static com.redgogh.libext.collection.Collects.collectionBeg;
+import static com.redgogh.tools.collection.Collects.collectionBeg;
 
 /**
  * @author RedGogh
