@@ -9,7 +9,7 @@
         <version>v1.0.0</version>
     </parent>
 
-    <artifactId>security</artifactId>
+    <artifactId>fishing</artifactId>
 
     <properties>
     </properties>
