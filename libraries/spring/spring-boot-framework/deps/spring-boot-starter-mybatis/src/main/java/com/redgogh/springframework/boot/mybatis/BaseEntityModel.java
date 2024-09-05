@@ -1,4 +1,4 @@
-package com.redgogh.springframework.boot.ibatis;
+package com.redgogh.springframework.boot.mybatis;
 
 /* ************************************************************************
  *
@@ -23,13 +23,12 @@ package com.redgogh.springframework.boot.ibatis;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-
-import java.util.Date;
+import com.redgogh.tools.time.Date;
 
 /**
  * @author RedGogh
  */
-public class SuperMapModel<T extends Model<T>> extends Model<T> {
+public class BaseEntityModel<T extends Model<T>> extends Model<T> {
 
     /**
      * ID
@@ -47,28 +46,7 @@ public class SuperMapModel<T extends Model<T>> extends Model<T> {
      */
     private Date updateTime;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public BaseEntityModel() {
     }
 
 }

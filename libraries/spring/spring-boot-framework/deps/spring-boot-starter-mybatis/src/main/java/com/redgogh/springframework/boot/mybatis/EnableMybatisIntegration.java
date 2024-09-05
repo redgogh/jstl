@@ -1,4 +1,4 @@
-package com.redgogh.springframework.boot.ibatis;
+package com.redgogh.springframework.boot.mybatis;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -42,5 +42,5 @@ import java.lang.annotation.*;
         SnowflakeIdGenerator.class
 })
 @Documented
-public @interface EnableMybatisFeature {
+public @interface EnableMybatisIntegration {
 }

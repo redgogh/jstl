@@ -1,4 +1,4 @@
-package com.redgogh.springframework.boot.ibatis;
+package com.redgogh.springframework.boot.mybatis;
 
 /* ************************************************************************
  *

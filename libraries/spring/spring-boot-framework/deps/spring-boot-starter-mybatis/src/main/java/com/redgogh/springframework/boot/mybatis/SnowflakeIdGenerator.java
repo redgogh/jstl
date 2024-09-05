@@ -1,4 +1,4 @@
-package com.redgogh.springframework.boot.ibatis;
+package com.redgogh.springframework.boot.mybatis;
 
 /* ************************************************************************
  *
@@ -22,6 +22,8 @@ package com.redgogh.springframework.boot.ibatis;
 
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.redgogh.tools.generators.SnowflakeGenerator;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -37,11 +39,15 @@ public class SnowflakeIdGenerator implements IdentifierGenerator {
     /**
      * 数据中心ID
      */
+    @Getter
+    @Setter
     private Integer dataCenterId = 0;
 
     /**
      * 机器ID
      */
+    @Getter
+    @Setter
     private Integer machineId = 0;
 
     private SnowflakeGenerator snowflakeGenerator;
@@ -51,22 +57,6 @@ public class SnowflakeIdGenerator implements IdentifierGenerator {
         if (snowflakeGenerator == null)
             snowflakeGenerator = new SnowflakeGenerator(dataCenterId, machineId);
         return snowflakeGenerator.nextId();
-    }
-
-    public Integer getDataCenterId() {
-        return dataCenterId;
-    }
-
-    public void setDataCenterId(Integer dataCenterId) {
-        this.dataCenterId = dataCenterId;
-    }
-
-    public Integer getMachineId() {
-        return machineId;
-    }
-
-    public void setMachineId(Integer machineId) {
-        this.machineId = machineId;
     }
 
 }
