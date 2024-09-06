@@ -61,7 +61,7 @@ public class FileByteReader extends FileInputStream {
      * <p>该函数用于调用指定的 {@code FileByteReaderResource} 对象，并对其应用当前对象。
      * 在调用过程中，如果发生异常，会记录错误日志。
      * 函数执行完后，无论是否发生异常，都会尝试关闭当前对象的资源。
-     *
+     * <p>
      * <h2>注意事项：</h2>
      * <ul>
      *   <li> 确保传入的 {@code fileByteReaderResource} 参数为非空且已经正确初始化。</li>

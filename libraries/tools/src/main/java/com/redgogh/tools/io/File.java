@@ -290,7 +290,7 @@ public class File extends java.io.File {
         return strcut(getName(), index, 0);
     }
 
-    private boolean staticForceDeleteDirectory(File dir) {
+    private boolean forceDeleteDirectory(File dir) {
         List<File> children = Lists.map(dir.listFiles(), File::new);
         for (File child : children) {
             if (child.isFile()) {
@@ -303,7 +303,7 @@ public class File extends java.io.File {
     }
 
     private boolean forceDeleteDirectory() {
-        return staticForceDeleteDirectory(this);
+        return forceDeleteDirectory(this);
     }
 
     private boolean forceDeleteFile() {
