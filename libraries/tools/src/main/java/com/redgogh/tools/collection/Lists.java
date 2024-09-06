@@ -233,12 +233,11 @@ public class Lists {
      *
      * @see ArrayList#ArrayList(Collection)
      */
-    @SuppressWarnings("unchecked")
     public static <E> List<E> of(Collection<? extends E> a, Collection<? extends E> b) {
         List<E> ret = of();
         ret.addAll(a);
         ret.addAll(b);
-        return (ArrayList<E>) ret;
+        return ret;
     }
 
     /**
