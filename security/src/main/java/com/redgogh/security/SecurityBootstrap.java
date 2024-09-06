@@ -27,11 +27,13 @@ package com.redgogh.security;
 
 import com.redgogh.libraries.springframework.boot.web.SpringApplicationBootstrap;
 import com.redgogh.libraries.springframework.boot.web.annotation.EnableValidExcept;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author RedGogh
  */
+@EnableAutoConfiguration
 @EnableValidExcept
 @SpringBootApplication
 public class SecurityBootstrap {
