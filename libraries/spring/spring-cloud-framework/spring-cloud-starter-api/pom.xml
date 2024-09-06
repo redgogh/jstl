@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.redgogh.libraries</groupId>
         <artifactId>spring-cloud-framework</artifactId>
-        <version>1.0.0-beta.1+build</version>
+        <version>v1.0.0-beta.1+build</version>
     </parent>
 
     <groupId>com.redgogh.api</groupId>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.redgogh.libraries</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <version>1.0.0-beta.1+build</version>
+            <version>v1.0.0-beta.1+build</version>
         </dependency>
         <dependency>
             <groupId>com.redgogh.libraries</groupId>

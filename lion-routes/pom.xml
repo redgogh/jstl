@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.redgogh.projects</groupId>
         <artifactId>projects</artifactId>
-        <version>1.0.0-beta.1+build</version>
+        <version>v1.0.0-beta.1+build</version>
     </parent>
 
     <artifactId>lion-routes</artifactId>
@@ -16,14 +16,14 @@
             <dependency>
                 <groupId>com.redgogh.libraries</groupId>
                 <artifactId>spring-boot-framework</artifactId>
-                <version>1.0.0-beta.1+build</version>
+                <version>v1.0.0-beta.1+build</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>com.redgogh.libraries</groupId>
                 <artifactId>spring-cloud-framework</artifactId>
-                <version>1.0.0-beta.1+build</version>
+                <version>v1.0.0-beta.1+build</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>

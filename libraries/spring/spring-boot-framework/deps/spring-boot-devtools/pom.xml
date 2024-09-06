@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.redgogh.libraries</groupId>
         <artifactId>spring-boot-framework</artifactId>
-        <version>1.0.0-beta.1+build</version>
+        <version>v1.0.0-beta.1+build</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
