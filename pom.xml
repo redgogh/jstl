@@ -6,7 +6,7 @@
 
     <groupId>com.redgogh.projects</groupId>
     <artifactId>projects</artifactId>
-    <version>v1.0.0</version>
+    <version>1.0.0-beta.1+build</version>
 
     <modules>
         <module>lion-routes</module>
@@ -28,7 +28,7 @@
             <dependency>
                 <groupId>com.redgogh.libraries</groupId>
                 <artifactId>tools</artifactId>
-                <version>v1.0.0</version>
+                <version>1.0.0-beta.1+build</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -37,12 +37,12 @@
         <dependency>
             <groupId>com.redgogh.configuration</groupId>
             <artifactId>spring-boot-configuration-banner-text</artifactId>
-            <version>v1.0.0</version>
+            <version>1.0.0-beta.1+build</version>
         </dependency>
         <dependency>
             <groupId>com.redgogh.configuration</groupId>
             <artifactId>spring-cloud-configuration-discovery-nacos</artifactId>
-            <version>v1.0.0</version>
+            <version>1.0.0-beta.1+build</version>
         </dependency>
     </dependencies>
 

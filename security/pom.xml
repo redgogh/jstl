@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.redgogh.projects</groupId>
         <artifactId>projects</artifactId>
-        <version>v1.0.0</version>
+        <version>1.0.0-beta.1+build</version>
     </parent>
 
     <artifactId>security</artifactId>
@@ -19,21 +19,21 @@
             <dependency>
                 <groupId>com.redgogh.libraries</groupId>
                 <artifactId>spring-boot-framework</artifactId>
-                <version>v1.0.0</version>
+                <version>1.0.0-beta.1+build</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>com.redgogh.libraries</groupId>
                 <artifactId>spring-cloud-framework</artifactId>
-                <version>v1.0.0</version>
+                <version>1.0.0-beta.1+build</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>com.redgogh.api</groupId>
-                <artifactId>api</artifactId>
-                <version>v1.0.0</version>
+                <artifactId>feginrcall</artifactId>
+                <version>1.0.0-beta.1+build</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.redgogh.libraries</groupId>
         <artifactId>spring-cloud-framework</artifactId>
-        <version>v1.0.0</version>
+        <version>1.0.0-beta.1+build</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 

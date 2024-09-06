@@ -6,7 +6,7 @@
 
     <groupId>com.redgogh.api</groupId>
     <artifactId>feginrcall</artifactId>
-    <version>v1.0.0</version>
+    <version>1.0.0-beta.1+build</version>
     <packaging>pom</packaging>
     <modules>
     </modules>

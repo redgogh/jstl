@@ -5,7 +5,7 @@
     <parent>
         <artifactId>libraries</artifactId>
         <groupId>com.redgogh.libraries</groupId>
-        <version>v1.0.0</version>
+        <version>1.0.0-beta.1+build</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -30,27 +30,27 @@
             <dependency>
                 <groupId>com.redgogh.libraries</groupId>
                 <artifactId>spring-cloud-starter-api</artifactId>
-                <version>v1.0.0</version>
+                <version>1.0.0-beta.1+build</version>
             </dependency>
             <dependency>
                 <groupId>com.redgogh.libraries</groupId>
                 <artifactId>spring-boot-devtools</artifactId>
-                <version>v1.0.0</version>
+                <version>1.0.0-beta.1+build</version>
             </dependency>
             <dependency>
                 <groupId>com.redgogh.libraries</groupId>
                 <artifactId>spring-cloud-starter-discovery-nacos</artifactId>
-                <version>v1.0.0</version>
+                <version>1.0.0-beta.1+build</version>
             </dependency>
             <dependency>
                 <groupId>com.redgogh.libraries</groupId>
                 <artifactId>spring-cloud-starter-gateway</artifactId>
-                <version>v1.0.0</version>
+                <version>1.0.0-beta.1+build</version>
             </dependency>
             <dependency>
                 <groupId>com.redgogh.libraries</groupId>
                 <artifactId>spring-cloud-starter-openfeign</artifactId>
-                <version>v1.0.0</version>
+                <version>1.0.0-beta.1+build</version>
             </dependency>
             <!-- import -->
             <dependency>
