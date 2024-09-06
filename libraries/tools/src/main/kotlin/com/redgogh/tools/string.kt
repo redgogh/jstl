@@ -37,7 +37,33 @@ private typealias DWdouble = java.lang.Double
 private val ZH_CN: Locale = Locale.getDefault()
 
 /**
- * 字符串工具类
+ * `StringUtils` 提供了一系列用于字符串处理的静态方法，包括字符串的长度计算、大小写转换、
+ * 比较、格式化、查找、替换和分割等功能。这些方法可以方便地用于处理各种字符串操作，并支持
+ * 忽略大小写的比较和正则表达式的匹配。
+ *
+ * <p>此对象还包含一个正则表达式对象缓存，以提高正则表达式匹配的性能。可以选择启用或禁用
+ * 缓存来优化性能。
+ *
+ * <p>该类中的所有方法都是静态方法，能够直接调用而无需实例化对象。这些方法的设计初衷是
+ * 为了提供一个简洁的字符串处理工具集，简化常见的字符串操作代码。
+ *
+ * <h2>注意事项</h2>
+ * <ul>
+ *     <li>部分方法会将 `null` 参数转换为空字符串进行处理，不会抛出空指针异常。</li>
+ *     <li>正则表达式相关方法支持缓存编译的模式对象，默认开启缓存可以提高性能。</li>
+ * </ul>
+ *
+ * <p>使用示例：
+ * <pre>
+ *     // 计算字符串长度
+ *     val length = strlen("Hello World")
+ *
+ *     // 将字符串转换为大写
+ *     val upper = strupper("hello")
+ *
+ *     // 格式化字符串
+ *     val formatted = strwfmt("Hello %s", "World")
+ * </pre>
  */
 object StringUtils {
 

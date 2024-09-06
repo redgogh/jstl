@@ -34,9 +34,20 @@ import static com.redgogh.tools.Optional.optionalIfError;
 import static com.redgogh.tools.StringUtils.strwfmt;
 
 /**
- * 类属性`Field`对象封装
+ * `UField` 类封装了 Java 反射中的 `Field` 对象，提供对字段的访问和操作功能。
  *
- * @author RedGogh   
+ * <p>该类允许通过反射机制获取字段信息，读取和写入字段值，并支持属性的复制和注解检查等操作。
+ *
+ * <h2>主要功能</h2>
+ * <ul>
+ *     <li>封装了 `Field` 对象，用于访问字段的元数据和操作字段值。</li>
+ *     <li>支持通过字段名称和类描述符查找字段。</li>
+ *     <li>提供读取、写入字段值的方法，以及将字段值从一个对象复制到另一个对象的方法。</li>
+ *     <li>支持检查字段上的注解。</li>
+ * </ul>
+ *
+ * @author RedGogh
+ * @since 1.0
  */
 @SuppressWarnings({
         "LombokGetterMayBeUsed"

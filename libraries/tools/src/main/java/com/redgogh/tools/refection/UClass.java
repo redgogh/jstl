@@ -25,7 +25,8 @@ package com.redgogh.tools.refection;
 
 /* Creates on 2019/5/16. */
 
-import com.redgogh.tools.collection.Collects;
+import com.redgogh.tools.collection.Lists;
+import com.redgogh.tools.collection.Maps;
 import lombok.Getter;
 
 import java.lang.reflect.Constructor;
@@ -36,32 +37,75 @@ import java.util.Map;
 
 import static com.redgogh.tools.Assert.throwIfError;
 import static com.redgogh.tools.Assert.throwIfNull;
-import static com.redgogh.tools.collection.Collects.*;
 
 /**
- * 类属性`Object`对象封装
+ * `UClass` 是一个用于处理 Java 类元数据的工具类。它封装了一个 `Class` 对象，并提供了一些方法来
+ * 访问和操作该类的属性和方法。可以通过该类实例化对象、获取类的属性列表以及调用静态方法等。
  *
- * @author RedGogh   
+ * <p>该类提供了静态和实例方法来创建类实例、获取属性、调用静态方法等操作。它支持通过构造函数
+ * 参数实例化对象，并能处理包含可选参数的构造函数。
+ *
+ * <p>该类的主要特点包括：
+ * <ul>
+ *     <li>封装了 Java 的 `Class` 对象，提供对类的元数据的访问。</li>
+ *     <li>能够根据类的构造函数参数实例化对象。</li>
+ *     <li>提供获取类属性和调用静态方法的功能。</li>
+ * </ul>
+ *
+ * <p>该工具类适用于需要动态操作 Java 类元数据的场景，如反射操作和动态实例化对象等。
+ *
+ * <h2>注意事项</h2>
+ * <ul>
+ *     <li>构造函数参数需要与类的构造函数匹配，否则会抛出异常。</li>
+ *     <li>访问属性和调用静态方法时需要保证传入的名称正确，否则会抛出异常。</li>
+ * </ul>
+ *
+ * @author RedGogh
+ * @see Class
+ * @see Constructor
+ * @see Method
+ * @since 1.0
  */
 public class UClass {
+
     /**
-     * 对象类属性
+     * #brief: 类描述符
+     *
+     * <p>该属性存储类的 {@link Class} 对象描述符。它被标记为 {@code transient}，
+     * 以防止在序列化过程中被保存。
      */
     @Getter
     private transient final Class<?> descriptor;
-    /**
-     * 属性列表
-     */
-    private final Map<String, UField> properties = Collects.asMap();
 
+    /**
+     * #brief: 属性列表
+     *
+     * <p>存储类的属性，以属性名称作为键，属性对象 {@link UField} 作为值。
+     */
+    private final Map<String, UField> properties = Maps.of();
+
+    /**
+     * #brief: 构造器，使用对象实例初始化
+     *
+     * <p>通过传入对象实例的 {@link Class} 对象初始化 {@link UClass} 实例。
+     *
+     * @param instance 对象实例
+     */
     public UClass(Object instance) {
         this(instance.getClass());
     }
 
+    /**
+     * #brief: 构造器，使用类描述符初始化
+     *
+     * <p>通过类的 {@link Class} 对象初始化 {@link UClass} 实例，并初始化属性列表。
+     *
+     * @param descriptor 类的 {@link Class} 对象
+     */
     public UClass(Class<?> descriptor) {
         this.descriptor = descriptor;
         /* init */
-        List<UField> descriptorProperties = getDescriptorProperties(descriptor, asList());
+        List<UField> descriptorProperties = getDescriptorProperties(descriptor, Lists.of());
         for (UField property : descriptorProperties) {
             String name = property.getName();
             if (!properties.containsKey(name))
@@ -69,6 +113,14 @@ public class UClass {
         }
     }
 
+    /**
+     * #brief: 根据类名创建 UClass 实例
+     *
+     * <p>根据给定的类名返回一个 {@link UClass} 实例。如果类名无效，将会抛出异常。
+     *
+     * @param className 类名
+     * @return {@link UClass} 实例
+     */
     public static UClass forName(String className) {
         Class<?> clazz = (Class<?>) throwIfError(() -> Class.forName(className));
         return new UClass(clazz);
@@ -79,14 +131,12 @@ public class UClass {
     ////////////////////////////////////////////////////////////////////////////
 
     /**
-     * 实例化一个类对象，根据类的构造器传入参数数据。
+     * #brief: 实例化一个类对象，根据类的构造器传入参数数据
      *
-     * @param descriptor
-     *        类对象
+     * <p>根据传入的构造器参数实例化类对象。如果使用空构造器，则不传入参数。
      *
-     * @param parameters
-     *        构造器参数，如果使用空构造器就不传
-     *
+     * @param descriptor 类对象
+     * @param parameters 构造器参数，如果使用空构造器则不传
      * @return 类对象实例
      */
     public static <T> T newInstance(Class<T> descriptor, Object... parameters) {
@@ -100,10 +150,15 @@ public class UClass {
     }
 
     /**
-     * 将参数数组转换成类型数组
+     * #brief: 将参数数组转换成类型数组
+     *
+     * <p>将传入的参数数组转换为相应的 {@link Class} 类型数组。
+     *
+     * @param parameters 参数数组
+     * @return 转换后的类型数组
      */
     public static Class<?>[] toClassArray(Object... parameters) {
-        List<Class<?>> parametersClassList = Collects.asList();
+        List<Class<?>> parametersClassList = Lists.of();
         for (Object parameter : parameters)
             parametersClassList.add(parameter.getClass());
         Class<?>[] parametersClassArray = new Class<?>[parametersClassList.size()];
@@ -128,9 +183,9 @@ public class UClass {
     ////////////////////////////////////////////////////////////////////////////
 
     /**
-     * #brief：实例化当前类对象，可选构造函数参数<p>
-     * <p>
-     * 实例化当前类对象，可选构造函数参数。通过 {@code args} 参数列表自动选择
+     * #brief: 实例化当前类对象，可选构造函数参数
+     *
+     * <p>实例化当前类对象，可选构造函数参数。通过 {@code args} 参数列表自动选择
      * 实例化对象的构造器。如果没有参数默认使用无参构造器初始化。
      *
      * @param args 构造器参数（可变
@@ -163,9 +218,9 @@ public class UClass {
      */
     public List<UField> getProperties(boolean isFilter) {
         if (!isFilter)
-            return Collects.asList(properties.values());
+            return Lists.of(properties.values());
         /* 筛选出修饰符非 static & final 的属性列表 */
-        return listFilter(properties.values(), value -> (!value.isStatic() && !value.isFinal()));
+        return Lists.filter(properties.values(), value -> (!value.isStatic() && !value.isFinal()));
     }
 
     /**
@@ -175,7 +230,7 @@ public class UClass {
                                                 List<UField> descriptorProperties) {
         // 获取所有成员
         Field[] properties = descriptor.getDeclaredFields();
-        descriptorProperties.addAll(listMap(properties, UField::new));
+        descriptorProperties.addAll(Lists.map(properties, UField::new));
 
         Class<?> superclass = descriptor.getSuperclass();
         if (superclass != Object.class)
@@ -199,21 +254,13 @@ public class UClass {
     }
 
     /**
-     * Returns the class loader for the class.  Some implementations may use
-     * null to represent the bootstrap class loader. This method will return
-     * null in such implementations if this class was loaded by the bootstrap
-     * class loader.
+     * #brief: 获取类加载器
      *
-     * <p>If this {@code Class} object
-     * represents a primitive type or void, null is returned.
+     * <p>返回加载此类的类加载器。如果类由引导类加载器加载，则返回 {@code null}。
      *
-     * @return the class loader that loaded the class or interface
-     * represented by this {@code Class} object.
-     * @throws SecurityException if a security manager is present, and the caller's class loader
-     *                           is not {@code null} and is not the same as or an ancestor of the
-     *                           class loader for the class whose class loader is requested,
-     *                           and the caller does not have the
-     *                           {@link RuntimePermission}{@code ("getClassLoader")}
+     * @return 加载此类的类加载器
+     * @throws SecurityException 如果安全管理器存在且调用者的类加载器与请求类的类加载器不同，
+     *                           并且调用者没有 {@link RuntimePermission} 权限，则抛出此异常
      * @see ClassLoader
      * @see SecurityManager#checkPermission
      * @see RuntimePermission

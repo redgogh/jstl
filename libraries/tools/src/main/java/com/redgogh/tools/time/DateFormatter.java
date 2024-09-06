@@ -30,7 +30,20 @@ import lombok.SneakyThrows;
 import java.text.SimpleDateFormat;
 
 /**
- * @author RedGogh   
+ * `DateFormatter` 类提供日期和时间的格式化和解析功能。
+ *
+ * <p>该类支持将日期对象格式化为指定的字符串格式，以及将符合格式的字符串解析为日期对象。
+ * 支持默认格式和自定义格式。
+ *
+ * <h2>主要功能</h2>
+ * <ul>
+ *     <li>格式化当前时间或指定时间为字符串。</li>
+ *     <li>将字符串解析为日期对象。</li>
+ *     <li>支持默认日期格式和自定义日期格式。</li>
+ * </ul>
+ *
+ * @author RedGogh
+ * @since 1.0
  */
 public class DateFormatter {
 

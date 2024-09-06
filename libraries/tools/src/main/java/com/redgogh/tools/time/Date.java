@@ -26,25 +26,35 @@ package com.redgogh.tools.time;
 /* Creates on 2022/3/30. */
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Date 日期对象，使用的时候注意不要用到 {@link java.util.Date}
- * 日期类了哦 ~
- * <p>
- * 在多线程环境下需要注意，如果需要使用和 {@link Date#setTime}
- * 函数有关的方法，或者说需要多个线程修改内部的 time 变量的情况下
- * 会导致线程不安全。所以请尽量避免在多线程环境下多个线程同时对一个
- * 日期对象进行读写操作。如果需要请搭配 `ThreadLocal` 等线程安全
- * 工具使用。
- * <p>
- * 因为 jdk 的日期类最初设计问题，所以本质上并不是 {@code Date} 对象线程
- * 不安全，而是和日期操作有关的 {@code Calendar} 类，它是全局共享的，然后
- * Date 又使用了 Calendar 做日期的计算操作。所以 Calendar 类是线程不安全的
- * 然后 Date 类有依赖 Calendar 提供的函数，这也就间接导致了 Date 也是不安全
- * 的。
+ * `Date` 类扩展了 `java.util.Date` 类，提供了对日期和时间的扩展功能。
+ * 这个类允许以不同的方式初始化日期，并提供了额外的方法用于日期的比较和格式化。
  *
- * @author RedGogh
+ * <p>该类中的构造函数支持从不同的输入类型（如长整型、字符串等）初始化日期，
+ * 并提供了一系列用于比较、添加、减少时间单位以及获取日期相关信息的方法。
+ *
+ * <p>主要功能包括：
+ * <ul>
+ *     <li>初始化日期对象的多种构造函数。</li>
+ *     <li>日期比较方法（如小于、大于、等于等）。</li>
+ *     <li>日期操作方法（如加减时间单位）。</li>
+ *     <li>获取日期的各种信息（如年份、月份、周数等）。</li>
+ *     <li>计算与指定日期之间的时间差（天、小时、分钟、秒）。</li>
+ *     <li>日期对象的格式化输出。</li>
+ * </ul>
+ *
+ * <h2>注意事项</h2>
+ * <ul>
+ *     <li>一些构造函数已经被弃用，建议使用 {@link Calendar} 或 {@link GregorianCalendar} 替代。</li>
+ * </ul>
+ *
+ * @see java.util.Date
+ * @see java.util.Calendar
+ * @see DateFormatter
+ * @since 1.0
  */
 public class Date extends java.util.Date {
 
