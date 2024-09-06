@@ -27,7 +27,7 @@ package com.redgogh.libraries.springframework.boot.web.configuration;
 
 import com.redgogh.libraries.springframework.boot.web.configuration.interceptors.AfterRequestInterceptor;
 import com.redgogh.libraries.springframework.boot.web.configuration.interceptors.BeforeRequestInterceptor;
-import com.redgogh.tools.collection.Collects;
+import com.redgogh.tools.collection.Lists;
 import lombok.Data;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.InitializingBean;
@@ -54,7 +54,7 @@ public abstract class WebMvcConfigurationAdapter extends WebMvcConfigurationSupp
     @SuppressWarnings("UnusedReturnValue")
     protected static class Configuration {
         /** 拦截器列表 */
-        private List<HandlerInterceptor> interceptors = Collects.asList();
+        private List<HandlerInterceptor> interceptors = Lists.of();
 
         /**
          * 添加自定义拦截器

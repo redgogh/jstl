@@ -1,6 +1,5 @@
 package com.redgogh.tools
 
-import com.redgogh.tools.collection.Collects
 import com.redgogh.tools.collection.Lists
 import com.redgogh.tools.refection.UClass
 import com.redgogh.tools.refection.UField
