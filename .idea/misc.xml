@@ -1,46 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Black">
-    <option name="sdkName" value="System Python 3.12" />
-  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/large-module-libs/spring-cloud-enhance-parent-module/dependencies/spring-cloud-starter-enhance-nacos/pom.xml" />
-        <option value="$PROJECT_DIR$/large-module-libs/spring-cloud-enhance-parent-module/spring-cloud-openfeign-api/pom.xml" />
-        <option value="$PROJECT_DIR$/large-module-libs/spring-cloud-enhance-parent-module/dependencies/spring-cloud-starter-enhance-openfeign/pom.xml" />
-        <option value="$PROJECT_DIR$/large-module-libs/spring-cloud-enhance-parent-module/pom.xml" />
-        <option value="$PROJECT_DIR$/large-module-libs/springboot-framework-libs/pom.xml" />
-        <option value="$PROJECT_DIR$/large-module-libs/springcloud-framework-libs/dependencies/spring-cloud-starter-enhance-gateway/pom.xml" />
-        <option value="$PROJECT_DIR$/libraries/springboot/deps/starter-web/pom.xml" />
-        <option value="$PROJECT_DIR$/libraries/springboot/deps/mysql-for-jpa/pom.xml" />
-        <option value="$PROJECT_DIR$/libraries/springboot/deps/mysql-for-mybatis/pom.xml" />
-        <option value="$PROJECT_DIR$/libraries/springboot/pom.xml" />
-        <option value="$PROJECT_DIR$/configuration/spring-boot-configuration-banner-text/pom.xml" />
-        <option value="$PROJECT_DIR$/configuration/spring-cloud-configuration-discovery-nacos/pom.xml" />
-        <option value="$PROJECT_DIR$/configuration/pom.xml" />
-        <option value="$PROJECT_DIR$/libraries/pom.xml" />
-        <option value="$PROJECT_DIR$/libraries/springcloud/api-service/pom.xml" />
-        <option value="$PROJECT_DIR$/opensso/api/pom.xml" />
-        <option value="$PROJECT_DIR$/api/pom.xml" />
-        <option value="$PROJECT_DIR$/libraries/spring-cloud-framework/deps/spring-cloud-starter-openfeign/pom.xml" />
-        <option value="$PROJECT_DIR$/libraries/workdoc/pom.xml" />
-        <option value="$PROJECT_DIR$/feginrcall/pom.xml" />
-        <option value="$PROJECT_DIR$/lib64/spring-cloud-framework/deps/spring-cloud-starter-discovery-nacos/pom.xml" />
-        <option value="$PROJECT_DIR$/lib64/pom.xml" />
       </list>
     </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/configuration/lang-kotlin-starter-configuration/pom.xml" />
-        <option value="$PROJECT_DIR$/libraries/officekit/pom.xml" />
-        <option value="$PROJECT_DIR$/libraries/workdoc/pom.xml" />
-        <option value="$PROJECT_DIR$/webocr/pom.xml" />
-      </set>
-    </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="azul-21" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="azul-22" project-jdk-type="JavaSDK" />
 </project>

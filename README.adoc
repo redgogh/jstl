@@ -1,11 +1,11 @@
-= Security
+= Quick Start
 
 image:doc/svg/dahan.svg[dahan]
 image:doc/svg/test.svg[test]
 image:doc/svg/maven-center.svg[maven-center]
 image:doc/svg/build.svg[build]
 
-长虹 IM 即时通讯后端安全服务系统。
+Java 后端微服务、单体服务快速开发框架。
 
 == 开发文档
 
