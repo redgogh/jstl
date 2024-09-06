@@ -75,11 +75,11 @@ public class File extends java.io.File {
     /**
      * #brief: 快速访问指定路径
      *
-     * 该函数用于在 Windows 操作系统上对指定路径进行快速替换操作。
+     * <p>该函数用于在 Windows 操作系统上对指定路径进行快速替换操作。
      * 如果传入的路径以特定的桌面路径变量（{@code PATHNAME_DESKTOP_VARIABLE}）开头，
      * 将替换为实际的用户桌面路径。
      *
-     * 注意事项：
+     * <p>注意事项：
      * - 该函数仅在 Windows 操作系统上执行替换操作，其他操作系统则直接返回原始路径。
      * - 确保 {@code PATHNAME_DESKTOP_VARIABLE} 已正确定义且匹配预期的路径格式。
      *
@@ -440,9 +440,8 @@ public class File extends java.io.File {
      * 打开文件描述符，使得 <code>File</code> 文件对象支持系统随机读写
      * 访问。随机读写机制能够更灵活的操作文件内容，并写入。性能更高。
      * 同时当文件打开成功以后，当前对象将支持所有随机读写访问函数。
-     * <p>
      *
-     * 当调用 <code>open()</code> 函数时，操作系统会打开一个文件描述符，
+     * <p>当调用 <code>open()</code> 函数时，操作系统会打开一个文件描述符，
      * 该描述符由操作系统中的文件系统管理，
      *
      * @param mode 打开模式，r 表示支持读取，w 表示支持写入，也可以
