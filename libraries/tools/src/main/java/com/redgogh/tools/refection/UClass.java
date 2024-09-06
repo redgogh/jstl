@@ -244,12 +244,89 @@ public class UClass {
                 .read(instance);
     }
 
+    /**
+     * 使用反射机制调用实例方法。
+     * <p>
+     * 此方法允许通过名称和参数调用任何实例方法。若目标方法是静态方法，
+     * 应传递 null 作为 obj 参数。对于非静态方法，obj 参数必须是调用方法
+     * 的实际对象实例。
+     * <p>
+     * 例如，如果目标类是 MyClass，有一个名为 myMethod 的实例方法，可以通过
+     * 该方法进行调用：
+     * <pre>
+     *     MyClass instance = new MyClass();
+     *     Object result = invoke(instance, "myMethod", arg1, arg2);
+     * </pre>
+     * 若目标方法是静态方法，则只需传入 null 作为 obj 参数：
+     * <pre>
+     *     Object result = staticInvoke("myStaticMethod", arg1, arg2);
+     * </pre>
+     *
+     * @param obj  要调用方法的实例对象。如果要调用静态方法，则传入 null。
+     *             对于实例方法，这个对象必须是调用方法的实际实例。
+     * @param name 要调用的方法的名称。该名称必须与目标方法的名称完全一致，
+     *             包括大小写。
+     * @param args 方法的参数列表，使用可变参数形式传入。参数顺序和类型必须
+     *             与目标方法的签名匹配。如果方法没有参数，则可以传入一个
+     *             空的参数列表（即，`Object[] args` 为 `null` 或 `args` 为
+     *             一个空数组）。
+     * @return 方法调用的返回值。如果目标方法的返回类型是 `void`，则返回 `null`。
+     */
+    public Object invoke(Object obj, String name, Object... args) {
+        return invoke0(obj, name, args);
+    }
+
+    /**
+     * 使用反射机制调用静态方法。
+     * <p>
+     * 此方法允许通过名称和参数调用静态方法。若目标方法是实例方法，
+     * 应传递目标对象作为 obj 参数。对于静态方法，obj 参数应为 null。
+     * <p>
+     * 例如，如果目标类是 MyClass，有一个名为 myStaticMethod 的静态方法，
+     * 可以通过该方法进行调用：
+     * <pre>
+     *     Object result = staticInvoke("myStaticMethod", arg1, arg2);
+     * </pre>
+     *
+     * @param name 要调用的静态方法的名称。该名称必须与目标静态方法的名称
+     *             完全一致，包括大小写。
+     * @param args 方法的参数列表，使用可变参数形式传入。参数顺序和类型必须
+     *             与目标静态方法的签名匹配。如果方法没有参数，则可以传入一个
+     *             空的参数列表（即，`Object[] args` 为 `null` 或 `args` 为
+     *             一个空数组）。
+     * @return 方法调用的返回值。如果目标方法的返回类型是 `void`，则返回 `null`。
+     */
     public Object staticInvoke(String name, Object... args) {
+        return invoke0(null, name, args);
+    }
+
+    /**
+     * #brief：执行实际的反射方法调用。
+     *
+     * <p>该方法根据方法名和参数通过反射机制查找并调用目标方法。它会处理
+     * 实例方法和静态方法的不同调用情境。通过设置方法的可访问性为 true，
+     * 确保可以访问私有或受保护的方法。
+     *
+     * <p>如果方法的调用过程中发生异常（如方法找不到、方法不可访问等），
+     * 则会抛出适当的反射异常。
+     *
+     * @param obj  要调用方法的实例对象。如果调用静态方法则传入 null。
+     *             对于实例方法，这个对象必须是调用方法的实际实例。
+     * @param name 要调用的方法的名称。该名称必须与目标方法的名称完全一致，
+     *             包括大小写。
+     * @param args 方法的参数列表，使用可变参数形式传入。参数顺序和类型必须
+     *             与目标方法的签名匹配。如果方法没有参数，则可以传入一个
+     *             空的参数列表（即，`Object[] args` 为 `null` 或 `args` 为
+     *             一个空数组）。
+     * @return 方法调用的返回值。如果目标方法的返回类型是 `void`，则返回 `null`。
+     */
+    private Object invoke0(Object obj, String name, Object... args) {
         return throwIfError(() -> {
             Method method = args == null ? descriptor.getDeclaredMethod(name) :
                     descriptor.getDeclaredMethod(name, toClassArray(args));
-            return method.invoke(null, args);
-        }, "invoke failed.");
+            method.setAccessible(true);
+            return method.invoke(obj, args);
+        });
     }
 
     /**

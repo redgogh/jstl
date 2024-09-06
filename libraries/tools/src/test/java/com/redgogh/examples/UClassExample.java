@@ -50,13 +50,34 @@ public class UClassExample {
 
     @AllArgsConstructor
     class User {
+        /* test field */
         private String name;
+
+        /* static method */
+        public void sayIntroduce() {
+            System.out.printf("介绍 - 永乐大帝\n");
+        }
+
+        /* static method */
+        public static void say(String value) {
+            System.out.printf("朱棣 - %s\n", value);
+        }
+
     }
 
     @Test
     public void readFieldValueExample() {
         User judy = new User("Judy");
         System.out.println((String) new UClass(judy).readFieldValue("name", judy));
+    }
+
+    @Test
+    public void invokeMethodExample() {
+        User judy = new User("Judy");
+        UClass uClass = new UClass(judy);
+
+        uClass.invoke(judy,"sayIntroduce");
+        uClass.staticInvoke("say", "如此江山，岂不让人留恋 ~");
     }
 
 }
