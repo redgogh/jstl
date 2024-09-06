@@ -111,7 +111,7 @@ object Assert {
      */
     @JvmStatic
     fun <T> throwIfNull(obj: T?, vfmt: String, vararg args: Any): T =
-            Objects.requireNonNull<T>(obj, strwfmt(vfmt, args))
+            Objects.requireNonNull<T>(obj, strwfmt(vfmt, *args))
 
     /**
      * 判断一个集合容器类的对象是否为空对象或 `null`，如果满足其中任何一个

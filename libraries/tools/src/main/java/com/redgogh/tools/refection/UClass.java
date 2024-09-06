@@ -82,7 +82,7 @@ public class UClass {
      *
      * <p>存储类的属性，以属性名称作为键，属性对象 {@link UField} 作为值。
      */
-    private final Map<String, UField> properties = Maps.of();
+    private final Map<String, UField> fields = Maps.of();
 
     /**
      * #brief: 构造器，使用对象实例初始化
@@ -105,11 +105,11 @@ public class UClass {
     public UClass(Class<?> descriptor) {
         this.descriptor = descriptor;
         /* init */
-        List<UField> descriptorProperties = getDescriptorProperties(descriptor, Lists.of());
-        for (UField property : descriptorProperties) {
-            String name = property.getName();
-            if (!properties.containsKey(name))
-                properties.put(property.getName(), property);
+        List<UField> declaredFields = scanDescriptorDeclaredFields(descriptor, Lists.of());
+        for (UField field : declaredFields) {
+            String name = field.getName();
+            if (!fields.containsKey(name))
+                fields.put(field.getName(), field);
         }
     }
 
@@ -199,13 +199,13 @@ public class UClass {
     /**
      * #brief：获取当前类下的所有属性列表<p>
      * <p>
-     * 获取当前类下的所有属性列表，属性列表已经是封装好了的`ObjectProperty`
+     * 获取当前类下的所有属性列表，属性列表已经是封装好了的`UField`
      * 对象实例，可以直接使用。
      *
-     * @return 封装好的`ObjectProperty`实例列表
+     * @return 封装好的`UField`实例列表
      */
-    public List<UField> getProperties() {
-        return getProperties(true);
+    public List<UField> getDeclaredFields() {
+        return getDeclaredFields(true);
     }
 
     /**
@@ -214,34 +214,33 @@ public class UClass {
      * 获取当前类下的所有属性列表，的属性列表已经是封装好了的`UField`
      * 对象实例，可以直接使用。
      *
-     * @return 封装好的`ObjectProperty`实例列表
+     * @return 封装好的`UField`实例列表
      */
-    public List<UField> getProperties(boolean isFilter) {
+    public List<UField> getDeclaredFields(boolean isFilter) {
         if (!isFilter)
-            return Lists.of(properties.values());
+            return Lists.of(fields.values());
         /* 筛选出修饰符非 static & final 的属性列表 */
-        return Lists.filter(properties.values(), value -> (!value.isStatic() && !value.isFinal()));
+        return Lists.filter(fields.values(), value -> (!value.isStatic() && !value.isFinal()));
     }
 
     /**
      * 递归查找属性列表
      */
-    static List<UField> getDescriptorProperties(Class<?> descriptor,
-                                                List<UField> descriptorProperties) {
+    static List<UField> scanDescriptorDeclaredFields(Class<?> descriptor, List<UField> declaredFields) {
         // 获取所有成员
-        Field[] properties = descriptor.getDeclaredFields();
-        descriptorProperties.addAll(Lists.map(properties, UField::new));
+        Field[] fields = descriptor.getDeclaredFields();
+        declaredFields.addAll(Lists.map(fields, UField::new));
 
         Class<?> superclass = descriptor.getSuperclass();
         if (superclass != Object.class)
-            getDescriptorProperties(superclass, descriptorProperties);
+            scanDescriptorDeclaredFields(superclass, declaredFields);
 
-        return descriptorProperties;
+        return declaredFields;
     }
 
     @SuppressWarnings({"unchecked"})
-    public <R> R readProperty(String name, Object instance) {
-        return (R) throwIfNull(properties.get(name), "`%s`属性成员不存在", name)
+    public <R> R readFieldValue(String name, Object instance) {
+        return (R) throwIfNull(fields.get(name), "未在 %s 类中找到 %s 属性。", getName(), name)
                 .read(instance);
     }
 
@@ -265,6 +264,7 @@ public class UClass {
      * @see SecurityManager#checkPermission
      * @see RuntimePermission
      */
+    @SuppressWarnings("removal")
     public ClassLoader getClassLoader() {
         return descriptor.getClassLoader();
     }

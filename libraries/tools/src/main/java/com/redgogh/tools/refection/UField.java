@@ -56,7 +56,7 @@ public class UField {
     /**
      * 成员属性对象
      */
-    private final Field property;
+    private final Field field;
     /**
      * 属性修饰符
      */
@@ -75,22 +75,22 @@ public class UField {
     private final String name;
 
     public UField(String name, Class<?> inDescriptor) {
-        this(findDescriptorProperty(name, inDescriptor));
+        this(findDescriptorField(name, inDescriptor));
     }
 
     /**
-     * #brief：通过`Field`对象初始化`ObjectProperty`<p>
+     * #brief：通过`Field`对象初始化`ObjectField`<p>
      *
-     * 通过`Field`对象初始化`ObjectProperty`, 这个构造器会通过 {@code field} 参数
-     * 获取属性的名称，类型等元数据信息。从而初始化`ObjectProperty`对象实例。
+     * 通过`Field`对象初始化`ObjectField`, 这个构造器会通过 {@code field} 参数
+     * 获取属性的名称，类型等元数据信息。从而初始化`ObjectField`对象实例。
      *
      * @param field
      *        属性
      */
     public UField(Field field) {
-        this.property = field;
-        this.property.setAccessible(true);
-        this.modifiers = property.getModifiers();
+        this.field = field;
+        this.field.setAccessible(true);
+        this.modifiers = field.getModifiers();
         this.inClass = field.getDeclaringClass();
         this.name = field.getName();
         this.path = strwfmt("%s#%s", inClass.getName(), name);
@@ -112,7 +112,7 @@ public class UField {
      * 返回当前属性对象类型
      */
     public Class<?> getType() {
-        return property.getType();
+        return field.getType();
     }
 
     /**
@@ -130,21 +130,21 @@ public class UField {
     }
 
     /** 属性数据读取接口 */
-    interface PropertyReader<T> { T read(); }
+    interface FieldReader<T> { T read(); }
     /** 属性数据写入接口 */
-    interface PropertyWriter { void write(Object value); }
+    interface FieldWriter { void write(Object value); }
 
     /**
-     * 可访问的`Property`对象实例，该实例默认`Field`对象的
+     * 可访问的`Field`对象实例，该实例默认`Field`对象的
      * `Accessible`为true；并且支持读写操作。
      */
-    static class PropertyDescriptor implements PropertyReader<Object>, PropertyWriter {
+    static class FieldDescriptor implements FieldReader<Object>, FieldWriter {
         private final Field field; /* 可访问的 field */
         private final Object instance;
         /**
-         * 创建 Property
+         * 创建 Field
          */
-        public PropertyDescriptor(Field field, Object instance) {
+        public FieldDescriptor(Field field, Object instance) {
             this.field = field;
             this.instance = instance;
         }
@@ -162,22 +162,8 @@ public class UField {
         }
     }
 
-    private PropertyDescriptor createPropertyDescriptor(Object obj) {
-        return new PropertyDescriptor(property, obj);
-    }
-
-    /**
-     * 将`BuiltinPublicProperty`对象映射为读取
-     */
-    private PropertyReader<Object> getPropertyDescriptorReader(Object obj) {
-        return createPropertyDescriptor(obj);
-    }
-
-    /**
-     * 将`BuiltinPublicProperty`对象映射为写入
-     */
-    private PropertyWriter getPropertyDescriptorWriter(Object obj) {
-        return createPropertyDescriptor(obj);
+    private FieldDescriptor createFieldDescriptor(Object obj) {
+        return new FieldDescriptor(field, obj);
     }
 
     /**
@@ -187,14 +173,14 @@ public class UField {
      * 如果当前类中找不到 {@code name} 属性则会从父类一直往上查找。直到找不到为止。如果
      * 存在 {@code name} 属性则返回该属性 Field 对象。不存在则抛出异常。
      */
-    static Field findDescriptorProperty(String name, Class<?> descriptor) {
-        Field property = optionalIfError(() -> descriptor.getDeclaredField(name),
-                findDescriptorProperty0(name, descriptor));
-        return throwIfNull(property, "属性`%s`在`%s`类中不存在", name, descriptor.getName());
+    static Field findDescriptorField(String name, Class<?> descriptor) {
+        Field field = optionalIfError(() -> descriptor.getDeclaredField(name),
+                findDescriptorField0(name, descriptor));
+        return throwIfNull(field, "属性 %s 在 %s 类中不存在", name, descriptor.getName());
     }
 
     /** 递归从 {@code descriptor} 的父类查找 {@code name} 属性 */
-    static Field findDescriptorProperty0(String name, Class<?> descriptor) {
+    static Field findDescriptorField0(String name, Class<?> descriptor) {
         Field rfield;
         Class<?> superclass = descriptor.getSuperclass();
 
@@ -203,7 +189,7 @@ public class UField {
             return null;
 
         if ((rfield = optionalIfError(() -> superclass.getDeclaredField(name), null)) == null)
-            rfield = findDescriptorProperty0(name, superclass);
+            rfield = findDescriptorField0(name, superclass);
 
         return rfield;
     }
@@ -218,7 +204,7 @@ public class UField {
      *        对象实例
      */
     public Object read(Object instance) {
-        return getPropertyDescriptorReader(instance).read();
+        return createFieldDescriptor(instance).read();
     }
 
     /**
@@ -234,14 +220,14 @@ public class UField {
      *        对象实例
      */
     public void write(Object instance, Object value) {
-        getPropertyDescriptorWriter(instance).write(value);
+        createFieldDescriptor(instance).write(value);
     }
 
     /**
      * #brief：将`src`实例中的当前属性对象拷贝到`dest`中<p>
      *
      * 将`src`实例中的当前属性对象拷贝到`dest`中，首先必须确保`src`对象中
-     * 和`dest`对象中都存在当前`Property`属性。否则拷贝失败。
+     * 和`dest`对象中都存在当前`Field`属性。否则拷贝失败。
      *
      * @param src
      *        源对象实例
@@ -302,9 +288,9 @@ public class UField {
      *         返回注解对象。如果不存在则返回 {@code null}。
      */
     public <T extends Annotation> T getAnnotation(Class<T> annotation) {
-        T a = property.getDeclaredAnnotation(annotation);
+        T a = field.getDeclaredAnnotation(annotation);
         if (a == null)
-            a = property.getAnnotation(annotation);
+            a = field.getAnnotation(annotation);
         return a;
     }
 

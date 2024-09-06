@@ -25,6 +25,7 @@ package com.redgogh.examples;
 
 import com.redgogh.tools.refection.UClass;
 import com.redgogh.tools.refection.UField;
+import lombok.AllArgsConstructor;
 import org.junit.Test;
 
 import java.awt.*;
@@ -41,10 +42,21 @@ public class UClassExample {
 
         printf("uClass(%s)\n", uClass.getName());
 
-        List<UField> properties = uClass.getProperties();
+        List<UField> properties = uClass.getDeclaredFields();
         for (UField property : properties) {
             printf("  - uField path: %s\n", property.getPath());
         }
+    }
+
+    @AllArgsConstructor
+    class User {
+        private String name;
+    }
+
+    @Test
+    public void readFieldValueExample() {
+        User judy = new User("Judy");
+        System.out.println((String) new UClass(judy).readFieldValue("name", judy));
     }
 
 }

@@ -106,12 +106,12 @@ object BeanUtils {
      */
     @JvmStatic
     fun copyProperties(src: Any, dest: Any, vararg ignores: String) {
-        val primary = UClass(dest)
-        for (property in primary.properties) {
-            val name = property.name
+        val uClass = UClass(dest)
+        for (field in uClass.declaredFields) {
+            val name = field.name
             if (ignores.isNotEmpty() && (name in ignores))
                 continue
-            UField.copyIgnoreError(src, dest, property.name)
+            UField.copyIgnoreError(src, dest, field.name)
         }
     }
 
