@@ -32,18 +32,57 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
- * 容器工具类
+ * `Lists` 是一个工具类，提供了各种对集合（特别是 {@link List} 和 {@link Collection}）
+ * 进行操作的方法。这些方法旨在简化对集合的常见操作，如判断集合是否为空、复制集合、
+ * 创建集合实例、合并集合、过滤集合、以及计算集合的交集和差集等。
  *
- * @author RedGogh   
+ * <p>该类中的所有方法都是静态方法，能够直接调用而无需实例化对象。这些方法的设计初衷
+ * 是为了提高集合操作的简洁性和可读性，避免冗长的集合操作代码。
+ *
+ * <p>本类的主要特点包括：
+ * <ul>
+ *     <li>通过简化常见集合操作，提升代码的可读性和维护性。</li>
+ *     <li>支持泛型操作，增强了方法的适用性和灵活性。</li>
+ *     <li>提供了对集合元素的映射转换和过滤功能，方便集合元素的快速处理。</li>
+ *     <li>集成了 {@link StreamMapping} 接口，允许通过 Lambda 表达式对集合元素进行
+ *         自定义处理。</li>
+ * </ul>
+ *
+ * <p>该工具类尤其适合在需要频繁操作集合的场景中使用，能够极大地减少手动处理集合的代码量。
+ *
+ * <h2>注意事项</h2>
+ * <ul>
+ *     <li>部分方法要求传入的集合参数不能为空，否则会抛出 {@link NullPointerException} 异常。</li>
+ *     <li>集合的操作大多数是不可变的，即原集合不会被修改，返回的新集合是操作后的结果。</li>
+ *     <li>对于需要映射转换的操作，需要传入实现了 {@link StreamMapping} 的 Lambda 表达式
+ *         或函数式接口。</li>
+ * </ul>
+ *
+ * <p>本类支持的集合类型包括但不限于 {@link ArrayList}、{@link LinkedList}、{@link HashSet} 等。
+ *
+ * <h2>使用示例</h2>
+ * <pre>
+ *     // 判断集合是否为空
+ *     boolean isEmpty = Lists.isEmpty(collection);
+ *
+ *     // 创建一个包含指定元素的 ArrayList
+ *     List<Integer> list = Lists.of(1, 2, 3);
+ *
+ *     // 计算两个集合的交集
+ *     List<Integer> intersection = Lists.intersection(list1, list2);
+ * </pre>
+ *
+ * <p>完整的使用示例和测试用例可以参考项目的测试包下的相关测试类。
+ *
+ * @author RedGogh
+ *
+ * @see Collection
+ * @see List
+ * @see ArrayList
+ * @see StreamMapping
+ * @since 1.0
  */
-@SuppressWarnings("DuplicatedCode")
-public class Collects {
-
-    @SuppressWarnings("rawtypes")
-    public static final List EMPTY_LIST = java.util.Collections.EMPTY_LIST;
-
-    @SuppressWarnings("rawtypes")
-    public static final Set EMPTY_SET = java.util.Collections.EMPTY_SET;
+public class Lists {
 
     /**
      * 判断参数 {@code a} 实现了 {@link Collection} 接口的对象实例，是否为空。如果要满足函数
@@ -63,30 +102,8 @@ public class Collects {
      * @see List
      * @see Set
      */
-    public static <E> boolean isEmptyList(Collection<E> a) {
+    public static <E> boolean isEmpty(Collection<E> a) {
         return a == null || a.isEmpty();
-    }
-
-    /**
-     * 判断参数 {@code map} 实现了 {@link Map} 接口的对象实例，是否为空。如果要满足函数
-     * 返回 {@code false} 那么该对象不能为 {@code null} 并且该对象的 {@code size} 必须大
-     * 于 0。反之返回 {@code true}。<p>
-     *
-     * <p>
-     * 这个函数主要的作用在于判断各种 {@link LinkedHashMap}、{@link HashMap} 等继承了
-     * {@link Map} 接口的子接口。
-     *
-     * @param map
-     *        一个 {@link Map} 接口对象实例
-     *
-     * @return {@code false} 表示集合不为空，集合内有真实的数据。反之 {@code true} 表示集合
-     *         内是空的，没有真实的任何数据。
-     *
-     * @see List
-     * @see Set
-     */
-    public static <K, V> boolean isEmptyMap(Map<K, V> map) {
-        return map == null || map.isEmpty();
     }
 
     /**
@@ -94,7 +111,7 @@ public class Collects {
      *         对象为 {@code null} 或 {@code size} == 0 那么则会返回 {@code null}
      */
     @SuppressWarnings("unchecked")
-    public static <E> E collectionBeg(Collection<E> collection) {
+    public static <E> E beg(Collection<E> collection) {
         if (collection == null || collection.isEmpty())
             return null;
         Object[] array = collection.toArray();
@@ -106,16 +123,12 @@ public class Collects {
      *         对象为 {@code null} 或 {@code size} == 0 那么则会返回 {@code null}
      */
     @SuppressWarnings("unchecked")
-    public static <E> E collectionEnd(Collection<E> collection) {
+    public static <E> E end(Collection<E> collection) {
         if (collection == null || collection.isEmpty())
             return null;
         Object[] array = collection.toArray();
         return (E) array[array.length - 1];
     }
-
-    //////////////////////////////////////////////////////////////////////////////////////
-    /// List
-    //////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * 传入一个 {@link List} 对象，拷贝参数 {@code a} 中的数据到新的 {@link ArrayList} 对象中，数据拷贝
@@ -124,14 +137,14 @@ public class Collects {
      * @param a 需要拷贝的数据
      * @return 拷贝后的新 {@link ArrayList} 对象实例
      */
-    public static <E> List<E> listCopy(Collection<E> a) {
+    public static <E> List<E> copy(Collection<E> a) {
         return new ArrayList<>(a);
     }
 
     /**
      * @return 分配一个空的 {@link ArrayList} 集合对象实例。
      */
-    public static <E> List<E> asList() {
+    public static <E> List<E> of() {
         return new ArrayList<>();
     }
 
@@ -147,11 +160,11 @@ public class Collects {
      * @throws NullPointerException
      *         如果泛型参数为空值
      *
-     * @see #asList(Collection)
+     * @see #of(Collection)
      */
     @SafeVarargs
-    public static <E> ArrayList<E> asList(E... a) {
-        return asList(Arrays.asList(a));
+    public static <E> ArrayList<E> of(E... a) {
+        return of(Arrays.asList(a));
     }
 
     /**
@@ -176,11 +189,11 @@ public class Collects {
      * @throws ArrayIndexOutOfBoundsException
      *         如果 {@code len} 超出整个 {@code a} 数组大小的长度。
      *
-     * @see #asList(Collection)
+     * @see #of(Collection)
      */
     @SuppressWarnings("unchecked")
-    public static <E> ArrayList<E> asList(E[] a, int off, int len) {
-        return (ArrayList<E>) asList(Arrays.asList(a, off, len));
+    public static <E> ArrayList<E> of(E[] a, int off, int len) {
+        return (ArrayList<E>) of(Arrays.asList(a, off, len));
     }
 
     /**
@@ -198,7 +211,7 @@ public class Collects {
      *
      * @see ArrayList#ArrayList(Collection)
      */
-    public static <E> ArrayList<E> asList(Collection<? extends E> collection) {
+    public static <E> ArrayList<E> of(Collection<? extends E> collection) {
         return new ArrayList<>(collection);
     }
 
@@ -221,8 +234,8 @@ public class Collects {
      * @see ArrayList#ArrayList(Collection)
      */
     @SuppressWarnings("unchecked")
-    public static <E> List<E> asList(Collection<? extends E> a, Collection<? extends E> b) {
-        List<E> ret = asList();
+    public static <E> List<E> of(Collection<? extends E> a, Collection<? extends E> b) {
+        List<E> ret = of();
         ret.addAll(a);
         ret.addAll(b);
         return (ArrayList<E>) ret;
@@ -241,8 +254,8 @@ public class Collects {
      *
      * @return 返回通过 {@link StreamMapping} 转换后的集合实例。
      */
-    public static <T, R> List<R> listMap(T[] a, StreamMapping<T, R> builder) {
-        return listMap(asList(a), builder);
+    public static <T, R> List<R> map(T[] a, StreamMapping<T, R> builder) {
+        return map(of(a), builder);
     }
 
     /**
@@ -258,10 +271,10 @@ public class Collects {
      *
      * @return 返回通过 {@link StreamMapping} 转换后的集合实例。
      */
-    public static <T, R> List<R> listMap(Collection<T> collection, StreamMapping<T, R> builder) {
+    public static <T, R> List<R> map(Collection<T> collection, StreamMapping<T, R> builder) {
         List<R> retval = null;
         if (collection != null) {
-            retval = asList();
+            retval = of();
             for (T obj : collection)
                 retval.add(builder.map(obj));
         }
@@ -282,7 +295,7 @@ public class Collects {
      *
      * @return 一个过滤后的新集合对象实例，不影响原有的数据。
      */
-    public static <E> List<E> listFilter(Collection<E> a, Predicate<? super E> predicate) {
+    public static <E> List<E> filter(Collection<E> a, Predicate<? super E> predicate) {
         return a.stream().filter(predicate).collect(Collectors.toList());
     }
 
@@ -298,8 +311,8 @@ public class Collects {
      *
      * @return 计算后返回：两个集合之间的交集
      */
-    public static <E> List<E> listInt(Collection<E> a, Collection<E> b) {
-        List<E> lcopy = listCopy(a);
+    public static <E> List<E> intersection(Collection<E> a, Collection<E> b) {
+        List<E> lcopy = copy(a);
         lcopy.retainAll(b);
         return lcopy;
     }
@@ -315,16 +328,16 @@ public class Collects {
      * 理解函数用法：
      * <pre>
      *     // 首先我们有一个包含 ["1", "2", "3"] 的整数集合，但它是字符串类型
-     *     var numstrs = asList("1", "2", "3");
+     *     var numstrs = of("1", "2", "3");
      *
      *     // 然后我们还有一个整数类型集合，[1, 2, 3, 4, 5, 6]
-     *     var numints = asList(1, 2, 3, 4, 5, 6);
+     *     var numints = of(1, 2, 3, 4, 5, 6);
      *
      *     // 根据数字类型，取差集，预期结果为：[1, 2, 3]
-     *     var ret = listInt(numints, numstrs, Objects::atoi); // 通过 atoi 将 string 转为 int 做比较
+     *     var ret = intersection(numints, numstrs, Objects::atoi); // 通过 atoi 将 string 转为 int 做比较
      * </pre>
      *
-     * <p>可执行测试用例 'CollectsTest#listIntTest2'（在 test 包下）
+     * <p>可执行测试用例 'CollectsTest#intersectionTest2'（在 test 包下）
      *
      * @param a         集合 a
      * @param b         集合 b，类型可以是任意对象
@@ -333,8 +346,8 @@ public class Collects {
      *
      * @return 计算后返回：两个集合之间的交集
      */
-    public static <E, M> List<E> listInt(Collection<E> a, Collection<M> b, StreamMapping<M, E> bMapper) {
-        return listInt(a, listMap(b, bMapper));
+    public static <E, M> List<E> intersection(Collection<E> a, Collection<M> b, StreamMapping<M, E> bMapper) {
+        return intersection(a, map(b, bMapper));
     }
 
     /**
@@ -348,13 +361,13 @@ public class Collects {
      * 理解函数用法：
      * <pre>
      *     // 首先我们有一个包含 ["1", "2", "3"] 的整数集合，但它是字符串类型
-     *     var numstrs = asList("1", "2", "3");
+     *     var numstrs = of("1", "2", "3");
      *
      *     // 然后我们还有一个整数类型集合，[1, 2, 3, 4, 5, 6]
-     *     var numints = asList(1, 2, 3, 4, 5, 6);
+     *     var numints = of(1, 2, 3, 4, 5, 6);
      *
      *     // 根据数字类型，取差集，预期结果为：[1, 2, 3]
-     *     var ret = listInt(numints, Objects::atoi, numstrs, Objects::atoi); // 通过 atoi 将 string 转为 int 做比较
+     *     var ret = intersection(numints, Objects::atoi, numstrs, Objects::atoi); // 通过 atoi 将 string 转为 int 做比较
      * </pre>
      *
      * @param a           完整数据集
@@ -366,9 +379,9 @@ public class Collects {
      *
      * @return 计算后返回：两个集合之间的差集
      */
-    public static <M1, M2, E> List<E> listInt(Collection<M1> a, StreamMapping<M1, E> aMapper,
+    public static <M1, M2, E> List<E> intersection(Collection<M1> a, StreamMapping<M1, E> aMapper,
                                               Collection<M2> b, StreamMapping<M2, E> bMapper) {
-        return listInt(listMap(a, aMapper), listMap(b, bMapper));
+        return intersection(map(a, aMapper), map(b, bMapper));
     }
 
     /**
@@ -383,8 +396,8 @@ public class Collects {
      *
      * @return 计算后返回：两个集合之间的差集
      */
-    public static <E> List<E> listDiff(Collection<E> a, Collection<E> b) {
-        List<E> lcopy = listCopy(a);
+    public static <E> List<E> diff(Collection<E> a, Collection<E> b) {
+        List<E> lcopy = copy(a);
         lcopy.removeAll(b);
         return lcopy;
     }
@@ -400,16 +413,16 @@ public class Collects {
      * 理解函数用法：
      * <pre>
      *     // 首先我们有一个包含 ["1", "2", "3"] 的整数集合，但它是字符串类型
-     *     var numstrs = asList("1", "2", "3");
+     *     var numstrs = of("1", "2", "3");
      *
      *     // 然后我们还有一个整数类型集合，[1, 2, 3, 4, 5, 6]
-     *     var numints = asList(1, 2, 3, 4, 5, 6);
+     *     var numints = of(1, 2, 3, 4, 5, 6);
      *
      *     // 根据数字类型，取差集，预期结果为：[4，5，6]
-     *     var ret = listDiff(numints, numstrs, Objects::atoi); // 通过 atoi 将 string 转为 int 做比较
+     *     var ret = diff(numints, numstrs, Objects::atoi); // 通过 atoi 将 string 转为 int 做比较
      * </pre>
      *
-     * <p>可执行测试用例 'CollectsTest#listDiffMapperTest'（在 test 包下）
+     * <p>可执行测试用例 'CollectsTest#diffMapperTest'（在 test 包下）
      *
      * @param a         完整数据集
      * @param b         部分数据集，可以是任意对象
@@ -418,8 +431,8 @@ public class Collects {
      *
      * @return 计算后返回：两个集合之间的差集
      */
-    public static <E, M> List<E> listDiff(Collection<E> a, Collection<M> b, StreamMapping<M, E> bMapper) {
-        return listDiff(a, listMap(b, bMapper));
+    public static <E, M> List<E> diff(Collection<E> a, Collection<M> b, StreamMapping<M, E> bMapper) {
+        return diff(a, map(b, bMapper));
     }
 
     /**
@@ -433,13 +446,13 @@ public class Collects {
      * 理解函数用法：
      * <pre>
      *     // 首先我们有一个包含 ["1", "2", "3"] 的整数集合，但它是字符串类型
-     *     var numstrs1 = asList("1", "2", "3");
+     *     var numstrs1 = of("1", "2", "3");
      *
      *     // 然后我们还有一个包含 ["2", "3", "4"]
-     *     var numstrs2 = asList("2", "3", "4");
+     *     var numstrs2 = of("2", "3", "4");
      *
      *     // 根据数字类型，取差集，预期结果为：["1", "4"]
-     *     var ret = listDiff(numstrs1, Objects::atoi, numstrs2, Objects::atoi); // 通过 atoi 将 string 转为 int 做比较
+     *     var ret = diff(numstrs1, Objects::atoi, numstrs2, Objects::atoi); // 通过 atoi 将 string 转为 int 做比较
      * </pre>
      *
      * @param a           完整数据集
@@ -451,9 +464,9 @@ public class Collects {
      *
      * @return 计算后返回：两个集合之间的差集
      */
-    public static <M1, M2, E> List<E> listDiff(Collection<M1> a, StreamMapping<M1, E> aMapper,
+    public static <M1, M2, E> List<E> diff(Collection<M1> a, StreamMapping<M1, E> aMapper,
                                                Collection<M2> b, StreamMapping<M2, E> bMapper) {
-        return listDiff(listMap(a, aMapper), listMap(b, bMapper));
+        return diff(map(a, aMapper), map(b, bMapper));
     }
 
     /**
@@ -469,16 +482,16 @@ public class Collects {
      * @return 计算后返回：两个集合之间的`对称差集`
      */
     @SuppressWarnings({"SlowAbstractSetRemoveAll"})
-    public static <E> List<E> listSymmDiff(Collection<E> a, Collection<E> b) {
-        Set<E> symmdiff = asSet();
+    public static <E> List<E> symdiff(Collection<E> a, Collection<E> b) {
+        Set<E> symmdiff = Sets.of();
         symmdiff.addAll(a);
         symmdiff.addAll(b);
 
         /* 计算交集 */
-        List<E> inter = listInt(a, b);
+        List<E> inter = intersection(a, b);
 
         symmdiff.removeAll(inter);
-        return (List<E>) asList(symmdiff);
+        return (List<E>) of(symmdiff);
     }
 
     /**
@@ -492,14 +505,14 @@ public class Collects {
      * 理解函数用法：
      * <pre>
      *     // 先创建集合 A
-     *     var A = asList(2, 3, 4);
+     *     var A = of(2, 3, 4);
      *     // 然后创建集合 B
-     *     var B = asList("1", "2", "3");
+     *     var B = of("1", "2", "3");
      *     // 最后取对称差集部分，预期结果：[1，4]
-     *     listSymmDiff(A, B, Objects::atoi); // 通过 atoi 将集合 A 的 String 转为 int 计算对称差集
+     *     symdiff(A, B, Objects::atoi); // 通过 atoi 将集合 A 的 String 转为 int 计算对称差集
      * </pre>
      *
-     * <p>可执行测试用例 'CollectsTest#listSymmDiffTest'（在 test 包下）
+     * <p>可执行测试用例 'CollectsTest#symdiffTest'（在 test 包下）
      *
      * @param a         完整数据集
      * @param b         部分数据集，可以是任意对象
@@ -508,8 +521,8 @@ public class Collects {
      *
      * @return 计算后返回：两个集合之间的差集
      */
-    public static <E, M> List<E> listSymmDiff(Collection<E> a, Collection<M> b, StreamMapping<M, E> bMapper) {
-        return listSymmDiff(a, listMap(b, bMapper));
+    public static <E, M> List<E> symdiff(Collection<E> a, Collection<M> b, StreamMapping<M, E> bMapper) {
+        return symdiff(a, map(b, bMapper));
     }
 
     /**
@@ -523,14 +536,14 @@ public class Collects {
      * 理解函数用法：
      * <pre>
      *     // 先创建集合 A
-     *     var A = asList(2, 3, 4);
+     *     var A = of(2, 3, 4);
      *     // 然后创建集合 B
-     *     var B = asList("1", "2", "3");
+     *     var B = of("1", "2", "3");
      *     // 最后取对称差集部分，预期结果：[1，4]
-     *     listSymmDiff(A, B, Objects::atoi); // 通过 atoi 将集合 A 的 String 转为 int 计算对称差集
+     *     symdiff(A, B, Objects::atoi); // 通过 atoi 将集合 A 的 String 转为 int 计算对称差集
      * </pre>
      *
-     * <p>可执行测试用例 'CollectsTest#listSymmDiffTest'（在 test 包下）
+     * <p>可执行测试用例 'CollectsTest#symdiffTest'（在 test 包下）
      *
      * @param a           完整数据集
      * @param aMapper     映射操作，将 {@code a} 中的数据对应类型映射
@@ -541,280 +554,9 @@ public class Collects {
      *
      * @return 计算后返回：两个集合之间的差集
      */
-    public static <M1, M2, E> List<E> listSymmDiff(Collection<M1> a, StreamMapping<M1, E> aMapper,
+    public static <M1, M2, E> List<E> symdiff(Collection<M1> a, StreamMapping<M1, E> aMapper,
                                                    Collection<M2> b, StreamMapping<M2, E> bMapper) {
-        return listSymmDiff(listMap(a, aMapper), listMap(b, bMapper));
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////
-    /// Set
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * 传入一个 {@link Set} 对象，拷贝参数 {@code a} 中的数据到新的 {@link HashSet} 对象中，数据拷贝
-     * 过去以后，修改原来的 {@link Set} 对象或修改新分配到对象，并不会影响两个对象之间的数据。
-     *
-     * @param a 需要拷贝的数据
-     * @return 拷贝后的新 {@link HashSet} 对象实例
-     */
-    public static <E> Set<E> setCopy(Set<E> a) {
-        return new HashSet<>(a);
-    }
-
-    /**
-     * @return 分配一个空的 {@link HashSet} 集合对象实例。
-     */
-    public static <E> HashSet<E> asSet() {
-        return new HashSet<>();
-    }
-
-    /**
-     * 通过传入的泛型可变参数去分配一个 {@link HashSet} 集合对象实例。泛型可变参数不能为空
-     * 否则会抛出 {@link NullPointerException} 异常。
-     *
-     * @param a
-     *        泛型可变参数数组
-     *
-     * @return 一个新的 {@link HashSet} 对象实例
-     *
-     * @throws NullPointerException
-     *         如果泛型参数为空值
-     *
-     * @see #asSet(Collection)
-     */
-    @SafeVarargs
-    public static <E> HashSet<E> asSet(E... a) {
-        return asSet(Arrays.asList(a));
-    }
-
-    /**
-     * 截取数组 {@code a} 通过 {@code off} 和 {@code len} 两个参数去截取，截取出来的新数组会
-     * 分配成一个可变的 {@link HashSet} 对象实例。
-     *
-     * @param a
-     *        泛型可变参数数组
-     *
-     * @param off
-     *        泛型数组开始的索引位置，偏移量。
-     *
-     * @param len
-     *        要截取的长度，这个长度范围应该在 <= {@code a}.length()。如果长度超出 {@code a} 数组
-     *        的大小，会抛出 {@link ArrayIndexOutOfBoundsException} 异常。
-     *
-     * @return 一个新的 {@link HashSet} 对象实例
-     *
-     * @throws NullPointerException
-     *         如果泛型参数为空值。
-     *
-     * @throws ArrayIndexOutOfBoundsException
-     *         如果 {@code len} 超出整个 {@code a} 数组大小的长度。
-     *
-     * @see #asSet(Collection)
-     */
-    @SuppressWarnings("unchecked")
-    public static <E> HashSet<E> asSet(E[] a, int off, int len) {
-        return (HashSet<E>) asSet(Arrays.asList(a, off, len));
-    }
-
-    /**
-     * 通过传入的 {@link Collection} 实例去分配一个 {@link HashSet} 集合对象实例。{@code collection} 参数不能为空
-     * 否则会抛出 {@link NullPointerException} 异常。
-     *
-     * @param collection
-     *        实现了 {@link Collection} 接口的对象实例，如 {@link HashSet}、{@link LinkedList} 等
-     *        对象实例皆实现了 {@link Collection} 接口。
-     *
-     * @return 一个新的 {@link HashSet} 对象实例
-     *
-     * @throws NullPointerException
-     *         如果 {@code collection} 参数为空值
-     *
-     * @see HashSet#HashSet(Collection)
-     */
-    public static <E> HashSet<E> asSet(Collection<? extends E> collection) {
-        return new HashSet<>(collection);
-    }
-
-    /**
-     * 合并两个实现了 {@link Collection} 接口的对象实例，通过传入顺序合并两个对象成一个新的 {@link HashSet} 对象
-     * 实例。两个 {@link Collection} 不能为空，否则会抛出 {@link NullPointerException} 异常。
-     *
-     * @param a
-     *        实现了 {@link Collection} 接口的对象实例，如 {@link HashSet}、{@link LinkedList} 等
-     *        对象实例皆实现了 {@link Collection} 接口。
-
-     * @param b
-     *        另一个实现了 {@link Collection} 接口的对象的实例
-     *
-     * @return 一个新的 {@link HashSet} 对象实例
-     *
-     * @throws NullPointerException
-     *         如果 {@code a} 或者 {@code b} 参数为空值
-     *
-     * @see HashSet#HashSet(Collection)
-     */
-    @SuppressWarnings("unchecked")
-    public static <E> HashSet<E> asSet(Collection<? extends E> a, Collection<? extends E> b) {
-        HashSet<E> ret = asSet();
-        ret.addAll(a);
-        ret.addAll(b);
-        return (HashSet<E>) ret;
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////
-    /// Map
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * 传入一个 {@link Map} 对象，拷贝参数 {@code a} 中的数据到新的 {@link HashMap} 对象中，数据拷贝
-     * 过去以后，修改原来的 {@link Map} 对象或修改新分配到对象，并不会影响两个对象之间的数据。
-     *
-     * @param a 需要拷贝的数据
-     * @return 拷贝后的新 {@link HashMap} 对象实例
-     */
-    public static <K, V> Map<K, V> mapCopy(Map<K, V> a) {
-        return new HashMap<>(a);
-    }
-
-    /**
-     * @return 分配一个新的容量默认为 16 个空间的 {@link Map} 实例。
-     */
-    public static <K, V> Map<K, V> asMap() {
-        return new HashMap<>();
-    }
-
-    /**
-     * 合并两个实现了 {@link Map} 接口实例，合并的 {@link Map} 对象可以是任何实现类。但是有一个地方
-     * 需要注意，也就是如果想要的合并结果是有序的。比如你想要合并两个 {@link LinkedHashMap} 成一个单独
-     * 的 {@link Map} 对象并且要保证数据的有序。那么这个函数并不适合这样的操作。
-     *
-     * <p>因为这个函数的返回结果是 {@link HashMap}，而 {@link HashMap} 是一个无序的
-     * {@link Map} 实现类。
-     *
-     * @param a
-     *          一个要合并的 {@link Map} 实现
-     *
-     * @param b
-     *          另一个要合并的 {@link Map} 实现
-     *
-     * @return 合并后的 {@link HashMap} 对象。
-     */
-    public static <K, V> Map<K, V> asMap(Map<K, V> a, Map<K, V> b) {
-        Map<K, V> retmap = asMap();
-        retmap.putAll(a);
-        retmap.putAll(b);
-        return retmap;
-    }
-
-    /**
-     * 通过参数传入，key 和 value 创建一个 {@link Map} 对象实例。这个函数必须传入
-     * {@code key} 和 {@code value} 并且返回的 Map 对象实例中包含传入的 {@code key}
-     * 和 {@code value}
-     *
-     * 这个函数支持传入一个键值对。
-     *
-     * @param k1
-     *          key
-     *
-     * @param v1
-     *          value
-     *
-     * @return 返回一个包含传入的 key 和 value 的 {@link Map} 对象实例。
-     */
-    public static <K, V> Map<K, V> asMap(K k1, V v1) {
-        Map<K, V> retmap = asMap();
-        retmap.put(k1, v1);
-        return retmap;
-    }
-
-    /**
-     * 通过参数传入，key 和 value 创建一个 {@link Map} 对象实例。这个函数必须传入
-     * {@code key} 和 {@code value} 并且返回的 Map 对象实例中包含传入的 {@code key}
-     * 和 {@code value}
-     *
-     * 这个函数支持传入两个键值对。
-     *
-     * @return 返回一个包含传入的 key 和 value 的 {@link Map} 对象实例。
-     */
-    public static <K, V> Map<K, V> asMap(K k1, V v1, K k2, V v2) {
-        Map<K, V> retmap = asMap();
-        retmap.put(k1, v1);
-        retmap.put(k2, v2);
-        return retmap;
-    }
-
-    /**
-     * 通过参数传入，key 和 value 创建一个 {@link Map} 对象实例。这个函数必须传入
-     * {@code key} 和 {@code value} 并且返回的 Map 对象实例中包含传入的 {@code key}
-     * 和 {@code value}
-     *
-     * 这个函数支持传入三个键值对。
-     *
-     * @return 返回一个包含传入的 key 和 value 的 {@link Map} 对象实例。
-     */
-    public static <K, V> Map<K, V> asMap(K k1, V v1, K k2, V v2, K k3, V v3) {
-        Map<K, V> retmap = asMap();
-        retmap.put(k1, v1);
-        retmap.put(k2, v2);
-        retmap.put(k3, v3);
-        return retmap;
-    }
-
-    /**
-     * 通过参数传入，key 和 value 创建一个 {@link Map} 对象实例。这个函数必须传入
-     * {@code key} 和 {@code value} 并且返回的 Map 对象实例中包含传入的 {@code key}
-     * 和 {@code value}
-     *
-     * 这个函数支持传入四个键值对。
-     *
-     * @return 返回一个包含传入的 key 和 value 的 {@link Map} 对象实例。
-     */
-    public static <K, V> Map<K, V> asMap(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4) {
-        Map<K, V> retmap = asMap();
-        retmap.put(k1, v1);
-        retmap.put(k2, v2);
-        retmap.put(k3, v3);
-        retmap.put(k4, v4);
-        return retmap;
-    }
-
-    /**
-     * 通过参数传入，key 和 value 创建一个 {@link Map} 对象实例。这个函数必须传入
-     * {@code key} 和 {@code value} 并且返回的 Map 对象实例中包含传入的 {@code key}
-     * 和 {@code value}
-     *
-     * 这个函数支持传入五个键值对。
-     *
-     * @return 返回一个包含传入的 key 和 value 的 {@link Map} 对象实例。
-     */
-    public static <K, V> Map<K, V> asMap(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5) {
-        Map<K, V> retmap = asMap();
-        retmap.put(k1, v1);
-        retmap.put(k2, v2);
-        retmap.put(k3, v3);
-        retmap.put(k4, v4);
-        retmap.put(k5, v5);
-        return retmap;
-    }
-
-    /**
-     * 通过参数传入，key 和 value 创建一个 {@link Map} 对象实例。这个函数必须传入
-     * {@code key} 和 {@code value} 并且返回的 Map 对象实例中包含传入的 {@code key}
-     * 和 {@code value}
-     *
-     * 这个函数支持传入六个键值对。
-     *
-     * @return 返回一个包含传入的 key 和 value 的 {@link Map} 对象实例。
-     */
-    public static <K, V> Map<K, V> asMap(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6) {
-        Map<K, V> retmap = asMap();
-        retmap.put(k1, v1);
-        retmap.put(k2, v2);
-        retmap.put(k3, v3);
-        retmap.put(k4, v4);
-        retmap.put(k5, v5);
-        retmap.put(k6, v6);
-        return retmap;
+        return symdiff(map(a, aMapper), map(b, bMapper));
     }
 
 }

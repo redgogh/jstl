@@ -43,6 +43,8 @@ import java.util.concurrent.TimeUnit;
  * Date 又使用了 Calendar 做日期的计算操作。所以 Calendar 类是线程不安全的
  * 然后 Date 类有依赖 Calendar 提供的函数，这也就间接导致了 Date 也是不安全
  * 的。
+ *
+ * @author RedGogh
  */
 public class Date extends java.util.Date {
 

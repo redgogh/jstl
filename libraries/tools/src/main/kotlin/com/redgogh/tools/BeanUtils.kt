@@ -1,6 +1,7 @@
 package com.redgogh.tools
 
 import com.redgogh.tools.collection.Collects
+import com.redgogh.tools.collection.Lists
 import com.redgogh.tools.refection.UClass
 import com.redgogh.tools.refection.UField
 
@@ -58,7 +59,7 @@ object BeanUtils {
      */
     @JvmStatic
     fun <T> copyProperties(src: Collection<*>, destClass: Class<T>, vararg ignores: String): List<T> {
-        val retvals = Collects.asList<T>()
+        val retvals = Lists.of<T>()
         for (any in src)
             retvals.add(copyProperties(any!!, destClass, *ignores))
         return retvals

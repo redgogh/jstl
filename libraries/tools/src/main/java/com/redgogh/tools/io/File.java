@@ -24,7 +24,7 @@ package com.redgogh.tools.io;
 \* -------------------------------------------------------------------------------- */
 
 import com.redgogh.tools.SystemOS;
-import com.redgogh.tools.collection.Collects;
+import com.redgogh.tools.collection.Lists;
 
 import java.io.*;
 import java.net.URI;
@@ -36,8 +36,27 @@ import static com.redgogh.tools.Optional.optionalIfError;
 import static com.redgogh.tools.StringUtils.*;
 
 /**
- * File 对象，增强 {@code File} 对象操作，添加更多实用函数以便在开发中
- * 提高效率，代码简洁。
+ * 扩展了 `java.io.File` 的自定义文件类，提供了增强的文件操作功能。
+ * <p>
+ * 该类在基本文件操作功能的基础上，增加了对文件路径的快速访问、文件扩展名的处理、文件强制删除等功能。
+ * 它支持在 Windows 操作系统上对路径进行快速替换，提供了便捷的方法来获取和操作文件的扩展名。
+ * <p>
+ * 此外，本类还提供了对文件内容的随机读写操作的支持，包括读取不同类型的数据（如 int、long、float、double）。
+ * 强制删除文件或目录的方法会递归删除目录下的所有内容，并尝试删除指定的文件或目录。
+ * <p>
+ * 本类支持的主要功能包括：
+ * <ul>
+ *     <li>路径快速访问</li>
+ *     <li>文件和目录的强制删除</li>
+ *     <li>文件扩展名的处理</li>
+ *     <li>文件内容的随机读写访问</li>
+ * </ul>
+ * <p>
+ * 需要注意的是，文件的随机读写访问功能要求在操作之前调用 `open()` 方法打开文件描述符。
+ *
+ * @see java.io.File
+ * @since 1.0
+ * @author RedGogh
  */
 public class File extends java.io.File {
 
@@ -272,7 +291,7 @@ public class File extends java.io.File {
     }
 
     private boolean staticForceDeleteDirectory(File dir) {
-        List<File> children = Collects.listMap(dir.listFiles(), File::new);
+        List<File> children = Lists.map(dir.listFiles(), File::new);
         for (File child : children) {
             if (child.isFile()) {
                 child.forceDeleteFile();

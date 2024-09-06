@@ -25,7 +25,7 @@ package com.redgogh.lionroutes.framework;
 
 /* Create on 2023/8/11 */
 
-import com.redgogh.tools.collection.Collects;
+import com.redgogh.tools.collection.Lists;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.http.HttpStatus;
@@ -35,8 +35,6 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
-
-import static com.redgogh.tools.collection.Collects.collectionBeg;
 
 /**
  * @author RedGogh
@@ -100,7 +98,7 @@ public class LionRoutesFilterContext {
     /** 从当前请求上下文中获取请求头 */
     public String getHeader(String header) {
         List<String> headerValues = _request().getHeaders().get(header);
-        return headerValues != null ? collectionBeg(headerValues) : null;
+        return headerValues != null ? Lists.beg(headerValues) : null;
     }
 
     /** 获取当前请求上下文数据中的请求路径 */
