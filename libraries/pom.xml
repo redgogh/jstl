@@ -6,7 +6,7 @@
 
     <groupId>com.redgogh.libraries</groupId>
     <artifactId>libraries</artifactId>
-    <version>v1.0.0-beta.1+build</version>
+    <version>v1.0.1-beta.1+build</version>
     <packaging>pom</packaging>
 
     <modules>

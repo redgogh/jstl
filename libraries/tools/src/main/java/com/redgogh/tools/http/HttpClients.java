@@ -26,7 +26,6 @@ package com.redgogh.tools.http;
 /* Creates on 2022/8/8. */
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.redgogh.tools.Upgrade;
 import com.redgogh.tools.exception.HttpRequestException;
 import com.redgogh.tools.io.File;
@@ -45,6 +44,7 @@ import static com.redgogh.tools.Assert.xassert;
  *
  * @author RedGogh
  */
+@SuppressWarnings("ALL")
 public class HttpClients {
 
     private static final int READ_TIMEOUT = 5; // seconds
@@ -55,6 +55,7 @@ public class HttpClients {
     enum ResponseType {
         BYTE,
         STRING,
+        RESPONSE,
         BYTE_STRING,
         BYTE_STREAM,
         CHAR_STREAM,
@@ -73,7 +74,7 @@ public class HttpClients {
      *
      * @return 请求结果：字符串
      */
-    public static String get(String url) {
+    public static Response get(String url) {
         return get(url, null, (QueryBuilder) null);
     }
 
@@ -105,7 +106,7 @@ public class HttpClients {
      *
      * @return 请求结果：字符串
      */
-    public static String get(String url, Map<String, String> headers) {
+    public static Response get(String url, Map<String, String> headers) {
         return get(url, headers, (QueryBuilder) null);
     }
 
@@ -137,7 +138,7 @@ public class HttpClients {
      *
      * @return 请求结果：字符串
      */
-    public static String get(String url, QueryBuilder arguments) {
+    public static Response get(String url, QueryBuilder arguments) {
         return get(url, null, arguments);
     }
 
@@ -180,7 +181,7 @@ public class HttpClients {
      * @return 请求结果：字符串
      */
     public static <T> T get(String url, Map<String, String> headers, QueryBuilder arguments, Class<T> seri) {
-        return JSONObject.parseObject(get(url, headers, arguments), seri);
+        return get(url, headers, arguments).toJavaObject(seri);
     }
 
     /**
@@ -198,10 +199,10 @@ public class HttpClients {
      *
      * @return 请求结果：字符串
      */
-    public static String get(String url, Map<String, String> headers, QueryBuilder arguments) {
+    public static Response get(String url, Map<String, String> headers, QueryBuilder arguments) {
         if (arguments == null)
             arguments = EMPTY_REQUEST_ARGUMENTS;
-        return (String) get0(url, headers, arguments, ResponseType.STRING);
+        return (Response) get0(url, headers, arguments, ResponseType.RESPONSE);
     }
 
     /**
@@ -240,9 +241,9 @@ public class HttpClients {
 
         Request request = requestBuilder.build();
 
-        try (Response response = client.newCall(request).execute()) {
+        try (okhttp3.Response response = client.newCall(request).execute()) {
             /* 根据枚举类型获取响应数据 */
-            retval = parseResponseObject(response, responseType);
+            retval = responseConvert(response, responseType);
             /* 断言请求是否成功 */
             xassert(response.isSuccessful(), "HTTP请求出错, CODE: {}, URL: {}, MESSAGE: {}",
                     response.code(), url, retval);
@@ -306,7 +307,7 @@ public class HttpClients {
      * @return 序列化后的对象
      */
     public static <T> T post(String url, Object param, Map<String, String> headers, Class<T> seri) {
-        return JSONObject.parseObject(post(url, param, headers), seri);
+        return post(url, param, headers).toJavaObject(seri);
     }
 
     /**
@@ -315,7 +316,7 @@ public class HttpClients {
      * @param url 请求URL
      * @return 请求结果，返回JSON字符串
      */
-    public static String post(String url) {
+    public static Response post(String url) {
         return post(url, (Object) null, (Map<String, String>) null);
     }
 
@@ -330,7 +331,7 @@ public class HttpClients {
      *
      * @return 请求结果，返回JSON字符串
      */
-    public static String post(String url, Object param) {
+    public static Response post(String url, Object param) {
         return post(url, param, (Map<String, String>) null);
     }
 
@@ -348,8 +349,8 @@ public class HttpClients {
      *
      * @return 请求结果，返回JSON字符串
      */
-    public static String post(String url, Object param, Map<String, String> headers) {
-        return (String) post0(url, param, headers, ResponseType.STRING);
+    public static Response post(String url, Object param, Map<String, String> headers) {
+        return (Response) post0(url, param, headers, ResponseType.RESPONSE);
     }
 
     /**
@@ -413,9 +414,9 @@ public class HttpClients {
 
         Request request = requestBuilder.build();
 
-        try (Response response = client.newCall(request).execute()) {
+        try (okhttp3.Response response = client.newCall(request).execute()) {
             /* 根据枚举类型获取响应数据 */
-            retval = parseResponseObject(response, responseType);
+            retval = responseConvert(response, responseType);
             /* 断言请求是否成功 */
             xassert(response.isSuccessful(), "HTTP请求出错, CODE: {}, URL: {}, REQUEST BODY: {}, MESSAGE: {}",
                     response.code(), url, JSON.toJSONString(param), retval);
@@ -437,13 +438,14 @@ public class HttpClients {
      */
     @Upgrade(features = "OpenJDK17/EnhancedSwitchMigration")
     @SuppressWarnings("EnhancedSwitchMigration")
-    private static Object parseResponseObject(Response response, ResponseType responseType)
+    private static Object responseConvert(okhttp3.Response response, ResponseType responseType)
             throws IOException {
         ResponseBody body = response.body();
         if (body != null) {
             switch (responseType) {
                 case BYTE: return body.bytes();
                 case STRING: return body.string();
+                case RESPONSE: return new Response(response.code(), body.string());
                 case BYTE_STRING: return body.byteString();
                 case BYTE_STREAM: return body.byteStream();
                 case CHAR_STREAM: return body.charStream();
