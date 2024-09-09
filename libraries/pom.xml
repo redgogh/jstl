@@ -16,14 +16,19 @@
         <module>office</module>
     </modules>
 
+    <!-- Version comparison table of Java and Kotlin.
+        1.8: Java[1.8]/Kotlin[1.9.X] - available: 1.9.20-RC
+         21: Java[21]/Kotlin[2.0.X] - available: 2.0.20
+    -->
+
     <properties>
-        <kotlin.version>2.0.20</kotlin.version>
+        <kotlin.version>1.9.20-RC</kotlin.version>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
         <spring-boot.version>3.1.4</spring-boot.version>
         <lombok.version>1.18.30</lombok.version>
         <junit.version>4.13.2</junit.version>
         <jackson-module-kotlin.version>2.14.2</jackson-module-kotlin.version>
-        <java.compiler.version>21</java.compiler.version>
+        <java.compiler.version>1.8</java.compiler.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

@@ -377,15 +377,17 @@ public class HttpClients {
                 .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
                 .build();
 
-        Object requestBody;
+        RequestBody requestBody;
 
-        if (param instanceof FormBodyBuilder formbody) {
+        if (param instanceof FormBodyBuilder) {
+            FormBodyBuilder formbody = (FormBodyBuilder) param;
             MultipartBody.Builder builder = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM);
 
             for (Map.Entry<String, Object> entry : formbody.entrySet()) {
                 Object value = entry.getValue();
-                if (value instanceof File file) {
+                if (value instanceof File) {
+                    File file = (File) value;
                     builder.addFormDataPart(entry.getKey(), file.getName(),
                             RequestBody.create(file, MediaType.parse("text/plain")));
                 } else {
@@ -403,11 +405,7 @@ public class HttpClients {
                 .url(url);
 
         /* 添加 body */
-        switch (requestBody) {
-            case MultipartBody body -> requestBuilder.post(body);
-            case RequestBody body -> requestBuilder.post(body);
-            default -> throw new IllegalStateException("Unexpected value: " + requestBody);
-        }
+        requestBuilder.post(requestBody);
 
         /* 添加 Header */
         if (headers != null && !headers.isEmpty())
