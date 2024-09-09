@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/configuration/spring-boot-configuration-banner-text/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/configuration/spring-boot-configuration-banner-text/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/configuration/spring-cloud-configuration-discovery-nacos/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/configuration/spring-cloud-configuration-discovery-nacos/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/configuration/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/configuration/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/feginrcall/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/feginrcall/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libraries/office/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libraries/office/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libraries/spring/spring-boot-framework/deps/spring-boot-devtools/src/main/java" charset="UTF-8" />
