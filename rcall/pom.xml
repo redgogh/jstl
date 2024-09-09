@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.redgogh.api</groupId>
-    <artifactId>feginrcall</artifactId>
+    <artifactId>rcall</artifactId>
     <version>v1.0.0-beta.1+build</version>
     <packaging>pom</packaging>
     <modules>
