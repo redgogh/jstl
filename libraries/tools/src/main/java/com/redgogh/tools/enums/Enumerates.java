@@ -31,7 +31,41 @@ import com.redgogh.tools.refection.UClass;
 import static com.redgogh.tools.StringUtils.strieq;
 
 /**
+ * `Enumerates` 是一个工具类，提供了获取和查找枚举值的方法。主要包括获取指定枚举类的所有
+ * 枚举值和根据名称查找枚举值的功能。这些方法使用了反射机制来操作枚举类，以提供灵活的
+ * 枚举值处理能力。
+ *
+ * <p>该类中的方法主要用于处理枚举类型的数据，可以用于动态查找枚举值，适用于需要在运行时
+ * 处理枚举的场景。
+ *
+ * <h2>主要方法</h2>
+ * <ul>
+ *     <li>{@link #values(Class)}: 获取指定枚举类的所有枚举值。</li>
+ *     <li>{@link #checkout(Class, String)}: 根据名称查找并返回指定枚举类的枚举值。</li>
+ * </ul>
+ *
+ * <h2>注意事项</h2>
+ * <ul>
+ *     <li>使用了 `@SuppressWarnings("unchecked")` 注解来忽略未经检查的类型转换警告。</li>
+ *     <li>方法 `checkout` 可能会抛出 `InvalidArgumentException` 异常，需要进行相应的异常处理。</li>
+ * </ul>
+ *
+ * <h2>使用示例</h2>
+ * <pre>
+ *     // 获取枚举类 `Color` 的所有枚举值
+ *     Color[] colors = Enumerates.values(Color.class);
+ *
+ *     // 根据名称查找 `Color` 枚举中的枚举值
+ *     Color color = Enumerates.checkout(Color.class, "RED");
+ * </pre>
+ *
+ * <p>完整的使用示例和测试用例可以参考项目的测试包下的相关测试类。
+ *
  * @author RedGogh
+ *
+ * @see Enum
+ * @see InvalidArgumentException
+ * @since 1.0
  */
 public class Enumerates {
 
