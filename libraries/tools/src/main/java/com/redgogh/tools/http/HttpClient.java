@@ -50,6 +50,9 @@ public class HttpClient {
     /** 请求体，可以是任意对象类型。 */
     private Object object;
 
+    /** 禁用 SSL 证书验证 */
+    private boolean sslVerficationDisable = false;
+
     /** HTTP 请求头的集合。 */
     private final Map<String, String> headers = Maps.of();
 
@@ -134,6 +137,21 @@ public class HttpClient {
     }
 
     /**
+     * #brief: 禁用 SSL 验证
+     *
+     * <p>该方法用于禁用 SSL 证书验证。调用此方法后，`HttpClient` 将在发送 HTTP 请求时
+     * 不对 SSL 证书进行验证。这通常用于开发或测试环境中，以避免证书验证错误影响测试进度。
+     *
+     * <p>注意：在生产环境中禁用 SSL 验证可能会导致安全风险，建议谨慎使用。
+     *
+     * @return 当前的 `HttpClient` 实例，允许链式调用
+     */
+    public HttpClient sslVerifierDisable() {
+        this.sslVerficationDisable = true;
+        return this;
+    }
+
+    /**
      * #brief: 发送 HTTP 请求
      *
      * <p>该方法使用默认的读超时和连接超时发送 HTTP 请求，并返回响应对象。
@@ -161,11 +179,16 @@ public class HttpClient {
         if (queryBuilder != null)
             url = queryBuilder.argConcatBuild(url);
 
-        OkHttpClient client = new OkHttpClient()
-                .newBuilder()
-                .connectTimeout(connectTimeout, TimeUnit.SECONDS)
-                .readTimeout(readTimeout, TimeUnit.SECONDS)
-                .build();
+        OkHttpClient.Builder clientBuilder = new OkHttpClient().newBuilder();
+        clientBuilder.connectTimeout(connectTimeout, TimeUnit.SECONDS);
+        clientBuilder.readTimeout(readTimeout, TimeUnit.SECONDS);
+
+        if (sslVerficationDisable) {
+            clientBuilder.sslSocketFactory(SSLSocketClient.getSSLSocketFactory(), SSLSocketClient.getX509TrustManager());
+            clientBuilder.hostnameVerifier(SSLSocketClient.getHostnameVerifier());
+        }
+
+        OkHttpClient client = clientBuilder.build();
 
         /* response */
         Response retval;

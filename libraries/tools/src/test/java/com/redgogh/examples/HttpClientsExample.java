@@ -69,6 +69,7 @@ public class HttpClientsExample {
         queryBuilder.putAll(Maps.of("id", "12138", "name", "zs", "age", "18"));
         Response response = HttpClient.open("GET", "http://127.0.0.1:8001/security/get")
                 .setQueryBuilder(queryBuilder)
+                .sslVerifierDisable()
                 .newCall();
 
         System.out.println(response);

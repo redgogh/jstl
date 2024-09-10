@@ -15,3 +15,4 @@
   - 新增 Response 不同返回结果处理。
   - 新增 StringUtils#strip 字符串处理函数
   - 新增 atos 函数映射操作。
+  - 新增 HttpClient#sslVerifierDisable 函数，禁用 SSL 校验。
