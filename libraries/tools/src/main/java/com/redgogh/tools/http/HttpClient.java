@@ -214,18 +214,16 @@ public class HttpClient {
         Response retval;
 
         try (okhttp3.Response response = client.newCall(request).execute()) {
-            /* 根据枚举类型获取响应数据 */
-            retval = new Response(response.code(), response.body().string());
-            /* 断言请求是否成功 */
+            ResponseBody body = response.body();
+            retval = new Response(response.code(), body == null ? "{}" : body.string());
+
             xassert(response.isSuccessful(), "HTTP请求出错（%s）\n    - URL：%s \n    - Request Body：%s \n    - Message: %s",
                     response.code(), url, JSON.toJSONString(object), retval);
+
             return retval;
         } catch (IOException e) {
             throw new HttpRequestException(e);
         }
-    }
-
-    public static void main(String[] args) {
     }
 
 }
