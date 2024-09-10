@@ -1,7 +1,0 @@
-tag: v1.0.0-beta.1+build
-
-  - 发布 v1.0.0-beta.1+build 测试版本。
-
-tag: v1.0.1-beta.1+build
-
-  - 新增 HttpClients 返回对象 Response。

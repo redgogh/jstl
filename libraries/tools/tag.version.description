@@ -1,0 +1,8 @@
+== v1.0.0-beta.1+build
+
+  - 发布 v1.0.0-beta.1+build 测试版本。
+
+== v1.0.1-beta.1+build
+
+  - 新增 HttpClients 返回对象 Response。
+  - 适配并兼容 JVM1.8 版本。
