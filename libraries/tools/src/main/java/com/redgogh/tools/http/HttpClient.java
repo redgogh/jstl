@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.redgogh.tools.AnyObjects.atos;
 import static com.redgogh.tools.Assert.*;
+import static com.redgogh.tools.StringUtils.strhas;
 import static com.redgogh.tools.StringUtils.strupper;
 
 /**
@@ -56,13 +57,7 @@ public class HttpClient {
      * `HttpMethod` 枚举定义了支持的 HTTP 请求方法。
      */
     enum HttpMethod {
-        GET,
-        POST,
-        PUT,
-        PATCH,
-        DELETE,
-        HEAD,
-        ;
+        GET, POST, PUT, PATCH, DELETE, HEAD
     }
 
     /**
@@ -131,6 +126,9 @@ public class HttpClient {
      * @return 当前 `HttpClient` 实例，以支持链式调用
      */
     public HttpClient setRequestBody(Object object) {
+        if (strhas(method, HttpMethod.GET, HttpMethod.HEAD))
+            throw new HttpRequestException("GET 或 HEAD 方法不支持请求主体。");
+
         this.object = object;
         return this;
     }
@@ -169,6 +167,27 @@ public class HttpClient {
                 .readTimeout(readTimeout, TimeUnit.SECONDS)
                 .build();
 
+        /* response */
+        Response retval;
+
+        try (okhttp3.Response response = client.newCall(request()).execute()) {
+            ResponseBody body = response.body();
+            retval = new Response(response.code(), body == null ? "{}" : body.string());
+
+            xassert(response.isSuccessful(), "HTTP请求出错（%s）\n    - URL：%s \n    - Request Body：%s \n    - Message: %s",
+                    response.code(), url, JSON.toJSONString(object), retval);
+
+            return retval;
+        } catch (IOException e) {
+            throw new HttpRequestException(e);
+        }
+    }
+
+    /**
+     * @return 根据请求体类型构建正确的请求主体。
+     */
+    private RequestBody getRequestBody() {
+        /* request body */
         RequestBody requestBody = null;
 
         /* is MultipartBody. */
@@ -199,31 +218,45 @@ public class HttpClient {
                     object instanceof String ? (String) object : JSON.toJSONString(object));
         }
 
+        return requestBody;
+    }
+
+    /**
+     * @return 构建请求对象
+     */
+    private Request request() {
         /* create request builder. */
         Request.Builder requestBuilder = new Request.Builder()
-                .url(url)
-                .method(method.name(), requestBody);
+                .url(url);
+
+        /* pick method */
+        switch (method) {
+            case GET:
+                requestBuilder.get();
+                break;
+            case POST:
+                requestBuilder.post(getRequestBody());
+                break;
+            case PUT:
+                requestBuilder.put(getRequestBody());
+                break;
+            case PATCH:
+                requestBuilder.patch(getRequestBody());
+                break;
+            case DELETE:
+                requestBuilder.delete(getRequestBody());
+                break;
+            case HEAD:
+                requestBuilder.head();
+                break;
+        }
 
         /* add headers. */
         if (!Maps.isEmpty(headers))
             headers.forEach(requestBuilder::addHeader);
 
         /* final execute request. */
-        Request request = requestBuilder.build();
-
-        Response retval;
-
-        try (okhttp3.Response response = client.newCall(request).execute()) {
-            ResponseBody body = response.body();
-            retval = new Response(response.code(), body == null ? "{}" : body.string());
-
-            xassert(response.isSuccessful(), "HTTP请求出错（%s）\n    - URL：%s \n    - Request Body：%s \n    - Message: %s",
-                    response.code(), url, JSON.toJSONString(object), retval);
-
-            return retval;
-        } catch (IOException e) {
-            throw new HttpRequestException(e);
-        }
+        return requestBuilder.build();
     }
 
 }

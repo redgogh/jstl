@@ -1,9 +1,12 @@
 package com.redgogh.tools.http;
 
 import com.alibaba.fastjson.JSONObject;
+import com.redgogh.tools.StringUtils;
 
 import java.util.Map;
 
+import static com.redgogh.tools.AnyObjects.atos;
+import static com.redgogh.tools.Optional.optionalIfError;
 import static com.redgogh.tools.StringUtils.streq;
 
 /**
@@ -21,7 +24,6 @@ import static com.redgogh.tools.StringUtils.streq;
  * <h2>构造方法</h2>
  * <ul>
  *     <li>{@link #Response(int, String)}: 使用状态码和 JSON 字符串初始化响应对象。</li>
- *     <li>{@link #Response(int, Map)}: 使用状态码和 `Map` 对象初始化响应对象。</li>
  * </ul>
  *
  * <h2>主要方法</h2>
@@ -50,7 +52,16 @@ import static com.redgogh.tools.StringUtils.streq;
  */
 public class Response extends JSONObject {
 
+    /**
+     * Http 请求状态码
+     */
     private final int code;
+
+    /**
+     * 如果接口没有正常的 JSON 返回对象等结构的话，那么 message 就是
+     * 接口返回信息。有可能是 `Not Found` 等文本。
+     */
+    private String message;
 
     /**
      * #brief: 使用状态码和 JSON 字符串初始化响应对象
@@ -61,22 +72,18 @@ public class Response extends JSONObject {
      * @param code 响应的状态码
      * @param content 响应内容的 JSON 字符串
      */
+    @SuppressWarnings("unchecked")
     public Response(int code, String content) {
-        this(code, JSONObject.parseObject(content));
-    }
-
-    /**
-     * #brief: 使用状态码和 `Map` 对象初始化响应对象
-     *
-     * <p>该构造方法通过状态码和 `Map` 对象来创建一个 `Response` 对象。`Map` 对象的内容会被
-     * 添加到 `JSONObject` 中，并存储在响应对象中。
-     *
-     * @param code 响应的状态码
-     * @param map 响应内容的 `Map` 对象
-     */
-    public Response(int code, Map<String, Object> map) {
         this.code = code;
-        putAll(map);
+
+        /* 处理响应 */
+        Object object = optionalIfError(() -> JSONObject.parseObject(content), content);
+
+        if (object instanceof String)
+            this.message = atos(object, StringUtils::strip);
+
+        if (object instanceof Map)
+            putAll((Map<String, Object>) object);
     }
 
     /**
@@ -111,6 +118,19 @@ public class Response extends JSONObject {
      */
     public boolean isSuccess() {
         return codeEquals(200);
+    }
+
+    @Override
+    public String toString() {
+        /* success */
+        if (!isEmpty())
+            return super.toString();
+
+        /* failed */
+        JSONObject retval = new JSONObject();
+        retval.put("code", code);
+        retval.put("message", message);
+        return retval.toString();
     }
 
 }

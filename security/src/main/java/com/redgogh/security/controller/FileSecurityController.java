@@ -1,6 +1,5 @@
 package com.redgogh.security.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.redgogh.libraries.springframework.boot.web.R;
 import com.redgogh.security.service.FileSecurityService;
 import lombok.Data;
@@ -40,6 +39,11 @@ public class FileSecurityController {
      */
     @PostMapping("/save")
     public R<User> save(@RequestBody User user) {
+        return R.ok(user);
+    }
+
+    @GetMapping("/get")
+    public R<User> get(User user) {
         return R.ok(user);
     }
 

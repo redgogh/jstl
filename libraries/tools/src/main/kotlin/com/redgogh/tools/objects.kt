@@ -190,29 +190,42 @@ object AnyObjects {
     }
 
     /**
-     * 将 [Any] 对象实例转换成 [String] 类型的对象实例。修改原来的 [Any] 对象不会对
-     * 新的创建的 [String] 对象实例有任何影响。该函数也不会抛出异常，如果传入的对象为 `null` 的话
-     * 那么新创建出来的字符串就会从常量池中返回一个 "null" 字符串出去。
+     * `atos` 方法的简化重载形式，不使用自定义映射。
      *
-     * @param any
-     *        Any 对象实例
-     *
-     * @return 根据传入的其他对象实例转换成 [String] 对象实例。
-     *
-     * @see String#valueOf(Object)
+     * @param any 要转换的输入对象，可以是任意类型
+     * @return 转换后的字符串
      */
     @JvmStatic
-    fun atos(any: Any?): String {
+    fun atos(any: Any?): String = atos(any, null)
+
+    /**
+     * `atos` 方法用于将任意类型的对象转换为字符串。提供了两种重载形式，
+     * 一种不使用映射，另一种可以通过 `StreamMapping` 进行自定义映射。
+     *
+     * 如果输入为 `null`，则返回空字符串。如果输入已经是字符串，则直接返回该字符串。
+     * 如果输入是 `CharArray` 或 `ByteArray`，则将其转换为字符串。如果输入类型不匹配，
+     * 且提供了 `StreamMapping`，则使用该映射将输入对象转换为字符串；否则，将对象的字符串表示形式返回。
+     *
+     * @param any 要转换的输入对象，可以是任意类型
+     * @param mapping 自定义的映射函数（可选），用于将对象转换为字符串
+     * @return 转换后的字符串
+     */
+    @JvmStatic
+    fun atos(any: Any?, mapping: StreamMapping<Any, String>?): String {
         if (any == null)
             return ""
         if (any is String)
-            return any
+            return valueMap(any, mapping)
         if (any is CharArray)
-            return atos(any, 0, any.size)
+            return valueMap(atos(any, 0, any.size), mapping)
         if (any is ByteArray)
-            return atos(any, 0, any.size)
-        return "$any"
+            return valueMap(atos(any, 0, any.size), mapping)
+        return valueMap("$any", mapping)
     }
+
+    /** value 映射 */
+    private fun valueMap(any: String, mapping: StreamMapping<Any, String>?): String
+        = mapping?.map(any) ?: any
 
     /**
      * 通过 `obj` 子字符串、`off` 数组偏移量和 `len` 长度分配

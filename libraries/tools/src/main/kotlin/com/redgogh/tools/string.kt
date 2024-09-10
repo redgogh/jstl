@@ -188,9 +188,9 @@ object StringUtils {
      * @return 如果 `wstr` 在字符串列表中返回 `true`
      */
     @JvmStatic
-    fun strhas(wstr: Any?, vararg list: String): Boolean {
+    fun strhas(wstr: Any?, vararg list: Any): Boolean {
         for (item in list) {
-            if (atos(wstr).contains(item))
+            if (atos(wstr).contains(atos(item)))
                 return true
         }
         return false
@@ -205,7 +205,7 @@ object StringUtils {
      * @return 如果 `wstr` 在字符串列表中返回 `true`
      */
     @JvmStatic
-    fun strihas(wstr: Any?, vararg list: String): Boolean {
+    fun strihas(wstr: Any?, vararg list: Any): Boolean {
         for (item in list) {
             if (strhas(strlower(wstr), strlower(item)))
                 return true
@@ -290,6 +290,7 @@ object StringUtils {
      * @return 如果 `wstr` 中满足正则表达式 `regexp` 匹配条件则
      * 返回 `true`，反之返回 `false`。
      */
+    @JvmStatic
     private fun strxmatch(wstr: Any?,
                           regexp: String,
                           enablePatternCache: Boolean): Boolean {
@@ -319,6 +320,7 @@ object StringUtils {
      * @return 如果 `wstr` 中满足正则表达式 `regexp` 匹配条件则
      * 返回 `true`，反之返回 `false`。
      */
+    @JvmStatic
     fun strmatch(wstr: Any?, regexp: String): Boolean = strxmatch(wstr, regexp, false)
 
     /**
@@ -343,6 +345,20 @@ object StringUtils {
      * @return 如果 `wstr` 中满足正则表达式 `regexp` 匹配条件则
      * 返回 `true`，反之返回 `false`。
      */
+    @JvmStatic
     fun strxmatch(wstr: Any?, regexp: String): Boolean = strxmatch(wstr, regexp, true)
+
+    /**
+     * #brief: 去除输入字符串的首尾空白字符
+     *
+     * <p>该方法将输入的 `wstr` 转换为字符串后，去除其首尾的空白字符，并返回结果。
+     *
+     * <p>如果输入为 `null`，则方法将其视为一个空字符串。
+     *
+     * @param wstr 要处理的输入对象，可以是任意类型
+     * @return 去除首尾空白字符后的字符串
+     */
+    @JvmStatic
+    fun strip(wstr: Any?) = java.lang.String(atos(wstr)).trim()
 
 }

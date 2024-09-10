@@ -8,3 +8,10 @@
   - 适配并兼容 JVM1.8 版本。
   - 新的 HttpClient API 设计。
   - 修复 AssertException 多个占位符格式化失败。
+
+# v1.0.2-beta.1+build
+
+  - 修复 HttpClient GET 不支持请求体问题。
+  - 新增 Response 不同返回结果处理。
+  - 新增 StringUtils#strip 字符串处理函数
+  - 新增 atos 函数映射操作。
