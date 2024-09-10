@@ -382,8 +382,8 @@ public class HttpClients {
 
         if (param instanceof FormBodyBuilder) {
             FormBodyBuilder formbody = (FormBodyBuilder) param;
-            MultipartBody.Builder builder = new MultipartBody.Builder()
-                    .setType(MultipartBody.FORM);
+            okhttp3.MultipartBody.Builder builder = new okhttp3.MultipartBody.Builder()
+                    .setType(okhttp3.MultipartBody.FORM);
 
             for (Map.Entry<String, Object> entry : formbody.entrySet()) {
                 Object value = entry.getValue();

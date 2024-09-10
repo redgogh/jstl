@@ -23,6 +23,9 @@
         <lombok.version>1.18.30</lombok.version>
         <junit.version>4.13.2</junit.version>
         <jackson-module-kotlin.version>2.14.2</jackson-module-kotlin.version>
+        <java.compiler.version>21</java.compiler.version>
+        <maven.compiler.source>${java.compiler.version}</maven.compiler.source>
+        <maven.compiler.target>${java.compiler.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

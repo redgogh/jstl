@@ -28,6 +28,6 @@ import com.redgogh.tools.StringUtils.strwfmt
 open class KeepLiveRuntimeException : RuntimeException {
     constructor() : super()
     constructor(e: Throwable) : super(e.message ?: "Unknown Error!")
-    constructor(vfmt: String, vararg args: Any) : super(strwfmt(vfmt, args))
-    constructor(vfmt: String, e: Throwable, vararg args: Any) : super(strwfmt(vfmt, args), e)
+    constructor(vfmt: String, vararg args: Any) : super(strwfmt(vfmt, *args))
+    constructor(vfmt: String, e: Throwable, vararg args: Any) : super(strwfmt(vfmt, *args), e)
 }

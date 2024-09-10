@@ -1,12 +1,11 @@
 package com.redgogh.security.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.redgogh.libraries.springframework.boot.web.R;
 import com.redgogh.security.service.FileSecurityService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -27,6 +26,21 @@ public class FileSecurityController {
     @PostMapping("/check/file")
     public R<Boolean> check(@RequestParam("document") MultipartFile document) {
         return R.ok(fileSecurityService.checkFileSecurity(document));
+    }
+
+    @Data
+    public static class User {
+        private Long    id;
+        private String  name;
+        private Integer age;
+    }
+
+    /**
+     * 文件安全检查
+     */
+    @PostMapping("/save")
+    public R<User> save(@RequestBody User user) {
+        return R.ok(user);
     }
 
 }

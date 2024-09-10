@@ -49,7 +49,7 @@ public class UClassExample {
     }
 
     @AllArgsConstructor
-    class User {
+    static class User {
         /* test field */
         private String name;
 

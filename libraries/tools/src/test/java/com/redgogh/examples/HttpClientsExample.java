@@ -25,19 +25,42 @@ package com.redgogh.examples;
 
 /* Creates on 2022/8/8. */
 
-import com.redgogh.tools.http.FormBodyBuilder;
-import com.redgogh.tools.http.HttpClients;
+import com.redgogh.tools.collection.Maps;
+import com.redgogh.tools.http.*;
 import com.redgogh.tools.io.File;
 import org.junit.Test;
+
+import static com.redgogh.tools.Assert.xassert;
 
 @SuppressWarnings("ALL")
 public class HttpClientsExample {
 
+    // @Test
+    // public void callFormBodyExample() {
+    //     FormBodyBuilder formBodyBuilder = new FormBodyBuilder();
+    //     formBodyBuilder.put("document", new File("src/main/java/com/redgogh/tools/ArrayUtils.java"));
+    //     System.out.println(HttpClients.post("http://127.0.0.1:8001/security/check-file", formBodyBuilder));
+    // }
+
     @Test
-    public void callFormBodyExample() {
-        FormBodyBuilder formBodyBuilder = new FormBodyBuilder();
-        formBodyBuilder.put("document", new File("src/main/java/com/redgogh/tools/ArrayUtils.java"));
-        System.out.println(HttpClients.post("http://127.0.0.1:8001/security/check-file", formBodyBuilder));
+    public void callMultipartBodyExample() {
+        MultipartBody multipartBody = new MultipartBody();
+        multipartBody.put("document", new File("src/main/java/com/redgogh/tools/ArrayUtils.java"));
+
+        Response response = HttpClient.open("POST", "http://127.0.0.1:8001/security/check/file")
+                .setRequestBody(multipartBody)
+                .newCall();
+
+        System.out.println(response);
+    }
+
+    @Test
+    public void callJSONBodyExample() {
+        Response response = HttpClient.open("POST", "http://127.0.0.1:8001/security/save")
+                .setRequestBody(Maps.of("id", "12138", "name", "zs", "age", "18"))
+                .newCall();
+
+        System.out.println(response);
     }
 
 }
