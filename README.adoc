@@ -1,4 +1,4 @@
-= Quick Start
+= Fastsetup
 
 image:doc/svg/dahan.svg[dahan]
 image:doc/svg/test.svg[test]
