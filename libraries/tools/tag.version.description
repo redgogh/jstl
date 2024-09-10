@@ -6,3 +6,5 @@
 
   - 新增 HttpClients 返回对象 Response。
   - 适配并兼容 JVM1.8 版本。
+  - 新的 HttpClient API 设计。
+  - 修复 AssertException 多个占位符格式化失败。
