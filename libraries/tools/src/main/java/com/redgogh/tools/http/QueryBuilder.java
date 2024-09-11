@@ -29,6 +29,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static com.redgogh.tools.AnyObjects.atos;
+import static com.redgogh.tools.StringUtils.strtok;
 import static com.redgogh.tools.StringUtils.strwfmt;
 
 /**
@@ -52,6 +53,37 @@ import static com.redgogh.tools.StringUtils.strwfmt;
  * @author RedGogh
  */
 public class QueryBuilder extends LinkedHashMap<String, String> {
+
+    /**
+     * 无参数构造方法
+     *
+     * <p>创建一个空的 `QueryBuilder` 实例。此实例不包含任何参数。
+     */
+    public QueryBuilder() {
+        this((String) null);
+    }
+
+    /**
+     * #brief: 使用参数数组初始化 `QueryBuilder`
+     *
+     * <p>该构造方法接收一组参数字符串，每个参数应为“key=value”的格式，并将这些参数解析后
+     * 添加到 `QueryBuilder` 实例中。适用于需要根据给定的参数字符串快速构建查询参数的场景。
+     *
+     * <h2>示例</h1>
+     * <pre>
+     *     new QueryBuilder("name=zs", "age=10");
+     * </pre>
+     *
+     * @param parameters 参数数组，每个参数应为“key=value”格式的字符串
+     */
+    public QueryBuilder(String ...parameters) {
+        if (parameters != null) {
+            for (String parameter : parameters) {
+                String[] a = strtok(parameter, "=");
+                put(a[0], a[1]);
+            }
+        }
+    }
 
     /**
      * #brief: 将查询参数拼接到 URL 上

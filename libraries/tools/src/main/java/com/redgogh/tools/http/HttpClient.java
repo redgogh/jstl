@@ -5,6 +5,7 @@ import com.redgogh.tools.collection.Maps;
 import com.redgogh.tools.exception.HttpRequestException;
 import com.redgogh.tools.io.File;
 import okhttp3.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.Map;
@@ -55,6 +56,12 @@ public class HttpClient {
 
     /** HTTP 请求头的集合。 */
     private final Map<String, String> headers = Maps.of();
+
+    /** 读取响应的超时时间（秒） */
+    private int readTimeout = 5;
+
+    /** 连接请求的超时时间（秒） */
+    private int connectTimeout = 5;
 
     /**
      * `HttpMethod` 枚举定义了支持的 HTTP 请求方法。
@@ -108,6 +115,22 @@ public class HttpClient {
     }
 
     /**
+     * #brief: 设置查询构建器
+     *
+     * <p>该方法用于设置 HTTP 请求的查询构建器。它接收一个或多个参数字符串（每个参数应为“key=value”的格式），
+     * 并使用这些参数初始化一个 `QueryBuilder` 实例，然后设置到 `HttpClient` 中。
+     *
+     * <p>适用于需要动态构建和设置查询参数的场景。
+     *
+     * @param parameters 参数数组，每个参数应为“key=value”格式的字符串
+     * @see QueryBuilder
+     * @return 当前的 `HttpClient` 实例
+     */
+    public HttpClient setQueryBuilder(String ...parameters) {
+        return setQueryBuilder(new QueryBuilder(parameters));
+    }
+
+    /**
      * #brief: 设置查询参数构建器
      *
      * <p>该方法用于设置查询参数构建器，用于构建带有查询参数的请求 URL。
@@ -152,6 +175,34 @@ public class HttpClient {
     }
 
     /**
+     * #brief: 设置读取超时时间
+     *
+     * <p>该方法用于设置 HTTP 请求的读取超时时间。读取超时时间指定了在等待服务器响应时，
+     * 客户端的最大等待时间（以秒为单位）。适用于需要自定义读取超时设置的场景。
+     *
+     * @param readTimeout 读取超时时间（秒）
+     * @return 当前 `HttpClient` 实例
+     */
+    public HttpClient setReadTimeout(int readTimeout) {
+        this.readTimeout = readTimeout;
+        return this;
+    }
+
+    /**
+     * #brief: 设置连接超时时间
+     *
+     * <p>该方法用于设置 HTTP 请求的连接超时时间。连接超时时间指定了客户端在与服务器建立连接时，
+     * 等待的最大时间（以秒为单位）。适用于需要自定义连接超时设置的场景。
+     *
+     * @param connectTimeout 连接超时时间（秒）
+     * @return 当前 `HttpClient` 实例
+     */
+    public HttpClient setConnectTimeout(int connectTimeout) {
+        this.connectTimeout = connectTimeout;
+        return this;
+    }
+
+    /**
      * #brief: 发送 HTTP 请求
      *
      * <p>该方法使用默认的读超时和连接超时发送 HTTP 请求，并返回响应对象。
@@ -160,7 +211,7 @@ public class HttpClient {
      * @return 响应对象 `Response`
      */
     public Response newCall() {
-        return newCall(16, 16);
+        return newCall(null);
     }
 
     /**
@@ -169,12 +220,11 @@ public class HttpClient {
      * <p>该方法使用指定的读超时和连接超时发送 HTTP 请求，并返回响应对象。支持设置请求体、
      * 查询参数和请求头。请求体默认为 `application/json` 格式，支持多部分请求体（MultipartBody）。
      *
-     * @param readTimeout 读取响应的超时时间（秒）
-     * @param connectTimeout 连接请求的超时时间（秒）
+     * @param callback 回调接口，如果改对象不为 `null` 则是异步调用。
      * @return 响应对象 `Response`
      * @throws HttpRequestException 如果请求发送失败
      */
-    public Response newCall(Integer readTimeout, Integer connectTimeout) {
+    public Response newCall(Callback callback) {
         /* init url. */
         if (queryBuilder != null)
             url = queryBuilder.argConcatBuild(url);
@@ -190,21 +240,24 @@ public class HttpClient {
 
         OkHttpClient client = clientBuilder.build();
 
-        /* response */
-        Response retval;
+        /* call */
+        Call call = request(client);
 
-        try (okhttp3.Response response = client.newCall(request()).execute()) {
-            ResponseBody body = response.body();
-            retval = new Response(response.code(), body == null ? "{}" : body.string());
+        /* async */
+        if (callback != null)
+            return async(call, callback);
 
-            xassert(response.isSuccessful(), "HTTP请求出错（%s）\n    - URL：%s \n    - Request Body：%s \n    - Message: %s",
-                    response.code(), url, JSON.toJSONString(object), retval);
-
-            return retval;
+        /* sync */
+        try (okhttp3.Response response = call.execute()) {
+            return processResponse(response);
         } catch (IOException e) {
             throw new HttpRequestException(e);
         }
     }
+
+    // /////////////////////////////////////////////////////////// //
+    //                         private                             //
+    // /////////////////////////////////////////////////////////// //
 
     /**
      * @return 根据请求体类型构建正确的请求主体。
@@ -247,7 +300,7 @@ public class HttpClient {
     /**
      * @return 构建请求对象
      */
-    private Request request() {
+    private Call request(OkHttpClient client) {
         /* create request builder. */
         Request.Builder requestBuilder = new Request.Builder()
                 .url(url);
@@ -279,7 +332,39 @@ public class HttpClient {
             headers.forEach(requestBuilder::addHeader);
 
         /* final execute request. */
-        return requestBuilder.build();
+        return client.newCall(requestBuilder.build());
+    }
+
+    /**
+     * 处理响应
+     */
+    private Response processResponse(okhttp3.Response okResponse) throws IOException {
+        ResponseBody body = okResponse.body();
+        Response retval = new Response(okResponse.code(), body == null ? "{}" : body.string());
+
+        xassert(okResponse.isSuccessful(), "HTTP请求出错（%s）\n    - URL：%s \n    - Request Body：%s \n    - Message: %s",
+                okResponse.code(), url, JSON.toJSONString(object), retval);
+
+        return retval;
+    }
+
+    /**
+     * 异步调用
+     */
+    private Response async(Call call, Callback callback) {
+        call.enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull okhttp3.Response response) throws IOException {
+                callback.onResponse(processResponse(response));
+            }
+        });
+
+        return null;
     }
 
 }

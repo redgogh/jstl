@@ -30,7 +30,10 @@ import com.redgogh.tools.http.*;
 import com.redgogh.tools.io.File;
 import org.junit.Test;
 
+import java.util.concurrent.TimeUnit;
+
 import static com.redgogh.tools.Assert.xassert;
+import static com.redgogh.tools.io.IOUtils.stdout;
 
 @SuppressWarnings("ALL")
 public class HttpClientsExample {
@@ -73,6 +76,27 @@ public class HttpClientsExample {
                 .newCall();
 
         System.out.println(response);
+    }
+
+    @Test
+    public void callAsyncExample() throws InterruptedException {
+        HttpClient.open("POST", "http://127.0.0.1:8001/testing/async-call")
+                .setQueryBuilder(new QueryBuilder("sleep=1"))
+                .setReadTimeout(3)
+                .newCall(new Callback() {
+                    @Override
+                    public void onFailure(Throwable e) {
+                        stdout.printf("请求出现异常：%s\n", e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(Response response) {
+                        stdout.printf("请求成功：%s\n", response);
+                    }
+                });
+        System.out.println("等待异步调用执行完成！");
+        Thread.sleep(TimeUnit.SECONDS.toMillis(5));
+        System.out.println("程序执行完毕！");
     }
 
 }

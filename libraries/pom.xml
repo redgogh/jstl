@@ -34,7 +34,7 @@
             <dependency>
                 <groupId>com.redgogh.libraries</groupId>
                 <artifactId>tools</artifactId>
-                <version>v1.0.0-beta.1+build</version>
+                <version>v1.0.1-beta.1+build</version>
             </dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>

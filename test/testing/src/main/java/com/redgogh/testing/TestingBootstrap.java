@@ -1,4 +1,4 @@
-package com.redgogh.security;
+package com.redgogh.testing;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -34,8 +34,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @EnableValidExcept
 @SpringBootApplication
-public class SecurityBootstrap {
+public class TestingBootstrap {
     public static void main(String[] args) {
-        SpringApplicationBootstrap.run(SecurityBootstrap.class, args);
+        SpringApplicationBootstrap.run(TestingBootstrap.class, args);
     }
 }

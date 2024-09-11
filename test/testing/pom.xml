@@ -7,9 +7,10 @@
         <groupId>com.redgogh.projects</groupId>
         <artifactId>projects</artifactId>
         <version>v1.0.0-beta.1+build</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>security</artifactId>
+    <artifactId>testing</artifactId>
 
     <properties>
     </properties>

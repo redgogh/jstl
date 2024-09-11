@@ -10,7 +10,7 @@
 
     <modules>
         <module>lion-routes</module>
-        <module>security</module>
+        <module>test/testing</module>
     </modules>
     <packaging>pom</packaging>
 
