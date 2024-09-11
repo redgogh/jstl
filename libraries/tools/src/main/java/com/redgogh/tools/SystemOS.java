@@ -2,6 +2,13 @@ package com.redgogh.tools;
 
 import static com.redgogh.tools.StringUtils.*;
 
+/**
+ * 操作系统工具类
+ *
+ * <p>该类提供了一些静态方法，用于检查当前操作系统的类型和获取用户主目录路径。
+ *
+ * @author RedGogh
+ */
 public class SystemOS {
 
     /**
