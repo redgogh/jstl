@@ -2,6 +2,8 @@ package com.redgogh.tools.generators;
 
 import java.util.Random;
 
+import static com.redgogh.tools.StringUtils.strupper;
+
 /**
  * `RandomGenerator` 是一个用于生成随机数的工具类，提供了多种生成随机整数、浮点数和双精度数的方法。
  *
@@ -19,6 +21,41 @@ import java.util.Random;
  * @since 1.0
  */
 public class RandomGenerator {
+
+    /**
+     * 包含字母的静态常量数组。
+     */
+    private static final char[] LETTER_ARRAY = new char[26];
+
+    /**
+     * 包含数字的静态常量数组。
+     */
+    private static final char[] NUMBER_ARRAY = new char[10];
+
+    static {
+        for (int i = 0; i < LETTER_ARRAY.length; i++)
+            LETTER_ARRAY[i] = (char) ('a' + i);
+
+        for (int i = 0; i < NUMBER_ARRAY.length; i++)
+            NUMBER_ARRAY[i] = (char) ('0' + i);
+    }
+
+    /**
+     * #brief: 生成指定长度的随机字符串
+     *
+     * <p>该方法生成一个由字母和数字组成的随机字符串。字符串的每个字符随机从字母或数字数组中选取。
+     * 使用 `nextBoolean()` 方法决定是选择字母还是数字，并使用 `nextInt()` 方法随机选择具体字符。
+     *
+     * @param length 要生成的随机字符串的长度
+     * @return 包含指定长度的随机字母和数字的字符串
+     */
+    public static String nextCode(int length) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < length; i++)
+            builder.append(nextBoolean() ? LETTER_ARRAY[nextInt(LETTER_ARRAY.length - 1)] :
+                                           NUMBER_ARRAY[nextInt(NUMBER_ARRAY.length - 1)]);
+        return builder.toString();
+    }
 
     /**
      * #brief: 生成指定最大值的随机整数
