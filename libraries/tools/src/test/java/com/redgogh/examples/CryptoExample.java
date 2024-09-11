@@ -23,11 +23,11 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.tools.security.Cryptographic;
+import com.redgogh.tools.security.Crypto;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")
-public class CryptographicExample {
+public class CryptoExample {
 
     /**
      * Base64 编码、解码测试
@@ -37,12 +37,24 @@ public class CryptographicExample {
         String str = "Cryptographic: Hello World";
 
         // encode
-        String encode = Cryptographic.Encoder.base64(str);
+        String encode = Crypto.Encoder.base64(str);
         System.out.printf("base64 url encode code: %s\n", encode);
 
         // decode
-        String decode = Cryptographic.Decoder.base64(encode);
+        String decode = Crypto.Decoder.base64(encode);
         System.out.printf("base64 url decode code: %s\n", decode);
+    }
+
+    /**
+     * 版本生成测试
+     */
+    @Test
+    public void versionGenerateExample() {
+        int version = Crypto.makeVersion(1, 8, 1);
+        System.out.println("make version = " + version);
+        System.out.println("  - major = " + Crypto.versionMajor(version));
+        System.out.println("  - minor = " + Crypto.versionMinor(version));
+        System.out.println("  - patch = " + Crypto.versionPatch(version));
     }
 
 }

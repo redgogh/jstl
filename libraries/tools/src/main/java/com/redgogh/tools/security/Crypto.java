@@ -46,7 +46,7 @@ import static com.redgogh.tools.StringUtils.*;
  *
  * @author venorze
  */
-public final class Cryptographic {
+public final class Crypto {
 
     private static final String CRYPT_PREFIX_HTTP = "http://";
     private static final String CRYPT_PREFIX_HTTPS = "https://";
