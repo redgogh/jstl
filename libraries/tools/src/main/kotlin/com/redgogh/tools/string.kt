@@ -160,7 +160,7 @@ object StringUtils {
      */
     @JvmStatic
 
-    fun strieq(a: Any, b: Any): Boolean = streq(strupper(a), (b))
+    fun strieq(a: Any, b: Any): Boolean = streq(strlower(a), strlower(b))
 
     /**
      * 返回一个格式化后的字符串类型，`vfmt` 为原字符串，在这个字符串中如果要指定某个

@@ -26,3 +26,4 @@
   - 新增 [RandomGenerator](libraries/tools/src/main/java/com/redgogh/tools/generators/RandomGenerator.java) 随机数生成器。
   - 简化 Cryptographic 拼写，改名为：[Crypto](libraries%2Ftools%2Fsrc%2Fmain%2Fjava%2Fcom%2Fredgogh%2Ftools%2Fsecurity%2FCrypto.java)
   - 修复 QueryBuilder 空构造器数组越界异常。
+  - 修复 [string](libraries%2Ftools%2Fsrc%2Fmain%2Fkotlin%2Fcom%2Fredgogh%2Ftools%2Fstring.kt) strieq 方法比较没忽略大小写问题。
