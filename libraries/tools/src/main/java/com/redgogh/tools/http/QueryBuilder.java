@@ -60,7 +60,11 @@ public class QueryBuilder extends LinkedHashMap<String, String> {
      * <p>创建一个空的 `QueryBuilder` 实例。此实例不包含任何参数。
      */
     public QueryBuilder() {
-        this((String) null);
+        this((String[]) null);
+    }
+
+    public static void main(String[] args) {
+        new QueryBuilder();
     }
 
     /**
