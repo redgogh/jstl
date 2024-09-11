@@ -33,4 +33,5 @@
 
 # v1.0.4-beta.1+build
 
-  - 
+  - 新增 [ChanceMaker.java](libraries/tools/src/main/java/com/redgogh/tools/generators/ChanceMaker.java) 幸运值工具类。
+  - 新增 [RandomGenerator.java](libraries/tools/src/main/java/com/redgogh/tools/generators/RandomGenerator.java) 随机数生成器。
