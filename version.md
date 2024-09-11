@@ -22,16 +22,5 @@
 
 # v1.0.3-beta.1+build
 
-  - 修复 HttpClient GET 不支持请求体问题。
-  - 新增 Response 不同返回结果处理。
-  - 新增 StringUtils#strip 字符串处理函数
-  - 新增 atos 函数映射操作。
-  - 新增 HttpClient#sslVerifierDisable 函数，禁用 SSL 校验。
-  - 新增 HttpClient#newCall 异步调用接口。
-  - 新增 testing 模块，用于模拟测试服务。
-  - 新增 QueryBuilder 初始化传参。
-
-# v1.0.4-beta.1+build
-
   - 新增 [ChanceMaker.java](libraries/tools/src/main/java/com/redgogh/tools/generators/ChanceMaker.java) 幸运值工具类。
   - 新增 [RandomGenerator.java](libraries/tools/src/main/java/com/redgogh/tools/generators/RandomGenerator.java) 随机数生成器。
