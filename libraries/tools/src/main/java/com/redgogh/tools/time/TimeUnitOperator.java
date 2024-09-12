@@ -72,7 +72,6 @@ public enum TimeUnitOperator {
      * @return 加上对应 TimeUnits + unit 后的日期
      */
     @Upgrade(features = "OpenJDK17/EnhancedSwitchMigration")
-    @SuppressWarnings("EnhancedSwitchMigration")
     public Date add(Date date, int unit) {
         DateTime calc = new DateTime(date);
         DateTime retval = null;
@@ -125,7 +124,6 @@ public enum TimeUnitOperator {
      * @return 减去对应 TimeUnits - unit 后的日期
      */
     @Upgrade(features = "OpenJDK17/EnhancedSwitchMigration")
-    @SuppressWarnings("EnhancedSwitchMigration")
     public Date minus(Date date, int unit) {
         DateTime calc = new DateTime(date);
         DateTime retval = null;
