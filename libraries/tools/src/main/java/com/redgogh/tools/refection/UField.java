@@ -89,7 +89,6 @@ public class UField {
      */
     public UField(Field field) {
         this.field = field;
-        this.field.setAccessible(true);
         this.modifiers = field.getModifiers();
         this.inClass = field.getDeclaringClass();
         this.name = field.getName();
@@ -146,6 +145,7 @@ public class UField {
          */
         public FieldDescriptor(Field field, Object instance) {
             this.field = field;
+            this.field.setAccessible(true);
             this.instance = instance;
         }
         /**

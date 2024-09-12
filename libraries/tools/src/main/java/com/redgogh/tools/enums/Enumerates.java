@@ -28,6 +28,7 @@ package com.redgogh.tools.enums;
 import com.redgogh.tools.exception.InvalidArgumentException;
 import com.redgogh.tools.refection.UClass;
 
+import static com.redgogh.tools.Assert.throwIfNull;
 import static com.redgogh.tools.StringUtils.strieq;
 
 /**
@@ -98,15 +99,31 @@ public class Enumerates {
      * @param name 要查找的枚举值名称
      * @param <E> 枚举类的类型参数
      * @return 与提供名称匹配的枚举值
-     * @throws InvalidArgumentException 如果提供的名称没有匹配的枚举值
+     * @throws NullPointerException 如果提供的名称没有匹配的枚举值
      */
-    @SuppressWarnings({"unchecked", "UnusedReturnValue"})
     public static <E extends Enum<E>> E checkout(Class<? extends Enum<E>> enumClass, String name) {
+        return throwIfNull(find(enumClass, name), "参数错误【%s】常量不存在！", name);
+    }
+
+    /**
+     * #brief: 根据名称查找并返回指定枚举类的枚举值
+     *
+     * <p>该方法在指定的枚举类中查找与提供的名称匹配的枚举值。如果找到匹配的枚举值，
+     * 则返回该枚举值；如果未找到匹配项，则返回 `null`。该方法利用反射机制获取枚举
+     * 类的所有枚举值，并逐一比较名称。
+     *
+     * @param enumClass 枚举类的 `Class` 对象
+     * @param name 要查找的枚举值名称
+     * @param <E> 枚举类的类型参数
+     * @return 与提供名称匹配的枚举值，如果没有匹配项则返回 `null`
+     */
+    @SuppressWarnings("unchecked")
+    public static <E extends Enum<E>> E find(Class<? extends Enum<E>> enumClass, String name) {
         Enum<E>[] values = values(enumClass);
         for (Enum<E> value : values)
             if (strieq(value.name(), name))
                 return (E) value;
-        throw new InvalidArgumentException("参数错误【%s】常量不存在！", name);
+        return null;
     }
 
 }
