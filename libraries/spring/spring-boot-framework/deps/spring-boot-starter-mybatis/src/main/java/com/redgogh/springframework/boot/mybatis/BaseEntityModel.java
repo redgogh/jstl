@@ -24,10 +24,14 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.redgogh.tools.time.Date;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author RedGogh
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class BaseEntityModel<T extends Model<T>> extends Model<T> {
 
     /**

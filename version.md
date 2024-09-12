@@ -27,3 +27,4 @@
   - 简化 Cryptographic 拼写，改名为：[Crypto](libraries%2Ftools%2Fsrc%2Fmain%2Fjava%2Fcom%2Fredgogh%2Ftools%2Fsecurity%2FCrypto.java)
   - 修复 QueryBuilder 空构造器数组越界异常。
   - 修复 [string](libraries%2Ftools%2Fsrc%2Fmain%2Fkotlin%2Fcom%2Fredgogh%2Ftools%2Fstring.kt) strieq 方法比较没忽略大小写问题。
+  - 更新 SpringBoot Mybatis 主键雪花算法生成配置。 

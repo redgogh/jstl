@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
  * @author RedGogh
  */
 @Component
-@ConfigurationProperties(prefix = "ibatis-plus.enable-primary-generator")
+@ConfigurationProperties(prefix = "mybatis.primary-key")
 public class SnowflakeIdGenerator implements IdentifierGenerator {
 
     /**
