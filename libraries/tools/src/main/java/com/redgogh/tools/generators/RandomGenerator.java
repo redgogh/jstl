@@ -58,6 +58,22 @@ public class RandomGenerator {
     }
 
     /**
+     * #brief: 生成指定长度的随机数字字符串
+     *
+     * <p>该方法生成一个由数字组成的随机字符串。字符串的每个字符随机从数字数组 `NUMBER_ARRAY`
+     * 中选取。使用 `nextInt()` 方法随机选择数组中的数字字符。
+     *
+     * @param length 要生成的随机数字字符串的长度
+     * @return 包含指定长度的随机数字字符串
+     */
+    public static String nextNumberCode(int length) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < length; i++)
+            builder.append(NUMBER_ARRAY[nextInt(NUMBER_ARRAY.length - 1)]);
+        return builder.toString();
+    }
+
+    /**
      * #brief: 生成指定最大值的随机整数
      *
      * <p>该方法生成一个从 0 到指定最大值（包括最大值）的随机整数。
