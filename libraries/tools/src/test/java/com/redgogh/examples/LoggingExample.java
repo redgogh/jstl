@@ -50,4 +50,11 @@ public class LoggingExample {
         }
     }
 
+    @Test
+    public void logginLocalDebugAdapterExample() {
+        Logger LOGGER = LoggerFactory.getDebuggerLogger(LoggingExample.class);
+        System.out.println("");
+        LOGGER.info("INFO");
+    }
+
 }

@@ -53,6 +53,7 @@
   - 新增 [UnsupportedOperationException](libraries/tools/src/main/java/com/redgogh/tools/exception/UnsupportedOperationException.java) 异常类型。
   - 新增 [MultipartBody](libraries/tools/src/main/java/com/redgogh/tools/http/MultipartBody.java) 构造器，在构造时最大支持 3 个键值对。
   - 新增 [StringUtils](libraries/tools/src/main/kotlin/com/redgogh/tools/string.kt) 中 `strxip` 函数，用于除去字符串内的所有占位符。
+  - 新增 [LoggerFactory](libraries/tools/src/main/java/com/redgogh/tools/logging/LoggerFactory.java) 中获取本地标准日志输出调试对象。
 
 ## 👻 优化功能
 
