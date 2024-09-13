@@ -23,7 +23,7 @@ package com.redgogh.tools.io;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.tools.SystemOS;
+import com.redgogh.tools.OSEnvironment;
 import com.redgogh.tools.collection.Lists;
 
 import java.io.*;
@@ -90,10 +90,10 @@ public class File extends java.io.File {
      *         否则，返回原始路径
      */
     private static String quickAccessPath(String pathname) {
-        if (SystemOS.isWindows()) {
+        if (OSEnvironment.isWindows() || OSEnvironment.isMacOS()) {
             /* Conversation Desktop */
             if (pathname.startsWith(PATHNAME_DESKTOP_VARIABLE))
-                return pathname.replace(PATHNAME_DESKTOP_VARIABLE, SystemOS.getUserHome("Desktop/"));
+                return pathname.replace(PATHNAME_DESKTOP_VARIABLE, OSEnvironment.getUserHome("Desktop/"));
         }
 
         return pathname;

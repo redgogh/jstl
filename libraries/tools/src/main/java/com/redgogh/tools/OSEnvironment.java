@@ -9,7 +9,24 @@ import static com.redgogh.tools.StringUtils.*;
  *
  * @author RedGogh
  */
-public class SystemOS {
+public class OSEnvironment {
+
+    /**
+     * 未知操作系统
+     */
+    public static final byte UNKNOWN = 0x0000;
+    /**
+     * Windows 操作系统
+     */
+    public static final byte WINDOWS = 0x0001;
+    /**
+     * Linux 操作系统
+     */
+    public static final byte LINUX   = 0x0002;
+    /**
+     * MacOS 操作系统
+     */
+    public static final byte MACOS   = 0x0004;
 
     /**
      * #brief: 当前操作系统的名称
@@ -26,6 +43,20 @@ public class SystemOS {
     private static final String OS_NAME = System.getProperty("os.name");
 
     /**
+     * 操作系统枚举类
+     */
+    private static byte OS_FLAG = UNKNOWN;
+
+    static {
+        if (strihas(OS_NAME, "Windows"))
+            OS_FLAG = WINDOWS;
+        else if (strihas(OS_NAME, "Linux"))
+            OS_FLAG = LINUX;
+        else if (strihas(OS_NAME, "Mac"))
+            OS_FLAG = MACOS;
+    }
+
+    /**
      * #brief: 检查当前操作系统是否为 Windows
      *
      * 该函数用于判断当前运行环境是否为 Windows 操作系统。
@@ -33,7 +64,29 @@ public class SystemOS {
      * @return 如果操作系统是 Windows，返回 {@code true}，否则返回 {@code false}
      */
     public static boolean isWindows() {
-        return strihas(OS_NAME, "Windows");
+        return OS_FLAG == WINDOWS;
+    }
+
+    /**
+     * #brief: 检查当前操作系统是否为 Linux
+     *
+     * 该函数用于判断当前运行环境是否为 Linux 操作系统。
+     *
+     * @return 如果操作系统是 Linux，返回 {@code true}，否则返回 {@code false}
+     */
+    public static boolean isLinux() {
+        return OS_FLAG == LINUX;
+    }
+
+    /**
+     * #brief: 检查当前操作系统是否为 MacOS
+     *
+     * 该函数用于判断当前运行环境是否为 MacOS 操作系统。
+     *
+     * @return 如果操作系统是 MacOS，返回 {@code true}，否则返回 {@code false}
+     */
+    public static boolean isMacOS() {
+        return OS_FLAG == MACOS;
     }
 
     /**
