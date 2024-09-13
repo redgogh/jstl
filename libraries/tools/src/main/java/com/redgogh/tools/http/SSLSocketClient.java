@@ -1,6 +1,6 @@
 package com.redgogh.tools.http;
 
-import com.redgogh.tools.exception.KeepLiveRuntimeException;
+import com.redgogh.tools.exception.SystemRuntimeException;
 
 import javax.net.ssl.*;
 import java.security.KeyStore;
@@ -58,7 +58,7 @@ public class SSLSocketClient {
             }
             trustManager = (X509TrustManager) trustManagers[0];
         } catch (Exception e) {
-            throw new KeepLiveRuntimeException();
+            throw new SystemRuntimeException();
         }
 
         return trustManager;

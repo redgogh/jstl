@@ -25,7 +25,7 @@ package com.redgogh.tools.security;
 
 /* Creates on 2023/5/16. */
 
-import com.redgogh.tools.exception.KeepLiveRuntimeException;
+import com.redgogh.tools.exception.SystemRuntimeException;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -161,7 +161,7 @@ public final class Crypto {
                 messageDigest.update(source.getBytes(StandardCharsets.UTF_8));
                 return toByteHex(messageDigest.digest());
             } catch (Exception e) {
-                throw new KeepLiveRuntimeException(e);
+                throw new SystemRuntimeException(e);
             }
         }
 
@@ -233,7 +233,7 @@ public final class Crypto {
                 int flag = n > 16 ? 0 : 8;
                 return strcut(chars, flag, (n + flag));
             } catch (NoSuchAlgorithmException e) {
-                throw new KeepLiveRuntimeException(e);
+                throw new SystemRuntimeException(e);
             }
         }
 
