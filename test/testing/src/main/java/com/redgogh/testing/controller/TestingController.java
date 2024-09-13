@@ -26,6 +26,7 @@ package com.redgogh.testing.controller;
 /* Create on 2024/9/13 */
 
 import com.redgogh.libraries.springframework.boot.web.R;
+import com.redgogh.testing.enums.TikaFile;
 import com.redgogh.testing.service.TestingService;
 import com.redgogh.tools.enums.Enumerates;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,9 +63,9 @@ public class TestingController {
     /**
      * tika 解析测试
      */
-    @PostMapping("/tika/{type}")
-    public R<String> tika(@RequestParam("file") MultipartFile multipartFile, @PathVariable("type") String type) {
-        return R.ok(testingService.tika(multipartFile, Enumerates.checkout()));
+    @PostMapping("/tika/pdf")
+    public R<String> tika(@RequestParam("file") MultipartFile multipartFile) {
+        return R.ok(testingService.tika(multipartFile, TikaFile.PDF));
     }
 
 

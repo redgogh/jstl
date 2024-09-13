@@ -1,4 +1,4 @@
-package com.redgogh.testing.service;
+package com.redgogh.testing;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -25,17 +25,23 @@ package com.redgogh.testing.service;
 
 /* Create on 2024/9/13 */
 
-import com.redgogh.testing.enums.TikaFile;
-import org.springframework.web.multipart.MultipartFile;
+import com.redgogh.tools.http.HttpClient;
+import com.redgogh.tools.http.MultipartBody;
+import com.redgogh.tools.http.Response;
+import com.redgogh.tools.io.File;
+import org.junit.Test;
 
 /**
  * @author RedGogh
  */
-public interface TestingService {
+public class TikaRequestTest {
 
-    boolean uploadFile(MultipartFile multipartFile);
+    @Test
+    public  void parsePDFTest() {
+        Response response = HttpClient.open("POST", "http://127.0.0.1:8001/testing/tika/pdf")
+                .setRequestBody(new MultipartBody("file", new File("Desktop://验证码卡片消息推送.pdf")))
+                .newCall();
+        System.out.println(response.getString("data"));
+    }
 
-    void asyncCall(int sleep);
-
-    String tika(MultipartFile multipartFile, TikaFile tikaFile);
 }

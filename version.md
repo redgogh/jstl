@@ -51,6 +51,8 @@
   - 新增 [RandomGenerator](libraries/tools/src/main/java/com/redgogh/tools/generators/RandomGenerator.java) 随机数生成器。
   - 新增 [TimeUnitOperator](libraries/tools/src/main/java/com/redgogh/tools/time/TimeUnitOperator.java) 部分类型支持时间单位转换。 
   - 新增 [UnsupportedOperationException](libraries/tools/src/main/java/com/redgogh/tools/exception/UnsupportedOperationException.java) 异常类型。
+  - 新增 [MultipartBody](libraries/tools/src/main/java/com/redgogh/tools/http/MultipartBody.java) 构造器，在构造时最大支持 3 个键值对。
+  - 新增 [StringUtils](libraries/tools/src/main/kotlin/com/redgogh/tools/string.kt) 中 `strxip` 函数，用于除去字符串内的所有占位符。
 
 ## 👻 优化功能
 

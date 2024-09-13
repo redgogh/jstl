@@ -25,16 +25,29 @@ package com.redgogh.testing.enums;
 
 /* Create on 2024/9/13 */
 
-import org.springframework.web.multipart.MultipartFile;
-
 /**
  * @author RedGogh
  */
-public interface TikaFileType {
-
-    boolean uploadFile(MultipartFile multipartFile);
-
-    void asyncCall(int sleep);
-
-    String tika(MultipartFile multipartFile, String type);
+public enum TikaFile {
+    PDF,
+    DOC,
+    DOCX,
+    PPT,
+    PPTX,
+    XLS,
+    XLSX,
+    TXT,
+    CSV,
+    XML,
+    JSON,
+    HTML,
+    MD,
+    RTF,
+    ODT,
+    EPUB,
+    MOBI,
+    AUDIO,
+    VIDEO,
+    IMAGE,
+    ;
 }

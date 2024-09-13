@@ -359,6 +359,18 @@ object StringUtils {
      * @return 去除首尾空白字符后的字符串
      */
     @JvmStatic
-    fun strip(wstr: Any?) = java.lang.String(atos(wstr)).trim()
+    fun strip(wstr: Any?): String = java.lang.String(atos(wstr)).trim()
+
+    /**
+     * #brief: 删除字符串中的换行符和回车符，并返回处理后的字符串
+     *
+     * <p>该方法用于去除字符串的首尾空白字符，字符串中的所有换行符和回车
+     * 符替换为空字符串。
+     *
+     * @param wstr 需要处理的对象，可以是任意类型
+     * @return 处理后的字符串，去除了换行符和回车符
+     */
+    @JvmStatic
+    fun strxip(wstr: Any?): String = strrep(strip(wstr), "[\r\n]+", "")
 
 }

@@ -57,11 +57,11 @@ public class HttpClient {
     /** HTTP 请求头的集合。 */
     private final Map<String, String> headers = Maps.of();
 
-    /** 读取响应的超时时间（秒） */
-    private int readTimeout = 5;
+    /** 读取响应的超时时间 */
+    private int readTimeout = 60000;
 
-    /** 连接请求的超时时间（秒） */
-    private int connectTimeout = 5;
+    /** 连接请求的超时时间 */
+    private int connectTimeout = 60000;
 
     /**
      * `HttpMethod` 枚举定义了支持的 HTTP 请求方法。
@@ -178,7 +178,7 @@ public class HttpClient {
      * #brief: 设置读取超时时间
      *
      * <p>该方法用于设置 HTTP 请求的读取超时时间。读取超时时间指定了在等待服务器响应时，
-     * 客户端的最大等待时间（以秒为单位）。适用于需要自定义读取超时设置的场景。
+     * 客户端的最大等待时间（以毫秒为单位）。适用于需要自定义读取超时设置的场景。
      *
      * @param readTimeout 读取超时时间（秒）
      * @return 当前 `HttpClient` 实例
@@ -192,7 +192,7 @@ public class HttpClient {
      * #brief: 设置连接超时时间
      *
      * <p>该方法用于设置 HTTP 请求的连接超时时间。连接超时时间指定了客户端在与服务器建立连接时，
-     * 等待的最大时间（以秒为单位）。适用于需要自定义连接超时设置的场景。
+     * 等待的最大时间（以毫秒为单位）。适用于需要自定义连接超时设置的场景。
      *
      * @param connectTimeout 连接超时时间（秒）
      * @return 当前 `HttpClient` 实例
@@ -230,8 +230,8 @@ public class HttpClient {
             url = queryBuilder.argConcatBuild(url);
 
         OkHttpClient.Builder clientBuilder = new OkHttpClient().newBuilder();
-        clientBuilder.connectTimeout(connectTimeout, TimeUnit.SECONDS);
-        clientBuilder.readTimeout(readTimeout, TimeUnit.SECONDS);
+        clientBuilder.connectTimeout(connectTimeout, TimeUnit.MILLISECONDS);
+        clientBuilder.readTimeout(readTimeout, TimeUnit.MILLISECONDS);
 
         if (sslVerficationDisable) {
             clientBuilder.sslSocketFactory(SSLSocketClient.getSSLSocketFactory(), SSLSocketClient.getX509TrustManager());
