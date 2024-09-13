@@ -58,6 +58,6 @@ public class TestingServiceImplements implements TestingService {
 
     @Override
     public String tika(MultipartFile multipartFile, TikaFile tikaFile) {
-        return throwIfError(() -> new Tika().parseToString(multipartFile.getInputStream()));
+        return throwIfError(() -> TikaFile.readText(multipartFile.getInputStream()));
     }
 }

@@ -25,29 +25,86 @@ package com.redgogh.testing.enums;
 
 /* Create on 2024/9/13 */
 
+import org.apache.tika.Tika;
+
+import java.io.InputStream;
+
+import static com.redgogh.tools.Assert.throwIfError;
+
 /**
+ * `TikaFile` 枚举定义了常见的文件类型，用于表示不同的文件格式。
+ *
+ * <p>该枚举类包括各种文件格式的标识符，便于在处理文件时进行格式分类和操作。它适用于文件上传、解析、处理等场景。
+ *
+ * <h2>枚举常量</h2>
+ * <ul>
+ *     <li>{@link #PDF} - 代表 PDF 文件格式。</li>
+ *     <li>{@link #DOC} - 代表旧版 Microsoft Word 文档格式。</li>
+ *     <li>{@link #DOCX} - 代表新版 Microsoft Word 文档格式（基于 XML）。</li>
+ *     <li>{@link #PPT} - 代表旧版 Microsoft PowerPoint 演示文稿格式。</li>
+ *     <li>{@link #PPTX} - 代表新版 Microsoft PowerPoint 演示文稿格式（基于 XML）。</li>
+ *     <li>{@link #XLS} - 代表旧版 Microsoft Excel 工作簿格式。</li>
+ *     <li>{@link #XLSX} - 代表新版 Microsoft Excel 工作簿格式（基于 XML）。</li>
+ * </ul>
+ *
+ * <h2>使用示例</h2>
+ * <pre>
+ *     // 获取文件类型
+ *     TikaFile fileType = TikaFile.PDF;
+ *
+ *     // 根据文件类型执行操作
+ *     switch (fileType) {
+ *         case PDF:
+ *             // 处理 PDF 文件
+ *             break;
+ *         case DOCX:
+ *             // 处理 DOCX 文件
+ *             break;
+ *         // 其他文件类型
+ *     }
+ * </pre>
+ *
  * @author RedGogh
+ * @since 1.0
  */
 public enum TikaFile {
+
+    /** 代表 PDF 文件格式 */
     PDF,
+
+    /** 代表旧版 Microsoft Word 文档格式 */
     DOC,
+
+    /** 代表新版 Microsoft Word 文档格式（基于 XML） */
     DOCX,
+
+    /** 代表旧版 Microsoft PowerPoint 演示文稿格式 */
     PPT,
+
+    /** 代表新版 Microsoft PowerPoint 演示文稿格式（基于 XML） */
     PPTX,
+
+    /** 代表旧版 Microsoft Excel 工作簿格式 */
     XLS,
+
+    /** 代表新版 Microsoft Excel 工作簿格式（基于 XML） */
     XLSX,
-    TXT,
-    CSV,
-    XML,
-    JSON,
-    HTML,
-    MD,
-    RTF,
-    ODT,
-    EPUB,
-    MOBI,
-    AUDIO,
-    VIDEO,
-    IMAGE,
+
+    /** 代表普通文本文件格式 */
+    TEXT,
     ;
+
+    /**
+     * Tika 实例
+     */
+    private static final Tika tika = new Tika();
+
+    /**
+     * 任意文档数据流转文本
+     */
+    public static String readText(InputStream stream) {
+        return throwIfError(() -> tika.parseToString(stream));
+    }
+
 }
+
