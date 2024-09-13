@@ -1,13 +1,30 @@
 package com.redgogh.tools;
 
+import java.util.Map;
+
 import static com.redgogh.tools.StringUtils.*;
 
 /**
- * 操作系统工具类
+ * `OSEnvironment` 是一个类，用于管理和操作操作系统环境变量。
  *
- * <p>该类提供了一些静态方法，用于检查当前操作系统的类型和获取用户主目录路径。
+ * <p>该类提供了访问和检索操作系统环境变量的功能。主要功能包括获取指定名称的环境
+ * 变量值等。可以通过静态方法访问环境变量，无需实例化该类。
+ *
+ * <p>该类的主要特点包括：
+ * <ul>
+ *     <li>提供简单的接口来获取操作系统环境变量。</li>
+ *     <li>封装了环境变量的访问逻辑，易于管理和扩展。</li>
+ * </ul>
+ *
+ * <h2>使用示例</h2>
+ * <pre>
+ *     // 获取指定名称的环境变量值
+ *     String value = OSEnvironment.getEnvironment("PATH");
+ * </pre>
  *
  * @author RedGogh
+ * @see System
+ * @since 1.0
  */
 public class OSEnvironment {
 
@@ -29,8 +46,6 @@ public class OSEnvironment {
     public static final byte MACOS   = 0x0004;
 
     /**
-     * #brief: 当前操作系统的名称
-     *
      * 该常量用于获取并保存当前运行环境的操作系统名称。
      * 通过调用 {@code System.getProperty("os.name")} 来初始化，
      * 返回的操作系统名称可能是 "Windows", "Linux", "Mac OS X" 等。
@@ -43,11 +58,17 @@ public class OSEnvironment {
     private static final String OS_NAME = System.getProperty("os.name");
 
     /**
+     * 操作系统环境变量
+     */
+    private static final Map<String, String> environments = System.getenv();
+
+    /**
      * 操作系统枚举类
      */
     private static byte OS_FLAG = UNKNOWN;
 
     static {
+        // initialize
         if (strihas(OS_NAME, "Windows"))
             OS_FLAG = WINDOWS;
         else if (strihas(OS_NAME, "Linux"))
@@ -116,6 +137,19 @@ public class OSEnvironment {
         if (sub != null)
             return home + "/" + sub;
         return home;
+    }
+
+    /**
+     * #brief: 根据名称获取对应的环境变量值
+     *
+     * <p>从环境变量集合中查找指定名称的环境变量，并返回其对应的值。
+     * 如果环境变量名称不存在，返回 `null`。
+     *
+     * @param name 环境变量的名称
+     * @return 对应名称的环境变量值，如果名称未找到，则返回 `null`
+     */
+    public static String getEnvironment(String name) {
+        return environments.get(name);
     }
 
 }
