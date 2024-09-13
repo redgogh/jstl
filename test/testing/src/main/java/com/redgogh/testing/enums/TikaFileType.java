@@ -1,4 +1,4 @@
-package com.redgogh.testing.controller;
+package com.redgogh.testing.enums;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -25,47 +25,16 @@ package com.redgogh.testing.controller;
 
 /* Create on 2024/9/13 */
 
-import com.redgogh.libraries.springframework.boot.web.R;
-import com.redgogh.testing.service.TestingService;
-import com.redgogh.tools.enums.Enumerates;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author RedGogh
  */
-@RestController
-@RequestMapping("/testing")
-public class TestingController {
+public interface TikaFileType {
 
-    @Autowired
-    private TestingService testingService;
+    boolean uploadFile(MultipartFile multipartFile);
 
-    /**
-     * 文件上传测试
-     */
-    @PostMapping("/upload-file")
-    public R<Boolean> check(@RequestParam("file") MultipartFile multipartFile) {
-        return R.ok(testingService.uploadFile(multipartFile));
-    }
+    void asyncCall(int sleep);
 
-    /**
-     * 异步调用测试
-     */
-    @PostMapping("/async-call")
-    public R<Void> asyncCall(@RequestParam("sleep") int sleep) {
-        testingService.asyncCall(sleep);
-        return R.ok();
-    }
-
-    /**
-     * tika 解析测试
-     */
-    @PostMapping("/tika/{type}")
-    public R<String> tika(@RequestParam("file") MultipartFile multipartFile, @PathVariable("type") String type) {
-        return R.ok(testingService.tika(multipartFile, Enumerates.checkout()));
-    }
-
-
+    String tika(MultipartFile multipartFile, String type);
 }
