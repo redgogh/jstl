@@ -63,8 +63,8 @@ public class TestingController {
     /**
      * tika 解析测试
      */
-    @PostMapping("/tika/pdf")
-    public R<String> tika(@RequestParam("file") MultipartFile multipartFile) {
+    @PostMapping("/tika/{type}")
+    public R<String> tika(@RequestParam("file") MultipartFile multipartFile, @PathVariable("type") String type) {
         return R.ok(testingService.tika(multipartFile, TikaFile.PDF));
     }
 

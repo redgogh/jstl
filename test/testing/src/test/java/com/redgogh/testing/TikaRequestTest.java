@@ -39,7 +39,7 @@ public class TikaRequestTest {
     @Test
     public  void parsePDFTest() {
         Response response = HttpClient.open("POST", "http://127.0.0.1:8001/testing/tika/pdf")
-                .setRequestBody(new MultipartBody("file", new File("Desktop://附件八、历史迁移数据库设计.xlsx")))
+                .setRequestBody(new MultipartBody("file", new File("Desktop://log.txt")))
                 .newCall();
         System.out.println(response.getString("data"));
     }
