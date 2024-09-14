@@ -241,6 +241,33 @@ public class Lists {
     }
 
     /**
+     * #brief: 创建一个同步的空列表
+     *
+     * <p>该方法创建一个新的空列表，并将其包装为同步列表，以确保线程安全。
+     * 调用 `synchronizedList` 方法来实现同步包装。
+     *
+     * @param <E> 列表元素的类型
+     * @return 包装后的同步空列表
+     */
+    public static <E> List<E> newSynchronizedList() {
+        return synchronizedList(of());
+    }
+
+    /**
+     * #brief: 将现有列表包装为同步列表
+     *
+     * <p>该方法将提供的列表包装为同步列表，以确保在多线程环境下对列表的操作是线程安全的。
+     * 使用 `Collections.synchronizedList` 方法进行包装。
+     *
+     * @param list 要包装的原始列表
+     * @param <E> 列表元素的类型
+     * @return 包装后的同步列表
+     */
+    public static <E> List<E> synchronizedList(List<E> list) {
+        return Collections.synchronizedList(list);
+    }
+
+    /**
      * 通过实现 {@link StreamMapping} 的 Lambda 接口，将一个对象转换成另一个对象实例，并
      * 批量添加到新的 {@link List} 集合中。
      *
