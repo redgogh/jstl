@@ -39,10 +39,6 @@ public class FileByteReader extends FileInputStream {
 
     private static final Logger logger = LoggerFactory.getLogger(FileByteReader.class);
 
-    public interface FileByteReaderResource {
-        void call(FileByteReader byteReader);
-    }
-
     public FileByteReader(@NotNull String name) throws FileNotFoundException {
         super(name);
     }
@@ -53,6 +49,10 @@ public class FileByteReader extends FileInputStream {
 
     public FileByteReader(@NotNull FileDescriptor fdObj) {
         super(fdObj);
+    }
+
+    public interface FileByteReaderResource {
+        void call(FileByteReader byteReader);
     }
 
     /**
