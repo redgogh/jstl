@@ -30,7 +30,7 @@ import com.redgogh.tools.ArrayUtils;
 /**
  * @author RedGogh
  */
-public abstract class ByteBuf {
+public abstract class ByteBuffer {
 
     /** 读写指针 */
     protected int position;
@@ -42,24 +42,24 @@ public abstract class ByteBuf {
     private final byte[] buftmp = new byte[16];
 
     /* 控制读写指针属性 */
-    public static final SeekOption SEEK_SET = (byteBuf, value) -> byteBuf.position = value;
-    public static final SeekOption SEEK_CUR = (byteBuf, value) -> byteBuf.position += value;
-    public static final SeekOption SEEK_END = (byteBuf, value) -> byteBuf.position = byteBuf.capacity - value;
+    public static final SeekOption SEEK_SET = (byteBuffer, value) -> byteBuffer.position = value;
+    public static final SeekOption SEEK_CUR = (byteBuffer, value) -> byteBuffer.position += value;
+    public static final SeekOption SEEK_END = (byteBuffer, value) -> byteBuffer.position = byteBuffer.capacity - value;
 
     public interface SeekOption {
-        void getpos(ByteBuf byteBuf, int value);
+        void getpos(ByteBuffer byteBuffer, int value);
     }
 
     /**
-     * @return 分配一个默认 4kb 大小的 {@link ByteBuf} 缓冲区。
+     * @return 分配一个默认 4kb 大小的 {@link ByteBuffer} 缓冲区。
      */
-    public static ByteBuf allocate() {
+    public static ByteBuffer allocate() {
         return allocate(IOUtils.DEFAULT_BYTE_BUFFER_SIZE);
     }
 
     /**
-     * 分配一个默认 {@code size} 大小的 {@link ByteBuf} 缓冲区。该缓冲区使用 JVM 中内部的堆内存储存数据,
-     * 所以这个 {@link ByteBuf} 的最大存储大小取决于 JVM 的启动参数 {@code -Xmx} 设置的堆内存
+     * 分配一个默认 {@code size} 大小的 {@link ByteBuffer} 缓冲区。该缓冲区使用 JVM 中内部的堆内存储存数据,
+     * 所以这个 {@link ByteBuffer} 的最大存储大小取决于 JVM 的启动参数 {@code -Xmx} 设置的堆内存
      * 有多大。
      * <p>
      * 但是在 JDK1.9 版本之前一般 JVM 的堆内存不会调整到太大，通常来说就几百兆，几个G的大小。JDK9 后
@@ -69,11 +69,11 @@ public abstract class ByteBuf {
      * 所以通常来说在堆中分配的内存就足以完成 90% 的使用需求了，这个类后续应该也不会扩展 DirectByteBuffer
      * 实现类。
      *
-     * @return 创建一个 {@link HeapByteBuf} 子类对象实例，内部的缓冲区默认大小为
+     * @return 创建一个 {@link HeapByteBuffer} 子类对象实例，内部的缓冲区默认大小为
      *         参数 {@code size} 的值。
      */
-    public static ByteBuf allocate(int size) {
-        return new HeapByteBuf(size);
+    public static ByteBuffer allocate(int size) {
+        return new HeapByteBuffer(size);
     }
 
     /**
@@ -87,7 +87,7 @@ public abstract class ByteBuf {
      *
      * @return 封装了 {@code b} 字节数组的缓冲区对象实例。
      */
-    public static ByteBuf wrap(byte[] b) {
+    public static ByteBuffer wrap(byte[] b) {
         return wrap(b, 0, b.length);
     }
 
@@ -108,8 +108,8 @@ public abstract class ByteBuf {
      *
      * @return 封装了 {@code b} 字节数组的缓冲区对象实例。
      */
-    public static ByteBuf wrap(byte[] b, int off, int len) {
-        ByteBuf buffer = allocate();
+    public static ByteBuffer wrap(byte[] b, int off, int len) {
+        ByteBuffer buffer = allocate();
         buffer.write(b, off, len);
         return buffer;
     }
@@ -124,7 +124,7 @@ public abstract class ByteBuf {
     /**
      * #brief: 重置读写指针位置。<p>
      *
-     * 设置 {@link ByteBuf} 内部读写指针偏移量，这个 {@link ByteBuf} 是支持随机读写的对象，
+     * 设置 {@link ByteBuffer} 内部读写指针偏移量，这个 {@link ByteBuffer} 是支持随机读写的对象，
      * 所以可以通过 {@code seek()} 函数设置内部的读写指针。当执行完所有写入操作时，使用者应该调
      * 用 {@code seek(SEEK_SET, 0)} 来重置缓冲区内部的读写指针位置。它会被重置到 {@code 0} 的
      * 位置上。
@@ -144,7 +144,7 @@ public abstract class ByteBuf {
      * @see #SEEK_CUR
      * @see #SEEK_END
      */
-    public ByteBuf seek(SeekOption sop, int off) {
+    public ByteBuffer seek(SeekOption sop, int off) {
         sop.getpos(this, off);
         return this;
     }
@@ -182,13 +182,13 @@ public abstract class ByteBuf {
     }
 
     /**
-     * 读取 {@link ByteBuf} 中的字节数据，通过传入的 {@code b}、{@code off}、{@code len} 这三个参数
+     * 读取 {@link ByteBuffer} 中的字节数据，通过传入的 {@code b}、{@code off}、{@code len} 这三个参数
      * 来确定需要读取多少个字节到 {@code b} 字节数组中。这个函数内部调用了 {@link #read0(byte[], int, int)}
      * 函数。它与 {@code read0()} 函数唯一不同的区别就在于，这个函数会做索引越界等校验，来确保读取时的安全性、
      * 以及稳定性
      *
      * @param b
-     *        读取 {@link ByteBuf} 中数据到 {@code b} 这个字节数组中
+     *        读取 {@link ByteBuffer} 中数据到 {@code b} 这个字节数组中
      *
      * @param off
      *        字节数组起始索引，从 {@code b[off]} 开始写入第一个字节
@@ -210,16 +210,16 @@ public abstract class ByteBuf {
     /**
      * #brief: ByteBuf 数据读取唯一接口，需要子类自行实现。<p>
      *
-     * 读取 {@link ByteBuf} 中的字节数据，这个函数是一个抽象函数，同时也是所有 {@code read()}
+     * 读取 {@link ByteBuffer} 中的字节数据，这个函数是一个抽象函数，同时也是所有 {@code read()}
      * 函数的底层接口。类似 {@link #write0(byte[], int, int)} 函数的作用，所有的读取操作底层都
-     * 必须由它来完成，子类需要实现这个函数。可以参考 {@link HeapByteBuf} 实现。这是目前唯一
+     * 必须由它来完成，子类需要实现这个函数。可以参考 {@link HeapByteBuffer} 实现。这是目前唯一
      * 一个库内自带的实现子类。
      * <p>
      * 实现 {@code read0()} 函数内部并不需要做任何有关校验的代码，因为校验代码在父类中已经提供
      * 了，所以子类实现 {@code read0()} 时只需要实现读取即可。
      *
      * @param b
-     *        读取 {@link ByteBuf} 中数据到 {@code b} 这个字节数组中
+     *        读取 {@link ByteBuffer} 中数据到 {@code b} 这个字节数组中
      *
      * @param off
      *        字节数组起始索引，从 {@code b[off]} 开始写入第一个字节
@@ -273,7 +273,7 @@ public abstract class ByteBuf {
     }
 
     /**
-     * 将整个字节缓冲的内容写入到 {@link ByteBuf} 中。
+     * 将整个字节缓冲的内容写入到 {@link ByteBuffer} 中。
      */
     public void write(byte[] b) {
         write(b, 0, b.length);
@@ -300,20 +300,20 @@ public abstract class ByteBuf {
     /**
      * #brief: ByteBuf 数据写入唯一接口，需要子类自行实现。<p>
      *
-     * {@code write0()} 函数是 {@link ByteBuf} 抽象类中需要子类去实现的一个函数。这个函数是
-     * 所有数据写入的唯一接口，写入到 {@link ByteBuf} 中的所有数据都必须经过它，其他的写入函数
-     * 也只是在它之上做了一层封装，所以 {@code write0()} 这个函数就决定子类实现的 {@link ByteBuf}
+     * {@code write0()} 函数是 {@link ByteBuffer} 抽象类中需要子类去实现的一个函数。这个函数是
+     * 所有数据写入的唯一接口，写入到 {@link ByteBuffer} 中的所有数据都必须经过它，其他的写入函数
+     * 也只是在它之上做了一层封装，所以 {@code write0()} 这个函数就决定子类实现的 {@link ByteBuffer}
      * 好不好用、性能、安全等所有关键性问题。
      * <p>
      * 写入数据会有空指针、长度、偏移量等索引检查，但这个函数不需要做任何检查，因为在其他 {@code write()}
      * 函数中都已经做了这样的数据写入检查了。它只需要确保内部缓冲区的容量足够大，并且不会超出边界溢出即可。
-     * 完成了这两个需求，那么它就算是一个合格的 {@link ByteBuf} 子类。
+     * 完成了这两个需求，那么它就算是一个合格的 {@link ByteBuffer} 子类。
      *
      * @param b
      *        写入的数据内容字节数组
      *
      * @param off
-     *        从参数 {@code b[off]} 位置开始读取数据写入到 {@link ByteBuf}
+     *        从参数 {@code b[off]} 位置开始读取数据写入到 {@link ByteBuffer}
      *
      * @param len
      *        字节数组的结束位置，读取的内容从 {@code b[off]} 到 {@code b[len]}
@@ -321,7 +321,7 @@ public abstract class ByteBuf {
     abstract void write0(byte[] b, int off, int len);
 
     /**
-     * @return 分配一个新的 {@code byte} 字节数组，将 {@link ByteBuf} 缓冲区中
+     * @return 分配一个新的 {@code byte} 字节数组，将 {@link ByteBuffer} 缓冲区中
      *         有效的数据拷贝到新分配的字节数组，并返回。
      */
     public byte[] toByteArray() {

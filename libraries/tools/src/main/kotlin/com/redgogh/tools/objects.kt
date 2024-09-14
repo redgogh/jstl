@@ -2,8 +2,8 @@ package com.redgogh.tools
 
 import com.redgogh.tools.StringUtils.strupper
 import com.redgogh.tools.StringUtils.strxmatch
-import com.redgogh.tools.io.ByteBuf
-import com.redgogh.tools.io.ByteBuf.SEEK_SET
+import com.redgogh.tools.io.ByteBuffer
+import com.redgogh.tools.io.ByteBuffer.SEEK_SET
 import com.redgogh.tools.io.IOUtils
 import java.io.PrintStream
 
@@ -96,7 +96,7 @@ object AnyObjects {
      */
     @JvmStatic
     fun atoi(b: ByteArray?, off: Int): Int {
-        return ByteBuf.wrap(b, off, Integer.BYTES)
+        return ByteBuffer.wrap(b, off, Integer.BYTES)
                 .seek(SEEK_SET, 0).readInt()
     }
 
@@ -162,7 +162,7 @@ object AnyObjects {
      */
     @JvmStatic
     fun atol(b: ByteArray?, off: Int): Long {
-        return ByteBuf.wrap(b, off, java.lang.Long.BYTES)
+        return ByteBuffer.wrap(b, off, java.lang.Long.BYTES)
                 .seek(SEEK_SET, 0).readLong()
     }
 

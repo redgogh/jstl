@@ -28,7 +28,7 @@ package com.redgogh.tools.io;
 /**
  * @author RedGogh
  */
-public class  HeapByteBuf extends ByteBuf {
+public class HeapByteBuffer extends ByteBuffer {
 
     /** 字节缓冲区 */
     private byte[] buf;
@@ -37,7 +37,7 @@ public class  HeapByteBuf extends ByteBuf {
     /** 每次扩容大小为初始分配大小 */
     private final int initializeCapacity;
 
-    HeapByteBuf(int capacity) {
+    HeapByteBuffer(int capacity) {
         initializeCapacity = capacity;
         buf = new byte[initializeCapacity];
     }
