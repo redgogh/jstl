@@ -55,6 +55,7 @@
   - 新增 [StringUtils](libraries/tools/src/main/kotlin/com/redgogh/tools/string.kt) 中 `strxip` 函数，用于除去字符串内的所有占位符。
   - 新增 [LoggerFactory](libraries/tools/src/main/java/com/redgogh/tools/logging/LoggerFactory.java) 中获取本地标准日志输出调试对象。
   - 新增 [FileByteWriter](libraries/tools/src/main/java/com/redgogh/tools/io/FileByteWriter.java) `call` 方法，用于自动关闭流。
+  - 新增 [File](libraries/tools/src/main/java/com/redgogh/tools/io/File.java) `readBytes` 函数，用于直接获取文件所有字节数据。
 
 ## 👻 优化功能
 
