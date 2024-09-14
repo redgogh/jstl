@@ -40,7 +40,7 @@ public class FileByteReader extends FileInputStream {
     private static final Logger logger = LoggerFactory.getLogger(FileByteReader.class);
 
     public interface FileByteReaderResource {
-        void apply(FileByteReader byteReader);
+        void call(FileByteReader byteReader);
     }
 
     public FileByteReader(@NotNull String name) throws FileNotFoundException {
@@ -75,7 +75,7 @@ public class FileByteReader extends FileInputStream {
      */
     public void call(FileByteReaderResource fileByteReaderResource) {
         try {
-            fileByteReaderResource.apply(this);
+            fileByteReaderResource.call(this);
         } catch (Exception e) {
             logger.error("FileByteReader call error!", e);
         } finally {
