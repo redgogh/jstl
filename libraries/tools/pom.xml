@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>tools</artifactId>
+    <version>v1.0.2-beta.1+build</version>
 
     <properties>
         <fastjson.version>2.0.26</fastjson.version>
@@ -21,6 +22,11 @@
         <scala.version>2.10.4</scala.version>
         <apache-poi.version>5.2.3</apache-poi.version>
         <asm.version>9.5</asm.version>
+        <!-- compile -->
+        <java.compiler.version>1.8</java.compiler.version>
+        <kotlin.jvm.target>1.8</kotlin.jvm.target>
+        <maven.compiler.source>${java.compiler.version}</maven.compiler.source>
+        <maven.compiler.target>${java.compiler.version}</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -111,7 +117,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <jvmTarget>${java.compiler.version}</jvmTarget>
+                    <jvmTarget>${kotlin.jvm.target}</jvmTarget>
                 </configuration>
             </plugin>
             <plugin>
@@ -164,5 +170,30 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>shade</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-shade-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>shade</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

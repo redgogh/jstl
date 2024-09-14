@@ -80,7 +80,7 @@ object Assert {
     @JvmStatic
     fun xassert(value: Boolean, vfmt: String, vararg args: Any) {
         if (!value)
-            throw AssertException(vfmt, args)
+            throw AssertException(vfmt, *args)
     }
 
     /**
@@ -148,6 +148,22 @@ object Assert {
             function.apply()
         } catch (e: Throwable) {
             /* ignore... */
+        }
+    }
+
+    /**
+     * 闭包函数接口，安静地捕获一个异常并忽略。如果发生异常，则
+     * 返回 `null`。
+     *
+     * @param function 闭包函数接口
+     *
+     */
+    @JvmStatic
+    fun <T> ignore(function: TypeFunction<T>): T? {
+        return try {
+            function.apply()
+        } catch (e: Throwable) {
+            null
         }
     }
 

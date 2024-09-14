@@ -26,7 +26,6 @@ package com.redgogh.tools.io;
 /* Creates on 2020/4/29. */
 
 import com.redgogh.tools.exception.IOReadException;
-import com.redgogh.tools.exception.IORuntimeException;
 import com.redgogh.tools.exception.IOWriteException;
 
 import java.io.*;
@@ -238,7 +237,7 @@ public class IOUtils {
             writer = file.openByteWriter();
             write(input, writer);
         } catch (Exception e) {
-            throw new IORuntimeException(e);
+            throw new IOWriteException(e);
         } finally {
             closeQuietly(writer);
         }
@@ -308,7 +307,7 @@ public class IOUtils {
             while ((len = read(buf, input)) != EOF)
                 write(buf, 0, len, stream);
         } catch (Throwable e) {
-            throw new IORuntimeException(e);
+            throw new IOWriteException(e);
         } finally {
             /* 如果出现异常关闭输入流，因为输入流中的数据已经被读取，所以
              * 这个函数可以替开发者将输入流关闭。 */

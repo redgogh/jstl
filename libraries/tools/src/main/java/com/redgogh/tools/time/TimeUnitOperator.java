@@ -26,7 +26,13 @@ package com.redgogh.tools.time;
 /* Creates on 2022/3/30. */
 
 import com.redgogh.tools.Upgrade;
+import com.redgogh.tools.enums.Enumerates;
+import com.redgogh.tools.exception.UnsupportedOperationException;
 import org.joda.time.DateTime;
+
+import java.util.concurrent.TimeUnit;
+
+import static com.redgogh.tools.StringUtils.strwfmt;
 
 /**
  * 时间单位操作符
@@ -72,7 +78,6 @@ public enum TimeUnitOperator {
      * @return 加上对应 TimeUnits + unit 后的日期
      */
     @Upgrade(features = "OpenJDK17/EnhancedSwitchMigration")
-    @SuppressWarnings("EnhancedSwitchMigration")
     public Date add(Date date, int unit) {
         DateTime calc = new DateTime(date);
         DateTime retval = null;
@@ -102,7 +107,7 @@ public enum TimeUnitOperator {
                 retval = calc.plusYears(unit);
                 break;
         }
-        ;
+
         return new Date(retval.toDate());
     }
 
@@ -125,7 +130,6 @@ public enum TimeUnitOperator {
      * @return 减去对应 TimeUnits - unit 后的日期
      */
     @Upgrade(features = "OpenJDK17/EnhancedSwitchMigration")
-    @SuppressWarnings("EnhancedSwitchMigration")
     public Date minus(Date date, int unit) {
         DateTime calc = new DateTime(date);
         DateTime retval = null;
@@ -155,8 +159,115 @@ public enum TimeUnitOperator {
                 retval = calc.minusYears(unit);
                 break;
         }
-        ;
+
         return new Date(retval.toDate());
+    }
+
+    /**
+     * #brief: 将给定时长转换为纳秒
+     *
+     * <p>该方法将指定的时长转换为纳秒。如果当前类的名称匹配 `TimeUnit` 枚举的某个常量，
+     * 则使用相应的 `TimeUnit` 枚举的 `toNanos` 方法进行转换；否则抛出 `UnsupportedOperationException` 异常。
+     *
+     * @param duration 需要转换的时长
+     * @return 转换后的纳秒值
+     * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
+     */
+    public long toNanos(long duration) {
+        TimeUnit timeUnit = Enumerates.find(TimeUnit.class, name());
+        if (timeUnit != null)
+            return timeUnit.toNanos(duration);
+        throw new UnsupportedOperationException(toUnsupportedExceptMessage("toNanos"));
+    }
+
+    /**
+     * #brief: 将给定时长转换为毫秒
+     *
+     * <p>该方法将指定的时长转换为毫秒。如果当前类的名称匹配 `TimeUnit` 枚举的某个常量，
+     * 则使用相应的 `TimeUnit` 枚举的 `toMillis` 方法进行转换；否则抛出 `UnsupportedOperationException` 异常。
+     *
+     * @param duration 需要转换的时长
+     * @return 转换后的毫秒值
+     * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
+     */
+    public long toMillis(long duration) {
+        TimeUnit timeUnit = Enumerates.find(TimeUnit.class, name());
+        if (timeUnit != null)
+            return timeUnit.toMillis(duration);
+        throw new UnsupportedOperationException(toUnsupportedExceptMessage("toMillis"));
+    }
+
+    /**
+     * #brief: 将给定时长转换为秒
+     *
+     * <p>该方法将指定的时长转换为秒。如果当前类的名称匹配 `TimeUnit` 枚举的某个常量，
+     * 则使用相应的 `TimeUnit` 枚举的 `toSeconds` 方法进行转换；否则抛出 `UnsupportedOperationException` 异常。
+     *
+     * @param duration 需要转换的时长
+     * @return 转换后的秒值
+     * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
+     */
+    public long toSeconds(long duration) {
+        TimeUnit timeUnit = Enumerates.find(TimeUnit.class, name());
+        if (timeUnit != null)
+            return timeUnit.toSeconds(duration);
+        throw new UnsupportedOperationException(toUnsupportedExceptMessage("toSeconds"));
+    }
+
+    /**
+     * #brief: 将给定时长转换为分钟
+     *
+     * <p>该方法将指定的时长转换为分钟。如果当前类的名称匹配 `TimeUnit` 枚举的某个常量，
+     * 则使用相应的 `TimeUnit` 枚举的 `toMinutes` 方法进行转换；否则抛出 `UnsupportedOperationException` 异常。
+     *
+     * @param duration 需要转换的时长
+     * @return 转换后的分钟值
+     * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
+     */
+    public long toMinutes(long duration) {
+        TimeUnit timeUnit = Enumerates.find(TimeUnit.class, name());
+        if (timeUnit != null)
+            return timeUnit.toMinutes(duration);
+        throw new UnsupportedOperationException(toUnsupportedExceptMessage("toMinutes"));
+    }
+
+    /**
+     * #brief: 将给定时长转换为小时
+     *
+     * <p>该方法将指定的时长转换为小时。如果当前类的名称匹配 `TimeUnit` 枚举的某个常量，
+     * 则使用相应的 `TimeUnit` 枚举的 `toHours` 方法进行转换；否则抛出 `UnsupportedOperationException` 异常。
+     *
+     * @param duration 需要转换的时长
+     * @return 转换后的小时值
+     * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
+     */
+    public long toHours(long duration) {
+        TimeUnit timeUnit = Enumerates.find(TimeUnit.class, name());
+        if (timeUnit != null)
+            return timeUnit.toHours(duration);
+        throw new UnsupportedOperationException(toUnsupportedExceptMessage("toHours"));
+    }
+
+    /**
+     * #brief: 将给定时长转换为天
+     *
+     * <p>该方法将指定的时长转换为天。如果当前类的名称匹配 `TimeUnit` 枚举的某个常量，
+     * 则使用相应的 `TimeUnit` 枚举的 `toDays` 方法进行转换；否则抛出 `UnsupportedOperationException` 异常。
+     *
+     * @param duration 需要转换的时长
+     * @return 转换后的天数值
+     * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
+     */
+    public long toDays(long duration) {
+        TimeUnit timeUnit = Enumerates.find(TimeUnit.class, name());
+        if (timeUnit != null)
+            return timeUnit.toDays(duration);
+        throw new UnsupportedOperationException(toUnsupportedExceptMessage("toDays"));
+    }
+
+    /** 构建异常信息 */
+    private String toUnsupportedExceptMessage(String method) {
+        return strwfmt("TimeUnitOperator#%s 类型暂时不支持 %s 函数转换", name(), method);
     }
 
 }

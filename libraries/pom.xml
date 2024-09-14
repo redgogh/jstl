@@ -17,13 +17,15 @@
     </modules>
 
     <properties>
-        <kotlin.version>2.0.20</kotlin.version>
+        <kotlin.version>1.9.20-RC</kotlin.version>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
         <spring-boot.version>3.1.4</spring-boot.version>
         <lombok.version>1.18.30</lombok.version>
         <junit.version>4.13.2</junit.version>
         <jackson-module-kotlin.version>2.14.2</jackson-module-kotlin.version>
         <java.compiler.version>21</java.compiler.version>
+        <maven.compiler.source>${java.compiler.version}</maven.compiler.source>
+        <maven.compiler.target>${java.compiler.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -32,7 +34,7 @@
             <dependency>
                 <groupId>com.redgogh.libraries</groupId>
                 <artifactId>tools</artifactId>
-                <version>v1.0.0-beta.1+build</version>
+                <version>v1.0.2-beta.1+build</version>
             </dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
@@ -61,27 +63,5 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
-                    <configuration>
-                        <source>${java.compiler.version}</source>
-                        <target>${java.compiler.version}</target>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

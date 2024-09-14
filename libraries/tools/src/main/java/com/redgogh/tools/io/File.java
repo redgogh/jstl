@@ -23,7 +23,7 @@ package com.redgogh.tools.io;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.tools.SystemOS;
+import com.redgogh.tools.OSEnvironment;
 import com.redgogh.tools.collection.Lists;
 
 import java.io.*;
@@ -90,10 +90,10 @@ public class File extends java.io.File {
      *         否则，返回原始路径
      */
     private static String quickAccessPath(String pathname) {
-        if (SystemOS.isWindows()) {
+        if (OSEnvironment.isWindows() || OSEnvironment.isMacOS()) {
             /* Conversation Desktop */
             if (pathname.startsWith(PATHNAME_DESKTOP_VARIABLE))
-                return pathname.replace(PATHNAME_DESKTOP_VARIABLE, SystemOS.getUserHome("Desktop/"));
+                return pathname.replace(PATHNAME_DESKTOP_VARIABLE, OSEnvironment.getUserHome("Desktop/"));
         }
 
         return pathname;
@@ -417,6 +417,29 @@ public class File extends java.io.File {
     public String strread() {
         return IOUtils.strread(openByteReader());
     }
+
+    /**
+     * #brief: 读取并返回文件的所有字节内容
+     *
+     * <p>该方法打开文件，读取文件的所有内容并将其存储到字节数组中，最后关闭文件。
+     * 返回包含文件所有字节数据的数组。
+     *
+     * <p>方法会先根据文件长度初始化一个字节数组，然后将文件内容读取到该数组中。
+     * 调用完毕后，会自动关闭文件。
+     *
+     * @return 包含文件内容的字节数组
+     */
+    public byte[] readBytes() {
+        open();
+        byte[] b = new byte[(int) length()];
+        read(b);
+        close();
+        return b;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////
+    /// RandomAccessFile
+    //////////////////////////////////////////////////////////////////////////////
 
     /**
      * 打开文件描述符，使得 <code>File</code> 文件对象支持系统随机读写

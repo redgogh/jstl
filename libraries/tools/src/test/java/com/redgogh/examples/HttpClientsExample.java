@@ -25,19 +25,78 @@ package com.redgogh.examples;
 
 /* Creates on 2022/8/8. */
 
-import com.redgogh.tools.http.FormBodyBuilder;
-import com.redgogh.tools.http.HttpClients;
+import com.redgogh.tools.collection.Maps;
+import com.redgogh.tools.http.*;
 import com.redgogh.tools.io.File;
 import org.junit.Test;
+
+import java.util.concurrent.TimeUnit;
+
+import static com.redgogh.tools.Assert.xassert;
+import static com.redgogh.tools.io.IOUtils.stdout;
 
 @SuppressWarnings("ALL")
 public class HttpClientsExample {
 
+    // @Test
+    // public void callFormBodyExample() {
+    //     FormBodyBuilder formBodyBuilder = new FormBodyBuilder();
+    //     formBodyBuilder.put("document", new File("src/main/java/com/redgogh/tools/ArrayUtils.java"));
+    //     System.out.println(HttpClients.post("http://127.0.0.1:8001/security/check-file", formBodyBuilder));
+    // }
+
     @Test
-    public void callFormBodyExample() {
-        FormBodyBuilder formBodyBuilder = new FormBodyBuilder();
-        formBodyBuilder.put("document", new File("src/main/java/com/redgogh/tools/ArrayUtils.java"));
-        System.out.println(HttpClients.post("http://127.0.0.1:8001/security/check-file", formBodyBuilder));
+    public void callMultipartBodyExample() {
+        MultipartBody multipartBody = new MultipartBody();
+        multipartBody.put("document", new File("src/main/java/com/redgogh/tools/ArrayUtils.java"));
+
+        Response response = HttpClient.open("POST", "http://127.0.0.1:8001/security/check/file")
+                .setRequestBody(multipartBody)
+                .newCall();
+
+        System.out.println(response);
+    }
+
+    @Test
+    public void callJSONBodyExample() {
+        Response response = HttpClient.open("POST", "http://127.0.0.1:8001/security/save")
+                .setRequestBody(Maps.of("id", "12138", "name", "zs", "age", "18"))
+                .newCall();
+
+        System.out.println(response);
+    }
+
+    @Test
+    public void callGetExample() {
+        QueryBuilder queryBuilder = new QueryBuilder();
+        queryBuilder.putAll(Maps.of("id", "12138", "name", "zs", "age", "18"));
+        Response response = HttpClient.open("GET", "http://127.0.0.1:8001/security/get")
+                .setQueryBuilder(queryBuilder)
+                .sslVerifierDisable()
+                .newCall();
+
+        System.out.println(response);
+    }
+
+    @Test
+    public void callAsyncExample() throws InterruptedException {
+        HttpClient.open("POST", "http://127.0.0.1:8001/testing/async-call")
+                .setQueryBuilder(new QueryBuilder("sleep=1"))
+                .setReadTimeout(3)
+                .newCall(new Callback() {
+                    @Override
+                    public void onFailure(Throwable e) {
+                        stdout.printf("请求出现异常：%s\n", e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(Response response) {
+                        stdout.printf("请求成功：%s\n", response);
+                    }
+                });
+        System.out.println("等待异步调用执行完成！");
+        Thread.sleep(TimeUnit.SECONDS.toMillis(5));
+        System.out.println("程序执行完毕！");
     }
 
 }

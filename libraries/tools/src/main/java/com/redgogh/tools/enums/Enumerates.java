@@ -28,10 +28,45 @@ package com.redgogh.tools.enums;
 import com.redgogh.tools.exception.InvalidArgumentException;
 import com.redgogh.tools.refection.UClass;
 
+import static com.redgogh.tools.Assert.throwIfNull;
 import static com.redgogh.tools.StringUtils.strieq;
 
 /**
+ * `Enumerates` 是一个工具类，提供了获取和查找枚举值的方法。主要包括获取指定枚举类的所有
+ * 枚举值和根据名称查找枚举值的功能。这些方法使用了反射机制来操作枚举类，以提供灵活的
+ * 枚举值处理能力。
+ *
+ * <p>该类中的方法主要用于处理枚举类型的数据，可以用于动态查找枚举值，适用于需要在运行时
+ * 处理枚举的场景。
+ *
+ * <h2>主要方法</h2>
+ * <ul>
+ *     <li>{@link #values(Class)}: 获取指定枚举类的所有枚举值。</li>
+ *     <li>{@link #checkout(Class, String)}: 根据名称查找并返回指定枚举类的枚举值。</li>
+ * </ul>
+ *
+ * <h2>注意事项</h2>
+ * <ul>
+ *     <li>使用了 `@SuppressWarnings("unchecked")` 注解来忽略未经检查的类型转换警告。</li>
+ *     <li>方法 `checkout` 可能会抛出 `InvalidArgumentException` 异常，需要进行相应的异常处理。</li>
+ * </ul>
+ *
+ * <h2>使用示例</h2>
+ * <pre>
+ *     // 获取枚举类 `Color` 的所有枚举值
+ *     Color[] colors = Enumerates.values(Color.class);
+ *
+ *     // 根据名称查找 `Color` 枚举中的枚举值
+ *     Color color = Enumerates.checkout(Color.class, "RED");
+ * </pre>
+ *
+ * <p>完整的使用示例和测试用例可以参考项目的测试包下的相关测试类。
+ *
  * @author RedGogh
+ *
+ * @see Enum
+ * @see InvalidArgumentException
+ * @since 1.0
  */
 public class Enumerates {
 
@@ -64,15 +99,31 @@ public class Enumerates {
      * @param name 要查找的枚举值名称
      * @param <E> 枚举类的类型参数
      * @return 与提供名称匹配的枚举值
-     * @throws InvalidArgumentException 如果提供的名称没有匹配的枚举值
+     * @throws NullPointerException 如果提供的名称没有匹配的枚举值
      */
-    @SuppressWarnings({"unchecked", "UnusedReturnValue"})
     public static <E extends Enum<E>> E checkout(Class<? extends Enum<E>> enumClass, String name) {
+        return throwIfNull(find(enumClass, name), "参数错误【%s】常量不存在！", name);
+    }
+
+    /**
+     * #brief: 根据名称查找并返回指定枚举类的枚举值
+     *
+     * <p>该方法在指定的枚举类中查找与提供的名称匹配的枚举值。如果找到匹配的枚举值，
+     * 则返回该枚举值；如果未找到匹配项，则返回 `null`。该方法利用反射机制获取枚举
+     * 类的所有枚举值，并逐一比较名称。
+     *
+     * @param enumClass 枚举类的 `Class` 对象
+     * @param name 要查找的枚举值名称
+     * @param <E> 枚举类的类型参数
+     * @return 与提供名称匹配的枚举值，如果没有匹配项则返回 `null`
+     */
+    @SuppressWarnings("unchecked")
+    public static <E extends Enum<E>> E find(Class<? extends Enum<E>> enumClass, String name) {
         Enum<E>[] values = values(enumClass);
         for (Enum<E> value : values)
             if (strieq(value.name(), name))
                 return (E) value;
-        throw new InvalidArgumentException("参数错误【%s】常量不存在！", name);
+        return null;
     }
 
 }

@@ -1,9 +1,9 @@
-= Quick Start
+= Fastsetup
 
-image:doc/svg/dahan.svg[dahan]
-image:doc/svg/test.svg[test]
-image:doc/svg/maven-center.svg[maven-center]
-image:doc/svg/build.svg[build]
+image:Documents/svg/dahan.svg[dahan]
+image:Documents/svg/test.svg[test]
+image:Documents/svg/maven-center.svg[maven-center]
+image:Documents/svg/build.svg[build]
 
 Java 后端微服务、单体服务快速开发框架。
 
@@ -11,8 +11,8 @@ Java 后端微服务、单体服务快速开发框架。
 
 项目规范文档列表（开发前请阅读）：
 
-- link:doc/codestyle.adoc[代码规范文档]
-- link:doc/commit-style.adoc[提交规范文档]
+- link:Documents/codestyle.adoc[代码规范文档]
+- link:Documents/commit-style.adoc[提交规范文档]
 
 == 构建环境要求
 

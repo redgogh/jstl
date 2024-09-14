@@ -38,6 +38,8 @@ public class LoggerFactory {
 
     /** 日志适配器 */
     private static LoggerAdapter loggerAdapterInstance = null;
+    /** 标准适配器 */
+    private static final LoggerAdapter standardLoggerAdapterInstance = new StandardLoggerAdapter();
 
     static {
         tryFindBestChoiceLoggerAdapter(LoggerFactory::slf4j);
@@ -71,6 +73,32 @@ public class LoggerFactory {
     }
 
     /**
+     * #brief: 获取指定名称的本地调试日志记录器
+     *
+     * <p>根据提供的名称获取本地调试日志记录器。返回与该名称关联的日志记录器实例，
+     * 该实例由标准日志适配器提供。
+     *
+     * @param name 日志记录器的名称
+     * @return 与指定名称关联的日志记录器实例
+     */
+    public static Logger getDebuggerLogger(String name) {
+        return standardLoggerAdapterInstance.getLogger(name);
+    }
+
+    /**
+     * #brief: 获取指定类的本地调试日志记录器
+     *
+     * <p>根据提供的类获取本地调试日志记录器。返回与该类关联的日志记录器实例，
+     * 该实例由标准日志适配器提供。
+     *
+     * @param aClass 日志记录器关联的类
+     * @return 与指定类关联的日志记录器实例
+     */
+    public static Logger getDebuggerLogger(Class<?> aClass) {
+        return standardLoggerAdapterInstance.getLogger(aClass);
+    }
+
+    /**
      * 尝试查找最优解的日志适配器
      */
     private static void tryFindBestChoiceLoggerAdapter(Runnable runnable) {
@@ -97,12 +125,9 @@ public class LoggerFactory {
 
     private static void standard() {
         try {
-            StandardLoggerAdapter adapter = UClass.newInstance(StandardLoggerAdapter.class);
-            Logger logger = adapter.getLogger(LoggerFactory.class);
-            if (!logger.isValid())
-                return;
+            Logger logger = standardLoggerAdapterInstance.getLogger(LoggerFactory.class);
             logger.info(formatBestChoice("STANDARD"));
-            loggerAdapterInstance = adapter;
+            loggerAdapterInstance = standardLoggerAdapterInstance;
         } catch (Throwable ignoreException) {
             // ignore...
         }

@@ -26,6 +26,7 @@ package com.redgogh.examples;
 import com.redgogh.tools.io.File;
 import org.junit.Test;
 
+import static com.redgogh.tools.AnyObjects.atos;
 import static com.redgogh.tools.AnyObjects.printf;
 
 @SuppressWarnings("ALL")
@@ -85,6 +86,11 @@ public class FileExample {
         printf("----------------------------------------------------\n");
 
         file.forceDelete();
+    }
+
+    @Test
+    public void readBytesExample() {
+        System.out.println(atos(new File("Desktop://log.txt").readBytes()));
     }
 
 }
