@@ -1,4 +1,4 @@
-package com.redgogh.projects.springboot;
+package com.redgogh.projects.template.springboot;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|

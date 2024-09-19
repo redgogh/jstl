@@ -7,23 +7,33 @@
         <groupId>com.redgogh.projects</groupId>
         <artifactId>projects</artifactId>
         <version>v1.0.0-beta.1+build</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <groupId>com.redgogh.projects.springboot</groupId>
-    <artifactId>spring-boot-project</artifactId>
+    <artifactId>template-spring-boot-project</artifactId>
 
     <properties>
-        <maven.compiler.source>22</maven.compiler.source>
-        <maven.compiler.target>22</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>${java.compiler.version}</maven.compiler.source>
+        <maven.compiler.target>${java.compiler.version}</maven.compiler.target>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.redgogh.libraries</groupId>
+                <artifactId>spring-boot-framework</artifactId>
+                <version>v1.0.0-beta.1+build</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
             <groupId>com.redgogh.libraries</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>v1.0.0-beta.1+build</version>
         </dependency>
     </dependencies>
 
