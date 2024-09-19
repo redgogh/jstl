@@ -10,7 +10,6 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <groupId>com.redgogh.projects.springboot</groupId>
     <artifactId>template-spring-boot-project</artifactId>
 
     <properties>
