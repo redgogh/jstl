@@ -1,8 +1,8 @@
 = Fastsetup
 
-image:Documents/svg/offical.svg[dahan]
+image:Documents/svg/offical.svg[offical]
 image:Documents/svg/test.svg[test]
-image:Documents/svg/license.svg[dahan]
+image:Documents/svg/license.svg[license]
 image:Documents/svg/build.svg[build]
 
 Java 后端微服务、单体服务快速开发框架。
