@@ -1,0 +1,20 @@
+<svg width="98.5" height="20" viewBox="0 0 985 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="redgogh: offical">
+  <title>redgogh: offical</title>
+  <linearGradient id="dgBZA" x2="0" y2="100%">
+    <stop offset="0" stop-opacity=".1" stop-color="#EEE"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <mask id="EmPen"><rect width="985" height="200" rx="30" fill="#FFF"/></mask>
+  <g mask="url(#EmPen)">
+    <rect width="557" height="200" fill="#555"/>
+    <rect width="428" height="200" fill="#F73" x="557"/>
+    <rect width="985" height="200" fill="url(#dgBZA)"/>
+  </g>
+  <g aria-hidden="true" fill="#fff" text-anchor="start" font-family="Verdana,DejaVu Sans,sans-serif" font-size="110">
+    <text x="60" y="148" textLength="457" fill="#000" opacity="0.25">redgogh</text>
+    <text x="50" y="138" textLength="457">redgogh</text>
+    <text x="612" y="148" textLength="328" fill="#000" opacity="0.25">offical</text>
+    <text x="602" y="138" textLength="328">offical</text>
+  </g>
+  
+</svg>
