@@ -14,6 +14,7 @@
 - 新增 [FileByteWriter](libraries/tools/src/main/java/com/redgogh/tools/io/FileByteWriter.java) `call` 方法，用于自动关闭流。
 - 新增 [File](libraries/tools/src/main/java/com/redgogh/tools/io/File.java) `readBytes` 函数，用于直接获取文件所有字节数据。
 - 新增 [Lists](libraries/tools/src/main/java/com/redgogh/tools/collection/Lists.java) 包装同步集合接口。
+- 新增 spring-boot 项目配置模板。
 
 ## 👻 优化功能
 

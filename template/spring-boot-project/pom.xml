@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.redgogh.projects</groupId>
+        <artifactId>projects</artifactId>
+        <version>v1.0.0-beta.1+build</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <groupId>com.redgogh.projects.springboot</groupId>
+    <artifactId>spring-boot-project</artifactId>
+
+    <properties>
+        <maven.compiler.source>22</maven.compiler.source>
+        <maven.compiler.target>22</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.redgogh.libraries</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>v1.0.0-beta.1+build</version>
+        </dependency>
+    </dependencies>
+
+</project>
