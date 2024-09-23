@@ -30,9 +30,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.redgogh.libraries</groupId>
+                <groupId>io.github.redgogh</groupId>
                 <artifactId>tools</artifactId>
-                <version>v1.0.2-beta.1+build</version>
+                <version>v1.0.3-beta.1+build</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

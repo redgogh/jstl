@@ -18,7 +18,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.redgogh.libraries</groupId>
+            <groupId>io.github.redgogh</groupId>
             <artifactId>tools</artifactId>
         </dependency>
         <dependency>
