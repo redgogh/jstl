@@ -22,10 +22,5 @@ under certain conditions; type `show c' for details.
 Creates on 2024/9/20.
 
 """
-import facetrack
-
-if __name__ == '__main__':
-    """
-    main
-    """
-    pass
+import cv2
+import face_recognition

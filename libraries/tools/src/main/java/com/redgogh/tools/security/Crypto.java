@@ -55,13 +55,13 @@ public final class Crypto {
      * 生成一个版本号
      *
      * @param major
-     *        主版本号（major << 22）
+     *        主版本号
      *
      * @param minor
-     *        副版本号（minor << 12 & 0x3ff）
+     *        副版本号
      *
      * @param patch
-     *        补丁版本 （patch & 0xfff）
+     *        补丁版本
      */
     public static int makeVersion(int major, int minor, int patch) {
         return major << 22 | minor << 12 | patch;
