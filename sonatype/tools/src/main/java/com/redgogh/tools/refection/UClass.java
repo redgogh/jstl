@@ -122,8 +122,7 @@ public class UClass {
      * @return {@link UClass} 实例
      */
     public static UClass forName(String className) {
-        Class<?> clazz = (Class<?>) throwIfError(() -> Class.forName(className));
-        return new UClass(clazz);
+        return new UClass(throwIfError(() -> Class.forName(className)));
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -238,6 +237,37 @@ public class UClass {
         return declaredFields;
     }
 
+    /**
+     * #brief: 读取指定名称的字段值（可能返回 null）
+     *
+     * <p>根据字段名称从当前实例中读取字段值。如果未找到该字段，返回 `null`。
+     * 该方法提供了灵活性，允许在未找到字段的情况下继续执行。
+     *
+     * @param name 字段的名称
+     * @param instance 要读取字段值的对象实例
+     * @param <R> 字段值的类型
+     * @return 指定字段的值，如果未找到字段，则返回 `null`
+     */
+    @SuppressWarnings("unchecked")
+    public <R> R ireadFieldValue(String name, Object instance) {
+        UField uField = fields.get(name);
+        if (uField == null)
+            return null;
+        return (R) uField.read(instance);
+    }
+
+    /**
+     * #brief: 读取指定名称的字段值（不允许为 null）
+     *
+     * <p>根据字段名称从当前实例中读取字段值。如果未找到该字段，将抛出异常。
+     * 该方法确保字段存在，以避免潜在的 `null` 值处理。
+     *
+     * @param name 字段的名称
+     * @param instance 要读取字段值的对象实例
+     * @param <R> 字段值的类型
+     * @return 指定字段的值
+     * @throws IllegalArgumentException 如果未找到指定字段
+     */
     @SuppressWarnings({"unchecked"})
     public <R> R readFieldValue(String name, Object instance) {
         return (R) throwIfNull(fields.get(name), "未在 %s 类中找到 %s 属性。", getName(), name)
