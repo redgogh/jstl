@@ -24,3 +24,11 @@ Creates on 2024/9/20.
 """
 import cv2
 import face_recognition
+
+
+def getfaces(image_path):
+    image = face_recognition.load_image_file(image_path)
+    face_locations = face_recognition.face_locations(image)
+
+    for (top, right, bottom, left) in face_locations:
+        print(f'top: {top}, right: {right}, bottom: {bottom}, left: {left}')

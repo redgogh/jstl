@@ -28,4 +28,4 @@ if __name__ == '__main__':
     """
     main
     """
-    pass
+    facetrack.getfaces('example.jpg')
