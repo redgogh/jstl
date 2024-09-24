@@ -32,5 +32,5 @@ package com.redgogh.tools
  * @author RedGogh
  */
 interface StreamMapping<T, R> {
-    fun map(any: T): R
+    fun apply(any: T): R
 }

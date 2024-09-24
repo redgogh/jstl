@@ -33,7 +33,7 @@
             <dependency>
                 <groupId>io.github.redgogh</groupId>
                 <artifactId>tools</artifactId>
-                <version>v1.0.3-beta.1+build</version>
+                <version>1.0.3</version>
             </dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>

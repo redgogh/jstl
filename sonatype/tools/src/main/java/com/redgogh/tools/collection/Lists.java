@@ -302,7 +302,7 @@ public class Lists {
         if (collection != null) {
             retval = of();
             for (T obj : collection)
-                retval.add(builder.map(obj));
+                retval.add(builder.apply(obj));
         }
         return retval;
     }

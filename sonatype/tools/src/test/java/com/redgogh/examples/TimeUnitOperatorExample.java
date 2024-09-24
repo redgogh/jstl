@@ -27,7 +27,7 @@ import com.redgogh.tools.time.TimeUnitOperator;
 import com.redgogh.tools.time.Date;
 import org.junit.Test;
 
-import static com.redgogh.tools.AnyObjects.printf;
+import static com.redgogh.tools.Converts.printf;
 
 @SuppressWarnings("ALL")
 public class TimeUnitOperatorExample {

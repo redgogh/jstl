@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static com.redgogh.tools.AnyObjects.atos;
+import static com.redgogh.tools.Converts.atos;
 import static com.redgogh.tools.Assert.*;
 import static com.redgogh.tools.StringUtils.strhas;
 import static com.redgogh.tools.StringUtils.strupper;

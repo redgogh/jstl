@@ -28,7 +28,7 @@ package com.redgogh.tools.http;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static com.redgogh.tools.AnyObjects.atos;
+import static com.redgogh.tools.Converts.atos;
 import static com.redgogh.tools.StringUtils.strtok;
 import static com.redgogh.tools.StringUtils.strwfmt;
 

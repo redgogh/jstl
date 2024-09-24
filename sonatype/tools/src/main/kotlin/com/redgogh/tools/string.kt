@@ -25,7 +25,7 @@ package com.redgogh.tools
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.tools.AnyObjects.atos
+import com.redgogh.tools.Converts.atos
 import com.redgogh.tools.Optional.optionalIfError
 import java.util.*
 import java.util.regex.Pattern

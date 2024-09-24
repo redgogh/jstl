@@ -31,9 +31,9 @@ import java.io.PrintStream
 \* -------------------------------------------------------------------------------- */
 
 /**
- * 全局静态类
+ * 对象类型转换
  */
-object AnyObjects {
+object Converts {
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     /// int
@@ -225,7 +225,7 @@ object AnyObjects {
 
     /** value 映射 */
     private fun valueMap(any: String, mapping: StreamMapping<Any, String>?): String
-        = mapping?.map(any) ?: any
+        = mapping?.apply(any) ?: any
 
     /**
      * 通过 `obj` 子字符串、`off` 数组偏移量和 `len` 长度分配

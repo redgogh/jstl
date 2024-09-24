@@ -27,6 +27,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 venv
+__pycache__
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
