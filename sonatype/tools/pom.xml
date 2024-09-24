@@ -2,16 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>libraries</artifactId>
-        <groupId>com.redgogh.libraries</groupId>
-        <version>v1.0.0-beta.1+build</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.redgogh</groupId>
     <artifactId>tools</artifactId>
-    <version>v1.0.3-beta.1+build</version>
+    <version>1.0.3</version>
 
     <developers>
         <developer>
@@ -29,7 +24,7 @@
     </licenses>
 
     <url>https://github.com/RedGogh/Fastsetup</url>
-    <description>The project repository in github.</description>
+    <description>This project for enhanced jdk class libraries.</description>
 
     <scm>
         <connection>scm:git:git@github.com:RedGogh/Fastsetup.git</connection>
@@ -47,8 +42,11 @@
         <scala.version>2.10.4</scala.version>
         <apache-poi.version>5.2.3</apache-poi.version>
         <asm.version>9.5</asm.version>
-        <version>${kotlin.version}</version>
+        <kotlin.version>1.9.20-RC</kotlin.version>
+        <lombok.version>1.18.30</lombok.version>
+        <junit.version>4.13.2</junit.version>
         <!-- compile -->
+        <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
         <java.compiler.version>1.8</java.compiler.version>
         <kotlin.jvm.target>1.8</kotlin.jvm.target>
         <maven.compiler.source>${java.compiler.version}</maven.compiler.source>
@@ -89,6 +87,17 @@
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -120,7 +129,6 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
-                            <additionalparam>-Xdoclint:none</additionalparam>
                             <failOnError>false</failOnError>
                         </configuration>
                     </execution>
