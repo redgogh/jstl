@@ -36,3 +36,20 @@ JDK21 是 OpenJDK 的一个 LTS 版本，通常我们可以选择不同的发行
 相信如何添加环境变量对于任何一个程序员来说都是最基础的操作这里就不再过多的赘述。
 
 在终端上执行 `mvn package` 对项目进行构建，通常来说构建出来的 `jar` 包的大小一般在 100MB 以上，如果你构建出来的包没有这么大，那么你需要检查一下是否执行了一次正确构建。
+
+== Maven Central
+
+项目的 `tools` 依赖包已经上传到了 Maven Central，你可以在任意项目中直接引入依赖。
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.github.redgogh</groupId>
+    <artifactId>tools</artifactId>
+    <version>1.0.3</version>
+</dependency>
+----
+
+== License
+
+本项目采用 GNU GPL v3.0 许可证，详情见 link:LICENSE[LICENSE]
