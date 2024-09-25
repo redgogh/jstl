@@ -23,7 +23,7 @@ package com.redgogh.tools
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.tools.StringUtils.strnemp
+import com.redgogh.tools.StringUtils.strnempty
 import com.redgogh.tools.StringUtils.strwfmt
 import com.redgogh.tools.exception.AssertException
 import com.redgogh.tools.logging.LoggerFactory
@@ -274,7 +274,7 @@ object Optional {
     @JvmStatic
     fun <T> optionalIfNull(obj: T, orElse: T, message: String, vararg args: Any): T {
         if (obj == null) {
-            if (strnemp(message))
+            if (strnempty(message))
                 log.error("%s - 异常信息：%s", message, *args)
             return orElse
         }
@@ -320,7 +320,7 @@ object Optional {
     fun <T> optionalIfNull(function: GenericFunction<T>, orElse: T, message: String, vararg args: Any): T {
         val ret = function.apply()
         if (ret == null) {
-            if (strnemp(message))
+            if (strnempty(message))
                 log.error("%s - 异常信息：%s", message, *args)
             return orElse
         }
@@ -376,7 +376,7 @@ object Optional {
         return try {
             function.apply()
         } catch (e: Throwable) {
-            val out = if (strnemp(message)) strwfmt(message, *args) else e.message
+            val out = if (strnempty(message)) strwfmt(message, *args) else e.message
             log.error("%s", out)
             return orError
         }
@@ -435,7 +435,7 @@ object Optional {
             function.apply()
             return orSuccess
         } catch (e: Throwable) {
-            if (strnemp(message)) {
+            if (strnempty(message)) {
                 val tmp = strwfmt(message, *args)
                 log.error("%s - 异常信息：%s", tmp, e.message)
             }

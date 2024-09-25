@@ -27,7 +27,6 @@ import com.redgogh.tools.io.File;
 import org.junit.Test;
 
 import static com.redgogh.tools.Converts.atos;
-import static com.redgogh.tools.Converts.printf;
 
 @SuppressWarnings("ALL")
 public class FileExample {
@@ -44,20 +43,20 @@ public class FileExample {
         {
             float writeValue = 114.514f;
             file.writeFloat(writeValue);
-            printf("-------------------------------------------------------------------\n");
-            printf("File random access write float example, write value: %f\n", writeValue);
+            System.out.printf("-------------------------------------------------------------------\n");
+            System.out.printf("File random access write float example, write value: %f\n", writeValue);
         }
         file.close();
 
-            printf("-------------------------------------------------------------------\n");
+            System.out.printf("-------------------------------------------------------------------\n");
 
         // read float
         file.open();
         {
             float readValue = 0.0f;
             readValue = file.readFloat();
-            printf("File random access read float example, read value: %f\n", readValue);
-            printf("-------------------------------------------------------------------\n");
+            System.out.printf("File random access read float example, read value: %f\n", readValue);
+            System.out.printf("-------------------------------------------------------------------\n");
         }
         file.close();
 
@@ -79,11 +78,11 @@ public class FileExample {
 
         file.seek(0);
 
-        printf("----------------------------------------------------\n");
-        printf("random access write example read(0): %s\n", file.readInt());
-        printf("random access write example read(1): %s\n", file.readInt());
-        printf("random access write example read(2): %s\n", file.readInt());
-        printf("----------------------------------------------------\n");
+        System.out.printf("----------------------------------------------------\n");
+        System.out.printf("random access write example read(0): %s\n", file.readInt());
+        System.out.printf("random access write example read(1): %s\n", file.readInt());
+        System.out.printf("random access write example read(2): %s\n", file.readInt());
+        System.out.printf("----------------------------------------------------\n");
 
         file.forceDelete();
     }
