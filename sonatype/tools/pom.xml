@@ -6,7 +6,7 @@
 
     <groupId>io.github.redgogh</groupId>
     <artifactId>tools</artifactId>
-    <version>v2.0.0-beta.1+build</version>
+    <version>2.0.0</version>
 
     <developers>
         <developer>

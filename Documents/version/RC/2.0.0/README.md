@@ -10,5 +10,7 @@
 ## 👻 优化功能
 
 - 优化 `UClass#newInstance` 方法支持 private 类实例。
+- 清晰的 `AnyObjects` 命名，新命名为：`BasicConverts`。
+- 映射接口 `StreamMapper` 命名更新。
 
 ## 🐞 BUG 修复

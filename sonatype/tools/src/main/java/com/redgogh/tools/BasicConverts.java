@@ -46,7 +46,7 @@ import static com.redgogh.tools.io.ByteBuffer.SEEK_SET;
  * @author RedGogh
  * @see java.util.Objects
  */
-public class Converts {
+public class BasicConverts {
 
     /**
      * `any`函数通常用于 Lambda 接口，将任何对象作为`Object`类型
@@ -247,7 +247,7 @@ public class Converts {
      *
      * @see String#valueOf(Object)
      */
-    public static String atos(Object obj, ConvertMapper<String, String> mapper) {
+    public static String atos(Object obj, StreamMapper<String, String> mapper) {
         return mapper.call(atos(obj));
     }
 

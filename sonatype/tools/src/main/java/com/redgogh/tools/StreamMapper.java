@@ -26,11 +26,27 @@ package com.redgogh.tools;
 /* Creates on 2023/4/29. */
 
 /**
- * 对象映射接口，当批量操作对象或时在转换一个对象属性的时候可以使用
- * 该接口做 Lambda 表达式，简化代码冗余。
+ * `ConvertMapper` 接口定义了一个通用的转换映射功能，
+ * 用于将类型为 {@code T} 的值转换为类型为 {@code R} 的值。
+ * 该接口的主要目的是提供一个抽象的方法，以便实现不同类型的转换逻辑。
+ *
+ * <p>实现此接口的类需要定义 {@code call} 方法，
+ * 该方法接受一个 {@code T} 类型的参数并返回一个 {@code R} 类型的结果。
+ *
+ * <p>此接口适用于需要类型转换的场景，例如在数据处理、
+ * 数据传输等过程中进行类型的转换与映射。
+ *
+ * @param <T> 输入值的类型
+ * @param <R> 输出值的类型
  *
  * @author RedGogh
  */
-public interface ConvertMapper<T, R> {
+public interface StreamMapper<T, R> {
+    /**
+     * 将给定的输入值转换为输出值。
+     *
+     * @param value 要转换的输入值
+     * @return 转换后的输出值
+     */
     R call(T value);
 }

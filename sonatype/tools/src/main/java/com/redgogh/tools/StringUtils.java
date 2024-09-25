@@ -28,8 +28,8 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.regex.Pattern;
 
-import static com.redgogh.tools.Converts.anyeq;
-import static com.redgogh.tools.Converts.atos;
+import static com.redgogh.tools.BasicConverts.anyeq;
+import static com.redgogh.tools.BasicConverts.atos;
 
 /**
  * `StringUtils` 是一个工具类，提供了一系列针对字符串的操作方法。这些方法用于处理

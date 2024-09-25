@@ -6,7 +6,7 @@ import com.redgogh.tools.StringUtils;
 
 import java.util.Map;
 
-import static com.redgogh.tools.Converts.atos;
+import static com.redgogh.tools.BasicConverts.atos;
 import static com.redgogh.tools.StringUtils.streq;
 
 /**
