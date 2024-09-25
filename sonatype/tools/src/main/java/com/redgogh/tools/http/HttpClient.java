@@ -342,7 +342,7 @@ public class HttpClient {
         ResponseBody body = okResponse.body();
         Response retval = new Response(okResponse.code(), body == null ? "{}" : body.string());
 
-        xassert(okResponse.isSuccessful(), "HTTP请求出错（%s）\n    - URL：%s \n    - Request Body：%s \n    - Message: %s",
+        throwIfFalse(okResponse.isSuccessful(), "HTTP请求出错（%s）\n    - URL：%s \n    - Request Body：%s \n    - Message: %s",
                 okResponse.code(), url, JSON.toJSONString(object), retval);
 
         return retval;

@@ -26,8 +26,6 @@ package com.redgogh.examples;
 import com.redgogh.tools.time.Date;
 import org.junit.Test;
 
-import static com.redgogh.tools.Converts.printf;
-
 @SuppressWarnings("ALL")
 public class DateExample {
 
@@ -40,14 +38,14 @@ public class DateExample {
     @Test
     public void patternToCreateUDateExample() {
         Date date = new Date("yyyy-MM-dd HH:mm:ss", "2019-10-08 11:45:14");
-        printf("pattern of yyyy-MM-dd HH:mm:ss to create Date: %s\n", date);
-        printf("year:                                          %s\n", date.getYear());
-        printf("month:                                         %s\n", date.getMonth());
-        printf("day:                                           %s\n", date.getDay());
-        printf("week:                                          %s\n", date.getWeekOfMonth());
-        printf("hour:                                          %s\n", date.getHours());
-        printf("minutes:                                       %s\n", date.getMinutes());
-        printf("seconds:                                       %s\n", date.getSeconds());
+        System.out.printf("pattern of yyyy-MM-dd HH:mm:ss to create Date: %s\n", date);
+        System.out.printf("year:                                          %s\n", date.getYear());
+        System.out.printf("month:                                         %s\n", date.getMonth());
+        System.out.printf("day:                                           %s\n", date.getDay());
+        System.out.printf("week:                                          %s\n", date.getWeekOfMonth());
+        System.out.printf("hour:                                          %s\n", date.getHours());
+        System.out.printf("minutes:                                       %s\n", date.getMinutes());
+        System.out.printf("seconds:                                       %s\n", date.getSeconds());
     }
 
     /**
@@ -55,11 +53,11 @@ public class DateExample {
      */
     @Test
     public void dateCompareExample() {
-        printf("Date x  < y compare result is: %s\n", x.lt(y));
-        printf("Date x  > y compare result is: %s\n", x.gt(y));
-        printf("Date x == y compare result is: %s\n", x.eq(y));
-        printf("Date x <= y compare result is: %s\n", x.lteq(y));
-        printf("Date x >= y compare result is: %s\n", x.gteq(y));
+        System.out.printf("Date x  < y compare result is: %s\n", x.lt(y));
+        System.out.printf("Date x  > y compare result is: %s\n", x.gt(y));
+        System.out.printf("Date x == y compare result is: %s\n", x.eq(y));
+        System.out.printf("Date x <= y compare result is: %s\n", x.lteq(y));
+        System.out.printf("Date x >= y compare result is: %s\n", x.gteq(y));
     }
 
     /**
@@ -69,9 +67,9 @@ public class DateExample {
     public void dateDiffInExample() {
         Date a = new Date("2018-01-01 00:00:02");
         Date b = new Date("2018-01-01 00:00:05");
-        printf("date diff in days result is: %s\n", a.diffInDays(b));
-        printf("date diff in hours result is: %s\n", a.diffInHours(b));
-        printf("date diff in seconds result is: %s\n", a.diffInSeconds(b));
+        System.out.printf("date diff in days result is: %s\n", a.diffInDays(b));
+        System.out.printf("date diff in hours result is: %s\n", a.diffInHours(b));
+        System.out.printf("date diff in seconds result is: %s\n", a.diffInSeconds(b));
     }
 
     /**

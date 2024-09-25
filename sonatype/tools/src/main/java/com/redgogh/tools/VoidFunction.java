@@ -1,4 +1,4 @@
-package com.redgogh.examples;
+package com.redgogh.tools;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -23,28 +23,9 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.junit.Test;
-
-import static com.redgogh.tools.Converts.atobool;
-
-@SuppressWarnings("ALL")
-public class RedGoghExample {
-
-    /**
-     * atobool
-     */
-    @Test
-    public void atoboolExample() {
-        System.out.printf("----------------------------\n");
-        System.out.printf("atobool 'y' example: %s\n", atobool("y"));
-        System.out.printf("atobool 'n' example: %s\n", atobool("n"));
-        System.out.printf("----------------------------\n");
-        System.out.printf("atobool '1' example: %s\n", atobool(1));
-        System.out.printf("atobool '0' example: %s\n", atobool(0));
-        System.out.printf("----------------------------\n");
-        System.out.printf("atobool 'true' example: %s\n", atobool("true"));
-        System.out.printf("atobool 'false' example: %s\n", atobool("false"));
-        System.out.printf("----------------------------\n");
-    }
-
+/**
+ * @author RedGogh
+ */
+public interface VoidFunction {
+    void call() throws Throwable;
 }

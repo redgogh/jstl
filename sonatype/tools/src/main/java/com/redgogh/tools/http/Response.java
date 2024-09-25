@@ -1,12 +1,12 @@
 package com.redgogh.tools.http;
 
 import com.alibaba.fastjson.JSONObject;
+import com.redgogh.tools.Optional;
 import com.redgogh.tools.StringUtils;
 
 import java.util.Map;
 
 import static com.redgogh.tools.Converts.atos;
-import static com.redgogh.tools.Optional.optionalIfError;
 import static com.redgogh.tools.StringUtils.streq;
 
 /**
@@ -77,7 +77,7 @@ public class Response extends JSONObject {
         this.code = code;
 
         /* 处理响应 */
-        Object object = optionalIfError(() -> JSONObject.parseObject(content), content);
+        Object object = Optional.ifError(() -> JSONObject.parseObject(content), content);
 
         if (object instanceof String)
             this.message = atos(object, StringUtils::strip);

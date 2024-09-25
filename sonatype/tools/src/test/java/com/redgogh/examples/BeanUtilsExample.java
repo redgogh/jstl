@@ -1,7 +1,4 @@
-package com.redgogh.tools
-
-import kotlin.annotation.AnnotationRetention.SOURCE
-import kotlin.annotation.AnnotationTarget.*
+package com.redgogh.examples;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -26,28 +23,37 @@ import kotlin.annotation.AnnotationTarget.*
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-/**
- * 标记功能支持从 JDK X 开始提供，低于 [version] 版本后就不可
- * 使用。
- *
- * @param version 表示功能从哪个版本开始提供
- * @author RedGogh
- * @since 1.0
- */
-@Target(CLASS, FIELD, TYPE, FUNCTION)
-@Retention(SOURCE)
-@MustBeDocumented
-annotation class Since(val version: String)
+import com.redgogh.tools.BeanUtils;
+import lombok.Data;
+import org.junit.Test;
 
-/**
- * 标记函数或类可以升级到最新的 JDK 提供的功能，如果以后 Jdk 升级后可以
- * 使用新的语法或功能代替。
- *
- * @param features 新版本功能描述
- * @author RedGogh
- * @since 1.0
- */
-@Target(CLASS, FIELD, TYPE, FUNCTION)
-@Retention(SOURCE)
-@MustBeDocumented
-annotation class Upgrade(val features: String)
+@SuppressWarnings("ALL")
+public class BeanUtilsExample {
+
+    @Data
+    static class A {
+        private String name;
+        private String age;
+    }
+
+    @Data
+    static class B extends A {
+        private String aabb;
+    }
+
+    @Data
+    static class C {
+        private String name;
+    }
+
+    @Test
+    public void copyPropertiesExample() {
+        B b = new B();
+        b.setName("John");
+        b.setAge("30");
+
+        C c = BeanUtils.copyProperties(b, C.class);
+        System.out.println(c);
+    }
+
+}

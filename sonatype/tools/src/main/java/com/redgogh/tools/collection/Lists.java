@@ -25,7 +25,7 @@ package com.redgogh.tools.collection;
 
 /* Creates on 2023/5/6. */
 
-import com.redgogh.tools.StreamMapping;
+import com.redgogh.tools.ConvertMapper;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -44,7 +44,7 @@ import java.util.stream.Collectors;
  *     <li>通过简化常见集合操作，提升代码的可读性和维护性。</li>
  *     <li>支持泛型操作，增强了方法的适用性和灵活性。</li>
  *     <li>提供了对集合元素的映射转换和过滤功能，方便集合元素的快速处理。</li>
- *     <li>集成了 {@link StreamMapping} 接口，允许通过 Lambda 表达式对集合元素进行
+ *     <li>集成了 {@link ConvertMapper} 接口，允许通过 Lambda 表达式对集合元素进行
  *         自定义处理。</li>
  * </ul>
  *
@@ -54,7 +54,7 @@ import java.util.stream.Collectors;
  * <ul>
  *     <li>部分方法要求传入的集合参数不能为空，否则会抛出 {@link NullPointerException} 异常。</li>
  *     <li>集合的操作大多数是不可变的，即原集合不会被修改，返回的新集合是操作后的结果。</li>
- *     <li>对于需要映射转换的操作，需要传入实现了 {@link StreamMapping} 的 Lambda 表达式
+ *     <li>对于需要映射转换的操作，需要传入实现了 {@link ConvertMapper} 的 Lambda 表达式
  *         或函数式接口。</li>
  * </ul>
  *
@@ -79,7 +79,7 @@ import java.util.stream.Collectors;
  * @see Collection
  * @see List
  * @see ArrayList
- * @see StreamMapping
+ * @see ConvertMapper
  * @since 1.0
  */
 public class Lists {
@@ -268,41 +268,41 @@ public class Lists {
     }
 
     /**
-     * 通过实现 {@link StreamMapping} 的 Lambda 接口，将一个对象转换成另一个对象实例，并
+     * 通过实现 {@link ConvertMapper} 的 Lambda 接口，将一个对象转换成另一个对象实例，并
      * 批量添加到新的 {@link List} 集合中。
      *
      * @param builder
-     *        Lambda 函数实现接口，或者也可以通过实现 {@link StreamMapping} 接口的方式
+     *        Lambda 函数实现接口，或者也可以通过实现 {@link ConvertMapper} 接口的方式
      *        完成这个参数。
      *
      * @param a
      *        输入数组
      *
-     * @return 返回通过 {@link StreamMapping} 转换后的集合实例。
+     * @return 返回通过 {@link ConvertMapper} 转换后的集合实例。
      */
-    public static <T, R> List<R> map(T[] a, StreamMapping<T, R> builder) {
+    public static <T, R> List<R> map(T[] a, ConvertMapper<T, R> builder) {
         return map(of(a), builder);
     }
 
     /**
-     * 通过实现 {@link StreamMapping} 的 Lambda 接口，将一个对象转换成另一个对象实例，并
+     * 通过实现 {@link ConvertMapper} 的 Lambda 接口，将一个对象转换成另一个对象实例，并
      * 批量添加到新的 {@link List} 集合中。
      *
      * @param builder
-     *        Lambda 函数实现接口，或者也可以通过实现 {@link StreamMapping} 接口的方式
+     *        Lambda 函数实现接口，或者也可以通过实现 {@link ConvertMapper} 接口的方式
      *        完成这个参数。
      *
      * @param collection
      *        实现了 {@link Collection} 接口的对象实例
      *
-     * @return 返回通过 {@link StreamMapping} 转换后的集合实例。
+     * @return 返回通过 {@link ConvertMapper} 转换后的集合实例。
      */
-    public static <T, R> List<R> map(Collection<T> collection, StreamMapping<T, R> builder) {
+    public static <T, R> List<R> map(Collection<T> collection, ConvertMapper<T, R> builder) {
         List<R> retval = null;
         if (collection != null) {
             retval = of();
             for (T obj : collection)
-                retval.add(builder.apply(obj));
+                retval.add(builder.call(obj));
         }
         return retval;
     }
@@ -372,7 +372,7 @@ public class Lists {
      *
      * @return 计算后返回：两个集合之间的交集
      */
-    public static <E, M> List<E> intersection(Collection<E> a, Collection<M> b, StreamMapping<M, E> bMapper) {
+    public static <E, M> List<E> intersection(Collection<E> a, Collection<M> b, ConvertMapper<M, E> bMapper) {
         return intersection(a, map(b, bMapper));
     }
 
@@ -405,8 +405,8 @@ public class Lists {
      *
      * @return 计算后返回：两个集合之间的差集
      */
-    public static <M1, M2, E> List<E> intersection(Collection<M1> a, StreamMapping<M1, E> aMapper,
-                                              Collection<M2> b, StreamMapping<M2, E> bMapper) {
+    public static <M1, M2, E> List<E> intersection(Collection<M1> a, ConvertMapper<M1, E> aMapper,
+                                              Collection<M2> b, ConvertMapper<M2, E> bMapper) {
         return intersection(map(a, aMapper), map(b, bMapper));
     }
 
@@ -457,7 +457,7 @@ public class Lists {
      *
      * @return 计算后返回：两个集合之间的差集
      */
-    public static <E, M> List<E> diff(Collection<E> a, Collection<M> b, StreamMapping<M, E> bMapper) {
+    public static <E, M> List<E> diff(Collection<E> a, Collection<M> b, ConvertMapper<M, E> bMapper) {
         return diff(a, map(b, bMapper));
     }
 
@@ -490,8 +490,8 @@ public class Lists {
      *
      * @return 计算后返回：两个集合之间的差集
      */
-    public static <M1, M2, E> List<E> diff(Collection<M1> a, StreamMapping<M1, E> aMapper,
-                                               Collection<M2> b, StreamMapping<M2, E> bMapper) {
+    public static <M1, M2, E> List<E> diff(Collection<M1> a, ConvertMapper<M1, E> aMapper,
+                                               Collection<M2> b, ConvertMapper<M2, E> bMapper) {
         return diff(map(a, aMapper), map(b, bMapper));
     }
 
@@ -547,7 +547,7 @@ public class Lists {
      *
      * @return 计算后返回：两个集合之间的差集
      */
-    public static <E, M> List<E> symdiff(Collection<E> a, Collection<M> b, StreamMapping<M, E> bMapper) {
+    public static <E, M> List<E> symdiff(Collection<E> a, Collection<M> b, ConvertMapper<M, E> bMapper) {
         return symdiff(a, map(b, bMapper));
     }
 
@@ -580,8 +580,8 @@ public class Lists {
      *
      * @return 计算后返回：两个集合之间的差集
      */
-    public static <M1, M2, E> List<E> symdiff(Collection<M1> a, StreamMapping<M1, E> aMapper,
-                                                   Collection<M2> b, StreamMapping<M2, E> bMapper) {
+    public static <M1, M2, E> List<E> symdiff(Collection<M1> a, ConvertMapper<M1, E> aMapper,
+                                                   Collection<M2> b, ConvertMapper<M2, E> bMapper) {
         return symdiff(map(a, aMapper), map(b, bMapper));
     }
 

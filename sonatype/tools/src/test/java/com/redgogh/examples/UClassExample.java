@@ -31,8 +31,6 @@ import org.junit.Test;
 import java.awt.*;
 import java.util.List;
 
-import static com.redgogh.tools.Converts.printf;
-
 @SuppressWarnings("ALL")
 public class UClassExample {
 
@@ -40,11 +38,11 @@ public class UClassExample {
     public void newUClassExample() {
         UClass uClass = new UClass(Button.class);
 
-        printf("uClass(%s)\n", uClass.getName());
+        System.out.printf("uClass(%s)\n", uClass.getName());
 
         List<UField> properties = uClass.getDeclaredFields();
         for (UField property : properties) {
-            printf("  - uField path: %s\n", property.getPath());
+            System.out.printf("  - uField path: %s\n", property.getPath());
         }
     }
 

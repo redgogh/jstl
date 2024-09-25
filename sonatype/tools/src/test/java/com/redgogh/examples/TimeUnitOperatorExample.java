@@ -27,8 +27,6 @@ import com.redgogh.tools.time.TimeUnitOperator;
 import com.redgogh.tools.time.Date;
 import org.junit.Test;
 
-import static com.redgogh.tools.Converts.printf;
-
 @SuppressWarnings("ALL")
 public class TimeUnitOperatorExample {
 
@@ -37,7 +35,7 @@ public class TimeUnitOperatorExample {
      */
     @Test
     public void timeUnitAddOperateExample() {
-        printf("TimeUnitOperator DAY add 1 example: %s\n", TimeUnitOperator.DAYS.add(1));
+        System.out.printf("TimeUnitOperator DAY add 1 example: %s\n", TimeUnitOperator.DAYS.add(1));
     }
 
     /**
@@ -45,7 +43,7 @@ public class TimeUnitOperatorExample {
      */
     @Test
     public void timeUnitMinusOperateExample() {
-        printf("TimeUnitOperator DAY minus 1 example: %s\n", TimeUnitOperator.DAYS.minus(1));
+        System.out.printf("TimeUnitOperator DAY minus 1 example: %s\n", TimeUnitOperator.DAYS.minus(1));
     }
 
     /**
@@ -53,7 +51,7 @@ public class TimeUnitOperatorExample {
      */
     @Test
     public void udateAddOperateExample() {
-        printf("Date WEEKs add 1 week example: %s\n", new Date().add(TimeUnitOperator.WEEKS, 1));
+        System.out.printf("Date WEEKs add 1 week example: %s\n", new Date().add(TimeUnitOperator.WEEKS, 1));
     }
 
     /**
@@ -61,7 +59,7 @@ public class TimeUnitOperatorExample {
      */
     @Test
     public void udateMinusOperateExample() {
-        printf("Date WEEKs minus 1 week example: %s\n", new Date().minus(TimeUnitOperator.WEEKS, 1));
+        System.out.printf("Date WEEKs minus 1 week example: %s\n", new Date().minus(TimeUnitOperator.WEEKS, 1));
     }
 
 }

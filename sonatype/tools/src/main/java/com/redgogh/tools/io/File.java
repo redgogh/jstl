@@ -24,6 +24,7 @@ package com.redgogh.tools.io;
 \* -------------------------------------------------------------------------------- */
 
 import com.redgogh.tools.OSEnvironment;
+import com.redgogh.tools.Optional;
 import com.redgogh.tools.collection.Lists;
 
 import java.io.*;
@@ -31,8 +32,7 @@ import java.net.URI;
 import java.util.List;
 
 import static com.redgogh.tools.Assert.throwIfError;
-import static com.redgogh.tools.Assert.xassert;
-import static com.redgogh.tools.Optional.optionalIfError;
+import static com.redgogh.tools.Assert.throwIfFalse;
 import static com.redgogh.tools.StringUtils.*;
 
 /**
@@ -335,7 +335,7 @@ public class File extends java.io.File {
     private void checkFile(boolean autoCreate) {
         if (autoCreate && !exists())
             throwIfError(this::createNewFile);
-        xassert(exists(), "%s （系统找不到指定的文件，文件不存在）", getPath());
+        throwIfFalse(exists(), "%s （系统找不到指定的文件，文件不存在）", getPath());
     }
 
     /**
@@ -473,14 +473,14 @@ public class File extends java.io.File {
      * @return 描述符是否打开成功
      */
     public boolean open(String mode) {
-        return (accessFile = optionalIfError(() -> new RandomAccessFile(this, mode), null)) != null;
+        return (accessFile = Optional.ifError(() -> new RandomAccessFile(this, mode), null)) != null;
     }
 
     /**
      * 检查文件描述符是否打开
      */
     private void checkOpen() {
-        xassert(accessFile != null, "Please call open() before random access methods execute.");
+        throwIfFalse(accessFile != null, "Please call open() before random access methods execute.");
     }
 
     /**

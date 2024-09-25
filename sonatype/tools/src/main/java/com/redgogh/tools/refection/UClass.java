@@ -142,6 +142,7 @@ public class UClass {
         try {
             Class<?>[] parametersClassArray = toClassArray(parameters);
             Constructor<T> constructor = descriptor.getConstructor(parametersClassArray);
+            constructor.setAccessible(true);
             return constructor.newInstance(parameters);
         } catch (Throwable e) {
             throw new RuntimeException(e);

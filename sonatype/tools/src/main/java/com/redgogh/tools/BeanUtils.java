@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static com.redgogh.tools.StringUtils.strhas;
+
 /**
  * Bean工具类，方便实现对两个对象之间的属性拷贝，这属于浅拷贝。如果需要
  * 深拷贝，可以使用 JSON 工具类实现对象的深拷贝。
@@ -87,20 +89,11 @@ public class BeanUtils {
         UClass uClass = new UClass(dest);
         for (UField field : uClass.getDeclaredFields()) {
             String name = field.getName();
-            if (ignores.length > 0 && contains(ignores, name)) {
+            if (ignores.length > 0 && strhas(name, ignores)) {
                 continue;
             }
             UField.copyIgnoreError(src, dest, field.getName());
         }
-    }
-
-    private static boolean contains(String[] array, String value) {
-        for (String item : array) {
-            if (item.equals(value)) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

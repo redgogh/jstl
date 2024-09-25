@@ -247,8 +247,8 @@ public class Converts {
      *
      * @see String#valueOf(Object)
      */
-    public static String atos(Object obj, StreamMapping<String, String> mapper) {
-        return mapper.apply(atos(obj));
+    public static String atos(Object obj, ConvertMapper<String, String> mapper) {
+        return mapper.call(atos(obj));
     }
 
     /**

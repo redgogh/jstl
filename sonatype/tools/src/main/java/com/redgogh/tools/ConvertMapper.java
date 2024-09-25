@@ -1,4 +1,4 @@
-package com.redgogh.tools
+package com.redgogh.tools;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -31,6 +31,6 @@ package com.redgogh.tools
  *
  * @author RedGogh
  */
-interface StreamMapping<T, R> {
-    fun apply(any: T): R
+public interface ConvertMapper<T, R> {
+    R call(T value);
 }

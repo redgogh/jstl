@@ -63,10 +63,6 @@ public class QueryBuilder extends LinkedHashMap<String, String> {
         this((String[]) null);
     }
 
-    public static void main(String[] args) {
-        new QueryBuilder();
-    }
-
     /**
      * #brief: 使用参数数组初始化 `QueryBuilder`
      *

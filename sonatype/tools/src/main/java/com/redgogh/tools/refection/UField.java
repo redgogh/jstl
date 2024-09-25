@@ -25,12 +25,13 @@ package com.redgogh.tools.refection;
 
 /* Creates on 2019/5/16. */
 
+import com.redgogh.tools.Optional;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 import static com.redgogh.tools.Assert.*;
-import static com.redgogh.tools.Optional.optionalIfError;
 import static com.redgogh.tools.StringUtils.strwfmt;
 
 /**
@@ -174,7 +175,7 @@ public class UField {
      * 存在 {@code name} 属性则返回该属性 Field 对象。不存在则抛出异常。
      */
     static Field findDescriptorField(String name, Class<?> descriptor) {
-        Field field = optionalIfError(() -> descriptor.getDeclaredField(name),
+        Field field = Optional.ifError(() -> descriptor.getDeclaredField(name),
                 findDescriptorField0(name, descriptor));
         return throwIfNull(field, "属性 %s 在 %s 类中不存在", name, descriptor.getName());
     }
@@ -188,7 +189,7 @@ public class UField {
         if (superclass == null)
             return null;
 
-        if ((rfield = optionalIfError(() -> superclass.getDeclaredField(name), null)) == null)
+        if ((rfield = Optional.ifError(() -> superclass.getDeclaredField(name), null)) == null)
             rfield = findDescriptorField0(name, superclass);
 
         return rfield;

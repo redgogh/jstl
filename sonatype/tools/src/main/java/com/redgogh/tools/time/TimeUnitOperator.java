@@ -25,7 +25,6 @@ package com.redgogh.tools.time;
 
 /* Creates on 2022/3/30. */
 
-import com.redgogh.tools.Upgrade;
 import com.redgogh.tools.enums.Enumerates;
 import com.redgogh.tools.exception.UnsupportedOperationException;
 import org.joda.time.DateTime;
@@ -77,7 +76,6 @@ public enum TimeUnitOperator {
      *
      * @return 加上对应 TimeUnits + unit 后的日期
      */
-    @Upgrade(features = "OpenJDK17/EnhancedSwitchMigration")
     public Date add(Date date, int unit) {
         DateTime calc = new DateTime(date);
         DateTime retval = null;
@@ -129,7 +127,6 @@ public enum TimeUnitOperator {
      *
      * @return 减去对应 TimeUnits - unit 后的日期
      */
-    @Upgrade(features = "OpenJDK17/EnhancedSwitchMigration")
     public Date minus(Date date, int unit) {
         DateTime calc = new DateTime(date);
         DateTime retval = null;

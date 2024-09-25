@@ -30,7 +30,6 @@ import java.util.regex.Pattern;
 
 import static com.redgogh.tools.Converts.anyeq;
 import static com.redgogh.tools.Converts.atos;
-import static com.redgogh.tools.Optional.optionalIfError;
 
 /**
  * `StringUtils` 是一个工具类，提供了一系列针对字符串的操作方法。这些方法用于处理
@@ -337,7 +336,7 @@ public class StringUtils {
      */
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static boolean strdig(Object wstr) {
-        return optionalIfError(() -> Double.parseDouble(atos(wstr)), true, false);
+        return Optional.ifError(() -> Double.parseDouble(atos(wstr)), true, false);
     }
 
     /**

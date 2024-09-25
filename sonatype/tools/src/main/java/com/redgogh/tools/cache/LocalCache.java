@@ -1,6 +1,6 @@
 package com.redgogh.tools.cache;
 
-import com.redgogh.tools.StreamMapping;
+import com.redgogh.tools.ConvertMapper;
 
 public interface LocalCache<K, V> {
 
@@ -10,7 +10,7 @@ public interface LocalCache<K, V> {
 
     V get(K key);
 
-    V get(K key, StreamMapping<Object, V> mapping);
+    V get(K key, ConvertMapper<Object, V> mapping);
 
     void remove(K key);
 

@@ -23,13 +23,13 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.redgogh.tools.Optional;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.redgogh.tools.Assert.throwIfEmpty;
-import static com.redgogh.tools.Optional.optionalIfError;
 
 @SuppressWarnings("ALL")
 public class AssertExample {
@@ -37,9 +37,9 @@ public class AssertExample {
     @Test
     public void throwIfEmptyExample() {
         List<String> list = new ArrayList<>();
-        System.out.printf("-Example: throwIfEmpty() object `list` is empty: %s\n", optionalIfError(() -> throwIfEmpty(list), "SUCCESS", "ERROR"));
+        System.out.printf("-Example: throwIfEmpty() object `list` is empty: %s\n", Optional.ifError(() -> throwIfEmpty(list), "SUCCESS", "ERROR"));
         list.add("Hello");
-        System.out.printf("-Example: throwIfEmpty() object `list` not empty: %s\n", optionalIfError(() -> throwIfEmpty(list), "SUCCESS", "ERROR"));
+        System.out.printf("-Example: throwIfEmpty() object `list` not empty: %s\n", Optional.ifError(() -> throwIfEmpty(list), "SUCCESS", "ERROR"));
     }
 
 }

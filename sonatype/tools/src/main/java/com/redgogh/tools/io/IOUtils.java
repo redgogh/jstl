@@ -31,7 +31,7 @@ import com.redgogh.tools.exception.IOWriteException;
 import java.io.*;
 
 import static com.redgogh.tools.Assert.throwIfError;
-import static com.redgogh.tools.Assert.xassert;
+import static com.redgogh.tools.Assert.throwIfFalse;
 
 /**
  * IO操作工具包，整合大部分IO操作，使得在Java中更多的IO操作
@@ -91,7 +91,7 @@ public class IOUtils {
      * @return 返回所有文件中的字节数据
      */
     public static byte[] read(java.io.File file) {
-        xassert(file != null && file.isFile(), "文件不能为空且不能是目录！");
+        throwIfFalse(file != null && file.isFile(), "文件不能为空且不能是目录！");
         return read(new File(file).openByteReader());
     }
 
