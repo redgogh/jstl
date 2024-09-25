@@ -6,6 +6,7 @@ import com.redgogh.tools.StringUtils;
 
 import java.util.Map;
 
+import static com.redgogh.tools.BasicConverts.anyeq;
 import static com.redgogh.tools.BasicConverts.atos;
 import static com.redgogh.tools.StringUtils.streq;
 
@@ -118,6 +119,22 @@ public class Response extends JSONObject {
      */
     public boolean isSuccess() {
         return codeEquals(200);
+    }
+
+    /**
+     * 比较给定的键对应的值与传入的 {@code value} 是否相等。
+     * 通过调用 {@code get(name)} 获取对应的值，并使用
+     * {@code anyeq} 方法判断是否相等。
+     *
+     * <p>此方法用于检查存储的值是否与给定值匹配。
+     *
+     * @param name 键的名称，用于获取对应的值
+     * @param value 需要比较的值
+     *
+     * @return 如果两个值相等，则返回 {@code true}，否则返回 {@code false}
+     */
+    public boolean valueEquals(String name, Object value) {
+        return anyeq(get(name), value);
     }
 
     @Override
