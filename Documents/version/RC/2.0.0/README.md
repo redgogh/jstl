@@ -7,6 +7,7 @@
 - 新增 `UClass#ireadFieldValue` 方法，忽略异常读取。
 - 移除所有 Kotlin 代码，全部切换到 Java 增强兼容性。
 - 新增 `Response#valueEquals` 方法，比较响应值对象某个属性是否相等。
+- 新增 `HttpClient#newOctetStreamCall` 文件下载功能，支持异步下载。
 
 ## 👻 优化功能
 
@@ -15,6 +16,8 @@
 - 重命名 `StreamMapping` 为 `StreamMapper`，提升命名清晰度和可读性。
 
 ## 🐞 BUG 修复
+
+- 修复 `OSEnvironment#OS_FLAG` 检测不正确问题。
 
 ## 🔨 依赖升级
 

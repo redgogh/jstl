@@ -27,10 +27,12 @@ package com.redgogh.tools.io;
 
 import com.redgogh.tools.ArrayUtils;
 
+import java.io.OutputStream;
+
 /**
  * @author RedGogh
  */
-public abstract class ByteBuffer {
+public abstract class ByteBuffer extends OutputStream {
 
     /** 读写指针 */
     protected int position;

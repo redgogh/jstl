@@ -1,5 +1,28 @@
 package com.redgogh.tools.http;
 
+/* -------------------------------------------------------------------------------- *\
+|*                                                                                  *|
+|*    Copyright (C) 2023 RedGogh                                                    *|
+|*                                                                                  *|
+|*    This program is free software: you can redistribute it and/or modify          *|
+|*    it under the terms of the GNU General Public License as published by          *|
+|*    the Free Software Foundation, either version 3 of the License, or             *|
+|*    (at your option) any later version.                                           *|
+|*                                                                                  *|
+|*    This program is distributed in the hope that it will be useful,               *|
+|*    but WITHOUT ANY WARRANTY; without even the implied warranty of                *|
+|*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                 *|
+|*    GNU General Public License for more details.                                  *|
+|*                                                                                  *|
+|*    You should have received a copy of the GNU General Public License             *|
+|*    along with this program.  If not, see <https://www.gnu.org/licenses/>.        *|
+|*                                                                                  *|
+|*    This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.    *|
+|*    This is free software, and you are welcome to redistribute it                 *|
+|*    under certain conditions; type `show c' for details.                          *|
+|*                                                                                  *|
+\* -------------------------------------------------------------------------------- */
+
 import com.alibaba.fastjson.JSON;
 import com.redgogh.tools.collection.Maps;
 import com.redgogh.tools.exception.HttpRequestException;
@@ -8,6 +31,7 @@ import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -203,6 +227,32 @@ public class HttpClient {
     }
 
     /**
+     * 创建一个新的 {@link OctetStreamResponse} 实例。
+     *
+     * <p>此方法可以选择性地接收一个 {@link OctetStreamCallback}
+     * 参数，以便在处理八位字节流时提供自定义的回调功能。
+     *
+     * @return 一个新的 {@link OctetStreamResponse} 实例。
+     */
+    public OctetStreamResponse newOctetStreamCall() {
+        return newOctetStreamCall(null);
+    }
+
+    /**
+     * 创建一个新的 {@link OctetStreamResponse} 实例，并指定回调。
+     *
+     * <p>如果提供的回调不为 {@code null}，将在处理八位字节流时
+     * 调用该回调。
+     *
+     * @param callback 可选的回调，用于处理八位字节流。
+     *
+     * @return 一个新的 {@link OctetStreamResponse} 实例。
+     */
+    public OctetStreamResponse newOctetStreamCall(OctetStreamCallback callback) {
+        return new OctetStreamResponse(throwIfError(() -> newCall0(callback)));
+    }
+
+    /**
      * #brief: 发送 HTTP 请求
      *
      * <p>该方法使用默认的读超时和连接超时发送 HTTP 请求，并返回响应对象。
@@ -225,6 +275,25 @@ public class HttpClient {
      * @throws HttpRequestException 如果请求发送失败
      */
     public Response newCall(Callback callback) {
+        try (okhttp3.Response response = newCall0(callback)) {
+            return newCallResponse(response);
+        } catch (IOException e) {
+            throw new HttpRequestException(e);
+        }
+    }
+
+
+    /**
+     * #brief: 发送 HTTP 请求
+     *
+     * <p>该方法使用指定的读超时和连接超时发送 HTTP 请求，并返回响应对象。支持设置请求体、
+     * 查询参数和请求头。请求体默认为 `application/json` 格式，支持多部分请求体（MultipartBody）。
+     *
+     * @param callback 回调接口，如果改对象不为 `null` 则是异步调用。
+     * @return 响应对象 `Response`
+     * @throws HttpRequestException 如果请求发送失败
+     */
+    public okhttp3.Response newCall0(Object callback) throws IOException {
         /* init url. */
         if (queryBuilder != null)
             url = queryBuilder.argConcatBuild(url);
@@ -244,15 +313,17 @@ public class HttpClient {
         Call call = request(client);
 
         /* async */
-        if (callback != null)
-            return async(call, callback);
+        if (callback != null) {
+            if (callback instanceof Callback)
+                async(call, (OctetStreamCallback) callback);
+
+            if (callback instanceof OctetStreamCallback)
+                async(call, (OctetStreamCallback) callback);
+            return null;
+        }
 
         /* sync */
-        try (okhttp3.Response response = call.execute()) {
-            return processResponse(response);
-        } catch (IOException e) {
-            throw new HttpRequestException(e);
-        }
+        return call.execute();
     }
 
     // /////////////////////////////////////////////////////////// //
@@ -338,9 +409,9 @@ public class HttpClient {
     /**
      * 处理响应
      */
-    private Response processResponse(okhttp3.Response okResponse) throws IOException {
-        ResponseBody body = okResponse.body();
-        Response retval = new Response(okResponse.code(), body == null ? "{}" : body.string());
+    private Response newCallResponse(okhttp3.Response okResponse) throws IOException {
+        /* response */
+        Response retval = new Response(okResponse.code(), okResponse.headers(), okResponse.body());
 
         throwIfFalse(okResponse.isSuccessful(), "HTTP请求出错（%s）\n    - URL：%s \n    - Request Body：%s \n    - Message: %s",
                 okResponse.code(), url, JSON.toJSONString(object), retval);
@@ -348,10 +419,7 @@ public class HttpClient {
         return retval;
     }
 
-    /**
-     * 异步调用
-     */
-    private Response async(Call call, Callback callback) {
+    private void async(Call call, Callback callback) {
         call.enqueue(new okhttp3.Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
@@ -360,11 +428,24 @@ public class HttpClient {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull okhttp3.Response response) throws IOException {
-                callback.onResponse(processResponse(response));
+                callback.onResponse(newCallResponse(response));
             }
         });
+    }
 
-        return null;
+
+    private void async(Call call, OctetStreamCallback callback) {
+        call.enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull okhttp3.Response response) throws IOException {
+                callback.onResponse(new OctetStreamResponse(response));
+            }
+        });
     }
 
 }

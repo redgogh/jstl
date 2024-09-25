@@ -26,6 +26,7 @@ package com.redgogh.testing.controller;
 /* Create on 2024/9/13 */
 
 import com.redgogh.libraries.springframework.boot.web.R;
+import com.redgogh.testing.dto.User;
 import com.redgogh.testing.enums.TikaFile;
 import com.redgogh.testing.service.TestingService;
 import com.redgogh.tools.enums.Enumerates;
@@ -68,5 +69,12 @@ public class TestingController {
         return R.ok(testingService.tika(multipartFile, TikaFile.PDF));
     }
 
+    /**
+     * User
+     */
+    @GetMapping("/user")
+    public R<User> user() {
+        return R.ok(new User("RedGogh", "redgogh@example.com", 30));
+    }
 
 }

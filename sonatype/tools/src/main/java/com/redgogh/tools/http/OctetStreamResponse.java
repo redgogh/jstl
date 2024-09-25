@@ -23,43 +23,70 @@ package com.redgogh.tools.http;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-/**
- * `Callback` 接口用于处理 HTTP 请求的响应和错误回调。
- *
- * <p>该接口定义了两个方法：`onFailure` 和 `onResponse`，分别用于处理请求失败时的异常
- * 和请求成功时的响应。通常用于异步 HTTP 请求的回调机制中，提供对请求结果的处理逻辑。
- *
- * <p>使用场景包括异步 HTTP 请求、网络请求回调等。
- *
- * <h2>主要功能</h2>
- * <ul>
- *     <li>`onFailure(Throwable e)`：当 HTTP 请求失败时调用，传入引发失败的异常。</li>
- *     <li>`onResponse(Response response)`：当 HTTP 请求成功时调用，传入请求的响应结果。</li>
- * </ul>
- *
- * @author RedGogh
- * @see Response
- * @since 1.0
- */
-public interface Callback {
+import com.redgogh.tools.io.File;
+import com.redgogh.tools.io.IOUtils;
+import okhttp3.ResponseBody;
+
+import java.io.Closeable;
+import java.io.IOException;
+import java.io.InputStream;
+
+import static com.redgogh.tools.Assert.throwIfNull;
+
+public class OctetStreamResponse implements Closeable {
+
+    private final okhttp3.Response response;
+
+    OctetStreamResponse(okhttp3.Response response) {
+        this.response = response;
+    }
 
     /**
-     * #brief: 处理请求失败的回调
+     * 将响应体内容传输到指定路径的文件。
      *
-     * <p>该方法在 HTTP 请求失败时被调用，提供引发失败的异常信息。可用于记录错误日志、
-     * 提示用户或者进行错误处理等。
+     * <p>此方法通过调用 {@link #transferTo(File)} 实现，
+     * 将给定路径 {@code path} 转换为 {@link File} 对象，
+     * 并将响应体内容写入该文件。
      *
-     * @param e 请求失败的异常
+     * @param path 要传输内容的目标文件路径
+     * @return 传输完成的 {@link File} 对象
      */
-    void onFailure(Throwable e);
+    public File transferTo(String path) {
+        return transferTo(File.wrap(path));
+    }
 
     /**
-     * #brief: 处理请求成功的回调
+     * 将响应体内容传输到指定的 {@code java.io.File} 对象。
      *
-     * <p>该方法在 HTTP 请求成功时被调用，提供请求的响应结果。可用于处理响应数据、
-     * 更新 UI 或者进行进一步的业务逻辑处理。
+     * <p>此方法将响应体内容写入提供的 {@link java.io.File} 实例，
+     * 并返回该文件。
      *
-     * @param response 请求成功的响应结果
+     * @param file 要传输内容的目标文件
+     * @return 传输完成的 {@link File} 对象
      */
-    void onResponse(Response response);
+    public File transferTo(java.io.File file) {
+        return transferTo(File.wrap(file));
+    }
+
+    /**
+     * 将响应体内容传输到指定的 {@link File} 对象。
+     *
+     * <p>从响应体中获取输入流，并将其内容写入提供的
+     * {@link File} 实例，然后返回该文件。
+     *
+     * @param file 要传输内容的目标 {@link File} 对象
+     * @return 传输完成的 {@link File} 对象
+     */
+    public File transferTo(File file) {
+        ResponseBody body = throwIfNull(response.body(), "没有数据响应。");
+        IOUtils.write(body.byteStream(), file);
+        close();
+        return file;
+    }
+
+    @Override
+    public void close() {
+        IOUtils.closeQuietly(response);
+    }
+
 }

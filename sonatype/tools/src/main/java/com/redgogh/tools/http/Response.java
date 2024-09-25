@@ -1,14 +1,45 @@
 package com.redgogh.tools.http;
 
+/* -------------------------------------------------------------------------------- *\
+|*                                                                                  *|
+|*    Copyright (C) 2023 RedGogh                                                    *|
+|*                                                                                  *|
+|*    This program is free software: you can redistribute it and/or modify          *|
+|*    it under the terms of the GNU General Public License as published by          *|
+|*    the Free Software Foundation, either version 3 of the License, or             *|
+|*    (at your option) any later version.                                           *|
+|*                                                                                  *|
+|*    This program is distributed in the hope that it will be useful,               *|
+|*    but WITHOUT ANY WARRANTY; without even the implied warranty of                *|
+|*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                 *|
+|*    GNU General Public License for more details.                                  *|
+|*                                                                                  *|
+|*    You should have received a copy of the GNU General Public License             *|
+|*    along with this program.  If not, see <https://www.gnu.org/licenses/>.        *|
+|*                                                                                  *|
+|*    This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.    *|
+|*    This is free software, and you are welcome to redistribute it                 *|
+|*    under certain conditions; type `show c' for details.                          *|
+|*                                                                                  *|
+\* -------------------------------------------------------------------------------- */
+
 import com.alibaba.fastjson.JSONObject;
 import com.redgogh.tools.Optional;
 import com.redgogh.tools.StringUtils;
+import com.redgogh.tools.io.ByteBuffer;
+import com.redgogh.tools.io.IOUtils;
+import lombok.Getter;
+import okhttp3.Headers;
+import okhttp3.ResponseBody;
 
+import java.io.InputStream;
 import java.util.Map;
 
 import static com.redgogh.tools.BasicConverts.anyeq;
 import static com.redgogh.tools.BasicConverts.atos;
 import static com.redgogh.tools.StringUtils.streq;
+import static com.redgogh.tools.StringUtils.strmatch;
+import static com.redgogh.tools.io.ByteBuffer.SEEK_SET;
 
 /**
  * `Response` 是一个继承自 `JSONObject` 的类，用于表示一个包含状态码和数据的响应对象。
@@ -24,7 +55,7 @@ import static com.redgogh.tools.StringUtils.streq;
  *
  * <h2>构造方法</h2>
  * <ul>
- *     <li>{@link #Response(int, String)}: 使用状态码和 JSON 字符串初始化响应对象。</li>
+ *     <li>{@link #Response}: 使用状态码和 JSON 字符串初始化响应对象。</li>
  * </ul>
  *
  * <h2>主要方法</h2>
@@ -56,13 +87,26 @@ public class Response extends JSONObject {
     /**
      * Http 请求状态码
      */
+    @Getter
     private final int code;
 
     /**
      * 如果接口没有正常的 JSON 返回对象等结构的话，那么 message 就是
      * 接口返回信息。有可能是 `Not Found` 等文本。
      */
+    @Getter
     private String message;
+
+    /**
+     * 响应头
+     */
+    private final Headers headers;
+
+    /**
+     * 文件或二进制资源
+     */
+    private transient final ByteBuffer byteBuffer =
+            ByteBuffer.allocate(16 * IOUtils.KB);
 
     /**
      * #brief: 使用状态码和 JSON 字符串初始化响应对象
@@ -71,13 +115,15 @@ public class Response extends JSONObject {
      * `JSONObject`，并存储在响应对象中。
      *
      * @param code 响应的状态码
-     * @param content 响应内容的 JSON 字符串
+     * @param responseBody 响应内容
      */
     @SuppressWarnings("unchecked")
-    public Response(int code, String content) {
+    public Response(int code, Headers headers, ResponseBody responseBody) {
         this.code = code;
+        this.headers = headers;
 
         /* 处理响应 */
+        String content = Optional.ifError(responseBody::string, "{}");
         Object object = Optional.ifError(() -> JSONObject.parseObject(content), content);
 
         if (object instanceof String)
@@ -135,6 +181,20 @@ public class Response extends JSONObject {
      */
     public boolean valueEquals(String name, Object value) {
         return anyeq(get(name), value);
+    }
+
+    /**
+     * 获取指定名称的头部信息。
+     *
+     * <p>通过提供的 {@code name} 从头部集合 {@code headers}
+     * 中检索对应的值。返回值为 {@code String} 类型，如果
+     * 该名称的头部信息不存在，则返回 {@code null}。
+     *
+     * @param name 头部的名称
+     * @return 对应名称的头部信息，如果不存在则返回 {@code null}
+     */
+    public String getHeader(String name) {
+        return headers.get(name);
     }
 
     @Override

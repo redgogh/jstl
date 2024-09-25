@@ -79,6 +79,14 @@ public class HttpClientsExample {
     }
 
     @Test
+    public void getUserExample() {
+        Response response = HttpClient.open("GET", "http://127.0.0.1:8001/testing/user")
+                .sslVerifierDisable()
+                .newCall();
+        System.out.println(response);
+    }
+
+    @Test
     public void callAsyncExample() throws InterruptedException {
         HttpClient.open("POST", "http://127.0.0.1:8001/testing/async-call")
                 .setQueryBuilder(new QueryBuilder("sleep=1"))
@@ -97,6 +105,31 @@ public class HttpClientsExample {
         System.out.println("等待异步调用执行完成！");
         Thread.sleep(TimeUnit.SECONDS.toMillis(5));
         System.out.println("程序执行完毕！");
+    }
+
+    @Test
+    public void downloadFileExample() {
+        OctetStreamResponse octet = HttpClient.open("GET", "https://repo.huaweicloud.com/java/jdk/8u202-b08-demos/jdk-8u202-windows-x64-demos.zip")
+                .sslVerifierDisable()
+                .newOctetStreamCall();
+        octet.transferTo(new File("Desktop://jdk-8u202-windows-x64-demos.zip"));
+    }
+
+    @Test
+    public void asyncDownloadFileExample() throws InterruptedException {
+        HttpClient.open("GET", "https://repo.huaweicloud.com/java/jdk/8u202-b08-demos/jdk-8u202-windows-x64-demos.zip")
+                .sslVerifierDisable()
+                .newOctetStreamCall(new OctetStreamCallback() {
+                    @Override
+                    public void onFailure(Throwable e) {
+                        stdout.printf("请求出现异常：%s\n", e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(OctetStreamResponse response) {
+                        response.transferTo(new File("Desktop://jdk-8u202-windows-x64-demos.zip"));
+                    }
+                });
     }
 
 }

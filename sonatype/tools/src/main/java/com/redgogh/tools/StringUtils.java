@@ -339,6 +339,14 @@ public class StringUtils {
         return Optional.ifError(() -> Double.parseDouble(atos(wstr)), true, false);
     }
 
+    public static boolean strcont(Object wstr, String cmp) {
+        return atos(wstr).contains(cmp);
+    }
+
+    public static boolean stricont(Object wstr, String cmp) {
+        return strcont(strupper(wstr), strupper(cmp));
+    }
+
     /**
      * 检查字符串是否与正则表达式匹配。
      *

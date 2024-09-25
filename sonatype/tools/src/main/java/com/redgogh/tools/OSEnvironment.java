@@ -92,11 +92,11 @@ public class OSEnvironment {
 
     static {
         // initialize
-        if (strihas(OS_NAME, "Windows"))
+        if (stricont(OS_NAME, "Windows"))
             OS_FLAG = WINDOWS;
-        else if (strihas(OS_NAME, "Linux"))
+        else if (stricont(OS_NAME, "Linux"))
             OS_FLAG = LINUX;
-        else if (strihas(OS_NAME, "Mac"))
+        else if (stricont(OS_NAME, "Mac"))
             OS_FLAG = MACOS;
     }
 
