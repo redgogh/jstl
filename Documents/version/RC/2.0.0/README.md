@@ -11,6 +11,10 @@
 
 - 优化 `UClass#newInstance` 方法支持 private 类实例。
 - 重命名 `AnyObjects`，更清晰的命名为：`BasicConverts`。
-- 重命名 `StreamMapping`，更清晰的命名为：`StreamMapper`。 
+- 重命名 `StreamMapping`，更清晰的命名为：`StreamMapper`。
 
 ## 🐞 BUG 修复
+
+## 🔨 依赖升级
+
+- `com.squareup.okhttp3:okhttp` 依赖从 `4.10.0` 版本升级到 `4.12.0` 版本。

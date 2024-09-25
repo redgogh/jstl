@@ -36,7 +36,7 @@
         <fastjson.version>2.0.26</fastjson.version>
         <joda-time.version>2.12.2</joda-time.version>
         <java-jwt.version>4.3.0</java-jwt.version>
-        <okhttp.version>4.10.0</okhttp.version>
+        <okhttp.version>4.12.0</okhttp.version>
         <ip2region.version>2.6.1</ip2region.version>
         <slf4j.version>1.7.21</slf4j.version>
         <scala.version>2.10.4</scala.version>
