@@ -8,6 +8,8 @@
 - 移除所有 Kotlin 代码，全部切换到 Java 增强兼容性。
 - 新增 `Response#valueEquals` 方法，比较响应值对象某个属性是否相等。
 - 新增 `HttpClient#newOctetStreamCall` 文件下载功能，支持异步下载。
+- 新增 `Workbook` Excel 文件操作类，支持写入 `.xlsx` 文件以及修改。
+- 新增 `Row` 数据类，可读取 `Workbook` 中的每行数据内容。
 
 ## 👻 优化功能
 
@@ -18,7 +20,9 @@
 ## 🐞 BUG 修复
 
 - 修复 `OSEnvironment#OS_FLAG` 检测不正确问题。
+- 修复 `StringUtils#strempty` 判空逻辑错误问题。
 
 ## 🔨 依赖升级
 
-- `com.squareup.okhttp3:okhttp` 依赖从 `4.10.0` 版本升级到 `4.12.0` 版本。
+- 新增 `org.apache.poi:poi-ooxml` `5.2.3` 版本依赖。
+- 升级 `com.squareup.okhttp3:okhttp` 依赖从 `4.10.0` 版本升级到 `4.12.0` 版本。

@@ -86,13 +86,41 @@ public class StringUtils {
         return atos(wstr).length();
     }
 
+    /**
+     * 检查给定的字符串是否为空。
+     *
+     * <p>此方法判断字符串是否为 {@code null} 或者长度为0。
+     * 如果是，则返回 {@code true}；否则返回 {@code false}。
+     *
+     * <p>示例用法：
+     * <pre>
+     *      boolean isEmpty = strempty("example");
+     * </pre>
+     *
+     * @param wstr 要检查的字符串对象。
+     * @return 如果字符串为空，返回 {@code true}；否则返回 {@code false}。
+     */
     public static boolean strempty(Object wstr) {
-        return wstr != null && strlen(wstr) > 0;
+        return wstr == null || strlen(wstr) == 0;
     }
 
+    /**
+     * 检查给定的字符串是否非空。
+     *
+     * <p>此方法在内部调用 {@link #strempty(Object)} 方法，返回其结果的相反值。
+     *
+     * <p>示例用法：
+     * <pre>
+     *      boolean isNotEmpty = strnempty("example");
+     * </pre>
+     *
+     * @param wstr 要检查的字符串对象。
+     * @return 如果字符串非空，返回 {@code true}；否则返回 {@code false}。
+     */
     public static boolean strnempty(Object wstr) {
         return !strempty(wstr);
     }
+
 
     /**
      * 将字符串转换为小写。
