@@ -26,7 +26,7 @@ package com.redgogh.examples;
 import com.redgogh.tools.io.File;
 import org.junit.Test;
 
-import static com.redgogh.tools.BasicConverts.atos;
+import static com.redgogh.tools.BasicConverter.atos;
 
 @SuppressWarnings("ALL")
 public class FileExample {

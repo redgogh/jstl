@@ -36,7 +36,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.UUID;
 
-import static com.redgogh.tools.BasicConverts.atos;
+import static com.redgogh.tools.BasicConverter.atos;
 import static com.redgogh.tools.Assert.throwIfError;
 import static com.redgogh.tools.StringUtils.*;
 

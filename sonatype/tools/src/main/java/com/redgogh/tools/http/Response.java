@@ -32,14 +32,11 @@ import lombok.Getter;
 import okhttp3.Headers;
 import okhttp3.ResponseBody;
 
-import java.io.InputStream;
 import java.util.Map;
 
-import static com.redgogh.tools.BasicConverts.anyeq;
-import static com.redgogh.tools.BasicConverts.atos;
+import static com.redgogh.tools.BasicConverter.anyeq;
+import static com.redgogh.tools.BasicConverter.atos;
 import static com.redgogh.tools.StringUtils.streq;
-import static com.redgogh.tools.StringUtils.strmatch;
-import static com.redgogh.tools.io.ByteBuffer.SEEK_SET;
 
 /**
  * `Response` 是一个继承自 `JSONObject` 的类，用于表示一个包含状态码和数据的响应对象。

@@ -31,11 +31,10 @@ import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static com.redgogh.tools.BasicConverts.atos;
+import static com.redgogh.tools.BasicConverter.atos;
 import static com.redgogh.tools.Assert.*;
 import static com.redgogh.tools.StringUtils.strhas;
 import static com.redgogh.tools.StringUtils.strupper;

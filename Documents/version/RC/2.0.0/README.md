@@ -12,8 +12,8 @@
 ## 👻 优化功能
 
 - 优化 `UClass#newInstance` 方法，增加对 `private` 构造器的支持。
-- 重命名 `AnyObjects` 为 `BasicConverts`，更准确地反映其基本转换功能。
-- 重命名 `StreamMapping` 为 `StreamMapper`，提升命名清晰度和可读性。
+- 优化 `AnyObjects` 命名，新命名为 `BasicConverter`，更准确地反映其基本转换功能。
+- 优化 `StreamMapping` 命名，新命名为 `StreamMapper`，提升命名清晰度和可读性。
 
 ## 🐞 BUG 修复
 

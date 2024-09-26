@@ -46,7 +46,7 @@ import static com.redgogh.tools.io.ByteBuffer.SEEK_SET;
  * @author RedGogh
  * @see java.util.Objects
  */
-public class BasicConverts {
+public class BasicConverter {
 
     /**
      * `any`函数通常用于 Lambda 接口，将任何对象作为`Object`类型
