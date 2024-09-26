@@ -33,6 +33,17 @@ import java.io.InputStream;
 
 import static com.redgogh.tools.Assert.throwIfNull;
 
+/**
+ * 类 {@link OctetStreamResponse} 表示一个字节流响应。
+ *
+ * <p>该类实现了 {@link Closeable} 接口，意味着在使用完该响应后，
+ * 应该调用 {@link #close()} 方法来释放资源。
+ *
+ * <p>此类通常用于处理来自服务器的字节流数据，提供了方法来
+ * 读取响应内容和处理响应状态。
+ *
+ * @author RedGogh
+ */
 public class OctetStreamResponse implements Closeable {
 
     private final okhttp3.Response response;
