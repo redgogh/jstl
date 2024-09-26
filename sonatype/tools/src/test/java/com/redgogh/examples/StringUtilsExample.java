@@ -26,15 +26,22 @@ package com.redgogh.examples;
 import org.junit.Test;
 
 import static com.redgogh.tools.BasicConverter.atos;
+import static com.redgogh.tools.StringUtils.strcut;
 
 @SuppressWarnings("ALL")
-public class StringExample {
+public class StringUtilsExample {
 
     @Test
     public void atosExample() {
         String vanGogh = "Vincent Van Gogh";
         System.out.printf("atos: byte array to string: %s\n", atos(vanGogh.getBytes()));
         System.out.printf("atos: byte array [7 - len] to string: %s\n", atos(vanGogh.getBytes(), 7, 0));
+    }
+
+    @Test
+    public void strcutExmaple() {
+        String author = "Red Gogh";
+        System.out.println(strcut(author, 0, -1));
     }
 
 }
