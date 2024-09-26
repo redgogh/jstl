@@ -24,5 +24,5 @@
 
 ## 🔨 依赖升级
 
-- 新增 `org.apache.poi:poi-ooxml` `5.2.3` 版本依赖。
-- 升级 `com.squareup.okhttp3:okhttp` 依赖从 `4.10.0` 版本升级到 `4.12.0` 版本。
+- 新增依赖 `org.apache.poi:poi-ooxml` Apache POI 库，版本：`5.2.3`。
+- 升级依赖 `com.squareup.okhttp3:okhttp` 从 `4.10.0` 版本升级到 `4.12.0` 版本。
