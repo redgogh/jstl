@@ -27,6 +27,8 @@ import static com.redgogh.tools.Assert.throwIfFalse;
 
 /**
  * 数组工具类
+ *
+ * @author RedGogh
  */
 public class ArrayUtils {
 
