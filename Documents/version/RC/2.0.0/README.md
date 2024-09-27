@@ -16,6 +16,7 @@
 - 优化`AnyObjects`命名，新命名为`BasicConverter`，更准确地反映其基本转换功能。
 - 优化`StreamMapping`命名，新命名为`StreamMapper`，提升命名清晰度和可读性。
 - 迁移所有 Kotlin 代码，全部切换到 Java 增强兼容性。
+- 优化`ArrayUtils#heapcopy`命名更新为`arraycopy`提升命名清晰度。
 
 ## 🐞 BUG 修复
 
