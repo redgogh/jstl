@@ -367,10 +367,28 @@ public class StringUtils {
         return Optional.ifError(() -> Double.parseDouble(atos(wstr)), true, false);
     }
 
+    /**
+     * #brief: 检查字符串是否包含子串
+     *
+     * <p>将 `wstr` 转换为字符串后，检查它是否包含子串 `cmp`。
+     *
+     * @param wstr 任意对象，会被转换为字符串
+     * @param cmp 要检查的子串
+     * @return 如果 `wstr` 包含 `cmp`，返回 true；否则返回 false
+     */
     public static boolean strcont(Object wstr, String cmp) {
         return atos(wstr).contains(cmp);
     }
 
+    /**
+     * #brief: 忽略大小写检查字符串是否包含子串
+     *
+     * <p>将 `wstr` 和 `cmp` 都转换为大写后，检查它们之间是否有包含关系。
+     *
+     * @param wstr 任意对象，会被转换为字符串
+     * @param cmp 要检查的子串
+     * @return 忽略大小写后，如果 `wstr` 包含 `cmp`，返回 true；否则返回 false
+     */
     public static boolean stricont(Object wstr, String cmp) {
         return strcont(strupper(wstr), strupper(cmp));
     }
