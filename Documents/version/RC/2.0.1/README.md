@@ -5,7 +5,8 @@
 ## ⭐ 新增新能
 
 - `Workbook`工作簿支持从文件或数据流中加载数据。
-- `Workbook`对象支持迭代器以及`forEach`等方式遍历当前`Sheet`数据。
+- `Workbook`工作簿支持迭代器以及`forEach`等方式遍历当前`Sheet`数据。
+- `Workbook`工作簿支持转`CSV`文本格式。
 
 ## 👻 优化功能
 

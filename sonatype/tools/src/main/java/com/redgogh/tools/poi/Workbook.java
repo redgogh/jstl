@@ -36,6 +36,7 @@ import java.util.List;
 
 import static com.redgogh.tools.Assert.throwIfError;
 import static com.redgogh.tools.BasicConverter.atos;
+import static com.redgogh.tools.StringUtils.strne;
 
 /**
  * 类 {@link Workbook} 用于创建和操作 Excel 工作簿。
@@ -370,6 +371,34 @@ public class Workbook implements Iterable<Row> {
     @Override
     public Iterator<Row> iterator() {
         return new WorkbookIterator(this);
+    }
+
+    /**
+     * #brief: 将工作表内容转换为 CSV 格式文本
+     *
+     * <p>遍历当前工作表的所有行，并将其内容
+     * 转换为 CSV 格式的字符串。每行以换行符
+     * 分隔，单元格内容之间用逗号分隔。
+     *
+     * <p>如果单元格的值为 "NULL"，则该单元格
+     * 在输出中将为空字符串。
+     *
+     * @return 转换后的 CSV 格式文本
+     */
+    public String toCSVText() {
+        StringBuilder builder = new StringBuilder();
+
+        List<Row> rows = getRows();
+        for (Row row : rows) {
+            for (String cell : row) {
+                builder.append(strne(cell, "NULL") ? cell : "");
+                builder.append(",");
+            }
+            builder.deleteCharAt(builder.length() - 1);
+            builder.append("\n");
+        }
+
+        return atos(builder);
     }
 
 }

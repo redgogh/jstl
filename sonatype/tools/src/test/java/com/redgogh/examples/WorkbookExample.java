@@ -66,4 +66,11 @@ public class WorkbookExample {
         wb.forEach(System.out::println);
     }
 
+    @Test
+    public void workbookCSVExample() {
+        Workbook wb = Workbook.load("Desktop://test.xlsx");
+        String csvText = wb.toCSVText();
+        System.out.println(csvText);
+    }
+
 }
