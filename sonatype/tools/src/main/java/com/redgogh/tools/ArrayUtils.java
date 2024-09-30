@@ -67,7 +67,7 @@ public class ArrayUtils {
      *        拷贝长度，从偏移位置开始拷贝 {@code length} 个元素。
      */
     @SuppressWarnings("all")
-    public static void arraycopy(Object src, int  srcPos,
+    private static void arraycopy0(Object src, int  srcPos,
                                 Object dest, int destPos,
                                 int length) {
         java.lang.System.arraycopy(src, srcPos, dest, destPos, length);
@@ -100,7 +100,7 @@ public class ArrayUtils {
     public static byte[] arraycopy(byte[] original, int off, int len) {
         len = truncate(original.length, off, len);
         byte[] ret = new byte[len];
-        arraycopy(original, off, ret, 0, len);
+        arraycopy0(original, off, ret, 0, len);
         return ret;
     }
 
@@ -131,7 +131,7 @@ public class ArrayUtils {
     public static char[] arraycopy(char[] original, int off, int len) {
         len = truncate(original.length, off, len);
         char[] ret = new char[len];
-        arraycopy(original, off, ret, 0, len);
+        arraycopy0(original, off, ret, 0, len);
         return ret;
     }
 
