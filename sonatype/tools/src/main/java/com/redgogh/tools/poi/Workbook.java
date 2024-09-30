@@ -25,9 +25,11 @@ import com.redgogh.tools.io.File;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Iterator;
 
 import static com.redgogh.tools.Assert.throwIfError;
 import static com.redgogh.tools.BasicConverter.atos;
@@ -48,7 +50,7 @@ import static com.redgogh.tools.StringUtils.strnempty;
  *
  * @author RedGogh
  */
-public class Workbook {
+public class Workbook implements Iterable<Row> {
 
     /**
      * Apache POI 工作簿实例，用于创建和操作 Excel 文件。
@@ -291,6 +293,51 @@ public class Workbook {
      */
     public void write(OutputStream stream) {
         throwIfError(() -> wb.write(stream));
+    }
+
+    /**
+     * #brief: Workbook 的迭代器
+     *
+     * <p>该内部类实现了迭代器接口，用于遍历
+     * Workbook 中的行对象。通过此迭代器，用户
+     * 可以方便地遍历工作表中的每一行。
+     *
+     * <h2>注意事项</h2>
+     * <ul>
+     *     <li>确保在迭代过程中工作表未被修改，以避免
+     *         意外的行为或抛出异常。</li>
+     * </ul>
+     *
+     * @see Iterator
+     * @see Row
+     */
+    public static class WorkbookIterator implements Iterator<Row> {
+
+        private int index;
+        private final int size;
+        private final Workbook wb;
+
+        WorkbookIterator(Workbook wb) {
+            this.wb = wb;
+            this.index = 0;
+            this.size = wb.rowCount() + 1;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return index != size;
+        }
+
+        @Override
+        public Row next() {
+            return wb.getRow(index++);
+        }
+    }
+
+    @NotNull
+    @Override
+    public Iterator<Row> iterator() {
+        return new WorkbookIterator(this);
     }
 
 }

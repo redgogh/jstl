@@ -19,6 +19,7 @@ package com.redgogh.examples;
 \* -------------------------------------------------------------------------------- */
 
 import com.redgogh.tools.io.File;
+import com.redgogh.tools.poi.Row;
 import com.redgogh.tools.poi.Workbook;
 import org.junit.Test;
 
@@ -49,11 +50,20 @@ public class WorkbookExample {
             wb.write(new File("Desktop://b.xlsx").openByteWriter());
     }
 
-        @Test
-        public void loadWorkbookExample() {
-            Workbook wb = Workbook.load("Desktop://test.xlsx");
-            for (int i = 0; i < wb.rowCount(); i++)
-                System.out.println(wb.getRow(i));
-        }
+    @Test
+    public void loadWorkbookExample() {
+        Workbook wb = Workbook.load("Desktop://test.xlsx");
+        for (int i = 0; i < wb.rowCount(); i++)
+            System.out.println(wb.getRow(i));
+    }
+
+    @Test
+    public void workbookIteratorExample() {
+        Workbook wb = Workbook.load("Desktop://test.xlsx");
+        // for (Row row : wb) {
+        //     System.out.println(row);
+        // }
+        wb.forEach(System.out::println);
+    }
 
 }
