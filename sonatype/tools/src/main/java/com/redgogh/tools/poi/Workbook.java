@@ -22,6 +22,7 @@ import com.redgogh.tools.BasicConverter;
 import com.redgogh.tools.Optional;
 import com.redgogh.tools.collection.Lists;
 import com.redgogh.tools.io.File;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -209,7 +210,8 @@ public class Workbook {
 
         short lastCellNum = row.getLastCellNum();
         for (short i = 0; i < lastCellNum; i++) {
-            retval.add(row.getCell(i).getStringCellValue());
+            Cell cell = row.getCell(i);
+            retval.add(cell != null ? cell.getStringCellValue() : "NULL");
         }
 
         return retval;
