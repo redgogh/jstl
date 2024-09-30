@@ -29,11 +29,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import static com.redgogh.tools.Assert.throwIfError;
 import static com.redgogh.tools.BasicConverter.atos;
-import static com.redgogh.tools.StringUtils.strnempty;
 
 /**
  * 类 {@link Workbook} 用于创建和操作 Excel 工作簿。
@@ -210,12 +212,27 @@ public class Workbook implements Iterable<Row> {
         org.apache.poi.ss.usermodel.Row row = sheet.getRow(index);
         Row retval = new Row();
 
-        short lastCellNum = row.getLastCellNum();
-        for (short i = 0; i < lastCellNum; i++) {
+        int lastCellNum = cellCount();
+        for (int i = 0; i < lastCellNum; i++) {
             Cell cell = row.getCell(i);
             retval.add(cell != null ? cell.getStringCellValue() : "NULL");
         }
 
+        return retval;
+    }
+
+    /**
+     * #brief: 获取当前工作表的所有行
+     *
+     * <p>返回一个包含当前工作表中所有行的列表。
+     * 该方法会遍历工作表并将每一行添加到返回的
+     * 列表中。
+     *
+     * @return 包含当前工作表所有行的列表
+     */
+    public List<Row> getRows() {
+        List<Row> retval = Lists.of();
+        forEach(retval::add);
         return retval;
     }
 
@@ -230,6 +247,21 @@ public class Workbook implements Iterable<Row> {
      */
     public int rowCount() {
         return sheet.getLastRowNum();
+    }
+
+    /**
+     * #brief: 获取当前行的单元格数量
+     *
+     * <p>返回当前工作表第一行的单元格数量。如果
+     * 第一行为空，则返回 0。
+     *
+     * @return 当前行的单元格数量
+     */
+    public int cellCount() {
+        org.apache.poi.ss.usermodel.Row row = sheet.getRow(0);
+        if (row != null)
+            return row.getLastCellNum();
+        return 0;
     }
 
     /**
