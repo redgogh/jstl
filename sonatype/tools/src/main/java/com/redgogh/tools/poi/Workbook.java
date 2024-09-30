@@ -25,6 +25,7 @@ import com.redgogh.tools.io.File;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.InputStream;
 import java.io.OutputStream;
 
 import static com.redgogh.tools.Assert.throwIfError;
@@ -51,7 +52,7 @@ public class Workbook {
     /**
      * Apache POI 工作簿实例，用于创建和操作 Excel 文件。
      */
-    private final org.apache.poi.ss.usermodel.Workbook wb = new XSSFWorkbook();
+    private final org.apache.poi.ss.usermodel.Workbook wb;
 
     /**
      * 当前工作簿中的工作表。
@@ -59,22 +60,68 @@ public class Workbook {
     private Sheet sheet;
 
     /**
-     * 构造函数，创建一个新的工作簿但不初始化任何工作表。如果
-     * 需要创建工作表，使用 {@link #checkout} 函数创建。
+     * #brief: 创建一个空的 Workbook 实例
+     *
+     * <p>使用默认的 XSSFWorkbook 创建一个新的 Workbook
+     * 对象。
      */
     public Workbook() {
-        this(null);
+        this(new XSSFWorkbook());
     }
 
     /**
-     * 构造函数，创建一个新的工作簿并初始化工作表。
+     * #brief: 根据指定路径创建 Workbook 实例
      *
-     * <p>使用此构造函数可以指定初始工作表名称。
+     * <p>根据提供的文件路径，创建一个新的 Workbook
+     * 实例。如果文件不存在或格式不正确，可能会抛出
+     * 异常。
+     *
+     * @param pathname Excel 文件的路径
      */
-    public Workbook(String name) {
-        if (strnempty(name))
-            sheet = wb.createSheet(name);
+    public Workbook(String pathname) {
+        this(new File(pathname));
     }
+
+    /**
+     * #brief: 根据指定文件创建 Workbook 实例
+     *
+     * <p>根据提供的 File 对象，创建一个新的 Workbook
+     * 实例。如果文件不存在或格式不正确，可能会抛出
+     * 异常。
+     *
+     * @param file Excel 文件对象
+     */
+    public Workbook(File file) {
+        this(throwIfError(() -> new XSSFWorkbook(file)));
+    }
+
+    /**
+     * #brief: 根据输入流创建 Workbook 实例
+     *
+     * <p>根据提供的输入流，创建一个新的 Workbook
+     * 实例。输入流需指向有效的 Excel 文件内容。
+     * 如果输入流无效，可能会抛出异常。
+     *
+     * @param stream 输入流，需指向有效的 Excel 文件内容
+     */
+    public Workbook(InputStream stream) {
+        this(throwIfError(() -> new XSSFWorkbook(stream)));
+    }
+
+    /**
+     * #brief: 使用现有的 XSSFWorkbook 创建 Workbook 实例
+     *
+     * <p>接受一个已存在的 XSSFWorkbook 对象并将其
+     * 包装为新的 Workbook 实例。
+     *
+     * @param workbook 已存在的 XSSFWorkbook 对象
+     */
+    public Workbook(XSSFWorkbook workbook) {
+        this.wb = workbook;
+        /* switch sheet. */
+        this.sheet = wb.getSheet(wb.getSheetName(0));
+    }
+
 
     /**
      * 检查并获取指定名称的工作表。如果不存在，则创建一个新的工作表。
@@ -161,10 +208,66 @@ public class Workbook {
         Row retval = new Row();
 
         short lastCellNum = row.getLastCellNum();
-        for (short i = 0; i < lastCellNum; i++)
+        for (short i = 0; i < lastCellNum; i++) {
             retval.add(row.getCell(i).getStringCellValue());
+        }
 
         return retval;
+    }
+
+    /**
+     * #brief: 获取当前工作表的行数
+     *
+     * <p>返回当前工作表中最后一行的索引，代表
+     * 行数。注意：行数从 0 开始，因此返回值加 1
+     * 才是实际行数。如果工作表为空，返回 -1。
+     *
+     * @return 当前工作表的行数
+     */
+    public int rowCount() {
+        return sheet.getLastRowNum();
+    }
+
+    /**
+     * #brief: 根据文件路径加载 Workbook 实例
+     *
+     * <p>根据提供的文件路径，加载并返回对应的
+     * Workbook 实例。如果文件不存在或格式不正确，可能
+     * 会抛出异常。
+     *
+     * @param pathname Excel 文件的路径
+     * @return 加载的 Workbook 实例
+     */
+    public static Workbook load(String pathname) {
+        return load(new File(pathname));
+    }
+
+    /**
+     * #brief: 根据 File 对象加载 Workbook 实例
+     *
+     * <p>根据提供的 File 对象，加载并返回对应的
+     * Workbook 实例。如果文件不存在或格式不正确，可能
+     * 会抛出异常。
+     *
+     * @param file Excel 文件对象
+     * @return 加载的 Workbook 实例
+     */
+    public static Workbook load(File file) {
+        return new Workbook(file);
+    }
+
+    /**
+     * #brief: 根据输入流加载 Workbook 实例
+     *
+     * <p>根据提供的输入流，加载并返回对应的
+     * Workbook 实例。输入流需指向有效的 Excel 文件内容。
+     * 如果输入流无效，可能会抛出异常。
+     *
+     * @param stream 输入流，需指向有效的 Excel 文件内容
+     * @return 加载的 Workbook 实例
+     */
+    public static Workbook load(InputStream stream) {
+        return new Workbook(stream);
     }
 
     /**

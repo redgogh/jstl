@@ -49,4 +49,11 @@ public class WorkbookExample {
             wb.write(new File("Desktop://b.xlsx").openByteWriter());
     }
 
+        @Test
+        public void loadWorkbookExample() {
+            Workbook wb = Workbook.load("Desktop://test.xlsx");
+            for (int i = 0; i < wb.rowCount(); i++)
+                System.out.println(wb.getRow(i));
+        }
+
 }
