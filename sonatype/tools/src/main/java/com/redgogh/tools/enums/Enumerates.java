@@ -21,7 +21,7 @@ package com.redgogh.tools.enums;
 /* Create on 2019/6/14 */
 
 import com.redgogh.tools.exception.InvalidArgumentException;
-import com.redgogh.tools.refection.UClass;
+import com.redgogh.tools.reflect.UClass;
 
 import static com.redgogh.tools.Assert.throwIfNull;
 import static com.redgogh.tools.StringUtils.strieq;

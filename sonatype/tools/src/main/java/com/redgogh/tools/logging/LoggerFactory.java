@@ -22,7 +22,7 @@ package com.redgogh.tools.logging;
 
 import com.redgogh.tools.logging.slf4j.Slf4jLoggerAdapter;
 import com.redgogh.tools.logging.standard.StandardLoggerAdapter;
-import com.redgogh.tools.refection.UClass;
+import com.redgogh.tools.reflect.UClass;
 
 import static com.redgogh.tools.StringUtils.strwfmt;
 
