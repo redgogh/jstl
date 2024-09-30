@@ -23,8 +23,6 @@ import com.redgogh.tools.io.IOUtils;
 import okhttp3.ResponseBody;
 
 import java.io.Closeable;
-import java.io.IOException;
-import java.io.InputStream;
 
 import static com.redgogh.tools.Assert.throwIfNull;
 
