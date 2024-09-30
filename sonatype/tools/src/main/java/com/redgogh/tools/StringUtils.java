@@ -18,6 +18,9 @@ package com.redgogh.tools;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import java.nio.file.FileSystems;
+import java.nio.file.PathMatcher;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -67,6 +70,8 @@ import static com.redgogh.tools.BasicConverter.atos;
 public class StringUtils {
 
     private static final Map<String, Pattern> compiled = new WeakHashMap<>();
+
+    private static final Map<String, PathMatcher> pathMatcherCache = new WeakHashMap<>();
 
     /**
      * 获取字符串的长度。
@@ -444,6 +449,30 @@ public class StringUtils {
         Pattern pattern = enablePatternCache ? _patternCacheComputeIfAbsent(regexp) : Pattern.compile(regexp);
         assert pattern != null;
         return pattern.matcher(atos(obj)).find();
+    }
+
+    /**
+     * #brief: 检查给定字符串是否符合指定模式
+     *
+     * <p>该方法使用路径匹配器判断提供的字符串是否与
+     * 指定的模式匹配。模式使用 glob 语法，可以实现
+     * 简单的通配符匹配。
+     *
+     * <p>如果模式在缓存中不存在，将会创建一个新的
+     * PathMatcher 并缓存，以提高后续匹配的效率。
+     *
+     * @param wstr 要匹配的字符串
+     * @param pattern 匹配模式
+     * @return 如果字符串符合模式，返回 true；否则返回 false
+     */
+    public static boolean strant(Object wstr, String pattern) {
+        PathMatcher pathMatcher =
+                pathMatcherCache.computeIfAbsent(pattern, k -> compilePathMatcher(pattern));
+        return pathMatcher.matches(Paths.get(atos(wstr)));
+    }
+
+    private static PathMatcher compilePathMatcher(String pattern) {
+        return FileSystems.getDefault().getPathMatcher("glob:" + pattern);
     }
 
     /**

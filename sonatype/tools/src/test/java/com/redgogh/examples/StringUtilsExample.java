@@ -18,9 +18,18 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.redgogh.tools.collection.Lists;
+import com.redgogh.tools.generators.RandomGenerator;
 import org.junit.Test;
 
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
 import static com.redgogh.tools.BasicConverter.atos;
+import static com.redgogh.tools.StringUtils.strant;
 import static com.redgogh.tools.StringUtils.strcut;
 
 @SuppressWarnings("ALL")
@@ -37,6 +46,28 @@ public class StringUtilsExample {
     public void strcutExmaple() {
         String author = "Red Gogh";
         System.out.println(strcut(author, 0, -1));
+    }
+
+    @Test
+    public void globMatcherExample() {
+        List<String> paths = Lists.of();
+
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        scheduledExecutorService.scheduleAtFixedRate(() -> System.out.print("\rsize: " + paths.size()), 0, 10, TimeUnit.MILLISECONDS);
+
+        boolean isContinue = true;
+        while (isContinue) {
+            paths.add("/" + RandomGenerator.nextLetterCode(3, 8) + "/" + RandomGenerator.nextLetterCode(0, 8) + "." + RandomGenerator.nextLetterCode(3, 6));
+            if (paths.size() > 10000000)
+                isContinue = false;
+        }
+        scheduledExecutorService.shutdown();
+        System.out.println();
+        paths.add("/api/dwada.xdwadpojawopdjf");
+        paths.forEach(V -> {
+            if (strant(V, "/api/*.x*f"))
+                System.out.println(V);
+        });
     }
 
 }

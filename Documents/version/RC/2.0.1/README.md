@@ -9,11 +9,14 @@
 - `Workbook`工作簿支持转`CSV`文本格式。
 - 提供序列化工具，支持对象序列化以及反序列化操作。持久化保存对象数据。
 - 新增`SerializationException`序列化异常类。
+- 新增Linux下`globbing`路径匹配机制，支持使用`strant`函数匹配各种路径。
+- 新增`nextLetterCode`随机纯英文字符生成方法。
 
 ## 👻 优化功能
 
 - `reflection`包更新为`reflect`，这样命名会比较清晰容易理解。
 - 私有化原始`arraycopy`方法，避免外部调用。
+- 随机字符生成支持长度范围生成。
 
 ## 🐞 BUG 修复
 

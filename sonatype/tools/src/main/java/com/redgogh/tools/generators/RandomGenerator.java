@@ -41,34 +41,98 @@ public class RandomGenerator {
     }
 
     /**
-     * #brief: 生成指定长度的随机字符串
+     * #brief: 生成指定长度的随机代码
      *
-     * <p>该方法生成一个由字母和数字组成的随机字符串。字符串的每个字符随机从字母或数字数组中选取。
-     * 使用 `nextBoolean()` 方法决定是选择字母还是数字，并使用 `nextInt()` 方法随机选择具体字符。
+     * <p>该方法生成一个随机长度的字符串，字符串长度由
+     * 参数指定，内容为字母和数字的组合。调用该方法将
+     * 默认生成从 0 到指定长度之间的随机长度代码。
      *
-     * @param length 要生成的随机字符串的长度
-     * @return 包含指定长度的随机字母和数字的字符串
+     * @param length 要生成的字符串的最大长度
+     * @return 生成的随机代码
      */
     public static String nextCode(int length) {
+        return nextCode(0, length);
+    }
+
+    /**
+     * #brief: 生成指定范围内随机长度的代码
+     *
+     * <p>该方法生成一个随机长度的字符串，长度在指定的
+     * 最小值和最大值之间，内容为字母和数字的组合。
+     *
+     * @param min 最小长度
+     * @param max 最大长度
+     * @return 生成的随机代码
+     */
+    public static String nextCode(int min, int max) {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < length; i++)
+        int loopCount = nextInt(min, max);
+        for (int i = 0; i < loopCount; i++)
             builder.append(nextBoolean() ? LETTER_ARRAY[nextInt(LETTER_ARRAY.length - 1)] :
-                                           NUMBER_ARRAY[nextInt(NUMBER_ARRAY.length - 1)]);
+                    NUMBER_ARRAY[nextInt(NUMBER_ARRAY.length - 1)]);
         return builder.toString();
     }
 
     /**
-     * #brief: 生成指定长度的随机数字字符串
+     * #brief: 生成指定长度的随机字母代码
      *
-     * <p>该方法生成一个由数字组成的随机字符串。字符串的每个字符随机从数字数组 `NUMBER_ARRAY`
-     * 中选取。使用 `nextInt()` 方法随机选择数组中的数字字符。
+     * <p>该方法生成一个随机长度的字符串，字符串内容仅
+     * 包含字母。调用该方法将默认生成从 0 到指定长度之间
+     * 的随机长度代码。
      *
-     * @param length 要生成的随机数字字符串的长度
-     * @return 包含指定长度的随机数字字符串
+     * @param length 要生成的字符串的最大长度
+     * @return 生成的随机字母代码
+     */
+    public static String nextLetterCode(int length) {
+        return nextLetterCode(0, length);
+    }
+
+    /**
+     * #brief: 生成指定范围内随机长度的字母代码
+     *
+     * <p>该方法生成一个随机长度的字符串，长度在指定的
+     * 最小值和最大值之间，字符串内容仅包含字母。
+     *
+     * @param min 最小长度
+     * @param max 最大长度
+     * @return 生成的随机字母代码
+     */
+    public static String nextLetterCode(int min, int max) {
+        StringBuilder builder = new StringBuilder();
+        int loopCount = nextInt(min, max);
+        for (int i = 0; i < loopCount; i++)
+            builder.append(LETTER_ARRAY[nextInt(LETTER_ARRAY.length - 1)]);
+        return builder.toString();
+    }
+
+    /**
+     * #brief: 生成指定长度的随机数字代码
+     *
+     * <p>该方法生成一个随机长度的字符串，字符串内容仅
+     * 包含数字。调用该方法将默认生成从 0 到指定长度之间
+     * 的随机长度代码。
+     *
+     * @param length 要生成的字符串的最大长度
+     * @return 生成的随机数字代码
      */
     public static String nextNumberCode(int length) {
+        return nextNumberCode(0, length);
+    }
+
+    /**
+     * #brief: 生成指定范围内随机长度的数字代码
+     *
+     * <p>该方法生成一个随机长度的字符串，长度在指定的
+     * 最小值和最大值之间，字符串内容仅包含数字。
+     *
+     * @param min 最小长度
+     * @param max 最大长度
+     * @return 生成的随机数字代码
+     */
+    public static String nextNumberCode(int min, int max) {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < length; i++)
+        int loopCount = nextInt(min, max);
+        for (int i = 0; i < loopCount; i++)
             builder.append(NUMBER_ARRAY[nextInt(NUMBER_ARRAY.length - 1)]);
         return builder.toString();
     }
