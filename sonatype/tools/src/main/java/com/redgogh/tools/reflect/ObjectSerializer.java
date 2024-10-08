@@ -22,8 +22,6 @@ import com.redgogh.tools.exception.SerializationException;
 import com.redgogh.tools.io.File;
 import com.redgogh.tools.io.FileByteReader;
 import com.redgogh.tools.io.FileByteWriter;
-import com.redgogh.tools.logging.Logger;
-import com.redgogh.tools.logging.LoggerFactory;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -39,12 +37,9 @@ import java.io.ObjectOutputStream;
  * 或恢复对象状态。
  *
  * @author RedGogh
- * @see Logger
  * @see File
  */
 public class ObjectSerializer {
-
-    public static final Logger LOG = LoggerFactory.getLogger(ObjectSerializer.class);
 
     /**
      * #brief: 将对象序列化并写入文件
@@ -60,7 +55,6 @@ public class ObjectSerializer {
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileByteWriter)) {
             objectOutputStream.writeObject(object);
         } catch (IOException e) {
-            LOG.error("UObject#serialize error", e);
             throw new SerializationException(e);
         }
     }
@@ -80,7 +74,6 @@ public class ObjectSerializer {
              ObjectInputStream objectInputStream = new ObjectInputStream(fileByteReader)) {
             return objectInputStream.readObject();
         } catch (Exception e) {
-            LOG.error("UObject#deserialize error", e);
             throw new SerializationException(e);
         }
     }

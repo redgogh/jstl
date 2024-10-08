@@ -22,7 +22,6 @@ package com.redgogh.libraries.springframework.boot.web.configuration;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.redgogh.libraries.springframework.boot.web.R;
-import com.redgogh.tools.BeanUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
 import org.jetbrains.annotations.NotNull;
@@ -35,8 +34,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
 
 import java.util.List;
-
-import static com.redgogh.tools.StringUtils.*;
 
 /**
  * 全局异常拦截器。

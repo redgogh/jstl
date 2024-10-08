@@ -18,8 +18,7 @@ package com.redgogh.tools.io;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.tools.logging.Logger;
-import com.redgogh.tools.logging.LoggerFactory;
+import com.redgogh.tools.exception.IOWriteException;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -28,8 +27,6 @@ import java.io.*;
  * 文件输出流
  */
 public class FileByteWriter extends FileOutputStream {
-
-    private static final Logger logger = LoggerFactory.getLogger(FileByteWriter.class);
 
     public FileByteWriter(@NotNull String name) throws FileNotFoundException {
         super(name);
@@ -69,7 +66,7 @@ public class FileByteWriter extends FileOutputStream {
         try {
             fileByteReaderResource.call(this);
         } catch (Exception e) {
-            logger.error("FileByteWriter call error!", e);
+            throw new IOWriteException(e);
         } finally {
             IOUtils.closeQuietly(this);
         }
