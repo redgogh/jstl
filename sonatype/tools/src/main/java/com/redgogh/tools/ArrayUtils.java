@@ -18,8 +18,6 @@ package com.redgogh.tools;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import static com.redgogh.tools.Assert.throwIfFalse;
-
 /**
  * 数组工具类
  *
@@ -41,7 +39,7 @@ public class ArrayUtils {
     }
 
     public static void checkIndexSize(int off, int len, int size) {
-        throwIfFalse(!((off + len ) > size), "Array offset and size out of index: %s", size);
+        Assert.ifBool(!((off + len ) > size), "Array offset and size out of index: %s", size);
     }
 
     /**

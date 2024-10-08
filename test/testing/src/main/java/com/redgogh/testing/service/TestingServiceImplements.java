@@ -21,19 +21,12 @@ package com.redgogh.testing.service;
 /* Create on 2024/9/13 */
 
 import com.redgogh.testing.enums.TikaFile;
+import com.redgogh.tools.Assert;
 import com.redgogh.tools.io.File;
-import org.apache.tika.Tika;
-import org.apache.tika.metadata.Metadata;
-import org.apache.tika.parser.ParseContext;
-import org.apache.tika.parser.pdf.PDFParser;
-import org.apache.tika.sax.BodyContentHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.concurrent.TimeUnit;
-
-import static com.redgogh.tools.Assert.throwIfError;
-import static com.redgogh.tools.StringUtils.strxip;
 
 /**
  * @author RedGogh
@@ -48,11 +41,11 @@ public class TestingServiceImplements implements TestingService {
 
     @Override
     public void asyncCall(int sleep) {
-        throwIfError(() -> Thread.sleep(TimeUnit.SECONDS.toMillis(sleep)));
+        Assert.ifError(() -> Thread.sleep(TimeUnit.SECONDS.toMillis(sleep)));
     }
 
     @Override
     public String tika(MultipartFile multipartFile, TikaFile tikaFile) {
-        return throwIfError(() -> TikaFile.readText(multipartFile.getInputStream()));
+        return Assert.ifError(() -> TikaFile.readText(multipartFile.getInputStream()));
     }
 }

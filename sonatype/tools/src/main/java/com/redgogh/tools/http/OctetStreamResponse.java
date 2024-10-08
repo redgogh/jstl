@@ -18,13 +18,12 @@ package com.redgogh.tools.http;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.redgogh.tools.Assert;
 import com.redgogh.tools.io.File;
 import com.redgogh.tools.io.IOUtils;
 import okhttp3.ResponseBody;
 
 import java.io.Closeable;
-
-import static com.redgogh.tools.Assert.throwIfNull;
 
 /**
  * 类 {@link OctetStreamResponse} 表示一个字节流响应。
@@ -82,7 +81,7 @@ public class OctetStreamResponse implements Closeable {
      * @return 传输完成的 {@link File} 对象
      */
     public File transferTo(File file) {
-        ResponseBody body = throwIfNull(response.body(), "没有数据响应。");
+        ResponseBody body = Assert.ifNull(response.body(), "没有数据响应。");
         IOUtils.write(body.byteStream(), file);
         close();
         return file;

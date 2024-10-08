@@ -64,36 +64,6 @@ public class Assert {
     }
 
     /**
-     * 如果条件为 true，则抛出断言异常。
-     *
-     * <p>此方法用于验证某个条件是否为 true，如果条件为 true，将抛出 {@link AssertException}。
-     *
-     * @param condition 要检查的条件
-     * @throws AssertException 如果条件为 true
-     */
-    public static void throwIfTrue(boolean condition) {
-        throwIfTrue(condition, "assert condition == true");
-    }
-
-    /**
-     * 当条件为 true 时，抛出自定义的 {@link AssertException}。
-     *
-     * <p>此方法用于在条件不满足时触发异常，便于进行断言检查，确保程序的状态符合预期。
-     *
-     * @param condition 需要检查的条件
-     * @param fmt 自定义异常信息的格式化字符串
-     * @param args 格式化字符串的参数
-     *
-     * @throws AssertException 如果 {@code condition} 为 true，将抛出异常，并使用 {@code fmt} 和 {@code args}
-     *                         格式化异常信息。
-     */
-    public static void throwIfTrue(boolean condition, String fmt, Object... args) {
-        if (condition)
-            throw new AssertException(fmt, args);
-    }
-
-
-    /**
      * 如果条件为 false，则抛出断言异常。
      *
      * <p>此方法用于验证某个条件是否为 false，如果条件为 false，将抛出 {@link AssertException}。
@@ -101,8 +71,8 @@ public class Assert {
      * @param condition 要检查的条件
      * @throws AssertException 如果条件为 false
      */
-    public static void throwIfFalse(boolean condition) {
-        throwIfFalse(condition, "assert condition == false");
+    public static void ifBool(boolean condition) {
+        ifBool(condition, "assert condition == false");
     }
 
     /**
@@ -117,7 +87,7 @@ public class Assert {
      * @throws AssertException 如果 {@code condition} 为 false，将抛出异常，并使用 {@code fmt} 和 {@code args}
      *                         格式化异常信息。
      */
-    public static void throwIfFalse(boolean condition, String fmt, Object... args) {
+    public static void ifBool(boolean condition, String fmt, Object... args) {
         if (!condition)
             throw new AssertException(fmt, args);
     }
@@ -131,7 +101,7 @@ public class Assert {
      * @param collection 要检查的集合
      * @throws AssertException 如果集合为空
      */
-    public static <E> void throwIfEmpty(Collection<E> collection) {
+    public static <E> void ifEmpty(Collection<E> collection) {
         if (Lists.isEmpty(collection))
             throw new AssertException("collection is empty!");
     }
@@ -144,7 +114,7 @@ public class Assert {
      * @param function 要执行的函数
      * @throws AssertException 如果函数执行时发生异常
      */
-    public static void throwIfError(VoidFunction function) {
+    public static void ifError(VoidFunction function) {
         try {
             function.call();
         } catch (Throwable e) {
@@ -162,7 +132,7 @@ public class Assert {
      * @param args 格式化参数
      * @throws AssertException 如果函数执行时发生异常
      */
-    public static void throwIfError(VoidFunction function, String fmt, Object... args) {
+    public static void ifError(VoidFunction function, String fmt, Object... args) {
         try {
             function.call();
         } catch (Throwable e) {
@@ -180,7 +150,7 @@ public class Assert {
      * @return 函数返回的值；如果发生异常，则抛出 {@link AssertException}
      * @throws AssertException 如果函数执行时发生异常
      */
-    public static <T> T throwIfError(RetFunction<T> function) {
+    public static <T> T ifError(RetFunction<T> function) {
         try {
             return function.call();
         } catch (Throwable e) {
@@ -200,7 +170,7 @@ public class Assert {
      * @return 函数返回的值；如果发生异常，则抛出 {@link AssertException}
      * @throws AssertException 如果函数执行时发生异常
      */
-    public static <T> T throwIfError(RetFunction<T> function, String fmt, Object... args) {
+    public static <T> T ifError(RetFunction<T> function, String fmt, Object... args) {
         try {
             return function.call();
         } catch (Throwable e) {
@@ -218,8 +188,8 @@ public class Assert {
      * @return 如果条件不为 null，返回该对象
      * @throws AssertException 如果条件为 null
      */
-    public static <T> T throwIfNull(T condition) {
-        return throwIfNull(condition, "null");
+    public static <T> T ifNull(T condition) {
+        return ifNull(condition, "null");
     }
 
     /**
@@ -234,7 +204,7 @@ public class Assert {
      * @return 如果条件不为 null，返回该对象
      * @throws AssertException 如果条件为 null
      */
-    public static <T> T throwIfNull(T condition, String fmt, Object... args) {
+    public static <T> T ifNull(T condition, String fmt, Object... args) {
         if (condition == null)
             throw new AssertException(fmt, args);
         return condition;

@@ -25,6 +25,7 @@ package com.redgogh.tools.reflect;
 
 /* Creates on 2019/5/16. */
 
+import com.redgogh.tools.Assert;
 import com.redgogh.tools.collection.Lists;
 import com.redgogh.tools.collection.Maps;
 import lombok.Getter;
@@ -34,9 +35,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
-
-import static com.redgogh.tools.Assert.throwIfError;
-import static com.redgogh.tools.Assert.throwIfNull;
 
 /**
  * `UClass` 是一个用于处理 Java 类元数据的工具类。它封装了一个 `Class` 对象，并提供了一些方法来
@@ -122,7 +120,7 @@ public class UClass {
      * @return {@link UClass} 实例
      */
     public static UClass forName(String className) {
-        return new UClass(throwIfError(() -> Class.forName(className)));
+        return new UClass(Assert.ifError(() -> Class.forName(className)));
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -271,7 +269,7 @@ public class UClass {
      */
     @SuppressWarnings({"unchecked"})
     public <R> R readFieldValue(String name, Object instance) {
-        return (R) throwIfNull(fields.get(name), "未在 %s 类中找到 %s 属性。", getName(), name)
+        return (R) Assert.ifNull(fields.get(name), "未在 %s 类中找到 %s 属性。", getName(), name)
                 .read(instance);
     }
 
@@ -352,7 +350,7 @@ public class UClass {
      * @return 方法调用的返回值。如果目标方法的返回类型是 `void`，则返回 `null`。
      */
     private Object invoke0(Object obj, String name, Object... args) {
-        return throwIfError(() -> {
+        return Assert.ifError(() -> {
             Method method = args == null ? descriptor.getDeclaredMethod(name) :
                     descriptor.getDeclaredMethod(name, toClassArray(args));
             method.setAccessible(true);

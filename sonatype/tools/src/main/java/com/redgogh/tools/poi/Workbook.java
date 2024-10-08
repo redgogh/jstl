@@ -18,6 +18,7 @@ package com.redgogh.tools.poi;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.redgogh.tools.Assert;
 import com.redgogh.tools.BasicConverter;
 import com.redgogh.tools.Optional;
 import com.redgogh.tools.collection.Lists;
@@ -32,7 +33,6 @@ import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.redgogh.tools.Assert.throwIfError;
 import static com.redgogh.tools.BasicConverter.atos;
 import static com.redgogh.tools.StringUtils.strne;
 
@@ -96,7 +96,7 @@ public class Workbook implements Iterable<Row> {
      * @param file Excel 文件对象
      */
     public Workbook(File file) {
-        this(throwIfError(() -> new XSSFWorkbook(file)));
+        this(Assert.ifError(() -> new XSSFWorkbook(file)));
     }
 
     /**
@@ -109,7 +109,7 @@ public class Workbook implements Iterable<Row> {
      * @param stream 输入流，需指向有效的 Excel 文件内容
      */
     public Workbook(InputStream stream) {
-        this(throwIfError(() -> new XSSFWorkbook(stream)));
+        this(Assert.ifError(() -> new XSSFWorkbook(stream)));
     }
 
     /**
@@ -323,7 +323,7 @@ public class Workbook implements Iterable<Row> {
      *
      */
     public void write(OutputStream stream) {
-        throwIfError(() -> wb.write(stream));
+        Assert.ifError(() -> wb.write(stream));
     }
 
     /**

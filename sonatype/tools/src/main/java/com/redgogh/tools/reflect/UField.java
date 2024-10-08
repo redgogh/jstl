@@ -25,13 +25,14 @@ package com.redgogh.tools.reflect;
 
 /* Creates on 2019/5/16. */
 
+import com.redgogh.tools.Assert;
 import com.redgogh.tools.Optional;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-import static com.redgogh.tools.Assert.*;
+import static com.redgogh.tools.Assert.ignore;
 import static com.redgogh.tools.StringUtils.strwfmt;
 
 /**
@@ -153,13 +154,13 @@ public class UField {
          * 获取当前属性中的值
          */
         public Object read() {
-            return throwIfError(() -> field.get(instance));
+            return Assert.ifError(() -> field.get(instance));
         }
         /**
          * 设置当前属性中的值
          */
         public void write(Object value) {
-            throwIfError(() -> field.set(instance, value));
+            Assert.ifError(() -> field.set(instance, value));
         }
     }
 
@@ -177,7 +178,7 @@ public class UField {
     static Field findDescriptorField(String name, Class<?> descriptor) {
         Field field = Optional.ifError(() -> descriptor.getDeclaredField(name),
                 findDescriptorField0(name, descriptor));
-        return throwIfNull(field, "属性 %s 在 %s 类中不存在", name, descriptor.getName());
+        return Assert.ifNull(field, "属性 %s 在 %s 类中不存在", name, descriptor.getName());
     }
 
     /** 递归从 {@code descriptor} 的父类查找 {@code name} 属性 */

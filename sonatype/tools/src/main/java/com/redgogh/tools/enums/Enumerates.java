@@ -20,10 +20,10 @@ package com.redgogh.tools.enums;
 
 /* Create on 2019/6/14 */
 
+import com.redgogh.tools.Assert;
 import com.redgogh.tools.exception.InvalidArgumentException;
 import com.redgogh.tools.reflect.UClass;
 
-import static com.redgogh.tools.Assert.throwIfNull;
 import static com.redgogh.tools.StringUtils.strieq;
 
 /**
@@ -97,7 +97,7 @@ public class Enumerates {
      * @throws NullPointerException 如果提供的名称没有匹配的枚举值
      */
     public static <E extends Enum<E>> E checkout(Class<? extends Enum<E>> enumClass, String name) {
-        return throwIfNull(find(enumClass, name), "参数错误【%s】常量不存在！", name);
+        return Assert.ifNull(find(enumClass, name), "参数错误【%s】常量不存在！", name);
     }
 
     /**

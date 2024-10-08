@@ -108,7 +108,7 @@ public class R<T> implements Serializable {
         return !streq("200", code);
     }
 
-    public void throwIfError() {
+    public void ifError() {
         xassert(!isError(), "%x[code: %s] %s", code, message);
     }
 

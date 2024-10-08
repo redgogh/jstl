@@ -19,6 +19,7 @@ package com.redgogh.tools.http;
 \* -------------------------------------------------------------------------------- */
 
 import com.alibaba.fastjson.JSON;
+import com.redgogh.tools.Assert;
 import com.redgogh.tools.collection.Maps;
 import com.redgogh.tools.exception.HttpRequestException;
 import com.redgogh.tools.io.File;
@@ -29,8 +30,8 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import static com.redgogh.tools.Assert.ignore;
 import static com.redgogh.tools.BasicConverter.atos;
-import static com.redgogh.tools.Assert.*;
 import static com.redgogh.tools.StringUtils.strhas;
 import static com.redgogh.tools.StringUtils.strupper;
 
@@ -101,7 +102,7 @@ public class HttpClient {
     private HttpClient(String method, String url) {
         String upperMethod = strupper(method);
         this.method = ignore(() -> HttpMethod.valueOf(upperMethod));
-        throwIfNull(this.method, "不支持的请求方式 - %s", this.method.name());
+        Assert.ifNull(this.method, "不支持的请求方式 - %s", this.method.name());
         this.url = url;
     }
 
@@ -243,7 +244,7 @@ public class HttpClient {
      * @return 一个新的 {@link OctetStreamResponse} 实例。
      */
     public OctetStreamResponse newOctetStreamCall(OctetStreamCallback callback) {
-        return new OctetStreamResponse(throwIfError(() -> newCall0(callback)));
+        return new OctetStreamResponse(Assert.ifError(() -> newCall0(callback)));
     }
 
     /**
@@ -407,7 +408,7 @@ public class HttpClient {
         /* response */
         Response retval = new Response(okResponse.code(), okResponse.headers(), okResponse.body());
 
-        throwIfFalse(okResponse.isSuccessful(), "HTTP请求出错（%s）\n    - URL：%s \n    - Request Body：%s \n    - Message: %s",
+        Assert.ifBool(okResponse.isSuccessful(), "HTTP请求出错（%s）\n    - URL：%s \n    - Request Body：%s \n    - Message: %s",
                 okResponse.code(), url, JSON.toJSONString(object), retval);
 
         return retval;

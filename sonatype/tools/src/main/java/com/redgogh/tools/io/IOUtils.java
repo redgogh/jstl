@@ -20,13 +20,11 @@ package com.redgogh.tools.io;
 
 /* Creates on 2020/4/29. */
 
+import com.redgogh.tools.Assert;
 import com.redgogh.tools.exception.IOReadException;
 import com.redgogh.tools.exception.IOWriteException;
 
 import java.io.*;
-
-import static com.redgogh.tools.Assert.throwIfError;
-import static com.redgogh.tools.Assert.throwIfFalse;
 
 /**
  * IO操作工具包，整合大部分IO操作，使得在Java中更多的IO操作
@@ -71,7 +69,7 @@ public class IOUtils {
      */
     public static void closeQuietly(Closeable closeable) {
         if (closeable != null)
-            throwIfError(closeable::close);
+            Assert.ifError(closeable::close);
     }
 
     /**
@@ -86,7 +84,7 @@ public class IOUtils {
      * @return 返回所有文件中的字节数据
      */
     public static byte[] read(java.io.File file) {
-        throwIfFalse(file != null && file.isFile(), "文件不能为空且不能是目录！");
+        Assert.ifBool(file != null && file.isFile(), "文件不能为空且不能是目录！");
         return read(new File(file).openByteReader());
     }
 
@@ -365,7 +363,7 @@ public class IOUtils {
      */
     public static void write(byte[] b, int off, int len,
                              OutputStream stream) {
-        throwIfError(() -> stream.write(b, off, len));
+        Assert.ifError(() -> stream.write(b, off, len));
     }
 
 }

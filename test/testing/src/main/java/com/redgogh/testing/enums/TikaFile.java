@@ -20,11 +20,10 @@ package com.redgogh.testing.enums;
 
 /* Create on 2024/9/13 */
 
+import com.redgogh.tools.Assert;
 import org.apache.tika.Tika;
 
 import java.io.InputStream;
-
-import static com.redgogh.tools.Assert.throwIfError;
 
 /**
  * `TikaFile` 枚举定义了常见的文件类型，用于表示不同的文件格式。
@@ -98,7 +97,7 @@ public enum TikaFile {
      * 任意文档数据流转文本
      */
     public static String readText(InputStream stream) {
-        return throwIfError(() -> tika.parseToString(stream));
+        return Assert.ifError(() -> tika.parseToString(stream));
     }
 
 }
