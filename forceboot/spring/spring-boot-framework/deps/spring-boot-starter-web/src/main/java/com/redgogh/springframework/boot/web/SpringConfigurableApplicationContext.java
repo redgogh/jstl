@@ -1,4 +1,4 @@
-package com.redgogh.testing;
+package com.redgogh.springframework.boot.web;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,19 +18,29 @@ package com.redgogh.testing;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-/* Create on 2023/8/10 */
+/* Create on 2023/8/22 */
 
-import com.redgogh.springframework.boot.web.SpringApplicationBootstrap;
-import com.redgogh.springframework.boot.web.annotation.EnableValidExcept;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * @author RedGogh
  */
-@EnableValidExcept
-@SpringBootApplication
-public class TestingBootstrap {
-    public static void main(String[] args) {
-        SpringApplicationBootstrap.run(TestingBootstrap.class, args);
+public class SpringConfigurableApplicationContext {
+
+    private static ConfigurableApplicationContext _configurableApplicationContext;
+
+    public static void configure(ConfigurableApplicationContext configurableApplicationContext) {
+        _configurableApplicationContext = configurableApplicationContext;
     }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T getBean(String name) {
+        return (T) _configurableApplicationContext.getBean(name);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T getBean(Class<?> beanType) {
+        return (T) _configurableApplicationContext.getBean(beanType);
+    }
+
 }

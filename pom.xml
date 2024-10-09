@@ -9,8 +9,6 @@
     <version>v1.0.0-beta.1+build</version>
 
     <modules>
-        <!-- projects -->
-        <module>projects/lion-routes</module>
         <!-- test -->
         <module>test/testing</module>
         <!-- template -->

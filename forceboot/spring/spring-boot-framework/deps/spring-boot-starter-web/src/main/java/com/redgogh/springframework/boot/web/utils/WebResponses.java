@@ -1,4 +1,4 @@
-package com.redgogh.testing;
+package com.redgogh.springframework.boot.web.utils;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,19 +18,43 @@ package com.redgogh.testing;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-/* Create on 2023/8/10 */
+/* Creates on 2023/5/18. */
 
-import com.redgogh.springframework.boot.web.SpringApplicationBootstrap;
-import com.redgogh.springframework.boot.web.annotation.EnableValidExcept;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.redgogh.tools.exception.IOWriteException;
+import com.redgogh.tools.io.IOUtils;
+import com.redgogh.tools.io.File;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+
+import static com.redgogh.tools.StringUtils.*;
 
 /**
  * @author RedGogh
  */
-@EnableValidExcept
-@SpringBootApplication
-public class TestingBootstrap {
-    public static void main(String[] args) {
-        SpringApplicationBootstrap.run(TestingBootstrap.class, args);
+public class WebResponses {
+
+    /**
+     * 添加文件返回对象
+     *
+     * @param response
+     *        响应对象
+     *
+     * @param file
+     *        文件对象
+     */
+    public static void addFileHeader(HttpServletResponse response, File file) {
+        try {
+            response.reset();
+            response.setContentType("application/octet-stream");
+            response.setCharacterEncoding("utf-8");
+            response.setContentLength((int) file.length());
+            response.setHeader("Content-Disposition", strwfmt("attachment;filename=%s", file.getName()));
+            IOUtils.write(file.openByteReader(), response.getOutputStream());
+        } catch (IOException e) {
+            response.reset();
+            throw new IOWriteException(e);
+        }
     }
+
 }

@@ -20,11 +20,10 @@ package com.redgogh.testing.controller;
 
 /* Create on 2024/9/13 */
 
-import com.redgogh.libraries.springframework.boot.web.R;
+import com.redgogh.springframework.boot.web.R;
 import com.redgogh.testing.dto.User;
 import com.redgogh.testing.enums.TikaFile;
 import com.redgogh.testing.service.TestingService;
-import com.redgogh.tools.enums.Enumerates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

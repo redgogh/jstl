@@ -1,4 +1,4 @@
-package com.redgogh.testing;
+package com.redgogh.springframework.boot.web.configuration.interceptors;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,19 +18,22 @@ package com.redgogh.testing;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-/* Create on 2023/8/10 */
+/* Create on 2023/8/24 */
 
-import com.redgogh.springframework.boot.web.SpringApplicationBootstrap;
-import com.redgogh.springframework.boot.web.annotation.EnableValidExcept;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
+ * 请求结束处理拦截器
+ *
  * @author RedGogh
  */
-@EnableValidExcept
-@SpringBootApplication
-public class TestingBootstrap {
-    public static void main(String[] args) {
-        SpringApplicationBootstrap.run(TestingBootstrap.class, args);
+public class AfterRequestInterceptor implements HandlerInterceptor {
+    @Override
+    @SuppressWarnings("NullableProblems")
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+            throws Exception {
+
     }
 }
