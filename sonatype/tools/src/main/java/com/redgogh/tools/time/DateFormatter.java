@@ -23,6 +23,7 @@ package com.redgogh.tools.time;
 import lombok.SneakyThrows;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * `DateFormatter` 类提供日期和时间的格式化和解析功能。
@@ -78,7 +79,7 @@ public class DateFormatter {
         @Override
         @SneakyThrows
         public Date parse(String text) {
-            return new Date(sdf.parse(text));
+            return sdf.parse(text);
         }
     }
 
@@ -100,8 +101,8 @@ public class DateFormatter {
      *
      * @return 格式化后的字符串
      */
-    public static String fmt() {
-        return fmt(now());
+    public static String format() {
+        return format(now());
     }
 
     /**
@@ -115,8 +116,8 @@ public class DateFormatter {
      *
      * @return 格式化后的字符串
      */
-    public static String fmt(Date date) {
-        return fmt(defaultFormatPattern, date);
+    public static String format(Date date) {
+        return format(defaultFormatPattern, date);
     }
 
     /**
@@ -130,8 +131,8 @@ public class DateFormatter {
      *
      * @return 格式化后的字符串
      */
-    public static String fmt(String pattern) {
-        return fmt(pattern, now());
+    public static String format(String pattern) {
+        return format(pattern, now());
     }
 
     /**
@@ -149,7 +150,7 @@ public class DateFormatter {
      *
      * @return 格式化后的字符串
      */
-    public static String fmt(String pattern, Date date) {
+    public static String format(String pattern, Date date) {
         return compileFormatter(pattern).format(date);
     }
 

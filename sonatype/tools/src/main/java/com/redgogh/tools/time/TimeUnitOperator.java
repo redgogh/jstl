@@ -24,6 +24,7 @@ import com.redgogh.tools.enums.Enumerates;
 import com.redgogh.tools.exception.UnsupportedOperationException;
 import org.joda.time.DateTime;
 
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import static com.redgogh.tools.StringUtils.strwfmt;
@@ -101,7 +102,7 @@ public enum TimeUnitOperator {
                 break;
         }
 
-        return new Date(retval.toDate());
+        return retval.toDate();
     }
 
     public Date minus(int unit) {
@@ -152,7 +153,7 @@ public enum TimeUnitOperator {
                 break;
         }
 
-        return new Date(retval.toDate());
+        return retval.toDate();
     }
 
     /**
