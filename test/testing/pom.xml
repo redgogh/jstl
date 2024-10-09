@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.redgogh.projects</groupId>
         <artifactId>projects</artifactId>
-        <version>v1.0.0-beta.1+build</version>
+        <version>1.0.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
@@ -18,23 +18,23 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.redgogh.forceboot</groupId>
+                <groupId>com.redgogh.plat</groupId>
                 <artifactId>spring-boot-framework</artifactId>
-                <version>v1.0.0-beta.1+build</version>
+                <version>1.0.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>com.redgogh.forceboot</groupId>
+                <groupId>com.redgogh.plat</groupId>
                 <artifactId>spring-cloud-framework</artifactId>
-                <version>v1.0.0-beta.1+build</version>
+                <version>1.0.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>com.redgogh.api</groupId>
-                <artifactId>feginrcall</artifactId>
-                <version>v1.0.0-beta.1+build</version>
+                <artifactId>rcall</artifactId>
+                <version>1.0.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -43,7 +43,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.redgogh.forceboot</groupId>
+            <groupId>com.redgogh.plat</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>

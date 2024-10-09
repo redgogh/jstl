@@ -28,7 +28,7 @@ __pycache__
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
-.idea/forceboot/
+.idea/plat/
 .idea/workspace.xml
 *.iws
 *.iml

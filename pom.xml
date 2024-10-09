@@ -6,7 +6,7 @@
 
     <groupId>com.redgogh.projects</groupId>
     <artifactId>projects</artifactId>
-    <version>v1.0.0-beta.1+build</version>
+    <version>1.0.0</version>
 
     <modules>
         <!-- test -->
@@ -39,12 +39,12 @@
         <dependency>
             <groupId>com.redgogh.configuration</groupId>
             <artifactId>spring-boot-configuration-banner-text</artifactId>
-            <version>v1.0.0-beta.1+build</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.redgogh.configuration</groupId>
             <artifactId>spring-cloud-configuration-discovery-nacos</artifactId>
-            <version>v1.0.0-beta.1+build</version>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 
