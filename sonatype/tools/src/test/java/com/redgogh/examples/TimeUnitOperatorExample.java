@@ -19,7 +19,6 @@ package com.redgogh.examples;
 \* -------------------------------------------------------------------------------- */
 
 import com.redgogh.tools.time.TimeUnitOperator;
-import com.redgogh.tools.time.Date;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")
@@ -39,22 +38,6 @@ public class TimeUnitOperatorExample {
     @Test
     public void timeUnitMinusOperateExample() {
         System.out.printf("TimeUnitOperator DAY minus 1 example: %s\n", TimeUnitOperator.DAYS.minus(1));
-    }
-
-    /**
-     * Date：时间加一周
-     */
-    @Test
-    public void udateAddOperateExample() {
-        System.out.printf("Date WEEKs add 1 week example: %s\n", new Date().add(TimeUnitOperator.WEEKS, 1));
-    }
-
-    /**
-     * Date：时间减一周
-     */
-    @Test
-    public void udateMinusOperateExample() {
-        System.out.printf("Date WEEKs minus 1 week example: %s\n", new Date().minus(TimeUnitOperator.WEEKS, 1));
     }
 
 }
