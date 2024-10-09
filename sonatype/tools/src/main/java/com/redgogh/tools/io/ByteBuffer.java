@@ -22,6 +22,7 @@ package com.redgogh.tools.io;
 
 import com.redgogh.tools.ArrayUtils;
 
+import java.io.IOException;
 import java.io.OutputStream;
 
 /**
@@ -327,6 +328,11 @@ public abstract class ByteBuffer extends OutputStream {
         read(retval, 0, retval.length);
         seek(SEEK_END, 0);
         return retval;
+    }
+
+    @Override
+    public void close() {
+        /* do nothing... */
     }
 
 }
