@@ -31,9 +31,9 @@ public class AssertExample {
     @Test
     public void ifEmptyExample() {
         List<String> list = new ArrayList<>();
-        System.out.printf("-Example: Assert.ifEmpty() object `list` is empty: %s\n", Optional.ifError(() -> Assert.ifEmpty(list), "SUCCESS", "ERROR"));
+        System.out.printf("-Example: Assert.ifEmpty() object `list` is empty: %s\n", Optional.ifError(() -> Assert.isEmpty(list), "SUCCESS", "ERROR"));
         list.add("Hello");
-        System.out.printf("-Example: Assert.ifEmpty() object `list` not empty: %s\n", Optional.ifError(() -> Assert.ifEmpty(list), "SUCCESS", "ERROR"));
+        System.out.printf("-Example: Assert.ifEmpty() object `list` not empty: %s\n", Optional.ifError(() -> Assert.isEmpty(list), "SUCCESS", "ERROR"));
     }
 
 }

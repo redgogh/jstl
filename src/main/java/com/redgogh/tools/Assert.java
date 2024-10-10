@@ -71,8 +71,8 @@ public class Assert {
      * @param condition 要检查的条件
      * @throws AssertException 如果条件为 false
      */
-    public static void ifBool(boolean condition) {
-        ifBool(condition, "assert condition == false");
+    public static void isFalse(boolean condition) {
+        isFalse(condition, "assert condition == false");
     }
 
     /**
@@ -87,7 +87,7 @@ public class Assert {
      * @throws AssertException 如果 {@code condition} 为 false，将抛出异常，并使用 {@code fmt} 和 {@code args}
      *                         格式化异常信息。
      */
-    public static void ifBool(boolean condition, String fmt, Object... args) {
+    public static void isFalse(boolean condition, String fmt, Object... args) {
         if (!condition)
             throw new AssertException(fmt, args);
     }
@@ -101,7 +101,7 @@ public class Assert {
      * @param collection 要检查的集合
      * @throws AssertException 如果集合为空
      */
-    public static <E> void ifEmpty(Collection<E> collection) {
+    public static <E> void isEmpty(Collection<E> collection) {
         if (Lists.isEmpty(collection))
             throw new AssertException("collection is empty!");
     }
@@ -114,7 +114,7 @@ public class Assert {
      * @param function 要执行的函数
      * @throws AssertException 如果函数执行时发生异常
      */
-    public static void ifError(VoidFunction function) {
+    public static void isError(VoidFunction function) {
         try {
             function.call();
         } catch (Throwable e) {
@@ -132,7 +132,7 @@ public class Assert {
      * @param args 格式化参数
      * @throws AssertException 如果函数执行时发生异常
      */
-    public static void ifError(VoidFunction function, String fmt, Object... args) {
+    public static void isError(VoidFunction function, String fmt, Object... args) {
         try {
             function.call();
         } catch (Throwable e) {
@@ -150,7 +150,7 @@ public class Assert {
      * @return 函数返回的值；如果发生异常，则抛出 {@link AssertException}
      * @throws AssertException 如果函数执行时发生异常
      */
-    public static <T> T ifError(RetFunction<T> function) {
+    public static <T> T isError(RetFunction<T> function) {
         try {
             return function.call();
         } catch (Throwable e) {
@@ -170,7 +170,7 @@ public class Assert {
      * @return 函数返回的值；如果发生异常，则抛出 {@link AssertException}
      * @throws AssertException 如果函数执行时发生异常
      */
-    public static <T> T ifError(RetFunction<T> function, String fmt, Object... args) {
+    public static <T> T isError(RetFunction<T> function, String fmt, Object... args) {
         try {
             return function.call();
         } catch (Throwable e) {
@@ -188,8 +188,8 @@ public class Assert {
      * @return 如果条件不为 null，返回该对象
      * @throws AssertException 如果条件为 null
      */
-    public static <T> T ifNull(T condition) {
-        return ifNull(condition, "null");
+    public static <T> T isNull(T condition) {
+        return isNull(condition, "null");
     }
 
     /**
@@ -204,7 +204,7 @@ public class Assert {
      * @return 如果条件不为 null，返回该对象
      * @throws AssertException 如果条件为 null
      */
-    public static <T> T ifNull(T condition, String fmt, Object... args) {
+    public static <T> T isNull(T condition, String fmt, Object... args) {
         if (condition == null)
             throw new AssertException(fmt, args);
         return condition;

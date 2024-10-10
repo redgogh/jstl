@@ -120,7 +120,7 @@ public class UClass {
      * @return {@link UClass} 实例
      */
     public static UClass forName(String className) {
-        return new UClass(Assert.ifError(() -> Class.forName(className)));
+        return new UClass(Assert.isError(() -> Class.forName(className)));
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -269,7 +269,7 @@ public class UClass {
      */
     @SuppressWarnings({"unchecked"})
     public <R> R readFieldValue(String name, Object instance) {
-        return (R) Assert.ifNull(fields.get(name), "未在 %s 类中找到 %s 属性。", getName(), name)
+        return (R) Assert.isNull(fields.get(name), "未在 %s 类中找到 %s 属性。", getName(), name)
                 .read(instance);
     }
 
@@ -350,7 +350,7 @@ public class UClass {
      * @return 方法调用的返回值。如果目标方法的返回类型是 `void`，则返回 `null`。
      */
     private Object invoke0(Object obj, String name, Object... args) {
-        return Assert.ifError(() -> {
+        return Assert.isError(() -> {
             Method method = args == null ? descriptor.getDeclaredMethod(name) :
                     descriptor.getDeclaredMethod(name, toClassArray(args));
             method.setAccessible(true);

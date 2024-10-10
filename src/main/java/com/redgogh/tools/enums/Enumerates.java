@@ -97,7 +97,7 @@ public class Enumerates {
      * @throws NullPointerException 如果提供的名称没有匹配的枚举值
      */
     public static <E extends Enum<E>> E checkout(Class<? extends Enum<E>> enumClass, String name) {
-        return Assert.ifNull(find(enumClass, name), "参数错误【%s】常量不存在！", name);
+        return Assert.isNull(find(enumClass, name), "参数错误【%s】常量不存在！", name);
     }
 
     /**

@@ -154,13 +154,13 @@ public class UField {
          * 获取当前属性中的值
          */
         public Object read() {
-            return Assert.ifError(() -> field.get(instance));
+            return Assert.isError(() -> field.get(instance));
         }
         /**
          * 设置当前属性中的值
          */
         public void write(Object value) {
-            Assert.ifError(() -> field.set(instance, value));
+            Assert.isError(() -> field.set(instance, value));
         }
     }
 
@@ -178,7 +178,7 @@ public class UField {
     static Field findDescriptorField(String name, Class<?> descriptor) {
         Field field = Optional.ifError(() -> descriptor.getDeclaredField(name),
                 findDescriptorField0(name, descriptor));
-        return Assert.ifNull(field, "属性 %s 在 %s 类中不存在", name, descriptor.getName());
+        return Assert.isNull(field, "属性 %s 在 %s 类中不存在", name, descriptor.getName());
     }
 
     /** 递归从 {@code descriptor} 的父类查找 {@code name} 属性 */

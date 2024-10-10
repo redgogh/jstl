@@ -81,7 +81,7 @@ public class OctetStreamResponse implements Closeable {
      * @return 传输完成的 {@link File} 对象
      */
     public File transferTo(File file) {
-        ResponseBody body = Assert.ifNull(response.body(), "没有数据响应。");
+        ResponseBody body = Assert.isNull(response.body(), "没有数据响应。");
         IOUtils.write(body.byteStream(), file);
         close();
         return file;

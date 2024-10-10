@@ -328,8 +328,8 @@ public class File extends java.io.File {
      */
     private void checkFile(boolean autoCreate) {
         if (autoCreate && !exists())
-            Assert.ifError(this::createNewFile);
-        Assert.ifBool(exists(), "%s （系统找不到指定的文件，文件不存在）", getPath());
+            Assert.isError(this::createNewFile);
+        Assert.isFalse(exists(), "%s （系统找不到指定的文件，文件不存在）", getPath());
     }
 
     /**
@@ -344,7 +344,7 @@ public class File extends java.io.File {
      */
     private FileByteReader openByteReader(boolean autoCreate) {
         checkFile(autoCreate);
-        return Assert.ifError(() -> new FileByteReader(this));
+        return Assert.isError(() -> new FileByteReader(this));
     }
 
     /**
@@ -359,7 +359,7 @@ public class File extends java.io.File {
      */
     private FileByteWriter openByteWriter(boolean autoCreate) {
         checkFile(autoCreate);
-        return Assert.ifError(() -> new FileByteWriter(this));
+        return Assert.isError(() -> new FileByteWriter(this));
     }
 
     /**
@@ -474,7 +474,7 @@ public class File extends java.io.File {
      * 检查文件描述符是否打开
      */
     private void checkOpen() {
-        Assert.ifBool(accessFile != null, "Please call open() before random access methods execute.");
+        Assert.isFalse(accessFile != null, "Please call open() before random access methods execute.");
     }
 
     /**
@@ -494,7 +494,7 @@ public class File extends java.io.File {
      */
     public int skipBytes(int n) {
         checkOpen();
-        return Assert.ifError(() -> accessFile.skipBytes(n));
+        return Assert.isError(() -> accessFile.skipBytes(n));
     }
 
     /**
@@ -511,7 +511,7 @@ public class File extends java.io.File {
      */
     public void seek(long pos) {
         checkOpen();
-        Assert.ifError(() -> accessFile.seek(pos));
+        Assert.isError(() -> accessFile.seek(pos));
     }
 
     /**
@@ -529,7 +529,7 @@ public class File extends java.io.File {
      */
     public int read() {
         checkOpen();
-        return Assert.ifError(() -> accessFile.read());
+        return Assert.isError(() -> accessFile.read());
     }
 
     /**
@@ -544,7 +544,7 @@ public class File extends java.io.File {
      */
     public void read(byte[] b) {
         checkOpen();
-        Assert.ifError(() -> accessFile.read(b));
+        Assert.isError(() -> accessFile.read(b));
     }
 
     /**
@@ -563,7 +563,7 @@ public class File extends java.io.File {
      */
     public void read(byte[] b, int off, int len) {
         checkOpen();
-        Assert.ifError(() -> accessFile.read(b, off, len));
+        Assert.isError(() -> accessFile.read(b, off, len));
     }
 
     /**
@@ -578,7 +578,7 @@ public class File extends java.io.File {
      */
     public int readInt() {
         checkOpen();
-        return Assert.ifError(() -> accessFile.readInt());
+        return Assert.isError(() -> accessFile.readInt());
     }
 
     /**
@@ -593,7 +593,7 @@ public class File extends java.io.File {
      */
     public long readLong() {
         checkOpen();
-        return Assert.ifError(() -> accessFile.readLong());
+        return Assert.isError(() -> accessFile.readLong());
     }
 
     /**
@@ -608,7 +608,7 @@ public class File extends java.io.File {
      */
     public float readFloat() {
         checkOpen();
-        return Assert.ifError(() -> accessFile.readFloat());
+        return Assert.isError(() -> accessFile.readFloat());
     }
 
     /**
@@ -623,7 +623,7 @@ public class File extends java.io.File {
      */
     public double readDouble() {
         checkOpen();
-        return Assert.ifError(() -> accessFile.readDouble());
+        return Assert.isError(() -> accessFile.readDouble());
     }
 
     /**
@@ -637,7 +637,7 @@ public class File extends java.io.File {
      */
     public void write(byte b) {
         checkOpen();
-        Assert.ifError(() -> accessFile.write(b));
+        Assert.isError(() -> accessFile.write(b));
     }
 
     /**
@@ -651,7 +651,7 @@ public class File extends java.io.File {
      */
     public void write(byte[] b) {
         checkOpen();
-        Assert.ifError(() -> accessFile.write(b));
+        Assert.isError(() -> accessFile.write(b));
     }
 
     /**
@@ -670,7 +670,7 @@ public class File extends java.io.File {
      */
     public void write(byte[] b, int off, int len) {
         checkOpen();
-        Assert.ifError(() -> accessFile.write(b, off, len));
+        Assert.isError(() -> accessFile.write(b, off, len));
     }
 
     /**
@@ -684,7 +684,7 @@ public class File extends java.io.File {
      */
     public void writeInt(int value) {
         checkOpen();
-        Assert.ifError(() -> accessFile.writeInt(value));
+        Assert.isError(() -> accessFile.writeInt(value));
     }
 
     /**
@@ -698,7 +698,7 @@ public class File extends java.io.File {
      */
     public void writeLong(long value) {
         checkOpen();
-        Assert.ifError(() -> accessFile.writeLong(value));
+        Assert.isError(() -> accessFile.writeLong(value));
     }
 
     /**
@@ -712,7 +712,7 @@ public class File extends java.io.File {
      */
     public void writeFloat(float value) {
         checkOpen();
-        Assert.ifError(() -> accessFile.writeFloat(value));
+        Assert.isError(() -> accessFile.writeFloat(value));
     }
 
     /**
@@ -726,7 +726,7 @@ public class File extends java.io.File {
      */
     public void writeDouble(double value) {
         checkOpen();
-        Assert.ifError(() -> accessFile.writeDouble(value));
+        Assert.isError(() -> accessFile.writeDouble(value));
     }
 
     /**

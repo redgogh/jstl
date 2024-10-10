@@ -306,7 +306,7 @@ public final class Crypto {
 
         @Override
         public String url(String source, String enc) {
-            return Assert.ifError(() -> URLDecoder.decode(source, enc));
+            return Assert.isError(() -> URLDecoder.decode(source, enc));
         }
     };
 

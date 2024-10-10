@@ -69,7 +69,7 @@ public class IOUtils {
      */
     public static void closeQuietly(Closeable closeable) {
         if (closeable != null)
-            Assert.ifError(closeable::close);
+            Assert.isError(closeable::close);
     }
 
     /**
@@ -84,7 +84,7 @@ public class IOUtils {
      * @return 返回所有文件中的字节数据
      */
     public static byte[] read(java.io.File file) {
-        Assert.ifBool(file != null && file.isFile(), "文件不能为空且不能是目录！");
+        Assert.isFalse(file != null && file.isFile(), "文件不能为空且不能是目录！");
         return read(new File(file).openByteReader());
     }
 
@@ -363,7 +363,7 @@ public class IOUtils {
      */
     public static void write(byte[] b, int off, int len,
                              OutputStream stream) {
-        Assert.ifError(() -> stream.write(b, off, len));
+        Assert.isError(() -> stream.write(b, off, len));
     }
 
 }
