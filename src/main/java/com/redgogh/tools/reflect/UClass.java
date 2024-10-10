@@ -267,10 +267,11 @@ public class UClass {
      * @return 指定字段的值
      * @throws IllegalArgumentException 如果未找到指定字段
      */
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings("unchecked")
     public <R> R readFieldValue(String name, Object instance) {
-        return (R) Assert.isNull(fields.get(name), "未在 %s 类中找到 %s 属性。", getName(), name)
-                .read(instance);
+        UField uField = fields.get(name);
+        Assert.isNull(fields.get(name), "未在 %s 类中找到 %s 属性。", getName(), name);
+        return (R) uField.read(instance);
     }
 
     /**

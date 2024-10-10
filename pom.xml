@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.redgogh</groupId>
-    <artifactId>rgtool</artifactId>
+    <artifactId>phew-common-lang</artifactId>
     <version>2.1.0-RC</version>
 
     <developers>

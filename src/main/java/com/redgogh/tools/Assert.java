@@ -184,12 +184,10 @@ public class Assert {
      * <p>此方法用于验证一个对象是否为 null，如果为 null，将抛出 {@link AssertException}。
      *
      * @param condition 要检查的对象
-     * @param <T> 对象的类型
-     * @return 如果条件不为 null，返回该对象
      * @throws AssertException 如果条件为 null
      */
-    public static <T> T isNull(T condition) {
-        return isNull(condition, "null");
+    public static void isNull(Object condition) {
+        isNull(condition, "null");
     }
 
     /**
@@ -200,14 +198,11 @@ public class Assert {
      * @param condition 要检查的对象
      * @param fmt 自定义异常信息的格式
      * @param args 格式化参数
-     * @param <T> 对象的类型
-     * @return 如果条件不为 null，返回该对象
      * @throws AssertException 如果条件为 null
      */
-    public static <T> T isNull(T condition, String fmt, Object... args) {
+    public static void isNull(Object condition, String fmt, Object... args) {
         if (condition == null)
             throw new AssertException(fmt, args);
-        return condition;
     }
 
 }
