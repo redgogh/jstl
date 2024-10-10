@@ -5,7 +5,7 @@ image:Documents/svg/test.svg[test]
 image:Documents/svg/license.svg[license]
 image:Documents/svg/build.svg[build]
 
-Java 后端微服务、单体服务快速开发框架。
+标准开发工具包。
 
 == 开发文档
 
@@ -16,9 +16,7 @@ Java 后端微服务、单体服务快速开发框架。
 
 == 构建环境要求
 
-此项目使用 Maven toolchains 进行构建操作，JDK要求21及以上，JDK版本最低要求 21。
-
-JDK21 是 OpenJDK 的一个 LTS 版本，通常我们可以选择不同的发行版进行开发或部署，常用 JDK 发行版：
+此项目使用 Maven toolchains 进行构建操作，JDK要求1.8及以上，JDK版本最低要求 1.8。
 
 * link:https://openjdk.org/projects/jdk/21/[OpenJDK]
 * link:https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html[Oracle OpenJDK]
@@ -27,26 +25,24 @@ JDK21 是 OpenJDK 的一个 LTS 版本，通常我们可以选择不同的发行
 
 === 构建
 
-构建项目前请**务必**按照 link:install.txt[install.txt] 中描述的模块按顺序安装到把本地。否则在执行 `clean` 或 `package` 等命令的时候会抛出找不到依赖版本的异常。
-
 本项目使用 Maven 进行构建，你需要在你本地的环境变量中添加 Maven 的 `/bin` 目录地址，并指定 Maven Home
 
     MAVEN_HOME=<your maven home>
 
 相信如何添加环境变量对于任何一个程序员来说都是最基础的操作这里就不再过多的赘述。
 
-在终端上执行 `mvn package` 对项目进行构建，通常来说构建出来的 `jar` 包的大小一般在 100MB 以上，如果你构建出来的包没有这么大，那么你需要检查一下是否执行了一次正确构建。
+在终端上执行 `mvn clean package` 对项目进行构建。
 
 == Maven Central
 
-项目的 `tools` 依赖包已经上传到了 Maven Central，你可以在任意项目中直接引入依赖。
+项目的依赖包已经上传到了 Maven Central，你可以在任意项目中直接引入依赖。
 
 [source,xml]
 ----
 <dependency>
     <groupId>io.github.redgogh</groupId>
     <artifactId>tools</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.3</version>
 </dependency>
 ----
 
