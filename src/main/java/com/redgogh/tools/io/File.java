@@ -19,6 +19,7 @@ package com.redgogh.tools.io;
 \* -------------------------------------------------------------------------------- */
 
 import com.redgogh.tools.Assert;
+import com.redgogh.tools.Capturer;
 import com.redgogh.tools.OSEnvironment;
 import com.redgogh.tools.Optional;
 import com.redgogh.tools.collection.Lists;
@@ -328,7 +329,7 @@ public class File extends java.io.File {
      */
     private void checkFile(boolean autoCreate) {
         if (autoCreate && !exists())
-            Assert.isError(this::createNewFile);
+            Capturer.call(this::createNewFile);
         Assert.isFalse(exists(), "%s （系统找不到指定的文件，文件不存在）", getPath());
     }
 
@@ -344,7 +345,7 @@ public class File extends java.io.File {
      */
     private FileByteReader openByteReader(boolean autoCreate) {
         checkFile(autoCreate);
-        return Assert.isError(() -> new FileByteReader(this));
+        return Capturer.call(() -> new FileByteReader(this));
     }
 
     /**
@@ -359,7 +360,7 @@ public class File extends java.io.File {
      */
     private FileByteWriter openByteWriter(boolean autoCreate) {
         checkFile(autoCreate);
-        return Assert.isError(() -> new FileByteWriter(this));
+        return Capturer.call(() -> new FileByteWriter(this));
     }
 
     /**
@@ -494,7 +495,7 @@ public class File extends java.io.File {
      */
     public int skipBytes(int n) {
         checkOpen();
-        return Assert.isError(() -> accessFile.skipBytes(n));
+        return Capturer.call(() -> accessFile.skipBytes(n));
     }
 
     /**
@@ -511,7 +512,7 @@ public class File extends java.io.File {
      */
     public void seek(long pos) {
         checkOpen();
-        Assert.isError(() -> accessFile.seek(pos));
+        Capturer.call(() -> accessFile.seek(pos));
     }
 
     /**
@@ -529,7 +530,7 @@ public class File extends java.io.File {
      */
     public int read() {
         checkOpen();
-        return Assert.isError(() -> accessFile.read());
+        return Capturer.call(() -> accessFile.read());
     }
 
     /**
@@ -544,7 +545,7 @@ public class File extends java.io.File {
      */
     public void read(byte[] b) {
         checkOpen();
-        Assert.isError(() -> accessFile.read(b));
+        Capturer.call(() -> accessFile.read(b));
     }
 
     /**
@@ -563,7 +564,7 @@ public class File extends java.io.File {
      */
     public void read(byte[] b, int off, int len) {
         checkOpen();
-        Assert.isError(() -> accessFile.read(b, off, len));
+        Capturer.call(() -> accessFile.read(b, off, len));
     }
 
     /**
@@ -578,7 +579,7 @@ public class File extends java.io.File {
      */
     public int readInt() {
         checkOpen();
-        return Assert.isError(() -> accessFile.readInt());
+        return Capturer.call(() -> accessFile.readInt());
     }
 
     /**
@@ -593,7 +594,7 @@ public class File extends java.io.File {
      */
     public long readLong() {
         checkOpen();
-        return Assert.isError(() -> accessFile.readLong());
+        return Capturer.call(() -> accessFile.readLong());
     }
 
     /**
@@ -608,7 +609,7 @@ public class File extends java.io.File {
      */
     public float readFloat() {
         checkOpen();
-        return Assert.isError(() -> accessFile.readFloat());
+        return Capturer.call(() -> accessFile.readFloat());
     }
 
     /**
@@ -623,7 +624,7 @@ public class File extends java.io.File {
      */
     public double readDouble() {
         checkOpen();
-        return Assert.isError(() -> accessFile.readDouble());
+        return Capturer.call(() -> accessFile.readDouble());
     }
 
     /**
@@ -637,7 +638,7 @@ public class File extends java.io.File {
      */
     public void write(byte b) {
         checkOpen();
-        Assert.isError(() -> accessFile.write(b));
+        Capturer.call(() -> accessFile.write(b));
     }
 
     /**
@@ -651,7 +652,7 @@ public class File extends java.io.File {
      */
     public void write(byte[] b) {
         checkOpen();
-        Assert.isError(() -> accessFile.write(b));
+        Capturer.call(() -> accessFile.write(b));
     }
 
     /**
@@ -670,7 +671,7 @@ public class File extends java.io.File {
      */
     public void write(byte[] b, int off, int len) {
         checkOpen();
-        Assert.isError(() -> accessFile.write(b, off, len));
+        Capturer.call(() -> accessFile.write(b, off, len));
     }
 
     /**
@@ -684,7 +685,7 @@ public class File extends java.io.File {
      */
     public void writeInt(int value) {
         checkOpen();
-        Assert.isError(() -> accessFile.writeInt(value));
+        Capturer.call(() -> accessFile.writeInt(value));
     }
 
     /**
@@ -698,7 +699,7 @@ public class File extends java.io.File {
      */
     public void writeLong(long value) {
         checkOpen();
-        Assert.isError(() -> accessFile.writeLong(value));
+        Capturer.call(() -> accessFile.writeLong(value));
     }
 
     /**
@@ -712,7 +713,7 @@ public class File extends java.io.File {
      */
     public void writeFloat(float value) {
         checkOpen();
-        Assert.isError(() -> accessFile.writeFloat(value));
+        Capturer.call(() -> accessFile.writeFloat(value));
     }
 
     /**
@@ -726,7 +727,7 @@ public class File extends java.io.File {
      */
     public void writeDouble(double value) {
         checkOpen();
-        Assert.isError(() -> accessFile.writeDouble(value));
+        Capturer.call(() -> accessFile.writeDouble(value));
     }
 
     /**

@@ -26,6 +26,7 @@ package com.redgogh.tools.reflect;
 /* Creates on 2019/5/16. */
 
 import com.redgogh.tools.Assert;
+import com.redgogh.tools.Capturer;
 import com.redgogh.tools.Optional;
 
 import java.lang.annotation.Annotation;
@@ -154,13 +155,13 @@ public class UField {
          * 获取当前属性中的值
          */
         public Object read() {
-            return Assert.isError(() -> field.get(instance));
+            return Capturer.call(() -> field.get(instance));
         }
         /**
          * 设置当前属性中的值
          */
         public void write(Object value) {
-            Assert.isError(() -> field.set(instance, value));
+            Capturer.call(() -> field.set(instance, value));
         }
     }
 

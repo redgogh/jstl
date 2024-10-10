@@ -21,6 +21,7 @@ package com.redgogh.tools.io;
 /* Creates on 2020/4/29. */
 
 import com.redgogh.tools.Assert;
+import com.redgogh.tools.Capturer;
 import com.redgogh.tools.exception.IOReadException;
 import com.redgogh.tools.exception.IOWriteException;
 
@@ -69,7 +70,7 @@ public class IOUtils {
      */
     public static void closeQuietly(Closeable closeable) {
         if (closeable != null)
-            Assert.isError(closeable::close);
+            Capturer.call(closeable::close);
     }
 
     /**
@@ -363,7 +364,7 @@ public class IOUtils {
      */
     public static void write(byte[] b, int off, int len,
                              OutputStream stream) {
-        Assert.isError(() -> stream.write(b, off, len));
+        Capturer.call(() -> stream.write(b, off, len));
     }
 
 }

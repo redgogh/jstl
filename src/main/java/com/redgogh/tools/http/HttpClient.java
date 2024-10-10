@@ -20,6 +20,7 @@ package com.redgogh.tools.http;
 
 import com.alibaba.fastjson.JSON;
 import com.redgogh.tools.Assert;
+import com.redgogh.tools.Capturer;
 import com.redgogh.tools.collection.Maps;
 import com.redgogh.tools.exception.HttpRequestException;
 import com.redgogh.tools.io.File;
@@ -244,7 +245,7 @@ public class HttpClient {
      * @return 一个新的 {@link OctetStreamResponse} 实例。
      */
     public OctetStreamResponse newOctetStreamCall(OctetStreamCallback callback) {
-        return new OctetStreamResponse(Assert.isError(() -> newCall0(callback)));
+        return new OctetStreamResponse(Capturer.call(() -> newCall0(callback)));
     }
 
     /**

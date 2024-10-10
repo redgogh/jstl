@@ -26,6 +26,7 @@ package com.redgogh.tools.security;
 /* Creates on 2023/5/16. */
 
 import com.redgogh.tools.Assert;
+import com.redgogh.tools.Capturer;
 import com.redgogh.tools.exception.SystemRuntimeException;
 
 import java.io.UnsupportedEncodingException;
@@ -306,7 +307,7 @@ public final class Crypto {
 
         @Override
         public String url(String source, String enc) {
-            return Assert.isError(() -> URLDecoder.decode(source, enc));
+            return Capturer.call(() -> URLDecoder.decode(source, enc));
         }
     };
 
