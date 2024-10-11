@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static com.redgogh.tools.Assert.ignore;
 import static com.redgogh.tools.BasicConverter.atos;
 import static com.redgogh.tools.StringUtils.strhas;
 import static com.redgogh.tools.StringUtils.strupper;
@@ -102,7 +101,7 @@ public class HttpClient {
      */
     private HttpClient(String method, String url) {
         String upperMethod = strupper(method);
-        this.method = ignore(() -> HttpMethod.valueOf(upperMethod));
+        this.method = Capturer.icall(() -> HttpMethod.valueOf(upperMethod));
         Assert.isNull(this.method, "不支持的请求方式 - %s", this.method.name());
         this.url = url;
     }

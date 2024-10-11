@@ -33,7 +33,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-import static com.redgogh.tools.Assert.ignore;
 import static com.redgogh.tools.StringUtils.strwfmt;
 
 /**
@@ -260,7 +259,7 @@ public class UField {
      *        目标对象实例
      */
     public static void copyIgnoreError(Object src, Object dest, String name) {
-        ignore(() -> copy(src, dest, name));
+        Capturer.icall(() -> copy(src, dest, name));
     }
 
     /**

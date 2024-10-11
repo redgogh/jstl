@@ -32,38 +32,6 @@ import java.util.Collection;
 public class Assert {
 
     /**
-     * 执行指定的无返回值函数，如果发生任何异常则忽略并不处理。
-     *
-     * <p>该方法可用于执行可能会抛出异常的操作，但不需要关心异常的情况。
-     *
-     * @param function 要执行的函数
-     */
-    public static void ignore(VoidFunction function) {
-        try {
-            function.call();
-        } catch (Throwable e) {
-            /* do nothing... */
-        }
-    }
-
-    /**
-     * 执行指定的有返回值函数，如果发生异常则返回 null。
-     *
-     * <p>该方法可用于执行可能会抛出异常的操作，并在异常发生时提供一个默认值（null）。
-     *
-     * @param function 要执行的函数
-     * @param <T> 返回值的类型
-     * @return 函数返回的值；如果发生异常，则返回 null
-     */
-    public static <T> T ignore(RetFunction<T> function) {
-        try {
-            return function.call();
-        } catch (Throwable e) {
-            return null;
-        }
-    }
-
-    /**
      * 如果条件为 false，则抛出断言异常。
      *
      * <p>此方法用于验证某个条件是否为 false，如果条件为 false，将抛出 {@link AssertException}。
