@@ -4,11 +4,12 @@
 
 ## ⭐ 新增新能
 
-- 捕获器工具类新增 `icall` 函数用于忽略异常调用。
+- 新增 `Capturer#icall` 函数用于忽略异常调用。
+- 新增 `Assert#isTrue` 函数用于校验为`true`的值。
 
 ## 👻 优化功能
 
-- 断言移除忽略异常函数。
+- 移除断言 `Assert#ignore` 忽略异常函数。取而代之使用 `Capaturer#icall`。
 
 ## 🐞 BUG 修复
 
