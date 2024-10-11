@@ -6,6 +6,7 @@
 
 - 新增 `Capturer#icall` 函数用于忽略异常调用。
 - 新增 `Assert#isTrue` 函数用于校验为`true`的值。
+- 提供 `Assert#notEquals` 检测两个对象是否不相等。
 
 ## 👻 优化功能
 

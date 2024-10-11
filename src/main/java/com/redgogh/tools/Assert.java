@@ -22,6 +22,7 @@ import com.redgogh.tools.collection.Lists;
 import com.redgogh.tools.exception.AssertException;
 
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * 运行时断言工具类，这个类断言失败后并不会直接停止整个程序，而是会将所有失败的断言
@@ -89,7 +90,6 @@ public class Assert {
             throw new AssertException(fmt, args);
     }
 
-
     /**
      * 如果集合为空，则抛出断言异常。
      *
@@ -128,6 +128,24 @@ public class Assert {
     public static void isNull(Object condition, String fmt, Object... args) {
         if (condition == null)
             throw new AssertException(fmt, args);
+    }
+
+    /**
+     * #brief: 断言两个对象不相等
+     *
+     * <p>该方法用于判断两个对象是否不相等。如果两个
+     * 对象相等，则抛出 `AssertException`，提示断言
+     * 失败；如果不相等，则正常结束。
+     *
+     * <p>该方法可用于单元测试或需要验证对象不相等的场景。
+     *
+     * @param actual 实际值
+     * @param expected 期望值
+     * @throws AssertException 当 `actual` 和 `expected` 相等时抛出异常
+     */
+    public static void notEquals(Object actual, Object expected) {
+        if (!Objects.equals(actual, expected))
+            throw new AssertException("assert actual == expected");
     }
 
 }
