@@ -21,6 +21,7 @@ package com.redgogh.tools.http;
 import com.alibaba.fastjson.JSON;
 import com.redgogh.tools.Assert;
 import com.redgogh.tools.Capturer;
+import com.redgogh.tools.Optional;
 import com.redgogh.tools.collection.Maps;
 import com.redgogh.tools.exception.HttpRequestException;
 import com.redgogh.tools.io.File;
@@ -101,7 +102,7 @@ public class HttpClient {
      */
     private HttpClient(String method, String url) {
         String upperMethod = strupper(method);
-        this.method = Capturer.icall(() -> HttpMethod.valueOf(upperMethod));
+        this.method = Optional.ifError(() -> HttpMethod.valueOf(upperMethod), null);
         Assert.isNull(this.method, "不支持的请求方式 - %s", this.method.name());
         this.url = url;
     }
