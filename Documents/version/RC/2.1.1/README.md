@@ -13,6 +13,7 @@
 ## 👻 优化功能
 
 - 移除断言`Assert#ignore`忽略异常函数。取而代之使用`Capaturer#icall`。
+- 私有化`HttpClient#newCall0`方法，避免外部错误引用该方法从而产生异常。
 
 ## 🐞 BUG 修复
 

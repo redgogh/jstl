@@ -289,7 +289,7 @@ public class HttpClient {
      * @return 响应对象 `Response`
      * @throws HttpRequestException 如果请求发送失败
      */
-    public okhttp3.Response newCall0(Object callback) throws IOException {
+    private okhttp3.Response newCall0(Object callback) throws IOException {
         /* init url. */
         if (queryBuilder != null)
             url = queryBuilder.argConcatBuild(url);
