@@ -123,7 +123,8 @@ public class Workbook implements Iterable<Row> {
     public Workbook(XSSFWorkbook workbook) {
         this.wb = workbook;
         /* switch sheet. */
-        this.sheet = wb.getSheet(wb.getSheetName(0));
+        if (wb.getNumberOfSheets() > 0)
+            this.sheet = wb.getSheet(wb.getSheetName(0));
     }
 
 
@@ -397,6 +398,14 @@ public class Workbook implements Iterable<Row> {
         }
 
         return atos(builder);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        getRows().forEach(row -> builder.append(row).append("\n"));
+        int len = builder.length();
+        return atos(builder.delete(len - 1, len));
     }
 
 }

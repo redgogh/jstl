@@ -22,8 +22,11 @@ import com.redgogh.tools.StreamMapper;
 import com.redgogh.tools.collection.Lists;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import static com.redgogh.tools.BasicConverter.atos;
 
 /**
  * 表示一行数据，继承自 {@link ArrayList}，用于存储字符串类型的单元格数据。
@@ -92,4 +95,13 @@ public class Row extends ArrayList<String> {
         return mapper.call(get(i));
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (String text : this)
+            builder.append(text).append(" ");
+        int len = builder.length();
+        builder.delete(len - 1, len);
+        return atos(builder);
+    }
 }

@@ -18,6 +18,7 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.alibaba.fastjson.support.hsf.HSFJSONUtils;
 import com.redgogh.tools.io.File;
 import com.redgogh.tools.poi.Row;
 import com.redgogh.tools.poi.Workbook;
@@ -71,6 +72,12 @@ public class WorkbookExample {
         Workbook wb = Workbook.load("Desktop://test.xlsx");
         String csvText = wb.toCSVText();
         System.out.println(csvText);
+    }
+
+    @Test
+    public void workbookPrintExample() {
+        Workbook wb = Workbook.load("Desktop://b.xlsx");
+        System.out.println(wb);
     }
 
 }
