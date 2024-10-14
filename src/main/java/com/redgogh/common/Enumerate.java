@@ -20,7 +20,6 @@ package com.redgogh.common;
 
 /* Create on 2019/6/14 */
 
-import com.redgogh.common.Assert;
 import com.redgogh.common.exception.InvalidArgumentException;
 import com.redgogh.common.reflect.UClass;
 
@@ -63,7 +62,7 @@ import static com.redgogh.common.StringUtils.strieq;
  * @see InvalidArgumentException
  * @since 1.0
  */
-public class Enumerates {
+public class Enumerate {
 
     /**
      * #brief: 获取指定枚举类的所有枚举值
