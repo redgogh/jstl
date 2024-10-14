@@ -48,4 +48,4 @@ image:Documents/svg/build.svg[build]
 
 == License
 
-本项目采用 GNU GPL v3.0 许可证，详情见 link:LICENSE[LICENSE]
+本项目采用 Apache License 2.0 许可证，详情见 link:LICENSE[LICENSE]
