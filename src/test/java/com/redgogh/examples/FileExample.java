@@ -87,4 +87,11 @@ public class FileExample {
         System.out.println(atos(new File("Desktop://log.txt").readBytes()));
     }
 
+    @Test
+    public void listFileExample() {
+        for (File file : new File("D:/aaaa").listFiles()) {
+            System.out.println(file.getPath());
+        }
+    }
+
 }

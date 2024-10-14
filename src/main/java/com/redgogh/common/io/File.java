@@ -23,9 +23,12 @@ import com.redgogh.common.Capturer;
 import com.redgogh.common.OSEnvironment;
 import com.redgogh.common.Optional;
 import com.redgogh.common.collection.Lists;
+import lombok.experimental.SuperBuilder;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.RandomAccessFile;
 import java.net.URI;
+import java.nio.file.Path;
 import java.util.List;
 
 import static com.redgogh.common.StringUtils.*;
@@ -237,6 +240,76 @@ public class File extends java.io.File {
      */
     public static File wrap(java.io.File file) {
         return new File(file);
+    }
+
+    /**
+     * Returns the abstract pathname of this abstract pathname's parent,
+     * or {@code null} if this pathname does not name a parent
+     * directory.
+     *
+     * <p> The <em>parent</em> of an abstract pathname consists of the
+     * pathname's prefix, if any, and each name in the pathname's name
+     * sequence except for the last.  If the name sequence is empty then
+     * the pathname does not name a parent directory.
+     *
+     * @return  The abstract pathname of the parent directory named by this
+     *          abstract pathname, or {@code null} if this pathname
+     *          does not name a parent
+     *
+     * @since 1.2
+     */
+    @Override
+    public File getParentFile() {
+        java.io.File parentFile = super.getParentFile();
+        return parentFile != null ? wrap(parentFile) : null;
+    }
+
+    /**
+     * Returns an array of abstract pathnames denoting the files in the
+     * directory denoted by this abstract pathname.
+     *
+     * <p> If this abstract pathname does not denote a directory, then this
+     * method returns {@code null}.  Otherwise an array of {@code File} objects
+     * is returned, one for each file or directory in the directory.  Pathnames
+     * denoting the directory itself and the directory's parent directory are
+     * not included in the result.  Each resulting abstract pathname is
+     * constructed from this abstract pathname using the {@link #File(java.io.File,
+     * String) File(File,&nbsp;String)} constructor.  Therefore if this
+     * pathname is absolute then each resulting pathname is absolute; if this
+     * pathname is relative then each resulting pathname will be relative to
+     * the same directory.
+     *
+     * <p> There is no guarantee that the name strings in the resulting array
+     * will appear in any specific order; they are not, in particular,
+     * guaranteed to appear in alphabetical order.
+     *
+     * <p> Note that the {@link java.nio.file.Files} class defines the {@link
+     * java.nio.file.Files#newDirectoryStream(Path) newDirectoryStream} method
+     * to open a directory and iterate over the names of the files in the
+     * directory. This may use less resources when working with very large
+     * directories.
+     *
+     * @return  An array of abstract pathnames denoting the files and
+     *          directories in the directory denoted by this abstract pathname.
+     *          The array will be empty if the directory is empty.  Returns
+     *          {@code null} if this abstract pathname does not denote a
+     *          directory, or if an I/O error occurs.
+     *
+     * @throws  SecurityException
+     *          If a security manager exists and its {@link
+     *          SecurityManager#checkRead(String)} method denies read access to
+     *          the directory
+     *
+     * @since  1.2
+     */
+    @Nullable
+    @Override
+    @SuppressWarnings("DataFlowIssue")
+    public File[] listFiles() {
+        List<File> list = Lists.map(super.listFiles(), File::wrap);
+        File[] fs = new File[list.size()];
+        list.toArray(fs);
+        return fs;
     }
 
     /**
