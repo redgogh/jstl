@@ -18,7 +18,7 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.tools.security.Crypto;
+import com.redgogh.common.security.Crypto;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")

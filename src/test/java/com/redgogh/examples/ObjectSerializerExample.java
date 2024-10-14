@@ -18,8 +18,8 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.tools.io.File;
-import com.redgogh.tools.reflect.ObjectSerializer;
+import com.redgogh.common.io.File;
+import com.redgogh.common.reflect.ObjectSerializer;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
 import org.junit.Test;

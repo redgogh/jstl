@@ -18,10 +18,10 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.tools.generators.ChanceMaker;
+import com.redgogh.common.generators.ChanceMaker;
 import org.junit.Test;
 
-import static com.redgogh.tools.io.IOUtils.stdout;
+import static com.redgogh.common.io.IOUtils.stdout;
 
 @SuppressWarnings("ALL")
 public class ChanceMakerExample {

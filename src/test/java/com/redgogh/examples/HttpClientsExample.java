@@ -25,14 +25,14 @@ package com.redgogh.examples;
 
 /* Creates on 2022/8/8. */
 
-import com.redgogh.tools.collection.Maps;
-import com.redgogh.tools.http.*;
-import com.redgogh.tools.io.File;
+import com.redgogh.common.collection.Maps;
+import com.redgogh.common.http.*;
+import com.redgogh.common.io.File;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.redgogh.tools.io.IOUtils.stdout;
+import static com.redgogh.common.io.IOUtils.stdout;
 
 @SuppressWarnings("ALL")
 public class HttpClientsExample {

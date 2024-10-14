@@ -1,4 +1,4 @@
-package com.redgogh.examples;
+package com.redgogh.common.http;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,28 +18,33 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.junit.Test;
-
-import static com.redgogh.common.BasicConverter.atobool;
-
-@SuppressWarnings("ALL")
-public class RedGoghExample {
+/**
+ * 接口 {@link OctetStreamCallback} 定义了处理八位字节流响应的回调方法。
+ *
+ * <p>该接口包含两个方法：
+ * <ul>
+ *   <li>{@link #onFailure(Throwable)}: 当处理响应时发生错误时调用。</li>
+ *   <li>{@link #onResponse(OctetStreamResponse)}: 当成功接收到响应时调用。</li>
+ * </ul>
+ *
+ * <p>实现此接口的类可以提供自定义的处理逻辑，以便在接收到八位字节流
+ * 或发生错误时采取相应的措施。
+ *
+ * @author RedGogh
+ */
+public interface OctetStreamCallback {
 
     /**
-     * atobool
+     * 当处理字节流响应时发生错误时调用。
+     *
+     * @param e 发生的异常，包含错误信息。
      */
-    @Test
-    public void atoboolExample() {
-        System.out.printf("----------------------------\n");
-        System.out.printf("atobool 'y' example: %s\n", atobool("y"));
-        System.out.printf("atobool 'n' example: %s\n", atobool("n"));
-        System.out.printf("----------------------------\n");
-        System.out.printf("atobool '1' example: %s\n", atobool(1));
-        System.out.printf("atobool '0' example: %s\n", atobool(0));
-        System.out.printf("----------------------------\n");
-        System.out.printf("atobool 'true' example: %s\n", atobool("true"));
-        System.out.printf("atobool 'false' example: %s\n", atobool("false"));
-        System.out.printf("----------------------------\n");
-    }
+    void onFailure(Throwable e);
 
+    /**
+     * 当成功接收到字节流响应时调用。
+     *
+     * @param response 成功的 {@link OctetStreamResponse} 实例。
+     */
+    void onResponse(OctetStreamResponse response);
 }

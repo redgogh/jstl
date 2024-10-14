@@ -1,4 +1,4 @@
-package com.redgogh.examples;
+package com.redgogh.common.io;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,28 +18,47 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.junit.Test;
+/* Creates on 2023/5/8. */
 
-import static com.redgogh.common.BasicConverter.atobool;
+/**
+ * @author RedGogh
+ */
+public class HeapByteBuffer extends ByteBuffer {
 
-@SuppressWarnings("ALL")
-public class RedGoghExample {
+    /** 字节缓冲区 */
+    private byte[] buf;
+    /** 扩容次数 */
+    private int count = 1;
+    /** 每次扩容大小为初始分配大小 */
+    private final int initializeCapacity;
 
-    /**
-     * atobool
-     */
-    @Test
-    public void atoboolExample() {
-        System.out.printf("----------------------------\n");
-        System.out.printf("atobool 'y' example: %s\n", atobool("y"));
-        System.out.printf("atobool 'n' example: %s\n", atobool("n"));
-        System.out.printf("----------------------------\n");
-        System.out.printf("atobool '1' example: %s\n", atobool(1));
-        System.out.printf("atobool '0' example: %s\n", atobool(0));
-        System.out.printf("----------------------------\n");
-        System.out.printf("atobool 'true' example: %s\n", atobool("true"));
-        System.out.printf("atobool 'false' example: %s\n", atobool("false"));
-        System.out.printf("----------------------------\n");
+    HeapByteBuffer(int capacity) {
+        initializeCapacity = capacity;
+        buf = new byte[initializeCapacity];
+    }
+
+    /** 确保数据写入时缓冲区内部容量足够 */
+    private void ensureCapacity(int size) {
+        if (buf.length < (capacity + size)) {
+            byte[] nbuf = new byte[((buf.length + size) + initializeCapacity) * count];
+            System.arraycopy(buf, 0, nbuf, 0, buf.length);
+            buf = nbuf;
+            ++count;
+        }
+    }
+
+    @Override
+    public void read0(byte[] b, int off, int len) {
+        System.arraycopy(buf, position, b, off, len);
+        position += len;
+    }
+
+    @Override
+    void write0(byte[] a, int off, int len) {
+        ensureCapacity(len);
+        System.arraycopy(a, off, buf, position, len);
+        position += len;
+        capacity += len;
     }
 
 }

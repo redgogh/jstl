@@ -18,7 +18,7 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.tools.time.TimeUnitOperator;
+import com.redgogh.common.time.TimeUnitOperator;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")

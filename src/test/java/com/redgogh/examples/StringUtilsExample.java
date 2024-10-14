@@ -18,19 +18,18 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.tools.collection.Lists;
-import com.redgogh.tools.generators.RandomGenerator;
+import com.redgogh.common.collection.Lists;
+import com.redgogh.common.generators.RandomGenerator;
 import org.junit.Test;
 
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import static com.redgogh.tools.BasicConverter.atos;
-import static com.redgogh.tools.StringUtils.strant;
-import static com.redgogh.tools.StringUtils.strcut;
+import static com.redgogh.common.BasicConverter.atos;
+import static com.redgogh.common.StringUtils.strant;
+import static com.redgogh.common.StringUtils.strcut;
 
 @SuppressWarnings("ALL")
 public class StringUtilsExample {

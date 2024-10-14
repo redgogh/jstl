@@ -18,8 +18,8 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.tools.reflect.UClass;
-import com.redgogh.tools.reflect.UField;
+import com.redgogh.common.reflect.UClass;
+import com.redgogh.common.reflect.UField;
 import lombok.AllArgsConstructor;
 import org.junit.Test;
 

@@ -18,8 +18,8 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.tools.collection.Lists;
-import com.redgogh.tools.generators.RandomGenerator;
+import com.redgogh.common.collection.Lists;
+import com.redgogh.common.generators.RandomGenerator;
 import org.junit.Test;
 
 import java.util.List;

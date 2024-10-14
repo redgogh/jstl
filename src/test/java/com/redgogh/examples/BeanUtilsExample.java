@@ -18,7 +18,7 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.tools.BeanUtils;
+import com.redgogh.common.BeanUtils;
 import lombok.Data;
 import org.junit.Test;
 

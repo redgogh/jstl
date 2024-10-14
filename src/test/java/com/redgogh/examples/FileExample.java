@@ -18,10 +18,10 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.tools.io.File;
+import com.redgogh.common.io.File;
 import org.junit.Test;
 
-import static com.redgogh.tools.BasicConverter.atos;
+import static com.redgogh.common.BasicConverter.atos;
 
 @SuppressWarnings("ALL")
 public class FileExample {
