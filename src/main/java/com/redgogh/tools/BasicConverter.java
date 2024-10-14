@@ -369,7 +369,7 @@ public class BasicConverter {
      * @see String#String(byte[], int, int)
      */
     public static String atos(byte[] b, int off, int len) {
-        return new String(ArrayUtils.arraycopy(b, off, len));
+        return new String(ArrayUtils.copyOf(b, off, len));
     }
 
     /**
@@ -396,7 +396,7 @@ public class BasicConverter {
      * @see String#String(char[], int, int)
      */
     public static String atos(char[] a, int off, int len) {
-        return new String(ArrayUtils.arraycopy(a, off, len));
+        return new String(ArrayUtils.copyOf(a, off, len));
     }
 
 }

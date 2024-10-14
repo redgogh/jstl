@@ -9,6 +9,7 @@
 - 提供`Assert#notEquals`检测两个对象是否不相等。
 - 重写`Row#toString`用于快速测试时直接打印每行的数据内容。
 - 重写`Workbook#toString`用于快速测试时直接打印工作簿数据内容。
+- 新增`ArrayUtils#copyOf`多个基础类型数组复制函数。
 
 ## 👻 优化功能
 
