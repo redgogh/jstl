@@ -5,8 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.redgogh</groupId>
-    <artifactId>phew-common-lang</artifactId>
+    <artifactId>phew-commons-lang</artifactId>
     <version>2.1.1</version>
+    <name>Phew common Lang</name>
 
     <developers>
         <developer>
