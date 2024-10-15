@@ -49,7 +49,7 @@ public class RandomGenerator {
      * @return 生成的随机代码
      */
     public static String nextCode(int length) {
-        return nextCode(0, length);
+        return nextCode(0, length, true);
     }
 
     /**
@@ -63,8 +63,25 @@ public class RandomGenerator {
      * @return 生成的随机代码
      */
     public static String nextCode(int min, int max) {
+        return nextCode(min, max, false);
+    }
+
+    /**
+     * #brief: 生成指定范围内随机长度的代码
+     *
+     * <p>该方法生成一个随机长度的字符串，长度在指定的
+     * 最小值和最大值之间，内容为字母和数字的组合。如果
+     * `enableMaxLength` 为 true，则生成的长度将始终为
+     * `max`。
+     *
+     * @param min 最小长度
+     * @param max 最大长度
+     * @param enableMaxLength 是否使用最大长度作为随机长度
+     * @return 生成的随机代码
+     */
+    private static String nextCode(int min, int max, boolean enableMaxLength) {
         StringBuilder builder = new StringBuilder();
-        int loopCount = nextInt(min, max);
+        int loopCount = enableMaxLength ? max : nextInt(min, max);
         for (int i = 0; i < loopCount; i++)
             builder.append(nextBoolean() ? LETTER_ARRAY[nextInt(LETTER_ARRAY.length - 1)] :
                     NUMBER_ARRAY[nextInt(NUMBER_ARRAY.length - 1)]);
@@ -82,7 +99,7 @@ public class RandomGenerator {
      * @return 生成的随机字母代码
      */
     public static String nextLetterCode(int length) {
-        return nextLetterCode(0, length);
+        return nextLetterCode(0, length, true);
     }
 
     /**
@@ -96,8 +113,25 @@ public class RandomGenerator {
      * @return 生成的随机字母代码
      */
     public static String nextLetterCode(int min, int max) {
+        return nextLetterCode(min, max, false);
+    }
+
+    /**
+     * #brief: 生成指定范围内随机长度的字母代码
+     *
+     * <p>该方法生成一个随机长度的字符串，长度在指定的
+     * 最小值和最大值之间，字符串内容仅包含字母。如果
+     * `enableMaxLength` 为 true，则生成的长度将始终为
+     * `max`。
+     *
+     * @param min 最小长度
+     * @param max 最大长度
+     * @param enableMaxLength 是否使用最大长度作为随机长度
+     * @return 生成的随机字母代码
+     */
+    private static String nextLetterCode(int min, int max, boolean enableMaxLength) {
         StringBuilder builder = new StringBuilder();
-        int loopCount = nextInt(min, max);
+        int loopCount = enableMaxLength ? max : nextInt(min, max);
         for (int i = 0; i < loopCount; i++)
             builder.append(LETTER_ARRAY[nextInt(LETTER_ARRAY.length - 1)]);
         return builder.toString();
@@ -114,7 +148,7 @@ public class RandomGenerator {
      * @return 生成的随机数字代码
      */
     public static String nextNumberCode(int length) {
-        return nextNumberCode(0, length);
+        return nextNumberCode(0, length, true);
     }
 
     /**
@@ -128,8 +162,25 @@ public class RandomGenerator {
      * @return 生成的随机数字代码
      */
     public static String nextNumberCode(int min, int max) {
+        return nextNumberCode(min, max, false);
+    }
+
+    /**
+     * #brief: 生成指定范围内随机长度的数字代码
+     *
+     * <p>该方法生成一个随机长度的字符串，长度在指定的
+     * 最小值和最大值之间，字符串内容仅包含数字。如果
+     * `enableMaxLength` 为 true，则生成的长度将始终为
+     * `max`。
+     *
+     * @param min 最小长度
+     * @param max 最大长度
+     * @param enableMaxLength 是否使用最大长度作为随机长度
+     * @return 生成的随机数字代码
+     */
+    private static String nextNumberCode(int min, int max, boolean enableMaxLength) {
         StringBuilder builder = new StringBuilder();
-        int loopCount = nextInt(min, max);
+        int loopCount = enableMaxLength ? max : nextInt(min, max);
         for (int i = 0; i < loopCount; i++)
             builder.append(NUMBER_ARRAY[nextInt(NUMBER_ARRAY.length - 1)]);
         return builder.toString();
