@@ -6,6 +6,7 @@
 
 - 重写`File#getParentFile`方法，将原生`File`转为增强文件对象类型。
 - 重写`File#listFiles`方法，将原生`File`转为增强文件对象类型。
+- `UClass`对象提供获取类注解以及判断类注解是否存在方法。
 
 ## 👻 优化功能
 

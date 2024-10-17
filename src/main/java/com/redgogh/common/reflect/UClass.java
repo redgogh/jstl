@@ -29,8 +29,11 @@ import com.redgogh.common.Assert;
 import com.redgogh.common.Capturer;
 import com.redgogh.common.collection.Lists;
 import com.redgogh.common.collection.Maps;
+import jdk.internal.org.objectweb.asm.tree.AnnotationNode;
 import lombok.Getter;
 
+import javax.annotation.processing.SupportedAnnotationTypes;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -180,6 +183,27 @@ public class UClass {
     ////////////////////////////////////////////////////////////////////////////
     // methods
     ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * 检查指定的注解是否存在于描述符上。
+     *
+     * @param annotation 注解类型对应的 Class 对象
+     * @return 如果注解存在则返回 true，否则返回 false
+     */
+    public boolean isAnnotationPresent(Class<? extends Annotation> annotation) {
+        return descriptor.isAnnotationPresent(annotation);
+    }
+
+    /**
+     * 返回描述符上声明的指定注解实例。
+     *
+     * @param <A> 注解类型
+     * @param annotation 注解类型对应的 Class 对象
+     * @return 如果注解存在则返回注解实例，否则返回 null
+     */
+    public <A extends Annotation> A getDeclaredAnnotation(Class<A> annotation) {
+        return (A) descriptor.getDeclaredAnnotation(annotation);
+    }
 
     /**
      * #brief: 实例化当前类对象，可选构造函数参数
