@@ -48,7 +48,7 @@ doSomethingEverytime()
 [source, java]
 -----------------------------
 public static void main(String[] args) {
-bytecode (0xcafebabe)
+    bytecode (0xcafebabe)
 }
 -----------------------------
 
@@ -82,10 +82,10 @@ int OPENSSO_USER_STATUS_STOP   = 2;
 [source, java]
 -----------------------------
 class StringUtils {
-/** 比较两个字符串是否相等 */
-public static boolean equals(String a, String b) {
-...
-}
+    /** 比较两个字符串是否相等 */
+    public static boolean equals(String a, String b) {
+        ...
+    }
 }
 -----------------------------
 
@@ -97,8 +97,8 @@ public static boolean equals(String a, String b) {
 import StringUtils;
 
 public static void foo(String a, String b) {
-if (StringUtils.equals(a, b))
-doSomething();
+    if (StringUtils.equals(a, b))
+        doSomething();
 }
 -----------------------------
 
@@ -107,10 +107,10 @@ doSomething();
 [source, java]
 -----------------------------
 class StringUtils {
-/** 比较两个字符串是否相等 */
-public static boolean streq(String a, String b) {
-...
-}
+    /** 比较两个字符串是否相等 */
+    public static boolean streq(String a, String b) {
+        ...
+    }
 }
 -----------------------------
 
@@ -121,8 +121,8 @@ public static boolean streq(String a, String b) {
 import static StringUtils.streq;
 
 public static void foo(String a, String b) {
-if (streq(a, b))
-doSomething();
+    if (streq(a, b))
+        doSomething();
 }
 -----------------------------
 
