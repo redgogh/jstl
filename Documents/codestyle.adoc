@@ -3,45 +3,38 @@
 [NOTE]
 著作人：罗添胜; 笔名：RedGogh; 撰写时间：2019/08/16
 
-首先这是一个简短的文档，描述了在项目开发中的首选代码风格。项目代码中 `风格统一`、`简单易懂`。其次我知道代码风格是因人而异的，我不太愿意把我自己的观点强加给任何人，但是在一个团队中我我们应该保持并且遵循一定的规则。我相信我们做任何事情都需要保持这样。
+首先这是一个简短的文档，描述了在项目开发中的首选代码风格。项目代码中 风格统一、简单易懂。其次我知道代码风格是因人而异的，我不太愿意把我自己的观点强加给任何人，但是在一个团队中应该保持并且遵循一定的规则。我相信我们做任何事情都需要保持这样。
 
 == 1) 代码缩进
 
 制表符应该由 4 个字符，也就是说每行的 `tab` 要 4 个空格。
 
-**理由**：缩进的全部意义在于你可以一眼就能看出一个控制逻辑块的起始位置。（尤其是当你盯着屏幕看了20个小时后，你会发现大一点的缩进会使你更容易分辨缩进）
+**理由**：缩进的全部意义在于你可以一眼就能看出一个控制逻辑块的起始位置。同时也能保证代码的一致性，不同的编辑器或查看器可能对于 `tab` 的缩进宽度是不一样的。这可能会导致代码对齐效果不一致，而空格能确保在所有环境下代码对齐效果都是一致的。
 
-简而言之，4/8 个字符的缩进可以让代码更容易阅读。还有一个好处是当你函数嵌套太深的时候会给你一个警告（请不要无视它，当我在 review 时，你的PR大概率不会通过）
+缩进还有一个好处是当你函数嵌套太深的时候会给你一个警告，如果你的函数代码嵌套级数超过了三层就意味着你的函数已经很复杂了，这时候你需要考虑把它们拆分成更小的函数。
 
-在 `switch` 语句中消除多级缩进的方式是让 `case` 和 switch 处于对齐。而不要两次缩进 case 标签。比如：
-
+类似这样：
 [source, java]
 -----------------------------
-public static void main(String[] args) {
-    char suffix;
-    switch (suffix) {
-    case 'G':
-    case 'g':
-            stdout.println("G/g");
-            break;
-    case 'M':
-    case 'm':
-            stdout.println("M/m");
-            break;
-    case 'X':
-    case 'x':
-            stdout.println("X/x");
-            break;
+public void foo() {
+    for (...) {
+        if (cond) {
+            if (cond) {
+                ...
+            }
+        }
     }
 }
 -----------------------------
+
+可以看到上面的代码即使没有任何逻辑，看起来也是相当复杂了。所以尽量不要让你的代码缩进级数超过 3 层，如果超过了请拆分成更小的函数。因为一个人的大脑是不可能同时跟踪多个事情。
 
 不要把多个语句放在一行里面（除非你想隐藏什么东西？？？）
 
 [source, java]
 -----------------------------
 if (condition) doThis();
-    doSomethingEverytime()
+doSomethingEverytime()
 -----------------------------
 
 == 2) 空格
@@ -55,7 +48,7 @@ if (condition) doThis();
 [source, java]
 -----------------------------
 public static void main(String[] args) {
-    bytecode (0xcafebabe)
+bytecode (0xcafebabe)
 }
 -----------------------------
 
@@ -99,10 +92,10 @@ int OPENSSO_USER_STATUS_STOP   = 2;
 [source, java]
 -----------------------------
 class StringUtils {
-    /** 比较两个字符串是否相等 */
-    public static boolean equals(String a, String b) {
-        ...
-    }
+/** 比较两个字符串是否相等 */
+public static boolean equals(String a, String b) {
+...
+}
 }
 -----------------------------
 
@@ -114,8 +107,8 @@ class StringUtils {
 import StringUtils;
 
 public static void foo(String a, String b) {
-    if (StringUtils.equals(a, b))
-        doSomething();
+if (StringUtils.equals(a, b))
+doSomething();
 }
 -----------------------------
 
@@ -124,10 +117,10 @@ public static void foo(String a, String b) {
 [source, java]
 -----------------------------
 class StringUtils {
-    /** 比较两个字符串是否相等 */
-    public static boolean streq(String a, String b) {
-        ...
-    }
+/** 比较两个字符串是否相等 */
+public static boolean streq(String a, String b) {
+...
+}
 }
 -----------------------------
 
@@ -138,8 +131,8 @@ class StringUtils {
 import static StringUtils.streq;
 
 public static void foo(String a, String b) {
-    if (streq(a, b))
-        doSomething();
+if (streq(a, b))
+doSomething();
 }
 -----------------------------
 
@@ -156,12 +149,12 @@ public static void foo(String a, String b) {
 
 // 表示这是由前端传递到后端的数据接收对象
 class UserProfileMCTL {
-    ...
+...
 }
 
 // 表示这是由后端返回给前端的数据对象
 class UserProfileVCTL {
-    ...
+...
 }
 
 -----------------------------
@@ -174,15 +167,15 @@ class UserProfileVCTL {
 -----------------------------
 
 class User {
-    ...
+...
 }
 
 class UserInfo {
-    ...
+...
 }
 
 class UserData {
-    ...
+...
 }
 
 -----------------------------
@@ -203,9 +196,9 @@ class UserData {
 [source, java]
 -----------------------------
 public static void pickCotton(List<Nigger> niggers) {
-    for (Nigger nigger : niggers) {
-        for (...) {
-            if (...) {
+for (Nigger nigger : niggers) {
+for (...) {
+if (...) {
 
             }
         }
@@ -234,14 +227,14 @@ public static void pickCotton(List<Nigger> niggers) {
 [source, java]
 -----------------------------
 /**
- * 用户服务对象类，所有针对于用户的操作都必须使用这个类的接口
- * 统一管理对用户数据的增删改查管理。
- *
- * @author RedGogh
- */
-public class UserService {
-    ...
-}
+* 用户服务对象类，所有针对于用户的操作都必须使用这个类的接口
+* 统一管理对用户数据的增删改查管理。
+*
+* @author RedGogh
+  */
+  public class UserService {
+  ...
+  }
 -----------------------------
 
 一个类的注释很简单，你只需要`简要的`解释出这个类是做什么的。它大概包含了哪些相关的功能接口即可。以及作者信息即可。
@@ -252,15 +245,15 @@ public class UserService {
 [source, java]
 -----------------------------
 /**
- * 用户服务对象类，所有针对于用户的操作都必须使用这个类的接口
- * 统一管理对用户数据的增删改查管理。
- *
- * @author RedGogh
- * @author your name
- */
-public class UserService {
-    ...
-}
+* 用户服务对象类，所有针对于用户的操作都必须使用这个类的接口
+* 统一管理对用户数据的增删改查管理。
+*
+* @author RedGogh
+* @author your name
+  */
+  public class UserService {
+  ...
+  }
 -----------------------------
 
 === 5.2) 函数注释
@@ -270,19 +263,19 @@ public class UserService {
 [source, java]
 -----------------------------
 /**
- * #brief: 根据用户 id 查询用户订单列表
- *
- * 查询用户最近一年内购买的商品列表，如果用户没有购买商品那么这个函数将会
- * 返回 {@code null}.
- *
- * @param id
- *        用户id
- *
- * @return 返回用户最近一年内购买的商品列表
- */
-public List<ProductOrder> findProductOrderByUserId(Long id) {
-    ...
-}
+* #brief: 根据用户 id 查询用户订单列表
+*
+* 查询用户最近一年内购买的商品列表，如果用户没有购买商品那么这个函数将会
+* 返回 {@code null}.
+*
+* @param id
+*        用户id
+*
+* @return 返回用户最近一年内购买的商品列表
+  */
+  public List<ProductOrder> findProductOrderByUserId(Long id) {
+  ...
+  }
 -----------------------------
 
 上面是一个注释模板，其中 `#brief` 是整个函数介绍的摘要。摘要过后是 `详细解释`，然后是参数，返回值（如果有）。这样才算得上是一个合格的函数注释。在这之前请先
