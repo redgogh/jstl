@@ -20,8 +20,6 @@ package com.redgogh.examples;
 
 import com.redgogh.common.io.File;
 import com.redgogh.common.reflect.ObjectSerializer;
-import lombok.AllArgsConstructor;
-import lombok.ToString;
 import org.junit.Test;
 
 import java.io.Serializable;
@@ -29,11 +27,14 @@ import java.io.Serializable;
 @SuppressWarnings("ALL")
 public class ObjectSerializerExample {
 
-    @AllArgsConstructor
-    @ToString
     static class User implements Serializable {
         /* test field */
         private String name = "Crazy";
+
+        public User(String name) {
+            this.name = name;
+        }
+
     }
 
     @Test

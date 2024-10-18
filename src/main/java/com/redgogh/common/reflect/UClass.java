@@ -29,10 +29,6 @@ import com.redgogh.common.Assert;
 import com.redgogh.common.Capturer;
 import com.redgogh.common.collection.Lists;
 import com.redgogh.common.collection.Maps;
-import jdk.internal.org.objectweb.asm.tree.AnnotationNode;
-import lombok.Getter;
-
-import javax.annotation.processing.SupportedAnnotationTypes;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -76,7 +72,6 @@ public class UClass {
      * <p>该属性存储类的 {@link Class} 对象描述符。它被标记为 {@code transient}，
      * 以防止在序列化过程中被保存。
      */
-    @Getter
     private transient final Class<?> descriptor;
 
     /**
@@ -401,4 +396,7 @@ public class UClass {
         return descriptor.getClassLoader();
     }
 
+    public Class<?> getDescriptor() {
+        return descriptor;
+    }
 }

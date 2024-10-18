@@ -23,7 +23,6 @@ import com.redgogh.common.Optional;
 import com.redgogh.common.StringUtils;
 import com.redgogh.common.io.ByteBuffer;
 import com.redgogh.common.io.IOUtils;
-import lombok.Getter;
 import okhttp3.Headers;
 import okhttp3.ResponseBody;
 
@@ -79,14 +78,12 @@ public class Response extends JSONObject {
     /**
      * Http 请求状态码
      */
-    @Getter
     private final int code;
 
     /**
      * 如果接口没有正常的 JSON 返回对象等结构的话，那么 message 就是
      * 接口返回信息。有可能是 `Not Found` 等文本。
      */
-    @Getter
     private String message;
 
     /**
@@ -200,6 +197,14 @@ public class Response extends JSONObject {
         retval.put("code", code);
         retval.put("message", message);
         return retval.toString();
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
 }

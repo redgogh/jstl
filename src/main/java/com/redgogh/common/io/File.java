@@ -23,7 +23,6 @@ import com.redgogh.common.Capturer;
 import com.redgogh.common.OSEnvironment;
 import com.redgogh.common.Optional;
 import com.redgogh.common.collection.Lists;
-import lombok.experimental.SuperBuilder;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.RandomAccessFile;
@@ -295,16 +294,10 @@ public class File extends java.io.File {
      *          {@code null} if this abstract pathname does not denote a
      *          directory, or if an I/O error occurs.
      *
-     * @throws  SecurityException
-     *          If a security manager exists and its {@link
-     *          SecurityManager#checkRead(String)} method denies read access to
-     *          the directory
-     *
      * @since  1.2
      */
     @Nullable
     @Override
-    @SuppressWarnings("DataFlowIssue")
     public File[] listFiles() {
         List<File> list = Lists.map(super.listFiles(), File::wrap);
         File[] fs = new File[list.size()];

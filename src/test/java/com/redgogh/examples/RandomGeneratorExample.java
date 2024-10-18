@@ -18,9 +18,7 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.BeanUtils;
 import com.redgogh.common.generators.RandomGenerator;
-import lombok.Data;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")

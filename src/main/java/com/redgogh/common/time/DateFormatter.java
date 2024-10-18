@@ -20,7 +20,7 @@ package com.redgogh.common.time;
 
 /* Creates on 2022/3/30. */
 
-import lombok.SneakyThrows;
+import com.redgogh.common.Capturer;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -77,9 +77,8 @@ public class DateFormatter {
         }
 
         @Override
-        @SneakyThrows
         public Date parse(String text) {
-            return sdf.parse(text);
+            return Capturer.call(() -> sdf.parse(text));
         }
     }
 

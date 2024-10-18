@@ -20,7 +20,6 @@ package com.redgogh.examples;
 
 import com.redgogh.common.reflect.UClass;
 import com.redgogh.common.reflect.UField;
-import lombok.AllArgsConstructor;
 import org.junit.Test;
 
 import java.awt.*;
@@ -41,10 +40,13 @@ public class UClassExample {
         }
     }
 
-    @AllArgsConstructor
     static class User {
         /* test field */
         private String name;
+
+        public User(String name) {
+            this.name = name;
+        }
 
         /* static method */
         public void sayIntroduce() {

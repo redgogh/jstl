@@ -19,26 +19,54 @@ package com.redgogh.examples;
 \* -------------------------------------------------------------------------------- */
 
 import com.redgogh.common.BeanUtils;
-import lombok.Data;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")
 public class BeanUtilsExample {
 
-    @Data
     static class A {
         private String name;
         private String age;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getAge() {
+            return age;
+        }
+
+        public void setAge(String age) {
+            this.age = age;
+        }
     }
 
-    @Data
     static class B extends A {
         private String aabb;
+
+        public String getAabb() {
+            return aabb;
+        }
+
+        public void setAabb(String aabb) {
+            this.aabb = aabb;
+        }
     }
 
-    @Data
     static class C {
         private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 
     @Test
