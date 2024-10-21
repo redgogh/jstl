@@ -18,6 +18,7 @@ package com.redgogh.common;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import java.util.Date;
 import java.util.Map;
 
 import static com.redgogh.common.StringUtils.*;
@@ -168,6 +169,34 @@ public class OSEnvironment {
      */
     public static String getEnvironment(String name) {
         return environments.get(name);
+    }
+
+    /**
+     * #brief: 返回当前系统时间的毫秒数
+     *
+     * <p>该方法调用 `System.currentTimeMillis()`，获取自 Unix 纪元（1970-01-01 00:00:00 UTC）
+     * 以来的当前时间，以毫秒为单位返回。
+     *
+     * <p>该方法适用于需要精确测量时间间隔或记录当前时间的场景。
+     *
+     * @return 当前时间的毫秒数
+     */
+    public static long time() {
+        return System.currentTimeMillis();
+    }
+
+    /**
+     * #brief: 返回当前系统时间的 `Date` 对象
+     *
+     * <p>该方法基于当前时间的毫秒数创建并返回一个新的 `Date` 对象。当前时间是通过调用
+     * `time()` 方法获取的，该方法返回自 Unix 纪元（1970-01-01 00:00:00 UTC）以来的毫秒数。
+     *
+     * <p>该方法适用于需要获取当前时间的 `Date` 表示的场景。
+     *
+     * @return 当前时间的 `Date` 对象
+     */
+    public static Date date() {
+        return new Date(time());
     }
 
 }
