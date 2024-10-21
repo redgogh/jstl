@@ -41,6 +41,26 @@ public class Capturer {
     }
 
     /**
+     * #brief: 执行带返回值的回调函数，并在出现异常时返回 `null`
+     *
+     * <p>该方法执行传入的 `RetFunction` 接口的回调函数，并捕获任何异常。如果函数调用成功，
+     * 则返回其结果。如果在调用过程中抛出异常，则捕获异常并返回 `null`。
+     *
+     * <p>方法主要用于在执行可能抛出异常的操作时，简化异常处理流程，使调用者无需手动处理异常。
+     *
+     * @param function 要执行的回调函数，该函数返回类型为 `T`
+     * @param <T> 返回值的类型
+     * @return 回调函数的返回值，若发生异常则返回 `null`
+     */
+    public static <T> T icall(RetFunction<T> function) {
+        try {
+            return function.call();
+        } catch (Throwable e) {
+            return null;
+        }
+    }
+
+    /**
      * 执行指定的无返回值函数，如果发生异常则抛出断言异常。
      *
      * <p>此方法用于执行可能抛出异常的操作，并在发生异常时提供详细的异常信息。
