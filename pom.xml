@@ -181,13 +181,6 @@
                 <configuration>
                     <source>${java.compiler.version}</source>
                     <target>${java.compiler.version}</target>
-                    <annotationProcessorPaths>
-                        <annotationProcessorPath>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </annotationProcessorPath>
-                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
