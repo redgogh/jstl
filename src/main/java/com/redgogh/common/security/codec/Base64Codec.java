@@ -1,7 +1,5 @@
 package com.redgogh.common.security.codec;
 
-import com.redgogh.common.security.Base64;
-
 import static com.redgogh.common.BasicConverter.atos;
 
 /**
