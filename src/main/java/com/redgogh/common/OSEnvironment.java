@@ -199,4 +199,17 @@ public class OSEnvironment {
         return new Date(time());
     }
 
+    /**
+     * #brief: 获取当前可用的处理器数量
+     *
+     * <p>该方法调用 `Runtime.getRuntime().availableProcessors()`，返回当前 Java 虚拟机可用的处理器数量。
+     *
+     * <p>此方法适用于需要根据系统可用处理器数量进行资源分配或线程管理的场景。
+     *
+     * @return 当前可用的处理器数量
+     */
+    public static int availableProcessors() {
+        return Runtime.getRuntime().availableProcessors();
+    }
+
 }
