@@ -20,6 +20,7 @@ package com.redgogh.common.time;
 
 /* Creates on 2022/3/30. */
 
+import com.redgogh.common.Assert;
 import com.redgogh.common.Enumerate;
 import com.redgogh.common.exception.UnsupportedOperationException;
 import org.joda.time.DateTime;
@@ -167,10 +168,7 @@ public enum TimeUnitOperator {
      * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
      */
     public long toNanos(long duration) {
-        TimeUnit timeUnit = Enumerate.find(TimeUnit.class, name());
-        if (timeUnit != null)
-            return timeUnit.toNanos(duration);
-        throw new UnsupportedOperationException(toUnsupportedExceptMessage("toNanos"));
+        return toTimeUnit().toNanos(duration);
     }
 
     /**
@@ -184,10 +182,7 @@ public enum TimeUnitOperator {
      * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
      */
     public long toMillis(long duration) {
-        TimeUnit timeUnit = Enumerate.find(TimeUnit.class, name());
-        if (timeUnit != null)
-            return timeUnit.toMillis(duration);
-        throw new UnsupportedOperationException(toUnsupportedExceptMessage("toMillis"));
+        return toTimeUnit().toMillis(duration);
     }
 
     /**
@@ -201,10 +196,7 @@ public enum TimeUnitOperator {
      * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
      */
     public long toSeconds(long duration) {
-        TimeUnit timeUnit = Enumerate.find(TimeUnit.class, name());
-        if (timeUnit != null)
-            return timeUnit.toSeconds(duration);
-        throw new UnsupportedOperationException(toUnsupportedExceptMessage("toSeconds"));
+        return toTimeUnit().toSeconds(duration);
     }
 
     /**
@@ -218,10 +210,7 @@ public enum TimeUnitOperator {
      * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
      */
     public long toMinutes(long duration) {
-        TimeUnit timeUnit = Enumerate.find(TimeUnit.class, name());
-        if (timeUnit != null)
-            return timeUnit.toMinutes(duration);
-        throw new UnsupportedOperationException(toUnsupportedExceptMessage("toMinutes"));
+        return toTimeUnit().toMinutes(duration);
     }
 
     /**
@@ -235,10 +224,7 @@ public enum TimeUnitOperator {
      * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
      */
     public long toHours(long duration) {
-        TimeUnit timeUnit = Enumerate.find(TimeUnit.class, name());
-        if (timeUnit != null)
-            return timeUnit.toHours(duration);
-        throw new UnsupportedOperationException(toUnsupportedExceptMessage("toHours"));
+        return toTimeUnit().toHours(duration);
     }
 
     /**
@@ -252,15 +238,13 @@ public enum TimeUnitOperator {
      * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
      */
     public long toDays(long duration) {
-        TimeUnit timeUnit = Enumerate.find(TimeUnit.class, name());
-        if (timeUnit != null)
-            return timeUnit.toDays(duration);
-        throw new UnsupportedOperationException(toUnsupportedExceptMessage("toDays"));
+        return toTimeUnit().toDays(duration);
     }
 
-    /** 构建异常信息 */
-    private String toUnsupportedExceptMessage(String method) {
-        return strwfmt("TimeUnitOperator#%s 类型暂时不支持 %s 函数转换", name(), method);
+    public TimeUnit toTimeUnit() {
+        TimeUnit timeUnit = Enumerate.find(TimeUnit.class, name());
+        Assert.isNull(timeUnit, "TimeUnit枚举类型不支持【%s】单位", name());
+        return timeUnit;
     }
 
 }
