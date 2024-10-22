@@ -12,10 +12,12 @@
 - 新增`atob`方法，将任意类型转为字节数组。
 - 新增`UClass#toString`方法，默认返回全类名。
 - 新增`OSEnvironment#availableProcessors`方法获取可用处理器核心数。
+- 新增`ThreadPool`类，提供线程池功能。
 
 ## 👻 优化功能
 
 - 优化`Crypto`算法实现，每个算法使用单独接口定义避免代码臃肿。
+- 优化`TimeUnitOperator`转`TimeUnit`方法。
 
 ## 🐞 BUG 修复
 
