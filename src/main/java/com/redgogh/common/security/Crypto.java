@@ -25,20 +25,16 @@ package com.redgogh.common.security;
 
 /* Creates on 2023/5/16. */
 
-import com.redgogh.common.Capturer;
-import com.redgogh.common.exception.SystemRuntimeException;
+import com.redgogh.common.security.codec.Base64Codec;
+import com.redgogh.common.security.codec.MD5Codec;
+import com.redgogh.common.security.codec.Sha256Codec;
+import com.redgogh.common.security.codec.URLCodec;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.UUID;
 
 import static com.redgogh.common.BasicConverter.atos;
-import static com.redgogh.common.StringUtils.*;
+import static com.redgogh.common.StringUtils.strcut;
+import static com.redgogh.common.StringUtils.strlen;
 
 /**
  * 各种变量值生成器，用常用于生成 UUID、唯一标识符、MD5 等常用内容
@@ -48,8 +44,10 @@ import static com.redgogh.common.StringUtils.*;
  */
 public final class Crypto {
 
-    private static final String CRYPT_PREFIX_HTTP = "http://";
-    private static final String CRYPT_PREFIX_HTTPS = "https://";
+    public static final Base64 Base64 = new Base64Codec(); // Base64
+    public static final MD5    MD5    = new MD5Codec();    // MD5
+    public static final Sha256 SHA256 = new Sha256Codec(); // sha256
+    public static final URL    URL    = new URLCodec();    // url
 
     /**
      * 生成一个版本号
@@ -131,7 +129,9 @@ public final class Crypto {
         return strcut(uuid, 0, n);
     }
 
-    /** 字节码转 16 进制 */
+    /**
+     * 字节码转 16 进制
+     */
     public static String toByteHex(byte[] bytes) {
         StringBuilder builder = new StringBuilder();
         for (byte b : bytes) {
@@ -141,182 +141,6 @@ public final class Crypto {
             builder.append(tmp);
         }
         return atos(builder);
-    }
-
-    ////////////////////////////////////////////////////////////
-    /// 加密
-    ////////////////////////////////////////////////////////////
-
-    /** 十六进制字符集 */
-    static final char[] hexDigits = {
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-            'a', 'b', 'c', 'd', 'e', 'f'
-    };
-
-    public static final CryptEncoder Encoder = new CryptEncoder() {
-        @Override
-        public String sha256(String source) {
-            try {
-                MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-                messageDigest.update(source.getBytes(StandardCharsets.UTF_8));
-                return toByteHex(messageDigest.digest());
-            } catch (Exception e) {
-                throw new SystemRuntimeException(e);
-            }
-        }
-
-        @Override
-        public String md5lower32(String source) {
-            return md5lower32(source.getBytes());
-        }
-
-        @Override
-        public String md5lower32(byte[] b) {
-            return md5(b, 32);
-        }
-
-        @Override
-        public String md5lower16(String source) {
-            return md5lower16(source.getBytes());
-        }
-
-        @Override
-        public String md5lower16(byte[] b) {
-            return md5(b, 16);
-        }
-
-        @Override
-        public String md5upper32(String source) {
-            return md5upper32(source.getBytes());
-        }
-
-        @Override
-        public String md5upper32(byte[] b) {
-            return md5lower32(b).toUpperCase();
-        }
-
-        @Override
-        public String md5upper16(String source) {
-            return md5upper16(source.getBytes());
-        }
-
-        @Override
-        public String md5upper16(byte[] b) {
-            return md5lower16(b).toUpperCase();
-        }
-
-        @Override
-        public String base64(String source) {
-            return base64(source.getBytes());
-        }
-
-        @Override
-        public String base64(byte[] b) {
-            return Base64.getUrlEncoder().encodeToString(b);
-        }
-
-        /** 使用 Java 原生函数生成 MD5 字符串。注意如果是获取 16 位的加密字符串，原始 MD5
-         *  值会向前移动 8 位，然后截取出后 16 位返回。 */
-        private String md5(byte[] b, int n) {
-            try {
-                MessageDigest md = MessageDigest.getInstance("MD5");
-                md.update(b);
-                byte[] digests = md.digest();
-                char[] chars = new char[32];
-                int k = 0;
-                for (int i = 0; i < 16; i++) {
-                    byte byte0 = digests[i];
-                    chars[k++] = hexDigits[byte0 >>> 4 & 0xf];
-                    chars[k++] = hexDigits[byte0 & 0xf];
-                }
-                /* 判断是获取 16 位的 md5 字符串还是 16 位的 */
-                int flag = n > 16 ? 0 : 8;
-                return strcut(chars, flag, (n + flag));
-            } catch (NoSuchAlgorithmException e) {
-                throw new SystemRuntimeException(e);
-            }
-        }
-
-        @Override
-        public String url(String source) {
-            return url(source, "UTF-8");
-        }
-
-        @Override
-        public String url(String source, String enc) {
-            try {
-                String temporary = "";
-                if (source.startsWith(CRYPT_PREFIX_HTTPS)) {
-                    source = strcut(source, strlen(CRYPT_PREFIX_HTTPS), 0);
-                    temporary = CRYPT_PREFIX_HTTPS;
-                } else if (source.startsWith(CRYPT_PREFIX_HTTP)) {
-                    source = strcut(source, strlen(CRYPT_PREFIX_HTTP), 0);
-                    temporary = CRYPT_PREFIX_HTTP;
-                }
-                return strwfmt("%s%s", temporary, URLEncoder.encode(source, enc));
-            } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    };
-
-    public interface CryptEncoder {
-        /** sha256 加密（小写） */
-        String sha256(String source);
-        /** 将字符串加密成MD5（32位小） */
-        String md5lower32(String source);
-        /** 将字节数组加密成MD5（32位小） */
-        String md5lower32(byte[] b);
-        /** 将字符串加密成MD5（16位小） */
-        String md5lower16(String source);
-        /** 将字节数组加密成MD5（16位小） */
-        String md5lower16(byte[] b);
-        /** 将字符串加密成MD5（32位大） */
-        String md5upper32(String source);
-        /** 将字节数组加密成MD5（32位大） */
-        String md5upper32(byte[] b);
-        /** 将字符串加密成MD5（16位大） */
-        String md5upper16(String source);
-        /** 将字节数组加密成MD5（16位大） */
-        String md5upper16(byte[] b);
-        /** 将字符串使用base64算加密 */
-        String base64(String source);
-        /** 将字符数组使用base64算加密 */
-        String base64(byte[] b);
-        /** URL编码 */
-        String url(String source);
-        /** URL编码 */
-        String url(String source, String enc);
-    }
-
-    ////////////////////////////////////////////////////////////
-    /// 解密
-    ////////////////////////////////////////////////////////////
-
-    public static final CryptDecoder Decoder = new CryptDecoder() {
-        @Override
-        public String base64(String src) {
-            return atos(Base64.getUrlDecoder().decode(src));
-        }
-
-        @Override
-        public String url(String source) {
-            return url(source, "UTF-8");
-        }
-
-        @Override
-        public String url(String source, String enc) {
-            return Capturer.call(() -> URLDecoder.decode(source, enc));
-        }
-    };
-
-    public interface CryptDecoder {
-        /** 解析 base64 编码 */
-        String base64(String src);
-        /** URL解码 */
-        String url(String source);
-        /** URL解码 */
-        String url(String source, String enc);
     }
 
 }

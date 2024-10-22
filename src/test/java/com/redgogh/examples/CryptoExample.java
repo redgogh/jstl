@@ -29,15 +29,41 @@ public class CryptoExample {
      */
     @Test
     public void base64EncodAndDecodeExample() {
-        String str = "Cryptographic: Hello World";
+        String text = "牛子一掰，全场笑歪！";
 
-        // encode
-        String encode = Crypto.Encoder.base64(str);
-        System.out.printf("base64 url encode code: %s\n", encode);
+        // Encoder
+        String base64Str = Crypto.Base64.encode(text);
+        System.out.println("Base64 text encode: " + base64Str);
 
-        // decode
-        String decode = Crypto.Decoder.base64(encode);
-        System.out.printf("base64 url decode code: %s\n", decode);
+        // Decoder
+        String originText = Crypto.Base64.decode(base64Str);
+        System.out.println("Base64 text decode: " + originText);
+
+    }
+
+    /**
+     * md5 编码测试
+     */
+    @Test
+    public void md5EncodExample() {
+        String text = "Hello World";
+        // lower16
+        System.out.println("lower16: " + Crypto.MD5.lower16(text));
+        // lower32
+        System.out.println("lower32: " + Crypto.MD5.lower32(text));
+        // upper16
+        System.out.println("upper16: " + Crypto.MD5.upper16(text));
+        // upper32
+        System.out.println("upper32: " + Crypto.MD5.upper32(text));
+    }
+
+    /**
+     * sha256编码测试
+     */
+    @Test
+    public void sha256EncodExample() {
+        String text = "Hello World";
+        System.out.println("sha256: " + Crypto.SHA256.encode(text));
     }
 
     /**
