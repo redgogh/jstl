@@ -27,7 +27,7 @@ import java.io.OutputStream;
 /**
  * @author RedGogh
  */
-public abstract class ByteBuffer extends OutputStream {
+public abstract class ByteBuffer {
 
     /** 读写指针 */
     protected int position;
@@ -327,11 +327,6 @@ public abstract class ByteBuffer extends OutputStream {
         read(retval, 0, retval.length);
         seek(SEEK_END, 0);
         return retval;
-    }
-
-    @Override
-    public void close() {
-        /* do nothing... */
     }
 
 }

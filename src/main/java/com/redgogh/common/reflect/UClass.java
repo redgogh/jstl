@@ -399,4 +399,9 @@ public class UClass {
     public Class<?> getDescriptor() {
         return descriptor;
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

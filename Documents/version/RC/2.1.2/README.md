@@ -9,6 +9,8 @@
 - 新增`UClass`对象提供获取类注解以及判断类注解是否存在方法。
 - 新增`Capturer#icall`可忽略异常返回`null`。
 - 新增`OSEnvironment`获取时间和日期方法。
+- 新增`atob`方法，将任意类型转为字节数组。
+- 新增`UClass#toString`方法，默认返回全类名。
 
 ## 👻 优化功能
 

@@ -18,10 +18,15 @@ package com.redgogh.common;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.redgogh.common.exception.UnsupportedOperationException;
 import com.redgogh.common.io.ByteBuffer;
+import com.redgogh.common.reflect.UClass;
+import org.apache.commons.lang3.CharSet;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
+import static com.redgogh.common.StringUtils.strcut;
 import static com.redgogh.common.StringUtils.strxmatch;
 import static com.redgogh.common.io.ByteBuffer.SEEK_SET;
 
@@ -79,6 +84,54 @@ public class BasicConverter {
     /////////////////////////////////////////////////////////////////////////////////////////////
     /// int
     /////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * #brief: 将不同类型的对象转换为字节数组
+     *
+     * <p>该方法支持将 `byte[]`、`Integer`、`Long` 和 `String` 类型的对象转换为字节数组。
+     *
+     * <p>具体转换规则如下：
+     * <ul>
+     *     <li>如果输入对象是 `byte[]`，则直接返回该字节数组。</li>
+     *     <li>如果输入对象是 `Integer`，则通过 `ByteBuffer` 将其转换为字节数组。</li>
+     *     <li>如果输入对象是 `Long`，则同样通过 `ByteBuffer` 转换为字节数组。</li>
+     *     <li>如果输入对象是 `String` 或十六进制字符串，则将其转换为 UTF-8 编码的字节数组。</li>
+     * </ul>
+     *
+     * <p>如果输入对象的类型不在支持范围内，则抛出 `UnsupportedOperationException`。
+     *
+     * @param obj 要转换的对象，可以是 `byte[]`、`Integer`、`Long` 或 `String`
+     * @return 转换后的字节数组
+     * @throws UnsupportedOperationException 如果输入对象的类型不被支持
+     */
+    public static byte[] atob(Object obj) {
+        // byte[]
+        if (obj instanceof byte[])
+            return (byte[]) obj;
+
+        // int
+        if (obj instanceof Integer) {
+            ByteBuffer buffer = ByteBuffer.allocate();
+            buffer.write((int) obj);
+            buffer.seek(SEEK_SET, 0);
+            return buffer.toByteArray();
+        }
+
+        // long
+        if (obj instanceof Long) {
+            ByteBuffer buffer = ByteBuffer.allocate();
+            buffer.write((long) obj);
+            buffer.seek(SEEK_SET, 0);
+            return buffer.toByteArray();
+        }
+
+        // string or hex string
+        if (obj instanceof String) {
+            return ((String) obj).getBytes(StandardCharsets.UTF_8);
+        }
+
+        throw new UnsupportedOperationException("atob：暂不支持当前类型【%s】转字节数组", new UClass(obj));
+    }
 
     /**
      * #brief：自动识别 {@code obj} 类型，并转换成 Integer<p>
