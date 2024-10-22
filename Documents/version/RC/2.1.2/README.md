@@ -11,6 +11,7 @@
 - 新增`OSEnvironment`获取时间和日期方法。
 - 新增`atob`方法，将任意类型转为字节数组。
 - 新增`UClass#toString`方法，默认返回全类名。
+- 新增`OSEnvironment#availableProcessors`方法获取可用处理器核心数。
 
 ## 👻 优化功能
 
