@@ -1,4 +1,4 @@
-package com.redgogh.examples;
+package com.redgogh.research;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,28 +18,35 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.redgogh.common.generators.RandomGenerator;
 import org.junit.Test;
 
-import static com.redgogh.common.BasicConverter.atobool;
+import java.util.Random;
 
 @SuppressWarnings("ALL")
-public class RedGoghExample {
+public class FastRandomValueTest {
 
-    /**
-     * atobool
-     */
+    public static int seed = 0;
+    public static final long T = System.nanoTime() % 1000000;
+    public static final long A = 1103515245;
+    public static final long C = System.nanoTime() % 100000;
+    public static final long M = (long) Math.pow(2, 32);
+
     @Test
-    public void atoboolExample() {
-        System.out.printf("----------------------------\n");
-        System.out.printf("atobool 'y' example: %s\n", atobool("y"));
-        System.out.printf("atobool 'n' example: %s\n", atobool("n"));
-        System.out.printf("----------------------------\n");
-        System.out.printf("atobool '1' example: %s\n", atobool(1));
-        System.out.printf("atobool '0' example: %s\n", atobool(0));
-        System.out.printf("----------------------------\n");
-        System.out.printf("atobool 'true' example: %s\n", atobool("true"));
-        System.out.printf("atobool 'false' example: %s\n", atobool("false"));
-        System.out.printf("----------------------------\n");
+    public void fastRandomGenerateTest() {
+        Random random = new Random();
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+            /* 5 sec 541 ms */
+            fastNextRandom();
+
+            /* 7 sec 118 ms */
+            RandomGenerator.nextInt(1000, 9999);
+        }
+    }
+
+    public static int fastNextRandom() {
+        seed = (int) ((A * seed + C) % M);
+        return seed;
     }
 
 }

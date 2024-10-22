@@ -23,7 +23,7 @@ import com.redgogh.common.poi.Workbook;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")
-public class WorkbookExample {
+public class WorkbookTest {
 
     @Test
     public void generateWorkbookExample() {

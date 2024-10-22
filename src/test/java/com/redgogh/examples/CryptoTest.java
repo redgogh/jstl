@@ -18,26 +18,64 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.time.TimeUnitOperator;
+import com.redgogh.common.security.Crypto;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")
-public class TimeUnitOperatorExample {
+public class CryptoTest {
 
     /**
-     * TimeUnitOperator：时间加一天
+     * Base64 编码、解码测试
      */
     @Test
-    public void timeUnitAddOperateExample() {
-        System.out.printf("TimeUnitOperator DAY add 1 example: %s\n", TimeUnitOperator.DAYS.add(1));
+    public void base64EncodAndDecodeExample() {
+        String text = "牛子一掰，全场笑歪！";
+
+        // Encoder
+        String base64Str = Crypto.Base64.encode(text);
+        System.out.println("Base64 text encode: " + base64Str);
+
+        // Decoder
+        String originText = Crypto.Base64.decode(base64Str);
+        System.out.println("Base64 text decode: " + originText);
+
     }
 
     /**
-     * TimeUnitOperator：时间减一天
+     * md5 编码测试
      */
     @Test
-    public void timeUnitMinusOperateExample() {
-        System.out.printf("TimeUnitOperator DAY minus 1 example: %s\n", TimeUnitOperator.DAYS.minus(1));
+    public void md5EncodExample() {
+        String text = "Hello World";
+        // lower16
+        System.out.println("lower16: " + Crypto.MD5.lower16(text));
+        // lower32
+        System.out.println("lower32: " + Crypto.MD5.lower32(text));
+        // upper16
+        System.out.println("upper16: " + Crypto.MD5.upper16(text));
+        // upper32
+        System.out.println("upper32: " + Crypto.MD5.upper32(text));
+    }
+
+    /**
+     * sha256编码测试
+     */
+    @Test
+    public void sha256EncodExample() {
+        String text = "Hello World";
+        System.out.println("sha256: " + Crypto.SHA256.encode(text));
+    }
+
+    /**
+     * 版本生成测试
+     */
+    @Test
+    public void versionGenerateExample() {
+        int version = Crypto.makeVersion(1, 8, 1);
+        System.out.println("make version = " + version);
+        System.out.println("  - major = " + Crypto.versionMajor(version));
+        System.out.println("  - minor = " + Crypto.versionMinor(version));
+        System.out.println("  - patch = " + Crypto.versionPatch(version));
     }
 
 }

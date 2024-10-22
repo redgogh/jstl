@@ -18,18 +18,26 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.redgogh.common.generators.ChanceMaker;
 import org.junit.Test;
 
-import java.util.Arrays;
-
-import static com.redgogh.common.BasicConverter.atob;
+import static com.redgogh.common.io.IOUtils.stdout;
 
 @SuppressWarnings("ALL")
-public class BasicConverterExample {
+public class ChanceMakerTest {
 
+    /**
+     * 模拟 1% 中奖概率
+     */
     @Test
-    public void atobExample() {
-        System.out.println(Arrays.toString(atob(114514)));
+    public void onePercentChanceExample() {
+        int loopCount = 100;
+        int luckCount = 0;
+        for (int i = 0; i < loopCount; i++) {
+            if (ChanceMaker.isLuck(1.0f))
+                luckCount++;
+        }
+        stdout.printf("循环次数：%s，中奖次数：%s\n", loopCount, luckCount);
     }
 
 }

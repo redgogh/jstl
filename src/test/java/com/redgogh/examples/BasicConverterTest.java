@@ -18,65 +18,18 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.BeanUtils;
 import org.junit.Test;
 
+import java.util.Arrays;
+
+import static com.redgogh.common.BasicConverter.atob;
+
 @SuppressWarnings("ALL")
-public class BeanUtilsExample {
-
-    static class A {
-        private String name;
-        private String age;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getAge() {
-            return age;
-        }
-
-        public void setAge(String age) {
-            this.age = age;
-        }
-    }
-
-    static class B extends A {
-        private String aabb;
-
-        public String getAabb() {
-            return aabb;
-        }
-
-        public void setAabb(String aabb) {
-            this.aabb = aabb;
-        }
-    }
-
-    static class C {
-        private String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
+public class BasicConverterTest {
 
     @Test
-    public void copyPropertiesExample() {
-        B b = new B();
-        b.setName("John");
-        b.setAge("30");
-
-        C c = BeanUtils.copyProperties(b, C.class);
-        System.out.println(c);
+    public void atobExample() {
+        System.out.println(Arrays.toString(atob(114514)));
     }
 
 }

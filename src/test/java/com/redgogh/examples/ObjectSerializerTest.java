@@ -18,61 +18,37 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.reflect.UClass;
-import com.redgogh.common.reflect.UField;
+import com.redgogh.common.io.File;
+import com.redgogh.common.reflect.ObjectSerializer;
 import org.junit.Test;
 
-import java.awt.*;
-import java.util.List;
+import java.io.Serializable;
 
 @SuppressWarnings("ALL")
-public class UClassExample {
+public class ObjectSerializerTest {
 
-    @Test
-    public void newUClassExample() {
-        UClass uClass = new UClass(Button.class);
-
-        System.out.printf("uClass(%s)\n", uClass.getName());
-
-        List<UField> properties = uClass.getDeclaredFields();
-        for (UField property : properties) {
-            System.out.printf("  - uField path: %s\n", property.getPath());
-        }
-    }
-
-    static class User {
+    static class User implements Serializable {
         /* test field */
-        private String name;
+        private String name = "Crazy";
 
         public User(String name) {
             this.name = name;
         }
 
-        /* static method */
-        public void sayIntroduce() {
-            System.out.printf("介绍 - 永乐大帝\n");
-        }
-
-        /* static method */
-        public static void say(String value) {
-            System.out.printf("朱棣 - %s\n", value);
-        }
-
     }
 
     @Test
-    public void readFieldValueExample() {
-        User judy = new User("Judy");
-        System.out.println((String) new UClass(judy).readFieldValue("name", judy));
+    public void serializeExample() {
+        ObjectSerializer.serialize(new User("Judy"), new File("Desktop://judy.ser"));
     }
 
     @Test
-    public void invokeMethodExample() {
-        User judy = new User("Judy");
-        UClass uClass = new UClass(judy);
-
-        uClass.invoke(judy,"sayIntroduce");
-        uClass.staticInvoke("say", "如此江山，岂不让人留恋 ~");
+    public void deserializeExample() {
+        File file = new File("Desktop://judy.ser");
+        User user = (User) ObjectSerializer.deserialize(file);
+        System.out.println(user);
+        file.forceDelete();
     }
+
 
 }

@@ -18,26 +18,28 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.generators.ChanceMaker;
 import org.junit.Test;
 
-import static com.redgogh.common.io.IOUtils.stdout;
+import static com.redgogh.common.BasicConverter.atobool;
 
 @SuppressWarnings("ALL")
-public class ChanceMakerExample {
+public class RedGoghTest {
 
     /**
-     * 模拟 1% 中奖概率
+     * atobool
      */
     @Test
-    public void onePercentChanceExample() {
-        int loopCount = 100;
-        int luckCount = 0;
-        for (int i = 0; i < loopCount; i++) {
-            if (ChanceMaker.isLuck(1.0f))
-                luckCount++;
-        }
-        stdout.printf("循环次数：%s，中奖次数：%s\n", loopCount, luckCount);
+    public void atoboolExample() {
+        System.out.printf("----------------------------\n");
+        System.out.printf("atobool 'y' example: %s\n", atobool("y"));
+        System.out.printf("atobool 'n' example: %s\n", atobool("n"));
+        System.out.printf("----------------------------\n");
+        System.out.printf("atobool '1' example: %s\n", atobool(1));
+        System.out.printf("atobool '0' example: %s\n", atobool(0));
+        System.out.printf("----------------------------\n");
+        System.out.printf("atobool 'true' example: %s\n", atobool("true"));
+        System.out.printf("atobool 'false' example: %s\n", atobool("false"));
+        System.out.printf("----------------------------\n");
     }
 
 }

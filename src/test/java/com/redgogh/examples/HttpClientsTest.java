@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 import static com.redgogh.common.io.IOUtils.stdout;
 
 @SuppressWarnings("ALL")
-public class HttpClientsExample {
+public class HttpClientsTest {
 
     // @Test
     // public void callFormBodyExample() {

@@ -22,7 +22,7 @@ import com.redgogh.common.generators.RandomGenerator;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")
-public class RandomGeneratorExample {
+public class RandomGeneratorTest {
 
     @Test
     public void nextCodeTest() {

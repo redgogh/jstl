@@ -1,4 +1,4 @@
-package com.redgogh.research;
+package com.redgogh.examples;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,35 +18,65 @@ package com.redgogh.research;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.generators.RandomGenerator;
+import com.redgogh.common.BeanUtils;
 import org.junit.Test;
 
-import java.util.Random;
-
 @SuppressWarnings("ALL")
-public class FastRandomValueReserach {
+public class BeanUtilsTest {
 
-    public static int seed = 0;
-    public static final long T = System.nanoTime() % 1000000;
-    public static final long A = 1103515245;
-    public static final long C = System.nanoTime() % 100000;
-    public static final long M = (long) Math.pow(2, 32);
+    static class A {
+        private String name;
+        private String age;
 
-    @Test
-    public void fastRandomGenerateTest() {
-        Random random = new Random();
-        for (int i = 0; i < Integer.MAX_VALUE; i++) {
-            /* 5 sec 541 ms */
-            fastNextRandom();
+        public String getName() {
+            return name;
+        }
 
-            /* 7 sec 118 ms */
-            RandomGenerator.nextInt(1000, 9999);
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getAge() {
+            return age;
+        }
+
+        public void setAge(String age) {
+            this.age = age;
         }
     }
 
-    public static int fastNextRandom() {
-        seed = (int) ((A * seed + C) % M);
-        return seed;
+    static class B extends A {
+        private String aabb;
+
+        public String getAabb() {
+            return aabb;
+        }
+
+        public void setAabb(String aabb) {
+            this.aabb = aabb;
+        }
+    }
+
+    static class C {
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+
+    @Test
+    public void copyPropertiesExample() {
+        B b = new B();
+        b.setName("John");
+        b.setAge("30");
+
+        C c = BeanUtils.copyProperties(b, C.class);
+        System.out.println(c);
     }
 
 }

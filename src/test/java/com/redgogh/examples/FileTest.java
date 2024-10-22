@@ -24,7 +24,7 @@ import org.junit.Test;
 import static com.redgogh.common.BasicConverter.atos;
 
 @SuppressWarnings("ALL")
-public class FileExample {
+public class FileTest {
 
     /**
      * 随机读写访问测试

@@ -23,33 +23,50 @@ import com.redgogh.common.generators.RandomGenerator;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author RedGogh
- */
+import static com.redgogh.common.BasicConverter.atos;
+import static com.redgogh.common.StringUtils.strant;
+import static com.redgogh.common.StringUtils.strcut;
+
 @SuppressWarnings("ALL")
-public class ThreadExecutorExample {
+public class StringUtilsTest {
 
     @Test
-    public void newExecutorFixedPoolExample() throws InterruptedException {
-        ExecutorService executor = Executors.newFixedThreadPool(128);
+    public void atosExample() {
+        String vanGogh = "Vincent Van Gogh";
+        System.out.printf("atos: byte array to string: %s\n", atos(vanGogh.getBytes()));
+        System.out.printf("atos: byte array [7 - len] to string: %s\n", atos(vanGogh.getBytes(), 7, 0));
+    }
 
-        List<Integer> numbers = Lists.newSynchronizedList();
+    @Test
+    public void strcutExmaple() {
+        String author = "Red Gogh";
+        System.out.println(strcut(author, 0, -1));
+    }
 
-        for (int i = 0; i < (1024 * 1024); i++) {
-            executor.execute(() -> {
-                numbers.add(RandomGenerator.nextInt(6) + RandomGenerator.nextInt(6));
-            });
+    @Test
+    public void globMatcherExample() {
+        List<String> paths = Lists.of();
+
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        scheduledExecutorService.scheduleAtFixedRate(() -> System.out.print("\rsize: " + paths.size()), 0, 10, TimeUnit.MILLISECONDS);
+
+        boolean isContinue = true;
+        while (isContinue) {
+            paths.add("/" + RandomGenerator.nextLetterCode(3, 8) + "/" + RandomGenerator.nextLetterCode(0, 8) + "." + RandomGenerator.nextLetterCode(3, 6));
+            if (paths.size() > 10000000)
+                isContinue = false;
         }
-
-        executor.shutdown();
-        executor.awaitTermination(30, TimeUnit.SECONDS);
-
-        Integer sum = numbers.stream().reduce(0, Integer::sum);
-        System.out.println("beg="+ Lists.beg(numbers) + ", sum=" + sum);
+        scheduledExecutorService.shutdown();
+        System.out.println();
+        paths.add("/api/dwada.xdwadpojawopdjf");
+        paths.forEach(V -> {
+            if (strant(V, "/api/*.x*f"))
+                System.out.println(V);
+        });
     }
 
 }
