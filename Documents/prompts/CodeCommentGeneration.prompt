@@ -9,11 +9,9 @@
     /**
      * #brief: 根据名称查找并返回指定枚举类的枚举值
      *
-     * <p>该方法查找枚举类中名称匹配的枚举值。如果找到与提供的名称匹配的枚举值，则返回该
-     * 枚举值。如果没有找到，则抛出 `InvalidArgumentException` 异常，指明参数错误和常量不存在。
-     *
-     * <p>方法首先调用 `values` 方法获取所有枚举值，然后遍历这些枚举值，比较它们的名称与
-     * 提供的名称。如果找到匹配项，则返回对应的枚举值。否则，抛出 `InvalidArgumentException` 异常。
+     * <p>该方法查找枚举类中名称匹配的枚举值。如果找到与提供的名称匹配的枚举值，
+     * 则返回该枚举值。如果没有找到，则抛出 `InvalidArgumentException` 异常，
+     * 指明参数错误和常量不存在。
      *
      * @param enumClass 枚举类的 `Class` 对象
      * @param name 要查找的枚举值名称
@@ -77,7 +75,6 @@
      * <p>完整的使用示例和测试用例可以参考项目的测试包下的相关测试类。
      *
      * @author RedGogh
-     *
      * @see Collection
      * @see List
      * @see ArrayList
