@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '8'
-          distribution: 'openjdk'
+          distribution: 'temurin'
 
       - name: Test with Maven
         run: mvn clean test
