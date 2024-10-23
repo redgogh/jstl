@@ -53,6 +53,12 @@ public enum TimeUnitOperator {
     YEARS,
     ;
 
+    private final TimeUnit timeUnit;
+
+    TimeUnitOperator() {
+        timeUnit = Enumerate.find(TimeUnit.class, name());
+    }
+
     public Date add(int value) {
         return add(DateFormatter.now(), value);
     }
@@ -166,7 +172,7 @@ public enum TimeUnitOperator {
      * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
      */
     public long toNanos(long duration) {
-        return toTimeUnit().toNanos(duration);
+        return toTimeUnitCheckNull().toNanos(duration);
     }
 
     /**
@@ -180,7 +186,7 @@ public enum TimeUnitOperator {
      * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
      */
     public long toMillis(long duration) {
-        return toTimeUnit().toMillis(duration);
+        return toTimeUnitCheckNull().toMillis(duration);
     }
 
     /**
@@ -194,7 +200,7 @@ public enum TimeUnitOperator {
      * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
      */
     public long toSeconds(long duration) {
-        return toTimeUnit().toSeconds(duration);
+        return toTimeUnitCheckNull().toSeconds(duration);
     }
 
     /**
@@ -208,7 +214,7 @@ public enum TimeUnitOperator {
      * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
      */
     public long toMinutes(long duration) {
-        return toTimeUnit().toMinutes(duration);
+        return toTimeUnitCheckNull().toMinutes(duration);
     }
 
     /**
@@ -222,7 +228,7 @@ public enum TimeUnitOperator {
      * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
      */
     public long toHours(long duration) {
-        return toTimeUnit().toHours(duration);
+        return toTimeUnitCheckNull().toHours(duration);
     }
 
     /**
@@ -236,12 +242,15 @@ public enum TimeUnitOperator {
      * @throws UnsupportedOperationException 如果当前名称无法匹配到 `TimeUnit` 枚举常量
      */
     public long toDays(long duration) {
-        return toTimeUnit().toDays(duration);
+        return toTimeUnitCheckNull().toDays(duration);
+    }
+
+    private TimeUnit toTimeUnitCheckNull() {
+        Assert.isNull(timeUnit, "TimeUnit不支持【%s】", name());
+        return timeUnit;
     }
 
     public TimeUnit toTimeUnit() {
-        TimeUnit timeUnit = Enumerate.find(TimeUnit.class, name());
-        Assert.isNull(timeUnit, "TimeUnit枚举类型不支持【%s】单位", name());
         return timeUnit;
     }
 
