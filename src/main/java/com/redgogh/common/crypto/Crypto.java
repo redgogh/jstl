@@ -25,10 +25,7 @@ package com.redgogh.common.crypto;
 
 /* Creates on 2023/5/16. */
 
-import com.redgogh.common.crypto.codec.Base64Codec;
-import com.redgogh.common.crypto.codec.MD5Codec;
-import com.redgogh.common.crypto.codec.SHA256Codec;
-import com.redgogh.common.crypto.codec.URLCodec;
+import com.redgogh.common.crypto.codec.*;
 
 import java.util.UUID;
 
@@ -44,10 +41,11 @@ import static com.redgogh.common.StringUtils.strlen;
  */
 public final class Crypto {
 
-    public static final Base64 BASE64 = new Base64Codec(); // Base64
+    public static final Base64 BASE64 = new Base64Codec(); // BASE64
     public static final MD5    MD5    = new MD5Codec();    // MD5
-    public static final SHA256 SHA256 = new SHA256Codec(); // sha256
-    public static final URL    URL    = new URLCodec();    // url
+    public static final SHA256 SHA256 = new SHA256Codec(); // SHA-256
+    public static final URL    URL    = new URLCodec();    // URL
+    public static final AES    AES    = new AESCodec();    // AES
 
     /**
      * 生成一个版本号

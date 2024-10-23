@@ -78,4 +78,21 @@ public class CryptoTest {
         System.out.println("  - patch = " + Crypto.versionPatch(version));
     }
 
+    /**
+     * AES 编码、解码测试
+     */
+    @Test
+    public void aesExample() {
+        String text = "牛子一掰，全场笑歪！";
+        String secret = "1234567890123456";
+
+        // Encoder
+        String key = Crypto.AES.encrypt(text, secret);;
+        System.out.println("AES text encrypt: " + key);
+
+        // Decoder
+        System.out.println("AES text decrypt: " + Crypto.AES.decrypt(key, secret));
+
+    }
+
 }
