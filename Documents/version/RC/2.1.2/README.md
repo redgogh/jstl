@@ -18,6 +18,7 @@
 
 - 优化`Crypto`算法实现，每个算法使用单独接口定义避免代码臃肿。
 - 优化`TimeUnitOperator`转`TimeUnit`方法。
+- 优化包名加密以及编码工具放入`crypto`包下。
 
 ## 🐞 BUG 修复
 
