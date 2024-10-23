@@ -34,10 +34,29 @@ import static com.redgogh.common.StringUtils.strcut;
 import static com.redgogh.common.StringUtils.strlen;
 
 /**
- * 各种变量值生成器，用常用于生成 UUID、唯一标识符、MD5 等常用内容
- * 生成器。
+ * `Crypto` 是一个工具类，提供了多种加密和解密算法的实现，支持常见的加密需求。
  *
- * @author venorze
+ * <p>该类包含静态方法，可以直接调用，无需实例化对象。支持的算法包括 AES、MD5、SHA-256 等，能够
+ * 满足用户对数据加密和解密的需求，确保数据的安全性。
+ *
+ * <p>本类的主要特点包括：
+ * <ul>
+ *     <li>提供多种加密算法，支持不同类型的数据处理。</li>
+ *     <li>所有方法均为静态，方便直接调用，简化使用流程。</li>
+ *     <li>包含基本的异常处理，确保在加密解密过程中提供适当的错误信息。</li>
+ * </ul>
+ *
+ * <h2>使用示例</h2>
+ * <pre>
+ *     // 使用 AES 加密
+ *     String encrypted = Crypto.AES.encrypt("Hello World", "mysecretkey");
+ *
+ *     // 使用 MD5 计算哈希
+ *     String hash = Crypto.MD5.lower32("Hello World");
+ * </pre>
+ *
+ * @author RedGogh
+ * @since 1.0
  */
 public final class Crypto {
 
