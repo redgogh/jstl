@@ -1,11 +1,13 @@
-package com.redgogh.common.security.codec;
+package com.redgogh.common.crypto.codec;
+
+import com.redgogh.common.crypto.Base64;
 
 import static com.redgogh.common.BasicConverter.atos;
 
 /**
  * @author RedGogh
  */
-public class Base64Codec implements com.redgogh.common.security.Base64 {
+public class Base64Codec implements Base64 {
     @Override
     public String encode(String source) {
         return encode(source.getBytes());

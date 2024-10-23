@@ -1,20 +1,18 @@
-package com.redgogh.common.security.codec;
+package com.redgogh.common.crypto.codec;
 
 import com.redgogh.common.Capturer;
-import com.redgogh.common.exception.SystemRuntimeException;
+import com.redgogh.common.crypto.URL;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import static com.redgogh.common.StringUtils.*;
 
 /**
  * @author RedGogh
  */
-public class URLCodec implements com.redgogh.common.security.URL {
+public class URLCodec implements URL {
 
     private static final String CRYPT_PREFIX_HTTP = "http://";
     private static final String CRYPT_PREFIX_HTTPS = "https://";

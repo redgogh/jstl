@@ -1,5 +1,6 @@
-package com.redgogh.common.security.codec;
+package com.redgogh.common.crypto.codec;
 
+import com.redgogh.common.crypto.MD5;
 import com.redgogh.common.exception.SystemRuntimeException;
 
 import java.security.MessageDigest;
@@ -10,7 +11,7 @@ import static com.redgogh.common.StringUtils.strcut;
 /**
  * @author RedGogh
  */
-public class MD5Codec implements com.redgogh.common.security.MD5 {
+public class MD5Codec implements MD5 {
 
     /**
      * 十六进制字符集

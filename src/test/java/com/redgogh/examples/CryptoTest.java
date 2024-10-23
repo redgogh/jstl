@@ -18,7 +18,7 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.security.Crypto;
+import com.redgogh.common.crypto.Crypto;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")
@@ -32,11 +32,11 @@ public class CryptoTest {
         String text = "牛子一掰，全场笑歪！";
 
         // Encoder
-        String base64Str = Crypto.Base64.encode(text);
+        String base64Str = Crypto.BASE64.encode(text);
         System.out.println("Base64 text encode: " + base64Str);
 
         // Decoder
-        String originText = Crypto.Base64.decode(base64Str);
+        String originText = Crypto.BASE64.decode(base64Str);
         System.out.println("Base64 text decode: " + originText);
 
     }

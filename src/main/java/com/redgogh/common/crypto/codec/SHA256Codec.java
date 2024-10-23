@@ -1,8 +1,8 @@
-package com.redgogh.common.security.codec;
+package com.redgogh.common.crypto.codec;
 
+import com.redgogh.common.crypto.Crypto;
+import com.redgogh.common.crypto.SHA256;
 import com.redgogh.common.exception.SystemRuntimeException;
-import com.redgogh.common.security.Crypto;
-import com.redgogh.common.security.Sha256;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -10,7 +10,7 @@ import java.security.MessageDigest;
 /**
  * @author RedGogh
  */
-public class Sha256Codec implements com.redgogh.common.security.Sha256 {
+public class SHA256Codec implements SHA256 {
     @Override
     public String encode(String source) {
         try {
