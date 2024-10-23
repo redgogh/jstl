@@ -20,8 +20,8 @@ package com.redgogh.common.base;
 
 /* Creates on 2023/4/29. */
 
-import com.redgogh.common.iface.RetFunction;
-import com.redgogh.common.iface.VoidFunction;
+import com.redgogh.common.iface.CallableFunction;
+import com.redgogh.common.iface.ActionFunction;
 
 /**
  * @author RedGogh
@@ -44,7 +44,7 @@ public class Optional {
     }
 
     /**
-     * 执行给定的 {@link VoidFunction}，如果没有抛出异常，则返回 {@code orSuccess}，
+     * 执行给定的 {@link ActionFunction}，如果没有抛出异常，则返回 {@code orSuccess}，
      * 否则返回 {@code orError}。
      *
      * <p>此方法用于捕获可能抛出的异常，简化异常处理流程。成功执行时返回成功值，
@@ -56,7 +56,7 @@ public class Optional {
      *
      * @return {@code orSuccess} 如果函数成功执行，{@code orError} 如果函数抛出异常
      */
-    public static <T> T ifError(VoidFunction function, T orSuccess, T orError) {
+    public static <T> T ifError(ActionFunction function, T orSuccess, T orError) {
         try {
             function.call();
             return orSuccess;
@@ -75,7 +75,7 @@ public class Optional {
      * @param <T> 返回值的类型
      * @return 函数执行的返回值；如果发生异常，则返回 {@code orError}
      */
-    public static <T> T ifError(RetFunction<T> function, T orError) {
+    public static <T> T ifError(CallableFunction<T> function, T orError) {
         try {
             return function.call();
         } catch (Throwable e) {

@@ -18,7 +18,7 @@ package com.redgogh.common.poi;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.iface.StreamMapper;
+import com.redgogh.common.iface.TypeMapper;
 import com.redgogh.common.collection.Lists;
 import org.jetbrains.annotations.NotNull;
 
@@ -90,7 +90,7 @@ public class Row extends ArrayList<String> {
      * @param <R>    转换后的返回类型。
      * @return 转换后的单元格数据。
      */
-    public <R> R get(int i, StreamMapper<Object, R> mapper) {
+    public <R> R get(int i, TypeMapper<Object, R> mapper) {
         return mapper.call(get(i));
     }
 

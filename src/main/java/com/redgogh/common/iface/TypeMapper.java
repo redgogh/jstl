@@ -21,7 +21,7 @@ package com.redgogh.common.iface;
 /* Creates on 2023/4/29. */
 
 /**
- * `ConvertMapper` 接口定义了一个通用的转换映射功能，
+ * `TypeMapper` 接口定义了一个通用的转换映射功能，
  * 用于将类型为 {@code T} 的值转换为类型为 {@code R} 的值。
  * 该接口的主要目的是提供一个抽象的方法，以便实现不同类型的转换逻辑。
  *
@@ -36,12 +36,16 @@ package com.redgogh.common.iface;
  *
  * @author RedGogh
  */
-public interface StreamMapper<T, R> {
+public interface TypeMapper<T, R> {
+
     /**
-     * 将给定的输入值转换为输出值。
+     * #brief: 执行类型映射，将输入值转换为另一种类型
+     *
+     * <p>该方法接收一个输入值，并将其转换为指定的输出类型。实现该方法时需定义具体的转换逻辑。
      *
      * @param value 要转换的输入值
      * @return 转换后的输出值
      */
     R call(T value);
+
 }

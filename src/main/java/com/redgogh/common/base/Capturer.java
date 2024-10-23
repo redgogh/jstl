@@ -18,8 +18,8 @@ package com.redgogh.common.base;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.iface.RetFunction;
-import com.redgogh.common.iface.VoidFunction;
+import com.redgogh.common.iface.CallableFunction;
+import com.redgogh.common.iface.ActionFunction;
 import com.redgogh.common.exception.AssertException;
 
 /**
@@ -34,7 +34,7 @@ public class Capturer {
      *
      * @param function 要执行的函数
      */
-    public static void icall(VoidFunction function) {
+    public static void icall(ActionFunction function) {
         try {
             function.call();
         } catch (Throwable e) {
@@ -54,7 +54,7 @@ public class Capturer {
      * @param <T> 返回值的类型
      * @return 回调函数的返回值，若发生异常则返回 `null`
      */
-    public static <T> T icall(RetFunction<T> function) {
+    public static <T> T icall(CallableFunction<T> function) {
         try {
             return function.call();
         } catch (Throwable e) {
@@ -70,7 +70,7 @@ public class Capturer {
      * @param function 要执行的函数
      * @throws AssertException 如果函数执行时发生异常
      */
-    public static void call(VoidFunction function) {
+    public static void call(ActionFunction function) {
         try {
             function.call();
         } catch (Throwable e) {
@@ -88,7 +88,7 @@ public class Capturer {
      * @param args 格式化参数
      * @throws AssertException 如果函数执行时发生异常
      */
-    public static void call(VoidFunction function, String fmt, Object... args) {
+    public static void call(ActionFunction function, String fmt, Object... args) {
         try {
             function.call();
         } catch (Throwable e) {
@@ -106,7 +106,7 @@ public class Capturer {
      * @return 函数返回的值；如果发生异常，则抛出 {@link AssertException}
      * @throws AssertException 如果函数执行时发生异常
      */
-    public static <T> T call(RetFunction<T> function) {
+    public static <T> T call(CallableFunction<T> function) {
         try {
             return function.call();
         } catch (Throwable e) {
@@ -126,7 +126,7 @@ public class Capturer {
      * @return 函数返回的值；如果发生异常，则抛出 {@link AssertException}
      * @throws AssertException 如果函数执行时发生异常
      */
-    public static <T> T call(RetFunction<T> function, String fmt, Object... args) {
+    public static <T> T call(CallableFunction<T> function, String fmt, Object... args) {
         try {
             return function.call();
         } catch (Throwable e) {

@@ -18,7 +18,7 @@ package com.redgogh.common.base;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.iface.StreamMapper;
+import com.redgogh.common.iface.TypeMapper;
 import com.redgogh.common.exception.UnsupportedOperationException;
 import com.redgogh.common.io.ByteBuffer;
 import com.redgogh.common.reflect.UClass;
@@ -294,7 +294,7 @@ public class BasicConverter {
      *
      * @see String#valueOf(Object)
      */
-    public static String atos(Object obj, StreamMapper<String, String> mapper) {
+    public static String atos(Object obj, TypeMapper<String, String> mapper) {
         return mapper.call(atos(obj));
     }
 
