@@ -1,13 +1,13 @@
 package com.redgogh.common.crypto.codec;
 
-import com.redgogh.common.Capturer;
+import com.redgogh.common.base.Capturer;
 import com.redgogh.common.crypto.URL;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
-import static com.redgogh.common.StringUtils.*;
+import static com.redgogh.common.base.StringUtils.*;
 
 /**
  * @author RedGogh

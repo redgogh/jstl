@@ -6,7 +6,7 @@ import com.redgogh.common.exception.SystemRuntimeException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import static com.redgogh.common.StringUtils.strcut;
+import static com.redgogh.common.base.StringUtils.strcut;
 
 /**
  * @author RedGogh

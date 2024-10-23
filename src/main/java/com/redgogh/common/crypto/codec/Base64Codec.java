@@ -2,7 +2,7 @@ package com.redgogh.common.crypto.codec;
 
 import com.redgogh.common.crypto.Base64;
 
-import static com.redgogh.common.BasicConverter.atos;
+import static com.redgogh.common.base.BasicConverter.atos;
 
 /**
  * @author RedGogh

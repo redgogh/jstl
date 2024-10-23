@@ -1,4 +1,4 @@
-package com.redgogh.common;
+package com.redgogh.common.base;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -17,6 +17,8 @@ package com.redgogh.common;
 |*    limitations under the License.                                                *|
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
+
+import com.redgogh.common.base.Assert;
 
 /**
  * #brief：提供数组操作的实用工具类。

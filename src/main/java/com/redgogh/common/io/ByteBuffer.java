@@ -20,9 +20,7 @@ package com.redgogh.common.io;
 
 /* Creates on 2023/5/8. */
 
-import com.redgogh.common.ArrayUtils;
-
-import java.io.OutputStream;
+import com.redgogh.common.base.ArrayUtils;
 
 /**
  * @author RedGogh

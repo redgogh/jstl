@@ -18,7 +18,7 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.BeanUtils;
+import com.redgogh.common.bean.BeanUtils;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")

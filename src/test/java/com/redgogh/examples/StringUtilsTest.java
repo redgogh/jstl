@@ -27,9 +27,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import static com.redgogh.common.BasicConverter.atos;
-import static com.redgogh.common.StringUtils.strant;
-import static com.redgogh.common.StringUtils.strcut;
+import static com.redgogh.common.base.BasicConverter.atos;
+import static com.redgogh.common.base.StringUtils.strant;
+import static com.redgogh.common.base.StringUtils.strcut;
 
 @SuppressWarnings("ALL")
 public class StringUtilsTest {

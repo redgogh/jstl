@@ -1,4 +1,4 @@
-package com.redgogh.common;
+package com.redgogh.common.base;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,6 +18,8 @@ package com.redgogh.common;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.redgogh.common.base.Optional;
+
 import java.nio.file.FileSystems;
 import java.nio.file.PathMatcher;
 import java.nio.file.Paths;
@@ -26,8 +28,8 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.regex.Pattern;
 
-import static com.redgogh.common.BasicConverter.anyeq;
-import static com.redgogh.common.BasicConverter.atos;
+import static com.redgogh.common.base.BasicConverter.anyeq;
+import static com.redgogh.common.base.BasicConverter.atos;
 
 /**
  * `StringUtils` 是一个工具类，提供了一系列针对字符串的操作方法。这些方法用于处理

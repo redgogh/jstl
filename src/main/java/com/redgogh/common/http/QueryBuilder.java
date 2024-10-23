@@ -23,9 +23,9 @@ package com.redgogh.common.http;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static com.redgogh.common.BasicConverter.atos;
-import static com.redgogh.common.StringUtils.strtok;
-import static com.redgogh.common.StringUtils.strwfmt;
+import static com.redgogh.common.base.BasicConverter.atos;
+import static com.redgogh.common.base.StringUtils.strtok;
+import static com.redgogh.common.base.StringUtils.strwfmt;
 
 /**
  * `QueryBuilder` 是一个继承自 `LinkedHashMap<String, String>` 的类，用于构建 HTTP 请求的查询参数。

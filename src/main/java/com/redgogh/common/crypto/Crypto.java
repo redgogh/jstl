@@ -25,16 +25,16 @@ package com.redgogh.common.crypto;
 
 /* Creates on 2023/5/16. */
 
-import com.redgogh.common.Capturer;
+import com.redgogh.common.base.Capturer;
 import com.redgogh.common.crypto.codec.*;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.util.UUID;
 
-import static com.redgogh.common.BasicConverter.atos;
-import static com.redgogh.common.StringUtils.strcut;
-import static com.redgogh.common.StringUtils.strlen;
+import static com.redgogh.common.base.BasicConverter.atos;
+import static com.redgogh.common.base.StringUtils.strcut;
+import static com.redgogh.common.base.StringUtils.strlen;
 
 /**
  * `Crypto` 是一个工具类，提供了多种加密和解密算法的实现，支持常见的加密需求。

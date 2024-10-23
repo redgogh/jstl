@@ -1,4 +1,4 @@
-package com.redgogh.common;
+package com.redgogh.common.iface;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|

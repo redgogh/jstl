@@ -20,15 +20,15 @@ package com.redgogh.common.reflect;
 
 /* Creates on 2019/5/16. */
 
-import com.redgogh.common.Assert;
-import com.redgogh.common.Capturer;
-import com.redgogh.common.Optional;
+import com.redgogh.common.base.Assert;
+import com.redgogh.common.base.Capturer;
+import com.redgogh.common.base.Optional;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-import static com.redgogh.common.StringUtils.strwfmt;
+import static com.redgogh.common.base.StringUtils.strwfmt;
 
 /**
  * `UField` 类封装了 Java 反射中的 `Field` 对象，提供对字段的访问和操作功能。

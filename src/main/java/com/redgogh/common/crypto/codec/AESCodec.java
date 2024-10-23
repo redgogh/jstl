@@ -1,14 +1,13 @@
 package com.redgogh.common.crypto.codec;
 
-import com.redgogh.common.Capturer;
+import com.redgogh.common.base.Capturer;
 import com.redgogh.common.crypto.AES;
-import com.redgogh.common.crypto.Base64;
 import com.redgogh.common.crypto.Crypto;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-import static com.redgogh.common.BasicConverter.atos;
+import static com.redgogh.common.base.BasicConverter.atos;
 
 /**
  * @author RedGogh

@@ -25,8 +25,8 @@ package com.redgogh.common.reflect;
 
 /* Creates on 2019/5/16. */
 
-import com.redgogh.common.Assert;
-import com.redgogh.common.Capturer;
+import com.redgogh.common.base.Assert;
+import com.redgogh.common.base.Capturer;
 import com.redgogh.common.collection.Lists;
 import com.redgogh.common.collection.Maps;
 import java.lang.annotation.Annotation;

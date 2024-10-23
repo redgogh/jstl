@@ -18,8 +18,8 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.Assert;
-import com.redgogh.common.Optional;
+import com.redgogh.common.base.Assert;
+import com.redgogh.common.base.Optional;
 import org.junit.Test;
 
 import java.util.ArrayList;

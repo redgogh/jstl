@@ -1,4 +1,4 @@
-package com.redgogh.common;
+package com.redgogh.common.os;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -21,7 +21,7 @@ package com.redgogh.common;
 import java.util.Date;
 import java.util.Map;
 
-import static com.redgogh.common.StringUtils.*;
+import static com.redgogh.common.base.StringUtils.*;
 
 /**
  * `OSEnvironment` 是一个类，用于管理和操作操作系统环境变量。

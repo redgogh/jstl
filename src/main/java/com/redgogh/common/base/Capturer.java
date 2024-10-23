@@ -1,4 +1,4 @@
-package com.redgogh.common;
+package com.redgogh.common.base;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,6 +18,8 @@ package com.redgogh.common;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.redgogh.common.iface.RetFunction;
+import com.redgogh.common.iface.VoidFunction;
 import com.redgogh.common.exception.AssertException;
 
 /**

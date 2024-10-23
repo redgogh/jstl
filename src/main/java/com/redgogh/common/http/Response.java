@@ -19,8 +19,8 @@ package com.redgogh.common.http;
 \* -------------------------------------------------------------------------------- */
 
 import com.alibaba.fastjson.JSONObject;
-import com.redgogh.common.Optional;
-import com.redgogh.common.StringUtils;
+import com.redgogh.common.base.Optional;
+import com.redgogh.common.base.StringUtils;
 import com.redgogh.common.io.ByteBuffer;
 import com.redgogh.common.io.IOUtils;
 import okhttp3.Headers;
@@ -28,9 +28,9 @@ import okhttp3.ResponseBody;
 
 import java.util.Map;
 
-import static com.redgogh.common.BasicConverter.anyeq;
-import static com.redgogh.common.BasicConverter.atos;
-import static com.redgogh.common.StringUtils.streq;
+import static com.redgogh.common.base.BasicConverter.anyeq;
+import static com.redgogh.common.base.BasicConverter.atos;
+import static com.redgogh.common.base.StringUtils.streq;
 
 /**
  * `Response` 是一个继承自 `JSONObject` 的类，用于表示一个包含状态码和数据的响应对象。

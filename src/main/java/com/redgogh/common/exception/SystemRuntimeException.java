@@ -2,7 +2,7 @@ package com.redgogh.common.exception;
 
 import org.jetbrains.annotations.NotNull;
 
-import static com.redgogh.common.StringUtils.strwfmt;
+import static com.redgogh.common.base.StringUtils.strwfmt;
 
 /**
  * `SystemRuntimeException` 是一个自定义的运行时异常类，用于在系统中抛出各种运行时异常。

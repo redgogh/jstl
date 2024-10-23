@@ -20,8 +20,8 @@ package com.redgogh.common.io;
 
 /* Creates on 2020/4/29. */
 
-import com.redgogh.common.Assert;
-import com.redgogh.common.Capturer;
+import com.redgogh.common.base.Assert;
+import com.redgogh.common.base.Capturer;
 import com.redgogh.common.exception.IOReadException;
 import com.redgogh.common.exception.IOWriteException;
 

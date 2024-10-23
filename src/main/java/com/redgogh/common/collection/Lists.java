@@ -20,7 +20,7 @@ package com.redgogh.common.collection;
 
 /* Creates on 2023/5/6. */
 
-import com.redgogh.common.StreamMapper;
+import com.redgogh.common.iface.StreamMapper;
 
 import java.util.*;
 import java.util.function.Predicate;

@@ -18,10 +18,10 @@ package com.redgogh.common.io;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.Assert;
-import com.redgogh.common.Capturer;
-import com.redgogh.common.OSEnvironment;
-import com.redgogh.common.Optional;
+import com.redgogh.common.base.Assert;
+import com.redgogh.common.base.Capturer;
+import com.redgogh.common.os.OSEnvironment;
+import com.redgogh.common.base.Optional;
 import com.redgogh.common.collection.Lists;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,7 +30,7 @@ import java.net.URI;
 import java.nio.file.Path;
 import java.util.List;
 
-import static com.redgogh.common.StringUtils.*;
+import static com.redgogh.common.base.StringUtils.*;
 
 /**
  * 扩展了 `java.io.File` 的自定义文件类，提供了增强的文件操作功能。

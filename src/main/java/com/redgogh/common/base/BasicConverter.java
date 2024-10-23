@@ -1,4 +1,4 @@
-package com.redgogh.common;
+package com.redgogh.common.base;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,16 +18,15 @@ package com.redgogh.common;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.redgogh.common.iface.StreamMapper;
 import com.redgogh.common.exception.UnsupportedOperationException;
 import com.redgogh.common.io.ByteBuffer;
 import com.redgogh.common.reflect.UClass;
-import org.apache.commons.lang3.CharSet;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
-import static com.redgogh.common.StringUtils.strcut;
-import static com.redgogh.common.StringUtils.strxmatch;
+import static com.redgogh.common.base.StringUtils.strxmatch;
 import static com.redgogh.common.io.ByteBuffer.SEEK_SET;
 
 /**

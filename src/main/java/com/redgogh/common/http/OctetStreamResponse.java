@@ -18,7 +18,7 @@ package com.redgogh.common.http;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.Assert;
+import com.redgogh.common.base.Assert;
 import com.redgogh.common.io.File;
 import com.redgogh.common.io.IOUtils;
 import okhttp3.ResponseBody;

@@ -18,14 +18,14 @@ package com.redgogh.common.poi;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.StreamMapper;
+import com.redgogh.common.iface.StreamMapper;
 import com.redgogh.common.collection.Lists;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static com.redgogh.common.BasicConverter.atos;
+import static com.redgogh.common.base.BasicConverter.atos;
 
 /**
  * 表示一行数据，继承自 {@link ArrayList}，用于存储字符串类型的单元格数据。

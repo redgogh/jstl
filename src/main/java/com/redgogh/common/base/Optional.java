@@ -1,4 +1,4 @@
-package com.redgogh.common;
+package com.redgogh.common.base;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -19,6 +19,9 @@ package com.redgogh.common;
 \* -------------------------------------------------------------------------------- */
 
 /* Creates on 2023/4/29. */
+
+import com.redgogh.common.iface.RetFunction;
+import com.redgogh.common.iface.VoidFunction;
 
 /**
  * @author RedGogh

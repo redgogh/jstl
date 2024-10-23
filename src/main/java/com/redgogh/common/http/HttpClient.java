@@ -19,9 +19,9 @@ package com.redgogh.common.http;
 \* -------------------------------------------------------------------------------- */
 
 import com.alibaba.fastjson.JSON;
-import com.redgogh.common.Assert;
-import com.redgogh.common.Capturer;
-import com.redgogh.common.Optional;
+import com.redgogh.common.base.Assert;
+import com.redgogh.common.base.Capturer;
+import com.redgogh.common.base.Optional;
 import com.redgogh.common.collection.Maps;
 import com.redgogh.common.exception.HttpRequestException;
 import com.redgogh.common.io.File;
@@ -32,9 +32,9 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static com.redgogh.common.BasicConverter.atos;
-import static com.redgogh.common.StringUtils.strhas;
-import static com.redgogh.common.StringUtils.strupper;
+import static com.redgogh.common.base.BasicConverter.atos;
+import static com.redgogh.common.base.StringUtils.strhas;
+import static com.redgogh.common.base.StringUtils.strupper;
 
 /**
  * `HttpClient` 是一个用于发送 HTTP 请求的客户端工具类。该类支持多种 HTTP 请求方法，
