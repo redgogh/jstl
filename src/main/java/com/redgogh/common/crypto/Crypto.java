@@ -25,8 +25,11 @@ package com.redgogh.common.crypto;
 
 /* Creates on 2023/5/16. */
 
+import com.redgogh.common.Capturer;
 import com.redgogh.common.crypto.codec.*;
 
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import java.util.UUID;
 
 import static com.redgogh.common.BasicConverter.atos;
@@ -158,6 +161,23 @@ public final class Crypto {
             builder.append(tmp);
         }
         return atos(builder);
+    }
+
+    /**
+     * #brief: 生成并返回下一个随机的 AES 密钥，使用 Base64 编码格式表示
+     *
+     * <p>该方法利用 `KeyGenerator` 类生成一个 128 位的 AES 密钥，并将其编码为 Base64
+     * 字符串以便于存储或传输。返回的密钥可用于加密或解密数据，确保数据的安全性。
+     *
+     * @return 生成的随机 AES 密钥的 Base64 编码字符串
+     */
+    public static String nextSecretKey() {
+        return Capturer.call(() -> {
+            KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+            keyGen.init(128);
+            SecretKey secretKey = keyGen.generateKey();
+            return BASE64.encode(secretKey.getEncoded());
+        });
     }
 
 }

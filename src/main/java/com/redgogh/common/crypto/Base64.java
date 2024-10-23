@@ -28,7 +28,7 @@ public interface Base64 {
      * @param b 要进行 Base64 编码的字节数组
      * @return 编码后的 Base64 字符串
      */
-    String encodeBytes(byte[] b);
+    String encode(byte[] b);
 
     /**
      * #brief: 对 Base64 字符串进行解码

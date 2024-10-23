@@ -26,7 +26,7 @@ public class AESCodec implements AES {
             Cipher cipher = Cipher.getInstance("AES");
             SecretKeySpec secretKeySpec = new SecretKeySpec(secret.getBytes(), "AES");
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
-            return Crypto.BASE64.encodeBytes(cipher.doFinal(bytes));
+            return Crypto.BASE64.encode(cipher.doFinal(bytes));
         });
     }
 

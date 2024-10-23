@@ -10,11 +10,11 @@ import static com.redgogh.common.BasicConverter.atos;
 public class Base64Codec implements Base64 {
     @Override
     public String encode(String source) {
-        return encodeBytes(source.getBytes());
+        return encode(source.getBytes());
     }
 
     @Override
-    public String encodeBytes(byte[] b) {
+    public String encode(byte[] b) {
         return java.util.Base64.getUrlEncoder().encodeToString(b);
     }
 

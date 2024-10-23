@@ -84,7 +84,8 @@ public class CryptoTest {
     @Test
     public void aesExample() {
         String text = "牛子一掰，全场笑歪！";
-        String secret = "1234567890123456";
+        String secret = Crypto.nextSecretKey();
+        System.out.println("AES secret key: " + secret);
 
         // Encoder
         String key = Crypto.AES.encrypt(text, secret);;
