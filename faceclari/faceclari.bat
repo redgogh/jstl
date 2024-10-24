@@ -18,4 +18,4 @@
 @echo off
 
 cd scripts
-python facerec.py
+python faceclari.py
