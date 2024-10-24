@@ -20,7 +20,6 @@ import face_recognition
 import os
 from pathlib import Path
 import configparser
-from concurrent.futures import ThreadPoolExecutor
 
 # Initialize properties config file.
 config = configparser.ConfigParser()
