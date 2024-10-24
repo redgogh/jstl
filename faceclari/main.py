@@ -1,51 +1,140 @@
+"""
+
+    Copyright (C) 2019-2024 RedGogh All rights reserved.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+"""
+import cv2
 import face_recognition
 import os
-import numpy
-from PIL import Image, ImageDraw
+from pathlib import Path
+import configparser
 
-input_dir = "input_faces/"
-output_dir = "matched_faces/"
+# Initialize properties config file.
+config = configparser.ConfigParser()
 
-if not os.path.exists(output_dir):
-    os.makedirs(output_dir)
+with open("faceclari.ini", "r", encoding="UTF-8") as file:
+    config.read_file(file)
 
-image_file = face_recognition.load_image_file("target.jpg")
-target_face_encoding = face_recognition.face_encodings(image_file)[0]
-
-tolerance = 0.45
-
-
-def face_compare(main_face_encoding, image_path):
-    image = face_recognition.load_image_file(image_path)
-    face_encodings = face_recognition.face_encodings(image)
-    face_locations = face_recognition.face_locations(image)
-
-    is_matched = False
-
-    for face_encoding, face_location in zip(face_encodings, face_locations):
-        face_encoding = numpy.array(face_encoding)
-
-        distance = numpy.linalg.norm(face_encoding - main_face_encoding)
-        is_matched = distance <= tolerance
-
-        if is_matched:
-            pil_image = Image.fromarray(image)
-            draw = ImageDraw.Draw(pil_image)
-
-            top, right, bottom, left = face_location
-            draw.rectangle([left, top, right, bottom], outline="red", width=3)
-
-            base_filename = os.path.basename(image_path)
-            new_filename = f"matched_{base_filename}"
-
-            pil_image.save(os.path.join(output_dir, new_filename))
-            break
-
-    print(f"Matching face image {image_path}, Result: {is_matched}")
+# Value of config.
+known_faces_dir = config.get("dir", "known")
+matched_faces_dir = config.get("dir", "matched")
+scan_dir = config.get("dir", "scandir")
+tolerance = config.getfloat("face", "tolerance")
+drawrect = config.getboolean("face", "drawrect")
 
 
-for root, dirs, files in os.walk(input_dir):
-    for filename in files:
-        if filename.endswith(".jpg") or filename.endswith(".png"):
-            image_path = os.path.join(root, filename)
-            face_compare(target_face_encoding, image_path)
+def typecheck(pathname):
+    """
+    Check if the file is image or not.
+    """
+    return Path(pathname).suffix in [".jpg", ".png"]
+
+
+class KFace:
+    """
+    Loaded all the known face encodings and locations in memory. Use this
+    class to compare other faces.
+    """
+    def __init__(self, dirname, lenc, lloc):
+        self.dirname = Path(dirname)
+        self.lenc = lenc
+        self.lloc = lloc
+        self.name = self.dirname.stem
+
+
+    def compare(self, image_path):
+        """
+        Compare the known face data with to unknown face data. if similarity
+        is high return true otherwise return false.
+        """
+        if not typecheck(image_path):
+            return False
+
+        abs_image_path = Path(image_path).resolve()
+        image_file = face_recognition.load_image_file(abs_image_path)
+        lenc = face_recognition.face_encodings(image_file)
+        lloc = face_recognition.face_locations(image_file)
+
+        matchs = None
+        find = False
+
+        for cmpenc, cmploc in zip(self.lenc, self.lloc):
+            matchs = face_recognition.compare_faces(lenc, cmpenc, tolerance=tolerance)
+            find = True in matchs
+            if find:
+                break
+
+        if find:
+            origin = cv2.cvtColor(image_file, cv2.COLOR_RGB2BGR)
+
+            # draw rectangle on matched face
+            if drawrect:
+                matched_index = matchs.index(True)
+                top, right, bottom, left = lloc[matched_index]
+                cv2.rectangle(origin, (left, top), (right, bottom), (255, 0, 0), 2)
+
+            final_dir = f"{matched_faces_dir}/{self.name}"
+            if not os.path.exists(final_dir):
+                os.makedirs(final_dir)
+
+            cv2.imwrite(f"{final_dir}/{os.path.basename(image_path)}", origin)
+
+        return find
+
+
+def load_known_faces():
+    """
+    loading all the known faces in known_faces directory. Each image in the
+    known_faces directory must include one face.
+    """
+    kfaces = []
+
+    for item in os.listdir(known_faces_dir):
+        face_dir = os.path.join(known_faces_dir, item)
+        if Path(face_dir).is_dir():
+            # face encodings and locations.
+            lenc = []
+            lloc = []
+
+            for filename in os.listdir(face_dir):
+                if typecheck(filename):
+                    abs_file_path = Path(f"{face_dir}/{filename}").resolve()
+                    image_file = face_recognition.load_image_file(abs_file_path)
+                    enc = face_recognition.face_encodings(image_file)
+                    loc = face_recognition.face_locations(image_file)
+
+                    lenc.append(enc[0])
+                    lloc.append(loc[0])
+
+                    print(f"Loading face data of {item}/{filename} image success")
+
+            kfaces.append(KFace(face_dir, lenc, lloc))
+
+    return kfaces
+
+
+if __name__ == "__main__":
+    # create matched_faces dir if not exists.
+    if not os.path.exists(matched_faces_dir):
+        os.makedirs(matched_faces_dir)
+
+    # loading faces
+    kfaces = load_known_faces()
+
+    for dirpath, dirnames, filenames in os.walk(scan_dir):
+        for filename in filenames:
+            abs_file_name = os.path.join(dirpath, filename)
+            for kface in kfaces:
+                print(f"{kface.name} [{kface.compare(abs_file_name)}] --- {abs_file_name}")
