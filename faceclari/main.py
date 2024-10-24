@@ -20,6 +20,7 @@ import face_recognition
 import os
 from pathlib import Path
 import configparser
+from concurrent.futures import ThreadPoolExecutor
 
 # Initialize properties config file.
 config = configparser.ConfigParser()
@@ -31,9 +32,10 @@ with open("faceclari.ini", "r", encoding="UTF-8") as file:
 known_faces_dir = config.get("dir", "known")
 matched_faces_dir = config.get("dir", "matched")
 scan_dir = config.get("dir", "scandir")
-tolerance = config.getfloat("face", "tolerance")
-drawrect = config.getboolean("face", "drawrect")
+tolerance = config.getfloat("recognition", "tolerance")
+drawrect = config.getboolean("recognition", "drawrect")
 
+kfaces = []
 
 def typecheck(pathname):
     """
@@ -118,7 +120,7 @@ def load_known_faces():
                     lenc.append(enc[0])
                     lloc.append(loc[0])
 
-                    print(f"Loading face data of {item}/{filename} image success")
+                    print(f"Loading face data of {item}/{filename}")
 
             kfaces.append(KFace(face_dir, lenc, lloc))
 
@@ -136,5 +138,6 @@ if __name__ == "__main__":
     for dirpath, dirnames, filenames in os.walk(scan_dir):
         for filename in filenames:
             abs_file_name = os.path.join(dirpath, filename)
+            print(f"SCAN INFO --- {abs_file_name}")
             for kface in kfaces:
-                print(f"{kface.name} [{kface.compare(abs_file_name)}] --- {abs_file_name}")
+                kface.compare(abs_file_name)
