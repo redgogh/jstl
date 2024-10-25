@@ -15,6 +15,7 @@
     limitations under the License.
 
 """
+import PIL
 import cv2
 import face_recognition
 import os
@@ -22,6 +23,7 @@ from pathlib import Path
 import configparser
 import time
 import logging
+from tqdm import tqdm
 
 logging.basicConfig(level="INFO", format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -87,10 +89,10 @@ def face_feature_extract(pathname):
         lloc = face_recognition.face_locations(image, model=model)
 
         if len(lloc) > 0:
-            lenc = face_recognition.face_encodings(image, model=model)
+            lenc = face_recognition.face_encodings(image, lloc, model=model)
 
         return FaceFeature(pathname, image, lenc, lloc)
-    except BaseException as e:
+    except PIL.UnidentifiedImageError as e:
         logging.error(f"{e}")
         return EMPTY_FACE_FEATURE
 
@@ -168,8 +170,6 @@ def load_known_faces():
                 sample_face_lenc.append(load_feature.lenc[0])
                 sample_face_lloc.append(load_feature.lloc[0])
 
-                logging.info(f"Loading face data of {item}/{image}")
-
             ret_kfaces_val.append(KFaceSample(face_dir, sample_face_lenc, sample_face_lloc))
 
     return ret_kfaces_val
@@ -185,21 +185,23 @@ if __name__ == "__main__":
 
     # loading faces
     kfaces = load_known_faces()
+    files = []
 
     for dirpath, dirnames, filenames in os.walk(scan_dir):
         for filename in filenames:
-            abs_file_name = os.path.join(dirpath, filename)
-            feature = face_feature_extract(abs_file_name)
+            abs_path = os.path.join(dirpath, filename)
+            if typecheck(abs_path):
+                files.append(abs_path)
 
-            include_face = feature.include_face()
-            logging.info(f"{abs_file_name} EXTRACT include face: {include_face}")
+    for file in tqdm(iterable=files):
+        feature = face_feature_extract(file)
+        include_face = feature.include_face()
 
-            if include_face:
-                for kface in kfaces:
-                    kface.compare(feature)
+        if include_face:
+            for kface in kfaces:
+                kface.compare(feature)
 
     end_time = time.time()
-    logging.info("--- DONE ---")
 
     elapsed_time = end_time - start_time
     minutes = int(elapsed_time // 60)
