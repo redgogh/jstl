@@ -24,6 +24,7 @@ import configparser
 import time
 import logging
 from tqdm import tqdm
+import yaml
 
 logging.basicConfig(level="INFO", format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -35,9 +36,9 @@ with open("faceclari.ini", "r", encoding="UTF-8") as faceclari_ini_file:
 
 # Value of config.
 # [recognition]
-model = config.get("recognition", "model")
-tolerance = config.getfloat("recognition", "tolerance")
-drawrect = config.getboolean("recognition", "drawrect")
+model = config.get("recognition", "recognition.model")
+tolerance = config.getfloat("recognition", "recognition.tolerance")
+drawrect = config.getboolean("recognition", "write.drawrect")
 # [dir]
 sample_faces_dir = config.get("dir", "sample")
 matched_faces_dir = config.get("dir", "matched")
