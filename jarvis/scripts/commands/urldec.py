@@ -18,6 +18,11 @@
 import console
 import urllib.parse
 
+configure = {
+    'name': 'urldec',
+    'desc': 'URL解码器',
+}
+
 def reg(subparsers):
     """
     注册命令的处理函数。
@@ -27,7 +32,7 @@ def reg(subparsers):
 
     :param subparsers: argparse 模块创建的子解析器对象，用于添加子命令。
     """
-    parser = subparsers.add_parser('urldec', help='URL解码器')
+    parser = subparsers.add_parser(configure['name'], help=configure['desc'])
     parser.add_argument('value', type=str, help='URL')
 
 def handle(args):

@@ -17,6 +17,11 @@
 """
 import console
 
+configure = {
+    'name': 'strlen',
+    'desc': '计算一个字符串的长度',
+}
+
 def reg(subparsers):
     """
     注册命令的处理函数。
@@ -26,7 +31,7 @@ def reg(subparsers):
 
     :param subparsers: argparse 模块创建的子解析器对象，用于添加子命令。
     """
-    parser = subparsers.add_parser('strlen', help='计算字符串长度')
+    parser = subparsers.add_parser(configure['name'], help=configure['desc'])
     parser.add_argument('value', type=str, help='输入的字符串数据')
 
 
