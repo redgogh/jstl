@@ -26,11 +26,15 @@ subparsers = parser.add_subparsers(dest='command', help='command')
 current_dir = os.path.dirname(os.path.abspath(__file__))
 commands_dir = os.path.join(current_dir, 'commands')
 
+# import work dir
+sys.path.append(commands_dir)
+
 for filename in os.listdir(commands_dir):
     if filename.endswith('.py') and filename != '__init__.py':
         module_name = filename[:-3]
         module = importlib.import_module(f'commands.{module_name}')
-        module.reg(subparsers)
+        if hasattr(module, 'reg'):
+            module.reg(subparsers)
 
 args = parser.parse_args()
 

@@ -15,6 +15,7 @@
     limitations under the License.
 
 """
+import console
 import urllib.parse
 
 def reg(subparsers):
@@ -39,4 +40,4 @@ def handle(args):
 
     :param args: argparse 模块解析后的参数对象，包含用户输入的参数及选项。
     """
-    print(f'{urllib.parse.quote(args.value)}')
+    console.write(urllib.parse.quote(args.value))

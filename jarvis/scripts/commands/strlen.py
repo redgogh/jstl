@@ -15,6 +15,7 @@
     limitations under the License.
 
 """
+import console
 
 def reg(subparsers):
     """
@@ -38,4 +39,4 @@ def handle(args):
 
     :param args: argparse 模块解析后的参数对象，包含用户输入的参数及选项。
     """
-    print(f'{len(args.value)}')
+    console.write(len(args.value))
