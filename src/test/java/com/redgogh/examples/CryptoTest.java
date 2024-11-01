@@ -96,4 +96,10 @@ public class CryptoTest {
 
     }
 
+    @Test
+    public void urlExample() {
+        // System.out.println(Crypto.URL.encode("/audit-web/#/audit-web/settlementAudit/taskAllocationApproveEdit?taskId=19881F7C-94FE-11EF-9288-0242C0A8440E&instanceId=58AC7AA4-94FD-11EF-9288-0242C0A8440E&id=825DED38-911C-11EF-923B-0242C0A8441B"));
+        System.out.println(Crypto.URL.decode("%2Faudit-web%2F%23%2Faudit-web%2FAuditReform%2FAuditAccountabilityResult%2Fedit%2FRejectIndex%3F"));
+    }
+
 }
