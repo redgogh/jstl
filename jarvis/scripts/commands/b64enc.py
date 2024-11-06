@@ -34,7 +34,7 @@ def reg(subparsers):
     """
     parser = subparsers.add_parser(configure['name'], help=configure['desc'])
     parser.add_argument('value', type=str, help='需要编码的字符串')
-    parser.add_argument('-u', '--url_safe', action='store_true', help='使用URL安全字符编码')
+    parser.add_argument('-u', '--url-safe', action='store_true', help='使用URL安全字符编码')
 
 def handle(args):
     """
