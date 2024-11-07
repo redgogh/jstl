@@ -16,5 +16,5 @@
 #    limitations under the License.
 #
 # --------------------------------------------------------------------------------
-SCRIPT_DIR=$(dirname "$(realpath "$0")")
-python3 $SCRIPT_DIR/scripts/jarvis.py $@
+SCRIPT_DIR=$(dirname "$(dirname "$(realpath "$0")")")
+python3 $SCRIPT_DIR/devcli/scripts/devcli.py $@
