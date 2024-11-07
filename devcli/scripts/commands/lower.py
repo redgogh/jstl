@@ -21,7 +21,6 @@ pathname = __file__.replace('\\', '/')
 script_name = pathname.split('/')[-1].split('.')[0]
 
 configure = {
-    'name': 'lower',
     'desc': '将字符串变为小写',
     'sys': 'Windows/Linux/MacOS',
 }
