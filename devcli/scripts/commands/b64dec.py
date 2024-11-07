@@ -18,9 +18,12 @@
 import console
 import base64
 
+pathname = __file__.replace('\\', '/')
+script_name = pathname.split('/')[-1].split('.')[0]
+
 configure = {
-    'name': 'b64dec',
     'desc': 'Base64解码器',
+    'sys': 'Windows/Linux/MacOS',
 }
 
 def reg(subparsers):
@@ -32,7 +35,7 @@ def reg(subparsers):
 
     :param subparsers: argparse 模块创建的子解析器对象，用于添加子命令。
     """
-    parser = subparsers.add_parser(configure['name'], help=configure['desc'])
+    parser = subparsers.add_parser(script_name, help=f"{configure['desc']} ({configure['sys']})")
     parser.add_argument('value', type=str, help='Base64字符串')
     parser.add_argument('-u', '--url-safe', action='store_true', help='使用URL安全字符编码')
 

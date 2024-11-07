@@ -20,7 +20,7 @@ import argparse
 import importlib
 import os
 
-parser = argparse.ArgumentParser(prog='jarvis', description='Jarvis CLI Tool')
+parser = argparse.ArgumentParser(prog='DevCLI', description='DevCLI')
 subparsers = parser.add_subparsers(dest='command', help='command')
 
 current_dir = os.path.dirname(os.path.abspath(__file__))

@@ -17,9 +17,12 @@
 """
 import console
 
+pathname = __file__.replace('\\', '/')
+script_name = pathname.split('/')[-1].split('.')[0]
+
 configure = {
-    'name': 'pyeval',
     'desc': 'Python的表达式计算',
+    'sys': 'Windows/Linux/MacOS',
 }
 
 def reg(subparsers):
@@ -31,7 +34,7 @@ def reg(subparsers):
 
     :param subparsers: argparse 模块创建的子解析器对象，用于添加子命令。
     """
-    parser = subparsers.add_parser(configure['name'], help=configure['desc'])
+    parser = subparsers.add_parser(script_name, help=f"{configure['desc']} ({configure['sys']})")
     parser.add_argument('value', type=str, help='Python脚本代码')
 
 
