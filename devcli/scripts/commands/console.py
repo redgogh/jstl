@@ -21,6 +21,7 @@ YELLOW = '\033[33m'
 BLUE = '\033[34m'
 PURPLE = '\033[35m'
 WHITE = '\033[37m'
+END = '\033[0m'
 
 def write(text, color=GREEN):
     """
@@ -33,6 +34,6 @@ def write(text, color=GREEN):
     :param color: 输出颜色
     """
     if color is not None:
-        print(f'{color}{text}\033[0m')
+        print(f'{color}{text}{END}')
     else:
         print(f'{text}')
