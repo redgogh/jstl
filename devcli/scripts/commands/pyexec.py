@@ -16,6 +16,7 @@
 
 """
 import console
+import sys
 
 pathname = __file__.replace('\\', '/')
 script_name = pathname.split('/')[-1].split('.')[0]
@@ -35,7 +36,7 @@ def reg(subparsers):
     :param subparsers: argparse 模块创建的子解析器对象，用于添加子命令。
     """
     parser = subparsers.add_parser(script_name, help=f"{configure['desc']} ({configure['sys']})")
-    parser.add_argument('value', type=str, help='Python脚本代码')
+    parser.add_argument('value', type=str, help='Python脚本代码', nargs='?')
 
 
 def handle(args):
@@ -47,5 +48,7 @@ def handle(args):
 
     :param args: argparse 模块解析后的参数对象，包含用户输入的参数及选项。
     """
-    console.write(args.value)
-    exec(args.value)
+    code = args.value
+    if code is None:
+        code = sys.stdin.read()
+    exec(code)
