@@ -36,7 +36,8 @@ def reg(subparsers):
     :param subparsers: argparse 模块创建的子解析器对象，用于添加子命令。
     """
     parser = subparsers.add_parser(script_name, help=f"{configure['desc']} ({configure['sys']})")
-    parser.add_argument('value', type=str, help='URL')
+    parser.add_argument('url', type=str, help='URL')
+    parser.add_argument('--encoding', type=str, default='UTF-8', help='编码', nargs='?')
 
 def handle(args):
     """
@@ -47,4 +48,4 @@ def handle(args):
 
     :param args: argparse 模块解析后的参数对象，包含用户输入的参数及选项。
     """
-    console.write(urllib.parse.unquote(args.value))
+    console.write(urllib.parse.unquote(args.url, encoding=args.encoding))
