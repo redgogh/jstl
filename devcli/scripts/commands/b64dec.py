@@ -37,7 +37,7 @@ def reg(subparsers):
     """
     parser = subparsers.add_parser(script_name, help=f"{configure['desc']} ({configure['sys']})")
     parser.add_argument('value', type=str, help='Base64字符串')
-    parser.add_argument('-u', '--url-safe', action='store_true', help='使用URL安全字符编码')
+    parser.add_argument('--url-safe', action='store_true', help='使用URL安全字符编码')
 
 def handle(args):
     """
