@@ -17,4 +17,4 @@
 #
 # --------------------------------------------------------------------------------
 SCRIPT_DIR=$(dirname "$(dirname "$(realpath "$0")")")
-python3 $SCRIPT_DIR/devcli/scripts/devcli.py $@
+python3 $SCRIPT_DIR/devcli/scripts/devcli.py "$@"
