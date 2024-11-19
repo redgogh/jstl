@@ -34,10 +34,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import static com.redgogh.common.base.BasicConverter.atos;
-import static com.redgogh.common.base.StringUtils.strne;
+import static com.redgogh.common.base.StringUtils.*;
 
 /**
- * 类 {@link Workbook} 用于创建和操作 Excel 工作簿。
+ * 类 {@link ExcelWorkbook} 用于创建和操作 Excel 工作簿。
  *
  * <p>该类使用 Apache POI 库来实现工作簿的创建和行的添加。
  * 默认情况下，会创建一个名为 "Sheet1" 的工作表。
@@ -51,7 +51,7 @@ import static com.redgogh.common.base.StringUtils.strne;
  *
  * @author RedGogh
  */
-public class Workbook implements Iterable<Row> {
+public class ExcelWorkbook implements Iterable<Row> {
 
     /**
      * Apache POI 工作簿实例，用于创建和操作 Excel 文件。
@@ -64,12 +64,17 @@ public class Workbook implements Iterable<Row> {
     private Sheet sheet;
 
     /**
+     * 将Cell中不同类型的数据转格式化为文本
+     */
+    private final DataCellFormatter cellFormatter = new DataCellFormatter();
+
+    /**
      * #brief: 创建一个空的 Workbook 实例
      *
      * <p>使用默认的 XSSFWorkbook 创建一个新的 Workbook
      * 对象。
      */
-    public Workbook() {
+    public ExcelWorkbook() {
         this(new XSSFWorkbook());
     }
 
@@ -82,7 +87,7 @@ public class Workbook implements Iterable<Row> {
      *
      * @param pathname Excel 文件的路径
      */
-    public Workbook(String pathname) {
+    public ExcelWorkbook(String pathname) {
         this(new File(pathname));
     }
 
@@ -95,7 +100,7 @@ public class Workbook implements Iterable<Row> {
      *
      * @param file Excel 文件对象
      */
-    public Workbook(File file) {
+    public ExcelWorkbook(File file) {
         this(Capturer.call(() -> new XSSFWorkbook(file)));
     }
 
@@ -108,7 +113,7 @@ public class Workbook implements Iterable<Row> {
      *
      * @param stream 输入流，需指向有效的 Excel 文件内容
      */
-    public Workbook(InputStream stream) {
+    public ExcelWorkbook(InputStream stream) {
         this(Capturer.call(() -> new XSSFWorkbook(stream)));
     }
 
@@ -120,7 +125,7 @@ public class Workbook implements Iterable<Row> {
      *
      * @param workbook 已存在的 XSSFWorkbook 对象
      */
-    public Workbook(XSSFWorkbook workbook) {
+    public ExcelWorkbook(XSSFWorkbook workbook) {
         this.wb = workbook;
         /* switch sheet. */
         if (wb.getNumberOfSheets() > 0)
@@ -215,7 +220,8 @@ public class Workbook implements Iterable<Row> {
         int lastCellNum = cellCount();
         for (int i = 0; i < lastCellNum; i++) {
             Cell cell = row.getCell(i);
-            retval.add(cell != null ? cell.getStringCellValue() : "NULL");
+            String value = cellFormatter.formatCellValue(cell);
+            retval.add(cell != null && strnempty(value) ? value : "NULL");
         }
 
         return retval;
@@ -274,7 +280,7 @@ public class Workbook implements Iterable<Row> {
      * @param pathname Excel 文件的路径
      * @return 加载的 Workbook 实例
      */
-    public static Workbook load(String pathname) {
+    public static ExcelWorkbook load(String pathname) {
         return load(new File(pathname));
     }
 
@@ -288,8 +294,8 @@ public class Workbook implements Iterable<Row> {
      * @param file Excel 文件对象
      * @return 加载的 Workbook 实例
      */
-    public static Workbook load(File file) {
-        return new Workbook(file);
+    public static ExcelWorkbook load(File file) {
+        return new ExcelWorkbook(file);
     }
 
     /**
@@ -302,8 +308,8 @@ public class Workbook implements Iterable<Row> {
      * @param stream 输入流，需指向有效的 Excel 文件内容
      * @return 加载的 Workbook 实例
      */
-    public static Workbook load(InputStream stream) {
-        return new Workbook(stream);
+    public static ExcelWorkbook load(InputStream stream) {
+        return new ExcelWorkbook(stream);
     }
 
     /**
@@ -343,13 +349,13 @@ public class Workbook implements Iterable<Row> {
      * @see Iterator
      * @see Row
      */
-    public static class WorkbookIterator implements Iterator<Row> {
+    public static class ExcelWorkbookInterator implements Iterator<Row> {
 
         private int index;
         private final int size;
-        private final Workbook wb;
+        private final ExcelWorkbook wb;
 
-        WorkbookIterator(Workbook wb) {
+        ExcelWorkbookInterator(ExcelWorkbook wb) {
             this.wb = wb;
             this.index = 0;
             this.size = wb.rowCount() + 1;
@@ -369,7 +375,7 @@ public class Workbook implements Iterable<Row> {
     @NotNull
     @Override
     public Iterator<Row> iterator() {
-        return new WorkbookIterator(this);
+        return new ExcelWorkbookInterator(this);
     }
 
     /**

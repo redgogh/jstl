@@ -116,7 +116,7 @@ public class DateFormatter {
      * @return 格式化后的字符串
      */
     public static String format(Date date) {
-        return format(defaultFormatPattern, date);
+        return format(date, defaultFormatPattern);
     }
 
     /**
@@ -131,7 +131,7 @@ public class DateFormatter {
      * @return 格式化后的字符串
      */
     public static String format(String pattern) {
-        return format(pattern, now());
+        return format(now(), pattern);
     }
 
     /**
@@ -141,15 +141,16 @@ public class DateFormatter {
      * 实现日期格式化。使用 `new` 关键字创建 {@link SimpleDateFormat} 对象实例满
      * 足线程安全要求。
      *
-     * @param pattern
-     *        格式化规则，如：“yyyy-MM-dd”
-     *
      * @param date
      *        格式化日期对象，如：“DateFormatter.now()”
      *
+     * @param pattern
+     *        格式化规则，如：“yyyy-MM-dd”
+     *
+     *
      * @return 格式化后的字符串
      */
-    public static String format(String pattern, Date date) {
+    public static String format(Date date, String pattern) {
         return compileFormatter(pattern).format(date);
     }
 

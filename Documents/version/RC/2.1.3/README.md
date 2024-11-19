@@ -6,6 +6,10 @@
 
 ## 👻 优化功能
 
+- 优化`DateFormatter#format`功能参数顺序。
+
 ## 🐞 BUG 修复
+
+- 修复`ExcelWorkbook`对象不支持多种数据类型解析问题。
 
 ## 🔨 依赖变更
