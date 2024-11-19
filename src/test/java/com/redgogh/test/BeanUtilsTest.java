@@ -1,4 +1,4 @@
-package com.redgogh.examples;
+package com.redgogh.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,26 +18,65 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.time.TimeUnitOperator;
+import com.redgogh.common.bean.BeanUtils;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")
-public class TimeUnitOperatorTest {
+public class BeanUtilsTest {
 
-    /**
-     * TimeUnitOperator：时间加一天
-     */
-    @Test
-    public void timeUnitAddOperateExample() {
-        System.out.printf("TimeUnitOperator DAY add 1 example: %s\n", TimeUnitOperator.DAYS.add(1));
+    static class A {
+        private String name;
+        private String age;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getAge() {
+            return age;
+        }
+
+        public void setAge(String age) {
+            this.age = age;
+        }
     }
 
-    /**
-     * TimeUnitOperator：时间减一天
-     */
+    static class B extends A {
+        private String aabb;
+
+        public String getAabb() {
+            return aabb;
+        }
+
+        public void setAabb(String aabb) {
+            this.aabb = aabb;
+        }
+    }
+
+    static class C {
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+
     @Test
-    public void timeUnitMinusOperateExample() {
-        System.out.printf("TimeUnitOperator DAY minus 1 example: %s\n", TimeUnitOperator.DAYS.minus(1));
+    public void copyPropertiesTest() {
+        B b = new B();
+        b.setName("John");
+        b.setAge("30");
+
+        C c = BeanUtils.copyProperties(b, C.class);
+        System.out.println(c);
     }
 
 }

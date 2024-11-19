@@ -1,4 +1,4 @@
-package com.redgogh.examples;
+package com.redgogh.experiment;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,61 +18,35 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.reflect.UClass;
-import com.redgogh.common.reflect.UField;
+import com.redgogh.common.generators.RandomGenerator;
 import org.junit.Test;
 
-import java.awt.*;
-import java.util.List;
+import java.util.Random;
 
 @SuppressWarnings("ALL")
-public class UClassTest {
+public class FastRandomValueTest {
+
+    public static int seed = 0;
+    public static final long T = System.nanoTime() % 1000000;
+    public static final long A = 1103515245;
+    public static final long C = System.nanoTime() % 100000;
+    public static final long M = (long) Math.pow(2, 32);
 
     @Test
-    public void newUClassExample() {
-        UClass uClass = new UClass(Button.class);
+    public void fastRandomGenerateTest() {
+        Random random = new Random();
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+            /* 5 sec 541 ms */
+            fastNextRandom();
 
-        System.out.printf("uClass(%s)\n", uClass.getName());
-
-        List<UField> properties = uClass.getDeclaredFields();
-        for (UField property : properties) {
-            System.out.printf("  - uField path: %s\n", property.getPath());
+            /* 7 sec 118 ms */
+            RandomGenerator.nextInt(1000, 9999);
         }
     }
 
-    static class User {
-        /* test field */
-        private String name;
-
-        public User(String name) {
-            this.name = name;
-        }
-
-        /* static method */
-        public void sayIntroduce() {
-            System.out.printf("介绍 - 永乐大帝\n");
-        }
-
-        /* static method */
-        public static void say(String value) {
-            System.out.printf("朱棣 - %s\n", value);
-        }
-
-    }
-
-    @Test
-    public void readFieldValueExample() {
-        User judy = new User("Judy");
-        System.out.println((String) new UClass(judy).readFieldValue("name", judy));
-    }
-
-    @Test
-    public void invokeMethodExample() {
-        User judy = new User("Judy");
-        UClass uClass = new UClass(judy);
-
-        uClass.invoke(judy,"sayIntroduce");
-        uClass.staticInvoke("say", "如此江山，岂不让人留恋 ~");
+    public static int fastNextRandom() {
+        seed = (int) ((A * seed + C) % M);
+        return seed;
     }
 
 }

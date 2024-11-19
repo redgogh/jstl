@@ -1,4 +1,4 @@
-package com.redgogh.examples;
+package com.redgogh.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -28,7 +28,7 @@ public class CryptoTest {
      * Base64 编码、解码测试
      */
     @Test
-    public void base64EncodAndDecodeExample() {
+    public void base64EncodAndDecodeTest() {
         String text = "牛子一掰，全场笑歪！";
 
         // Encoder
@@ -45,7 +45,7 @@ public class CryptoTest {
      * md5 编码测试
      */
     @Test
-    public void md5EncodExample() {
+    public void md5EncodTest() {
         String text = "Hello World";
         // lower16
         System.out.println("lower16: " + Crypto.MD5.lower16(text));
@@ -61,7 +61,7 @@ public class CryptoTest {
      * sha256编码测试
      */
     @Test
-    public void sha256EncodExample() {
+    public void sha256EncodTest() {
         String text = "Hello World";
         System.out.println("sha256: " + Crypto.SHA256.encode(text));
     }
@@ -70,7 +70,7 @@ public class CryptoTest {
      * 版本生成测试
      */
     @Test
-    public void versionGenerateExample() {
+    public void versionGenerateTest() {
         int version = Crypto.makeVersion(1, 8, 1);
         System.out.println("make version = " + version);
         System.out.println("  - major = " + Crypto.versionMajor(version));
@@ -82,7 +82,7 @@ public class CryptoTest {
      * AES 编码、解码测试
      */
     @Test
-    public void aesExample() {
+    public void aesTest() {
         String text = "牛子一掰，全场笑歪！";
         String secret = Crypto.nextSecretKey();
         System.out.println("AES secret key: " + secret);
@@ -97,7 +97,7 @@ public class CryptoTest {
     }
 
     @Test
-    public void urlExample() {
+    public void urlTest() {
         // System.out.println(Crypto.URL.encode("/audit-web/#/audit-web/settlementAudit/taskAllocationApproveEdit?taskId=19881F7C-94FE-11EF-9288-0242C0A8440E&instanceId=58AC7AA4-94FD-11EF-9288-0242C0A8440E&id=825DED38-911C-11EF-923B-0242C0A8441B"));
         System.out.println(Crypto.URL.decode("%2Faudit-web%2F%23%2Faudit-web%2FAuditReform%2FAuditAccountabilityResult%2Fedit%2FRejectIndex%3F"));
     }

@@ -1,4 +1,4 @@
-package com.redgogh.examples;
+package com.redgogh.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,37 +18,38 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.io.File;
-import com.redgogh.common.reflect.ObjectSerializer;
+import com.redgogh.common.collection.Lists;
+import com.redgogh.common.generators.RandomGenerator;
 import org.junit.Test;
 
-import java.io.Serializable;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
+/**
+ * @author RedGogh
+ */
 @SuppressWarnings("ALL")
-public class ObjectSerializerTest {
+public class ThreadExecutorTest {
 
-    static class User implements Serializable {
-        /* test field */
-        private String name = "Crazy";
+    @Test
+    public void newExecutorFixedPoolTest() throws InterruptedException {
+        ExecutorService executor = Executors.newFixedThreadPool(128);
 
-        public User(String name) {
-            this.name = name;
+        List<Integer> numbers = Lists.newSynchronizedList();
+
+        for (int i = 0; i < (1024 * 1024); i++) {
+            executor.execute(() -> {
+                numbers.add(RandomGenerator.nextInt(6) + RandomGenerator.nextInt(6));
+            });
         }
 
-    }
+        executor.shutdown();
+        executor.awaitTermination(30, TimeUnit.SECONDS);
 
-    @Test
-    public void serializeExample() {
-        ObjectSerializer.serialize(new User("Judy"), new File("Desktop://judy.ser"));
+        Integer sum = numbers.stream().reduce(0, Integer::sum);
+        System.out.println("beg="+ Lists.beg(numbers) + ", sum=" + sum);
     }
-
-    @Test
-    public void deserializeExample() {
-        File file = new File("Desktop://judy.ser");
-        User user = (User) ObjectSerializer.deserialize(file);
-        System.out.println(user);
-        file.forceDelete();
-    }
-
 
 }

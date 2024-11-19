@@ -1,4 +1,4 @@
-package com.redgogh.examples;
+package com.redgogh.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -30,7 +30,7 @@ public class ChanceMakerTest {
      * 模拟 1% 中奖概率
      */
     @Test
-    public void onePercentChanceExample() {
+    public void onePercentChanceTest() {
         int loopCount = 100;
         int luckCount = 0;
         for (int i = 0; i < loopCount; i++) {

@@ -1,4 +1,4 @@
-package com.redgogh.examples;
+package com.redgogh.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,65 +18,28 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.bean.BeanUtils;
 import org.junit.Test;
 
+import static com.redgogh.common.base.BasicConverter.atobool;
+
 @SuppressWarnings("ALL")
-public class BeanUtilsTest {
+public class RedGoghTest {
 
-    static class A {
-        private String name;
-        private String age;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getAge() {
-            return age;
-        }
-
-        public void setAge(String age) {
-            this.age = age;
-        }
-    }
-
-    static class B extends A {
-        private String aabb;
-
-        public String getAabb() {
-            return aabb;
-        }
-
-        public void setAabb(String aabb) {
-            this.aabb = aabb;
-        }
-    }
-
-    static class C {
-        private String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
-
+    /**
+     * atobool
+     */
     @Test
-    public void copyPropertiesExample() {
-        B b = new B();
-        b.setName("John");
-        b.setAge("30");
-
-        C c = BeanUtils.copyProperties(b, C.class);
-        System.out.println(c);
+    public void atoboolTest() {
+        System.out.printf("----------------------------\n");
+        System.out.printf("atobool 'y' example: %s\n", atobool("y"));
+        System.out.printf("atobool 'n' example: %s\n", atobool("n"));
+        System.out.printf("----------------------------\n");
+        System.out.printf("atobool '1' example: %s\n", atobool(1));
+        System.out.printf("atobool '0' example: %s\n", atobool(0));
+        System.out.printf("----------------------------\n");
+        System.out.printf("atobool 'true' example: %s\n", atobool("true"));
+        System.out.printf("atobool 'false' example: %s\n", atobool("false"));
+        System.out.printf("----------------------------\n");
     }
 
 }

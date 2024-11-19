@@ -1,4 +1,4 @@
-package com.redgogh.research;
+package com.redgogh.experiment;
 
 import org.junit.Test;
 

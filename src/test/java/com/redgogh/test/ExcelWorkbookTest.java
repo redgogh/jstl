@@ -1,4 +1,4 @@
-package com.redgogh.examples;
+package com.redgogh.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -26,7 +26,7 @@ import org.junit.Test;
 public class ExcelWorkbookTest {
 
     @Test
-    public void generateWorkbookExample() {
+    public void generateWorkbookTest() {
             ExcelWorkbook wb = new ExcelWorkbook();
 
             wb.checkout("一班学生");
@@ -50,14 +50,14 @@ public class ExcelWorkbookTest {
     }
 
     @Test
-    public void loadWorkbookExample() {
+    public void loadWorkbookTest() {
         ExcelWorkbook wb = ExcelWorkbook.load("Desktop://test.xlsx");
         for (int i = 0; i < wb.rowCount(); i++)
             System.out.println(wb.getRow(i));
     }
 
     @Test
-    public void workbookIteratorExample() {
+    public void workbookIteratorTest() {
         ExcelWorkbook wb = ExcelWorkbook.load("Desktop://test.xlsx");
         // for (Row row : wb) {
         //     System.out.println(row);
@@ -66,14 +66,14 @@ public class ExcelWorkbookTest {
     }
 
     @Test
-    public void workbookCSVExample() {
+    public void workbookCSVTest() {
         ExcelWorkbook wb = ExcelWorkbook.load("Desktop://test.xlsx");
         String csvText = wb.toCSVText();
         System.out.println(csvText);
     }
 
     @Test
-    public void workbookPrintExample() {
+    public void workbookPrintTest() {
         ExcelWorkbook wb = ExcelWorkbook.load("Desktop://b.xlsx");
         System.out.println(wb);
     }

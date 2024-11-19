@@ -1,4 +1,4 @@
-package com.redgogh.examples;
+package com.redgogh.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -38,14 +38,14 @@ import static com.redgogh.common.io.IOUtils.stdout;
 public class HttpClientsTest {
 
     // @Test
-    // public void callFormBodyExample() {
+    // public void callFormBodyTest() {
     //     FormBodyBuilder formBodyBuilder = new FormBodyBuilder();
     //     formBodyBuilder.put("document", new File("src/main/java/com/redgogh/tools/ArrayUtils.java"));
     //     System.out.println(HttpClients.post("http://127.0.0.1:8001/security/check-file", formBodyBuilder));
     // }
 
     @Test
-    public void callMultipartBodyExample() {
+    public void callMultipartBodyTest() {
         MultipartBody multipartBody = new MultipartBody();
         multipartBody.put("document", new File("src/main/java/com/redgogh/tools/ArrayUtils.java"));
 
@@ -57,7 +57,7 @@ public class HttpClientsTest {
     }
 
     @Test
-    public void callJSONBodyExample() {
+    public void callJSONBodyTest() {
         Response response = HttpClient.open("POST", "http://127.0.0.1:8001/security/save")
                 .setRequestBody(Maps.of("id", "12138", "name", "zs", "age", "18"))
                 .newCall();
@@ -66,7 +66,7 @@ public class HttpClientsTest {
     }
 
     @Test
-    public void callGetExample() {
+    public void callGetTest() {
         QueryBuilder queryBuilder = new QueryBuilder();
         queryBuilder.putAll(Maps.of("id", "12138", "name", "zs", "age", "18"));
         Response response = HttpClient.open("GET", "http://127.0.0.1:8001/security/get")
@@ -78,7 +78,7 @@ public class HttpClientsTest {
     }
 
     @Test
-    public void getUserExample() {
+    public void getUserTest() {
         Response response = HttpClient.open("GET", "http://127.0.0.1:8001/testing/user")
                 .sslVerifierDisable()
                 .newCall();
@@ -86,7 +86,7 @@ public class HttpClientsTest {
     }
 
     @Test
-    public void callAsyncExample() throws InterruptedException {
+    public void callAsyncTest() throws InterruptedException {
         HttpClient.open("POST", "http://127.0.0.1:8001/testing/async-call")
                 .setQueryBuilder(new QueryBuilder("sleep=1"))
                 .setReadTimeout(3)
@@ -107,7 +107,7 @@ public class HttpClientsTest {
     }
 
     @Test
-    public void downloadFileExample() {
+    public void downloadFileTest() {
         OctetStreamResponse octet = HttpClient.open("GET", "https://repo.huaweicloud.com/java/jdk/8u202-b08-demos/jdk-8u202-windows-x64-demos.zip")
                 .sslVerifierDisable()
                 .newOctetStreamCall();
@@ -115,7 +115,7 @@ public class HttpClientsTest {
     }
 
     @Test
-    public void asyncDownloadFileExample() throws InterruptedException {
+    public void asyncDownloadFileTest() throws InterruptedException {
         HttpClient.open("GET", "https://repo.huaweicloud.com/java/jdk/8u202-b08-demos/jdk-8u202-windows-x64-demos.zip")
                 .sslVerifierDisable()
                 .newOctetStreamCall(new OctetStreamCallback() {

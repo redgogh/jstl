@@ -1,4 +1,4 @@
-package com.redgogh.research;
+package com.redgogh.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,35 +18,26 @@ package com.redgogh.research;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.common.generators.RandomGenerator;
+import com.redgogh.common.time.TimeUnitOperator;
 import org.junit.Test;
 
-import java.util.Random;
-
 @SuppressWarnings("ALL")
-public class FastRandomValueTest {
+public class TimeUnitOperatorTest {
 
-    public static int seed = 0;
-    public static final long T = System.nanoTime() % 1000000;
-    public static final long A = 1103515245;
-    public static final long C = System.nanoTime() % 100000;
-    public static final long M = (long) Math.pow(2, 32);
-
+    /**
+     * TimeUnitOperator：时间加一天
+     */
     @Test
-    public void fastRandomGenerateTest() {
-        Random random = new Random();
-        for (int i = 0; i < Integer.MAX_VALUE; i++) {
-            /* 5 sec 541 ms */
-            fastNextRandom();
-
-            /* 7 sec 118 ms */
-            RandomGenerator.nextInt(1000, 9999);
-        }
+    public void timeUnitAddOperateTest() {
+        System.out.printf("TimeUnitOperator DAY add 1 example: %s\n", TimeUnitOperator.DAYS.add(1));
     }
 
-    public static int fastNextRandom() {
-        seed = (int) ((A * seed + C) % M);
-        return seed;
+    /**
+     * TimeUnitOperator：时间减一天
+     */
+    @Test
+    public void timeUnitMinusOperateTest() {
+        System.out.printf("TimeUnitOperator DAY minus 1 example: %s\n", TimeUnitOperator.DAYS.minus(1));
     }
 
 }

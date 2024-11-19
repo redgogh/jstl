@@ -1,4 +1,4 @@
-package com.redgogh.examples;
+package com.redgogh.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -30,7 +30,7 @@ public class FileTest {
      * 随机读写访问测试
      */
     @Test
-    public void randomAccessExample() {
+    public void randomAccessTest() {
         File file = new File(".dat");
 
         // write float
@@ -62,7 +62,7 @@ public class FileTest {
      * 随机读写访问测试, 写入两个 Int
      */
     @Test
-    public void randomAccessWriteExample() {
+    public void randomAccessWriteTest() {
         File file = new File(".dat");
 
         file.open();
@@ -83,12 +83,12 @@ public class FileTest {
     }
 
     @Test
-    public void readBytesExample() {
+    public void readBytesTest() {
         System.out.println(atos(new File("Desktop://log.txt").readBytes()));
     }
 
     @Test
-    public void listFileExample() {
+    public void listFileTest() {
         for (File file : new File("D:/aaaa").listFiles()) {
             System.out.println(file.getPath());
         }

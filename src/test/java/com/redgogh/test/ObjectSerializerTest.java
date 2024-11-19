@@ -1,4 +1,4 @@
-package com.redgogh.examples;
+package com.redgogh.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,28 +18,37 @@ package com.redgogh.examples;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.redgogh.common.io.File;
+import com.redgogh.common.reflect.ObjectSerializer;
 import org.junit.Test;
 
-import static com.redgogh.common.base.BasicConverter.atobool;
+import java.io.Serializable;
 
 @SuppressWarnings("ALL")
-public class RedGoghTest {
+public class ObjectSerializerTest {
 
-    /**
-     * atobool
-     */
-    @Test
-    public void atoboolExample() {
-        System.out.printf("----------------------------\n");
-        System.out.printf("atobool 'y' example: %s\n", atobool("y"));
-        System.out.printf("atobool 'n' example: %s\n", atobool("n"));
-        System.out.printf("----------------------------\n");
-        System.out.printf("atobool '1' example: %s\n", atobool(1));
-        System.out.printf("atobool '0' example: %s\n", atobool(0));
-        System.out.printf("----------------------------\n");
-        System.out.printf("atobool 'true' example: %s\n", atobool("true"));
-        System.out.printf("atobool 'false' example: %s\n", atobool("false"));
-        System.out.printf("----------------------------\n");
+    static class User implements Serializable {
+        /* test field */
+        private String name = "Crazy";
+
+        public User(String name) {
+            this.name = name;
+        }
+
     }
+
+    @Test
+    public void serializeTest() {
+        ObjectSerializer.serialize(new User("Judy"), new File("Desktop://judy.ser"));
+    }
+
+    @Test
+    public void deserializeTest() {
+        File file = new File("Desktop://judy.ser");
+        User user = (User) ObjectSerializer.deserialize(file);
+        System.out.println(user);
+        file.forceDelete();
+    }
+
 
 }

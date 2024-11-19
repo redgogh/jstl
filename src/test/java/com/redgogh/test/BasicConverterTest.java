@@ -1,4 +1,4 @@
-package com.redgogh.examples;
+package com.redgogh.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -28,7 +28,7 @@ import static com.redgogh.common.base.BasicConverter.atob;
 public class BasicConverterTest {
 
     @Test
-    public void atobExample() {
+    public void atobTest() {
         System.out.println(Arrays.toString(atob(114514)));
     }
 
