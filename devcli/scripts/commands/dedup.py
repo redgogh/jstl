@@ -47,6 +47,13 @@ def handle(args):
     :param args: argparse 模块解析后的参数对象，包含用户输入的参数及选项。
     """
     text = args.value
-    unique_lines = list(set(text.splitlines()))
+    lines = text.splitlines()
+    unique_lines = list(set(lines))
+
+    console.write(f"\nRow count changed after deduplication:\n  {len(lines)} -> {len(unique_lines)}", color=console.RED)
+    console.write(f">>>", color=console.RED)
+
     for line in unique_lines:
-        print(line)
+        console.write(line)
+
+    console.write(f"<<<", color=console.RED)
