@@ -7,6 +7,7 @@
 ## 👻 优化功能
 
 - 优化`DateFormatter#format`功能参数顺序。
+- 优化`ExcelWorkbook`获取行数据时自动移除空行。
 
 ## 🐞 BUG 修复
 

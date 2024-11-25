@@ -23,6 +23,7 @@ import com.redgogh.common.base.Capturer;
 import com.redgogh.common.base.Optional;
 import com.redgogh.common.collection.Lists;
 import com.redgogh.common.io.File;
+import com.redgogh.common.reflect.UClass;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -30,8 +31,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import static com.redgogh.common.base.BasicConverter.atos;
 import static com.redgogh.common.base.StringUtils.*;
@@ -234,12 +237,22 @@ public class ExcelWorkbook implements Iterable<Row> {
      * 该方法会遍历工作表并将每一行添加到返回的
      * 列表中。
      *
+     * <p>如果存在空行，会自动从返回结果中移除空行
+     * 的数据。
+     *
+     *
      * @return 包含当前工作表所有行的列表
      */
     public List<Row> getRows() {
         List<Row> retval = Lists.of();
         forEach(retval::add);
-        return retval;
+        return Lists.filter(retval, e -> {
+            for (String cell : e) {
+                if (strne(cell, "NULL"))
+                    return true;
+            }
+            return false;
+        });
     }
 
     /**
