@@ -36,6 +36,10 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
+import static com.redgogh.common.base.BasicConverter.anyclude;
+import static com.redgogh.common.base.StringUtils.strhas;
+import static com.redgogh.common.base.StringUtils.strihas;
+
 /**
  * `UClass` 是一个用于处理 Java 类元数据的工具类。它封装了一个 `Class` 对象，并提供了一些方法来
  * 访问和操作该类的属性和方法。可以通过该类实例化对象、获取类的属性列表以及调用静态方法等。
@@ -398,6 +402,21 @@ public class UClass {
 
     public Class<?> getDescriptor() {
         return descriptor;
+    }
+
+    /**
+     * 检查当前描述符是否为基本类型或包装类型。
+     *
+     * <p>该方法判断当前对象是否为原生基本类型或其对应的包装类型（如 `int` 或 {@link Integer}）。
+     * 优先检查描述符是否为基本类型，随后判断是否为常见包装类型之一。
+     *
+     * @return 如果当前描述符是基本类型或包装类型，则返回 true；否则返回 false
+     */
+    public boolean isPrimitiveCheck() {
+        if (descriptor.isPrimitive())
+            return true;
+        return anyclude(descriptor, Short.class, Integer.class, Long.class, Float.class,
+                Double.class, Character.class, Boolean.class);
     }
 
     @Override

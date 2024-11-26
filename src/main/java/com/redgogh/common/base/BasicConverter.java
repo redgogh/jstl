@@ -23,9 +23,11 @@ import com.redgogh.common.exception.UnsupportedOperationException;
 import com.redgogh.common.io.ByteBuffer;
 import com.redgogh.common.reflect.UClass;
 
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
+import static com.redgogh.common.base.StringUtils.strwfmt;
 import static com.redgogh.common.base.StringUtils.strxmatch;
 import static com.redgogh.common.io.ByteBuffer.SEEK_SET;
 
@@ -78,6 +80,35 @@ public class BasicConverter {
      */
     public static boolean anyne(Object x, Object y) {
         return !anyeq(x, y);
+    }
+
+    /**
+     * 判断给定对象是否与任意其他对象相等。
+     *
+     * <p>该方法用于检查目标对象是否在提供的对象列表中。内部使用
+     * {@link #anyeq(Object, Object)} 方法比较对象的相等性。
+     *
+     * <h2>功能特点</h2>
+     * <ul>
+     *     <li>支持任意数量的比较对象。</li>
+     *     <li>适用于基础类型和复杂对象的相等性判断。</li>
+     * </ul>
+     *
+     * <h2>使用示例</h2>
+     * <pre>
+     *     boolean result = anyclude("test", "a", "b", "test", "c"); // 返回 true
+     * </pre>
+     *
+     * @param a    目标对象
+     * @param anys 要比较的一组对象
+     * @return 如果目标对象与提供的任意一个对象相等，则返回 true；否则返回 false
+     */
+    public static boolean anyclude(Object a, Object... anys) {
+        for (Object b : anys) {
+            if (anyeq(a, b))
+                return true;
+        }
+        return false;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////
@@ -449,6 +480,41 @@ public class BasicConverter {
      */
     public static String atos(char[] a, int off, int len) {
         return new String(ArrayUtils.copyOf(a, off, len));
+    }
+
+    /**
+     * 将对象转换为指定类型的值。
+     *
+     * <p>该方法尝试将给定的对象转换为指定类型的值。首先将对象转为字符串形式，
+     * 然后根据目标类型进行转换。如果目标类型是基本数据类型，使用反射调用其 `valueOf` 方法进行转换。
+     *
+     * <h2>功能特点</h2>
+     * <ul>
+     *     <li>支持将对象转换为基本数据类型或其包装类型。</li>
+     *     <li>通过反射动态调用目标类型的 `valueOf` 方法进行转换。</li>
+     * </ul>
+     *
+     * @param obj    要转换的对象
+     * @param aClass 目标类型的 Class 对象
+     * @param <T>    目标类型的泛型
+     * @return 转换后的目标类型的值，如果转换失败则返回 null
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T typevalue(Object obj, Class<T> aClass) {
+        String noType = atos(obj);
+
+        T retval = null;
+        UClass uClass = new UClass(aClass);
+
+        /* 基本数据类型 */
+        if (uClass.isPrimitiveCheck())
+            retval = Capturer.icall(() -> (T) uClass.staticInvoke("valueOf", noType));
+
+        return retval;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(typevalue("1231.12", float.class));
     }
 
 }

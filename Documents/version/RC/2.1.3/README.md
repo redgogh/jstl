@@ -4,6 +4,9 @@
 
 ## ⭐ 新增新能
 
+- `UClass`新增`isPrimitiveCheck`检测基本数据类型函数。
+- `BasicConverter`新增`typevalue`任意数据类型转换功能。
+
 ## 👻 优化功能
 
 - 优化`DateFormatter#format`功能参数顺序。
