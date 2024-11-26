@@ -513,8 +513,4 @@ public class BasicConverter {
         return retval;
     }
 
-    public static void main(String[] args) {
-        System.out.println(typevalue("1231.12", float.class));
-    }
-
 }
