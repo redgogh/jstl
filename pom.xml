@@ -25,7 +25,9 @@
 
     <url>https://github.com/redgogh/high-commons-lang</url>
     <description>
-        Redgogh High Commons Lang for java.
+        RedGogh High Commons Lang Java 开发工具包，该工具包可以用最简单的方式实现很多复杂的功能，在简化代码的同时增加代码的可读性和
+        清晰。使用High Commons Lang 库可以让整个项目的源码保持一致的整洁，所有代码统一维护，使用统一的方法，可以降低维护的复杂性。更简单的代
+        码可以带来更高的可读性。这就是 High Commons Lang 所要做的工作。
     </description>
 
     <scm>
