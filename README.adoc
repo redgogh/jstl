@@ -42,7 +42,7 @@ image:Documents/svg/build.svg[build]
 <dependency>
     <groupId>io.github.redgogh</groupId>
     <artifactId>high-commons-lang</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.0-RC1</version>
 </dependency>
 ----
 
