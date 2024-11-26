@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static com.redgogh.common.base.BasicConverter.atos;
-import static com.redgogh.common.base.StringUtils.strhas;
+import static com.redgogh.common.base.StringUtils.strclude;
 import static com.redgogh.common.base.StringUtils.strupper;
 
 /**
@@ -172,7 +172,7 @@ public class HttpClient {
      * @return 当前 `HttpClient` 实例，以支持链式调用
      */
     public HttpClient setRequestBody(Object object) {
-        if (strhas(method, HttpMethod.GET, HttpMethod.HEAD))
+        if (strclude(method, HttpMethod.GET, HttpMethod.HEAD))
             throw new HttpRequestException("GET 或 HEAD 方法不支持请求主体。");
 
         this.object = object;

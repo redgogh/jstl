@@ -37,8 +37,8 @@ import java.util.List;
 import java.util.Map;
 
 import static com.redgogh.common.base.BasicConverter.anyclude;
-import static com.redgogh.common.base.StringUtils.strhas;
-import static com.redgogh.common.base.StringUtils.strihas;
+import static com.redgogh.common.base.StringUtils.strclude;
+import static com.redgogh.common.base.StringUtils.striclude;
 
 /**
  * `UClass` 是一个用于处理 Java 类元数据的工具类。它封装了一个 `Class` 对象，并提供了一些方法来

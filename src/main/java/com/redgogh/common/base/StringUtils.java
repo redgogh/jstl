@@ -230,7 +230,7 @@ public class StringUtils {
      * @param list 要检查的字符串列表
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean strhas(Object wstr, Object... list) {
+    public static boolean strclude(Object wstr, Object... list) {
         if (list == null) return false;
 
         for (Object str : list) {
@@ -243,27 +243,27 @@ public class StringUtils {
     /**
      * 检查字符串是否在指定的字符串数组中。
      *
-     * <p>此方法是 `strhas` 的重载，专门用于字符串数组的查找。
+     * <p>此方法是 `strclude` 的重载，专门用于字符串数组的查找。
      *
      * @param wstr 要检查的字符串对象
      * @param list 要检查的字符串数组
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean strhas(Object wstr, String... list) {
-        return strhas(wstr, (Object[]) list);
+    public static boolean strclude(Object wstr, String... list) {
+        return strclude(wstr, (Object[]) list);
     }
 
     /**
      * 检查字符串是否在指定的字符串集合中。
      *
-     * <p>此方法是 `strhas` 的重载，专门用于集合的查找。
+     * <p>此方法是 `strclude` 的重载，专门用于集合的查找。
      *
      * @param wstr 要检查的字符串对象
      * @param list 要检查的字符串集合
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean strhas(Object wstr, Collection<String> list) {
-        return strhas(wstr, list.toArray());
+    public static boolean strclude(Object wstr, Collection<String> list) {
+        return strclude(wstr, list.toArray());
     }
 
     /**
@@ -275,7 +275,7 @@ public class StringUtils {
      * @param list 要检查的字符串列表
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean strihas(Object wstr, Object... list) {
+    public static boolean striclude(Object wstr, Object... list) {
         if (list == null) return false;
 
         for (Object str : list) {
@@ -288,27 +288,27 @@ public class StringUtils {
     /**
      * 检查字符串（不区分大小写）是否在指定的字符串数组中。
      *
-     * <p>此方法是 `strihas` 的重载，专门用于字符串数组的查找。
+     * <p>此方法是 `striclude` 的重载，专门用于字符串数组的查找。
      *
      * @param wstr 要检查的字符串对象
      * @param list 要检查的字符串数组
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean strihas(Object wstr, String... list) {
-        return strihas(wstr, (Object[]) list);
+    public static boolean striclude(Object wstr, String... list) {
+        return striclude(wstr, (Object[]) list);
     }
 
     /**
      * 检查字符串（不区分大小写）是否在指定的字符串集合中。
      *
-     * <p>此方法是 `strihas` 的重载，专门用于集合的查找。
+     * <p>此方法是 `striclude` 的重载，专门用于集合的查找。
      *
      * @param wstr 要检查的字符串对象
      * @param list 要检查的字符串集合
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean strihas(Object wstr, Collection<String> list) {
-        return strihas(wstr, list.toArray());
+    public static boolean striclude(Object wstr, Collection<String> list) {
+        return striclude(wstr, list.toArray());
     }
 
     /**

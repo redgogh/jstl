@@ -337,7 +337,7 @@ public class File extends java.io.File {
      *         否则返回 {@code false}
      */
     public boolean typeMatch(String... extensions) {
-        return strhas(getExtension(), extensions);
+        return strclude(getExtension(), extensions);
     }
 
     /**
