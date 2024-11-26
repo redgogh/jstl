@@ -41,8 +41,8 @@ image:Documents/svg/build.svg[build]
 ----
 <dependency>
     <groupId>io.github.redgogh</groupId>
-    <artifactId>devtools</artifactId>
-    <version>2.1.2</version>
+    <artifactId>high-commons-lang</artifactId>
+    <version>3.0.0</version>
 </dependency>
 ----
 
