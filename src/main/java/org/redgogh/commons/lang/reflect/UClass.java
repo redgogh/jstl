@@ -35,6 +35,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -251,6 +252,9 @@ public class UClass {
      */
     static List<UField> scanDescriptorDeclaredFields(Class<?> descriptor, List<UField> declaredFields) {
         // 获取所有成员
+        if (descriptor == null)
+            return declaredFields;
+
         Field[] fields = descriptor.getDeclaredFields();
         declaredFields.addAll(Lists.map(fields, UField::new));
 
@@ -405,6 +409,13 @@ public class UClass {
         return descriptor;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Class)
+            return descriptor == obj;
+        return super.equals(obj);
+    }
+
     /**
      * 检查当前描述符是否为基本类型或包装类型。
      *
@@ -416,8 +427,8 @@ public class UClass {
     public boolean isPrimitiveCheck() {
         if (descriptor.isPrimitive())
             return true;
-        return BasicConverter.anyclude(descriptor, Short.class, Integer.class, Long.class, Float.class,
-                Double.class, Character.class, Boolean.class);
+        return BasicConverter.anyclude(descriptor, Short.class, Integer.class, Long.class,
+                Float.class, Double.class, Character.class, Boolean.class, BigDecimal.class);
     }
 
     @Override

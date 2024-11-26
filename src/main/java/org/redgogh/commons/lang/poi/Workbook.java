@@ -18,23 +18,28 @@ package org.redgogh.commons.lang.poi;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import org.redgogh.commons.lang.annotations.RowColumn;
 import org.redgogh.commons.lang.base.BasicConverter;
 import org.redgogh.commons.lang.base.Capturer;
 import org.redgogh.commons.lang.base.Optional;
 import org.redgogh.commons.lang.collection.Lists;
+import org.redgogh.commons.lang.collection.Maps;
 import org.redgogh.commons.lang.io.File;
 import org.redgogh.commons.lang.base.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jetbrains.annotations.NotNull;
+import org.redgogh.commons.lang.reflect.UClass;
+import org.redgogh.commons.lang.reflect.UField;
+import org.redgogh.commons.lang.time.DateFormatter;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
-import static org.redgogh.commons.lang.base.BasicConverter.atos;
+import java.util.Map;
 
 /**
  * 类 {@link Workbook} 用于创建和操作 Excel 工作簿。
@@ -414,6 +419,52 @@ public class Workbook implements Iterable<Row> {
         }
 
         return BasicConverter.atos(builder);
+    }
+
+    private void initializeData(Object obj, UField uField, String value) {
+        /* RowColumn */
+        RowColumn annotation = uField.getAnnotation(RowColumn.class);
+
+        if (uField.isPrimitiveCheck())
+            uField.write(obj, BasicConverter.toPrimitiveValue(value, uField.getOriginType()));
+
+        if (uField.typecheck(Date.class))
+            uField.write(obj, DateFormatter.parse(annotation.pattern(), value));
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> List<T> toJavaObject(Class<T> aClass) {
+        UClass uClass = new UClass(aClass);
+
+        List<T> retval = Lists.of();
+        Map<String, UField> mapping = Maps.of();
+
+        // 获取对象中字段列表
+        List<UField> uFields = uClass.getDeclaredFields();
+        for (UField uField : uFields) {
+            if (uField.hasAnnotation(RowColumn.class)) {
+                RowColumn rowColumn = uField.getAnnotation(RowColumn.class);
+                mapping.put(rowColumn.name(), uField);
+            }
+        }
+
+        // 读取工作簿中所有行数据
+        List<Row> rows = getRows();
+        Row titles = rows.remove(0);
+        for (Row row : rows) {
+            Object obj = uClass.newInstance();
+            for (int i = 0; i < row.size(); i++) {
+                String title = titles.get(i);
+                UField uField = mapping.get(title);
+                if (uField != null) {
+                    String value = row.get(i);
+                    initializeData(obj, uField, value);
+                }
+            }
+            retval.add((T) obj);
+        }
+
+        return retval;
     }
 
     @Override

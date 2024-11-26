@@ -28,6 +28,7 @@ import org.redgogh.commons.lang.base.StringUtils;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Date;
 
 /**
  * `UField` 类封装了 Java 反射中的 `Field` 对象，提供对字段的访问和操作功能。
@@ -45,9 +46,6 @@ import java.lang.reflect.Modifier;
  * @author RedGogh
  * @since 1.0
  */
-@SuppressWarnings({
-        "LombokGetterMayBeUsed"
-})
 public class UField {
     /**
      * 成员属性对象
@@ -65,6 +63,10 @@ public class UField {
      * 属性路径
      */
     private final String path;
+    /**
+     * 属性类型
+     */
+    private final UClass type;
     /**
      * 成员名称
      */
@@ -89,6 +91,7 @@ public class UField {
         this.inClass = field.getDeclaringClass();
         this.name = field.getName();
         this.path = StringUtils.strwfmt("%s#%s", inClass.getName(), name);
+        this.type = new UClass(field.getType());
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -106,8 +109,15 @@ public class UField {
     /**
      * 返回当前属性对象类型
      */
-    public Class<?> getType() {
-        return field.getType();
+    public UClass getType() {
+        return type;
+    }
+
+    /**
+     * 返回当前属性原始对象类型
+     */
+    public Class<?> getOriginType() {
+        return type.getDescriptor();
     }
 
     /**
@@ -289,6 +299,22 @@ public class UField {
         if (a == null)
             a = field.getAnnotation(annotation);
         return a;
+    }
+
+    public boolean typecheck(Class<?> aClass) {
+        return aClass == getOriginType();
+    }
+
+    /**
+     * 检查当前描述符是否为基本类型或包装类型。
+     *
+     * <p>该方法判断当前对象是否为原生基本类型或其对应的包装类型（如 `int` 或 {@link Integer}）。
+     * 优先检查描述符是否为基本类型，随后判断是否为常见包装类型之一。
+     *
+     * @return 如果当前描述符是基本类型或包装类型，则返回 true；否则返回 false
+     */
+    public boolean isPrimitiveCheck() {
+        return type.isPrimitiveCheck();
     }
 
 }

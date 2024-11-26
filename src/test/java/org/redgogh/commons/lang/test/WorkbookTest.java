@@ -18,12 +18,27 @@ package org.redgogh.commons.lang.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import org.redgogh.commons.lang.annotations.RowColumn;
 import org.redgogh.commons.lang.io.File;
 import org.redgogh.commons.lang.poi.Workbook;
 import org.junit.Test;
 
+import java.util.Date;
+import java.util.List;
+
 @SuppressWarnings("ALL")
 public class WorkbookTest {
+
+    public static class User {
+        @RowColumn(name = "姓名")
+        private String name;
+        @RowColumn(name = "年龄")
+        private Short age;
+        @RowColumn(name = "性别")
+        private Character gender;
+        @RowColumn(name = "生日")
+        private Date brithday;
+    }
 
     @Test
     public void generateWorkbookTest() {
@@ -70,6 +85,13 @@ public class WorkbookTest {
         Workbook wb = Workbook.load("Desktop://test.xlsx");
         String csvText = wb.toCSVText();
         System.out.println(csvText);
+    }
+
+    @Test
+    public void workbookJavaObjectTest() {
+        Workbook wb = Workbook.load("Desktop://users.xlsx");
+        List<User> list = wb.toJavaObject(User.class);
+        System.out.println();
     }
 
     @Test

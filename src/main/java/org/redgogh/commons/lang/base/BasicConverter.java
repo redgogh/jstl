@@ -22,8 +22,10 @@ import org.redgogh.commons.lang.iface.TypeMapper;
 import org.redgogh.commons.lang.exception.UnsupportedOperationException;
 import org.redgogh.commons.lang.io.ByteBuffer;
 import org.redgogh.commons.lang.reflect.UClass;
+import org.redgogh.commons.lang.time.DateFormatter;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -495,17 +497,8 @@ public class BasicConverter {
      * @return 转换后的目标类型的值，如果转换失败则返回 null
      */
     @SuppressWarnings("unchecked")
-    public static <T> T typevalue(Object obj, Class<T> aClass) {
-        String noType = atos(obj);
-
-        T retval = null;
-        UClass uClass = new UClass(aClass);
-
-        /* 基本数据类型 */
-        if (uClass.isPrimitiveCheck())
-            retval = Capturer.icall(() -> (T) uClass.staticInvoke("valueOf", noType));
-
-        return retval;
+    public static <T> T toPrimitiveValue(Object obj, Class<T> aClass) {
+        return Capturer.icall(() -> (T) new UClass(aClass).staticInvoke("valueOf", obj));
     }
 
 }
