@@ -19,15 +19,15 @@ package org.redgogh.commons.lang.test;
 \* -------------------------------------------------------------------------------- */
 
 import org.redgogh.commons.lang.io.File;
-import org.redgogh.commons.lang.poi.ExcelWorkbook;
+import org.redgogh.commons.lang.poi.Workbook;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")
-public class ExcelWorkbookTest {
+public class WorkbookTest {
 
     @Test
     public void generateWorkbookTest() {
-            ExcelWorkbook wb = new ExcelWorkbook();
+            Workbook wb = new Workbook();
 
             wb.checkout("一班学生");
             wb.addRow("序号", "姓名", "年龄", "性别", "班级", "学号", "身份证号码", "联系方式");
@@ -51,14 +51,14 @@ public class ExcelWorkbookTest {
 
     @Test
     public void loadWorkbookTest() {
-        ExcelWorkbook wb = ExcelWorkbook.load("Desktop://test.xlsx");
+        Workbook wb = Workbook.load("Desktop://test.xlsx");
         for (int i = 0; i < wb.rowCount(); i++)
             System.out.println(wb.getRow(i));
     }
 
     @Test
     public void workbookIteratorTest() {
-        ExcelWorkbook wb = ExcelWorkbook.load("Desktop://test.xlsx");
+        Workbook wb = Workbook.load("Desktop://test.xlsx");
         // for (Row row : wb) {
         //     System.out.println(row);
         // }
@@ -67,20 +67,20 @@ public class ExcelWorkbookTest {
 
     @Test
     public void workbookCSVTest() {
-        ExcelWorkbook wb = ExcelWorkbook.load("Desktop://test.xlsx");
+        Workbook wb = Workbook.load("Desktop://test.xlsx");
         String csvText = wb.toCSVText();
         System.out.println(csvText);
     }
 
     @Test
     public void workbookPrintTest() {
-        ExcelWorkbook wb = ExcelWorkbook.load("Desktop://b.xlsx");
+        Workbook wb = Workbook.load("Desktop://b.xlsx");
         System.out.println(wb);
     }
 
     @Test
     public void dataFormatTest() {
-        System.out.println(ExcelWorkbook.load("Desktop://b.xlsx"));
+        System.out.println(Workbook.load("Desktop://b.xlsx"));
     }
 
 }
