@@ -53,16 +53,17 @@ def handle(args):
 
     unique_lines = list(set(a_lines) - set(b_lines))
 
-    console.write('------------------------------------', color=console.RED)
-    console.write('lines count', color=console.RED)
+    console.write('\nArguments line count', color=console.RED)
     console.write(f'  -a: {len(a_lines)}', color=console.RED)
     console.write(f'  -b: {len(b_lines)}', color=console.RED)
 
-    console.write(f'list diff count: {len(unique_lines)}', color=console.RED)
+    unique_lines_count = len(unique_lines)
+    console.write(f'list diff count: {unique_lines_count}', color=console.RED)
 
-    console.write('------------------------------------', color=console.RED)
+    if unique_lines_count > 0:
+        console.write('>>>', color=console.RED)
     for item in unique_lines:
         console.write(item)
 
-    if len(unique_lines) > 0:
-        console.write('------------------------------------', color=console.RED)
+    if unique_lines_count > 0:
+        console.write('<<<', color=console.RED)
