@@ -26,8 +26,8 @@ package org.redgogh.commons.lang.crypto;
 /* Creates on 2023/5/16. */
 
 import org.redgogh.commons.lang.base.Capturer;
-import com.redgogh.commons.crypto.codec.*;
-import com.redgogh.commons.lang.crypto.codec.*;
+import org.redgogh.commons.lang.crypto.codec.*;
+import org.redgogh.commons.lang.crypto.codec.*;
 import org.redgogh.commons.lang.crypto.codec.*;
 
 import javax.crypto.KeyGenerator;

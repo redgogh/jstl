@@ -26,8 +26,8 @@ package org.redgogh.commons.lang.test;
 /* Creates on 2022/8/8. */
 
 import org.redgogh.commons.lang.collection.Maps;
-import com.redgogh.commons.http.*;
-import com.redgogh.commons.lang.http.*;
+import org.redgogh.commons.lang.http.*;
+import org.redgogh.commons.lang.http.*;
 import org.redgogh.commons.lang.io.File;
 import org.junit.Test;
 import org.redgogh.commons.lang.http.*;
