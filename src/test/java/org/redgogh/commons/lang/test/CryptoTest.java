@@ -21,6 +21,8 @@ package org.redgogh.commons.lang.test;
 import org.redgogh.commons.lang.crypto.Crypto;
 import org.junit.Test;
 
+import java.io.File;
+
 @SuppressWarnings("ALL")
 public class CryptoTest {
 
@@ -64,6 +66,14 @@ public class CryptoTest {
     public void sha256EncodTest() {
         String text = "Hello World";
         System.out.println("sha256: " + Crypto.SHA256.encode(text));
+    }
+
+    /**
+     * sha256文件编码测试
+     */
+    @Test
+    public void sha256FileEncodTest() {
+        System.out.println(Crypto.SHA256.encode(new File("/home/1g.7z")));
     }
 
     /**

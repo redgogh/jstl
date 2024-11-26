@@ -2,6 +2,8 @@ package org.redgogh.commons.lang.crypto;
 
 import org.redgogh.commons.lang.crypto.codec.SHA256Codec;
 
+import java.io.File;
+
 /**
  * `Sha256` 接口定义了用于进行 SHA-256 编码的方法。
  *
@@ -20,6 +22,22 @@ public interface SHA256 {
      * @return 编码后的 SHA-256 字符串
      */
     String encode(String source);
+
+    /**
+     * #brief: 对文件进行 SHA-256 编码
+     *
+     * @param file 要进行 SHA-256 编码的文件
+     * @return 编码后的 SHA-256 字符串
+     */
+    String encode(File file);
+
+    /**
+     * #brief: 对字节数组进行 SHA-256 编码
+     *
+     * @param source 要进行 SHA-256 编码的字节数组
+     * @return 编码后的 SHA-256 字符串
+     */
+    String encode(byte[] source);
 
 }
 

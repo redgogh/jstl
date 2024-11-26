@@ -44,7 +44,7 @@ public class FileByteReader extends FileInputStream {
     }
 
     public interface FileByteReaderResource {
-        void call(FileByteReader byteReader);
+        void call(FileByteReader byteReader) throws Exception;
     }
 
     /**
