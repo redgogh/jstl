@@ -251,15 +251,11 @@ public class UClass {
      * 递归查找属性列表
      */
     static List<UField> scanDescriptorDeclaredFields(Class<?> descriptor, List<UField> declaredFields) {
-        // 获取所有成员
-        if (descriptor == null)
-            return declaredFields;
-
         Field[] fields = descriptor.getDeclaredFields();
         declaredFields.addAll(Lists.map(fields, UField::new));
 
         Class<?> superclass = descriptor.getSuperclass();
-        if (superclass != Object.class)
+        if (superclass != null && superclass != Object.class)
             scanDescriptorDeclaredFields(superclass, declaredFields);
 
         return declaredFields;
@@ -428,7 +424,7 @@ public class UClass {
         if (descriptor.isPrimitive())
             return true;
         return BasicConverter.anyclude(descriptor, Short.class, Integer.class, Long.class,
-                Float.class, Double.class, Character.class, Boolean.class, BigDecimal.class);
+                Float.class, Double.class, Character.class, Boolean.class);
     }
 
     @Override

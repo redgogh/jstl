@@ -66,7 +66,7 @@ public class UField {
     /**
      * 属性类型
      */
-    private final UClass type;
+    private final Class<?> originType;
     /**
      * 成员名称
      */
@@ -91,7 +91,7 @@ public class UField {
         this.inClass = field.getDeclaringClass();
         this.name = field.getName();
         this.path = StringUtils.strwfmt("%s#%s", inClass.getName(), name);
-        this.type = new UClass(field.getType());
+        this.originType = field.getType();
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -110,14 +110,14 @@ public class UField {
      * 返回当前属性对象类型
      */
     public UClass getType() {
-        return type;
+        return new UClass(originType);
     }
 
     /**
      * 返回当前属性原始对象类型
      */
     public Class<?> getOriginType() {
-        return type.getDescriptor();
+        return originType;
     }
 
     /**
@@ -314,7 +314,7 @@ public class UField {
      * @return 如果当前描述符是基本类型或包装类型，则返回 true；否则返回 false
      */
     public boolean isPrimitiveCheck() {
-        return type.isPrimitiveCheck();
+        return getType().isPrimitiveCheck();
     }
 
 }

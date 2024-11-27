@@ -7,6 +7,7 @@
 - `UClass`新增`isPrimitiveCheck`检测基本数据类型函数。
 - `BasicConverter`新增`typevalue`任意数据类型转换功能。
 - `SHA256Codec`支持大文件编码。
+- `Workbook`支持转Java对象。
 
 ## 👻 优化功能
 

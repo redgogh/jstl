@@ -43,8 +43,11 @@ import java.util.Date;
  */
 public class DateFormatter {
 
-    /** 默认格式化风格 */
-    public static final String Y4H2M2D2H2M2S2 = "yyyy-MM-dd HH:mm:ss";
+    /** 短横线格式化风格 */
+    public static final String DASH_PATTERN_Y4H2M2D2H2M2S2 = "yyyy-MM-dd HH:mm:ss";
+
+    /** 短横线格式化风格 */
+    public static final String SLASH_PATTERN_Y4H2M2D2H2M2S2 = "yyyy/MM/dd HH:mm:ss";
 
     /** 编译一个 Formatter 对象实例，根据 Pattern 编译。默认使用
      *  UnsafeFormatter 内置格式化对象。 */
@@ -93,9 +96,9 @@ public class DateFormatter {
     }
 
     /**
-     * #brief：将当前时间格式化成 {@link #Y4H2M2D2H2M2S2} 风格<p>
+     * #brief：将当前时间格式化成 {@link #DASH_PATTERN_Y4H2M2D2H2M2S2} 风格<p>
      *
-     * 将当前时间格式化成 {@link #Y4H2M2D2H2M2S2} 风格，也就是常用
+     * 将当前时间格式化成 {@link #DASH_PATTERN_Y4H2M2D2H2M2S2} 风格，也就是常用
      * 的：yyyy-MM-dd HH:mm:ss。该函数格式化当前日期。
      *
      * @return 格式化后的字符串
@@ -105,9 +108,9 @@ public class DateFormatter {
     }
 
     /**
-     * #brief：将指定日期对象格式化为 {@link #Y4H2M2D2H2M2S2} 风格<p>
+     * #brief：将指定日期对象格式化为 {@link #DASH_PATTERN_Y4H2M2D2H2M2S2} 风格<p>
      *
-     * 将指定日期对象格式化为 {@link #Y4H2M2D2H2M2S2} 风格，传入一个
+     * 将指定日期对象格式化为 {@link #DASH_PATTERN_Y4H2M2D2H2M2S2} 风格，传入一个
      * 日期对象实例，然后将该日期对象格式化为 yyyy-MM-dd HH:mm:ss 字符串。
      *
      * @param date
@@ -116,7 +119,7 @@ public class DateFormatter {
      * @return 格式化后的字符串
      */
     public static String format(Date date) {
-        return format(date, Y4H2M2D2H2M2S2);
+        return format(date, DASH_PATTERN_Y4H2M2D2H2M2S2);
     }
 
     /**
@@ -155,7 +158,7 @@ public class DateFormatter {
     }
 
     public static Date parse(String text) {
-        return parse(Y4H2M2D2H2M2S2, text);
+        return parse(DASH_PATTERN_Y4H2M2D2H2M2S2, text);
     }
 
     /**

@@ -36,6 +36,7 @@ import org.redgogh.commons.lang.time.DateFormatter;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -425,11 +426,21 @@ public class Workbook implements Iterable<Row> {
         /* RowColumn */
         RowColumn annotation = uField.getAnnotation(RowColumn.class);
 
+        /* 基础数据类型 */
         if (uField.isPrimitiveCheck())
             uField.write(obj, BasicConverter.toPrimitiveValue(value, uField.getOriginType()));
 
-        if (uField.typecheck(Date.class))
+        /* 日期类型 */
+        else if (uField.typecheck(Date.class))
             uField.write(obj, DateFormatter.parse(annotation.pattern(), value));
+
+        /* 浮点类型 */
+        else if (uField.typecheck(BigDecimal.class))
+            uField.write(obj, new BigDecimal(value));
+
+        /* 字符串 */
+        else if (uField.typecheck(String.class))
+            uField.write(obj, value);
     }
 
     @SuppressWarnings("unchecked")

@@ -18,26 +18,73 @@ package org.redgogh.commons.lang.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.alibaba.fastjson.JSON;
 import org.redgogh.commons.lang.annotations.RowColumn;
 import org.redgogh.commons.lang.io.File;
 import org.redgogh.commons.lang.poi.Workbook;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 @SuppressWarnings("ALL")
 public class WorkbookTest {
 
-    public static class User {
+    public static class User0 {
         @RowColumn(name = "姓名")
         private String name;
         @RowColumn(name = "年龄")
         private Short age;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Short getAge() {
+            return age;
+        }
+
+        public void setAge(Short age) {
+            this.age = age;
+        }
+    }
+
+    public static class User extends User0 {
         @RowColumn(name = "性别")
-        private Character gender;
-        @RowColumn(name = "生日")
+        private String gender;
+        @RowColumn(name = "生日", pattern = "yyyy/MM/dd HH:mm:ss")
         private Date brithday;
+        @RowColumn(name = "余额")
+        private BigDecimal amount;
+
+        public String getGender() {
+            return gender;
+        }
+
+        public void setGender(String gender) {
+            this.gender = gender;
+        }
+
+        public Date getBrithday() {
+            return brithday;
+        }
+
+        public void setBrithday(Date brithday) {
+            this.brithday = brithday;
+        }
+
+        public BigDecimal getAmount() {
+            return amount;
+        }
+
+        public void setAmount(BigDecimal amount) {
+            this.amount = amount;
+        }
     }
 
     @Test
@@ -91,7 +138,7 @@ public class WorkbookTest {
     public void workbookJavaObjectTest() {
         Workbook wb = Workbook.load("Desktop://users.xlsx");
         List<User> list = wb.toJavaObject(User.class);
-        System.out.println();
+        System.out.println(JSON.toJSONString(list));
     }
 
     @Test

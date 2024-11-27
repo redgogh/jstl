@@ -44,6 +44,6 @@ public @interface RowColumn {
      *
      * @return 日期格式
      */
-    String pattern() default DateFormatter.Y4H2M2D2H2M2S2;
+    String pattern() default DateFormatter.SLASH_PATTERN_Y4H2M2D2H2M2S2;
 
 }
