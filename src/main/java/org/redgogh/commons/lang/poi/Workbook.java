@@ -42,6 +42,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import static org.redgogh.commons.lang.base.StringUtils.strne;
+
 /**
  * 类 {@link Workbook} 用于创建和操作 Excel 工作簿。
  *
@@ -251,7 +253,7 @@ public class Workbook implements Iterable<Row> {
         forEach(retval::add);
         return Lists.filter(retval, e -> {
             for (String cell : e) {
-                if (StringUtils.strne(cell, "NULL"))
+                if (strne(cell, "NULL"))
                     return true;
             }
             return false;
@@ -412,7 +414,7 @@ public class Workbook implements Iterable<Row> {
         List<Row> rows = getRows();
         for (Row row : rows) {
             for (String cell : row) {
-                builder.append(StringUtils.strne(cell, "NULL") ? cell : "");
+                builder.append(strne(cell, "NULL") ? cell : "");
                 builder.append(",");
             }
             builder.deleteCharAt(builder.length() - 1);
@@ -443,6 +445,36 @@ public class Workbook implements Iterable<Row> {
             uField.write(obj, value);
     }
 
+    /**
+     * 将 Excel 数据转换为 Java 对象列表。
+     *
+     * <p>该方法根据指定的类类型，将工作簿中的数据解析并映射为 Java 对象列表。通过注解 {@link RowColumn}，
+     * 确定 Excel 列标题与 Java 类字段的对应关系，逐行解析并生成对象。
+     *
+     * <h2>功能特点</h2>
+     * <ul>
+     *     <li>支持通过 {@link RowColumn} 注解自动映射 Excel 列与 Java 字段。</li>
+     *     <li>动态创建指定类型的对象并初始化字段值。</li>
+     *     <li>适用于基于注解驱动的数据导入场景。</li>
+     * </ul>
+     *
+     * <h2>使用示例</h2>
+     * <pre>
+     *     public class User {
+     *         \@RowColumn(name = "用户名")
+     *         private String username;
+     *
+     *         \@RowColumn(name = "年龄")
+     *         private int age;
+     *     }
+     *
+     *     List<User> users = excelHandler.toJavaObject(User.class);
+     * </pre>
+     *
+     * @param aClass 目标对象的类类型
+     * @param <T>    目标对象的泛型类型
+     * @return 转换后的对象列表
+     */
     @SuppressWarnings("unchecked")
     public <T> List<T> toJavaObject(Class<T> aClass) {
         UClass uClass = new UClass(aClass);
