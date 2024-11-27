@@ -168,15 +168,15 @@ public class DateFormatter {
      * 实现日期格字符串解析。使用 `new` 关键字创建 {@link SimpleDateFormat} 对象实例满
      * 足线程安全要求。
      *
-     * @param pattern
-     *        格式化规则，如：“yyyy-MM-dd”
-     *
      * @param text
      *        解析日期对象，如：“2018-12-18”
      *
+     * @param pattern
+     *        格式化规则，如：“yyyy-MM-dd”
+     *
      * @return 解析后的字符串
      */
-    public static Date parse(String pattern, String text) {
+    public static Date parse(String text, String pattern) {
         return compileFormatter(pattern).parse(text);
     }
 

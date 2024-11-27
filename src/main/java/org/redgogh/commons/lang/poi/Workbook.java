@@ -432,7 +432,7 @@ public class Workbook implements Iterable<Row> {
 
         /* 日期类型 */
         else if (uField.typecheck(Date.class))
-            uField.write(obj, DateFormatter.parse(annotation.pattern(), value));
+            uField.write(obj, DateFormatter.parse(value, annotation.pattern()));
 
         /* 浮点类型 */
         else if (uField.typecheck(BigDecimal.class))
