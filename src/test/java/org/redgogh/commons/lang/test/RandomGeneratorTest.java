@@ -26,15 +26,15 @@ public class RandomGeneratorTest {
 
     @Test
     public void nextCodeTest() {
-        for (int i = 0; i < 100; i++) {
-            System.out.println(RandomGenerator.nextCode(6));
+        for (int i = 0; i < 165; i++) {
+            System.out.println(RandomGenerator.nextCode(8) + "75b0-11ef-a8c9-005056935d62");
         }
     }
 
     @Test
     public void nextLetterTest() {
         for (int i = 0; i < 100; i++) {
-            System.out.println(RandomGenerator.nextLetterCode(6));
+            System.out.println(RandomGenerator.nextLetterCode(8));
         }
     }
 
@@ -48,7 +48,7 @@ public class RandomGeneratorTest {
     @Test
     public void nextCodeRangeTest() {
         for (int i = 0; i < 100; i++) {
-            System.out.println(RandomGenerator.nextCode(0, 6));
+            System.out.println(RandomGenerator.nextCode(0, 8));
         }
     }
 
