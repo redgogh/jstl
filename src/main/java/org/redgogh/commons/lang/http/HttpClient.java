@@ -146,7 +146,7 @@ public class HttpClient {
      * @see QueryBuilder
      * @return 当前的 `HttpClient` 实例
      */
-    public HttpClient setQueryBuilder(String ...parameters) {
+    public HttpClient setQueryValue(String ...parameters) {
         return setQueryBuilder(new QueryBuilder(parameters));
     }
 
@@ -159,7 +159,9 @@ public class HttpClient {
      * @return 当前 `HttpClient` 实例，以支持链式调用
      */
     public HttpClient setQueryBuilder(QueryBuilder queryBuilder) {
-        this.queryBuilder = queryBuilder;
+        if (this.queryBuilder == null)
+            this.queryBuilder = new QueryBuilder();
+        this.queryBuilder.putAll(queryBuilder);
         return this;
     }
 
