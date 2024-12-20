@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.redgogh</groupId>
-    <artifactId>high-commons-lang</artifactId>
+    <artifactId>devtools3</artifactId>
     <version>3.0.0-RC1</version>
 
     <developers>
