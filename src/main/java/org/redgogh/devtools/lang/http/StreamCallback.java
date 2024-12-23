@@ -19,12 +19,12 @@ package org.redgogh.devtools.lang.http;
 \* -------------------------------------------------------------------------------- */
 
 /**
- * 接口 {@link OctetStreamCallback} 定义了处理八位字节流响应的回调方法。
+ * 接口 {@link StreamCallback} 定义了处理八位字节流响应的回调方法。
  *
  * <p>该接口包含两个方法：
  * <ul>
  *   <li>{@link #onFailure(Throwable)}: 当处理响应时发生错误时调用。</li>
- *   <li>{@link #onResponse(OctetStreamResponse)}: 当成功接收到响应时调用。</li>
+ *   <li>{@link #onResponse(StreamResponse)}: 当成功接收到响应时调用。</li>
  * </ul>
  *
  * <p>实现此接口的类可以提供自定义的处理逻辑，以便在接收到八位字节流
@@ -32,7 +32,7 @@ package org.redgogh.devtools.lang.http;
  *
  * @author RedGogh
  */
-public interface OctetStreamCallback {
+public interface StreamCallback {
 
     /**
      * 当处理字节流响应时发生错误时调用。
@@ -44,7 +44,7 @@ public interface OctetStreamCallback {
     /**
      * 当成功接收到字节流响应时调用。
      *
-     * @param response 成功的 {@link OctetStreamResponse} 实例。
+     * @param response 成功的 {@link StreamResponse} 实例。
      */
-    void onResponse(OctetStreamResponse response);
+    void onResponse(StreamResponse response);
 }

@@ -108,9 +108,9 @@ public class HttpClientsTest {
 
     @Test
     public void downloadFileTest() {
-        OctetStreamResponse octet = HttpClient.open("GET", "https://repo.huaweicloud.com/java/jdk/8u202-b08-demos/jdk-8u202-windows-x64-demos.zip")
+        StreamResponse octet = HttpClient.open("GET", "https://repo.huaweicloud.com/java/jdk/8u202-b08-demos/jdk-8u202-windows-x64-demos.zip")
                 .sslVerifierDisable()
-                .newOctetStreamCall();
+                .newStreamCall();
         octet.transferTo(new File("Desktop://jdk-8u202-windows-x64-demos.zip"));
     }
 
@@ -118,14 +118,14 @@ public class HttpClientsTest {
     public void asyncDownloadFileTest() throws InterruptedException {
         HttpClient.open("GET", "https://repo.huaweicloud.com/java/jdk/8u202-b08-demos/jdk-8u202-windows-x64-demos.zip")
                 .sslVerifierDisable()
-                .newOctetStreamCall(new OctetStreamCallback() {
+                .newStreamCall(new StreamCallback() {
                     @Override
                     public void onFailure(Throwable e) {
                         stdout.printf("请求出现异常：%s\n", e.getMessage());
                     }
 
                     @Override
-                    public void onResponse(OctetStreamResponse response) {
+                    public void onResponse(StreamResponse response) {
                         response.transferTo(new File("Desktop://jdk-8u202-windows-x64-demos.zip"));
                     }
                 });

@@ -26,7 +26,7 @@ import okhttp3.ResponseBody;
 import java.io.Closeable;
 
 /**
- * 类 {@link OctetStreamResponse} 表示一个字节流响应。
+ * 类 {@link StreamResponse} 表示一个字节流响应。
  *
  * <p>该类实现了 {@link Closeable} 接口，意味着在使用完该响应后，
  * 应该调用 {@link #close()} 方法来释放资源。
@@ -36,11 +36,11 @@ import java.io.Closeable;
  *
  * @author RedGogh
  */
-public class OctetStreamResponse implements Closeable {
+public class StreamResponse implements Closeable {
 
     private final okhttp3.Response response;
 
-    OctetStreamResponse(okhttp3.Response response) {
+    StreamResponse(okhttp3.Response response) {
         this.response = response;
     }
 

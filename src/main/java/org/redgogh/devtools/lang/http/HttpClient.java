@@ -225,29 +225,29 @@ public class HttpClient {
     }
 
     /**
-     * 创建一个新的 {@link OctetStreamResponse} 实例。
+     * 创建一个新的 {@link StreamResponse} 实例。
      *
-     * <p>此方法可以选择性地接收一个 {@link OctetStreamCallback}
+     * <p>此方法可以选择性地接收一个 {@link StreamCallback}
      * 参数，以便在处理八位字节流时提供自定义的回调功能。
      *
-     * @return 一个新的 {@link OctetStreamResponse} 实例。
+     * @return 一个新的 {@link StreamResponse} 实例。
      */
-    public OctetStreamResponse newOctetStreamCall() {
-        return newOctetStreamCall(null);
+    public StreamResponse newStreamCall() {
+        return newStreamCall(null);
     }
 
     /**
-     * 创建一个新的 {@link OctetStreamResponse} 实例，并指定回调。
+     * 创建一个新的 {@link StreamResponse} 实例，并指定回调。
      *
      * <p>如果提供的回调不为 {@code null}，将在处理八位字节流时
      * 调用该回调。
      *
      * @param callback 可选的回调，用于处理八位字节流。
      *
-     * @return 一个新的 {@link OctetStreamResponse} 实例。
+     * @return 一个新的 {@link StreamResponse} 实例。
      */
-    public OctetStreamResponse newOctetStreamCall(OctetStreamCallback callback) {
-        return new OctetStreamResponse(Capturer.call(() -> newCall0(callback)));
+    public StreamResponse newStreamCall(StreamCallback callback) {
+        return new StreamResponse(Capturer.call(() -> newCall0(callback)));
     }
 
     /**
@@ -313,10 +313,10 @@ public class HttpClient {
         /* async */
         if (callback != null) {
             if (callback instanceof Callback)
-                async(call, (OctetStreamCallback) callback);
+                async(call, (StreamCallback) callback);
 
-            if (callback instanceof OctetStreamCallback)
-                async(call, (OctetStreamCallback) callback);
+            if (callback instanceof StreamCallback)
+                async(call, (StreamCallback) callback);
             return null;
         }
 
@@ -432,7 +432,7 @@ public class HttpClient {
     }
 
 
-    private void async(Call call, OctetStreamCallback callback) {
+    private void async(Call call, StreamCallback callback) {
         call.enqueue(new okhttp3.Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
@@ -441,7 +441,7 @@ public class HttpClient {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull okhttp3.Response response) throws IOException {
-                callback.onResponse(new OctetStreamResponse(response));
+                callback.onResponse(new StreamResponse(response));
             }
         });
     }
