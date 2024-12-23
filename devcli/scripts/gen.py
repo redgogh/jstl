@@ -1,0 +1,15 @@
+import uuid
+
+tmp = "INSERT INTO `scms`.`scms_contract`(`id`, `code`, `they_code`, `name`, `business_code`, `level_code`, `level_name`, `state`, `flow_status`, `category`, `classify_code`, `classify_name`, `type_code`, `type_name`, `template_id`, `template_name`, `money_flow`, `standard`, `important`, `frame_type`, `create_type`, `source`, `source_code`, `source_name`, `company_code`, `company_name`, `project_code`, `project_name`, `party_ai_code`, `party_ai_name`, `party_bi_code`, `party_bi_name`, `org_id`, `org_code`, `org_name`, `employee_id`, `employee_code`, `employee_name`, `employee_phone`, `agent_code`, `agent_name`, `effective_start`, `effective_end`, `approve_date`, `sign_date`, `sign_address`, `amount_price_type`, `un_total_remark`, `currency_code`, `currency_name`, `exchange_rate`, `amount`, `tax_amount`, `earnest_money`, `fixed_tax`, `tax_code`, `tax_name`, `tax_rate`, `tax_money`, `if_other_party`, `deleted`, `version_no`, `last_version`, `remark`, `creator_id`, `creator_account`, `creator_name`, `created_date`, `last_editor_id`, `last_editor_account`, `last_editor_name`, `last_edited_date`, `tenant_code`, `wbs_code`, `wbs_name`, `if_simple_contract`, `if_oa`, `if_legal`, `individual_type`, `individual`, `report_come_from_sys_code`, `report_come_from_sys_name`, `create_come_from_sys_code`, `create_come_from_sys_name`, `create_come_from_type_code`, `create_come_from_type_name`, `if_group_legal`, `sign_discard_reason`, `report_contract_id`, `if_process_plan`, `org_name_path`, `settlement_method`, `standard_type`, `signed_file_num`, `type_all_link`, `sign_type_name`, `classified`, `classified_level`, `level`) VALUES ('#id', 'LJBYC2-Q600-2023-008017', NULL, '待办测试合同-X#num', 'HT0000#bnum', NULL, NULL, 1, 0, 0, 'scmp-cght', '采购类', 'wzcg', '物资采购合同', '1DFBEDFA-77CB-11EE-B3C2-0242C0A8440E', 'LJB测试模板V-36', 'OTHER', 1, 0, 1, 0, 0, NULL, NULL, 'Q000', '四川虹信软件股份有限公司', NULL, NULL, 'Q600', '四川智远乐享软件有限公司', '0000019405', '绵阳市社保保险事业管理中心', '8B755DD9-5142-11EE-A363-0242C0A84424', '12000639', '质量部', 'A3929FDB-5146-11EE-A363-0242C0A84424', '99993133', '李继斌', '15928715191', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 'RMB', '人民币', NULL, 210.000000, 245.700000, NULL, 1, '017', '17%增值税', 17.000000, 35.700000, NULL, 0, 1, 1, NULL, '2D1F7D35-7F7A-11EE-87B5-0242C0A84424', '99993133', '李继斌', '2024-12-23 21:30:05', '2D1F7D35-7F7A-11EE-87B5-0242C0A84424', '99993133', '李继斌3133', '2024-12-23 21:30:33', '10000028', NULL, NULL, 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '/长虹合同/买卖合同/采购类/物资采购合同', NULL, NULL, NULL, NULL);"
+
+num = 100001
+bnum = 80002
+
+for i in range(0, 50):
+    tmp0 = tmp
+    tmp0 = tmp0.replace("#id", str(uuid.uuid4()))
+    tmp0 = tmp0.replace("#num", str(num))
+    tmp0 = tmp0.replace("#bnum", str(bnum))
+    num += 1
+    bnum += 1
+    print(tmp0)
