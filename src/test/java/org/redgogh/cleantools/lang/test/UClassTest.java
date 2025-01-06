@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.lang.test;
+package org.redgogh.cleantools.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|

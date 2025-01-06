@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.lang.test;
+package org.redgogh.cleantools.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -27,7 +27,7 @@ package org.redgogh.cleantools.lang.test;
 
 import org.redgogh.cleantools.collection.Maps;
 import org.redgogh.cleantools.http.*;
-import org.redgogh.cleantools.lang.http.*;
+import org.redgogh.cleantools.http.*;
 import org.redgogh.cleantools.io.File;
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.lang.test;
+package org.redgogh.cleantools.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -24,7 +24,7 @@ import org.junit.Test;
 @SuppressWarnings("ALL")
 public class BeanUtilsTest {
 
-    static class A {
+    public static class A {
         private String name;
         private String age;
 
@@ -45,7 +45,7 @@ public class BeanUtilsTest {
         }
     }
 
-    static class B extends A {
+    public static class B extends A {
         private String aabb;
 
         public String getAabb() {
@@ -57,7 +57,7 @@ public class BeanUtilsTest {
         }
     }
 
-    static class C {
+    public static class C {
         private String name;
 
         public String getName() {
