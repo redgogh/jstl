@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.redgogh</groupId>
-    <artifactId>devtools</artifactId>
+    <artifactId>cleantools</artifactId>
     <version>3.0.0-RC1</version>
 
     <developers>
@@ -23,13 +23,13 @@
         </license>
     </licenses>
 
-    <url>https://github.com/redgogh/devtools</url>
+    <url>https://github.com/redgogh/cleantools</url>
     <description>...</description>
 
     <scm>
-        <connection>scm:git@github.com:redgogh/devtools.git</connection>
-        <developerConnection>scm:git@github.com:redgogh/devtools.git</developerConnection>
-        <url>https://github.com/redgogh/devtools</url>
+        <connection>scm:git@github.com:redgogh/cleantools.git</connection>
+        <developerConnection>scm:git@github.com:redgogh/cleantools.git</developerConnection>
+        <url>https://github.com/redgogh/cleantools</url>
     </scm>
 
     <properties>
