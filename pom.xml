@@ -24,7 +24,7 @@
     </licenses>
 
     <url>https://github.com/redgogh/cleantools</url>
-    <description>...</description>
+    <description>Cleantools是一款用于简化繁琐开发工作的工具包，该工具包提供了众多常用的工具类，使得在开发Java的过程中可以像在写Python一样简单。</description>
 
     <scm>
         <connection>scm:git@github.com:redgogh/cleantools.git</connection>
