@@ -38,19 +38,19 @@ public class ThreadPool {
     /**
      * 当前可用的处理器数量
      */
-    private static final int nThread = OSEnvironment.availableProcessors();
+    public static final int N_THREAD = OSEnvironment.availableProcessors();
 
     /**
      * 固定线程池，用于执行提交的任务
      */
     private static final ExecutorService fixedThreadPool =
-            Executors.newFixedThreadPool(nThread);
+            Executors.newFixedThreadPool(N_THREAD);
 
     /**
      * 调度线程池，用于定时执行任务
      */
     private static final ScheduledExecutorService scheduledThreadPool =
-            Executors.newScheduledThreadPool(nThread);
+            Executors.newScheduledThreadPool(N_THREAD);
 
     /**
      * #brief: 提交一个可运行的任务到固定线程池
