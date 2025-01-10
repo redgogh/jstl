@@ -21,7 +21,6 @@ package org.redgogh.cleantools.io;
 import org.redgogh.cleantools.base.Assert;
 import org.redgogh.cleantools.base.Capturer;
 import org.redgogh.cleantools.base.Optional;
-import org.redgogh.cleantools.base.StringUtils;
 import org.redgogh.cleantools.collection.Lists;
 import org.redgogh.cleantools.os.OSEnvironment;
 import org.jetbrains.annotations.Nullable;
@@ -30,6 +29,8 @@ import java.io.RandomAccessFile;
 import java.net.URI;
 import java.nio.file.Path;
 import java.util.List;
+
+import static org.redgogh.cleantools.base.StringUtils.*;
 
 /**
  * 扩展了 `java.io.File` 的自定义文件类，提供了增强的文件操作功能。
@@ -310,7 +311,7 @@ public class File extends java.io.File {
      */
     public String getCleanName() {
         String name = getName();
-        return StringUtils.strcut(getName(), 0, name.lastIndexOf("."));
+        return strcut(getName(), 0, name.lastIndexOf("."));
     }
 
     /**
@@ -321,7 +322,7 @@ public class File extends java.io.File {
      * @return 当前 File 文件和 {@code extension} 一致返回 `true`
      */
     public boolean typeEquals(String extension) {
-        return StringUtils.streq(extension, getExtension());
+        return streq(extension, getExtension());
     }
 
     /**
@@ -336,7 +337,7 @@ public class File extends java.io.File {
      *         否则返回 {@code false}
      */
     public boolean typeMatch(String... extensions) {
-        return StringUtils.strclude(getExtension(), extensions);
+        return strcont(getExtension(), extensions);
     }
 
     /**
@@ -347,7 +348,7 @@ public class File extends java.io.File {
         int index = name.indexOf(".");
         if (index == -1)
             return "";
-        return StringUtils.strcut(getName(), index, 0);
+        return strcut(getName(), index, 0);
     }
 
     private boolean forceDeleteDirectory(File dir) {
