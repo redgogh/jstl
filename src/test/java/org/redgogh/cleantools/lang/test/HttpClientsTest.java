@@ -27,8 +27,7 @@ package org.redgogh.cleantools.test;
 
 import org.redgogh.cleantools.collection.Maps;
 import org.redgogh.cleantools.http.*;
-import org.redgogh.cleantools.http.*;
-import org.redgogh.cleantools.io.File;
+import org.redgogh.cleantools.io.MutableFile;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -48,7 +47,7 @@ public class HttpClientsTest {
     @Test
     public void callMultipartBodyTest() {
         MultipartBody multipartBody = new MultipartBody();
-        multipartBody.put("document", new File("src/main/java/com/redgogh/tools/ArrayUtils.java"));
+        multipartBody.put("document", new MutableFile("src/main/java/com/redgogh/tools/ArrayUtils.java"));
 
         Response response = HttpClient.open("POST", "http://127.0.0.1:8001/security/check/file")
                 .setRequestBody(multipartBody)
@@ -112,7 +111,7 @@ public class HttpClientsTest {
         StreamResponse octet = HttpClient.open("GET", "https://repo.huaweicloud.com/java/jdk/8u202-b08-demos/jdk-8u202-windows-x64-demos.zip")
                 .sslVerifierDisable()
                 .newStreamCall();
-        octet.transferTo(new File("Desktop://jdk-8u202-windows-x64-demos.zip"));
+        octet.transferTo(new MutableFile("Desktop://jdk-8u202-windows-x64-demos.zip"));
     }
 
     @Test
@@ -127,7 +126,7 @@ public class HttpClientsTest {
 
                     @Override
                     public void onResponse(StreamResponse response) {
-                        response.transferTo(new File("Desktop://jdk-8u202-windows-x64-demos.zip"));
+                        response.transferTo(new MutableFile("Desktop://jdk-8u202-windows-x64-demos.zip"));
                     }
                 });
     }

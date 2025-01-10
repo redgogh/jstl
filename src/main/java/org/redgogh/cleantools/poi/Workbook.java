@@ -25,7 +25,7 @@ import org.redgogh.cleantools.base.Optional;
 import org.redgogh.cleantools.base.StringUtils;
 import org.redgogh.cleantools.collection.Lists;
 import org.redgogh.cleantools.collection.Maps;
-import org.redgogh.cleantools.io.File;
+import org.redgogh.cleantools.io.MutableFile;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -94,7 +94,7 @@ public class Workbook implements Iterable<Row> {
      * @param pathname Excel 文件的路径
      */
     public Workbook(String pathname) {
-        this(new File(pathname));
+        this(new MutableFile(pathname));
     }
 
     /**
@@ -104,10 +104,10 @@ public class Workbook implements Iterable<Row> {
      * 实例。如果文件不存在或格式不正确，可能会抛出
      * 异常。
      *
-     * @param file Excel 文件对象
+     * @param mutableFile Excel 文件对象
      */
-    public Workbook(File file) {
-        this(Capturer.call(() -> new XSSFWorkbook(file)));
+    public Workbook(MutableFile mutableFile) {
+        this(Capturer.call(() -> new XSSFWorkbook(mutableFile)));
     }
 
     /**
@@ -297,7 +297,7 @@ public class Workbook implements Iterable<Row> {
      * @return 加载的 Workbook 实例
      */
     public static Workbook load(String pathname) {
-        return load(new File(pathname));
+        return load(new MutableFile(pathname));
     }
 
     /**
@@ -307,11 +307,11 @@ public class Workbook implements Iterable<Row> {
      * Workbook 实例。如果文件不存在或格式不正确，可能
      * 会抛出异常。
      *
-     * @param file Excel 文件对象
+     * @param mutableFile Excel 文件对象
      * @return 加载的 Workbook 实例
      */
-    public static Workbook load(File file) {
-        return new Workbook(file);
+    public static Workbook load(MutableFile mutableFile) {
+        return new Workbook(mutableFile);
     }
 
     /**

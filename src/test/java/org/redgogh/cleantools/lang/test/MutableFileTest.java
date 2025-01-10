@@ -18,44 +18,44 @@ package org.redgogh.cleantools.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.io.File;
+import org.redgogh.cleantools.io.MutableFile;
 import org.junit.Test;
 
 import static org.redgogh.cleantools.base.BasicConverter.atos;
 
 @SuppressWarnings("ALL")
-public class FileTest {
+public class MutableFileTest {
 
     /**
      * 随机读写访问测试
      */
     @Test
     public void randomAccessTest() {
-        File file = new File(".dat");
+        MutableFile mutableFile = new MutableFile(".dat");
 
         // write float
-        file.open();
+        mutableFile.open();
         {
             float writeValue = 114.514f;
-            file.writeFloat(writeValue);
+            mutableFile.writeFloat(writeValue);
             System.out.printf("-------------------------------------------------------------------\n");
             System.out.printf("File random access write float example, write value: %f\n", writeValue);
         }
-        file.close();
+        mutableFile.close();
 
             System.out.printf("-------------------------------------------------------------------\n");
 
         // read float
-        file.open();
+        mutableFile.open();
         {
             float readValue = 0.0f;
-            readValue = file.readFloat();
+            readValue = mutableFile.readFloat();
             System.out.printf("File random access read float example, read value: %f\n", readValue);
             System.out.printf("-------------------------------------------------------------------\n");
         }
-        file.close();
+        mutableFile.close();
 
-        file.forceDelete();
+        mutableFile.forceDelete();
     }
 
     /**
@@ -63,34 +63,34 @@ public class FileTest {
      */
     @Test
     public void randomAccessWriteTest() {
-        File file = new File(".dat");
+        MutableFile mutableFile = new MutableFile(".dat");
 
-        file.open();
+        mutableFile.open();
 
-        file.writeInt(1001);
-        file.writeInt(1002);
-        file.writeInt(1003);
+        mutableFile.writeInt(1001);
+        mutableFile.writeInt(1002);
+        mutableFile.writeInt(1003);
 
-        file.seek(0);
+        mutableFile.seek(0);
 
         System.out.printf("----------------------------------------------------\n");
-        System.out.printf("random access write example read(0): %s\n", file.readInt());
-        System.out.printf("random access write example read(1): %s\n", file.readInt());
-        System.out.printf("random access write example read(2): %s\n", file.readInt());
+        System.out.printf("random access write example read(0): %s\n", mutableFile.readInt());
+        System.out.printf("random access write example read(1): %s\n", mutableFile.readInt());
+        System.out.printf("random access write example read(2): %s\n", mutableFile.readInt());
         System.out.printf("----------------------------------------------------\n");
 
-        file.forceDelete();
+        mutableFile.forceDelete();
     }
 
     @Test
     public void readBytesTest() {
-        System.out.println(atos(new File("Desktop://log.txt").readBytes()));
+        System.out.println(atos(new MutableFile("Desktop://log.txt").readBytes()));
     }
 
     @Test
     public void listFileTest() {
-        for (File file : new File("D:/aaaa").listFiles()) {
-            System.out.println(file.getPath());
+        for (MutableFile mutableFile : new MutableFile("D:/aaaa").listFiles()) {
+            System.out.println(mutableFile.getPath());
         }
     }
 

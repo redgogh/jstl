@@ -5,6 +5,7 @@ import org.redgogh.cleantools.crypto.Crypto;
 import org.redgogh.cleantools.crypto.SHA256;
 import org.redgogh.cleantools.exception.SystemRuntimeException;
 import org.redgogh.cleantools.io.IOUtils;
+import org.redgogh.cleantools.io.MutableFile;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -24,9 +25,9 @@ public class SHA256Codec implements SHA256 {
     @SuppressWarnings("resource")
     public String encode(File f0) {
         return Capturer.icall(() -> {
-            org.redgogh.cleantools.io.File file = new org.redgogh.cleantools.io.File(f0);
+            MutableFile mutableFile = new MutableFile(f0);
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            file.openByteReader().call(reader -> {
+            mutableFile.openByteReader().call(reader -> {
                 int len = 0;
                 byte[] buffer = new byte[IOUtils.MB];
                 while ((len = reader.read(buffer)) != IOUtils.EOF)

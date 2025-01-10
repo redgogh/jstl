@@ -19,7 +19,7 @@ package org.redgogh.cleantools.http;
 \* -------------------------------------------------------------------------------- */
 
 import org.redgogh.cleantools.base.Assert;
-import org.redgogh.cleantools.io.File;
+import org.redgogh.cleantools.io.MutableFile;
 import org.redgogh.cleantools.io.IOUtils;
 import okhttp3.ResponseBody;
 
@@ -47,15 +47,15 @@ public class StreamResponse implements Closeable {
     /**
      * 将响应体内容传输到指定路径的文件。
      *
-     * <p>此方法通过调用 {@link #transferTo(File)} 实现，
-     * 将给定路径 {@code path} 转换为 {@link File} 对象，
+     * <p>此方法通过调用 {@link #transferTo(MutableFile)} 实现，
+     * 将给定路径 {@code path} 转换为 {@link MutableFile} 对象，
      * 并将响应体内容写入该文件。
      *
      * @param path 要传输内容的目标文件路径
-     * @return 传输完成的 {@link File} 对象
+     * @return 传输完成的 {@link MutableFile} 对象
      */
-    public File transferTo(String path) {
-        return transferTo(File.wrap(path));
+    public MutableFile transferTo(String path) {
+        return transferTo(MutableFile.wrap(path));
     }
 
     /**
@@ -65,27 +65,27 @@ public class StreamResponse implements Closeable {
      * 并返回该文件。
      *
      * @param file 要传输内容的目标文件
-     * @return 传输完成的 {@link File} 对象
+     * @return 传输完成的 {@link MutableFile} 对象
      */
-    public File transferTo(java.io.File file) {
-        return transferTo(File.wrap(file));
+    public MutableFile transferTo(java.io.File file) {
+        return transferTo(MutableFile.wrap(file));
     }
 
     /**
-     * 将响应体内容传输到指定的 {@link File} 对象。
+     * 将响应体内容传输到指定的 {@link MutableFile} 对象。
      *
      * <p>从响应体中获取输入流，并将其内容写入提供的
-     * {@link File} 实例，然后返回该文件。
+     * {@link MutableFile} 实例，然后返回该文件。
      *
-     * @param file 要传输内容的目标 {@link File} 对象
-     * @return 传输完成的 {@link File} 对象
+     * @param mutableFile 要传输内容的目标 {@link MutableFile} 对象
+     * @return 传输完成的 {@link MutableFile} 对象
      */
-    public File transferTo(File file) {
+    public MutableFile transferTo(MutableFile mutableFile) {
         ResponseBody body = response.body();
         Assert.isNull(body, "没有数据响应。");
-        IOUtils.write(body.byteStream(), file);
+        IOUtils.write(body.byteStream(), mutableFile);
         close();
-        return file;
+        return mutableFile;
     }
 
     @Override

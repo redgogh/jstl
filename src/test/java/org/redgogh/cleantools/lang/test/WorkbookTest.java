@@ -20,7 +20,7 @@ package org.redgogh.cleantools.test;
 
 import com.alibaba.fastjson.JSON;
 import org.redgogh.cleantools.annotations.RowColumn;
-import org.redgogh.cleantools.io.File;
+import org.redgogh.cleantools.io.MutableFile;
 import org.redgogh.cleantools.poi.Workbook;
 import org.junit.Test;
 
@@ -108,7 +108,7 @@ public class WorkbookTest {
             wb.addRow(1, "冯十五", 20, "男", "七班", "2023013", "123456789012345690", "13800000013");
             wb.addRow(2, "陈十六", 21, "女", "七班", "2023014", "123456789012345691", "13800000014");
 
-            wb.write(new File("Desktop://b.xlsx").openByteWriter());
+            wb.write(new MutableFile("Desktop://b.xlsx").openByteWriter());
     }
 
     @Test

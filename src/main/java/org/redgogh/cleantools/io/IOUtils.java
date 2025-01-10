@@ -86,7 +86,7 @@ public class IOUtils {
      */
     public static byte[] read(java.io.File file) {
         Assert.isFalse(file != null && file.isFile(), "文件不能为空且不能是目录！");
-        return read(new org.redgogh.cleantools.io.File(file).openByteReader());
+        return read(new MutableFile(file).openByteReader());
     }
 
     /**
@@ -222,13 +222,13 @@ public class IOUtils {
      * @param input
      *        输入流
      *
-     * @param file
-     *        {@link org.redgogh.cleantools.io.File} 文件对象实例（如果文件不存在，则会创建）
+     * @param mutableFile
+     *        {@link MutableFile} 文件对象实例（如果文件不存在，则会创建）
      */
-    public static void write(InputStream input, org.redgogh.cleantools.io.File file) {
+    public static void write(InputStream input, MutableFile mutableFile) {
         FileByteWriter writer = null;
         try {
-            writer = file.openByteWriter();
+            writer = mutableFile.openByteWriter();
             write(input, writer);
         } catch (Exception e) {
             throw new IOWriteException(e);
@@ -247,11 +247,11 @@ public class IOUtils {
      * @param input
      *        字符串
      *
-     * @param file
-     *        {@link org.redgogh.cleantools.io.File} 文件对象实例（如果文件不存在，则会创建）
+     * @param mutableFile
+     *        {@link MutableFile} 文件对象实例（如果文件不存在，则会创建）
      */
-    public static void write(String input, org.redgogh.cleantools.io.File file) {
-        write(input.getBytes(), file);
+    public static void write(String input, MutableFile mutableFile) {
+        write(input.getBytes(), mutableFile);
     }
 
     /**
@@ -263,13 +263,13 @@ public class IOUtils {
      * @param b
      *        字节数组缓冲区
      *
-     * @param file
+     * @param mutableFile
      *        指定输出流
      */
-    public static void write(byte[] b, org.redgogh.cleantools.io.File file) {
+    public static void write(byte[] b, MutableFile mutableFile) {
         FileByteWriter writer = null;
         try {
-            writer = file.openByteWriterDisabled();
+            writer = mutableFile.openByteWriterDisabled();
             write(b, writer);
         } catch (Throwable e) {
             throw new IOWriteException(e);

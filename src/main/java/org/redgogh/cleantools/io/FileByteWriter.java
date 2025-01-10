@@ -32,8 +32,8 @@ public class FileByteWriter extends FileOutputStream {
         super(name);
     }
 
-    public FileByteWriter(@NotNull File file) throws FileNotFoundException {
-        super(file);
+    public FileByteWriter(@NotNull MutableFile mutableFile) throws FileNotFoundException {
+        super(mutableFile);
     }
 
     public FileByteWriter(@NotNull FileDescriptor fdObj) {

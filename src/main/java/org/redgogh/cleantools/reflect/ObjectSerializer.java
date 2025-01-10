@@ -21,7 +21,7 @@ package org.redgogh.cleantools.reflect;
 import org.redgogh.cleantools.exception.SerializationException;
 import org.redgogh.cleantools.io.FileByteReader;
 import org.redgogh.cleantools.io.FileByteWriter;
-import org.redgogh.cleantools.io.File;
+import org.redgogh.cleantools.io.MutableFile;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -37,7 +37,7 @@ import java.io.ObjectOutputStream;
  * 或恢复对象状态。
  *
  * @author RedGogh
- * @see File
+ * @see MutableFile
  */
 public class ObjectSerializer {
 
@@ -48,10 +48,10 @@ public class ObjectSerializer {
      * 错误信息到日志中，方便后续调试和错误排查。
      *
      * @param object 要序列化的对象
-     * @param file 要写入的文件
+     * @param mutableFile 要写入的文件
      */
-    public static void serialize(Object object, File file) {
-        try (FileByteWriter fileByteWriter = file.openByteWriter();
+    public static void serialize(Object object, MutableFile mutableFile) {
+        try (FileByteWriter fileByteWriter = mutableFile.openByteWriter();
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileByteWriter)) {
             objectOutputStream.writeObject(object);
         } catch (IOException e) {
@@ -65,12 +65,12 @@ public class ObjectSerializer {
      * <p>从指定文件中读取字节流，并将其反序列化为对象。如果反序列化过程中出现错误，相关
      * 错误信息将被记录，并抛出 DeserializeException，以便调用者进行处理。
      *
-     * @param file 要读取的文件
+     * @param mutableFile 要读取的文件
      * @return 反序列化得到的对象
      * @throws SerializationException 如果反序列化失败
      */
-    public static Object deserialize(File file) {
-        try (FileByteReader fileByteReader = file.openByteReader();
+    public static Object deserialize(MutableFile mutableFile) {
+        try (FileByteReader fileByteReader = mutableFile.openByteReader();
              ObjectInputStream objectInputStream = new ObjectInputStream(fileByteReader)) {
             return objectInputStream.readObject();
         } catch (Exception e) {

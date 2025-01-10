@@ -18,7 +18,7 @@ package org.redgogh.cleantools.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.io.File;
+import org.redgogh.cleantools.io.MutableFile;
 import org.redgogh.cleantools.reflect.ObjectSerializer;
 import org.junit.Test;
 
@@ -39,15 +39,15 @@ public class ObjectSerializerTest {
 
     @Test
     public void serializeTest() {
-        ObjectSerializer.serialize(new User("Judy"), new File("Desktop://judy.ser"));
+        ObjectSerializer.serialize(new User("Judy"), new MutableFile("Desktop://judy.ser"));
     }
 
     @Test
     public void deserializeTest() {
-        File file = new File("Desktop://judy.ser");
-        User user = (User) ObjectSerializer.deserialize(file);
+        MutableFile mutableFile = new MutableFile("Desktop://judy.ser");
+        User user = (User) ObjectSerializer.deserialize(mutableFile);
         System.out.println(user);
-        file.forceDelete();
+        mutableFile.forceDelete();
     }
 
 
