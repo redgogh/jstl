@@ -228,7 +228,7 @@ public class StringUtils {
      * @param list 要检查的字符串列表
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean strclude(Object wstr, Object... list) {
+    public static boolean strcont(Object wstr, Object... list) {
         if (list == null) return false;
 
         for (Object str : list) {
@@ -247,8 +247,8 @@ public class StringUtils {
      * @param list 要检查的字符串数组
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean strclude(Object wstr, String... list) {
-        return strclude(wstr, (Object[]) list);
+    public static boolean strcont(Object wstr, String... list) {
+        return strcont(wstr, (Object[]) list);
     }
 
     /**
@@ -260,8 +260,8 @@ public class StringUtils {
      * @param list 要检查的字符串集合
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean strclude(Object wstr, Collection<String> list) {
-        return strclude(wstr, list.toArray());
+    public static boolean strcont(Object wstr, Collection<String> list) {
+        return strcont(wstr, list.toArray());
     }
 
     /**
