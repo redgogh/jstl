@@ -191,6 +191,17 @@ public class RandomGenerator {
      *
      * <p>该方法生成一个从 0 到指定最大值（包括最大值）的随机整数。
      *
+     * @return 生成的随机整数
+     */
+    public static int nextInt() {
+        return nextInt(0, Integer.MAX_VALUE);
+    }
+
+    /**
+     * #brief: 生成指定最大值的随机整数
+     *
+     * <p>该方法生成一个从 0 到指定最大值（包括最大值）的随机整数。
+     *
      * @param max 随机整数的最大值（包括）
      * @return 生成的随机整数
      */

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * `Stream` 是一个工具类，提供了对集合、数组及其他数据源进行流式处理的相关方法。
@@ -46,6 +47,23 @@ import java.util.stream.Collectors;
 public class StreamOperator {
 
     /**
+     * #brief: 根据集合大小配置并返回合适的流（串行或并行）
+     *
+     * <p>该方法根据集合的大小决定是否使用并行流。如果集合的元素数量超过 15000，则使用并行流，
+     * 否则使用串行流。适用于需要根据数据量选择不同性能策略的场景。
+     *
+     * @param collection 待处理的集合
+     * @param <T> 集合中元素的类型
+     * @return 配置后的流，可能是串行流或并行流
+     * @throws NullPointerException 如果集合为空
+     * @see Collection#size()
+     * @see Stream#parallel()
+     */
+    private static <T> Stream<T> configure(Collection<T> collection) {
+        return collection.size() > 15000 ? collection.stream().parallel() : collection.stream();
+    }
+
+    /**
      * #brief: 根据给定条件过滤集合中的元素并返回结果列表
      *
      * <p>该方法接收一个集合和一个过滤条件，返回满足条件的元素列表。适用于需要根据特定规则
@@ -56,13 +74,13 @@ public class StreamOperator {
      * @param <T> 集合中元素的类型
      * @return 过滤后的新列表
      * @throws NullPointerException 如果集合为空或过滤条件为空
-     * @see java.util.stream.Stream#filter(Predicate)
+     * @see Stream#filter(Predicate)
      * @see Collectors#toList()
      */
     public static <T> List<T> filter(Collection<T> collection, Predicate<? super T> predicate) {
         if (Lists.isEmpty(collection))
             return Lists.of();
-        return collection.stream().filter(predicate).collect(Collectors.toList());
+        return configure(collection).filter(predicate).collect(Collectors.toList());
     }
 
 
@@ -78,13 +96,13 @@ public class StreamOperator {
      * @param <R> 映射后结果列表中元素的类型
      * @return 包含映射结果的新列表
      * @throws NullPointerException 如果集合或映射函数为空
-     * @see java.util.stream.Stream#map(Function)
+     * @see Stream#map(Function)
      * @see Collectors#toList()
      */
     public static <T, R> List<R> map(Collection<T> collection, Function<T, R> function) {
         if (Lists.isEmpty(collection))
             return Lists.of();
-        return collection.stream().map(function).collect(Collectors.toList());
+        return configure(collection).map(function).collect(Collectors.toList());
     }
 
     /**
@@ -97,13 +115,13 @@ public class StreamOperator {
      * @param <T> 集合中元素的类型
      * @return 去重后的新列表
      * @throws NullPointerException 如果集合为空
-     * @see java.util.stream.Stream#distinct()
+     * @see Stream#distinct()
      * @see Collectors#toList()
      */
     public static <T> List<T> distinct(Collection<T> collection) {
         if (Lists.isEmpty(collection))
             return Lists.of();
-        return collection.stream().distinct().collect(Collectors.toList());
+        return configure(collection).distinct().collect(Collectors.toList());
     }
 
     /**
@@ -151,13 +169,13 @@ public class StreamOperator {
      * @param <T> 集合中元素的类型
      * @return 排序后的新列表
      * @throws NullPointerException 如果集合为空或比较器为空
-     * @see java.util.stream.Stream#sorted(Comparator)
+     * @see Stream#sorted(Comparator)
      * @see Collectors#toList()
      */
     public static <T> List<T> sorted(Collection<T> collection, Comparator<T> comparator) {
         if (Lists.isEmpty(collection))
             return Lists.of();
-        return collection.stream().sorted(comparator).collect(Collectors.toList());
+        return configure(collection).sorted(comparator).collect(Collectors.toList());
     }
 
     /**
@@ -171,13 +189,13 @@ public class StreamOperator {
      * @param <T> 集合中元素的类型
      * @return 符合条件的元素数量
      * @throws NullPointerException 如果集合为空或过滤条件为空
-     * @see java.util.stream.Stream#filter(Predicate)
-     * @see java.util.stream.Stream#count()
+     * @see Stream#filter(Predicate)
+     * @see Stream#count()
      */
     public static <T> int count(Collection<T> collection, Predicate<? super T> predicate) {
         if (Lists.isEmpty(collection))
             return 0;
-        return (int) collection.stream().filter(predicate).count();
+        return (int) configure(collection).filter(predicate).count();
     }
 
 }
