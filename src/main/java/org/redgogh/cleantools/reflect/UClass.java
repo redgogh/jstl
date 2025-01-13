@@ -29,8 +29,8 @@ import org.redgogh.cleantools.base.Assert;
 import org.redgogh.cleantools.base.BasicConverter;
 import org.redgogh.cleantools.base.Capturer;
 import org.redgogh.cleantools.stream.StreamOperator;
-import org.redgogh.cleantools.collection.Lists;
-import org.redgogh.cleantools.collection.Maps;
+import org.redgogh.cleantools.collect.Lists;
+import org.redgogh.cleantools.collect.Maps;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
