@@ -24,7 +24,7 @@
     </licenses>
 
     <url>https://github.com/redgogh/cleantools</url>
-    <description>Cleantools是一款用于简化繁琐开发工作的工具包，该工具包提供了众多常用的工具类，使得在开发Java的过程中可以像在写Python一样简单。</description>
+    <description>cleantools 是一个标准的 Java 开发工具包，旨在提升开发效率，遵循最佳实践。该项目采用 Maven 进行构建，要求 JDK 版本不低于 1.8，并已发布至 Maven Central，方便在其他项目中直接引入。详细的代码和提交规范文档可在项目中找到，建议在开发前阅读。</description>
 
     <scm>
         <connection>scm:git@github.com:redgogh/cleantools.git</connection>
