@@ -29,6 +29,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jetbrains.annotations.NotNull;
 import org.redgogh.cleantools.reflect.UClass;
 import org.redgogh.cleantools.reflect.UField;
+import org.redgogh.cleantools.stream.StreamOperator;
 import org.redgogh.cleantools.time.DateFormatter;
 
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.base;
+package org.redgogh.cleantools.stream;
 
 import org.redgogh.cleantools.collection.Lists;
 

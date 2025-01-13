@@ -19,7 +19,7 @@ package org.redgogh.cleantools.lang.test;
 \* -------------------------------------------------------------------------------- */
 
 import org.junit.Test;
-import org.redgogh.cleantools.base.StreamOperator;
+import org.redgogh.cleantools.stream.StreamOperator;
 import org.redgogh.cleantools.collection.Lists;
 import org.redgogh.cleantools.generators.RandomGenerator;
 
