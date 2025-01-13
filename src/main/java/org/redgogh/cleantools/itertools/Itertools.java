@@ -12,28 +12,6 @@ import java.util.List;
  * <p>该类中的方法旨在简化对集合或迭代器的常见操作，如配对、分组、排序等。通过简洁的接口，
  * 可以方便地处理迭代器相关的常见任务。
  *
- * <p>主要特点：
- * <ul>
- *     <li>提供了对迭代器和集合的灵活操作方法。</li>
- *     <li>支持泛型操作，增强了方法的适用性和灵活性。</li>
- *     <li>简化了集合或迭代器的处理流程，避免了冗长的代码。</li>
- * </ul>
- *
- * <h2>使用示例</h2>
- * <pre>
- *     // 使用 zip 方法配对两个集合
- *     Iterable<Tuple<String, Integer>> zipped = Itertools.zip(names, ages);
- *
- *     // 通过 map 方法对集合中的元素进行转换
- *     List<String> uppercased = Itertools.map(names, String::toUpperCase);
- * </pre>
- *
- * <h2>注意事项</h2>
- * <ul>
- *     <li>部分方法要求传入的集合或迭代器不能为空。</li>
- *     <li>本类中的所有方法均为静态方法，调用时无需创建对象。</li>
- * </ul>
- *
  * @author RedGogh
  * @since 1.0
  */
