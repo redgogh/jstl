@@ -52,12 +52,12 @@ public class Stream {
      * 过滤不影响原来的集合实例，会将过滤后的新数据移动到一个新的集合中。
      *
      * @param predicate     predicate 函数式接口
-     * @param a             实现了 `Collection` 接口的对象实例
+     * @param collection    实现了 `Collection` 接口的对象实例
      *
      * @return 一个过滤后的新集合对象实例，不影响原有的数据。
      */
-    public static <E> List<E> filter(Collection<E> a, Predicate<? super E> predicate) {
-        return a.stream().filter(predicate).collect(Collectors.toList());
+    public static <T> List<T> filter(Collection<T> collection, Predicate<? super T> predicate) {
+        return collection.stream().filter(predicate).collect(Collectors.toList());
     }
 
 
