@@ -1,6 +1,9 @@
 package org.redgogh.cleantools.base;
 
+import org.redgogh.cleantools.collection.Lists;
+
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -43,20 +46,22 @@ import java.util.stream.Collectors;
 public class Stream {
 
     /**
-     * #brief：通过 `Predicate` Lambda 函数式接口实现集合过滤<p>
+     * #brief: 根据给定条件过滤集合中的元素并返回结果列表
      *
-     * 通过 `Predicate` Lambda 函数式接口实现集合过滤，简化 `stream` 流的
-     * 写法。只需要通过一个函数实现过滤。`Predicate#test`接口如果返回 {@code false}
-     * 表示不过滤，如果返回 {@code true} 表示过滤。<p>
+     * <p>该方法接收一个集合和一个过滤条件，返回满足条件的元素列表。适用于需要根据特定规则
+     * 过滤集合元素的场景。
      *
-     * 过滤不影响原来的集合实例，会将过滤后的新数据移动到一个新的集合中。
-     *
-     * @param predicate     predicate 函数式接口
-     * @param collection    实现了 `Collection` 接口的对象实例
-     *
-     * @return 一个过滤后的新集合对象实例，不影响原有的数据。
+     * @param collection 待处理的集合
+     * @param predicate 过滤条件，指定集合元素需要满足的条件
+     * @param <T> 集合中元素的类型
+     * @return 过滤后的新列表
+     * @throws NullPointerException 如果集合为空或过滤条件为空
+     * @see java.util.stream.Stream#filter(Predicate)
+     * @see Collectors#toList()
      */
     public static <T> List<T> filter(Collection<T> collection, Predicate<? super T> predicate) {
+        if (Lists.isEmpty(collection))
+            return Lists.of();
         return collection.stream().filter(predicate).collect(Collectors.toList());
     }
 
@@ -77,7 +82,82 @@ public class Stream {
      * @see Collectors#toList()
      */
     public static <T, R> List<R> map(Collection<T> collection, Function<T, R> function) {
+        if (Lists.isEmpty(collection))
+            return Lists.of();
         return collection.stream().map(function).collect(Collectors.toList());
+    }
+
+    /**
+     * #brief: 去除集合中的重复元素并返回结果列表
+     *
+     * <p>该方法接收一个集合，去除集合中的重复元素，并返回包含唯一元素的新列表。适用于需要
+     * 保证集合元素唯一性的场景。
+     *
+     * @param collection 待处理的集合
+     * @param <T> 集合中元素的类型
+     * @return 去重后的新列表
+     * @throws NullPointerException 如果集合为空
+     * @see java.util.stream.Stream#distinct()
+     * @see Collectors#toList()
+     */
+    public static <T> List<T> distinct(Collection<T> collection) {
+        if (Lists.isEmpty(collection))
+            return Lists.of();
+        return collection.stream().distinct().collect(Collectors.toList());
+    }
+
+    /**
+     * #brief: 根据自然顺序对集合中的元素进行排序并返回结果列表
+     *
+     * <p>该方法将集合中的元素按自然顺序进行排序，返回排序后的新列表。适用于集合中元素
+     * 已经实现了 {@link Comparable} 接口的情况。
+     *
+     * @param collection 待排序的集合
+     * @param <T> 集合中元素的类型
+     * @return 排序后的新列表
+     * @throws NullPointerException 如果集合为空
+     * @see Comparator#naturalOrder()
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> List<T> sorted(Collection<T> collection) {
+        return sorted(collection, (Comparator<T>) Comparator.naturalOrder());
+    }
+
+    /**
+     * #brief: 根据逆序对集合中的元素进行排序并返回结果列表
+     *
+     * <p>该方法将集合中的元素按逆序进行排序，返回排序后的新列表。适用于集合中元素需要
+     * 按降序排列的场景。
+     *
+     * @param collection 待排序的集合
+     * @param <T> 集合中元素的类型
+     * @return 排序后的新列表
+     * @throws NullPointerException 如果集合为空
+     * @see Comparator#reverseOrder()
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> List<T> reversed(Collection<T> collection) {
+        return sorted(collection, (Comparator<T>) Comparator.reverseOrder());
+    }
+
+    /**
+     * #brief: 根据指定比较器对集合中的元素进行排序并返回结果列表
+     *
+     * <p>该方法将集合中的元素根据指定的比较器进行排序，返回排序后的新列表。适用于需要
+     * 按照自定义规则排序集合元素的场景。
+     *
+     * @param collection 待排序的集合
+     * @param comparator 排序的比较器
+     * @param <T> 集合中元素的类型
+     * @return 排序后的新列表
+     * @throws NullPointerException 如果集合为空或比较器为空
+     * @see java.util.stream.Stream#sorted(Comparator)
+     * @see Collectors#toList()
+     */
+    public static <T> List<T> sorted(Collection<T> collection, Comparator<T> comparator) {
+        if (Lists.isEmpty(collection))
+            return Lists.of();
+        return collection.stream().sorted(comparator).collect(Collectors.toList());
     }
 
 }
