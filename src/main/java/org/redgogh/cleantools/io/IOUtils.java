@@ -22,8 +22,8 @@ package org.redgogh.cleantools.io;
 
 import org.redgogh.cleantools.base.Assert;
 import org.redgogh.cleantools.base.Capturer;
-import org.redgogh.cleantools.exception.IOReadException;
-import org.redgogh.cleantools.exception.IOWriteException;
+import org.redgogh.cleantools.except.IOReadException;
+import org.redgogh.cleantools.except.IOWriteException;
 
 import java.io.*;
 

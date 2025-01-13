@@ -21,7 +21,7 @@ package org.redgogh.cleantools.io;
 import org.redgogh.cleantools.base.Assert;
 import org.redgogh.cleantools.base.Capturer;
 import org.redgogh.cleantools.base.Optional;
-import org.redgogh.cleantools.collection.Lists;
+import org.redgogh.cleantools.collect.Lists;
 import org.redgogh.cleantools.os.OSEnvironment;
 import org.jetbrains.annotations.Nullable;
 

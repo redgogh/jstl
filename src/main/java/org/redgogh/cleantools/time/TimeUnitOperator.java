@@ -22,7 +22,7 @@ package org.redgogh.cleantools.time;
 
 import org.redgogh.cleantools.base.Assert;
 import org.redgogh.cleantools.base.Enumerate;
-import org.redgogh.cleantools.exception.UnsupportedOperationException;
+import org.redgogh.cleantools.except.UnsupportedOperationException;
 import org.joda.time.DateTime;
 
 import java.util.Date;

@@ -1,13 +1,17 @@
-package org.redgogh.cleantools.exception;
+package org.redgogh.cleantools.except;
 
 import org.jetbrains.annotations.NotNull;
 
-public class SerializationException extends SystemRuntimeException {
+/**
+ * @author RedGogh
+ * @since 1.0
+ */
+public class OpenFileDescriptorException extends SystemRuntimeException {
 
     /**
      * 默认构造函数。
      */
-    public SerializationException() {
+    public OpenFileDescriptorException() {
     }
 
     /**
@@ -15,7 +19,7 @@ public class SerializationException extends SystemRuntimeException {
      *
      * @param e 原始异常，不能为 null。
      */
-    public SerializationException(@NotNull Throwable e) {
+    public OpenFileDescriptorException(@NotNull Throwable e) {
         super(e);
     }
 
@@ -25,7 +29,7 @@ public class SerializationException extends SystemRuntimeException {
      * @param vfmt 格式化字符串，不能为 null。
      * @param args 格式化参数。
      */
-    public SerializationException(@NotNull String vfmt, @NotNull Object... args) {
+    public OpenFileDescriptorException(@NotNull String vfmt, @NotNull Object... args) {
         super(vfmt, args);
     }
 
@@ -36,7 +40,7 @@ public class SerializationException extends SystemRuntimeException {
      * @param e 原始异常，不能为 null。
      * @param args 格式化参数。
      */
-    public SerializationException(@NotNull String vfmt, @NotNull Throwable e, @NotNull Object... args) {
+    public OpenFileDescriptorException(@NotNull String vfmt, @NotNull Throwable e, @NotNull Object... args) {
         super(vfmt, e, args);
     }
 }

@@ -1,6 +1,5 @@
-package org.redgogh.cleantools.exception;
+package org.redgogh.cleantools.except;
 
-import org.redgogh.cleantools.base.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import static org.redgogh.cleantools.base.StringUtils.strwfmt;

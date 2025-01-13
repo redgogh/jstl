@@ -19,7 +19,7 @@ package org.redgogh.cleantools.base;
 \* -------------------------------------------------------------------------------- */
 
 import org.redgogh.cleantools.iface.TypeMapper;
-import org.redgogh.cleantools.exception.UnsupportedOperationException;
+import org.redgogh.cleantools.except.UnsupportedOperationException;
 import org.redgogh.cleantools.io.ByteBuffer;
 import org.redgogh.cleantools.reflect.UClass;
 

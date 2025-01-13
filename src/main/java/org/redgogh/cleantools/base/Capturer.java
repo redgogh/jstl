@@ -20,7 +20,7 @@ package org.redgogh.cleantools.base;
 
 import org.redgogh.cleantools.iface.CallableFunction;
 import org.redgogh.cleantools.iface.ActionFunction;
-import org.redgogh.cleantools.exception.AssertException;
+import org.redgogh.cleantools.except.AssertException;
 
 /**
  * @author RedGogh

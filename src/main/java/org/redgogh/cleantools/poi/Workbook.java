@@ -20,8 +20,8 @@ package org.redgogh.cleantools.poi;
 
 import org.redgogh.cleantools.annotations.RowColumn;
 import org.redgogh.cleantools.base.*;
-import org.redgogh.cleantools.collection.Lists;
-import org.redgogh.cleantools.collection.Maps;
+import org.redgogh.cleantools.collect.Lists;
+import org.redgogh.cleantools.collect.Maps;
 import org.redgogh.cleantools.io.MutableFile;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;

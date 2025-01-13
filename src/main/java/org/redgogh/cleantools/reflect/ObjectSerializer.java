@@ -18,7 +18,7 @@ package org.redgogh.cleantools.reflect;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.exception.SerializationException;
+import org.redgogh.cleantools.except.SerializationException;
 import org.redgogh.cleantools.io.FileByteReader;
 import org.redgogh.cleantools.io.FileByteWriter;
 import org.redgogh.cleantools.io.MutableFile;

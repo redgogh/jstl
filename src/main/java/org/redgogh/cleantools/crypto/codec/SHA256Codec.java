@@ -3,7 +3,7 @@ package org.redgogh.cleantools.crypto.codec;
 import org.redgogh.cleantools.base.Capturer;
 import org.redgogh.cleantools.crypto.Crypto;
 import org.redgogh.cleantools.crypto.SHA256;
-import org.redgogh.cleantools.exception.SystemRuntimeException;
+import org.redgogh.cleantools.except.SystemRuntimeException;
 import org.redgogh.cleantools.io.IOUtils;
 import org.redgogh.cleantools.io.MutableFile;
 

@@ -21,7 +21,7 @@ package org.redgogh.cleantools.test;
 import org.redgogh.cleantools.base.Assert;
 import org.redgogh.cleantools.base.Optional;
 import org.junit.Test;
-import org.redgogh.cleantools.exception.AssertException;
+import org.redgogh.cleantools.except.AssertException;
 
 import java.util.ArrayList;
 import java.util.List;

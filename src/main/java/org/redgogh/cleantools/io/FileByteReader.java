@@ -18,7 +18,7 @@ package org.redgogh.cleantools.io;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.exception.IOReadException;
+import org.redgogh.cleantools.except.IOReadException;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;

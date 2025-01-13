@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.collection;
+package org.redgogh.cleantools.collect;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|

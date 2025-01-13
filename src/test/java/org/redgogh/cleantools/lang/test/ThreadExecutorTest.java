@@ -18,7 +18,7 @@ package org.redgogh.cleantools.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.collection.Lists;
+import org.redgogh.cleantools.collect.Lists;
 import org.redgogh.cleantools.generators.RandomGenerator;
 import org.junit.Test;
 

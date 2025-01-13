@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.collection;
+package org.redgogh.cleantools.collect;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -23,8 +23,6 @@ package org.redgogh.cleantools.collection;
 import org.redgogh.cleantools.iface.TypeMapper;
 
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * `Lists` 是一个工具类，提供了各种对集合（特别是 {@link List} 和 {@link Collection}）

@@ -20,7 +20,7 @@ package org.redgogh.cleantools.base;
 
 /* Create on 2019/6/14 */
 
-import org.redgogh.cleantools.exception.InvalidArgumentException;
+import org.redgogh.cleantools.except.InvalidArgumentException;
 import org.redgogh.cleantools.reflect.UClass;
 
 /**
