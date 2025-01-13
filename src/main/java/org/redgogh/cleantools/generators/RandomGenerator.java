@@ -227,6 +227,17 @@ public class RandomGenerator {
      *
      * <p>该方法生成一个从 0 到指定最大值（包括最大值）的随机浮点数。
      *
+     * @return 生成的随机浮点数
+     */
+    public static float nextFloat() {
+        return nextFloat(0, Float.MAX_VALUE);
+    }
+
+    /**
+     * #brief: 生成指定最大值的随机浮点数
+     *
+     * <p>该方法生成一个从 0 到指定最大值（包括最大值）的随机浮点数。
+     *
      * @param max 随机浮点数的最大值（包括）
      * @return 生成的随机浮点数
      */
@@ -245,6 +256,17 @@ public class RandomGenerator {
      */
     public static float nextFloat(float min, float max) {
         return (float) nextDouble(min, max);
+    }
+
+    /**
+     * #brief: 生成指定最大值的随机双精度数
+     *
+     * <p>该方法生成一个从 0 到指定最大值（包括最大值）的随机双精度数。
+     *
+     * @return 生成的随机双精度数
+     */
+    public static double nextDouble() {
+        return nextDouble(0, Double.MAX_VALUE);
     }
 
     /**

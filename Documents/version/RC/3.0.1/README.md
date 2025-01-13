@@ -16,5 +16,6 @@
 - `StringUtils#strclude`更新为`StringUtils#strcont`。
 - `File`更新为`MutableFile`避免与JDK原生File起命名冲突。
 - 移除`Lists#filter`函数，将该函数移动到`Stream#filter`中。
+- `RandomGenerator`整数生成支持无参调用，默认随机范围`0 - MAX_VALUE`。
 
 ## 🐞 BUG 修复
