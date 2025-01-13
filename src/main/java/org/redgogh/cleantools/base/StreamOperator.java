@@ -160,4 +160,24 @@ public class StreamOperator {
         return collection.stream().sorted(comparator).collect(Collectors.toList());
     }
 
+    /**
+     * #brief: 统计集合中符合条件的元素个数
+     *
+     * <p>该方法接收一个集合和一个过滤条件，返回集合中符合条件的元素数量。适用于需要
+     * 根据特定规则统计集合元素数量的场景。
+     *
+     * @param collection 待处理的集合
+     * @param predicate 过滤条件，指定集合元素需要满足的条件
+     * @param <T> 集合中元素的类型
+     * @return 符合条件的元素数量
+     * @throws NullPointerException 如果集合为空或过滤条件为空
+     * @see java.util.stream.Stream#filter(Predicate)
+     * @see java.util.stream.Stream#count()
+     */
+    public static <T> int count(Collection<T> collection, Predicate<? super T> predicate) {
+        if (Lists.isEmpty(collection))
+            return 0;
+        return (int) collection.stream().filter(predicate).count();
+    }
+
 }
