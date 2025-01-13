@@ -20,7 +20,7 @@ package org.redgogh.cleantools.http;
 
 import com.alibaba.fastjson.JSON;
 import org.redgogh.cleantools.base.*;
-import org.redgogh.cleantools.collect.Maps;
+import org.redgogh.cleantools.collection.Maps;
 import org.redgogh.cleantools.except.HttpRequestException;
 import org.redgogh.cleantools.base.Assert;
 import org.redgogh.cleantools.base.Capturer;

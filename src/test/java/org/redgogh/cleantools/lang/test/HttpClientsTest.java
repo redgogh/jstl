@@ -25,7 +25,7 @@ package org.redgogh.cleantools.test;
 
 /* Creates on 2022/8/8. */
 
-import org.redgogh.cleantools.collect.Maps;
+import org.redgogh.cleantools.collection.Maps;
 import org.redgogh.cleantools.http.*;
 import org.redgogh.cleantools.io.MutableFile;
 import org.junit.Test;

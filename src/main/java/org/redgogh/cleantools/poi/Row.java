@@ -19,7 +19,7 @@ package org.redgogh.cleantools.poi;
 \* -------------------------------------------------------------------------------- */
 
 import org.redgogh.cleantools.base.BasicConverter;
-import org.redgogh.cleantools.collect.Lists;
+import org.redgogh.cleantools.collection.Lists;
 import org.redgogh.cleantools.iface.TypeMapper;
 import org.jetbrains.annotations.NotNull;
 

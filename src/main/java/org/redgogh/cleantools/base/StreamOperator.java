@@ -1,6 +1,6 @@
 package org.redgogh.cleantools.base;
 
-import org.redgogh.cleantools.collect.Lists;
+import org.redgogh.cleantools.collection.Lists;
 
 import java.util.Collection;
 import java.util.Comparator;

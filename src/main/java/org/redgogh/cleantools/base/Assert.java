@@ -18,8 +18,8 @@ package org.redgogh.cleantools.base;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.collect.Lists;
-import org.redgogh.cleantools.collect.Maps;
+import org.redgogh.cleantools.collection.Lists;
+import org.redgogh.cleantools.collection.Maps;
 import org.redgogh.cleantools.except.AssertException;
 
 import java.util.Collection;
