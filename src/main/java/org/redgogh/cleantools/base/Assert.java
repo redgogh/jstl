@@ -19,9 +19,11 @@ package org.redgogh.cleantools.base;
 \* -------------------------------------------------------------------------------- */
 
 import org.redgogh.cleantools.collection.Lists;
+import org.redgogh.cleantools.collection.Maps;
 import org.redgogh.cleantools.exception.AssertException;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -101,6 +103,19 @@ public class Assert {
     public static <E> void isEmpty(Collection<E> collection) {
         if (Lists.isEmpty(collection))
             throw new AssertException("collection is empty!");
+    }
+
+    /**
+     * 如果 Map 为空，则抛出断言异常。
+     *
+     * <p>此方法用于检查 Map 的状态，如果 Map 为空，将抛出 {@link AssertException}。
+     *
+     * @param map 要检查的 Map
+     * @throws AssertException 如果 Map 为空
+     */
+    public static <K, V> void isEmpty(Map<K, V> map) {
+        if (Maps.isEmpty(map))
+            throw new AssertException("map is empty!");
     }
 
     /**
