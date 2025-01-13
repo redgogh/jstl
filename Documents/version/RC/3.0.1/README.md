@@ -7,6 +7,7 @@
 - 新增`Stream`工具类，方便简化流式操作。
 - 新增`Stream#map`函数，用于简化映射操作。
 - 新增`Assert#isEmpty`支持 Map 类型判断。
+- 新增`Assert#notEquals`支持自定义异常信息。
 
 ## 👻 优化功能
 
