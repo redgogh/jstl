@@ -60,5 +60,8 @@ build/
 ### Mac OS ###
 .DS_Store
 
+### Rust ###
+Cargo.lock
+
 ### tmp ###
 /tmp
