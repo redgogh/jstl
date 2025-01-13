@@ -21,6 +21,7 @@ package org.redgogh.cleantools.test;
 import org.redgogh.cleantools.base.Assert;
 import org.redgogh.cleantools.base.Optional;
 import org.junit.Test;
+import org.redgogh.cleantools.exception.AssertException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,15 @@ public class AssertTest {
         System.out.printf("-Test: Assert.ifEmpty() object `list` is empty: %s\n", Optional.ifError(() -> Assert.isEmpty(list), "SUCCESS", "ERROR"));
         list.add("Hello");
         System.out.printf("-Test: Assert.ifEmpty() object `list` not empty: %s\n", Optional.ifError(() -> Assert.isEmpty(list), "SUCCESS", "ERROR"));
+    }
+
+    @Test
+    public void throwNullTest() throws Exception {
+        throw new RuntimeException("null");
+    }
+
+    public static void main(String[] args) {
+        throw new AssertException("null");
     }
 
 }

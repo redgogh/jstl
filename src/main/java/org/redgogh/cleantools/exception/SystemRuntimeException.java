@@ -3,6 +3,8 @@ package org.redgogh.cleantools.exception;
 import org.redgogh.cleantools.base.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
+import static org.redgogh.cleantools.base.StringUtils.strwfmt;
+
 /**
  * `SystemRuntimeException` 是一个自定义的运行时异常类，用于在系统中抛出各种运行时异常。
  * 该类继承自 `RuntimeException`，提供了多种构造函数以便根据不同的异常情况创建实例。
@@ -62,7 +64,7 @@ public class SystemRuntimeException extends RuntimeException {
      * @param args 格式化参数。
      */
     public SystemRuntimeException(@NotNull String vfmt, @NotNull Object... args) {
-        super(StringUtils.strwfmt(vfmt, args));
+        super(strwfmt(vfmt, args));
     }
 
     /**
@@ -73,7 +75,7 @@ public class SystemRuntimeException extends RuntimeException {
      * @param args 格式化参数。
      */
     public SystemRuntimeException(@NotNull String vfmt, @NotNull Throwable e, @NotNull Object... args) {
-        super(StringUtils.strwfmt(vfmt, args), e);
+        super(strwfmt(vfmt, args), e);
     }
 }
 
