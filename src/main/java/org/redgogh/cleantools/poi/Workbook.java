@@ -19,10 +19,7 @@ package org.redgogh.cleantools.poi;
 \* -------------------------------------------------------------------------------- */
 
 import org.redgogh.cleantools.annotations.RowColumn;
-import org.redgogh.cleantools.base.BasicConverter;
-import org.redgogh.cleantools.base.Capturer;
-import org.redgogh.cleantools.base.Optional;
-import org.redgogh.cleantools.base.StringUtils;
+import org.redgogh.cleantools.base.*;
 import org.redgogh.cleantools.collection.Lists;
 import org.redgogh.cleantools.collection.Maps;
 import org.redgogh.cleantools.io.MutableFile;
@@ -249,7 +246,7 @@ public class Workbook implements Iterable<Row> {
     public List<Row> getRows() {
         List<Row> retval = Lists.of();
         forEach(retval::add);
-        return Lists.filter(retval, e -> {
+        return Stream.filter(retval, e -> {
             for (String cell : e) {
                 if (StringUtils.strne(cell, "NULL"))
                     return true;

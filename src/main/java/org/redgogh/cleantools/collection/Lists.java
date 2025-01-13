@@ -303,24 +303,6 @@ public class Lists {
     }
 
     /**
-     * #brief：通过 `Predicate` Lambda 函数式接口实现集合过滤<p>
-     *
-     * 通过 `Predicate` Lambda 函数式接口实现集合过滤，简化 `stream` 流的
-     * 写法。只需要通过一个函数实现过滤。`Predicate#test`接口如果返回 {@code false}
-     * 表示不过滤，如果返回 {@code true} 表示过滤。<p>
-     *
-     * 过滤不影响原来的集合实例，会将过滤后的新数据移动到一个新的集合中。
-     *
-     * @param predicate     predicate 函数式接口
-     * @param a             实现了 `Collection` 接口的对象实例
-     *
-     * @return 一个过滤后的新集合对象实例，不影响原有的数据。
-     */
-    public static <E> List<E> filter(Collection<E> a, Predicate<? super E> predicate) {
-        return a.stream().filter(predicate).collect(Collectors.toList());
-    }
-
-    /**
      * #brief：计算两个集合之间的交集部分
      *
      * <p>计算两个集合之间的交集部分，参数 {@code a} 和 {@code b} 是两个
