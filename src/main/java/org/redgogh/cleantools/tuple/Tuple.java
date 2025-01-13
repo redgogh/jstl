@@ -1,5 +1,7 @@
 package org.redgogh.cleantools.tuple;
 
+import static org.redgogh.cleantools.base.BasicConverter.anyeq;
+
 /**
  * `Tuple` 是一个通用的二元元组类，用于存储一对相关联的值。
  *
@@ -81,6 +83,16 @@ public class Tuple<L, R> {
      */
     public R getRight() {
         return right;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @SuppressWarnings("SuspiciousNameCombination")
+    public boolean equals(Tuple<L, R> tuple) {
+        return anyeq(left, tuple.left) && anyeq(right, tuple.right);
     }
 
 }
