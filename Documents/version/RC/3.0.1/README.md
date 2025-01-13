@@ -4,7 +4,7 @@
 
 ## ⭐ 新增新能
 
-- 新增`Stream`工具类，方便简化流式操作。
+- 新增`StreamOperator`工具类，方便简化流式操作。
 - 新增`Assert#isEmpty`支持 Map 类型判断。
 - 新增`Assert#notEquals`支持自定义异常信息。
 

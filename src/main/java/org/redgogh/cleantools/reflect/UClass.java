@@ -28,7 +28,7 @@ package org.redgogh.cleantools.reflect;
 import org.redgogh.cleantools.base.Assert;
 import org.redgogh.cleantools.base.BasicConverter;
 import org.redgogh.cleantools.base.Capturer;
-import org.redgogh.cleantools.base.Stream;
+import org.redgogh.cleantools.base.StreamOperator;
 import org.redgogh.cleantools.collection.Lists;
 import org.redgogh.cleantools.collection.Maps;
 
@@ -241,7 +241,7 @@ public class UClass {
         if (!isFilter)
             return Lists.of(fields.values());
         /* 筛选出修饰符非 static & final 的属性列表 */
-        return Stream.filter(fields.values(), value -> (!value.isStatic() && !value.isFinal()));
+        return StreamOperator.filter(fields.values(), value -> (!value.isStatic() && !value.isFinal()));
     }
 
     /**

@@ -246,7 +246,7 @@ public class Workbook implements Iterable<Row> {
     public List<Row> getRows() {
         List<Row> retval = Lists.of();
         forEach(retval::add);
-        return Stream.filter(retval, e -> {
+        return StreamOperator.filter(retval, e -> {
             for (String cell : e) {
                 if (StringUtils.strne(cell, "NULL"))
                     return true;

@@ -43,7 +43,7 @@ import java.util.stream.Collectors;
  * @see java.util.stream.Stream
  * @since 1.0
  */
-public class Stream {
+public class StreamOperator {
 
     /**
      * #brief: 根据给定条件过滤集合中的元素并返回结果列表
