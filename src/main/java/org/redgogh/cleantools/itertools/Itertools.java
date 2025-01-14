@@ -32,7 +32,7 @@ public class Itertools {
      */
     public static <L, R> Iterable<Tuple<L, R>> zip(Collection<L> lefts, Collection<R> rights) {
         // 计算最小总数
-        int count = lefts == null || rights == null ? 0 : Math.min(lefts.size(), rights.size());
+        int count = (lefts == null || rights == null) ? 0 : Math.min(lefts.size(), rights.size());
 
         if (count == 0)
             return Lists.of();
