@@ -1,11 +1,11 @@
 [package]
-name = "find"
+name = "rust-v"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-clap = "4.0"
+clap = "4.5.26"
 
 [[bin]]
-name = "find"
+name = "rust-v"
 path = "main.rs"
