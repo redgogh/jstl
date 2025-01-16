@@ -15,9 +15,8 @@
 //!
 use std::time::Duration;
 use tokio;
-use std::fs;
 mod web_driver;
-use serde::{Deserialize};
+mod workflows;
 
 /// 异步执行按秒单位休眠
 ///
@@ -27,24 +26,11 @@ macro_rules! sleep_secs_await {
     };
 }
 
-#[derive(Debug, Deserialize)]
-struct Workflows {
-    app: String,
-}
-
-#[derive(Debug, Deserialize)]
-struct WorkflowsConfig {
-    workflows: Workflows,
-}
-
 /// 自动化测试框架入口函数
 ///
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // read workflows config
-    let yaml_file_content = fs::read_to_string("./workflows.yaml")?;
-    let workflows: WorkflowsConfig = serde_yaml::from_str(&yaml_file_content)?;
-    println!("{:#?}", workflows);
+    let cnf = workflows::read_workflows_cnf("./workflows.yaml")?;
 
     // open web client
     let web_client = web_driver::open_web_client("https://tht.changhong.com/#/user/login").await?;

@@ -1,2 +1,23 @@
 workflows:
   app: SCMS-WORK-FLOWS
+
+jobs:
+  testing:
+    - name: "登录"
+      steps:
+        - selector: "input[@id='account']"
+          event: "@set => admin"
+        - selector: "input[@id='password']"
+          event: "@set => sei654321"
+        - selector: "button[span[text() = '登 录']]"
+          event: "@click => _"
+
+    - name: "关闭提示窗口"
+      steps:
+        - selector: "button[span[text() = 'close']]"
+          event: "@click => _"
+
+    - name: "选择合同起草"
+      steps:
+        - selector: "menu[span[text() = 'draft']]"
+          event: "@click => _"
