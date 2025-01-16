@@ -1,9 +1,0 @@
-[package]
-name = "durs-v"
-version = "1.0.0"
-
-[dependencies]
-
-[[bin]]
-name="durs-v"
-path="main.rs"
