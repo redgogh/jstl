@@ -1,21 +1,21 @@
 use std::time::Duration;
 use tokio;
-mod web_driver;
+mod chromedriver;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let driver = web_driver::open_web_driver("https://www.rust-lang.org").await?;
+    let chromeclient = chromedriver::open_web_client("https://www.rust-lang.org").await?;
 
     loop {
-        if driver.is_page_bottom().await {
+        if chromeclient.is_bottom().await {
             break;
         }
 
         tokio::time::sleep(Duration::from_secs(1)).await;
-        driver.scroll_by(1000).await;
+        chromeclient.scroll(1000).await;
     }
 
-    driver.close().await;
+    chromeclient.close().await;
 
     Ok(())
 }
