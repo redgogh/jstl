@@ -17,10 +17,20 @@ use std::time::Duration;
 use tokio;
 mod web_driver;
 
+/// 异步执行按秒单位休眠
+///
+macro_rules! sleep_secs_await {
+    ($expr:expr) => {
+        tokio::time::sleep(Duration::from_secs($expr)).await;
+    };
+}
+
 /// 自动化测试框架入口函数
 ///
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    sleep_secs_await!(5);
+    println!("Hello, world!");
     // open web client
     let web_client = web_driver::open_web_client("https://tht.changhong.com/#/user/login").await?;
 
@@ -28,14 +38,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     web_client.set_value("//input[@id='password']", "sei654321").await?;
     web_client.click("//button[span[text() = '登 录']]").await?;
 
-    tokio::time::sleep(Duration::from_secs(10)).await;
+    sleep_secs_await!(10);
 
     loop {
         if web_client.is_bottom().await {
             break;
         }
 
-        tokio::time::sleep(Duration::from_secs(1)).await;
+        sleep_secs_await!(10);
         web_client.scroll(1000).await;
     }
 

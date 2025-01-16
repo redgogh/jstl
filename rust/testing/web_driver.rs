@@ -74,7 +74,7 @@ impl WebClient {
     /// 关闭客户端驱动
     ///
     pub async fn close(self) {
-        self.client.close().await.expect("Got error");
+        self.client.close().await.expect("[WebClient] 客户端关闭失败");
     }
 
 }
