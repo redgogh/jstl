@@ -1,19 +1,20 @@
-use fantoccini::{Client, Locator};
 use tokio;
-use std::vec::Vec;
+use fantoccini::{Client, ClientBuilder};
+
+async fn open_web_driver(url: &str) -> Result<Client, Box<dyn std::error::Error>>{
+    let client = ClientBuilder::native().connect("http://127.0.0.1:9515").await?;
+    client.goto(url).await?;
+    Ok(client)
+}
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let mut client = Client::new("http://localhost:8080").await?;
-    client.goto("https://tht.changhong.com/#/DashBoard").await?;
+    let client = open_web_driver("https://www.rust-lang.org").await?;
 
-    let _ = client.execute(
-        r#"window.scrollTo(0, document.body.scrollHeight);"#, vec![]
+    client.execute(
+        r#"window.scrollBy({ top: 1000, behavior: 'smooth' });"#,
+        vec![],
     ).await?;
-
-    tokio::time::sleep(std::time::Duration::from_secs(3)).await;
-
-    client.close().await?;
 
     Ok(())
 }
