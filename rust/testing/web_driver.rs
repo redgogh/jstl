@@ -1,10 +1,12 @@
-use fantoccini::{Client, ClientBuilder};
+use fantoccini::{Client, ClientBuilder, Locator};
 
 const CHROME_DRIVER: &str = "http://127.0.0.1:9515";
 
 pub struct WebClient {
     client: Client
 }
+
+
 
 impl WebClient {
     fn new(client: Client) -> Self {
@@ -25,8 +27,20 @@ impl WebClient {
         "#, vec![px.into()]).await.expect("[WebClient] 客户端脚本执行失败");
     }
 
+    pub async fn click(&self, xpath: &str) -> Result<(), Box<dyn std::error::Error>> {
+        let btn = self.client.find(Locator::XPath(xpath)).await?;
+        btn.click().await?;
+        Ok(())
+    }
+
+    pub async fn set_value(&self, xpath: &str, value: &str) -> Result<(), Box<dyn std::error::Error>> {
+        let input = self.client.find(Locator::XPath(xpath)).await?;
+        input.send_keys(value).await?;
+        Ok(())
+    }
+
     pub async fn close(self) {
-        self.client.close().await.expect("[WebClient] 客户端关闭失败");
+        self.client.close().await.expect("Got error");
     }
 
 }
