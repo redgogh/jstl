@@ -15,10 +15,17 @@
 //!
 
 use tokio;
+use crate::workflows::Workflows;
+
 mod web_driver;
+mod workflows;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // load workflows config
+    let workflows = workflows::load(&String::from("./workflows.yaml"))?;
+    println!("{workflows:?}");
+
     // open web client
     let client = web_driver::open_web_client("https://tht.changhong.com/#/user/login").await?;
 
