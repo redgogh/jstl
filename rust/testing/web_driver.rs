@@ -15,6 +15,7 @@
 //!
 use std::time::Duration;
 use fantoccini::{Client, ClientBuilder, Locator};
+use fantoccini::elements::Element;
 
 const CHROME_DRIVER: &str = "http://127.0.0.1:9515";
 
@@ -48,6 +49,11 @@ impl WebClient {
         "#, vec![px.into()]).await.expect("[WebClient] 客户端脚本执行失败");
     }
 
+    pub async fn click_locator(&self, element: &Element) -> Result<(), Box<dyn std::error::Error>> {
+        element.click().await?;
+        Ok(())
+    }
+
     /// 根据 `xpath` 描述获取某个控件并点击
     ///
     /// 方法参数：
@@ -59,15 +65,29 @@ impl WebClient {
         Ok(())
     }
 
+    pub async fn locator(&self, xpath: &str) -> Result<Element, Box<dyn std::error::Error>> {
+        let input = self.client.find(Locator::XPath(xpath)).await?;
+        Ok(input)
+    }
+
     /// 根据 `xpath` 描述获取某个控件并设置控件值
     ///
     /// 方法参数：
     ///  - `xpath`: `XPath` 匹配路径
     ///
-    pub async fn set_value(&self, xpath: &str, value: &str) -> Result<(), Box<dyn std::error::Error>> {
-        let input = self.client.find(Locator::XPath(xpath)).await?;
-        input.send_keys(value).await?;
+    pub async fn locator_set_value(&self, element: &Element, value: &str) -> Result<(), Box<dyn std::error::Error>> {
+        element.send_keys(value).await?;
         tokio::time::sleep(Duration::from_secs(1)).await;
+        Ok(())
+    }
+
+    /// 根据 `xpath` 描述获取某个控件并设置控件值
+    ///
+    /// 方法参数：
+    ///  - `xpath`: `XPath` 匹配路径
+    ///
+    pub async fn xpath_set_value(&self, xpath: &str, value: &str) -> Result<(), Box<dyn std::error::Error>> {
+        self.set_value(self.locator(xpath).await?, value).await?;
         Ok(())
     }
 

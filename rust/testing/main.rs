@@ -14,6 +14,8 @@
 //!    limitations under the License.
 //!
 use std::time::Duration;
+use fantoccini::elements::Element;
+use fantoccini::key::Key::Command;
 use tokio;
 mod web_driver;
 mod workflows;
@@ -30,14 +32,29 @@ macro_rules! sleep_secs_await {
 ///
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let cnf = workflows::read_workflows_cnf("./workflows.yaml")?;
-
     // open web client
     let web_client = web_driver::open_web_client("https://tht.changhong.com/#/user/login").await?;
 
-    web_client.set_value("//input[@id='account']", "admin").await?;
-    web_client.set_value("//input[@id='password']", "sei654321").await?;
-    web_client.click("//button[span[text() = '登 录']]").await?;
+    let cnf = workflows::load_workflows_cnf("./workflows.yaml")?;
+
+    let mut commands: Vec<workflows::Command> = Vec::new();
+
+    for task in cnf.jobs {
+        for cmd in task.commands {
+            let cmd = workflows::cmd_parse(cmd).expect("未知指令");
+            commands.push(cmd);
+        }
+    }
+
+    let mut tab_from_locator: Element;
+
+    for cmd in commands {
+        match cmd.inst {
+            LOC => tab_from_locator = web_client.locator(&cmd.value).await?,
+            SET => web_client.locator_set_value(&tab_from_locator, &cmd.value).await?,
+            CLICK => web_client.click_locator(&tab_from_locator).await?,
+        }
+    }
 
     sleep_secs_await!(10);
 

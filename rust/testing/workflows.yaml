@@ -1,18 +1,12 @@
 workflows:
-  app: SCMS-WORK-FLOWS
+  app: SCMS
 
 jobs:
-  commands:
-    - "@loc input[@id='account']"
-    - "@set 'admin'"
-    - "@loc input[@id='password']"
-    - "@set 'sei654321'"
-    - "@loc button[span[text() = '登 录']]"
-    - "@click"
-    - "@sleep 3"
-
-    - "@loop"
-    - "@loc input[@id='password']"
-    - "@click"
-    - "@sleep 1"
-    - "@end"
+  - name: "login"
+    commands:
+      - "@loc //input[@id='account']"
+      - "@set admin"
+      - "@loc //input[@id='password']"
+      - "@set sei654321"
+      - "@loc //button[span[text() = '登 录']]"
+      - "@click"
