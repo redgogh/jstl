@@ -20,9 +20,9 @@ use serde::{Deserialize, Deserializer};
 
 macro_rules! instruction {
     ($inst:expr, $prefix:expr, $text:expr) => {
-        if $text.start_withs($prefix) {
+        if $text.starts_with($prefix) {
             return Some(
-                Instruction::new($inst, $text.replace($prefix + " ", "", String::from($text)))
+                Inst::new($inst, $text.replace(&($prefix.to_string() + " "), ""), String::from($text))
             );
         }
     };
@@ -43,11 +43,12 @@ struct Job {
     pub name: String,
     #[serde(deserialize_with = "from_enable_bool")]
     pub enable: bool,
+    pub sleep: u64,
     pub insts: Vec<String>,
 }
 
 #[derive(Debug, Deserialize)]
-pub struct Workflows {
+struct Workflows {
     pub name: String,
     pub jobs: Vec<Job>,
 }
@@ -60,19 +61,32 @@ pub enum InstType {
     END,
 }
 
-pub struct Instruction {
-    pub inst: InstType,
+pub struct Inst {
+    pub inst_type: InstType,
     pub value: String,
     pub text: String,
 }
 
-impl Instruction {
-    fn new(inst: InstType, value: String, text: String) -> Self {
-        Self { inst, value, text }
+impl Inst {
+    fn new(inst_type: InstType, value: String, text: String) -> Self {
+        Self { inst_type, value, text }
     }
 }
 
-fn parse_inst(mut text: String) -> Option<Instruction> {
+pub struct Task {
+    pub name: String,
+    pub enable: bool,
+    pub sleep: u64,
+    pub insts: Vec<Inst>,
+}
+
+impl Task {
+    fn new(name: String, enable: bool, sleep: u64) -> Self {
+        Self { name, enable, sleep, insts: Vec::new() }
+    }
+}
+
+fn parse_inst(mut text: String) -> Option<Inst> {
     let text = text.trim();
 
     instruction!(InstType::LOC, "@loc", text);
@@ -84,20 +98,22 @@ fn parse_inst(mut text: String) -> Option<Instruction> {
     None
 }
 
-pub fn load(path: &String) -> Result<Workflows, Box<dyn std::error::Error>> {
+pub fn load(path: &String) -> Result<Vec<Task>, Box<dyn std::error::Error>> {
     let yaml_content = fs::read_to_string(path)?;
     let workflows: Workflows = serde_yaml::from_str(&yaml_content).map_err(|e| Box::new(e))?;
 
-    let mut instructions: Vec<Instruction> = Vec::new();
+    let mut tasks: Vec<Task> = Vec::new();
 
     for job in workflows.jobs {
+        let mut task = Task::new(job.name, job.enable, job.sleep);
         for inst in job.insts {
             match parse_inst(inst) {
-                Some(instruction) => instructions.push(instruction),
-                Err(e) => return Err(Box::new(e)),
+                Some(instruction) => task.insts.push(instruction),
+                None => return Err(Box::new(std::io::Error::new(std::io::ErrorKind::InvalidData, "invalid instruction"))),
             }
         }
+        tasks.push(task);
     }
 
-    Ok(workflows)
+    Ok(tasks)
 }

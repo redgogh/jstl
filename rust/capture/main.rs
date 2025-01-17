@@ -14,45 +14,58 @@
 //!    limitations under the License.
 //!
 
+use std::time::Duration;
+use fantoccini::elements::Element;
 use tokio;
-use crate::workflows::Workflows;
-
 mod web_driver;
 mod workflows;
+
+async fn run_task(task: &workflows::Task, client: &web_driver::WebClient) {
+    let mut curelem: Option<Element> = None;
+
+    for inst in &task.insts {
+        if task.sleep > 0 {
+            tokio::time::sleep(Duration::from_secs(task.sleep)).await;
+        }
+
+        match inst.inst_type {
+            workflows::InstType::LOC => {
+                let element = client.find(&inst.value).await;
+                if let Some(unwrap_element) = element {
+                    curelem = Some(unwrap_element);
+                }
+            },
+            workflows::InstType::SEND => {
+                match curelem {
+                    Some(ref elem) => client.send_text(elem, &inst.value).await
+                        .expect("[INST] SEND 指令执行失败"),
+                    None => panic!("[WebDriver] 当前元素不可用")
+                }
+            },
+            workflows::InstType::CLICK => {
+                match curelem {
+                    Some(ref elem) => client.click(elem).await
+                        .expect("[INST] CLICK 指令执行失败"),
+                    None => panic!("[WebDriver] 当前元素不可用")
+                }
+            },
+            workflows::InstType::LOOP => {},
+            workflows::InstType::END => {},
+        }
+    }
+}
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // load workflows config
-    let workflows = workflows::load(&String::from("./workflows.yaml"))?;
-    println!("{workflows:?}");
-
+    let tasks = workflows::load(&String::from("./workflows.yaml"))?;
     // open web client
-    let client = web_driver::open_web_client("https://tht.changhong.com/#/user/login").await?;
+    // let client = web_driver::open_web_client("https://tht.changhong.com/#/user/login").await?;
+    let client = web_driver::open_web_client("https://github.com/redgogh/cleantools").await?;
 
-    if let Some(account) = client.find("//input[@id='account']").await {
-        client.send_text(&account, "admin").await?;
-    }
-
-    if let Some(account) = client.find("//input[@id='password']").await {
-        client.send_text(&account, "sei654321").await?;
-    }
-
-    if let Some(btn) = client.find("//button[span[text() = '登 录']]").await {
-        client.click(&btn).await?;
-    }
-
-    if let Some(btn) = client.find("//button[@aria-label='Close' and contains(@class, 'ant-modal-close')]").await {
-        client.click(&btn).await?;
-    }
-
-    loop {
-        tokio::time::sleep(std::time::Duration::from_millis(500)).await;
-        match client.find("//button[@aria-label='Close' and contains(@class, 'ant-modal-close')]").await {
-            Some(btn) => {
-                client.click(&btn).await?;
-                break;
-            }
-            None => {}
+    for task in tasks {
+        if task.enable {
+            run_task(&task, &client).await;
         }
     }
 

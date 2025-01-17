@@ -7,11 +7,14 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2fbb31e5-ee0a-4b18-bf80-53f7ea585abb" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/workflows.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/workflows.yaml" afterDir="false" />
+    <list default="true" id="d808bd28-5e44-492c-b393-ab62c188d596" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/workflows-scms.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workflows.rs" beforeDir="false" afterPath="$PROJECT_DIR$/workflows.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workflows.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/workflows.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,64 +22,46 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="RsBuildProfile:dev" />
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Rust File" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="JsbtTreeLayoutManager">
-    <layout place="tools.popupGrunt">
-      <scroll-view-position x="0" y="0" />
-    </layout>
-  </component>
   <component name="MacroExpansionManager">
-    <option name="directoryName" value="UYcsWMg9" />
+    <option name="directoryName" value="XREWMBdx" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
-}</component>
-  <component name="ProjectId" id="2rhXU0IMyxyE31MhcfTumaxnxjd" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2rl9ucQAdeTYdO2hTYPxIHxzNPc" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Cargo.Run capture.executor": "Debug",
-    "Cargo.Run testing.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.rust.reset.selective.auto.import": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/Dev/Projects/MySelf/devtools/rust/capture",
+    "last_opened_file_path": "D:/dev/projects/cleantools/rust/capture",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
-    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
     "org.rust.first.attach.projects": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Dev\Projects\MySelf\devtools\rust\testing\target\debug" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Dev\Projects\MySelf\devtools\rust\testing" />
+      <recent name="D:\dev\projects\cleantools\rust\capture" />
     </key>
   </component>
   <component name="RunManager" selected="Cargo.Run capture">
-    <configuration name="Run capture" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+    <configuration name="Run capture" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
+      <option name="buildProfileId" value="dev" />
       <option name="command" value="run --package capture --bin capture" />
       <option name="workingDirectory" value="file://$PROJECT_DIR$" />
       <envs />
@@ -93,25 +78,7 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Run testing" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
-      <option name="buildProfileId" value="dev" />
-      <option name="command" value="run --package testing --bin testing" />
-      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
-      <envs />
-      <option name="emulateTerminal" value="true" />
-      <option name="channel" value="DEFAULT" />
-      <option name="requiredFeatures" value="true" />
-      <option name="allFeatures" value="false" />
-      <option name="withSudo" value="false" />
-      <option name="buildTarget" value="REMOTE" />
-      <option name="backtrace" value="SHORT" />
-      <option name="isRedirectInput" value="false" />
-      <option name="redirectInputPath" value="" />
-      <method v="2">
-        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Test testing" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
+    <configuration name="Test capture" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
       <option name="command" value="test --workspace" />
       <option name="workingDirectory" value="file://$PROJECT_DIR$" />
       <envs />
@@ -128,31 +95,19 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Cargo.Run capture" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="RustProjectSettings">
     <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="默认任务">
-      <changelist id="2fbb31e5-ee0a-4b18-bf80-53f7ea585abb" name="更改" comment="" />
-      <created>1737012292405</created>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d808bd28-5e44-492c-b393-ab62c188d596" name="Changes" comment="" />
+      <created>1737123017946</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1737012292405</updated>
-      <workItem from="1737012293537" duration="1276000" />
-      <workItem from="1737015781374" duration="698000" />
-      <workItem from="1737016565389" duration="13153000" />
-      <workItem from="1737073999154" duration="2164000" />
-      <workItem from="1737081775107" duration="3747000" />
-      <workItem from="1737099043934" duration="6653000" />
-      <workItem from="1737106764091" duration="39000" />
-      <workItem from="1737106837231" duration="6543000" />
+      <updated>1737123017946</updated>
+      <workItem from="1737123019009" duration="3177000" />
     </task>
     <servers />
   </component>
