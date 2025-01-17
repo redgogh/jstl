@@ -1,0 +1,11 @@
+name: Web Driver CI
+
+jobs:
+  - name: Draft
+    enable: on
+    sleep: 2
+    insts:
+      - "@loc //button[@id=':R55ab:']"
+      - "@click"
+      - "@loc //button[@aria-describedby=':r17:-loading-announcement']"
+      - "@click"
