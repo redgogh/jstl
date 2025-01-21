@@ -18,6 +18,8 @@ package org.redgogh.cleantools.base;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import org.redgogh.cleantools.stream.StreamOperator;
+
 import java.nio.file.FileSystems;
 import java.nio.file.PathMatcher;
 import java.nio.file.Paths;
@@ -72,6 +74,20 @@ public class StringUtils {
     private static final Map<String, Pattern> compiled = new WeakHashMap<>();
 
     private static final Map<String, PathMatcher> pathMatcherCache = new WeakHashMap<>();
+
+    @SuppressWarnings("SwitchStatementWithTooFewBranches")
+    private static String operatorImplements(String source, StringOperator[] operators) {
+        if (operators == null)
+            return source;
+
+        for (StringOperator operator : operators) {
+            switch (operator) {
+                case STRING_OPERATOR_TRIM: source = source.trim();
+                default: continue;
+            }
+        }
+        return source;
+    }
 
     /**
      * 获取字符串的长度。
@@ -129,10 +145,11 @@ public class StringUtils {
      * 大多数字符集。返回的新字符串可以用于不区分大小写的比较。
      *
      * @param wstr 要转换的字符串对象
+     * @param operators 后处理选项
      * @return 转换后的小写字符串；如果输入为 null，则返回 null
      */
-    public static String lowercase(Object wstr) {
-        return atos(wstr, String::toLowerCase);
+    public static String lowercase(Object wstr, StringOperator... operators) {
+        return operatorImplements(atos(wstr, String::toLowerCase), operators);
     }
 
     /**
@@ -142,10 +159,11 @@ public class StringUtils {
      * 大多数字符集。返回的新字符串可以用于不区分大小写的比较。
      *
      * @param wstr 要转换的字符串对象
+     * @param operators 后处理选项
      * @return 转换后的大写字符串；如果输入为 null，则返回 null
      */
-    public static String uppercase(Object wstr) {
-        return atos(wstr, String::toUpperCase);
+    public static String uppercase(Object wstr, StringOperator... operators) {
+        return operatorImplements(atos(wstr, String::toUpperCase), operators);
     }
 
     /**
@@ -219,6 +237,19 @@ public class StringUtils {
     }
 
     /**
+     * #brief: 检查字符串是否包含子串
+     *
+     * <p>将 `wstr` 转换为字符串后，检查它是否包含子串 `cmp`。
+     *
+     * @param wstr 任意对象，会被转换为字符串
+     * @param cmp 要检查的子串
+     * @return 如果 `wstr` 包含 `cmp`，返回 true；否则返回 false
+     */
+    public static boolean strcount(Object wstr, String cmp) {
+        return atos(wstr).contains(cmp);
+    }
+
+    /**
      * 检查字符串是否在指定的列表中。
      *
      * <p>此方法用于确定给定字符串是否存在于多个候选字符串中，适用于
@@ -228,11 +259,13 @@ public class StringUtils {
      * @param list 要检查的字符串列表
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean strcont(Object wstr, Object... list) {
-        if (list == null) return false;
+    public static boolean strcount(Object wstr, Object... list) {
+        if (list == null)
+            return false;
 
         for (Object str : list) {
-            if (streq(wstr, str)) return true;
+            if (streq(wstr, str))
+                return true;
         }
 
         return false;
@@ -247,8 +280,8 @@ public class StringUtils {
      * @param list 要检查的字符串数组
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean strcont(Object wstr, String... list) {
-        return strcont(wstr, (Object[]) list);
+    public static boolean strcount(Object wstr, String... list) {
+        return strcount(wstr, (Object[]) list);
     }
 
     /**
@@ -260,8 +293,21 @@ public class StringUtils {
      * @param list 要检查的字符串集合
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean strcont(Object wstr, Collection<String> list) {
-        return strcont(wstr, list.toArray());
+    public static boolean strcount(Object wstr, Collection<String> list) {
+        return strcount(wstr, list.toArray());
+    }
+
+    /**
+     * #brief: 忽略大小写检查字符串是否包含子串
+     *
+     * <p>将 `wstr` 和 `cmp` 都转换为大写后，检查它们之间是否有包含关系。
+     *
+     * @param wstr 任意对象，会被转换为字符串
+     * @param cmp 要检查的子串
+     * @return 忽略大小写后，如果 `wstr` 包含 `cmp`，返回 true；否则返回 false
+     */
+    public static boolean stricount(Object wstr, String cmp) {
+        return strcount(uppercase(wstr), uppercase(cmp));
     }
 
     /**
@@ -273,12 +319,13 @@ public class StringUtils {
      * @param list 要检查的字符串列表
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean striclude(Object wstr, Object... list) {
-        if (list == null) return false;
+    public static boolean stricount(Object wstr, Object... list) {
+        if (list == null)
+            return false;
 
-        for (Object str : list) {
-            if (streq(uppercase(wstr), uppercase(str))) return true;
-        }
+        for (Object str : list)
+            if (streq(uppercase(wstr), uppercase(str)))
+                return true;
 
         return false;
     }
@@ -292,8 +339,8 @@ public class StringUtils {
      * @param list 要检查的字符串数组
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean striclude(Object wstr, String... list) {
-        return striclude(wstr, (Object[]) list);
+    public static boolean stricount(Object wstr, String... list) {
+        return stricount(wstr, (Object[]) list);
     }
 
     /**
@@ -305,8 +352,8 @@ public class StringUtils {
      * @param list 要检查的字符串集合
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean striclude(Object wstr, Collection<String> list) {
-        return striclude(wstr, list.toArray());
+    public static boolean stricount(Object wstr, Collection<String> list) {
+        return stricount(wstr, list.toArray());
     }
 
     /**
@@ -318,10 +365,11 @@ public class StringUtils {
      * @param wstr 要处理的字符串对象
      * @param regexp 用于匹配的正则表达式
      * @param value 用于替换的字符串
+     * @param operators 后处理选项
      * @return 替换后的字符串
      */
-    public static String strrep(Object wstr, String regexp, String value) {
-        return atos(wstr).replaceAll(regexp, value);
+    public static String strrep(Object wstr, String regexp, String value, StringOperator... operators) {
+        return operatorImplements(atos(wstr).replaceAll(regexp, value), operators);
     }
 
     /**
@@ -334,8 +382,16 @@ public class StringUtils {
      * @param delim 用于拆分的分隔符
      * @return 拆分后的字符串数组
      */
-    public static String[] strtok(Object wstr, String delim) {
-        return atos(wstr).split(delim);
+    public static String[] strtok(Object wstr, String delim, StringOperator... operators) {
+        String[] origins = atos(wstr).split(delim);
+
+        if (operators != null) {
+            for (int i = 0; i < origins.length; i++) {
+                origins[i] = operatorImplements(origins[i], operators);
+            }
+        }
+
+        return origins;
     }
 
     /**
@@ -349,8 +405,8 @@ public class StringUtils {
      * @param len 截取的长度
      * @return 截取后的字符串
      */
-    public static String strcut(Object wstr, int off, int len) {
-        return atos(wstr, off, len);
+    public static String strcut(Object wstr, int off, int len, StringOperator... operators) {
+        return operatorImplements(atos(wstr, off, len), operators);
     }
 
     /**
@@ -365,32 +421,6 @@ public class StringUtils {
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static boolean strdig(Object wstr) {
         return Optional.ifError(() -> Double.parseDouble(atos(wstr)), true, false);
-    }
-
-    /**
-     * #brief: 检查字符串是否包含子串
-     *
-     * <p>将 `wstr` 转换为字符串后，检查它是否包含子串 `cmp`。
-     *
-     * @param wstr 任意对象，会被转换为字符串
-     * @param cmp 要检查的子串
-     * @return 如果 `wstr` 包含 `cmp`，返回 true；否则返回 false
-     */
-    public static boolean strcont(Object wstr, String cmp) {
-        return atos(wstr).contains(cmp);
-    }
-
-    /**
-     * #brief: 忽略大小写检查字符串是否包含子串
-     *
-     * <p>将 `wstr` 和 `cmp` 都转换为大写后，检查它们之间是否有包含关系。
-     *
-     * @param wstr 任意对象，会被转换为字符串
-     * @param cmp 要检查的子串
-     * @return 忽略大小写后，如果 `wstr` 包含 `cmp`，返回 true；否则返回 false
-     */
-    public static boolean stricont(Object wstr, String cmp) {
-        return strcont(uppercase(wstr), uppercase(cmp));
     }
 
     /**
@@ -482,10 +512,11 @@ public class StringUtils {
      * 适用于用户输入的规范化处理。
      *
      * @param wstr 要处理的字符串对象
+     * @param operators 后处理操作
      * @return 去除前后空白后的字符串
      */
-    public static String strip(Object wstr) {
-        return atos(wstr).trim();
+    public static String strip(Object wstr, StringOperator... operators) {
+        return operatorImplements(atos(wstr).trim(), operators);
     }
 
     /**
@@ -497,6 +528,7 @@ public class StringUtils {
      * @param wstr 要处理的字符串对象
      * @return 移除换行符后的字符串
      */
+    @Deprecated
     public static String strxip(Object wstr) {
         return atos(wstr).replaceAll("[\r\n]+", "");
     }
@@ -510,7 +542,7 @@ public class StringUtils {
      * @param obj 要处理的字符串对象
      * @return 转换为驼峰风格后的字符串
      */
-    public static String strlinehmp(Object obj) {
+    public static String strlinehmp(Object obj, StringOperator... operators) {
         char[] charArray = atos(obj).toCharArray();
         StringBuilder buffer = new StringBuilder();
 
@@ -530,7 +562,7 @@ public class StringUtils {
             buffer.append(append);
         }
 
-        return buffer.toString();
+        return operatorImplements(buffer.toString(), operators);
     }
 
 }

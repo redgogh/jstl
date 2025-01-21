@@ -33,8 +33,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static org.redgogh.cleantools.base.BasicConverter.atos;
-import static org.redgogh.cleantools.base.StringUtils.strcont;
+import static org.redgogh.cleantools.base.StringUtils.strcount;
 
 /**
  * `HttpClient` 是一个用于发送 HTTP 请求的客户端工具类。该类支持多种 HTTP 请求方法，
@@ -174,7 +173,7 @@ public class HttpClient {
      * @return 当前 `HttpClient` 实例，以支持链式调用
      */
     public HttpClient setRequestBody(Object object) {
-        if (strcont(method, HttpMethod.GET, HttpMethod.HEAD))
+        if (strcount(method, HttpMethod.GET, HttpMethod.HEAD))
             throw new HttpRequestException("GET 或 HEAD 方法不支持请求主体。");
 
         this.object = object;

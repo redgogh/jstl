@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.redgogh.cleantools.base.StringUtils.strcont;
+import static org.redgogh.cleantools.base.StringUtils.strcount;
 
 /**
  * Bean工具类，方便实现对两个对象之间的属性拷贝，这属于浅拷贝。如果需要
@@ -84,7 +84,7 @@ public class BeanUtils {
         UClass uClass = new UClass(dest);
         for (UField field : uClass.getDeclaredFields()) {
             String name = field.getName();
-            if (ignores.length > 0 && strcont(name, ignores)) {
+            if (ignores.length > 0 && strcount(name, ignores)) {
                 continue;
             }
             UField.copyIgnoreError(src, dest, field.getName());

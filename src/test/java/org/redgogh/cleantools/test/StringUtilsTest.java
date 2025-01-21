@@ -18,21 +18,29 @@ package org.redgogh.cleantools.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.collect.Lists;
-import org.redgogh.cleantools.generators.RandomGenerator;
 import org.junit.Test;
 import org.redgogh.cleantools.base.BasicConverter;
 import org.redgogh.cleantools.base.StringUtils;
+import org.redgogh.cleantools.collect.Lists;
+import org.redgogh.cleantools.generators.RandomGenerator;
 
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import static org.redgogh.cleantools.base.BasicConverter.atos;
+import static org.redgogh.cleantools.base.StringOperator.STRING_OPERATOR_TRIM;
+import static org.redgogh.cleantools.base.StringUtils.strcut;
 
 @SuppressWarnings("ALL")
 public class StringUtilsTest {
+
+    @Test
+    public void operatorsTest() {
+        String redGogh = " Red ";
+        System.out.printf("Not uses operator: <%s>\n", strcut(redGogh, 0, 0));
+        System.out.printf("Uses operator    : <%s>\n", strcut(redGogh, 0, 0, STRING_OPERATOR_TRIM));
+    }
 
     @Test
     public void atosTest() {
@@ -44,7 +52,7 @@ public class StringUtilsTest {
     @Test
     public void strcutExmaple() {
         String author = "Red Gogh";
-        System.out.println(StringUtils.strcut(author, 0, -1));
+        System.out.println(strcut(author, 0, -1));
     }
 
     @Test

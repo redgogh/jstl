@@ -23,6 +23,8 @@ import org.redgogh.cleantools.base.StringUtils;
 import java.util.Date;
 import java.util.Map;
 
+import static org.redgogh.cleantools.base.StringUtils.strrep;
+
 /**
  * `OSEnvironment` 是一个类，用于管理和操作操作系统环境变量。
  *
@@ -88,11 +90,11 @@ public class OSEnvironment {
 
     static {
         // initialize
-        if (StringUtils.stricont(OS_NAME, "Windows"))
+        if (StringUtils.stricount(OS_NAME, "Windows"))
             OS_FLAG = WINDOWS;
-        else if (StringUtils.stricont(OS_NAME, "Linux"))
+        else if (StringUtils.stricount(OS_NAME, "Linux"))
             OS_FLAG = LINUX;
-        else if (StringUtils.stricont(OS_NAME, "Mac"))
+        else if (StringUtils.stricount(OS_NAME, "Mac"))
             OS_FLAG = MACOS;
     }
 
@@ -152,7 +154,7 @@ public class OSEnvironment {
      * @return 返回当前用户的主目录路径，如果 {@code concat} 不为空，则在路径后附加该子路径
      */
     public static String getUserHome(String sub) {
-        String home = StringUtils.strrep(System.getProperty("user.home"), "\\\\", "/");
+        String home = strrep(System.getProperty("user.home"), "\\\\", "/");
         if (sub != null)
             return home + "/" + sub;
         return home;
