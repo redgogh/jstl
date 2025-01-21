@@ -295,7 +295,7 @@ public class BasicConverter {
             return (Boolean) obj;
         if (obj instanceof Number)
             return ((Number) obj).intValue() > 0;
-        String bool = atos(obj, StringUtils::strupper);
+        String bool = atos(obj, StringUtils::uppercase);
         return StringUtils.strxmatch(bool, "TRUE|ON|Y|YES");
     }
 
@@ -307,7 +307,7 @@ public class BasicConverter {
      * 这个函数提供数据处理 Lambda 函数，可通过 Lambda 处理返回数据。示例：
      * <pre>
      *     // 将字符串转为小写
-     *     var str = atos("0xABCDEF", Objects::strlower);
+     *     var str = atos("0xABCDEF", Objects::lowercase);
      * </pre>
      *
      * @param obj

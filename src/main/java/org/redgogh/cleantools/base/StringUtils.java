@@ -58,7 +58,7 @@ import static org.redgogh.cleantools.base.BasicConverter.atos;
  *     int length = StringUtils.strlen("example");
  *
  *     // 字符串转换为小写
- *     String lower = StringUtils.strlower("EXAMPLE");
+ *     String lower = StringUtils.lowercase("EXAMPLE");
  *
  *     // 字符串比较
  *     boolean isEqual = StringUtils.streq("test", "TEST");
@@ -131,7 +131,7 @@ public class StringUtils {
      * @param wstr 要转换的字符串对象
      * @return 转换后的小写字符串；如果输入为 null，则返回 null
      */
-    public static String strlower(Object wstr) {
+    public static String lowercase(Object wstr) {
         return atos(wstr, String::toLowerCase);
     }
 
@@ -144,7 +144,7 @@ public class StringUtils {
      * @param wstr 要转换的字符串对象
      * @return 转换后的大写字符串；如果输入为 null，则返回 null
      */
-    public static String strupper(Object wstr) {
+    public static String uppercase(Object wstr) {
         return atos(wstr, String::toUpperCase);
     }
 
@@ -187,7 +187,7 @@ public class StringUtils {
      * @return 如果两个字符串相等，则返回 true；否则返回 false
      */
     public static boolean strieq(Object a, Object b) {
-        return anyeq(strupper(a), strupper(b));
+        return anyeq(uppercase(a), uppercase(b));
     }
 
     /**
@@ -277,7 +277,7 @@ public class StringUtils {
         if (list == null) return false;
 
         for (Object str : list) {
-            if (streq(strupper(wstr), strupper(str))) return true;
+            if (streq(uppercase(wstr), uppercase(str))) return true;
         }
 
         return false;
@@ -390,7 +390,7 @@ public class StringUtils {
      * @return 忽略大小写后，如果 `wstr` 包含 `cmp`，返回 true；否则返回 false
      */
     public static boolean stricont(Object wstr, String cmp) {
-        return strcont(strupper(wstr), strupper(cmp));
+        return strcont(uppercase(wstr), uppercase(cmp));
     }
 
     /**
@@ -523,7 +523,7 @@ public class StringUtils {
             }
 
             if (next) {
-                append = strupper(c).charAt(0);
+                append = uppercase(c).charAt(0);
                 next = false;
             }
 

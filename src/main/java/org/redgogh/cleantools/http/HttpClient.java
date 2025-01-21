@@ -101,7 +101,7 @@ public class HttpClient {
      * @throws NullPointerException 如果请求方法不受支持
      */
     private HttpClient(String method, String url) {
-        String upperMethod = StringUtils.strupper(method);
+        String upperMethod = StringUtils.uppercase(method);
         this.method = Optional.ifError(() -> HttpMethod.valueOf(upperMethod), null);
         Assert.isNull(this.method, "不支持的请求方式 - %s", this.method.name());
         this.url = url;
