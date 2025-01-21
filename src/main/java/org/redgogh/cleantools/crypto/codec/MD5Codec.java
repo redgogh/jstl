@@ -1,6 +1,6 @@
 package org.redgogh.cleantools.crypto.codec;
 
-import org.redgogh.cleantools.base.StringUtils;
+import org.redgogh.cleantools.string.StringUtils;
 import org.redgogh.cleantools.crypto.MD5;
 import org.redgogh.cleantools.except.SystemRuntimeException;
 

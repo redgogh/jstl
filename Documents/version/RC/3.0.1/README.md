@@ -9,7 +9,7 @@
 - 新增`Assert#notEquals`支持自定义异常信息。
 - 新增`Tuple`元组对象。
 - 新增`Itertools`迭代器操作对象。
-- 新增`STRING_OPERATOR_TRIM`后处理操作，用于去除字符串两端空格。
+- 新增`StringOperator`流水线式批量执行后处理操作。
 
 ## 👻 优化功能
 

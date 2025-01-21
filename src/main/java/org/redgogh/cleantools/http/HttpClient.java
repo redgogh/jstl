@@ -28,12 +28,13 @@ import org.redgogh.cleantools.base.Optional;
 import org.redgogh.cleantools.io.MutableFile;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
+import org.redgogh.cleantools.string.StringUtils;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static org.redgogh.cleantools.base.StringUtils.strcount;
+import static org.redgogh.cleantools.string.StringUtils.strcount;
 
 /**
  * `HttpClient` 是一个用于发送 HTTP 请求的客户端工具类。该类支持多种 HTTP 请求方法，

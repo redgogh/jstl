@@ -20,7 +20,7 @@ package org.redgogh.cleantools.test;
 
 import org.junit.Test;
 import org.redgogh.cleantools.base.BasicConverter;
-import org.redgogh.cleantools.base.StringUtils;
+import org.redgogh.cleantools.string.StringUtils;
 import org.redgogh.cleantools.collect.Lists;
 import org.redgogh.cleantools.generators.RandomGenerator;
 
@@ -29,17 +29,21 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import static org.redgogh.cleantools.base.StringOperator.STRING_OPERATOR_TRIM;
-import static org.redgogh.cleantools.base.StringUtils.strcut;
+import static org.redgogh.cleantools.string.Operator.*;
+import static org.redgogh.cleantools.string.StringUtils.strcut;
 
 @SuppressWarnings("ALL")
 public class StringUtilsTest {
 
     @Test
     public void operatorsTest() {
-        String redGogh = " Red ";
-        System.out.printf("Not uses operator: <%s>\n", strcut(redGogh, 0, 0));
-        System.out.printf("Uses operator    : <%s>\n", strcut(redGogh, 0, 0, STRING_OPERATOR_TRIM));
+        String redGogh = " red_gogh ";
+        System.out.printf("STRING_OPERATOR_TRIM: <%s>\n", strcut(redGogh, 0, 0, STRING_OPERATOR_TRIM));
+        System.out.printf("STRING_OPERATOR_UPPER_CASE: <%s>\n", strcut(redGogh, 0, 0, STRING_OPERATOR_UPPER_CASE));
+        System.out.printf("STRING_OPERATOR_CAPITALIZE: <%s>\n", strcut(redGogh, 0, 0, STRING_OPERATOR_TRIM, STRING_OPERATOR_CAPITALIZE));
+        System.out.printf("STRING_OPERATOR_REVERSE: <%s>\n", strcut(redGogh, 0, 0, STRING_OPERATOR_REVERSE));
+        System.out.printf("STRING_OPERATOR_REMOVE_SPACES: <%s>\n", strcut(redGogh, 0, 0, STRING_OPERATOR_REMOVE_SPACES));
+        System.out.printf("STRING_OPERATOR_LINE_HMP: <%s>\n", strcut(redGogh, 0, 0, STRING_OPERATOR_REMOVE_SPACES, STRING_OPERATOR_LINE_HMP));
     }
 
     @Test

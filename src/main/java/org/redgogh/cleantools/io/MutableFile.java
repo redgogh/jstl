@@ -30,7 +30,7 @@ import java.net.URI;
 import java.nio.file.Path;
 import java.util.List;
 
-import static org.redgogh.cleantools.base.StringUtils.*;
+import static org.redgogh.cleantools.string.StringUtils.*;
 
 /**
  * 扩展了 `java.io.File` 的自定义文件类，提供了增强的文件操作功能。

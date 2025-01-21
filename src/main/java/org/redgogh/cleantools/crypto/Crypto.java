@@ -27,7 +27,7 @@ package org.redgogh.cleantools.crypto;
 
 import org.redgogh.cleantools.base.BasicConverter;
 import org.redgogh.cleantools.base.Capturer;
-import org.redgogh.cleantools.base.StringUtils;
+import org.redgogh.cleantools.string.StringUtils;
 import org.redgogh.cleantools.crypto.codec.*;
 
 import javax.crypto.KeyGenerator;

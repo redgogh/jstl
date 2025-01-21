@@ -23,7 +23,7 @@ package org.redgogh.cleantools.reflect;
 import org.redgogh.cleantools.base.Assert;
 import org.redgogh.cleantools.base.Capturer;
 import org.redgogh.cleantools.base.Optional;
-import org.redgogh.cleantools.base.StringUtils;
+import org.redgogh.cleantools.string.StringUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

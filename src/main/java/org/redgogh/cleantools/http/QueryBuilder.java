@@ -21,7 +21,7 @@ package org.redgogh.cleantools.http;
 /* Creates on 2023/6/26. */
 
 import org.redgogh.cleantools.base.BasicConverter;
-import org.redgogh.cleantools.base.StringUtils;
+import org.redgogh.cleantools.string.StringUtils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

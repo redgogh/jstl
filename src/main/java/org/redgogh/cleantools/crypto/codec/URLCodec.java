@@ -1,7 +1,7 @@
 package org.redgogh.cleantools.crypto.codec;
 
 import org.redgogh.cleantools.base.Capturer;
-import org.redgogh.cleantools.base.StringUtils;
+import org.redgogh.cleantools.string.StringUtils;
 import org.redgogh.cleantools.crypto.URL;
 
 import java.io.UnsupportedEncodingException;

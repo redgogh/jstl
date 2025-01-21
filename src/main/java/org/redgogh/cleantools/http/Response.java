@@ -21,7 +21,7 @@ package org.redgogh.cleantools.http;
 import com.alibaba.fastjson.JSONObject;
 import org.redgogh.cleantools.base.BasicConverter;
 import org.redgogh.cleantools.base.Optional;
-import org.redgogh.cleantools.base.StringUtils;
+import org.redgogh.cleantools.string.StringUtils;
 import org.redgogh.cleantools.io.ByteBuffer;
 import org.redgogh.cleantools.io.IOUtils;
 import okhttp3.Headers;
