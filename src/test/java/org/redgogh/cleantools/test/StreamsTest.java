@@ -19,7 +19,7 @@ package org.redgogh.cleantools.test;
 \* -------------------------------------------------------------------------------- */
 
 import org.junit.Test;
-import org.redgogh.cleantools.stream.StreamOperator;
+import org.redgogh.cleantools.stream.Streams;
 import org.redgogh.cleantools.collect.Lists;
 import org.redgogh.cleantools.generators.RandomGenerator;
 
@@ -28,7 +28,7 @@ import java.util.List;
 import static org.redgogh.cleantools.os.OSEnvironment.time;
 
 @SuppressWarnings("ALL")
-public class StreamOperatorTest {
+public class StreamsTest {
 
     @Test
     public void parallelTest() {
@@ -37,7 +37,7 @@ public class StreamOperatorTest {
             objects.add(RandomGenerator.nextInt());
 
         long start = time();
-        System.out.println(StreamOperator.count(objects, o -> o > 1024 && o < Integer.MAX_VALUE));
+        System.out.println(Streams.count(objects, o -> o > 1024 && o < Integer.MAX_VALUE));
         long end = time();
         System.out.printf("非并行计算耗时：%sms\n", (end - start));
     }

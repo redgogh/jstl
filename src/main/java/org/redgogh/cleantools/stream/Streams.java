@@ -44,7 +44,7 @@ import java.util.stream.Stream;
  * @see java.util.stream.Stream
  * @since 1.0
  */
-public class StreamOperator {
+public class Streams {
 
     /**
      * #brief: 根据集合大小配置并返回合适的流（串行或并行）

@@ -29,7 +29,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jetbrains.annotations.NotNull;
 import org.redgogh.cleantools.reflect.UClass;
 import org.redgogh.cleantools.reflect.UField;
-import org.redgogh.cleantools.stream.StreamOperator;
+import org.redgogh.cleantools.stream.Streams;
 import org.redgogh.cleantools.string.StringUtils;
 import org.redgogh.cleantools.time.DateFormatter;
 
@@ -248,7 +248,7 @@ public class Workbook implements Iterable<Row> {
     public List<Row> getRows() {
         List<Row> retval = Lists.of();
         forEach(retval::add);
-        return StreamOperator.filter(retval, e -> {
+        return Streams.filter(retval, e -> {
             for (String cell : e) {
                 if (StringUtils.strne(cell, "NULL"))
                     return true;
