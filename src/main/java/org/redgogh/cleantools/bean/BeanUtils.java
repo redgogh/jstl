@@ -33,9 +33,6 @@ import static org.redgogh.cleantools.string.StringUtils.strcount;
  * Bean工具类，方便实现对两个对象之间的属性拷贝，这属于浅拷贝。如果需要
  * 深拷贝，可以使用 JSON 工具类实现对象的深拷贝。
  *
- * <p>注意这个类中的不遵循 Java 规范。可以在无 Getter/Setter
- * 函数下对对象实现浅拷贝。
- *
  * @author RedGogh
  */
 public class BeanUtils {

@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.itertools;
+package org.redgogh.cleantools.iter;
 
 import org.redgogh.cleantools.collect.Lists;
 import org.redgogh.cleantools.tuple.Tuple;
