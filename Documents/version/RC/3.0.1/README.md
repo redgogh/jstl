@@ -22,5 +22,6 @@
 - `strlower`重命名为`lowercase`。
 - `strcont`重命名为`strcount`。
 - `stricont`重命名为`stricount`。
+- `Assert#isEmpty`新增更多的参数。
 
 ## 🐞 BUG 修复

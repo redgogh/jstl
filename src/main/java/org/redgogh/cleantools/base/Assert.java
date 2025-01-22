@@ -26,6 +26,8 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 
+import static org.redgogh.cleantools.string.StringUtils.strempty;
+
 /**
  * 运行时断言工具类，这个类断言失败后并不会直接停止整个程序，而是会将所有失败的断言
  * 信息作为 Runtime 异常抛出。
@@ -101,8 +103,20 @@ public class Assert {
      * @throws AssertException 如果集合为空
      */
     public static <E> void isEmpty(Collection<E> collection) {
+        isEmpty(collection, "collection is empty!");
+    }
+
+    /**
+     * 如果集合为空，则抛出断言异常。
+     *
+     * <p>此方法用于检查集合的状态，如果集合为空，将抛出 {@link AssertException}。
+     *
+     * @param collection 要检查的集合
+     * @throws AssertException 如果集合为空
+     */
+    public static <E> void isEmpty(Collection<E> collection, String fmt, Object... args) {
         if (Lists.isEmpty(collection))
-            throw new AssertException("collection is empty!");
+            throw new AssertException(fmt, args);
     }
 
     /**
@@ -114,9 +128,47 @@ public class Assert {
      * @throws AssertException 如果 Map 为空
      */
     public static <K, V> void isEmpty(Map<K, V> map) {
-        if (Maps.isEmpty(map))
-            throw new AssertException("map is empty!");
+        isEmpty(map, "map is empty!");
     }
+
+    /**
+     * 如果 Map 为空，则抛出断言异常。
+     *
+     * <p>此方法用于检查 Map 的状态，如果 Map 为空，将抛出 {@link AssertException}。
+     *
+     * @param map 要检查的 Map
+     * @throws AssertException 如果 Map 为空
+     */
+    public static <K, V> void isEmpty(Map<K, V> map, String fmt, Object... args) {
+        if (Maps.isEmpty(map))
+            throw new AssertException(fmt, args);
+    }
+
+    /**
+     * 如果字符串为空，则抛出断言异常。
+     *
+     * <p>此方法用于检查字符串的状态，如果字符串为空，将抛出 {@link AssertException}。
+     *
+     * @param source 要检查的字符串
+     * @throws AssertException 如果字符串为 null 或空字符串
+     */
+    public static void isEmpty(String source) {
+        isEmpty(source, "string is null or empty!");
+    }
+
+    /**
+     * 如果字符串为空，则抛出断言异常。
+     *
+     * <p>此方法用于检查字符串的状态，如果字符串为空，将抛出 {@link AssertException}。
+     *
+     * @param source 要检查的字符串
+     * @throws AssertException 如果字符串为 null 或空字符串
+     */
+    public static void isEmpty(String source, String fmt, Object... args) {
+        if (strempty(source))
+            throw new AssertException(fmt, args);
+    }
+
 
     /**
      * 检查给定条件是否为 null，如果是，则抛出断言异常。

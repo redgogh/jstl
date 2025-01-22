@@ -23,11 +23,7 @@ venv
 __pycache__
 
 ### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/plat/
-.idea/workspace.xml
+.idea
 *.iws
 *.iml
 *.ipr
