@@ -3,7 +3,7 @@ package org.redgogh.devtools.except;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * `AssertException` 是一个自定义的断言异常类，继承自 `SystemRuntimeException`。
+ * `AssertException` 是一个自定义的断言异常类，继承自 `CentralRuntimeException`。
  * 用于在程序中断言条件失败时抛出异常，以便快速定位和处理程序逻辑错误。
  *
  * <h2>使用场景</h2>
@@ -37,7 +37,7 @@ import org.jetbrains.annotations.NotNull;
  * @author RedGogh
  * @since 1.0
  */
-public class AssertException extends SystemRuntimeException {
+public class AssertException extends CentralRuntimeException {
 
     /**
      * 默认构造函数。

@@ -26,10 +26,8 @@ package org.redgogh.devtools.reflect;
 /* Creates on 2019/5/16. */
 
 import org.redgogh.devtools.base.Assert;
-import org.redgogh.devtools.base.BasicConverter;
 import org.redgogh.devtools.base.Capturer;
-import org.redgogh.devtools.base.Optional;
-import org.redgogh.devtools.except.SystemRuntimeException;
+import org.redgogh.devtools.except.CentralRuntimeException;
 import org.redgogh.devtools.stream.Streams;
 import org.redgogh.devtools.collect.Lists;
 import org.redgogh.devtools.collect.Maps;
@@ -191,12 +189,12 @@ public class UClass {
      * 检查类中是否存在指定的方法。
      *
      * <p>该方法通过方法名和参数类型检查指定类是否定义了对应的方法。如果找到匹配的方法，返回 `true`；
-     * 如果没有找到，返回 `false`。如果遇到安全异常，则抛出 {@link SystemRuntimeException}。
+     * 如果没有找到，返回 `false`。如果遇到安全异常，则抛出 {@link CentralRuntimeException}。
      *
      * @param callMethod    方法名称
      * @param parameterTypes 方法的参数类型
      * @return 如果方法存在则返回 `true`，否则返回 `false`
-     * @throws SystemRuntimeException 如果发生安全异常
+     * @throws CentralRuntimeException 如果发生安全异常
      */
     public boolean hasMethod(String callMethod, Class<?>... parameterTypes) {
         try {
@@ -205,7 +203,7 @@ public class UClass {
         } catch (NoSuchMethodException e) {
             return false;
         } catch (SecurityException e) {
-            throw new SystemRuntimeException(e);
+            throw new CentralRuntimeException(e);
         }
     }
 

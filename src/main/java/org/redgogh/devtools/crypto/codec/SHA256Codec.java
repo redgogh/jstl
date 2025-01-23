@@ -3,7 +3,7 @@ package org.redgogh.devtools.crypto.codec;
 import org.redgogh.devtools.base.Capturer;
 import org.redgogh.devtools.crypto.Crypto;
 import org.redgogh.devtools.crypto.SHA256;
-import org.redgogh.devtools.except.SystemRuntimeException;
+import org.redgogh.devtools.except.CentralRuntimeException;
 import org.redgogh.devtools.io.IOUtils;
 import org.redgogh.devtools.io.MutableFile;
 
@@ -44,7 +44,7 @@ public class SHA256Codec implements SHA256 {
             messageDigest.update(source);
             return Crypto.toByteHex(messageDigest.digest());
         } catch (Exception e) {
-            throw new SystemRuntimeException(e);
+            throw new CentralRuntimeException(e);
         }
     }
 

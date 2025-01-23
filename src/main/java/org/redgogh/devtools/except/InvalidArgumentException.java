@@ -3,7 +3,7 @@ package org.redgogh.devtools.except;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * `InvalidArgumentException` 是一个自定义的非法参数异常类，继承自 `SystemRuntimeException`。
+ * `InvalidArgumentException` 是一个自定义的非法参数异常类，继承自 `CentralRuntimeException`。
  * 用于在方法或函数调用中，当传入的参数不合法或不符合预期时抛出。
  *
  * <h2>使用场景</h2>
@@ -37,7 +37,7 @@ import org.jetbrains.annotations.NotNull;
  * @author RedGogh
  * @since 1.0
  */
-public class InvalidArgumentException extends SystemRuntimeException {
+public class InvalidArgumentException extends CentralRuntimeException {
 
     /**
      * 默认构造函数。

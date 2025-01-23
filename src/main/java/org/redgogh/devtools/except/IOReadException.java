@@ -3,7 +3,7 @@ package org.redgogh.devtools.except;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * `IOReadException` 是一个自定义的 I/O 读取异常类，继承自 `SystemRuntimeException`。
+ * `IOReadException` 是一个自定义的 I/O 读取异常类，继承自 `CentralRuntimeException`。
  * 当在进行 I/O 读取操作时发生错误或异常情况时，可以抛出此异常以便更好地处理和定位问题。
  *
  * <h2>使用场景</h2>
@@ -37,7 +37,7 @@ import org.jetbrains.annotations.NotNull;
  * @author RedGogh
  * @since 1.0
  */
-public class IOReadException extends SystemRuntimeException {
+public class IOReadException extends CentralRuntimeException {
 
     /**
      * 默认构造函数。

@@ -3,7 +3,7 @@ package org.redgogh.devtools.except;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * `UnsupportedOperationException` 是一个自定义的异常类，继承自 `SystemRuntimeException`。
+ * `UnsupportedOperationException` 是一个自定义的异常类，继承自 `CentralRuntimeException`。
  * 当操作不被支持或无法实现时，可以抛出此异常以表明该操作无法完成。
  *
  * <h2>使用场景</h2>
@@ -37,7 +37,7 @@ import org.jetbrains.annotations.NotNull;
  * @author RedGogh
  * @since 1.0
  */
-public class UnsupportedOperationException extends SystemRuntimeException {
+public class UnsupportedOperationException extends CentralRuntimeException {
 
     /**
      * 默认构造函数。

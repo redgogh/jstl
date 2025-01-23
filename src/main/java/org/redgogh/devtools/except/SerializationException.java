@@ -2,7 +2,7 @@ package org.redgogh.devtools.except;
 
 import org.jetbrains.annotations.NotNull;
 
-public class SerializationException extends SystemRuntimeException {
+public class SerializationException extends CentralRuntimeException {
 
     /**
      * 默认构造函数。

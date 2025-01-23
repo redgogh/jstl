@@ -3,7 +3,7 @@ package org.redgogh.devtools.except;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * `HttpRequestException` 是一个自定义的 HTTP 请求异常类，继承自 `SystemRuntimeException`。
+ * `HttpRequestException` 是一个自定义的 HTTP 请求异常类，继承自 `CentralRuntimeException`。
  * 用于在处理 HTTP 请求时出现错误或异常情况时抛出。
  *
  * <h2>使用场景</h2>
@@ -37,7 +37,7 @@ import org.jetbrains.annotations.NotNull;
  * @author RedGogh
  * @since 1.0
  */
-public class HttpRequestException extends SystemRuntimeException {
+public class HttpRequestException extends CentralRuntimeException {
 
     /**
      * 默认构造函数。
