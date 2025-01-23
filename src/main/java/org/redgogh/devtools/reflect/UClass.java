@@ -39,6 +39,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
+import static org.redgogh.devtools.base.BasicConverter.anycount;
+
 /**
  * `UClass` 是一个用于处理 Java 类元数据的工具类。它封装了一个 `Class` 对象，并提供了一些方法来
  * 访问和操作该类的属性和方法。可以通过该类实例化对象、获取类的属性列表以及调用静态方法等。
@@ -420,7 +422,7 @@ public class UClass {
     public boolean isPrimitiveCheck() {
         if (descriptor.isPrimitive())
             return true;
-        return BasicConverter.anyclude(descriptor, Short.class, Integer.class, Long.class,
+        return anycount(descriptor, Short.class, Integer.class, Long.class,
                 Float.class, Double.class, Character.class, Boolean.class);
     }
 

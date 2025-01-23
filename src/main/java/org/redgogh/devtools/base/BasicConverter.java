@@ -99,7 +99,7 @@ public class BasicConverter {
      * @param anys 要比较的一组对象
      * @return 如果目标对象与提供的任意一个对象相等，则返回 true；否则返回 false
      */
-    public static boolean anyclude(Object a, Object... anys) {
+    public static boolean anycount(Object a, Object... anys) {
         for (Object b : anys) {
             if (anyeq(a, b))
                 return true;
