@@ -3,9 +3,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <name>Dev Tools</name>
 
     <groupId>io.github.redgogh</groupId>
-    <artifactId>cleantools</artifactId>
+    <artifactId>devtools</artifactId>
     <version>3.0.1</version>
 
     <developers>
@@ -24,7 +25,7 @@
     </licenses>
 
     <url>https://github.com/redgogh/cleantools</url>
-    <description>cleantools 是一个标准的 Java 开发工具包，旨在提升开发效率，遵循最佳实践。该项目采用 Maven 进行构建，要求 JDK 版本不低于 1.8，并已发布至 Maven Central，方便在其他项目中直接引入。详细的代码和提交规范文档可在项目中找到，建议在开发前阅读。</description>
+    <description>DevTools 是 Red Gogh 提供的一个核心扩展库，它可以与任何项目做集成，帮助团队完善项目开发规范，简化重复性工作。包含：集合操作、字符串，I/O 等一系列工具库。</description>
 
     <scm>
         <connection>scm:git@github.com:redgogh/cleantools.git</connection>
