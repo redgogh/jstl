@@ -39,7 +39,7 @@ public class Optional {
      * @param <T> 值的类型
      * @return 如果 {@code value} 为 null，则返回 {@code orNull}，否则返回 {@code value}
      */
-    public static <T> T ifNull(T value, T orNull) {
+    public static <T> T ifNullable(T value, T orNull) {
         return value == null ? orNull : value;
     }
 

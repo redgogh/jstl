@@ -12,3 +12,4 @@
 
 - `anyclude`更新为`anycount`。
 - `BeanUtils#copyProperties`支持`set/get`方法拷贝。
+- `Optional#ifNull`命名更新为`Optional#ifNullable`
