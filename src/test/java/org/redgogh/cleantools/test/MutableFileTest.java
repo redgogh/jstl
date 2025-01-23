@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.test;
+package org.redgogh.devtools.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,10 +18,10 @@ package org.redgogh.cleantools.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.io.MutableFile;
+import org.redgogh.devtools.io.MutableFile;
 import org.junit.Test;
 
-import static org.redgogh.cleantools.base.BasicConverter.atos;
+import static org.redgogh.devtools.base.BasicConverter.atos;
 
 @SuppressWarnings("ALL")
 public class MutableFileTest {

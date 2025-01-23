@@ -1,7 +1,7 @@
-package org.redgogh.cleantools.thread;
+package org.redgogh.devtools.thread;
 
-import org.redgogh.cleantools.os.OSEnvironment;
-import org.redgogh.cleantools.time.TimeUnitOperator;
+import org.redgogh.devtools.os.OSEnvironment;
+import org.redgogh.devtools.time.TimeUnitOperator;
 
 import java.util.concurrent.*;
 

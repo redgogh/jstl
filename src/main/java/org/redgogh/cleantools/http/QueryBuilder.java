@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.http;
+package org.redgogh.devtools.http;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -20,13 +20,13 @@ package org.redgogh.cleantools.http;
 
 /* Creates on 2023/6/26. */
 
-import org.redgogh.cleantools.base.BasicConverter;
-import org.redgogh.cleantools.string.StringUtils;
+import org.redgogh.devtools.base.BasicConverter;
+import org.redgogh.devtools.string.StringUtils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static org.redgogh.cleantools.base.BasicConverter.atos;
+import static org.redgogh.devtools.base.BasicConverter.atos;
 
 /**
  * `QueryBuilder` 是一个继承自 `LinkedHashMap<String, String>` 的类，用于构建 HTTP 请求的查询参数。

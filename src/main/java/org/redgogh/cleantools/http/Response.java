@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.http;
+package org.redgogh.devtools.http;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -19,17 +19,17 @@ package org.redgogh.cleantools.http;
 \* -------------------------------------------------------------------------------- */
 
 import com.alibaba.fastjson.JSONObject;
-import org.redgogh.cleantools.base.BasicConverter;
-import org.redgogh.cleantools.base.Optional;
-import org.redgogh.cleantools.string.StringUtils;
-import org.redgogh.cleantools.io.ByteBuffer;
-import org.redgogh.cleantools.io.IOUtils;
+import org.redgogh.devtools.base.BasicConverter;
+import org.redgogh.devtools.base.Optional;
+import org.redgogh.devtools.string.StringUtils;
+import org.redgogh.devtools.io.ByteBuffer;
+import org.redgogh.devtools.io.IOUtils;
 import okhttp3.Headers;
 import okhttp3.ResponseBody;
 
 import java.util.Map;
 
-import static org.redgogh.cleantools.base.BasicConverter.atos;
+import static org.redgogh.devtools.base.BasicConverter.atos;
 
 /**
  * `Response` 是一个继承自 `JSONObject` 的类，用于表示一个包含状态码和数据的响应对象。

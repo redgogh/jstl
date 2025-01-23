@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.io;
+package org.redgogh.devtools.io;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -20,7 +20,7 @@ package org.redgogh.cleantools.io;
 
 /* Creates on 2023/5/8. */
 
-import org.redgogh.cleantools.base.ArrayUtils;
+import org.redgogh.devtools.base.ArrayUtils;
 
 /**
  * @author RedGogh

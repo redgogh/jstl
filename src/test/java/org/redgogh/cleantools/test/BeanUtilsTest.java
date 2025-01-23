@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.test;
+package org.redgogh.devtools.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,7 +18,7 @@ package org.redgogh.cleantools.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.bean.BeanUtils;
+import org.redgogh.devtools.bean.BeanUtils;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")

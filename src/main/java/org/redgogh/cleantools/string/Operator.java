@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.string;
+package org.redgogh.devtools.string;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,8 +18,8 @@ package org.redgogh.cleantools.string;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import static org.redgogh.cleantools.base.BasicConverter.atos;
-import static org.redgogh.cleantools.string.StringUtils.*;
+import static org.redgogh.devtools.base.BasicConverter.atos;
+import static org.redgogh.devtools.string.StringUtils.*;
 
 /**
  * 定义字符串操作类型的枚举类。

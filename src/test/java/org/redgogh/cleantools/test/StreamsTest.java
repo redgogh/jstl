@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.test;
+package org.redgogh.devtools.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -19,13 +19,13 @@ package org.redgogh.cleantools.test;
 \* -------------------------------------------------------------------------------- */
 
 import org.junit.Test;
-import org.redgogh.cleantools.stream.Streams;
-import org.redgogh.cleantools.collect.Lists;
-import org.redgogh.cleantools.generators.RandomGenerator;
+import org.redgogh.devtools.stream.Streams;
+import org.redgogh.devtools.collect.Lists;
+import org.redgogh.devtools.generators.RandomGenerator;
 
 import java.util.List;
 
-import static org.redgogh.cleantools.os.OSEnvironment.time;
+import static org.redgogh.devtools.os.OSEnvironment.time;
 
 @SuppressWarnings("ALL")
 public class StreamsTest {

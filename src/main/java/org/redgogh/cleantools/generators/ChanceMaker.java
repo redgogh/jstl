@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.generators;
+package org.redgogh.devtools.generators;
 
 /**
  * `ChanceMaker` 是一个用于生成随机概率的工具类，提供了基于概率的幸运检测功能。

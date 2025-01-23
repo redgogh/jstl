@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.base;
+package org.redgogh.devtools.base;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -20,8 +20,8 @@ package org.redgogh.cleantools.base;
 
 /* Creates on 2023/4/29. */
 
-import org.redgogh.cleantools.iface.CallableFunction;
-import org.redgogh.cleantools.iface.ActionFunction;
+import org.redgogh.devtools.iface.CallableFunction;
+import org.redgogh.devtools.iface.ActionFunction;
 
 /**
  * @author RedGogh

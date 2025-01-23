@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.test;
+package org.redgogh.devtools.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,10 +18,10 @@ package org.redgogh.cleantools.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.generators.ChanceMaker;
+import org.redgogh.devtools.generators.ChanceMaker;
 import org.junit.Test;
 
-import static org.redgogh.cleantools.io.IOUtils.stdout;
+import static org.redgogh.devtools.io.IOUtils.stdout;
 
 @SuppressWarnings("ALL")
 public class ChanceMakerTest {

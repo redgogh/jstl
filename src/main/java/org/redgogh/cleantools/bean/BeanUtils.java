@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.bean;
+package org.redgogh.devtools.bean;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -20,14 +20,14 @@ package org.redgogh.cleantools.bean;
 
 /* Creates on 2023/4/29. */
 
-import org.redgogh.cleantools.reflect.UClass;
-import org.redgogh.cleantools.reflect.UField;
+import org.redgogh.devtools.reflect.UClass;
+import org.redgogh.devtools.reflect.UField;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.redgogh.cleantools.string.StringUtils.strcount;
+import static org.redgogh.devtools.string.StringUtils.strcount;
 
 /**
  * Bean工具类，方便实现对两个对象之间的属性拷贝，这属于浅拷贝。如果需要

@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.generators;
+package org.redgogh.devtools.generators;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|

@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.http;
+package org.redgogh.devtools.http;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,9 +18,9 @@ package org.redgogh.cleantools.http;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.base.Assert;
-import org.redgogh.cleantools.io.MutableFile;
-import org.redgogh.cleantools.io.IOUtils;
+import org.redgogh.devtools.base.Assert;
+import org.redgogh.devtools.io.MutableFile;
+import org.redgogh.devtools.io.IOUtils;
 import okhttp3.ResponseBody;
 
 import java.io.Closeable;

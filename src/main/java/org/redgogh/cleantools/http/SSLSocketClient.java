@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.http;
+package org.redgogh.devtools.http;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,7 +18,7 @@ package org.redgogh.cleantools.http;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.except.SystemRuntimeException;
+import org.redgogh.devtools.except.SystemRuntimeException;
 
 import javax.net.ssl.*;
 import java.security.KeyStore;

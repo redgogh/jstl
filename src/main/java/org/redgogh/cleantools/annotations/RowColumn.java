@@ -1,6 +1,6 @@
-package org.redgogh.cleantools.annotations;
+package org.redgogh.devtools.annotations;
 
-import org.redgogh.cleantools.time.DateFormatter;
+import org.redgogh.devtools.time.DateFormatter;
 
 import java.lang.annotation.*;
 

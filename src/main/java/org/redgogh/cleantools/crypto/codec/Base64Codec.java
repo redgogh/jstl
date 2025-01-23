@@ -1,9 +1,9 @@
-package org.redgogh.cleantools.crypto.codec;
+package org.redgogh.devtools.crypto.codec;
 
-import org.redgogh.cleantools.base.BasicConverter;
-import org.redgogh.cleantools.crypto.Base64;
+import org.redgogh.devtools.base.BasicConverter;
+import org.redgogh.devtools.crypto.Base64;
 
-import static org.redgogh.cleantools.base.BasicConverter.atos;
+import static org.redgogh.devtools.base.BasicConverter.atos;
 
 /**
  * @author RedGogh

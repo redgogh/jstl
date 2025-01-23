@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.string;
+package org.redgogh.devtools.string;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,7 +18,7 @@ package org.redgogh.cleantools.string;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.base.Optional;
+import org.redgogh.devtools.base.Optional;
 
 import java.nio.file.FileSystems;
 import java.nio.file.PathMatcher;
@@ -28,8 +28,8 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.regex.Pattern;
 
-import static org.redgogh.cleantools.base.BasicConverter.anyeq;
-import static org.redgogh.cleantools.base.BasicConverter.atos;
+import static org.redgogh.devtools.base.BasicConverter.anyeq;
+import static org.redgogh.devtools.base.BasicConverter.atos;
 
 /**
  * `StringUtils` 是一个工具类，提供了一系列针对字符串的操作方法。这些方法用于处理

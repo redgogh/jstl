@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.test;
+package org.redgogh.devtools.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,8 +18,8 @@ package org.redgogh.cleantools.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.collect.Lists;
-import org.redgogh.cleantools.generators.RandomGenerator;
+import org.redgogh.devtools.collect.Lists;
+import org.redgogh.devtools.generators.RandomGenerator;
 import org.junit.Test;
 
 import java.util.List;

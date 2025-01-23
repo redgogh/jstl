@@ -1,6 +1,6 @@
-package org.redgogh.cleantools.crypto;
+package org.redgogh.devtools.crypto;
 
-import org.redgogh.cleantools.crypto.codec.SHA256Codec;
+import org.redgogh.devtools.crypto.codec.SHA256Codec;
 
 import java.io.File;
 

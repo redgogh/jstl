@@ -1,14 +1,14 @@
-package org.redgogh.cleantools.crypto.codec;
+package org.redgogh.devtools.crypto.codec;
 
-import org.redgogh.cleantools.base.BasicConverter;
-import org.redgogh.cleantools.base.Capturer;
-import org.redgogh.cleantools.crypto.AES;
-import org.redgogh.cleantools.crypto.Crypto;
+import org.redgogh.devtools.base.BasicConverter;
+import org.redgogh.devtools.base.Capturer;
+import org.redgogh.devtools.crypto.AES;
+import org.redgogh.devtools.crypto.Crypto;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-import static org.redgogh.cleantools.base.BasicConverter.atos;
+import static org.redgogh.devtools.base.BasicConverter.atos;
 
 /**
  * @author RedGogh

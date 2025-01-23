@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.test;
+package org.redgogh.devtools.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -20,7 +20,7 @@ package org.redgogh.cleantools.test;
 
 import org.junit.Test;
 
-import static org.redgogh.cleantools.base.BasicConverter.atobool;
+import static org.redgogh.devtools.base.BasicConverter.atobool;
 
 @SuppressWarnings("ALL")
 public class RedGoghTest {

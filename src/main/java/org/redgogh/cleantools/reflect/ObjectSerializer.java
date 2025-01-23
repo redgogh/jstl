@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.reflect;
+package org.redgogh.devtools.reflect;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,10 +18,10 @@ package org.redgogh.cleantools.reflect;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.except.SerializationException;
-import org.redgogh.cleantools.io.FileByteReader;
-import org.redgogh.cleantools.io.FileByteWriter;
-import org.redgogh.cleantools.io.MutableFile;
+import org.redgogh.devtools.except.SerializationException;
+import org.redgogh.devtools.io.FileByteReader;
+import org.redgogh.devtools.io.FileByteWriter;
+import org.redgogh.devtools.io.MutableFile;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

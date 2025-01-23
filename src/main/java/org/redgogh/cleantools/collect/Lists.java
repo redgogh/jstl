@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.collect;
+package org.redgogh.devtools.collect;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -20,7 +20,7 @@ package org.redgogh.cleantools.collect;
 
 /* Creates on 2023/5/6. */
 
-import org.redgogh.cleantools.iface.TypeMapper;
+import org.redgogh.devtools.iface.TypeMapper;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.iface;
+package org.redgogh.devtools.iface;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|

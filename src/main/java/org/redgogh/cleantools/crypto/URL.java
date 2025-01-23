@@ -1,6 +1,6 @@
-package org.redgogh.cleantools.crypto;
+package org.redgogh.devtools.crypto;
 
-import org.redgogh.cleantools.crypto.codec.URLCodec;
+import org.redgogh.devtools.crypto.codec.URLCodec;
 
 /**
  * `URL` 接口定义了用于进行 URL 编码和解码的方法，

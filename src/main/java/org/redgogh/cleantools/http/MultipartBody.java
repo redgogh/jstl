@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.http;
+package org.redgogh.devtools.http;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|

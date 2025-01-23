@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.test;
+package org.redgogh.devtools.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -25,14 +25,14 @@ package org.redgogh.cleantools.test;
 
 /* Creates on 2022/8/8. */
 
-import org.redgogh.cleantools.collect.Maps;
-import org.redgogh.cleantools.http.*;
-import org.redgogh.cleantools.io.MutableFile;
+import org.redgogh.devtools.collect.Maps;
+import org.redgogh.devtools.http.*;
+import org.redgogh.devtools.io.MutableFile;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.redgogh.cleantools.io.IOUtils.stdout;
+import static org.redgogh.devtools.io.IOUtils.stdout;
 
 @SuppressWarnings("ALL")
 public class HttpClientsTest {

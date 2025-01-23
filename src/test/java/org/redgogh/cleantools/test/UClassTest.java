@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.test;
+package org.redgogh.devtools.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,8 +18,8 @@ package org.redgogh.cleantools.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.reflect.UClass;
-import org.redgogh.cleantools.reflect.UField;
+import org.redgogh.devtools.reflect.UClass;
+import org.redgogh.devtools.reflect.UField;
 import org.junit.Test;
 
 import java.awt.*;

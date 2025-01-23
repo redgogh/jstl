@@ -7,7 +7,7 @@
 
     <groupId>io.github.redgogh</groupId>
     <artifactId>devtools</artifactId>
-    <version>3.0.1</version>
+    <version>v3.0.1-beta.1+build</version>
 
     <developers>
         <developer>
@@ -24,13 +24,13 @@
         </license>
     </licenses>
 
-    <url>https://github.com/redgogh/cleantools</url>
+    <url>https://github.com/redgogh/devtools</url>
     <description>DevTools 是 Red Gogh 提供的一个核心扩展库，它可以与任何项目做集成，帮助团队完善项目开发规范，简化重复性工作。包含：集合操作、字符串，I/O 等一系列工具库。</description>
 
     <scm>
-        <connection>scm:git@github.com:redgogh/cleantools.git</connection>
-        <developerConnection>scm:git@github.com:redgogh/cleantools.git</developerConnection>
-        <url>https://github.com/redgogh/cleantools</url>
+        <connection>scm:git@github.com:redgogh/devtools.git</connection>
+        <developerConnection>scm:git@github.com:redgogh/devtools.git</developerConnection>
+        <url>https://github.com/redgogh/devtools</url>
     </scm>
 
     <properties>

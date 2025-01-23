@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.base;
+package org.redgogh.devtools.base;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,9 +18,9 @@ package org.redgogh.cleantools.base;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.iface.CallableFunction;
-import org.redgogh.cleantools.iface.ActionFunction;
-import org.redgogh.cleantools.except.AssertException;
+import org.redgogh.devtools.iface.CallableFunction;
+import org.redgogh.devtools.iface.ActionFunction;
+import org.redgogh.devtools.except.AssertException;
 
 /**
  * @author RedGogh

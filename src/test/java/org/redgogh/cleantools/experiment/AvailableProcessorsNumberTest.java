@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.experiment;
+package org.redgogh.devtools.experiment;
 
 import org.junit.Test;
 

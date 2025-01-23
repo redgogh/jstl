@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.os;
+package org.redgogh.devtools.os;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,12 +18,12 @@ package org.redgogh.cleantools.os;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.string.StringUtils;
+import org.redgogh.devtools.string.StringUtils;
 
 import java.util.Date;
 import java.util.Map;
 
-import static org.redgogh.cleantools.string.StringUtils.strrep;
+import static org.redgogh.devtools.string.StringUtils.strrep;
 
 /**
  * `OSEnvironment` 是一个类，用于管理和操作操作系统环境变量。

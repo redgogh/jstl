@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.test;
+package org.redgogh.devtools.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -19,18 +19,18 @@ package org.redgogh.cleantools.test;
 \* -------------------------------------------------------------------------------- */
 
 import org.junit.Test;
-import org.redgogh.cleantools.base.BasicConverter;
-import org.redgogh.cleantools.string.StringUtils;
-import org.redgogh.cleantools.collect.Lists;
-import org.redgogh.cleantools.generators.RandomGenerator;
+import org.redgogh.devtools.base.BasicConverter;
+import org.redgogh.devtools.string.StringUtils;
+import org.redgogh.devtools.collect.Lists;
+import org.redgogh.devtools.generators.RandomGenerator;
 
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import static org.redgogh.cleantools.string.Operator.*;
-import static org.redgogh.cleantools.string.StringUtils.strcut;
+import static org.redgogh.devtools.string.Operator.*;
+import static org.redgogh.devtools.string.StringUtils.strcut;
 
 @SuppressWarnings("ALL")
 public class StringUtilsTest {

@@ -1,8 +1,8 @@
-package org.redgogh.cleantools.except;
+package org.redgogh.devtools.except;
 
 import org.jetbrains.annotations.NotNull;
 
-import static org.redgogh.cleantools.string.StringUtils.strwfmt;
+import static org.redgogh.devtools.string.StringUtils.strwfmt;
 
 /**
  * `SystemRuntimeException` 是一个自定义的运行时异常类，用于在系统中抛出各种运行时异常。

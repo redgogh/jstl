@@ -61,7 +61,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let tasks = workflows::load(&String::from("./workflows.yaml"))?;
     // open web client
     // let client = web_driver::open_web_client("https://tht.changhong.com/#/user/login").await?;
-    let client = web_driver::open_web_client("https://github.com/redgogh/cleantools").await?;
+    let client = web_driver::open_web_client("https://github.com/redgogh/devtools").await?;
 
     for task in tasks {
         if task.enable {

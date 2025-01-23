@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.test;
+package org.redgogh.devtools.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -22,7 +22,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.redgogh.cleantools.base.BasicConverter.atob;
+import static org.redgogh.devtools.base.BasicConverter.atob;
 
 @SuppressWarnings("ALL")
 public class BasicConverterTest {

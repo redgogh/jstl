@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.http;
+package org.redgogh.devtools.http;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -19,22 +19,22 @@ package org.redgogh.cleantools.http;
 \* -------------------------------------------------------------------------------- */
 
 import com.alibaba.fastjson.JSON;
-import org.redgogh.cleantools.base.*;
-import org.redgogh.cleantools.collect.Maps;
-import org.redgogh.cleantools.except.HttpRequestException;
-import org.redgogh.cleantools.base.Assert;
-import org.redgogh.cleantools.base.Capturer;
-import org.redgogh.cleantools.base.Optional;
-import org.redgogh.cleantools.io.MutableFile;
+import org.redgogh.devtools.base.*;
+import org.redgogh.devtools.collect.Maps;
+import org.redgogh.devtools.except.HttpRequestException;
+import org.redgogh.devtools.base.Assert;
+import org.redgogh.devtools.base.Capturer;
+import org.redgogh.devtools.base.Optional;
+import org.redgogh.devtools.io.MutableFile;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
-import org.redgogh.cleantools.string.StringUtils;
+import org.redgogh.devtools.string.StringUtils;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static org.redgogh.cleantools.string.StringUtils.strcount;
+import static org.redgogh.devtools.string.StringUtils.strcount;
 
 /**
  * `HttpClient` 是一个用于发送 HTTP 请求的客户端工具类。该类支持多种 HTTP 请求方法，
@@ -258,7 +258,7 @@ public class HttpClient {
      *
      * @return 响应对象 `Response`
      */
-    public org.redgogh.cleantools.http.Response newCall() {
+    public org.redgogh.devtools.http.Response newCall() {
         return newCall(null);
     }
 
@@ -272,7 +272,7 @@ public class HttpClient {
      * @return 响应对象 `Response`
      * @throws HttpRequestException 如果请求发送失败
      */
-    public org.redgogh.cleantools.http.Response newCall(org.redgogh.cleantools.http.Callback callback) {
+    public org.redgogh.devtools.http.Response newCall(org.redgogh.devtools.http.Callback callback) {
         try (okhttp3.Response response = newCall0(callback)) {
             return newCallResponse(response);
         } catch (IOException e) {
@@ -312,7 +312,7 @@ public class HttpClient {
 
         /* async */
         if (callback != null) {
-            if (callback instanceof org.redgogh.cleantools.http.Callback)
+            if (callback instanceof org.redgogh.devtools.http.Callback)
                 async(call, (StreamCallback) callback);
 
             if (callback instanceof StreamCallback)
@@ -336,8 +336,8 @@ public class HttpClient {
         RequestBody requestBody = null;
 
         /* is MultipartBody. */
-        if (object instanceof org.redgogh.cleantools.http.MultipartBody) {
-            org.redgogh.cleantools.http.MultipartBody multipartBody = (org.redgogh.cleantools.http.MultipartBody) object;
+        if (object instanceof org.redgogh.devtools.http.MultipartBody) {
+            org.redgogh.devtools.http.MultipartBody multipartBody = (org.redgogh.devtools.http.MultipartBody) object;
 
             /* okhttp MultipartBody */
             okhttp3.MultipartBody.Builder builder = new okhttp3.MultipartBody.Builder()
@@ -407,9 +407,9 @@ public class HttpClient {
     /**
      * 处理响应
      */
-    private org.redgogh.cleantools.http.Response newCallResponse(okhttp3.Response okResponse) throws IOException {
+    private org.redgogh.devtools.http.Response newCallResponse(okhttp3.Response okResponse) throws IOException {
         /* response */
-        org.redgogh.cleantools.http.Response retval = new org.redgogh.cleantools.http.Response(okResponse.code(), okResponse.headers(), okResponse.body());
+        org.redgogh.devtools.http.Response retval = new org.redgogh.devtools.http.Response(okResponse.code(), okResponse.headers(), okResponse.body());
 
         Assert.isFalse(okResponse.isSuccessful(), "HTTP请求出错（%s）\n    - URL：%s \n    - Request Body：%s \n    - Message: %s",
                 okResponse.code(), url, JSON.toJSONString(object), retval);
@@ -417,7 +417,7 @@ public class HttpClient {
         return retval;
     }
 
-    private void async(Call call, org.redgogh.cleantools.http.Callback callback) {
+    private void async(Call call, org.redgogh.devtools.http.Callback callback) {
         call.enqueue(new okhttp3.Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {

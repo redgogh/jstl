@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.test;
+package org.redgogh.devtools.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,8 +18,8 @@ package org.redgogh.cleantools.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.io.MutableFile;
-import org.redgogh.cleantools.reflect.ObjectSerializer;
+import org.redgogh.devtools.io.MutableFile;
+import org.redgogh.devtools.reflect.ObjectSerializer;
 import org.junit.Test;
 
 import java.io.Serializable;

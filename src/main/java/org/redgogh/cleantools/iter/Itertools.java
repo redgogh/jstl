@@ -1,7 +1,7 @@
-package org.redgogh.cleantools.iter;
+package org.redgogh.devtools.iter;
 
-import org.redgogh.cleantools.collect.Lists;
-import org.redgogh.cleantools.tuple.Tuple;
+import org.redgogh.devtools.collect.Lists;
+import org.redgogh.devtools.tuple.Tuple;
 
 import java.util.Collection;
 import java.util.List;

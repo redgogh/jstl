@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.base;
+package org.redgogh.devtools.base;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,15 +18,15 @@ package org.redgogh.cleantools.base;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.cleantools.collect.Lists;
-import org.redgogh.cleantools.collect.Maps;
-import org.redgogh.cleantools.except.AssertException;
+import org.redgogh.devtools.collect.Lists;
+import org.redgogh.devtools.collect.Maps;
+import org.redgogh.devtools.except.AssertException;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 
-import static org.redgogh.cleantools.string.StringUtils.strempty;
+import static org.redgogh.devtools.string.StringUtils.strempty;
 
 /**
  * 运行时断言工具类，这个类断言失败后并不会直接停止整个程序，而是会将所有失败的断言

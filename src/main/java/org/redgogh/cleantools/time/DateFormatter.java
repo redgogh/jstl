@@ -1,4 +1,4 @@
-package org.redgogh.cleantools.time;
+package org.redgogh.devtools.time;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -20,7 +20,7 @@ package org.redgogh.cleantools.time;
 
 /* Creates on 2022/3/30. */
 
-import org.redgogh.cleantools.base.Capturer;
+import org.redgogh.devtools.base.Capturer;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

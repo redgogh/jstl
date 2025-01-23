@@ -1,6 +1,6 @@
-package org.redgogh.cleantools.crypto;
+package org.redgogh.devtools.crypto;
 
-import org.redgogh.cleantools.crypto.codec.Base64Codec;
+import org.redgogh.devtools.crypto.codec.Base64Codec;
 
 /**
  * `Base64` 接口定义了用于进行 Base64 编码和解码的方法。
