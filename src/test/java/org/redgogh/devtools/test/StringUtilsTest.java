@@ -29,7 +29,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import static org.redgogh.devtools.string.Operator.*;
+import static org.redgogh.devtools.string.StringOperator.*;
 import static org.redgogh.devtools.string.StringUtils.strcut;
 
 @SuppressWarnings("ALL")

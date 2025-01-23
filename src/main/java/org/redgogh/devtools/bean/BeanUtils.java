@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.redgogh.devtools.string.StringUtils.strcount;
+import static org.redgogh.devtools.string.StringUtils.*;
 
 /**
  * Bean工具类，方便实现对两个对象之间的属性拷贝，这属于浅拷贝。如果需要
@@ -71,20 +71,34 @@ public class BeanUtils {
     }
 
     /**
-     * 将 [src] 对象中的属性拷贝到 [dest] 对象中。
+     * 将 [src] 对象中的属性拷贝到 [dst] 对象中。
      *
      * @param src    源对象实例
-     * @param dest   目标对象实例
+     * @param dst   目标对象实例
      * @param ignores 被忽略的属性名
      */
-    public static void copyProperties(Object src, Object dest, String... ignores) {
-        UClass uClass = new UClass(dest);
-        for (UField field : uClass.getDeclaredFields()) {
+    public static void copyProperties(Object src, Object dst, String... ignores) {
+        UClass dstClass = new UClass(dst);
+        for (UField field : dstClass.getDeclaredFields()) {
             String name = field.getName();
-            if (ignores.length > 0 && strcount(name, ignores)) {
+            if (ignores.length > 0 && strcount(name, ignores))
                 continue;
+            copyValue(src, new UClass(src), dst, dstClass, field);
+        }
+    }
+
+    /** 拷贝数据 */
+    private static void copyValue(Object src, UClass srcClass, Object dst, UClass dstClass, UField dstField) {
+        String setMethod = "set" + strcap(dstField.getName());
+        String getMethod = "get" + strcap(dstField.getName());
+        if (dstClass.hasMethod(setMethod, dstField.getOriginType())) {
+            if (srcClass.hasMethod(getMethod)) {
+                dstClass.invoke(dst, setMethod, srcClass.invoke(src, getMethod));
+            } else {
+                UField srcField = srcClass.getDeclaredField(dstField.getName());
+                if (srcField != null)
+                    dstClass.invoke(dst, setMethod, srcField.read(src));
             }
-            UField.copyIgnoreError(src, dest, field.getName());
         }
     }
 

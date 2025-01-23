@@ -198,4 +198,42 @@ public class Streams {
         return (int) configure(collection).filter(predicate).count();
     }
 
+    /**
+     * #brief: 判断集合中是否有元素符合指定条件
+     *
+     * <p>该方法检查集合中是否至少有一个元素满足给定的条件。如果集合为空，返回 false。
+     * 适用于需要检查集合中是否有符合条件的元素的场景。
+     *
+     * @param collection 待检查的集合
+     * @param predicate 过滤条件，指定集合元素需要满足的条件
+     * @param <T> 集合中元素的类型
+     * @return 如果集合中有元素符合条件，则返回 true；否则返回 false
+     * @throws NullPointerException 如果集合为空或过滤条件为空
+     * @see Stream#anyMatch(Predicate)
+     */
+    public static <T> boolean anyMatch(Collection<T> collection, Predicate<? super T> predicate) {
+        if (Lists.isEmpty(collection))
+            return false;
+        return configure(collection).anyMatch(predicate);
+    }
+
+    /**
+     * #brief: 判断集合中是否没有任何元素符合指定条件
+     *
+     * <p>该方法检查集合中是否没有任何元素满足给定的条件。如果集合为空，返回 false。
+     * 适用于需要检查集合中是否没有符合条件的元素的场景。
+     *
+     * @param collection 待检查的集合
+     * @param predicate 过滤条件，指定集合元素需要满足的条件
+     * @param <T> 集合中元素的类型
+     * @return 如果集合中没有元素符合条件，则返回 true；否则返回 false
+     * @throws NullPointerException 如果集合为空或过滤条件为空
+     * @see Stream#noneMatch(Predicate)
+     */
+    public static <T> boolean noneMatch(Collection<T> collection, Predicate<? super T> predicate) {
+        if (Lists.isEmpty(collection))
+            return false;
+        return configure(collection).noneMatch(predicate);
+    }
+
 }

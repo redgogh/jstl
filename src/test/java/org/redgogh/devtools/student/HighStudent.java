@@ -1,4 +1,4 @@
-package org.redgogh.devtools.test;
+package org.redgogh.devtools.student;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,21 +18,26 @@ package org.redgogh.devtools.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.alibaba.fastjson.JSON;
-import org.redgogh.devtools.bean.BeanUtils;
-import org.junit.Test;
-import org.redgogh.devtools.student.HighStudent;
-import org.redgogh.devtools.student.PrimaryStudent;
+public class HighStudent {
 
-@SuppressWarnings("ALL")
-public class BeanUtilsTest {
+    private String name;
 
-    @Test
-    public void copyPropertiesTest() {
-        PrimaryStudent judy = new PrimaryStudent();
-        judy.setAge(18);
+    private Integer age;
 
-        System.out.println(JSON.toJSONString(BeanUtils.copyProperties(judy, HighStudent.class)));
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
 }

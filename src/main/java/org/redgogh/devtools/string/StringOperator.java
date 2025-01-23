@@ -40,7 +40,7 @@ import static org.redgogh.devtools.string.StringUtils.*;
  * @author RedGogh
  * @since 1.0
  */
-public enum Operator {
+public enum StringOperator {
 
     /**
      * 字符串修剪操作，去除字符串前后的空白字符

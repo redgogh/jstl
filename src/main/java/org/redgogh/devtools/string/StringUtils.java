@@ -84,7 +84,7 @@ public class StringUtils {
      * <h2>功能特点</h2>
      * <ul>
      *     <li>支持对字符串进行按需操作（例如修剪空白字符）。</li>
-     *     <li>通过枚举类型 {@link Operator} 扩展支持更多操作。</li>
+     *     <li>通过枚举类型 {@link StringOperator} 扩展支持更多操作。</li>
      * </ul>
      *
      * <h2>使用示例</h2>
@@ -97,11 +97,11 @@ public class StringUtils {
      * @param operators 要应用的字符串操作数组
      * @return 操作后的字符串
      */
-    private static String pipelineExecutor(String source, Operator[] operators) {
+    private static String pipelineExecutor(String source, StringOperator[] operators) {
         if (operators == null)
             return source;
 
-        for (Operator operator : operators)
+        for (StringOperator operator : operators)
             source = operator.apply(source);
 
         return source;
@@ -166,7 +166,7 @@ public class StringUtils {
      * @param operators 后处理选项
      * @return 转换后的小写字符串；如果输入为 null，则返回 null
      */
-    public static String lowercase(Object wstr, Operator... operators) {
+    public static String lowercase(Object wstr, StringOperator... operators) {
         return pipelineExecutor(atos(wstr, String::toLowerCase), operators);
     }
 
@@ -180,8 +180,25 @@ public class StringUtils {
      * @param operators 后处理选项
      * @return 转换后的大写字符串；如果输入为 null，则返回 null
      */
-    public static String uppercase(Object wstr, Operator... operators) {
+    public static String uppercase(Object wstr, StringOperator... operators) {
         return pipelineExecutor(atos(wstr, String::toUpperCase), operators);
+    }
+
+
+    /**
+     * 将字符串的首字母大写，并根据指定的操作数组执行进一步的字符串处理。
+     *
+     * <p>该方法将传入的字符串的首字母转换为大写，并根据提供的操作数组（如修剪、转换大小写等）对字符串进行处理。
+     * 通过 {@link StringOperator} 枚举支持链式操作。
+     *
+     * @param wstr      需要处理的字符串对象
+     * @param operators 要应用的字符串操作数组
+     * @return 处理后的字符串
+     */
+    public static String strcap(Object wstr, StringOperator... operators) {
+        StringBuilder builder = new StringBuilder(atos(wstr));
+        builder.replace(0, 1, uppercase(builder.charAt(0)));
+        return pipelineExecutor(atos(builder), operators);
     }
 
     /**
@@ -386,7 +403,7 @@ public class StringUtils {
      * @param operators 后处理选项
      * @return 替换后的字符串
      */
-    public static String strrep(Object wstr, String regexp, String value, Operator... operators) {
+    public static String strrep(Object wstr, String regexp, String value, StringOperator... operators) {
         return pipelineExecutor(atos(wstr).replaceAll(regexp, value), operators);
     }
 
@@ -400,7 +417,7 @@ public class StringUtils {
      * @param delim 用于拆分的分隔符
      * @return 拆分后的字符串数组
      */
-    public static String[] strtok(Object wstr, String delim, Operator... operators) {
+    public static String[] strtok(Object wstr, String delim, StringOperator... operators) {
         String[] origins = atos(wstr).split(delim);
 
         if (operators != null) {
@@ -423,7 +440,7 @@ public class StringUtils {
      * @param len 截取的长度
      * @return 截取后的字符串
      */
-    public static String strcut(Object wstr, int off, int len, Operator... operators) {
+    public static String strcut(Object wstr, int off, int len, StringOperator... operators) {
         return pipelineExecutor(atos(wstr, off, len), operators);
     }
 
@@ -533,7 +550,7 @@ public class StringUtils {
      * @param operators 后处理操作
      * @return 去除前后空白后的字符串
      */
-    public static String strip(Object wstr, Operator... operators) {
+    public static String strip(Object wstr, StringOperator... operators) {
         return pipelineExecutor(atos(wstr).trim(), operators);
     }
 
@@ -560,7 +577,7 @@ public class StringUtils {
      * @param obj 要处理的字符串对象
      * @return 转换为驼峰风格后的字符串
      */
-    public static String strlinehmp(Object obj, Operator... operators) {
+    public static String strlinehmp(Object obj, StringOperator... operators) {
         char[] charArray = atos(obj).toCharArray();
         StringBuilder buffer = new StringBuilder();
 

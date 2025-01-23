@@ -28,6 +28,8 @@ package org.redgogh.devtools.reflect;
 import org.redgogh.devtools.base.Assert;
 import org.redgogh.devtools.base.BasicConverter;
 import org.redgogh.devtools.base.Capturer;
+import org.redgogh.devtools.base.Optional;
+import org.redgogh.devtools.except.SystemRuntimeException;
 import org.redgogh.devtools.stream.Streams;
 import org.redgogh.devtools.collect.Lists;
 import org.redgogh.devtools.collect.Maps;
@@ -40,6 +42,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.redgogh.devtools.base.BasicConverter.anycount;
+import static org.redgogh.devtools.string.StringUtils.streq;
 
 /**
  * `UClass` 是一个用于处理 Java 类元数据的工具类。它封装了一个 `Class` 对象，并提供了一些方法来
@@ -185,6 +188,28 @@ public class UClass {
     ////////////////////////////////////////////////////////////////////////////
 
     /**
+     * 检查类中是否存在指定的方法。
+     *
+     * <p>该方法通过方法名和参数类型检查指定类是否定义了对应的方法。如果找到匹配的方法，返回 `true`；
+     * 如果没有找到，返回 `false`。如果遇到安全异常，则抛出 {@link SystemRuntimeException}。
+     *
+     * @param callMethod    方法名称
+     * @param parameterTypes 方法的参数类型
+     * @return 如果方法存在则返回 `true`，否则返回 `false`
+     * @throws SystemRuntimeException 如果发生安全异常
+     */
+    public boolean hasMethod(String callMethod, Class<?>... parameterTypes) {
+        try {
+            descriptor.getDeclaredMethod(callMethod, parameterTypes);
+            return true;
+        } catch (NoSuchMethodException e) {
+            return false;
+        } catch (SecurityException e) {
+            throw new SystemRuntimeException(e);
+        }
+    }
+
+    /**
      * 检查指定的注解是否存在于描述符上。
      *
      * @param annotation 注解类型对应的 Class 对象
@@ -217,6 +242,23 @@ public class UClass {
     @SuppressWarnings("unchecked")
     public <T> T newInstance(Object... args) {
         return (T) newInstance(descriptor, args);
+    }
+
+    /**
+     * #brief：获取当前类下的指定属性对象<p>
+     * <p>
+     * 获取当前类下的指定属性对象，属性对象已经是封装好了的`UField`
+     * 对象实例，可以直接使用。
+     *
+     * @param name 属性名称
+     * @return 封装好的`UField`实例列表
+     */
+    public UField getDeclaredField(String name) {
+        for (UField field : getDeclaredFields()) {
+            if (streq(field.getName(), name))
+                return field;
+        }
+        return null;
     }
 
     /**
@@ -430,4 +472,5 @@ public class UClass {
     public String toString() {
         return getName();
     }
+
 }
