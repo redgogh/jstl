@@ -38,6 +38,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import static org.redgogh.devtools.base.BasicConverter.anycount;
 import static org.redgogh.devtools.string.StringUtils.streq;
@@ -184,6 +185,19 @@ public class UClass {
     ////////////////////////////////////////////////////////////////////////////
     // methods
     ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * 过滤出符合指定条件的字段列表。
+     *
+     * <p>该方法接收一个 {@link Predicate} 对象作为参数，用于对字段列表进行过滤。
+     * 返回一个包含符合指定条件的字段的列表。
+     *
+     * @param predicate 过滤条件
+     * @return 符合指定条件的字段列表
+     */
+    public List<UField> filterDeclaredFields(Predicate<UField> predicate) {
+        return Streams.filter(getDeclaredFields(), predicate);
+    }
 
     /**
      * 检查类中是否存在指定的方法。
