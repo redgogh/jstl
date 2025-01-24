@@ -1,7 +1,7 @@
 package org.redgogh.devtools.crypto.codec;
 
-import org.redgogh.devtools.string.StringUtils;
 import org.redgogh.devtools.crypto.MD5;
+import org.redgogh.devtools.string.StringUtils;
 import org.redgogh.devtools.exception.CentralRuntimeException;
 
 import java.security.MessageDigest;

@@ -27,8 +27,8 @@ package org.redgogh.devtools.crypto;
 
 import org.redgogh.devtools.base.BasicConverter;
 import org.redgogh.devtools.base.Capturer;
-import org.redgogh.devtools.string.StringUtils;
 import org.redgogh.devtools.crypto.codec.*;
+import org.redgogh.devtools.string.StringUtils;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;

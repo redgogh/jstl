@@ -50,6 +50,5 @@ public interface Base64 {
      */
     byte[] decodeBytes(String src);
 
-
 }
 

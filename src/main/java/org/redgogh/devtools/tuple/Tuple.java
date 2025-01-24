@@ -72,7 +72,7 @@ public class Tuple<L, R> {
      *
      * @return 元组的左值
      */
-    public L getLeft() {
+    public L left() {
         return left;
     }
 
@@ -81,7 +81,7 @@ public class Tuple<L, R> {
      *
      * @return 元组的右值
      */
-    public R getRight() {
+    public R right() {
         return right;
     }
 
