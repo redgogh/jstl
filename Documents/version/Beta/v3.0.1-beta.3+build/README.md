@@ -13,4 +13,8 @@
 
 - `anyclude`更新为`anycount`。
 - `BeanUtils#copyProperties`支持`set/get`方法拷贝。
-- `Optional#ifNull`命名更新为`Optional#ifNullable`
+- `Optional#ifNull`命名更新为`Optional#ifNullable`。
+
+## 🐞 BUG 修复
+
+- 修复 `DateFormatter#parse` 方法参数传递不正确问题。

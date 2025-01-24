@@ -158,7 +158,7 @@ public class DateFormatter {
     }
 
     public static Date parse(String text) {
-        return parse(DASH_PATTERN_Y4H2M2D2H2M2S2, text);
+        return parse(text, DASH_PATTERN_Y4H2M2D2H2M2S2);
     }
 
     /**
