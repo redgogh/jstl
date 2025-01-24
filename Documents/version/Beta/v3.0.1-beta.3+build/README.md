@@ -8,6 +8,7 @@
 - `Streams`新增`noneMatch`匹配函数。
 - `StringUtils`新增`strcap`首字母大写函数。
 - `UClass`新增`filterFields`方法用于过滤指定成员对象。
+- `Optional`新增`ifBlank`方法用于检查空字符串。
 
 ## 👻 优化功能
 

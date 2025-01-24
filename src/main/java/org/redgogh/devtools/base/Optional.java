@@ -23,6 +23,8 @@ package org.redgogh.devtools.base;
 import org.redgogh.devtools.iface.CallableFunction;
 import org.redgogh.devtools.iface.ActionFunction;
 
+import static org.redgogh.devtools.string.StringUtils.strempty;
+
 /**
  * @author RedGogh
  */
@@ -41,6 +43,19 @@ public class Optional {
      */
     public static <T> T ifNullable(T value, T orNull) {
         return value == null ? orNull : value;
+    }
+
+    /**
+     * 如果给定的字符串值为 null 或空字符串，则返回指定的替代值；否则返回原值。
+     *
+     * <p>此方法用于简化空字符串检查，可以避免冗长的条件语句。
+     *
+     * @param value 要检查的值
+     * @param orBlank 如果 {@code value} 为 null 时返回的替代值
+     * @return 如果 {@code value} 为 null，则返回 {@code orBlank}，否则返回 {@code value}
+     */
+    public static String ifBlank(String value, String orBlank) {
+        return strempty(value) ? orBlank : value;
     }
 
     /**
