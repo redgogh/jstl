@@ -18,7 +18,7 @@ package org.redgogh.devtools.http;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.devtools.except.CentralRuntimeException;
+import org.redgogh.devtools.exception.CentralRuntimeException;
 
 import javax.net.ssl.*;
 import java.security.KeyStore;

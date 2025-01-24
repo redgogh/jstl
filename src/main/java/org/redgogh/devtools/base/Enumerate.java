@@ -20,7 +20,7 @@ package org.redgogh.devtools.base;
 
 /* Create on 2019/6/14 */
 
-import org.redgogh.devtools.except.InvalidArgumentException;
+import org.redgogh.devtools.exception.InvalidArgumentException;
 import org.redgogh.devtools.reflect.UClass;
 import org.redgogh.devtools.string.StringUtils;
 

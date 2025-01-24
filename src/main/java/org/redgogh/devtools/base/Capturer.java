@@ -20,7 +20,7 @@ package org.redgogh.devtools.base;
 
 import org.redgogh.devtools.iface.CallableFunction;
 import org.redgogh.devtools.iface.ActionFunction;
-import org.redgogh.devtools.except.AssertException;
+import org.redgogh.devtools.exception.AssertException;
 
 /**
  * @author RedGogh

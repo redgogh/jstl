@@ -22,7 +22,7 @@ package org.redgogh.devtools.time;
 
 import org.redgogh.devtools.base.Assert;
 import org.redgogh.devtools.base.Enumerate;
-import org.redgogh.devtools.except.UnsupportedOperationException;
+import org.redgogh.devtools.exception.UnsupportedOperationException;
 import org.joda.time.DateTime;
 
 import java.util.Date;

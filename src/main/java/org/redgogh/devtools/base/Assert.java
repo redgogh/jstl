@@ -20,7 +20,7 @@ package org.redgogh.devtools.base;
 
 import org.redgogh.devtools.collect.Lists;
 import org.redgogh.devtools.collect.Maps;
-import org.redgogh.devtools.except.AssertException;
+import org.redgogh.devtools.exception.AssertException;
 
 import java.util.Collection;
 import java.util.Map;

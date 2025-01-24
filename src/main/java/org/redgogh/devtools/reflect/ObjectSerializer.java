@@ -18,7 +18,7 @@ package org.redgogh.devtools.reflect;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.devtools.except.SerializationException;
+import org.redgogh.devtools.exception.SerializationException;
 import org.redgogh.devtools.io.FileByteReader;
 import org.redgogh.devtools.io.FileByteWriter;
 import org.redgogh.devtools.io.MutableFile;

@@ -21,7 +21,7 @@ package org.redgogh.devtools.test;
 import org.redgogh.devtools.base.Assert;
 import org.redgogh.devtools.base.Optional;
 import org.junit.Test;
-import org.redgogh.devtools.except.AssertException;
+import org.redgogh.devtools.exception.AssertException;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,17 +1,13 @@
-package org.redgogh.devtools.except;
+package org.redgogh.devtools.exception;
 
 import org.jetbrains.annotations.NotNull;
 
-/**
- * @author RedGogh
- * @since 1.0
- */
-public class OpenFileDescriptorException extends CentralRuntimeException {
+public class SerializationException extends CentralRuntimeException {
 
     /**
      * 默认构造函数。
      */
-    public OpenFileDescriptorException() {
+    public SerializationException() {
     }
 
     /**
@@ -19,7 +15,7 @@ public class OpenFileDescriptorException extends CentralRuntimeException {
      *
      * @param e 原始异常，不能为 null。
      */
-    public OpenFileDescriptorException(@NotNull Throwable e) {
+    public SerializationException(@NotNull Throwable e) {
         super(e);
     }
 
@@ -29,7 +25,7 @@ public class OpenFileDescriptorException extends CentralRuntimeException {
      * @param vfmt 格式化字符串，不能为 null。
      * @param args 格式化参数。
      */
-    public OpenFileDescriptorException(@NotNull String vfmt, @NotNull Object... args) {
+    public SerializationException(@NotNull String vfmt, @NotNull Object... args) {
         super(vfmt, args);
     }
 
@@ -40,7 +36,7 @@ public class OpenFileDescriptorException extends CentralRuntimeException {
      * @param e 原始异常，不能为 null。
      * @param args 格式化参数。
      */
-    public OpenFileDescriptorException(@NotNull String vfmt, @NotNull Throwable e, @NotNull Object... args) {
+    public SerializationException(@NotNull String vfmt, @NotNull Throwable e, @NotNull Object... args) {
         super(vfmt, e, args);
     }
 }

@@ -1,4 +1,4 @@
-package org.redgogh.devtools.except;
+package org.redgogh.devtools.exception;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -22,8 +22,8 @@ package org.redgogh.devtools.io;
 
 import org.redgogh.devtools.base.Assert;
 import org.redgogh.devtools.base.Capturer;
-import org.redgogh.devtools.except.IOReadException;
-import org.redgogh.devtools.except.IOWriteException;
+import org.redgogh.devtools.exception.IOReadException;
+import org.redgogh.devtools.exception.IOWriteException;
 
 import java.io.*;
 

@@ -18,7 +18,7 @@ package org.redgogh.devtools.io;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.devtools.except.IOReadException;
+import org.redgogh.devtools.exception.IOReadException;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;

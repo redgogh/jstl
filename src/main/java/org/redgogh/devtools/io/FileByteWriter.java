@@ -18,7 +18,7 @@ package org.redgogh.devtools.io;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.devtools.except.IOWriteException;
+import org.redgogh.devtools.exception.IOWriteException;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
