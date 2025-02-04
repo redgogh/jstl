@@ -138,7 +138,7 @@ public class BasicConverter {
         // int
         if (obj instanceof Integer) {
             ByteBuffer buffer = ByteBuffer.allocate();
-            buffer.write((int) obj);
+            buffer.writeInt((int) obj);
             buffer.seek(ByteBuffer.SEEK_SET, 0);
             return buffer.toByteArray();
         }
@@ -146,7 +146,7 @@ public class BasicConverter {
         // long
         if (obj instanceof Long) {
             ByteBuffer buffer = ByteBuffer.allocate();
-            buffer.write((long) obj);
+            buffer.writeLong((long) obj);
             buffer.seek(ByteBuffer.SEEK_SET, 0);
             return buffer.toByteArray();
         }

@@ -145,6 +145,18 @@ public abstract class ByteBuffer {
     }
 
     /**
+     * #brief: 读取一个 Byte 类型的值。<p>
+     *
+     * 根据当前 {@code position} 的开始位置往后读取 1 个字节的数据。
+     *
+     * @return 从字节数组读到的 Byte 值
+     */
+    public byte readByte() {
+        read(buftmp, 0, 1);
+        return buftmp[0];
+    }
+
+    /**
      * #brief: 从字节数组中读取前 4 个字节并转换为 int 类型的值。<p>
      *
      * 根据当前 {@code position} 的开始位置往后读取 4 个字节的数据。将
@@ -233,7 +245,7 @@ public abstract class ByteBuffer {
      * @param i
      *        int 类型的整数
      */
-    public void write(int i) {
+    public void writeInt(int i) {
         buftmp[0] = (byte) ((i >> 24) & 0xff);
         buftmp[1] = (byte) ((i >> 16) & 0xff);
         buftmp[2] = (byte) ((i >> 8) & 0xff);
@@ -250,7 +262,7 @@ public abstract class ByteBuffer {
      * @param value
      *        long 类型的整数
      */
-    public void write(long value) {
+    public void writeLong(long value) {
         for (int i = 0; i < Long.BYTES; i++)
             buftmp[i] = (byte) ((value >> ((Long.BYTES - i - 1) * 8)) & 0xFF);
         write(buftmp, 0, Long.BYTES);
@@ -262,7 +274,7 @@ public abstract class ByteBuffer {
      * @param b
      *        要写入的字节
      */
-    public void write(byte b) {
+    public void writeByte(byte b) {
         buftmp[0] = b;
         write(buftmp, 0, Byte.BYTES);
     }
@@ -270,7 +282,7 @@ public abstract class ByteBuffer {
     /**
      * 将整个字节缓冲的内容写入到 {@link ByteBuffer} 中。
      */
-    public void write(byte[] b) {
+    public void writeBytes(byte[] b) {
         write(b, 0, b.length);
     }
 

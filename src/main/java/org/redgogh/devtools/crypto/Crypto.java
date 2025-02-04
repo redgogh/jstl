@@ -34,6 +34,9 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.util.UUID;
 
+import static org.redgogh.devtools.string.StringUtils.strcut;
+import static org.redgogh.devtools.string.StringUtils.uppercase;
+
 /**
  * `Crypto` 是一个工具类，提供了多种加密和解密算法的实现，支持常见的加密需求。
  *
@@ -130,7 +133,7 @@ public final class Crypto {
      * @return 生成不带符号的UUID
      */
     public static String uuid() {
-        return BasicConverter.atos(UUID.randomUUID())
+        return uppercase(UUID.randomUUID())
                 .replace("-", "");
     }
 
@@ -143,8 +146,7 @@ public final class Crypto {
      * @return 返回没有任何符号的 UUID
      */
     public static String uuid(int n) {
-        String uuid = uuid();
-        return StringUtils.strcut(uuid, 0, n);
+        return strcut(uuid(), 0, n);
     }
 
     /**
