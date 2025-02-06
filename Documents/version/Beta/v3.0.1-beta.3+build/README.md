@@ -13,6 +13,7 @@
 - 新增 `ByteBuffer#readableBytes` 方法判断缓冲区剩余可读字节数。
 - 新增 `ByteBuffer#readShort` 以及 `writeShort` 方法用于写入 short 类型数据。
 - 新增 `MutableFile#loadProperties` 方法读取 `properties` 文件。
+- 新增 `StreamReader` 用于统一操作输入流对象。
 
 ## 👻 优化功能
 
