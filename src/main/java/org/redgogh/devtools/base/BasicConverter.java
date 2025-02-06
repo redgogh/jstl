@@ -139,16 +139,14 @@ public class BasicConverter {
         if (obj instanceof Integer) {
             ByteBuffer buffer = ByteBuffer.allocate();
             buffer.writeInt((int) obj);
-            buffer.seek(ByteBuffer.SEEK_SET, 0);
-            return buffer.toByteArray();
+            return buffer.seekSet(0).toByteArray();
         }
 
         // long
         if (obj instanceof Long) {
             ByteBuffer buffer = ByteBuffer.allocate();
             buffer.writeLong((long) obj);
-            buffer.seek(ByteBuffer.SEEK_SET, 0);
-            return buffer.toByteArray();
+            return buffer.seekSet(0).toByteArray();
         }
 
         // string or hex string
@@ -211,7 +209,7 @@ public class BasicConverter {
      */
     public static int atoi(byte[] b, int off) {
         return ByteBuffer.wrap(b, off, Integer.BYTES)
-                .seek(ByteBuffer.SEEK_SET, 0).readInt();
+                .seekSet(0).readInt();
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////
@@ -272,7 +270,7 @@ public class BasicConverter {
      */
     public static long atol(byte[] b, int off) {
         return ByteBuffer.wrap(b, off, Long.BYTES)
-                .seek(ByteBuffer.SEEK_SET, 0).readLong();
+                .seekSet(0).readLong();
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////

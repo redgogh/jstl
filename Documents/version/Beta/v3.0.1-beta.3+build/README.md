@@ -10,6 +10,8 @@
 - 新增 `UClass#filterFields`方法用于过滤指定成员对象。
 - 新增 `Optional#ifBlank`方法用于检查空字符串。
 - 新增 `ByteBuffer#readByte` 方法用于读取单个字节。
+- 新增 `ByteBuffer#readableBytes` 方法判断缓冲区剩余可读字节数。
+- 新增 `ByteBuffer#readShort` 以及 `writeShort` 方法用于写入 short 类型数据。
 
 ## 👻 优化功能
 

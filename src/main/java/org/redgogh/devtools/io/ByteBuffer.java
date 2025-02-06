@@ -25,6 +25,7 @@ import org.redgogh.devtools.base.ArrayUtils;
 /**
  * @author RedGogh
  */
+@SuppressWarnings("UnusedReturnValue")
 public abstract class ByteBuffer {
 
     /** 读写指针 */
@@ -34,15 +35,15 @@ public abstract class ByteBuffer {
     protected int capacity;
 
     /* 临时缓冲区 */
-    private final byte[] buftmp = new byte[16];
+    private final byte[] tmp = new byte[16];
 
     /* 控制读写指针属性 */
-    public static final SeekOption SEEK_SET = (byteBuffer, value) -> byteBuffer.position = value;
-    public static final SeekOption SEEK_CUR = (byteBuffer, value) -> byteBuffer.position += value;
-    public static final SeekOption SEEK_END = (byteBuffer, value) -> byteBuffer.position = byteBuffer.capacity - value;
+    private static final SeekOption SEEK_SET = (byteBuffer, value) -> byteBuffer.position = value;
+    private static final SeekOption SEEK_CUR = (byteBuffer, value) -> byteBuffer.position += value;
+    private static final SeekOption SEEK_END = (byteBuffer, value) -> byteBuffer.position = byteBuffer.capacity - value;
 
     public interface SeekOption {
-        void getpos(ByteBuffer byteBuffer, int value);
+        void GETPOS(ByteBuffer byteBuffer, int value);
     }
 
     /**
@@ -105,7 +106,7 @@ public abstract class ByteBuffer {
      */
     public static ByteBuffer wrap(byte[] b, int off, int len) {
         ByteBuffer buffer = allocate();
-        buffer.write(b, off, len);
+        buffer.writeBytes(b, off, len);
         return buffer;
     }
 
@@ -114,6 +115,13 @@ public abstract class ByteBuffer {
      */
     public int size() {
         return capacity;
+    }
+
+    /**
+     * @return 返回当前 Buffer 剩余可读字节数
+     */
+    public int readableBytes() {
+        return capacity - position;
     }
 
     /**
@@ -129,8 +137,30 @@ public abstract class ByteBuffer {
      * <p>
      * 如果你是 c/c艹 的使用者，那么你应该很清楚这个函数在做什么！
      *
-     * @param sop
-     *        设置操作，{@code SEEK_SET}、{@code SEEK_CUR}、{@code SEEK_END}
+     * @param off
+     *        读写指针偏移量
+     *
+     * @see #SEEK_SET
+     * @see #SEEK_CUR
+     * @see #SEEK_END
+     */
+    public ByteBuffer seekSet(int off) {
+        SEEK_SET.GETPOS(this, off);
+        return this;
+    }
+
+    /**
+     * #brief: 重置读写指针位置。<p>
+     *
+     * 设置 {@link ByteBuffer} 内部读写指针偏移量，这个 {@link ByteBuffer} 是支持随机读写的对象，
+     * 所以可以通过 {@code seek()} 函数设置内部的读写指针。当执行完所有写入操作时，使用者应该调
+     * 用 {@code seek(SEEK_SET, 0)} 来重置缓冲区内部的读写指针位置。它会被重置到 {@code 0} 的
+     * 位置上。
+     * <p>
+     * 如果需要继续写入，应该调用 {@code seek(SEEK_END, 0)} 来重置到缓冲区最后的位置，然后才应该
+     * 调用缓冲区的写入函数。
+     * <p>
+     * 如果你是 c/c艹 的使用者，那么你应该很清楚这个函数在做什么！
      *
      * @param off
      *        读写指针偏移量
@@ -139,8 +169,33 @@ public abstract class ByteBuffer {
      * @see #SEEK_CUR
      * @see #SEEK_END
      */
-    public ByteBuffer seek(SeekOption sop, int off) {
-        sop.getpos(this, off);
+    public ByteBuffer seekCur(int off) {
+        SEEK_CUR.GETPOS(this, off);
+        return this;
+    }
+
+    /**
+     * #brief: 重置读写指针位置。<p>
+     *
+     * 设置 {@link ByteBuffer} 内部读写指针偏移量，这个 {@link ByteBuffer} 是支持随机读写的对象，
+     * 所以可以通过 {@code seek()} 函数设置内部的读写指针。当执行完所有写入操作时，使用者应该调
+     * 用 {@code seek(SEEK_SET, 0)} 来重置缓冲区内部的读写指针位置。它会被重置到 {@code 0} 的
+     * 位置上。
+     * <p>
+     * 如果需要继续写入，应该调用 {@code seek(SEEK_END, 0)} 来重置到缓冲区最后的位置，然后才应该
+     * 调用缓冲区的写入函数。
+     * <p>
+     * 如果你是 c/c艹 的使用者，那么你应该很清楚这个函数在做什么！
+     *
+     * @param off
+     *        读写指针偏移量
+     *
+     * @see #SEEK_SET
+     * @see #SEEK_CUR
+     * @see #SEEK_END
+     */
+    public ByteBuffer seekEnd(int off) {
+        SEEK_END.GETPOS(this, off);
         return this;
     }
 
@@ -152,8 +207,21 @@ public abstract class ByteBuffer {
      * @return 从字节数组读到的 Byte 值
      */
     public byte readByte() {
-        read(buftmp, 0, 1);
-        return buftmp[0];
+        readBytes(tmp, 0, 1);
+        return tmp[0];
+    }
+
+    /**
+     * #brief: 从字节数组中读取前 2 个字节并转换为 short 类型的值。<p>
+     *
+     * 根据当前 {@code position} 的开始位置往后读取 2 个字节的数据。将
+     * 读取到的字节数组转换成一个 short 类型结果。
+     *
+     * @return 从字节数组读到的 short 值
+     */
+    public int readShort() {
+        readBytes(tmp, 0, Short.BYTES);
+        return (short) ((tmp[0] << 8) | tmp[1] & 0xFF);
     }
 
     /**
@@ -165,11 +233,11 @@ public abstract class ByteBuffer {
      * @return 从字节数组读到的 int 值
      */
     public int readInt() {
-        read(buftmp, 0, Integer.BYTES);
-        return ((buftmp[0] & 0xff) << 24)
-                | ((buftmp[1] & 0xff) << 16)
-                | ((buftmp[2] & 0xff) << 8)
-                |  (buftmp[3] & 0xff);
+        readBytes(tmp, 0, Integer.BYTES);
+        return ((tmp[0] & 0xff) << 24)
+                | ((tmp[1] & 0xff) << 16)
+                | ((tmp[2] & 0xff) << 8)
+                |  (tmp[3] & 0xff);
     }
 
     /**
@@ -181,10 +249,10 @@ public abstract class ByteBuffer {
      * @return 从字节数组读到的 long 值
      */
     public long readLong() {
-        read(buftmp, 0, Long.BYTES);
+        readBytes(tmp, 0, Long.BYTES);
         long value = 0L;
         for (int i = 0; i < Long.BYTES; i++)
-            value = (value << 8) | (buftmp[i] & 0xFF);
+            value = (value << 8) | (tmp[i] & 0xFF);
         return value;
     }
 
@@ -203,7 +271,7 @@ public abstract class ByteBuffer {
      * @param len
      *        读取的总长度，字节数组结束索引为 {@code b[off + len]}
      */
-    public int read(byte[] b, int off, int len) {
+    public int readBytes(byte[] b, int off, int len) {
         ArrayUtils.checkIndexSize(off, len, b.length);
         int remcap = capacity - position;
         if (remcap == 0)
@@ -212,6 +280,90 @@ public abstract class ByteBuffer {
             len = remcap;
         read0(b, off, len);
         return len;
+    }
+
+    /**
+     * #brief: 写入 short 类型的数据到字节缓冲区中。<p>
+     *
+     * 写入 short 值到字节缓冲区中，占用 2 个字节的空间。先写入高位字节，
+     * 后写入低位字节。
+     *
+     * @param value
+     *        short 类型的整数
+     */
+    public void writeShort(short value) {
+        writeBytes(new byte[]{
+                (byte) (value >> 8),
+                (byte) value,
+        }, 0, Short.BYTES);
+    }
+
+    /**
+     * #brief: 写入 int 类型的数据到字节缓冲区中。<p>
+     *
+     * 写入 int 值到字节缓冲区中，占用 4 个字节的空间。先写入高位字节，
+     * 后写入低位字节。
+     *
+     * @param i
+     *        int 类型的整数
+     */
+    public void writeInt(int i) {
+        tmp[0] = (byte) ((i >> 24) & 0xff);
+        tmp[1] = (byte) ((i >> 16) & 0xff);
+        tmp[2] = (byte) ((i >> 8) & 0xff);
+        tmp[3] = (byte) (i & 0xff);
+        writeBytes(tmp, 0, Integer.BYTES);
+    }
+
+    /**
+     * #brief: 写入 long 类型的数据到字节缓冲区中。<p>
+     *
+     * 写入 long 值到字节缓冲区中，占用 8 个字节的空间。先写入高位字节，
+     * 后写入低位字节。
+     *
+     * @param value
+     *        long 类型的整数
+     */
+    public void writeLong(long value) {
+        for (int i = 0; i < Long.BYTES; i++)
+            tmp[i] = (byte) ((value >> ((Long.BYTES - i - 1) * 8)) & 0xFF);
+        writeBytes(tmp, 0, Long.BYTES);
+    }
+
+    /**
+     * #brief: 写入单个字节数据到缓冲区中
+     *
+     * @param b
+     *        要写入的字节
+     */
+    public void writeByte(byte b) {
+        tmp[0] = b;
+        writeBytes(tmp, 0, Byte.BYTES);
+    }
+
+    /**
+     * 将整个字节缓冲的内容写入到 {@link ByteBuffer} 中。
+     */
+    public void writeBytes(byte[] b) {
+        writeBytes(b, 0, b.length);
+    }
+
+    /**
+     * 通过 {@code off} 索引读取字节数组中的内存写入到缓冲区。读取的第一个字节从 {@code b[off]} 开始
+     * 到 {@code b[len]} 结束。它与大部分 io 操作的传参方式相同。
+     *
+     * @param b
+     *        要写入数据的字节数组
+     *
+     * @param off
+     *        开始索引位置
+     *
+     * @param len
+     *        写入长度
+     */
+    public void writeBytes(byte[] b, int off, int len) {
+        ArrayUtils.checkIndexSize(off, len, b.length);
+        write0(b, off, len);
     }
 
     /**
@@ -235,74 +387,6 @@ public abstract class ByteBuffer {
      *        读取的总长度，字节数组结束索引为 {@code b[off + len]}
      */
     abstract void read0(byte[] b, int off, int len);
-
-    /**
-     * #brief: 写入 int 类型的数据到字节缓冲区中。<p>
-     *
-     * 写入 int 值到字节缓冲区中，占用 4 个字节的空间。先写入高位字节，
-     * 后写入低位字节。
-     *
-     * @param i
-     *        int 类型的整数
-     */
-    public void writeInt(int i) {
-        buftmp[0] = (byte) ((i >> 24) & 0xff);
-        buftmp[1] = (byte) ((i >> 16) & 0xff);
-        buftmp[2] = (byte) ((i >> 8) & 0xff);
-        buftmp[3] = (byte) (i & 0xff);
-        write(buftmp, 0, Integer.BYTES);
-    }
-
-    /**
-     * #brief: 写入 int 类型的数据到字节缓冲区中。<p>
-     *
-     * 写入 int 值到字节缓冲区中，占用 4 个字节的空间。先写入高位字节，
-     * 后写入低位字节。
-     *
-     * @param value
-     *        long 类型的整数
-     */
-    public void writeLong(long value) {
-        for (int i = 0; i < Long.BYTES; i++)
-            buftmp[i] = (byte) ((value >> ((Long.BYTES - i - 1) * 8)) & 0xFF);
-        write(buftmp, 0, Long.BYTES);
-    }
-
-    /**
-     * #brief: 写入单个字节数据到缓冲区中
-     *
-     * @param b
-     *        要写入的字节
-     */
-    public void writeByte(byte b) {
-        buftmp[0] = b;
-        write(buftmp, 0, Byte.BYTES);
-    }
-
-    /**
-     * 将整个字节缓冲的内容写入到 {@link ByteBuffer} 中。
-     */
-    public void writeBytes(byte[] b) {
-        write(b, 0, b.length);
-    }
-
-    /**
-     * 通过 {@code off} 索引读取字节数组中的内存写入到缓冲区。读取的第一个字节从 {@code b[off]} 开始
-     * 到 {@code b[len]} 结束。它与大部分 io 操作的传参方式相同。
-     *
-     * @param b
-     *        要写入数据的字节数组
-     *
-     * @param off
-     *        开始索引位置
-     *
-     * @param len
-     *        写入长度
-     */
-    public void write(byte[] b, int off, int len) {
-        ArrayUtils.checkIndexSize(off, len, b.length);
-        write0(b, off, len);
-    }
 
     /**
      * #brief: ByteBuf 数据写入唯一接口，需要子类自行实现。<p>
@@ -333,9 +417,9 @@ public abstract class ByteBuffer {
      */
     public byte[] toByteArray() {
         byte[] retval = new byte[capacity];
-        seek(SEEK_SET, 0);
-        read(retval, 0, retval.length);
-        seek(SEEK_END, 0);
+        seekSet(0);
+        readBytes(retval, 0, retval.length);
+        seekEnd(0);
         return retval;
     }
 
