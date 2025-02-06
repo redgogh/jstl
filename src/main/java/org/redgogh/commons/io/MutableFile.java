@@ -18,6 +18,7 @@ package org.redgogh.commons.io;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import org.redgogh.commons.exception.IOReadException;
 import org.redgogh.commons.utils.Assert;
 import org.redgogh.commons.utils.Capturer;
 import org.redgogh.commons.utils.Optional;
@@ -818,8 +819,11 @@ public class MutableFile extends java.io.File {
      */
     public Properties loadProperties() {
         Properties properties = new Properties();
-        // 使用 Capturer 捕获加载过程中可能的异常
-        Capturer.call(() -> properties.load(openByteReaderDisabled()));
+        try(FileByteReader fileByteReader = openByteReaderDisabled()) {
+            properties.load(fileByteReader);
+        } catch (Exception e) {
+            throw new IOReadException(e);
+        }
         return properties;
     }
 
