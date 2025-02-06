@@ -29,6 +29,7 @@ import java.io.RandomAccessFile;
 import java.net.URI;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Properties;
 
 import static org.redgogh.commons.string.StringUtils.*;
 
@@ -805,6 +806,21 @@ public class MutableFile extends java.io.File {
         checkOpen();
         IOUtils.closeQuietly(accessFile);
         accessFile = null;
+    }
+
+    /**
+     * 加载配置文件的属性。
+     * <p>
+     * 该方法从指定的字节读取器中加载属性文件，并返回包含所有属性键值对的 `Properties` 对象。
+     * 加载过程中，使用 `Capturer.call()` 方法来捕获可能的异常。
+     *
+     * @return 加载的 `Properties` 对象，包含从配置文件中读取的所有键值对。
+     */
+    public Properties loadProperties() {
+        Properties properties = new Properties();
+        // 使用 Capturer 捕获加载过程中可能的异常
+        Capturer.call(() -> properties.load(openByteReaderDisabled()));
+        return properties;
     }
 
 }
