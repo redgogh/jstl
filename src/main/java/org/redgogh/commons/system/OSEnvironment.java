@@ -1,4 +1,4 @@
-package org.redgogh.commons.os;
+package org.redgogh.commons.system;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,9 +18,16 @@ package org.redgogh.commons.os;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import org.redgogh.commons.collection.Lists;
 import org.redgogh.commons.string.StringUtils;
+import org.redgogh.commons.utils.Capturer;
+import org.w3c.dom.ls.LSOutput;
 
+import java.net.NetworkInterface;
+import java.rmi.UnexpectedException;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
 
 import static org.redgogh.commons.string.StringUtils.strrep;

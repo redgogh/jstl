@@ -18,7 +18,7 @@ package org.redgogh.commons.string;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import static org.redgogh.commons.base.BasicConverter.atos;
+import static org.redgogh.commons.utils.BasicConverter.atos;
 import static org.redgogh.commons.string.StringUtils.*;
 
 /**

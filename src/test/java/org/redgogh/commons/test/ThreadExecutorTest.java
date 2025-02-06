@@ -18,7 +18,7 @@ package org.redgogh.commons.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.commons.collect.Lists;
+import org.redgogh.commons.collection.Lists;
 import org.redgogh.commons.utils.RandomGenerator;
 import org.junit.Test;
 

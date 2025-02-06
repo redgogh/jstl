@@ -19,12 +19,12 @@ package org.redgogh.commons.http;
 \* -------------------------------------------------------------------------------- */
 
 import com.alibaba.fastjson.JSON;
-import org.redgogh.commons.base.*;
-import org.redgogh.commons.collect.Maps;
+import org.redgogh.commons.collection.Maps;
 import org.redgogh.commons.exception.HttpRequestException;
-import org.redgogh.commons.base.Assert;
-import org.redgogh.commons.base.Capturer;
-import org.redgogh.commons.base.Optional;
+import org.redgogh.commons.utils.Assert;
+import org.redgogh.commons.utils.BasicConverter;
+import org.redgogh.commons.utils.Capturer;
+import org.redgogh.commons.utils.Optional;
 import org.redgogh.commons.io.MutableFile;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;

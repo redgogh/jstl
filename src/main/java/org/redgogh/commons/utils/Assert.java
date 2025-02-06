@@ -1,4 +1,4 @@
-package org.redgogh.commons.base;
+package org.redgogh.commons.utils;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,8 +18,8 @@ package org.redgogh.commons.base;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.commons.collect.Lists;
-import org.redgogh.commons.collect.Maps;
+import org.redgogh.commons.collection.Lists;
+import org.redgogh.commons.collection.Maps;
 import org.redgogh.commons.exception.AssertException;
 
 import java.util.Collection;

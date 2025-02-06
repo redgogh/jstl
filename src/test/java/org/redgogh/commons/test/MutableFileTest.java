@@ -21,7 +21,7 @@ package org.redgogh.commons.test;
 import org.redgogh.commons.io.MutableFile;
 import org.junit.Test;
 
-import static org.redgogh.commons.base.BasicConverter.atos;
+import static org.redgogh.commons.utils.BasicConverter.atos;
 
 @SuppressWarnings("ALL")
 public class MutableFileTest {

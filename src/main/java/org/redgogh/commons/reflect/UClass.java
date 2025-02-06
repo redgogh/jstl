@@ -25,12 +25,12 @@ package org.redgogh.commons.reflect;
 
 /* Creates on 2019/5/16. */
 
-import org.redgogh.commons.base.Assert;
-import org.redgogh.commons.base.Capturer;
+import org.redgogh.commons.utils.Assert;
+import org.redgogh.commons.utils.Capturer;
 import org.redgogh.commons.exception.CentralRuntimeException;
 import org.redgogh.commons.stream.Streams;
-import org.redgogh.commons.collect.Lists;
-import org.redgogh.commons.collect.Maps;
+import org.redgogh.commons.collection.Lists;
+import org.redgogh.commons.collection.Maps;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import static org.redgogh.commons.base.BasicConverter.anycount;
+import static org.redgogh.commons.utils.BasicConverter.anycount;
 import static org.redgogh.commons.string.StringUtils.streq;
 
 /**

@@ -18,11 +18,11 @@ package org.redgogh.commons.io;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.commons.base.Assert;
-import org.redgogh.commons.base.Capturer;
-import org.redgogh.commons.base.Optional;
-import org.redgogh.commons.collect.Lists;
-import org.redgogh.commons.os.OSEnvironment;
+import org.redgogh.commons.utils.Assert;
+import org.redgogh.commons.utils.Capturer;
+import org.redgogh.commons.utils.Optional;
+import org.redgogh.commons.collection.Lists;
+import org.redgogh.commons.system.OSEnvironment;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.RandomAccessFile;

@@ -20,7 +20,7 @@ package org.redgogh.commons.time;
 
 /* Creates on 2022/3/30. */
 
-import org.redgogh.commons.base.Capturer;
+import org.redgogh.commons.utils.Capturer;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

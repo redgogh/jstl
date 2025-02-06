@@ -18,8 +18,8 @@ package org.redgogh.commons.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.commons.base.Assert;
-import org.redgogh.commons.base.Optional;
+import org.redgogh.commons.utils.Assert;
+import org.redgogh.commons.utils.Optional;
 import org.junit.Test;
 import org.redgogh.commons.exception.AssertException;
 

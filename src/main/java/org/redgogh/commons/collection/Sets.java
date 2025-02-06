@@ -1,4 +1,4 @@
-package org.redgogh.commons.collect;
+package org.redgogh.commons.collection;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|

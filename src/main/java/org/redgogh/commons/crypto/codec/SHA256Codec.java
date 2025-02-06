@@ -1,6 +1,6 @@
 package org.redgogh.commons.crypto.codec;
 
-import org.redgogh.commons.base.Capturer;
+import org.redgogh.commons.utils.Capturer;
 import org.redgogh.commons.crypto.Crypto;
 import org.redgogh.commons.crypto.SHA256;
 import org.redgogh.commons.exception.CentralRuntimeException;

@@ -19,9 +19,9 @@ package org.redgogh.commons.test;
 \* -------------------------------------------------------------------------------- */
 
 import org.junit.Test;
-import org.redgogh.commons.base.BasicConverter;
+import org.redgogh.commons.utils.BasicConverter;
 import org.redgogh.commons.string.StringUtils;
-import org.redgogh.commons.collect.Lists;
+import org.redgogh.commons.collection.Lists;
 import org.redgogh.commons.utils.RandomGenerator;
 
 import java.util.List;

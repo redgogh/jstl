@@ -20,13 +20,13 @@ package org.redgogh.commons.http;
 
 /* Creates on 2023/6/26. */
 
-import org.redgogh.commons.base.BasicConverter;
+import org.redgogh.commons.utils.BasicConverter;
 import org.redgogh.commons.string.StringUtils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static org.redgogh.commons.base.BasicConverter.atos;
+import static org.redgogh.commons.utils.BasicConverter.atos;
 
 /**
  * `QueryBuilder` 是一个继承自 `LinkedHashMap<String, String>` 的类，用于构建 HTTP 请求的查询参数。

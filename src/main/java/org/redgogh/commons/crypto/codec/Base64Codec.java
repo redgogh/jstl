@@ -1,9 +1,9 @@
 package org.redgogh.commons.crypto.codec;
 
-import org.redgogh.commons.base.BasicConverter;
+import org.redgogh.commons.utils.BasicConverter;
 import org.redgogh.commons.crypto.Base64;
 
-import static org.redgogh.commons.base.BasicConverter.atos;
+import static org.redgogh.commons.utils.BasicConverter.atos;
 
 /**
  * @author RedGogh

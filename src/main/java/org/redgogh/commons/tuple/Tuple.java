@@ -1,6 +1,6 @@
 package org.redgogh.commons.tuple;
 
-import static org.redgogh.commons.base.BasicConverter.anyeq;
+import static org.redgogh.commons.utils.BasicConverter.anyeq;
 
 /**
  * `Tuple` 是一个通用的二元元组类，用于存储一对相关联的值。

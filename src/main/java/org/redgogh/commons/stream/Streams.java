@@ -1,6 +1,6 @@
 package org.redgogh.commons.stream;
 
-import org.redgogh.commons.collect.Lists;
+import org.redgogh.commons.collection.Lists;
 
 import java.util.Collection;
 import java.util.Comparator;

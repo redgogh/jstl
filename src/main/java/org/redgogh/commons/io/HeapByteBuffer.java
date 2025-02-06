@@ -23,7 +23,7 @@ package org.redgogh.commons.io;
 /**
  * @author RedGogh
  */
-public class HeapByteBuffer extends ByteBuffer {
+public class HeapByteBuffer extends AbstractByteBuffer {
 
     /** 字节缓冲区 */
     private byte[] buf;

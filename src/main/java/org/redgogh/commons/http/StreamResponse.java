@@ -18,7 +18,7 @@ package org.redgogh.commons.http;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.commons.base.Assert;
+import org.redgogh.commons.utils.Assert;
 import org.redgogh.commons.io.MutableFile;
 import org.redgogh.commons.io.IOUtils;
 import okhttp3.ResponseBody;

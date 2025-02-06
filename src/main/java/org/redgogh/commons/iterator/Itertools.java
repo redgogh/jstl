@@ -1,6 +1,6 @@
-package org.redgogh.commons.iter;
+package org.redgogh.commons.iterator;
 
-import org.redgogh.commons.collect.Lists;
+import org.redgogh.commons.collection.Lists;
 import org.redgogh.commons.tuple.Tuple;
 
 import java.util.Collection;

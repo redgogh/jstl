@@ -1,6 +1,6 @@
 package org.redgogh.commons.thread;
 
-import org.redgogh.commons.os.OSEnvironment;
+import org.redgogh.commons.system.OSEnvironment;
 import org.redgogh.commons.time.TimeUnitOperator;
 
 import java.util.concurrent.*;

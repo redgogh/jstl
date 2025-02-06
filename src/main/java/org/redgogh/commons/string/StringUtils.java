@@ -18,7 +18,7 @@ package org.redgogh.commons.string;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.redgogh.commons.base.Optional;
+import org.redgogh.commons.utils.Optional;
 
 import java.nio.file.FileSystems;
 import java.nio.file.PathMatcher;
@@ -28,8 +28,8 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.regex.Pattern;
 
-import static org.redgogh.commons.base.BasicConverter.anyeq;
-import static org.redgogh.commons.base.BasicConverter.atos;
+import static org.redgogh.commons.utils.BasicConverter.anyeq;
+import static org.redgogh.commons.utils.BasicConverter.atos;
 
 /**
  * `StringUtils` 是一个工具类，提供了一系列针对字符串的操作方法。这些方法用于处理

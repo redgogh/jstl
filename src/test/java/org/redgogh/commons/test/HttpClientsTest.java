@@ -25,7 +25,7 @@ package org.redgogh.commons.test;
 
 /* Creates on 2022/8/8. */
 
-import org.redgogh.commons.collect.Maps;
+import org.redgogh.commons.collection.Maps;
 import org.redgogh.commons.http.*;
 import org.redgogh.commons.io.MutableFile;
 import org.junit.Test;

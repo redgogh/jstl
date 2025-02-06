@@ -20,12 +20,12 @@ package org.redgogh.commons.test;
 
 import org.junit.Test;
 import org.redgogh.commons.stream.Streams;
-import org.redgogh.commons.collect.Lists;
+import org.redgogh.commons.collection.Lists;
 import org.redgogh.commons.utils.RandomGenerator;
 
 import java.util.List;
 
-import static org.redgogh.commons.os.OSEnvironment.time;
+import static org.redgogh.commons.system.OSEnvironment.time;
 
 @SuppressWarnings("ALL")
 public class StreamsTest {
