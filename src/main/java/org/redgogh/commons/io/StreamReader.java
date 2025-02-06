@@ -27,10 +27,10 @@ public class StreamReader {
         /**
          * 自定义的流处理操作方法。
          *
-         * @param reader 当前的 {@link StreamReader} 实例
+         * @param stream 当前的 InputStream 实例
          * @throws Exception 如果处理过程中出现异常
          */
-        void call(StreamReader reader) throws Exception;
+        void call(InputStream stream) throws Exception;
     }
 
     /**
@@ -51,7 +51,7 @@ public class StreamReader {
      */
     public void call(StreamReaderResource streamReaderResource) {
         try {
-            streamReaderResource.call(this);
+            streamReaderResource.call(stream);
         } catch (Exception e) {
             throw new IOReadException(e);
         } finally {
