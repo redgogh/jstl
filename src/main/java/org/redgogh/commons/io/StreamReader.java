@@ -1,6 +1,7 @@
 package org.redgogh.commons.io;
 
 import org.redgogh.commons.exception.IOReadException;
+import org.redgogh.commons.reflect.UClass;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +16,7 @@ import java.io.InputStream;
  *
  * @author Red Gogh
  */
-public class StreamReader extends InputStream {
+public class StreamReader {
 
     private final InputStream stream;
 
@@ -54,19 +55,21 @@ public class StreamReader extends InputStream {
         } catch (Exception e) {
             throw new IOReadException(e);
         } finally {
-            IOUtils.closeQuietly(this);
+            IOUtils.closeQuietly(stream);
         }
     }
 
     /**
-     * 从流中读取一个字节。
+     * 根据资源名称返回一个 {@link StreamReader} 实例，用于读取指定资源文件。
+     * <p>
+     * 该方法通过 `ClassLoader` 加载指定名称的资源，并将返回的输入流包装成 {@link StreamReader}，
+     * 使得用户可以方便地进行流操作，并自动管理资源的关闭。
      *
-     * @return 读取到的字节（0~255），如果已经到达流末尾，返回 -1。
-     * @throws IOException 如果读取时发生异常
+     * @param name 资源的名称（相对于类路径）
+     * @return 一个 {@link StreamReader} 实例，用于读取指定资源文件
      */
-    @Override
-    public int read() throws IOException {
-        return stream.read();
+    public static StreamReader withResource(String name) {
+        return new StreamReader(UClass.classLoader.getResourceAsStream(name));
     }
 
 }

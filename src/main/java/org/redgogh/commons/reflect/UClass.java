@@ -73,6 +73,8 @@ import static org.redgogh.commons.string.StringUtils.streq;
  */
 public class UClass {
 
+    public static ClassLoader classLoader = UClass.class.getClassLoader();
+
     /**
      * #brief: 类描述符
      *
