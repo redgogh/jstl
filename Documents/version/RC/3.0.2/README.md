@@ -15,6 +15,7 @@
 - 新增 `MutableFile#loadProperties` 方法读取 `properties` 文件。
 - 新增 `StreamReader` 用于统一操作输入流对象。
 - 完善 `ByteBuffer` API。
+- 新增 `BeanUtils#directCopy` 直接属性拷贝方法。
 
 ## 👻 优化功能
 

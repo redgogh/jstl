@@ -23,10 +23,13 @@ package com.redgogh.commons.lang3.bean;
 import com.redgogh.commons.lang3.reflect.UClass;
 import com.redgogh.commons.lang3.reflect.UField;
 import com.redgogh.commons.lang3.string.StringUtils;
+import com.redgogh.commons.lang3.utils.Capturer;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import static com.redgogh.commons.lang3.string.StringUtils.strcount;
 
 /**
  * Bean工具类，方便实现对两个对象之间的属性拷贝，这属于浅拷贝。如果需要
@@ -80,9 +83,29 @@ public class BeanUtils {
         UClass dstClass = new UClass(dst);
         for (UField field : dstClass.getDeclaredFields()) {
             String name = field.getName();
-            if (ignores.length > 0 && StringUtils.strcount(name, ignores))
+            if (ignores.length > 0 && strcount(name, ignores))
                 continue;
             copyValue(src, new UClass(src), dst, dstClass, field);
+        }
+    }
+
+    /**
+     * 将 [src] 对象中的属性拷贝到 [dst] 对象中。
+     * <p>
+     * 直接拷贝，不经过 GET/SET 方法
+     *
+     * @param src    源对象实例
+     * @param dst   目标对象实例
+     * @param ignores 被忽略的属性名
+     */
+    public static void directCopy(Object src, Object dst, String... ignores) {
+        UClass srcClass = new UClass(dst);
+        UClass dstClass = new UClass(dst);
+        for (UField dstField : dstClass.getDeclaredFields()) {
+            String name = dstField.getName();
+            if (ignores.length > 0 && strcount(name, ignores))
+                continue;
+            Capturer.icall(() -> dstField.write(dst, srcClass.readFieldValue(name, src)));
         }
     }
 
