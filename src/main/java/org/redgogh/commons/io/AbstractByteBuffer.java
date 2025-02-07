@@ -22,6 +22,8 @@ package org.redgogh.commons.io;
 
 import org.redgogh.commons.utils.ArrayUtils;
 
+import static org.redgogh.commons.string.StringUtils.strwfmt;
+
 /**
  * ByteBuffer 默认抽象实现类
  *
@@ -35,15 +37,34 @@ public abstract class AbstractByteBuffer extends ByteBuffer {
     /** 字节缓冲区内部真实数据大小 */
     protected int capacity;
 
+    /** 标记当前索引位置 */
+    protected int markIndex = 0;
+
     /* 临时缓冲区 */
     private final byte[] tmp = new byte[16];
 
-    public int size() {
-        return capacity;
+    @Override
+    public ByteBuffer duplicate() {
+        return wrap(toByteArray());
     }
 
     public int readableBytes() {
         return capacity - position;
+    }
+
+    @Override
+    public int writeableBytes() {
+        return size() - position;
+    }
+
+    @Override
+    public int position() {
+        return position;
+    }
+
+    @Override
+    public int capacity() {
+        return capacity;
     }
 
     public ByteBuffer seekSet(int off) {
@@ -61,9 +82,46 @@ public abstract class AbstractByteBuffer extends ByteBuffer {
         return this;
     }
 
+    @Override
+    public void skipBytes(int len) {
+        seekCur(len);
+    }
+
+    @Override
+    public ByteBuffer markIndex() {
+        markIndex = position;
+        return this;
+    }
+
+    @Override
+    public ByteBuffer reset() {
+        position = markIndex;
+        return this;
+    }
+
+    @Override
+    public ByteBuffer rewind() {
+        position = 0;
+        return this;
+    }
+
     public byte readByte() {
         readBytes(tmp, 0, 1);
         return tmp[0];
+    }
+
+    @Override
+    public char readChar() {
+        readBytes(tmp, 0, Character.BYTES);
+        return (char) ((tmp[0] << 8) | (tmp[1] & 0xFF));
+    }
+
+    @Override
+    public char[] readChars(int n) {
+        char[] c = new char[n];
+        for (int i = 0; i < n; i++)
+            c[i] = readChar();
+        return c;
     }
 
     public int readShort() {
@@ -73,10 +131,10 @@ public abstract class AbstractByteBuffer extends ByteBuffer {
 
     public int readInt() {
         readBytes(tmp, 0, Integer.BYTES);
-        return ((tmp[0] & 0xff) << 24)
-                | ((tmp[1] & 0xff) << 16)
-                | ((tmp[2] & 0xff) << 8)
-                |  (tmp[3] & 0xff);
+        return ((tmp[0] & 0xFF) << 24)
+                | ((tmp[1] & 0xFF) << 16)
+                | ((tmp[2] & 0xFF) << 8)
+                |  (tmp[3] & 0xFF);
     }
 
     public long readLong() {
@@ -85,6 +143,23 @@ public abstract class AbstractByteBuffer extends ByteBuffer {
         for (int i = 0; i < Long.BYTES; i++)
             value = (value << 8) | (tmp[i] & 0xFF);
         return value;
+    }
+
+    @Override
+    public float readFloat() {
+        return Float.intBitsToFloat(readInt());
+    }
+
+    @Override
+    public double readDouble() {
+        return Double.longBitsToDouble(readLong());
+    }
+
+    @Override
+    public byte[] readBytes(int nb) {
+        byte[] buf = new byte[nb];
+        readBytes(buf, 0, nb);
+        return buf;
     }
 
     public int readBytes(byte[] b, int off, int len) {
@@ -98,39 +173,65 @@ public abstract class AbstractByteBuffer extends ByteBuffer {
         return len;
     }
 
-    public void writeShort(short value) {
-        writeBytes(new byte[]{
-                (byte) (value >> 8),
-                (byte) value,
+    public ByteBuffer writeByte(byte b) {
+        tmp[0] = b;
+        return writeBytes(tmp, 0, Byte.BYTES);
+    }
+
+    @Override
+    public ByteBuffer writeChar(char c) {
+        return writeBytes(new byte[] {
+                (byte) (c >> 8),
+                (byte)  c,
+        });
+    }
+
+    @Override
+    public ByteBuffer writeChars(char[] ch) {
+        for (char c : ch)
+            writeChar(c);
+        return this;
+    }
+
+    public ByteBuffer writeShort(short v) {
+        return writeBytes(new byte[]{
+                (byte) (v >> 8),
+                (byte)  v,
         }, 0, Short.BYTES);
     }
 
-    public void writeInt(int i) {
-        tmp[0] = (byte) ((i >> 24) & 0xff);
-        tmp[1] = (byte) ((i >> 16) & 0xff);
-        tmp[2] = (byte) ((i >> 8) & 0xff);
-        tmp[3] = (byte) (i & 0xff);
-        writeBytes(tmp, 0, Integer.BYTES);
+    public ByteBuffer writeInt(int i) {
+        tmp[0] = (byte) ((i >> 24) & 0xFF);
+        tmp[1] = (byte) ((i >> 16) & 0xFF);
+        tmp[2] = (byte) ((i >> 8) & 0xFF);
+        tmp[3] = (byte) (i & 0xFF);
+        return writeBytes(tmp, 0, Integer.BYTES);
     }
 
-    public void writeLong(long value) {
+    public ByteBuffer writeLong(long l) {
         for (int i = 0; i < Long.BYTES; i++)
-            tmp[i] = (byte) ((value >> ((Long.BYTES - i - 1) * 8)) & 0xFF);
-        writeBytes(tmp, 0, Long.BYTES);
+            tmp[i] = (byte) ((l >> ((Long.BYTES - i - 1) * 8)) & 0xFF);
+        return writeBytes(tmp, 0, Long.BYTES);
     }
 
-    public void writeByte(byte b) {
-        tmp[0] = b;
-        writeBytes(tmp, 0, Byte.BYTES);
+    @Override
+    public ByteBuffer writeFloat(float f) {
+        return writeInt(Float.floatToIntBits(f));
     }
 
-    public void writeBytes(byte[] b) {
-        writeBytes(b, 0, b.length);
+    @Override
+    public ByteBuffer writeDouble(double d) {
+        return writeLong(Double.doubleToLongBits(d));
     }
 
-    public void writeBytes(byte[] b, int off, int len) {
+    public ByteBuffer writeBytes(byte[] b) {
+        return writeBytes(b, 0, b.length);
+    }
+
+    public ByteBuffer writeBytes(byte[] b, int off, int len) {
         ArrayUtils.checkIndexSize(off, len, b.length);
         write0(b, off, len);
+        return this;
     }
 
     abstract void read0(byte[] b, int off, int len);
@@ -139,10 +240,15 @@ public abstract class AbstractByteBuffer extends ByteBuffer {
 
     public byte[] toByteArray() {
         byte[] retval = new byte[capacity];
+        markIndex();
         seekSet(0);
         readBytes(retval, 0, retval.length);
-        seekEnd(0);
+        reset();
         return retval;
     }
 
+    @Override
+    public String toString() {
+        return strwfmt("%s [size=%s, cap=%s, index=%s]", super.toString(), size(), capacity(), position());
+    }
 }

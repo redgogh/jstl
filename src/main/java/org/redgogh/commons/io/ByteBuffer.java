@@ -20,8 +20,10 @@ package org.redgogh.commons.io;
 
 /* Creates on 2023/5/8. */
 
+import java.nio.ByteOrder;
+
 /**
- * ByteBuffer 接口对象
+ * ByteBuffer 接口对象（大端模式）
  *
  * @author RedGogh
  */
@@ -93,6 +95,16 @@ public abstract class ByteBuffer {
     }
 
     /**
+     * #brief: 拷贝当前缓冲区数据。<p>
+     *
+     * 在内存空间中开辟一块新的区域，将当前缓冲区中的数据拷贝到新的缓冲区
+     * 对象中，两个缓冲区互不影响。
+     *
+     * @return 新的缓冲区对象
+     */
+    public abstract ByteBuffer duplicate();
+
+    /**
      * 获取缓冲区的总大小（单位：字节）。
      *
      * @return 缓冲区的大小。
@@ -107,6 +119,21 @@ public abstract class ByteBuffer {
      * @return 可读取的字节数。
      */
     public abstract int readableBytes();
+
+    /**
+     * @return 当前可写的字节数。
+     */
+    public abstract int writeableBytes();
+
+    /**
+     * @return 返回当前读写索引位置
+     */
+    public abstract int position();
+
+    /**
+     * @return 当前有效的缓冲区大小（单位：字节）。
+     */
+    public abstract int capacity();
 
     /**
      * 将缓冲区的读取/写入位置设置到指定的偏移量（相对于起始位置）。
@@ -133,6 +160,36 @@ public abstract class ByteBuffer {
     public abstract ByteBuffer seekEnd(int off);
 
     /**
+     * 跳过指定长度的字节，并且将读取/写入位置向后偏移指定长度。<p>
+     *
+     * @param len 跳过的字节数。
+     */
+    public abstract void skipBytes(int len);
+
+    /**
+     * #brief: 标记当前读取/写入索引位置。<p>
+     *
+     * 标记当前读写指针索引位置，用于跳过某段内存操作后回到之前标记的位置。使用
+     * {@code reset()} 函数回到最开始标记位置，默认索引位置为 0。<p>
+     */
+    public abstract ByteBuffer markIndex();
+
+    /**
+     * #brief: 回到之前标记的索引位置。<p>
+     *
+     * 将读写指针重置到最开始标记的位置，默认索引位置为 0。<p>
+     */
+    public abstract ByteBuffer reset();
+
+    /**
+     * #brief: 重置读写索引回到 0 的位置<p>
+     *
+     * 重置读写索引到最开始的位置，也就是索引 0，写入后读取缓冲区内部
+     * 数据。
+     */
+    public abstract ByteBuffer rewind();
+
+    /**
      * #brief: 读取一个 Byte 类型的值。<p>
      *
      * 根据当前 {@code position} 的开始位置往后读取 1 个字节的数据。
@@ -140,6 +197,26 @@ public abstract class ByteBuffer {
      * @return 从字节数组读到的 Byte 值
      */
     public abstract byte readByte();
+
+    /**
+     * #brief: 从字节数组中读取前 2 个字节并转换为 char 类型的值。<p>
+     *
+     * 根据当前 {@code position} 的开始位置往后读取 2 个字节的数据。将
+     * 读取到的字节数组转换成一个 char 类型结果。
+     *
+     * @return 从字节数组读到的 char 值
+     */
+    public abstract char readChar();
+
+    /**
+     * #brief: 从字节数组中读取前 n * Char.SIZE 个字节并转换为 char[] 类型的值。<p>
+     *
+     * 根据当前 {@code position} 的开始位置往后读取 {@code n * Char.SIZE} 个字节的数据。将
+     * 读取到的字节数组转换成一个 char[] 类型结果。
+     *
+     * @return 从字节数组读到的 char[] 值
+     */
+    public abstract char[] readChars(int n);
 
     /**
      * #brief: 从字节数组中读取前 2 个字节并转换为 short 类型的值。<p>
@@ -172,6 +249,36 @@ public abstract class ByteBuffer {
     public abstract long readLong();
 
     /**
+     * #brief: 从字节数组中读取前 8 个字节并转换为 float 类型的值。<p>
+     *
+     * 根据当前 {@code position} 的开始位置往后读取 4 个字节的数据。将
+     * 读取到的字节数组转换成一个 float 类型结果。
+     *
+     * @return 从字节数组读到的 float 值
+     */
+    public abstract float readFloat();
+
+    /**
+     * #brief: 从字节数组中读取前 8 个字节并转换为 double 类型的值。<p>
+     *
+     * 根据当前 {@code position} 的开始位置往后读取 8 个字节的数据。将
+     * 读取到的字节数组转换成一个 double 类型结果。
+     *
+     * @return 从字节数组读到的 double 值
+     */
+    public abstract double readDouble();
+
+    /**
+     * #brief: 从字节数组中读取指定长度的字节数据。<p>
+     *
+     * 读取指定长度的字节数，并返回读取的字节数组。
+     *
+     * @param nb 读取缓冲区长度
+     * @return 新的字节数组
+     */
+    public abstract byte[] readBytes(int nb);
+
+    /**
      * 读取 {@link ByteBuffer} 中的字节数据，通过传入的 {@code b}、{@code off}、{@code len} 这三个参数
      * 来确定需要读取多少个字节到 {@code b} 字节数组中。这个函数内部调用了 {@link #read0(byte[], int, int)}
      * 函数。它与 {@code read0()} 函数唯一不同的区别就在于，这个函数会做索引越界等校验，来确保读取时的安全性、
@@ -189,15 +296,45 @@ public abstract class ByteBuffer {
     public abstract int readBytes(byte[] b, int off, int len);
 
     /**
+     * #brief: 写入单个字节数据到缓冲区中
+     *
+     * @param b
+     *        要写入的字节
+     */
+    public abstract ByteBuffer writeByte(byte b);
+
+    /**
+     * #brief: 写入 char 类型的数据到字节缓冲区中。<p>
+     *
+     * 写入 char 值到字节缓冲区中，占用 2 个字节的空间。先写入高位字节，
+     * 后写入低位字节。
+     *
+     * @param c
+     *        char 类型
+     */
+    public abstract ByteBuffer writeChar(char c);
+
+    /**
+     * #brief: 写入 char[] 类型的数据到字节缓冲区中。<p>
+     *
+     * 写入 char[] 值到字节缓冲区中，占用 {@code value / Char.SIZE} 个字节的空间。先写入
+     * 高位字节，后写入低位字节。
+     *
+     * @param ch
+     *        char 数组
+     */
+    public abstract ByteBuffer writeChars(char[] ch);
+
+    /**
      * #brief: 写入 short 类型的数据到字节缓冲区中。<p>
      *
      * 写入 short 值到字节缓冲区中，占用 2 个字节的空间。先写入高位字节，
      * 后写入低位字节。
      *
-     * @param value
+     * @param v
      *        short 类型的整数
      */
-    public abstract void writeShort(short value);
+    public abstract ByteBuffer writeShort(short v);
 
     /**
      * #brief: 写入 int 类型的数据到字节缓冲区中。<p>
@@ -208,7 +345,7 @@ public abstract class ByteBuffer {
      * @param i
      *        int 类型的整数
      */
-    public abstract void writeInt(int i);
+    public abstract ByteBuffer writeInt(int i);
 
     /**
      * #brief: 写入 long 类型的数据到字节缓冲区中。<p>
@@ -216,23 +353,37 @@ public abstract class ByteBuffer {
      * 写入 long 值到字节缓冲区中，占用 8 个字节的空间。先写入高位字节，
      * 后写入低位字节。
      *
-     * @param value
+     * @param l
      *        long 类型的整数
      */
-    public abstract void writeLong(long value);
+    public abstract ByteBuffer writeLong(long l);
 
     /**
-     * #brief: 写入单个字节数据到缓冲区中
+     * #brief: 写入 lofloatng 类型的数据到字节缓冲区中。<p>
      *
-     * @param b
-     *        要写入的字节
+     * 写入 float 值到字节缓冲区中，占用 4 个字节的空间。先写入高位字节，
+     * 后写入低位字节。
+     *
+     * @param f
+     *        float 类型的整数
      */
-    public abstract void writeByte(byte b);
+    public abstract ByteBuffer writeFloat(float f);
+
+    /**
+     * #brief: 写入 double 类型的数据到字节缓冲区中。<p>
+     *
+     * 写入 double 值到字节缓冲区中，占用 8 个字节的空间。先写入高位字节，
+     * 后写入低位字节。
+     *
+     * @param d
+     *        double 类型的整数
+     */
+    public abstract ByteBuffer writeDouble(double d);
 
     /**
      * 将整个字节缓冲的内容写入到 {@link ByteBuffer} 中。
      */
-    public abstract void writeBytes(byte[] b);
+    public abstract ByteBuffer writeBytes(byte[] b);
 
     /**
      * 通过 {@code off} 索引读取字节数组中的内存写入到缓冲区。读取的第一个字节从 {@code b[off]} 开始
@@ -247,7 +398,7 @@ public abstract class ByteBuffer {
      * @param len
      *        写入长度
      */
-    public abstract void writeBytes(byte[] b, int off, int len);
+    public abstract ByteBuffer writeBytes(byte[] b, int off, int len);
 
     /**
      * #brief: ByteBuf 数据读取唯一接口，需要子类自行实现。<p>
@@ -299,5 +450,13 @@ public abstract class ByteBuffer {
      *         有效的数据拷贝到新分配的字节数组，并返回。
      */
     public abstract byte[] toByteArray();
+
+    /**
+     * #brief: 压缩缓冲区内存区域<p>
+     *
+     * 压缩当前缓冲区内存区域，将未实际使用的缓冲区区域清除，只保留有效缓冲区大小的
+     * 数据区域。
+     */
+    public abstract ByteBuffer compact();
 
 }

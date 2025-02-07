@@ -1,4 +1,4 @@
-package org.redgogh.commons.io;
+package org.redgogh.commons.test;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,58 +18,43 @@ package org.redgogh.commons.io;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-/* Creates on 2023/5/8. */
+import org.junit.Test;
+import org.redgogh.commons.io.ByteBuffer;
+import org.redgogh.commons.utils.Assert;
+import org.redgogh.commons.utils.Optional;
 
-/**
- * @author RedGogh
- */
-public class HeapByteBuffer extends AbstractByteBuffer {
+import java.util.ArrayList;
+import java.util.List;
 
-    /** 字节缓冲区 */
-    private byte[] buf;
-    /** 每次扩容大小为初始分配大小 */
-    private static final int initializeCapacity = IOUtils.DEFAULT_BYTE_BUFFER_SIZE;
+@SuppressWarnings("ALL")
+public class ByteBufferTest {
 
-    HeapByteBuffer(int capacity) {
-        buf = new byte[capacity];
-    }
+    @Test
+    public void writeTest() {
+        ByteBuffer byteBuffer = ByteBuffer.allocate();
+        byteBuffer.writeChar('A'); /* 2 Byte */
+        byteBuffer.writeInt(12138); /* 4 Byte */
+        byteBuffer.writeLong(10086L); /* 4 Byte */
+        byteBuffer.writeFloat(32.5f); /* 4 Byte */
+        byteBuffer.writeDouble(64.5d); /* 8 Byte */
 
-    /** 确保数据写入时缓冲区内部容量足够 */
-    private void ensureCapacity(int size) {
-        if (buf.length < (capacity + size)) {
-            byte[] nbuf = new byte[(buf.length + size) + initializeCapacity];
-            System.arraycopy(buf, 0, nbuf, 0, buf.length);
-            buf = nbuf;
-        }
-    }
+        System.out.println(byteBuffer);
+        byteBuffer.markIndex().rewind();
+        byteBuffer.readChar();
+        System.out.println(byteBuffer);
+        byteBuffer.reset();
+        System.out.println(byteBuffer);
+        byteBuffer.compact();
+        System.out.println(byteBuffer);
 
-    @Override
-    public int size() {
-        return buf.length;
-    }
+        System.out.println("==================================");
+        byteBuffer.rewind();
+        System.out.printf("%s: %s\n", byteBuffer, byteBuffer.readChar());
+        System.out.printf("%s: %s\n", byteBuffer, byteBuffer.readInt());
+        System.out.printf("%s: %s\n", byteBuffer, byteBuffer.readLong());
+        System.out.printf("%s: %s\n", byteBuffer, byteBuffer.readFloat());
+        System.out.printf("%s: %s\n", byteBuffer, byteBuffer.readDouble());
 
-    @Override
-    public void read0(byte[] b, int off, int len) {
-        System.arraycopy(buf, position, b, off, len);
-        position += len;
-    }
-
-    @Override
-    void write0(byte[] a, int off, int len) {
-        ensureCapacity(len);
-        System.arraycopy(a, off, buf, position, len);
-        position += len;
-        capacity += len;
-    }
-
-    @Override
-    public ByteBuffer compact() {
-        if (size() > capacity) {
-            byte[] nbuf = new byte[capacity];
-            System.arraycopy(buf, 0, nbuf, 0, capacity);
-            buf = nbuf;
-        }
-        return this;
     }
 
 }
