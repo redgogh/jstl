@@ -6,7 +6,7 @@
     <name>Dev Tools</name>
 
     <groupId>io.github.redgogh</groupId>
-    <artifactId>devtools</artifactId>
+    <artifactId>commons-lang3</artifactId>
     <version>3.0.2</version>
 
     <developers>
@@ -25,7 +25,7 @@
     </licenses>
 
     <url>https://github.com/redgogh/devtools</url>
-    <description>DevTools 是 Red Gogh 提供的一个核心扩展库，它可以与任何项目做集成，帮助团队完善项目开发规范，简化重复性工作。包含：集合操作、字符串，I/O 等一系列工具库。</description>
+    <description>Commons Lang3 是 Red Gogh 提供的 3.0 版本的核心扩展库，它可以与任何项目做集成，帮助团队完善项目开发规范，简化重复性工作。包含：集合操作、字符串，I/O 等一系列工具库。</description>
 
     <scm>
         <connection>scm:git@github.com:redgogh/devtools.git</connection>
