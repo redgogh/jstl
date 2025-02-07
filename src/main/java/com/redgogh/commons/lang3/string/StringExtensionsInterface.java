@@ -34,18 +34,18 @@ import static com.redgogh.commons.lang3.string.StringUtils.*;
  *
  * <h2>使用示例</h2>
  * <pre>
- *     strcut(a, off, len, STRING_OPERATOR_TRIM)
+ *     strcut(a, off, len, STRING_IFACE_TRIM_EXT)
  * </pre>
  *
  * @author RedGogh
  * @since 1.0
  */
-public enum StringOperator {
+public enum StringExtensionsInterface {
 
     /**
      * 字符串修剪操作，去除字符串前后的空白字符
      */
-    STRING_OPERATOR_TRIM {
+    STRING_IFACE_TRIM_EXT {
         @Override
         public String apply(String input) {
             return strip(input);
@@ -55,7 +55,7 @@ public enum StringOperator {
     /**
      * 将字符串转换为大写字母
      */
-    STRING_OPERATOR_UPPER_CASE {
+    STRING_IFACE_UPPER_CASE_EXT {
         @Override
         public String apply(String input) {
             return uppercase(input);
@@ -65,7 +65,7 @@ public enum StringOperator {
     /**
      * 将字符串转换为小写字母
      */
-    STRING_OPERATOR_LOWER_CASE {
+    STRING_IFACE_LOWER_CASE_EXT {
         @Override
         public String apply(String input) {
             return lowercase(input);
@@ -75,17 +75,17 @@ public enum StringOperator {
     /**
      * 将字符串首字母大写
      */
-    STRING_OPERATOR_CAPITALIZE {
+    STRING_IFACE_CAPITALIZE_EXT {
         @Override
         public String apply(String input) {
-            return strcut(input, 0, 1, STRING_OPERATOR_UPPER_CASE) + strcut(input,1, 0);
+            return strcut(input, 0, 1, STRING_IFACE_UPPER_CASE_EXT) + strcut(input,1, 0);
         }
     },
 
     /**
      * 字符串反转
      */
-    STRING_OPERATOR_REVERSE {
+    STRING_IFACE_REVERSE_EXT {
         @Override
         public String apply(String input) {
             return atos(new StringBuilder(input).reverse());
@@ -95,7 +95,7 @@ public enum StringOperator {
     /**
      * 去除字符串中的所有空格
      */
-    STRING_OPERATOR_REMOVE_SPACES {
+    STRING_IFACE_REMOVE_SPACES_EXT {
         @Override
         public String apply(String input) {
             return strrep(input, "\\s+", "");
@@ -105,7 +105,7 @@ public enum StringOperator {
     /**
      * 下划线格式转驼峰
      */
-    STRING_OPERATOR_LINE_HMP {
+    STRING_IFACE_LINE_HMP_EXT {
         @Override
         public String apply(String input) {
             return strlinehmp(input);

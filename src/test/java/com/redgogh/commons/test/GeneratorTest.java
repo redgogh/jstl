@@ -18,51 +18,51 @@ package com.redgogh.commons.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.commons.lang3.utils.RandomGenerator;
+import com.redgogh.commons.lang3.utils.Generator;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")
-public class RandomGeneratorTest {
+public class GeneratorTest {
 
     @Test
     public void nextCodeTest() {
         for (int i = 0; i < 165; i++) {
-            System.out.println(RandomGenerator.nextCode(8) + "75b0-11ef-a8c9-005056935d62");
+            System.out.println(Generator.randomCode(8) + "75b0-11ef-a8c9-005056935d62");
         }
     }
 
     @Test
     public void nextLetterTest() {
         for (int i = 0; i < 100; i++) {
-            System.out.println(RandomGenerator.nextLetterCode(8));
+            System.out.println(Generator.randomLetterCode(8));
         }
     }
 
     @Test
     public void nextNumberTest() {
         for (int i = 0; i < 100; i++) {
-            System.out.println(RandomGenerator.nextNumberCode(6));
+            System.out.println(Generator.randomNumberCode(6));
         }
     }
 
     @Test
     public void nextCodeRangeTest() {
         for (int i = 0; i < 100; i++) {
-            System.out.println(RandomGenerator.nextCode(0, 8));
+            System.out.println(Generator.randomCode(0, 8));
         }
     }
 
     @Test
     public void nextLetterRangeTest() {
         for (int i = 0; i < 100; i++) {
-            System.out.println(RandomGenerator.nextLetterCode(0, 6));
+            System.out.println(Generator.randomLetterCode(0, 6));
         }
     }
 
     @Test
     public void nextNumberRangeTest() {
         for (int i = 0; i < 100; i++) {
-            System.out.println(RandomGenerator.nextNumberCode(0, 6));
+            System.out.println(Generator.randomNumberCode(0, 6));
         }
     }
 

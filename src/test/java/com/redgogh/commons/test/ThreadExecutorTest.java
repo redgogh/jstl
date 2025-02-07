@@ -19,7 +19,7 @@ package com.redgogh.commons.test;
 \* -------------------------------------------------------------------------------- */
 
 import com.redgogh.commons.lang3.collection.Lists;
-import com.redgogh.commons.lang3.utils.RandomGenerator;
+import com.redgogh.commons.lang3.utils.Generator;
 import org.junit.Test;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class ThreadExecutorTest {
 
         for (int i = 0; i < (1024 * 1024); i++) {
             executor.execute(() -> {
-                numbers.add(RandomGenerator.nextInt(6) + RandomGenerator.nextInt(6));
+                numbers.add(Generator.randomInt(6) + Generator.randomInt(6));
             });
         }
 

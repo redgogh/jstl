@@ -29,12 +29,9 @@ import com.redgogh.commons.lang3.crypto.codec.*;
 import com.redgogh.commons.lang3.string.StringUtils;
 import com.redgogh.commons.lang3.utils.BasicConverter;
 import com.redgogh.commons.lang3.utils.Capturer;
-import org.redgogh.commons.lang3.crypto.codec.*;
-import org.redgogh.commons.crypto.codec.*;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import java.util.UUID;
 
 /**
  * `Crypto` 是一个工具类，提供了多种加密和解密算法的实现，支持常见的加密需求。
@@ -122,30 +119,6 @@ public final class Crypto {
      */
     public static int versionPatch(int version) {
         return version & 0xfff;
-    }
-
-    ////////////////////////////////////////////////////////////
-    /// 唯一Id生成
-    ////////////////////////////////////////////////////////////
-
-    /**
-     * @return 生成不带符号的UUID
-     */
-    public static String uuid() {
-        return StringUtils.uppercase(UUID.randomUUID())
-                .replace("-", "");
-    }
-
-    /**
-     * 随机从 uuid 字符串中取 {@code n} 个字符组合返回。
-     *
-     * @param n
-     *        随机从 uuid 中取 {@code number} 位字符
-     *
-     * @return 返回没有任何符号的 UUID
-     */
-    public static String uuid(int n) {
-        return StringUtils.strcut(uuid(), 0, n);
     }
 
     /**

@@ -224,7 +224,7 @@ public abstract class ByteBuffer {
      *
      * @return 从字节数组读到的 short 值
      */
-    public abstract int readShort();
+    public abstract short readShort();
 
     /**
      * #brief: 从字节数组中读取前 4 个字节并转换为 int 类型的值。<p>

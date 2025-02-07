@@ -22,15 +22,15 @@ import org.junit.Test;
 import com.redgogh.commons.lang3.utils.BasicConverter;
 import com.redgogh.commons.lang3.string.StringUtils;
 import com.redgogh.commons.lang3.collection.Lists;
-import com.redgogh.commons.lang3.utils.RandomGenerator;
+import com.redgogh.commons.lang3.utils.Generator;
 
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import static com.redgogh.commons.lang3.string.StringOperator.*;
 import static com.redgogh.commons.lang3.string.StringUtils.strcut;
+import static com.redgogh.commons.lang3.string.StringExtensionsInterface.*;
 
 @SuppressWarnings("ALL")
 public class StringUtilsTest {
@@ -38,12 +38,12 @@ public class StringUtilsTest {
     @Test
     public void operatorsTest() {
         String redGogh = " red_gogh ";
-        System.out.printf("STRING_OPERATOR_TRIM: <%s>\n", strcut(redGogh, 0, 0, STRING_OPERATOR_TRIM));
-        System.out.printf("STRING_OPERATOR_UPPER_CASE: <%s>\n", strcut(redGogh, 0, 0, STRING_OPERATOR_UPPER_CASE));
-        System.out.printf("STRING_OPERATOR_CAPITALIZE: <%s>\n", strcut(redGogh, 0, 0, STRING_OPERATOR_TRIM, STRING_OPERATOR_CAPITALIZE));
-        System.out.printf("STRING_OPERATOR_REVERSE: <%s>\n", strcut(redGogh, 0, 0, STRING_OPERATOR_REVERSE));
-        System.out.printf("STRING_OPERATOR_REMOVE_SPACES: <%s>\n", strcut(redGogh, 0, 0, STRING_OPERATOR_REMOVE_SPACES));
-        System.out.printf("STRING_OPERATOR_LINE_HMP: <%s>\n", strcut(redGogh, 0, 0, STRING_OPERATOR_REMOVE_SPACES, STRING_OPERATOR_LINE_HMP));
+        System.out.printf("STRING_OPERATOR_TRIM: <%s>\n", strcut(redGogh, 0, 0, STRING_IFACE_TRIM_EXT));
+        System.out.printf("STRING_OPERATOR_UPPER_CASE: <%s>\n", strcut(redGogh, 0, 0, STRING_IFACE_UPPER_CASE_EXT));
+        System.out.printf("STRING_OPERATOR_CAPITALIZE: <%s>\n", strcut(redGogh, 0, 0, STRING_IFACE_TRIM_EXT, STRING_IFACE_CAPITALIZE_EXT));
+        System.out.printf("STRING_OPERATOR_REVERSE: <%s>\n", strcut(redGogh, 0, 0, STRING_IFACE_REVERSE_EXT));
+        System.out.printf("STRING_OPERATOR_REMOVE_SPACES: <%s>\n", strcut(redGogh, 0, 0, STRING_IFACE_REMOVE_SPACES_EXT));
+        System.out.printf("STRING_OPERATOR_LINE_HMP: <%s>\n", strcut(redGogh, 0, 0, STRING_IFACE_REMOVE_SPACES_EXT, STRING_IFACE_LINE_HMP_EXT));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class StringUtilsTest {
 
         boolean isContinue = true;
         while (isContinue) {
-            paths.add("/" + RandomGenerator.nextLetterCode(3, 8) + "/" + RandomGenerator.nextLetterCode(0, 8) + "." + RandomGenerator.nextLetterCode(3, 6));
+            paths.add("/" + Generator.randomLetterCode(3, 8) + "/" + Generator.randomLetterCode(0, 8) + "." + Generator.randomLetterCode(3, 6));
             if (paths.size() > 10000000)
                 isContinue = false;
         }

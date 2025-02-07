@@ -21,7 +21,7 @@ package com.redgogh.commons.test;
 import org.junit.Test;
 import com.redgogh.commons.lang3.stream.Streams;
 import com.redgogh.commons.lang3.collection.Lists;
-import com.redgogh.commons.lang3.utils.RandomGenerator;
+import com.redgogh.commons.lang3.utils.Generator;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class StreamsTest {
     public void parallelTest() {
         List<Integer> objects = Lists.of();
         for (int i = 0; i < 100000000; i++)
-            objects.add(RandomGenerator.nextInt());
+            objects.add(Generator.randomInt());
 
         long start = time();
         System.out.println(Streams.count(objects, o -> o > 1024 && o < Integer.MAX_VALUE));

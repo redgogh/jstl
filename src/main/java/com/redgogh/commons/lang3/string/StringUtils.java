@@ -84,7 +84,7 @@ public class StringUtils {
      * <h2>功能特点</h2>
      * <ul>
      *     <li>支持对字符串进行按需操作（例如修剪空白字符）。</li>
-     *     <li>通过枚举类型 {@link StringOperator} 扩展支持更多操作。</li>
+     *     <li>通过枚举类型 {@link StringExtensionsInterface} 扩展支持更多操作。</li>
      * </ul>
      *
      * <h2>使用示例</h2>
@@ -94,15 +94,15 @@ public class StringUtils {
      * </pre>
      *
      * @param source   源字符串
-     * @param operators 要应用的字符串操作数组
+     * @param iface 要应用的字符串操作数组
      * @return 操作后的字符串
      */
-    private static String pipelineExecutor(String source, StringOperator[] operators) {
-        if (operators == null)
+    private static String pipelineExecutor(String source, StringExtensionsInterface[] iface) {
+        if (iface == null)
             return source;
 
-        for (StringOperator operator : operators)
-            source = operator.apply(source);
+        for (StringExtensionsInterface iface_ext : iface)
+            source = iface_ext.apply(source);
 
         return source;
     }
@@ -163,11 +163,11 @@ public class StringUtils {
      * 大多数字符集。返回的新字符串可以用于不区分大小写的比较。
      *
      * @param wstr 要转换的字符串对象
-     * @param operators 后处理选项
+     * @param iface 后处理选项
      * @return 转换后的小写字符串；如果输入为 null，则返回 null
      */
-    public static String lowercase(Object wstr, StringOperator... operators) {
-        return pipelineExecutor(atos(wstr, String::toLowerCase), operators);
+    public static String lowercase(Object wstr, StringExtensionsInterface... iface) {
+        return pipelineExecutor(atos(wstr, String::toLowerCase), iface);
     }
 
     /**
@@ -177,11 +177,11 @@ public class StringUtils {
      * 大多数字符集。返回的新字符串可以用于不区分大小写的比较。
      *
      * @param wstr 要转换的字符串对象
-     * @param operators 后处理选项
+     * @param iface 后处理选项
      * @return 转换后的大写字符串；如果输入为 null，则返回 null
      */
-    public static String uppercase(Object wstr, StringOperator... operators) {
-        return pipelineExecutor(atos(wstr, String::toUpperCase), operators);
+    public static String uppercase(Object wstr, StringExtensionsInterface... iface) {
+        return pipelineExecutor(atos(wstr, String::toUpperCase), iface);
     }
 
 
@@ -189,16 +189,16 @@ public class StringUtils {
      * 将字符串的首字母大写，并根据指定的操作数组执行进一步的字符串处理。
      *
      * <p>该方法将传入的字符串的首字母转换为大写，并根据提供的操作数组（如修剪、转换大小写等）对字符串进行处理。
-     * 通过 {@link StringOperator} 枚举支持链式操作。
+     * 通过 {@link StringExtensionsInterface} 枚举支持链式操作。
      *
      * @param wstr      需要处理的字符串对象
-     * @param operators 要应用的字符串操作数组
+     * @param iface 要应用的字符串操作数组
      * @return 处理后的字符串
      */
-    public static String strcap(Object wstr, StringOperator... operators) {
+    public static String strcap(Object wstr, StringExtensionsInterface... iface) {
         StringBuilder builder = new StringBuilder(atos(wstr));
         builder.replace(0, 1, uppercase(builder.charAt(0)));
-        return pipelineExecutor(atos(builder), operators);
+        return pipelineExecutor(atos(builder), iface);
     }
 
     /**
@@ -400,11 +400,11 @@ public class StringUtils {
      * @param wstr 要处理的字符串对象
      * @param regexp 用于匹配的正则表达式
      * @param value 用于替换的字符串
-     * @param operators 后处理选项
+     * @param iface 后处理选项
      * @return 替换后的字符串
      */
-    public static String strrep(Object wstr, String regexp, String value, StringOperator... operators) {
-        return pipelineExecutor(atos(wstr).replaceAll(regexp, value), operators);
+    public static String strrep(Object wstr, String regexp, String value, StringExtensionsInterface... iface) {
+        return pipelineExecutor(atos(wstr).replaceAll(regexp, value), iface);
     }
 
     /**
@@ -417,12 +417,12 @@ public class StringUtils {
      * @param delim 用于拆分的分隔符
      * @return 拆分后的字符串数组
      */
-    public static String[] strtok(Object wstr, String delim, StringOperator... operators) {
+    public static String[] strtok(Object wstr, String delim, StringExtensionsInterface... iface) {
         String[] origins = atos(wstr).split(delim);
 
-        if (operators != null) {
+        if (iface != null) {
             for (int i = 0; i < origins.length; i++) {
-                origins[i] = pipelineExecutor(origins[i], operators);
+                origins[i] = pipelineExecutor(origins[i], iface);
             }
         }
 
@@ -440,8 +440,8 @@ public class StringUtils {
      * @param len 截取的长度
      * @return 截取后的字符串
      */
-    public static String strcut(Object wstr, int off, int len, StringOperator... operators) {
-        return pipelineExecutor(atos(wstr, off, len), operators);
+    public static String strcut(Object wstr, int off, int len, StringExtensionsInterface... iface) {
+        return pipelineExecutor(atos(wstr, off, len), iface);
     }
 
     /**
@@ -547,11 +547,11 @@ public class StringUtils {
      * 适用于用户输入的规范化处理。
      *
      * @param wstr 要处理的字符串对象
-     * @param operators 后处理操作
+     * @param iface 后处理操作
      * @return 去除前后空白后的字符串
      */
-    public static String strip(Object wstr, StringOperator... operators) {
-        return pipelineExecutor(atos(wstr).trim(), operators);
+    public static String strip(Object wstr, StringExtensionsInterface... iface) {
+        return pipelineExecutor(atos(wstr).trim(), iface);
     }
 
     /**
@@ -577,7 +577,7 @@ public class StringUtils {
      * @param obj 要处理的字符串对象
      * @return 转换为驼峰风格后的字符串
      */
-    public static String strlinehmp(Object obj, StringOperator... operators) {
+    public static String strlinehmp(Object obj, StringExtensionsInterface... iface) {
         char[] charArray = atos(obj).toCharArray();
         StringBuilder buffer = new StringBuilder();
 
@@ -597,7 +597,7 @@ public class StringUtils {
             buffer.append(append);
         }
 
-        return pipelineExecutor(buffer.toString(), operators);
+        return pipelineExecutor(buffer.toString(), iface);
     }
 
 }

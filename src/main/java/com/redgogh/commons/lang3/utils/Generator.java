@@ -1,9 +1,15 @@
 package com.redgogh.commons.lang3.utils;
 
+import com.redgogh.commons.lang3.string.StringExtensionsInterface;
+
 import java.util.Random;
+import java.util.UUID;
+
+import static com.redgogh.commons.lang3.string.StringUtils.strcut;
+import static com.redgogh.commons.lang3.string.StringUtils.uppercase;
 
 /**
- * `RandomGenerator` 是一个用于生成随机数的工具类，提供了多种生成随机整数、浮点数和双精度数的方法。
+ * `Generator` 是一个用于生成随机数的工具类，提供了多种生成随机整数、浮点数和双精度数的方法。
  *
  * <p>该类包含静态方法，用于生成指定范围内的随机数。这些方法适用于需要生成随机数的场景，如
  * 随机化算法、模拟测试、数据生成等。
@@ -18,7 +24,7 @@ import java.util.Random;
  * @author RedGogh
  * @since 1.0
  */
-public class RandomGenerator {
+public class Generator {
 
     /**
      * 包含字母的静态常量数组。
@@ -39,6 +45,37 @@ public class RandomGenerator {
     }
 
     /**
+     * #brief: 生成一个不带符号的 UUID 字符串。<p>
+     *
+     * 该方法生成一个不带任何符号的 UUID 字符串实例，默认返回大写的
+     * UUID 字符串对象。并且支持字符串扩展接口调用。
+     * <p>
+     * 如果希望生成小写的 UUID 字符串可以使用以下方式：
+     * <pre>
+     * Generator.uuid(STRING_IFACE_LOWER_CASE_EXT);
+     * </pre>
+     *
+     * @param iface 字符串扩展接口
+     * @return 生成不带符号的UUID
+     */
+    public static String uuid(StringExtensionsInterface... iface) {
+        return uppercase(UUID.randomUUID(), iface)
+                .replace("-", "");
+    }
+
+    /**
+     * 随机从 uuid 字符串中取 {@code n} 个字符组合返回。
+     *
+     * @param n
+     *        随机从 uuid 中取 {@code number} 位字符
+     *
+     * @return 返回没有任何符号的 UUID
+     */
+    public static String uuid(int n, StringExtensionsInterface... iface) {
+        return strcut(uuid(iface), 0, n);
+    }
+
+    /**
      * #brief: 生成指定长度的随机代码
      *
      * <p>该方法生成一个随机长度的字符串，字符串长度由
@@ -48,8 +85,8 @@ public class RandomGenerator {
      * @param length 要生成的字符串的最大长度
      * @return 生成的随机代码
      */
-    public static String nextCode(int length) {
-        return nextCode(0, length, true);
+    public static String randomCode(int length) {
+        return randomCode(0, length, true);
     }
 
     /**
@@ -62,8 +99,8 @@ public class RandomGenerator {
      * @param max 最大长度
      * @return 生成的随机代码
      */
-    public static String nextCode(int min, int max) {
-        return nextCode(min, max, false);
+    public static String randomCode(int min, int max) {
+        return randomCode(min, max, false);
     }
 
     /**
@@ -79,12 +116,12 @@ public class RandomGenerator {
      * @param enableMaxLength 是否使用最大长度作为随机长度
      * @return 生成的随机代码
      */
-    private static String nextCode(int min, int max, boolean enableMaxLength) {
+    private static String randomCode(int min, int max, boolean enableMaxLength) {
         StringBuilder builder = new StringBuilder();
-        int loopCount = enableMaxLength ? max : nextInt(min, max);
+        int loopCount = enableMaxLength ? max : randomInt(min, max);
         for (int i = 0; i < loopCount; i++)
-            builder.append(nextBoolean() ? LETTER_ARRAY[nextInt(LETTER_ARRAY.length - 1)] :
-                    NUMBER_ARRAY[nextInt(NUMBER_ARRAY.length - 1)]);
+            builder.append(randomBoolean() ? LETTER_ARRAY[randomInt(LETTER_ARRAY.length - 1)] :
+                    NUMBER_ARRAY[randomInt(NUMBER_ARRAY.length - 1)]);
         return builder.toString();
     }
 
@@ -98,8 +135,8 @@ public class RandomGenerator {
      * @param length 要生成的字符串的最大长度
      * @return 生成的随机字母代码
      */
-    public static String nextLetterCode(int length) {
-        return nextLetterCode(0, length, true);
+    public static String randomLetterCode(int length) {
+        return randomLetterCode(0, length, true);
     }
 
     /**
@@ -112,8 +149,8 @@ public class RandomGenerator {
      * @param max 最大长度
      * @return 生成的随机字母代码
      */
-    public static String nextLetterCode(int min, int max) {
-        return nextLetterCode(min, max, false);
+    public static String randomLetterCode(int min, int max) {
+        return randomLetterCode(min, max, false);
     }
 
     /**
@@ -129,11 +166,11 @@ public class RandomGenerator {
      * @param enableMaxLength 是否使用最大长度作为随机长度
      * @return 生成的随机字母代码
      */
-    private static String nextLetterCode(int min, int max, boolean enableMaxLength) {
+    private static String randomLetterCode(int min, int max, boolean enableMaxLength) {
         StringBuilder builder = new StringBuilder();
-        int loopCount = enableMaxLength ? max : nextInt(min, max);
+        int loopCount = enableMaxLength ? max : randomInt(min, max);
         for (int i = 0; i < loopCount; i++)
-            builder.append(LETTER_ARRAY[nextInt(LETTER_ARRAY.length - 1)]);
+            builder.append(LETTER_ARRAY[randomInt(LETTER_ARRAY.length - 1)]);
         return builder.toString();
     }
 
@@ -147,8 +184,8 @@ public class RandomGenerator {
      * @param length 要生成的字符串的最大长度
      * @return 生成的随机数字代码
      */
-    public static String nextNumberCode(int length) {
-        return nextNumberCode(0, length, true);
+    public static String randomNumberCode(int length) {
+        return randomNumberCode(0, length, true);
     }
 
     /**
@@ -161,8 +198,8 @@ public class RandomGenerator {
      * @param max 最大长度
      * @return 生成的随机数字代码
      */
-    public static String nextNumberCode(int min, int max) {
-        return nextNumberCode(min, max, false);
+    public static String randomNumberCode(int min, int max) {
+        return randomNumberCode(min, max, false);
     }
 
     /**
@@ -178,11 +215,11 @@ public class RandomGenerator {
      * @param enableMaxLength 是否使用最大长度作为随机长度
      * @return 生成的随机数字代码
      */
-    private static String nextNumberCode(int min, int max, boolean enableMaxLength) {
+    private static String randomNumberCode(int min, int max, boolean enableMaxLength) {
         StringBuilder builder = new StringBuilder();
-        int loopCount = enableMaxLength ? max : nextInt(min, max);
+        int loopCount = enableMaxLength ? max : randomInt(min, max);
         for (int i = 0; i < loopCount; i++)
-            builder.append(NUMBER_ARRAY[nextInt(NUMBER_ARRAY.length - 1)]);
+            builder.append(NUMBER_ARRAY[randomInt(NUMBER_ARRAY.length - 1)]);
         return builder.toString();
     }
 
@@ -193,8 +230,8 @@ public class RandomGenerator {
      *
      * @return 生成的随机整数
      */
-    public static int nextInt() {
-        return nextInt(0, Integer.MAX_VALUE);
+    public static int randomInt() {
+        return randomInt(0, Integer.MAX_VALUE);
     }
 
     /**
@@ -205,8 +242,8 @@ public class RandomGenerator {
      * @param max 随机整数的最大值（包括）
      * @return 生成的随机整数
      */
-    public static int nextInt(int max) {
-        return nextInt(0, max);
+    public static int randomInt(int max) {
+        return randomInt(0, max);
     }
 
     /**
@@ -218,8 +255,8 @@ public class RandomGenerator {
      * @param max 随机整数的最大值（包括）
      * @return 生成的随机整数
      */
-    public static int nextInt(int min, int max) {
-        return (int) nextDouble(min, max);
+    public static int randomInt(int min, int max) {
+        return (int) randomDouble(min, max);
     }
 
     /**
@@ -229,8 +266,8 @@ public class RandomGenerator {
      *
      * @return 生成的随机浮点数
      */
-    public static float nextFloat() {
-        return nextFloat(0, Float.MAX_VALUE);
+    public static float randomFloat() {
+        return randomFloat(0, Float.MAX_VALUE);
     }
 
     /**
@@ -241,8 +278,8 @@ public class RandomGenerator {
      * @param max 随机浮点数的最大值（包括）
      * @return 生成的随机浮点数
      */
-    public static float nextFloat(float max) {
-        return nextFloat(0, max);
+    public static float randomFloat(float max) {
+        return randomFloat(0, max);
     }
 
     /**
@@ -254,8 +291,8 @@ public class RandomGenerator {
      * @param max 随机浮点数的最大值（包括）
      * @return 生成的随机浮点数
      */
-    public static float nextFloat(float min, float max) {
-        return (float) nextDouble(min, max);
+    public static float randomFloat(float min, float max) {
+        return (float) randomDouble(min, max);
     }
 
     /**
@@ -265,8 +302,8 @@ public class RandomGenerator {
      *
      * @return 生成的随机双精度数
      */
-    public static double nextDouble() {
-        return nextDouble(0, Double.MAX_VALUE);
+    public static double randomDouble() {
+        return randomDouble(0, Double.MAX_VALUE);
     }
 
     /**
@@ -277,8 +314,8 @@ public class RandomGenerator {
      * @param max 随机双精度数的最大值（包括）
      * @return 生成的随机双精度数
      */
-    public static double nextDouble(double max) {
-        return nextDouble(0, max);
+    public static double randomDouble(double max) {
+        return randomDouble(0, max);
     }
 
     /**
@@ -290,7 +327,7 @@ public class RandomGenerator {
      * @param max 随机双精度数的最大值（包括）
      * @return 生成的随机双精度数
      */
-    public static double nextDouble(double min, double max) {
+    public static double randomDouble(double min, double max) {
         return (Math.random() * ((max - min) + 1.0f)) + min;
     }
 
@@ -302,7 +339,7 @@ public class RandomGenerator {
      *
      * @return 随机生成的布尔值
      */
-    public static boolean nextBoolean() {
+    public static boolean randomBoolean() {
         return new Random().nextBoolean();
     }
 

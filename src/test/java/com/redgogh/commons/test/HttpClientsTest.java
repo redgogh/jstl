@@ -27,8 +27,6 @@ package com.redgogh.commons.test;
 
 import com.redgogh.commons.lang3.collection.Maps;
 import com.redgogh.commons.lang3.http.*;
-import org.redgogh.commons.http.*;
-import org.redgogh.commons.lang3.http.*;
 import com.redgogh.commons.lang3.io.MutableFile;
 import org.junit.Test;
 

@@ -28,6 +28,7 @@ public class ByteBufferTest {
     public void writeTest() {
         ByteBuffer byteBuffer = ByteBuffer.allocate();
         byteBuffer.writeChar('A'); /* 2 Byte */
+        byteBuffer.writeShort((short) 255); /* 2 Byte */
         byteBuffer.writeInt(12138); /* 4 Byte */
         byteBuffer.writeLong(10086L); /* 4 Byte */
         byteBuffer.writeFloat(32.5f); /* 4 Byte */
@@ -45,6 +46,7 @@ public class ByteBufferTest {
         System.out.println("==================================");
         byteBuffer.rewind();
         System.out.printf("%s: %s\n", byteBuffer, byteBuffer.readChar());
+        System.out.printf("%s: %s\n", byteBuffer, byteBuffer.readShort());
         System.out.printf("%s: %s\n", byteBuffer, byteBuffer.readInt());
         System.out.printf("%s: %s\n", byteBuffer, byteBuffer.readLong());
         System.out.printf("%s: %s\n", byteBuffer, byteBuffer.readFloat());

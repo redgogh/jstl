@@ -123,7 +123,7 @@ public abstract class AbstractByteBuffer extends ByteBuffer {
         return c;
     }
 
-    public int readShort() {
+    public short readShort() {
         readBytes(tmp, 0, Short.BYTES);
         return (short) ((tmp[0] << 8) | tmp[1] & 0xFF);
     }

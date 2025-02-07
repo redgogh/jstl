@@ -18,7 +18,7 @@ package com.redgogh.commons.experiment;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.commons.lang3.utils.RandomGenerator;
+import com.redgogh.commons.lang3.utils.Generator;
 import org.junit.Test;
 
 import java.util.Random;
@@ -40,7 +40,7 @@ public class FastRandomValueTest {
             fastNextRandom();
 
             /* 7 sec 118 ms */
-            RandomGenerator.nextInt(1000, 9999);
+            Generator.randomInt(1000, 9999);
         }
     }
 
