@@ -181,7 +181,7 @@ public class UField {
     static Field findDescriptorField(String name, Class<?> descriptor) {
         Field field = Optional.ifError(() -> descriptor.getDeclaredField(name),
                 findDescriptorField0(name, descriptor));
-        Assert.isNull(field, "属性 %s 在 %s 类中不存在", name, descriptor.getName());
+        Assert.notNull(field, "属性 %s 在 %s 类中不存在", name, descriptor.getName());
         return field;
     }
 

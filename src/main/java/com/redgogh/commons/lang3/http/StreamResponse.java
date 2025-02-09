@@ -82,7 +82,7 @@ public class StreamResponse implements Closeable {
      */
     public MutableFile transferTo(MutableFile mutableFile) {
         ResponseBody body = response.body();
-        Assert.isNull(body, "没有数据响应。");
+        Assert.notNull(body, "没有数据响应。");
         IOUtils.write(body.byteStream(), mutableFile);
         close();
         return mutableFile;

@@ -350,7 +350,7 @@ public class UClass {
     @SuppressWarnings("unchecked")
     public <R> R readFieldValue(String name, Object instance) {
         UField uField = fields.get(name);
-        Assert.isNull(fields.get(name), "未在 %s 类中找到 %s 属性。", getName(), name);
+        Assert.notNull(fields.get(name), "未在 %s 类中找到 %s 属性。", getName(), name);
         return (R) uField.read(instance);
     }
 

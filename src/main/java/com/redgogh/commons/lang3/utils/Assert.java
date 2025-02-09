@@ -21,11 +21,12 @@ package com.redgogh.commons.lang3.utils;
 import com.redgogh.commons.lang3.collection.Lists;
 import com.redgogh.commons.lang3.collection.Maps;
 import com.redgogh.commons.lang3.exception.AssertException;
-import com.redgogh.commons.lang3.string.StringUtils;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
+
+import static com.redgogh.commons.lang3.string.StringUtils.strempty;
 
 /**
  * 运行时断言工具类，这个类断言失败后并不会直接停止整个程序，而是会将所有失败的断言
@@ -101,8 +102,8 @@ public class Assert {
      * @param collection 要检查的集合
      * @throws AssertException 如果集合为空
      */
-    public static <E> void isEmpty(Collection<E> collection) {
-        isEmpty(collection, "collection is empty!");
+    public static <E> void notEmpty(Collection<E> collection) {
+        notEmpty(collection, "collection is empty!");
     }
 
     /**
@@ -113,7 +114,7 @@ public class Assert {
      * @param collection 要检查的集合
      * @throws AssertException 如果集合为空
      */
-    public static <E> void isEmpty(Collection<E> collection, String fmt, Object... args) {
+    public static <E> void notEmpty(Collection<E> collection, String fmt, Object... args) {
         if (Lists.isEmpty(collection))
             throw new AssertException(fmt, args);
     }
@@ -126,8 +127,8 @@ public class Assert {
      * @param map 要检查的 Map
      * @throws AssertException 如果 Map 为空
      */
-    public static <K, V> void isEmpty(Map<K, V> map) {
-        isEmpty(map, "map is empty!");
+    public static <K, V> void notEmpty(Map<K, V> map) {
+        notEmpty(map, "map is empty!");
     }
 
     /**
@@ -138,7 +139,7 @@ public class Assert {
      * @param map 要检查的 Map
      * @throws AssertException 如果 Map 为空
      */
-    public static <K, V> void isEmpty(Map<K, V> map, String fmt, Object... args) {
+    public static <K, V> void notEmpty(Map<K, V> map, String fmt, Object... args) {
         if (Maps.isEmpty(map))
             throw new AssertException(fmt, args);
     }
@@ -151,8 +152,8 @@ public class Assert {
      * @param source 要检查的字符串
      * @throws AssertException 如果字符串为 null 或空字符串
      */
-    public static void isEmpty(String source) {
-        isEmpty(source, "string is null or empty!");
+    public static void notEmpty(String source) {
+        notEmpty(source, "string is null or empty!");
     }
 
     /**
@@ -163,8 +164,8 @@ public class Assert {
      * @param source 要检查的字符串
      * @throws AssertException 如果字符串为 null 或空字符串
      */
-    public static void isEmpty(String source, String fmt, Object... args) {
-        if (StringUtils.strempty(source))
+    public static void notEmpty(String source, String fmt, Object... args) {
+        if (strempty(source))
             throw new AssertException(fmt, args);
     }
 
@@ -177,8 +178,8 @@ public class Assert {
      * @param condition 要检查的对象
      * @throws AssertException 如果条件为 null
      */
-    public static void isNull(Object condition) {
-        isNull(condition, "null");
+    public static void notNull(Object condition) {
+        notNull(condition, "null");
     }
 
     /**
@@ -191,8 +192,35 @@ public class Assert {
      * @param args 格式化参数
      * @throws AssertException 如果条件为 null
      */
-    public static void isNull(Object condition, String fmt, Object... args) {
+    public static void notNull(Object condition, String fmt, Object... args) {
         if (condition == null)
+            throw new AssertException(fmt, args);
+    }
+
+    /**
+     * 检查给定条件是否不为 null，如果是，则抛出断言异常。
+     *
+     * <p>此方法用于验证一个对象是否不为 null，如果不为 null，将抛出 {@link AssertException}。
+     *
+     * @param condition 要检查的对象
+     * @throws AssertException 如果条件为 null
+     */
+    public static void requiredNull(Object condition) {
+        requiredNull(condition, "not null");
+    }
+
+    /**
+     * 检查给定条件是否不为 null，如果是，则抛出断言异常，并使用自定义的异常信息。
+     *
+     * <p>此方法用于验证一个对象是否不为 null，如果不为 null，将抛出 {@link AssertException}，同时提供格式化支持。
+     *
+     * @param condition 要检查的对象
+     * @param fmt 自定义异常信息的格式
+     * @param args 格式化参数
+     * @throws AssertException 如果条件为 null
+     */
+    public static void requiredNull(Object condition, String fmt, Object... args) {
+        if (condition != null)
             throw new AssertException(fmt, args);
     }
 
@@ -229,7 +257,7 @@ public class Assert {
      * @throws AssertException 当 `actual` 和 `expected` 相等时抛出异常
      */
     public static void notEquals(Object actual, Object expected, String message, Object... args) {
-        if (!Objects.equals(actual, expected))
+        if (Objects.equals(actual, expected))
             throw new AssertException(message, args);
     }
 

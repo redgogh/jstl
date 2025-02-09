@@ -246,7 +246,7 @@ public enum TimeUnitOperator {
     }
 
     private TimeUnit toTimeUnitCheckNull() {
-        Assert.isNull(timeUnit, "TimeUnit不支持【%s】", name());
+        Assert.notNull(timeUnit, "TimeUnit不支持【%s】", name());
         return timeUnit;
     }
 
