@@ -115,11 +115,16 @@ public class BeanUtils {
         String getMethod = "get" + StringUtils.strcap(dstField.getName());
         if (dstClass.hasMethod(setMethod, dstField.getOriginType())) {
             if (srcClass.hasMethod(getMethod)) {
-                dstClass.invoke(dst, setMethod, srcClass.invoke(src, getMethod));
+                Object param = srcClass.invoke(src, getMethod);
+                if (param != null)
+                    dstClass.invoke(dst, setMethod, srcClass.invoke(src, getMethod, param));
             } else {
                 UField srcField = srcClass.getDeclaredField(dstField.getName());
-                if (srcField != null)
-                    dstClass.invoke(dst, setMethod, srcField.read(src));
+                if (srcField != null) {
+                    Object param = srcField.read(src);
+                    if (param != null)
+                        dstClass.invoke(dst, setMethod, srcField.read(src));
+                }
             }
         }
     }
