@@ -85,7 +85,7 @@ public class BeanUtils {
             String name = field.getName();
             if (ignores.length > 0 && strcount(name, ignores))
                 continue;
-            copyValue(src, new UClass(src), dst, dstClass, field);
+            Capturer.icall(() -> copyValue(src, new UClass(src), dst, dstClass, field));
         }
     }
 
