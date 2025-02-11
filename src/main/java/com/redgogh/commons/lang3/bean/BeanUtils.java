@@ -117,7 +117,7 @@ public class BeanUtils {
             if (srcClass.hasMethod(getMethod)) {
                 Object param = srcClass.invoke(src, getMethod);
                 if (param != null)
-                    dstClass.invoke(dst, setMethod, srcClass.invoke(src, getMethod, param));
+                    dstClass.invoke(dst, setMethod, param);
             } else {
                 UField srcField = srcClass.getDeclaredField(dstField.getName());
                 if (srcField != null) {
