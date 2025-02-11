@@ -123,7 +123,7 @@ public class BeanUtils {
                 if (srcField != null) {
                     Object param = srcField.read(src);
                     if (param != null)
-                        dstClass.invoke(dst, setMethod, srcField.read(src));
+                        dstClass.invoke(dst, setMethod, param);
                 }
             }
         }
