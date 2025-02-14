@@ -37,6 +37,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -88,7 +89,7 @@ public class UClass {
      *
      * <p>存储类的属性，以属性名称作为键，属性对象 {@link UField} 作为值。
      */
-    private final Map<String, UField> fields = Maps.of();
+    private final Map<String, UField> fields = new LinkedHashMap<>();
 
     /**
      * #brief: 构造器，使用对象实例初始化

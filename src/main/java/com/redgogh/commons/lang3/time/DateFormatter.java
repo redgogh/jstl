@@ -166,29 +166,6 @@ public class DateFormatter {
     }
 
     public static Date parse(String text) {
-        return parse(text, DASH_PATTERN_Y4H2M2D2H2M2S2);
-    }
-
-    /**
-     * #brief：根据解析规则将字符串对象转换为日期对象实例。<p>
-     *
-     * 根据解析规则将字符串对象转换为日期对象实例，通过 {@link SimpleDateFormat} 对象
-     * 实现日期格字符串解析。使用 `new` 关键字创建 {@link SimpleDateFormat} 对象实例满
-     * 足线程安全要求。
-     *
-     * @param text
-     *        解析日期对象，如：“2018-12-18”
-     *
-     * @param pattern
-     *        格式化规则，如：“yyyy-MM-dd”
-     *
-     * @return 解析后的字符串
-     */
-    public static Date parse(String text, String pattern) {
-        return compileFormatter(pattern).parse(text);
-    }
-
-    public static Date autoParse(String text) {
         int match = strlen(text);
         switch (match) {
             case STRING_TEMP_DATE_MONTH: {
@@ -212,6 +189,25 @@ public class DateFormatter {
             default:
                 throw new ValidationException("日期格式不正确");
         }
+    }
+
+    /**
+     * #brief：根据解析规则将字符串对象转换为日期对象实例。<p>
+     *
+     * 根据解析规则将字符串对象转换为日期对象实例，通过 {@link SimpleDateFormat} 对象
+     * 实现日期格字符串解析。使用 `new` 关键字创建 {@link SimpleDateFormat} 对象实例满
+     * 足线程安全要求。
+     *
+     * @param text
+     *        解析日期对象，如：“2018-12-18”
+     *
+     * @param pattern
+     *        格式化规则，如：“yyyy-MM-dd”
+     *
+     * @return 解析后的字符串
+     */
+    public static Date parse(String text, String pattern) {
+        return compileFormatter(pattern).parse(text);
     }
 
 }
