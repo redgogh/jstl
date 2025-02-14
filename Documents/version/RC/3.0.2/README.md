@@ -16,6 +16,7 @@
 - 新增 `StreamReader` 用于统一操作输入流对象。
 - 完善 `ByteBuffer` API。
 - 新增 `BeanUtils#directCopy` 直接属性拷贝方法。
+- 新增 `DateFormatter#autoParse` 支持自动根据常用格式解析。
 
 ## 👻 优化功能
 

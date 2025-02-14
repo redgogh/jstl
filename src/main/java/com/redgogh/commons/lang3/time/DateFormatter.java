@@ -20,10 +20,14 @@ package com.redgogh.commons.lang3.time;
 
 /* Creates on 2022/3/30. */
 
+import com.redgogh.commons.lang3.exception.ValidationException;
 import com.redgogh.commons.lang3.utils.Capturer;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.redgogh.commons.lang3.string.StringUtils.strcount;
+import static com.redgogh.commons.lang3.string.StringUtils.strlen;
 
 /**
  * `DateFormatter` 类提供日期和时间的格式化和解析功能。
@@ -42,6 +46,10 @@ import java.util.Date;
  * @since 1.0
  */
 public class DateFormatter {
+
+    private static final int STRING_TEMP_DATE_MONTH = 7; // strlen("0000-00");
+    private static final int STRING_TEMP_DATE_DAY = 10; //strlen("0000-00-00");
+    private static final int STRING_TEMP_DATE_TIME = 19; //strlen("0000-00-00 00:00:00");
 
     /** 短横线格式化风格 */
     public static final String DASH_PATTERN_Y4H2M2D2H2M2S2 = "yyyy-MM-dd HH:mm:ss";
@@ -178,6 +186,32 @@ public class DateFormatter {
      */
     public static Date parse(String text, String pattern) {
         return compileFormatter(pattern).parse(text);
+    }
+
+    public static Date autoParse(String text) {
+        int match = strlen(text);
+        switch (match) {
+            case STRING_TEMP_DATE_MONTH: {
+                return strcount(text, "-")
+                        ? parse(text, "yyyy-MM")
+                        : parse(text, "yyyy/MM");
+            }
+
+            case STRING_TEMP_DATE_DAY: {
+                return strcount(text, "-")
+                        ? parse(text, "yyyy-MM-dd")
+                        : parse(text, "yyyy/MM/dd");
+            }
+
+            case STRING_TEMP_DATE_TIME: {
+                return strcount(text, "-")
+                        ? parse(text, "yyyy-MM-dd HH:mm:ss")
+                        : parse(text, "yyyy/MM/dd HH:mm:ss");
+            }
+
+            default:
+                throw new ValidationException("日期格式不正确");
+        }
     }
 
 }
