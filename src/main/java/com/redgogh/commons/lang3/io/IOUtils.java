@@ -68,7 +68,7 @@ public class IOUtils {
      *
      * @param closeable 实现了 {@link Closeable} 的对象实例。
      */
-    public static void closeQuietly(Closeable closeable) {
+    public static void closeQuietly(AutoCloseable closeable) {
         if (closeable != null)
             Capturer.call(closeable::close);
     }
