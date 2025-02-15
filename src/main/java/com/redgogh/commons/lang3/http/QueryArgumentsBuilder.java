@@ -48,14 +48,14 @@ import static com.redgogh.commons.lang3.utils.BasicConverter.atos;
  * @since 1.0
  * @author RedGogh
  */
-public class QueryBuilder extends LinkedHashMap<String, String> {
+public class QueryArgumentsBuilder extends LinkedHashMap<String, String> {
 
     /**
      * 无参数构造方法
      *
      * <p>创建一个空的 `QueryBuilder` 实例。此实例不包含任何参数。
      */
-    public QueryBuilder() {
+    public QueryArgumentsBuilder() {
         this((String[]) null);
     }
 
@@ -72,7 +72,7 @@ public class QueryBuilder extends LinkedHashMap<String, String> {
      *
      * @param parameters 参数数组，每个参数应为“key=value”格式的字符串
      */
-    public QueryBuilder(String ...parameters) {
+    public QueryArgumentsBuilder(String ...parameters) {
         if (parameters != null) {
             for (String parameter : parameters) {
                 String[] a = StringUtils.strtok(parameter, "=");

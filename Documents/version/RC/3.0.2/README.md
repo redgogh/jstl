@@ -25,6 +25,7 @@
 - `Optional#ifNull -> Optional#ifNullable`。
 - 明确 `ByteBuffer#write` 函数写入类型。
 - `Crypto#uuid` 方法默认返回大写的 UUID。
+- 增强 `HttpClient` API 提供通用配置项配置。
 
 ## 🐞 BUG 修复
 

@@ -50,7 +50,7 @@ public class HttpClientsTest {
         multipartBody.put("document", new MutableFile("src/main/java/com/redgogh/tools/ArrayUtils.java"));
 
         Response response = HttpClient.open("POST", "http://127.0.0.1:8001/security/check/file")
-                .setRequestBody(multipartBody)
+                .addRequestBody(multipartBody)
                 .newCall();
 
         System.out.println(response);
@@ -59,7 +59,7 @@ public class HttpClientsTest {
     @Test
     public void callJSONBodyTest() {
         Response response = HttpClient.open("POST", "http://127.0.0.1:8001/security/save")
-                .setRequestBody(Maps.of("id", "12138", "name", "zs", "age", "18"))
+                .addRequestBody(Maps.of("id", "12138", "name", "zs", "age", "18"))
                 .newCall();
 
         System.out.println(response);
@@ -67,10 +67,10 @@ public class HttpClientsTest {
 
     @Test
     public void callGetTest() {
-        QueryBuilder queryBuilder = new QueryBuilder();
-        queryBuilder.putAll(Maps.of("id", "12138", "name", "zs", "age", "18"));
+        QueryArgumentsBuilder queryArgumentsBuilder = new QueryArgumentsBuilder();
+        queryArgumentsBuilder.putAll(Maps.of("id", "12138", "name", "zs", "age", "18"));
         Response response = HttpClient.open("GET", "http://127.0.0.1:8001/security/get")
-                .setQueryBuilder(queryBuilder)
+                .setQueryArgumentsBuilder(queryArgumentsBuilder)
                 .sslVerifierDisable()
                 .newCall();
 
@@ -88,7 +88,7 @@ public class HttpClientsTest {
     @Test
     public void callAsyncTest() throws InterruptedException {
         HttpClient.open("POST", "http://127.0.0.1:8001/testing/async-call")
-                .setQueryBuilder(new QueryBuilder("sleep=1"))
+                .setQueryArgumentsBuilder(new QueryArgumentsBuilder("sleep=1"))
                 .setReadTimeout(3)
                 .newCall(new Callback() {
                     @Override
