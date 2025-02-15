@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author RedGogh   
  */
-public enum TimeUnitOperator {
+public enum TimeUnits {
 
     /** 毫秒 */
     MILLISECONDS,
@@ -55,12 +55,12 @@ public enum TimeUnitOperator {
 
     private final TimeUnit timeUnit;
 
-    TimeUnitOperator() {
+    TimeUnits() {
         timeUnit = Enumerate.find(TimeUnit.class, name());
     }
 
-    public Date add(int value) {
-        return add(DateFormatter.now(), value);
+    public Date plus(int value) {
+        return plus(DateFormatter.now(), value);
     }
 
     /**
@@ -77,7 +77,7 @@ public enum TimeUnitOperator {
      *
      * @return 加上对应 TimeUnits + unit 后的日期
      */
-    public Date add(Date date, int unit) {
+    public Date plus(Date date, int unit) {
         DateTime calc = new DateTime(date);
         DateTime retval = null;
         switch (this) {

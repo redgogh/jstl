@@ -12,7 +12,7 @@ package com.redgogh.commons.lang3.utils;
 |*                                                                                  *|
 |*    Unless required by applicable law or agreed to in writing, software           *|
 |*    distributed under the License is distributed on an "AS IS" BASIS,             *|
-|*    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.      *|
+|*    WITHOUT WARRANTIES OR exprS OF ANY KIND, either express or implied.      *|
 |*    See the License for the specific language governing permissions and           *|
 |*    limitations under the License.                                                *|
 |*                                                                                  *|
@@ -24,9 +24,9 @@ import com.redgogh.commons.lang3.exception.AssertException;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Objects;
 
 import static com.redgogh.commons.lang3.string.StringUtils.strempty;
+import static com.redgogh.commons.lang3.utils.BasicConverter.anyeq;
 
 /**
  * 运行时断言工具类，这个类断言失败后并不会直接停止整个程序，而是会将所有失败的断言
@@ -41,11 +41,11 @@ public class Assert {
      *
      * <p>此方法用于验证某个条件是否为 true，如果条件为 true，将抛出 {@link AssertException}。
      *
-     * @param condition 要检查的条件
+     * @param expr 要检查的条件
      * @throws AssertException 如果条件为 true
      */
-    public static void isTrue(boolean condition) {
-        isTrue(condition, "assert condition == true");
+    public static void requiredTrue(boolean expr) {
+        requiredTrue(expr, "assert expr == true");
     }
 
     /**
@@ -53,15 +53,15 @@ public class Assert {
      *
      * <p>此方法用于在条件不满足时触发异常，便于进行断言检查，确保程序的状态符合预期。
      *
-     * @param condition 需要检查的条件
+     * @param expr 需要检查的条件
      * @param fmt 自定义异常信息的格式化字符串
      * @param args 格式化字符串的参数
      *
-     * @throws AssertException 如果 {@code condition} 为 true，将抛出异常，并使用 {@code fmt} 和 {@code args}
+     * @throws AssertException 如果 {@code expr} 为 true，将抛出异常，并使用 {@code fmt} 和 {@code args}
      *                         格式化异常信息。
      */
-    public static void isTrue(boolean condition, String fmt, Object... args) {
-        if (condition)
+    public static void requiredTrue(boolean expr, String fmt, Object... args) {
+        if (!expr)
             throw new AssertException(fmt, args);
     }
 
@@ -70,11 +70,11 @@ public class Assert {
      *
      * <p>此方法用于验证某个条件是否为 false，如果条件为 false，将抛出 {@link AssertException}。
      *
-     * @param condition 要检查的条件
+     * @param expr 要检查的条件
      * @throws AssertException 如果条件为 false
      */
-    public static void isFalse(boolean condition) {
-        isFalse(condition, "assert condition == false");
+    public static void requiredFalse(boolean expr) {
+        requiredFalse(expr, "assert expr == false");
     }
 
     /**
@@ -82,15 +82,15 @@ public class Assert {
      *
      * <p>此方法用于在条件不满足时触发异常，便于进行断言检查，确保程序的状态符合预期。
      *
-     * @param condition 需要检查的条件
+     * @param expr 需要检查的条件
      * @param fmt 自定义异常信息的格式化字符串
      * @param args 格式化字符串的参数
      *
-     * @throws AssertException 如果 {@code condition} 为 false，将抛出异常，并使用 {@code fmt} 和 {@code args}
+     * @throws AssertException 如果 {@code expr} 为 false，将抛出异常，并使用 {@code fmt} 和 {@code args}
      *                         格式化异常信息。
      */
-    public static void isFalse(boolean condition, String fmt, Object... args) {
-        if (!condition)
+    public static void requiredFalse(boolean expr, String fmt, Object... args) {
+        if (expr)
             throw new AssertException(fmt, args);
     }
 
@@ -175,11 +175,11 @@ public class Assert {
      *
      * <p>此方法用于验证一个对象是否为 null，如果为 null，将抛出 {@link AssertException}。
      *
-     * @param condition 要检查的对象
+     * @param expr 要检查的对象
      * @throws AssertException 如果条件为 null
      */
-    public static void notNull(Object condition) {
-        notNull(condition, "null");
+    public static void notNull(Object expr) {
+        notNull(expr, "null");
     }
 
     /**
@@ -187,13 +187,13 @@ public class Assert {
      *
      * <p>此方法用于验证一个对象是否为 null，如果为 null，将抛出 {@link AssertException}，同时提供格式化支持。
      *
-     * @param condition 要检查的对象
+     * @param expr 要检查的对象
      * @param fmt 自定义异常信息的格式
      * @param args 格式化参数
      * @throws AssertException 如果条件为 null
      */
-    public static void notNull(Object condition, String fmt, Object... args) {
-        if (condition == null)
+    public static void notNull(Object expr, String fmt, Object... args) {
+        if (expr == null)
             throw new AssertException(fmt, args);
     }
 
@@ -202,11 +202,11 @@ public class Assert {
      *
      * <p>此方法用于验证一个对象是否不为 null，如果不为 null，将抛出 {@link AssertException}。
      *
-     * @param condition 要检查的对象
+     * @param expr 要检查的对象
      * @throws AssertException 如果条件为 null
      */
-    public static void requiredNull(Object condition) {
-        requiredNull(condition, "not null");
+    public static void requiredNull(Object expr) {
+        requiredNull(expr, "not null");
     }
 
     /**
@@ -214,13 +214,13 @@ public class Assert {
      *
      * <p>此方法用于验证一个对象是否不为 null，如果不为 null，将抛出 {@link AssertException}，同时提供格式化支持。
      *
-     * @param condition 要检查的对象
+     * @param expr 要检查的对象
      * @param fmt 自定义异常信息的格式
      * @param args 格式化参数
      * @throws AssertException 如果条件为 null
      */
-    public static void requiredNull(Object condition, String fmt, Object... args) {
-        if (condition != null)
+    public static void requiredNull(Object expr, String fmt, Object... args) {
+        if (expr != null)
             throw new AssertException(fmt, args);
     }
 
@@ -257,8 +257,46 @@ public class Assert {
      * @throws AssertException 当 `actual` 和 `expected` 相等时抛出异常
      */
     public static void notEquals(Object actual, Object expected, String message, Object... args) {
-        if (Objects.equals(actual, expected))
+        if (anyeq(actual, expected))
             throw new AssertException(message, args);
     }
+
+    /**
+     * #brief: 断言两个对象相等
+     *
+     * <p>该方法用于判断两个对象是否相等。如果两个
+     * 对象不相等，则抛出 `AssertException`，提示断言
+     * 失败；如果相等，则正常结束。
+     *
+     * <p>该方法可用于单元测试或需要验证对象相等的场景。
+     *
+     * @param actual 实际值
+     * @param expected 期望值
+     * @throws AssertException 当 `actual` 和 `expected` 相等时抛出异常
+     */
+    public static void requiredEquals(Object actual, Object expected) {
+        requiredEquals(actual, expected, "assert actual != expected");
+    }
+
+    /**
+     * #brief: 断言两个对象相等
+     *
+     * <p>该方法用于判断两个对象是否相等。如果两个
+     * 对象不相等，则抛出 `AssertException`，提示断言
+     * 失败；如果相等，则正常结束。
+     *
+     * <p>该方法可用于单元测试或需要验证对象相等的场景。
+     *
+     * @param actual 实际值
+     * @param expected 期望值
+     * @param message 自定义异常信息
+     * @param args 格式化参数
+     * @throws AssertException 当 `actual` 和 `expected` 不相等时抛出异常
+     */
+    public static void requiredEquals(Object actual, Object expected, String message, Object... args) {
+        if (anyeq(actual, expected))
+            throw new AssertException(message, args);
+    }
+
 
 }

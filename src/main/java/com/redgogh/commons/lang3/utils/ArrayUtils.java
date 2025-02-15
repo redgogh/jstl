@@ -77,7 +77,7 @@ public class ArrayUtils {
      * @throws IllegalArgumentException 如果偏移量和长度的和超出数组大小范围
      */
     public static void checkIndexSize(int off, int len, int size) {
-        Assert.isFalse(!((off + len ) > size), "Array offset and size out of index: %s", size);
+        Assert.requiredTrue(!((off + len ) > size), "Array offset and size out of index: %s", size);
     }
 
     /**

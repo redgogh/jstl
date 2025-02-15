@@ -411,7 +411,7 @@ public class HttpClient {
         /* response */
         com.redgogh.commons.lang3.http.Response retval = new com.redgogh.commons.lang3.http.Response(okResponse.code(), okResponse.headers(), okResponse.body());
 
-        Assert.isFalse(okResponse.isSuccessful(), "HTTP请求出错（%s）\n    - URL：%s \n    - Request Body：%s \n    - Message: %s",
+        Assert.requiredTrue(okResponse.isSuccessful(), "HTTP请求出错（%s）\n    - URL：%s \n    - Request Body：%s \n    - Message: %s",
                 okResponse.code(), url, JSON.toJSONString(object), retval);
 
         return retval;
