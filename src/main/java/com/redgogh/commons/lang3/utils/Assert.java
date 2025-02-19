@@ -298,5 +298,27 @@ public class Assert {
             throw new AssertException(message, args);
     }
 
+    /**
+     * #brief: 判断字符串对象是否为空对象
+     *
+     * @param text 文本内容
+     * @throws AssertException 如果不存在文本就抛出异常
+     */
+    public static void hasText(String text) {
+        hasText(text, "no text");
+    }
+
+    /**
+     * #brief: 判断字符串对象是否为空对象
+     *
+     * @param text 文本内容
+     * @param message 自定义异常信息
+     * @param args 格式化参数
+     * @throws AssertException 如果不存在文本就抛出异常
+     */
+    public static void hasText(String text, String message, Object... args) {
+        if (strempty(text))
+            throw new AssertException(message, args);
+    }
 
 }
