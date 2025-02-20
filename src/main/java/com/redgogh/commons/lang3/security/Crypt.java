@@ -25,6 +25,7 @@ package com.redgogh.commons.lang3.security;
 
 /* Creates on 2023/5/16. */
 
+import com.redgogh.commons.lang3.security.cipher.RSACipher;
 import com.redgogh.commons.lang3.security.codec.*;
 import com.redgogh.commons.lang3.string.StringUtils;
 import com.redgogh.commons.lang3.utils.BasicConverter;
@@ -55,7 +56,7 @@ import javax.crypto.SecretKey;
  *     String hash = Crypto.MD5.lower32("Hello World");
  * </pre>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  */
 public final class Crypt {
@@ -65,6 +66,7 @@ public final class Crypt {
     public static final SHA256 SHA256 = new SHA256Codec(); // SHA-256
     public static final URL    URL    = new URLCodec();    // URL
     public static final AES    AES    = new AESCodec();    // AES
+    public static final RSA    RSA    = new RSACipher();   // RSA
 
     /**
      * 生成一个版本号

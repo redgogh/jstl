@@ -44,7 +44,7 @@ package com.redgogh.commons.lang3.utils;
  *   <li>其他与数组操作相关的常见功能</li>
  * </ul>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.8
  */
 public class ArrayUtils {

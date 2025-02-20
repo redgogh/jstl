@@ -55,7 +55,7 @@ import com.redgogh.commons.lang3.string.StringUtils;
  *
  * <p>完整的使用示例和测试用例可以参考项目的测试包下的相关测试类。
  *
- * @author RedGogh
+ * @author Red Gogh
  *
  * @see Enum
  * @see InvalidArgumentException

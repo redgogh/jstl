@@ -27,7 +27,7 @@ import java.util.Map;
 
 /**
  * @since 1.0
- * @author RedGogh
+ * @author Red Gogh
  */
 @SuppressWarnings({"UnusedReturnValue"})
 public class RequestConfigure {

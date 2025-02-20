@@ -23,7 +23,7 @@ package com.redgogh.commons.lang3.io;
 /**
  * ByteBuffer 接口对象（大端模式）
  *
- * @author RedGogh
+ * @author Red Gogh
  */
 @SuppressWarnings("UnusedReturnValue")
 public abstract class ByteBuffer {

@@ -220,7 +220,7 @@ if (...) {
 * 用户服务对象类，所有针对于用户的操作都必须使用这个类的接口
 * 统一管理对用户数据的增删改查管理。
 *
-* @author RedGogh
+* @author Red Gogh
   */
   public class UserService {
   ...
@@ -238,7 +238,7 @@ if (...) {
 * 用户服务对象类，所有针对于用户的操作都必须使用这个类的接口
 * 统一管理对用户数据的增删改查管理。
 *
-* @author RedGogh
+* @author Red Gogh
 * @author your name
   */
   public class UserService {

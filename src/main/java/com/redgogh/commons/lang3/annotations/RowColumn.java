@@ -24,7 +24,7 @@ import java.lang.annotation.*;
  *     }
  * </pre>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  */
 @Target(ElementType.FIELD)

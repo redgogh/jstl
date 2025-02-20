@@ -67,7 +67,7 @@ import static com.redgogh.commons.lang3.utils.BasicConverter.atos;
  *     boolean isSuccess = response.isSuccess();
  * </pre>
  *
- * @author RedGogh
+ * @author Red Gogh
  *
  * @see JSONObject
  * @since 1.0

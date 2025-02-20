@@ -25,7 +25,7 @@ import com.redgogh.commons.lang3.string.StringUtils;
 import com.redgogh.commons.lang3.iface.ActionFunction;
 
 /**
- * @author RedGogh
+ * @author Red Gogh
  */
 public class Optional {
 

@@ -66,7 +66,7 @@ import static com.redgogh.commons.lang3.utils.BasicConverter.atos;
  *     boolean isEqual = StringUtils.streq("test", "TEST");
  * </pre>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  */
 public class StringUtils {

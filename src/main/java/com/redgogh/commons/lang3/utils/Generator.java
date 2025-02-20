@@ -21,7 +21,7 @@ import static com.redgogh.commons.lang3.string.StringUtils.uppercase;
  *     <li>生成指定范围内的随机双精度数。</li>
  * </ul>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  */
 public class Generator {

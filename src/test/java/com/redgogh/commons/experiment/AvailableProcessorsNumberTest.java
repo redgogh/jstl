@@ -3,7 +3,7 @@ package com.redgogh.commons.experiment;
 import org.junit.Test;
 
 /**
- * @author RedGogh
+ * @author Red Gogh
  */
 public class AvailableProcessorsNumberTest {
 

@@ -9,7 +9,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 /**
- * @author RedGogh
+ * @author Red Gogh
  */
 public class URLCodec implements URL {
 

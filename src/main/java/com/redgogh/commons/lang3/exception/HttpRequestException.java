@@ -34,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
  *     throw new HttpRequestException("HTTP 请求失败：状态码 %d", responseCode);
  * </pre>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  */
 public class HttpRequestException extends CentralRuntimeException {

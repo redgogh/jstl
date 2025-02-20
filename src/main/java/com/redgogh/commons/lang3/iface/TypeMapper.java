@@ -34,7 +34,7 @@ package com.redgogh.commons.lang3.iface;
  * @param <T> 输入值的类型
  * @param <R> 输出值的类型
  *
- * @author RedGogh
+ * @author Red Gogh
  */
 public interface TypeMapper<T, R> {
 

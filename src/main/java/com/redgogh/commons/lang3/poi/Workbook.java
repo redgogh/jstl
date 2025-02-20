@@ -56,7 +56,7 @@ import java.util.Map;
  *
  * <p>注意：在使用此类时，请确保已添加 Apache POI 依赖。
  *
- * @author RedGogh
+ * @author Red Gogh
  */
 public class Workbook implements Iterable<Row> {
 

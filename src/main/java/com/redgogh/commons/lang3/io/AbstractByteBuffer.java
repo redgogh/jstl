@@ -26,7 +26,7 @@ import com.redgogh.commons.lang3.utils.ArrayUtils;
 /**
  * ByteBuffer 默认抽象实现类
  *
- * @author RedGogh
+ * @author Red Gogh
  */
 public abstract class AbstractByteBuffer extends ByteBuffer {
 

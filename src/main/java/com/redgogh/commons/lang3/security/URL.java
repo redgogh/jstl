@@ -9,7 +9,7 @@ import com.redgogh.commons.lang3.security.codec.URLCodec;
  * <p>该接口的实现类需要提供对字符串进行 URL 编码和解码的功能，
  * 支持通过默认和自定义编码方式处理 URL 字符串。
  *
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  * @see URLCodec
  */

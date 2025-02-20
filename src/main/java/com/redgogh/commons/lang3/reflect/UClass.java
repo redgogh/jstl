@@ -66,7 +66,7 @@ import static com.redgogh.commons.lang3.utils.BasicConverter.anycount;
  *     <li>访问属性和调用静态方法时需要保证传入的名称正确，否则会抛出异常。</li>
  * </ul>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @see Class
  * @see Constructor
  * @see Method

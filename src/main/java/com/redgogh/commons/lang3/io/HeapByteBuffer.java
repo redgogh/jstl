@@ -21,7 +21,7 @@ package com.redgogh.commons.lang3.io;
 /* Creates on 2023/5/8. */
 
 /**
- * @author RedGogh
+ * @author Red Gogh
  */
 public class HeapByteBuffer extends AbstractByteBuffer {
 

@@ -34,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
  *     throw new IOReadException("读取文件 %s 时发生错误：%s", filePath, errorMessage);
  * </pre>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  */
 public class IOReadException extends CentralRuntimeException {

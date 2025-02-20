@@ -34,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
  *     throw new AssertException("断言失败：%s 应为 true", "条件");
  * </pre>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  */
 public class AssertException extends CentralRuntimeException {

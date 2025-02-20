@@ -34,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
  *     throw new InvalidArgumentException("非法参数：期望值在范围 %d 到 %d 之间，但实际值为 %d", minValue, maxValue, actualValue);
  * </pre>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  */
 public class InvalidArgumentException extends CentralRuntimeException {

@@ -28,7 +28,7 @@ import java.util.concurrent.*;
  *     }, 10, TimeUnitOperator.SECONDS);
  * </pre>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @see ExecutorService
  * @see ScheduledExecutorService
  * @since 1.0

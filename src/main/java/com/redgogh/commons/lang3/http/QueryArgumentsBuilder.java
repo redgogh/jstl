@@ -46,7 +46,7 @@ import static com.redgogh.commons.lang3.utils.BasicConverter.atos;
  *
  * @see LinkedHashMap
  * @since 1.0
- * @author RedGogh
+ * @author Red Gogh
  */
 public class QueryArgumentsBuilder extends LinkedHashMap<String, String> {
 

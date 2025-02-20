@@ -23,7 +23,7 @@ package com.redgogh.commons.lang3.utils;
 /**
  * 雪花算法生成器实例化对象.
  *
- * @author RedGogh
+ * @author Red Gogh
  */
 public final class SnowflakeGenerator {
 

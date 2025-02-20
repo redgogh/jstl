@@ -30,7 +30,7 @@ package com.redgogh.commons.lang3.http;
  * <p>实现此接口的类可以提供自定义的处理逻辑，以便在接收到八位字节流
  * 或发生错误时采取相应的措施。
  *
- * @author RedGogh
+ * @author Red Gogh
  */
 public interface StreamCallback {
 

@@ -32,7 +32,7 @@ import org.apache.poi.ss.usermodel.DateUtil;
  *     <li>日期格式默认为 "yyyy/MM/dd HH:mm:ss"，可根据需求调整。</li>
  * </ul>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @see Cell
  * @see DataFormatter
  * @see DateUtil

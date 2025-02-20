@@ -55,7 +55,7 @@ import java.util.*;
  *
  * <p>该类旨在为开发者提供方便且高效的 Set 操作工具，是日常开发中处理 Set 对象的理想选择。
  *
- * @author RedGogh
+ * @author Red Gogh
  *
  * @see Set
  * @see HashSet

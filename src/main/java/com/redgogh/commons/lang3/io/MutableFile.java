@@ -54,7 +54,7 @@ import java.util.Properties;
  *
  * @see java.io.File
  * @since 1.0
- * @author RedGogh
+ * @author Red Gogh
  */
 public class MutableFile extends java.io.File {
 

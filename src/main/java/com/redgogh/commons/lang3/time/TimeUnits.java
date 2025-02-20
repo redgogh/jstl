@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 时间单位操作符
  *
- * @author RedGogh   
+ * @author Red Gogh   
  */
 public enum TimeUnits {
 

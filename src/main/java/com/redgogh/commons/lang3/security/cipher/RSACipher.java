@@ -40,7 +40,7 @@ import static com.redgogh.commons.lang3.utils.BasicConverter.atob;
 import static com.redgogh.commons.lang3.utils.BasicConverter.atos;
 
 /**
- * @author RedGogh
+ * @author Red Gogh
  */
 @SuppressWarnings("DataFlowIssue")
 public class RSACipher implements RSA {

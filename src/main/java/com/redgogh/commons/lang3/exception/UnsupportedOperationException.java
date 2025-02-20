@@ -34,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
  *     throw new UnsupportedOperationException("操作 %s 不被支持：%s", operationName, errorMessage);
  * </pre>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  */
 public class UnsupportedOperationException extends CentralRuntimeException {

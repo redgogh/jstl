@@ -35,7 +35,7 @@ import org.jetbrains.annotations.NotNull;
  *     throw new CentralRuntimeException("错误代码：%d，描述：%s", errorCode, errorMessage);
  * </pre>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  */
 public class CentralRuntimeException extends RuntimeException {

@@ -3,7 +3,7 @@ package com.redgogh.commons.lang3.exception;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  */
 public class OpenFileDescriptorException extends CentralRuntimeException {

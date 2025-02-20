@@ -8,7 +8,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * @author RedGogh
+ * @author Red Gogh
  */
 public class MD5Codec implements MD5 {
 

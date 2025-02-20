@@ -53,7 +53,7 @@ import static com.redgogh.commons.lang3.string.StringUtils.strcount;
  *     <li>{@link HttpMethod}: 定义了支持的 HTTP 请求方法，如 GET、POST 等。</li>
  * </ul>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  */
 @SuppressWarnings("all")

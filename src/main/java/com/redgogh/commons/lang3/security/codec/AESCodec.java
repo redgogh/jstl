@@ -11,7 +11,7 @@ import javax.crypto.spec.SecretKeySpec;
 import static com.redgogh.commons.lang3.utils.BasicConverter.atos;
 
 /**
- * @author RedGogh
+ * @author Red Gogh
  */
 public class AESCodec implements AES {
 

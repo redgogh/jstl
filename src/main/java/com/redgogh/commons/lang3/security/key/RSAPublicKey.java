@@ -39,7 +39,7 @@ import static com.redgogh.commons.lang3.string.StringUtils.strtok;
 import static com.redgogh.commons.lang3.utils.BasicConverter.atos;
 
 /**
- * @author RedGogh
+ * @author Red Gogh
  */
 public class RSAPublicKey extends AbstractKey {
 

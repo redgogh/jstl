@@ -23,7 +23,7 @@ import com.redgogh.commons.lang3.iface.CallableFunction;
 import com.redgogh.commons.lang3.iface.ActionFunction;
 
 /**
- * @author RedGogh
+ * @author Red Gogh
  */
 public class Capturer {
 

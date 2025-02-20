@@ -34,7 +34,7 @@ import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 
 /**
- * @author RedGogh
+ * @author Red Gogh
  */
 public class RSAPrivateKey extends AbstractKey {
 

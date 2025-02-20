@@ -31,7 +31,7 @@ import java.io.*;
  * IO操作工具包，整合大部分IO操作，使得在Java中更多的IO操作
  * 变得简单、简洁、易用。
  *
- * @author RedGogh   
+ * @author Red Gogh   
  */
 public class IOUtils {
 

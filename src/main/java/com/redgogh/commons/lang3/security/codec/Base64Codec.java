@@ -6,7 +6,7 @@ import com.redgogh.commons.lang3.security.Base64;
 import static com.redgogh.commons.lang3.utils.BasicConverter.atos;
 
 /**
- * @author RedGogh
+ * @author Red Gogh
  */
 public class Base64Codec implements Base64 {
     @Override

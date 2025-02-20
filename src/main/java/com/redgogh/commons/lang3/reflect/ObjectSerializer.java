@@ -36,7 +36,7 @@ import java.io.ObjectOutputStream;
  * <p>主要功能包括将对象保存到指定文件中，并从该文件加载对象，以便在不同的程序运行间共享
  * 或恢复对象状态。
  *
- * @author RedGogh
+ * @author Red Gogh
  * @see MutableFile
  */
 public class ObjectSerializer {

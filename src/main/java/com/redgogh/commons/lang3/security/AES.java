@@ -5,7 +5,7 @@ package com.redgogh.commons.lang3.security;
  *
  * <p>该接口的实现类需要提供 AES 加密和解密功能，确保数据的安全性和机密性。
  *
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  */
 public interface AES {

@@ -34,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
  *     throw new IOWriteException("写入文件 %s 时发生错误：%s", filePath, errorMessage);
  * </pre>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  */
 public class IOWriteException extends CentralRuntimeException {

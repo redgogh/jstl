@@ -9,7 +9,7 @@ import java.io.File;
  *
  * <p>该接口的实现类需要提供将字符串使用 SHA-256 算法进行编码的功能。
  *
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  * @see SHA256Codec
  */

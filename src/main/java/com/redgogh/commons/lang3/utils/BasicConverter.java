@@ -42,7 +42,7 @@ import static com.redgogh.commons.lang3.string.StringUtils.strxmatch;
  *     boolean flag = atobool("true");
  * </pre>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @see java.util.Objects
  */
 public class BasicConverter {

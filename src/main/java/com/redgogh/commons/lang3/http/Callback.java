@@ -32,7 +32,7 @@ package com.redgogh.commons.lang3.http;
  *     <li>`onResponse(Response response)`：当 HTTP 请求成功时调用，传入请求的响应结果。</li>
  * </ul>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @see Response
  * @since 1.0
  */

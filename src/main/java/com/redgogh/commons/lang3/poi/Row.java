@@ -39,7 +39,7 @@ import static com.redgogh.commons.lang3.utils.BasicConverter.atos;
  *      String firstValue = row.get(0);
  * </pre>
  *
- * @author RedGogh
+ * @author Red Gogh
  */
 public class Row extends ArrayList<String> {
 

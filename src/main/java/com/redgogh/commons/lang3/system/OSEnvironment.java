@@ -43,7 +43,7 @@ import static com.redgogh.commons.lang3.string.StringUtils.strrep;
  *     String value = OSEnvironment.getEnvironment("PATH");
  * </pre>
  *
- * @author RedGogh
+ * @author Red Gogh
  * @see System
  * @since 1.0
  */

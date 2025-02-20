@@ -33,7 +33,7 @@ import static com.redgogh.commons.lang3.string.StringUtils.*;
 import static com.redgogh.commons.lang3.utils.BasicConverter.atos;
 
 /**
- * @author RedGogh
+ * @author Red Gogh
  */
 public abstract class AbstractKey {
 

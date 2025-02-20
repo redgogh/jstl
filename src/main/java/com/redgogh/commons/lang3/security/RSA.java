@@ -30,7 +30,7 @@ import com.redgogh.commons.lang3.security.key.RSAPublicKey;
 import com.redgogh.commons.lang3.tuple.Pair;
 
 /**
- * @author RedGogh
+ * @author Red Gogh
  * @since 1.0
  */
 public interface RSA {
