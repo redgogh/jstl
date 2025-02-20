@@ -21,6 +21,7 @@ package com.redgogh.commons.lang3.collection;
 /* Creates on 2023/5/6. */
 
 import com.redgogh.commons.lang3.iface.TypeMapper;
+import com.redgogh.commons.lang3.utils.ArrayUtils;
 
 import java.util.*;
 
@@ -558,6 +559,47 @@ public class Lists {
     public static <M1, M2, E> List<E> symdiff(Collection<M1> a, TypeMapper<M1, E> aMapper,
                                                    Collection<M2> b, TypeMapper<M2, E> bMapper) {
         return symdiff(map(a, aMapper), map(b, bMapper));
+    }
+
+    /**
+     * 将给定集合按指定的大小拆分成多个子集合。
+     *
+     * <p>该方法将输入集合 `collection` 分割为多个子集合，每个子集合的大小不超过指定的 `bySize`。
+     * 如果剩余元素不足一个完整的子集合，最后一个子集合可能会包含较少的元素。
+     *
+     * @param collection 要分割的集合
+     * @param bySize 每个子集合的最大大小
+     * @param <E> 集合中元素的类型
+     * @return 按指定大小分割后的子集合列表
+     * @throws IllegalArgumentException 如果 `bySize` 为 0 或负值
+     */
+    @SuppressWarnings("unchecked")
+    public static <E> List<List<E>> partitionBySize(Collection<E> collection, int bySize) {
+        List<List<E>> chunks = newArrayList();
+
+        List<E> origin = newArrayList(collection);
+
+        int size = origin.size();
+
+        if (bySize >= size)
+            return fromVarargs(origin);
+
+        Object[] array = origin.toArray(new Object[0]);
+
+        int count = size / bySize;
+
+        for (int i = 0; i < count; i++) {
+            Object[] chunk = ArrayUtils.copyOf(array, i * bySize, bySize);
+            chunks.add((List<E>) fromVarargs(chunk));
+        }
+
+        int copyCount = count * bySize;
+        if (size > copyCount) {
+            Object[] chunk = ArrayUtils.copyOf(array, copyCount, size - copyCount);
+            chunks.add((List<E>) fromVarargs(chunk));
+        }
+
+        return chunks;
     }
 
 }

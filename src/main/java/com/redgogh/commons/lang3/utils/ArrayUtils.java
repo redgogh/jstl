@@ -287,4 +287,28 @@ public class ArrayUtils {
         return ret;
     }
 
+    /**
+     * #brief：拷贝数组中的数据到另一个新实例化的数组中
+     *
+     * <p>将数组总的数据拷贝到一个新的数组中，数组的长度介于 {@code original.length} 到
+     * {@code -original.length} 之间。可以通过数组切片的形式拷贝数组。当 {@code len} 参
+     * 数为负数时，那么则表示 {@code len=original.length - len} 的新数组长度。也就是从数组
+     * 最后开始计算。如果 {@code len} 是 {@code 0} 则表示 从 original[off] - original[original.length]
+     * 之间的数据。
+     *
+     * <p>该函数有很多相似函数，支持泛型对象拷贝。
+     *
+     * @param original 原数组对象，将从这个数组对象中拷贝数据到新的数组对象中。
+     * @param off 偏移量，拷贝起始位置将从 {@code origin[off]} 开始算。
+     * @param len 拷贝长度
+     * @return 拷贝后的新数组对象。
+     */
+    public static Object[] copyOf(Object[] original, int off, int len) {
+        len = truncate(original.length, off, len);
+        Object[] ret = new Object[len];
+        System.arraycopy(original, off, ret, 0, len);
+        return ret;
+    }
+
+
 }
