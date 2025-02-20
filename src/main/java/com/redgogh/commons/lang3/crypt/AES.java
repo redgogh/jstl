@@ -1,4 +1,4 @@
-package com.redgogh.commons.lang3.crypto;
+package com.redgogh.commons.lang3.crypt;
 
 /**
  * `AES` 接口定义了用于 AES 加密和解密的方法，支持对字符串和字节数组的处理。

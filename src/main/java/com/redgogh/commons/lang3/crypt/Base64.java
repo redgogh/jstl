@@ -1,6 +1,6 @@
-package com.redgogh.commons.lang3.crypto;
+package com.redgogh.commons.lang3.crypt;
 
-import com.redgogh.commons.lang3.crypto.codec.Base64Codec;
+import com.redgogh.commons.lang3.crypt.codec.Base64Codec;
 
 /**
  * `Base64` 接口定义了用于进行 Base64 编码和解码的方法。

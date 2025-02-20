@@ -18,13 +18,13 @@ package com.redgogh.commons.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.commons.lang3.crypto.Crypto;
+import com.redgogh.commons.lang3.crypt.Crypt;
 import org.junit.Test;
 
 import java.io.File;
 
 @SuppressWarnings("ALL")
-public class CryptoTest {
+public class CryptTest {
 
     /**
      * Base64 编码、解码测试
@@ -34,11 +34,11 @@ public class CryptoTest {
         String text = "牛子一掰，全场笑歪！";
 
         // Encoder
-        String base64Str = Crypto.BASE64.encode(text);
+        String base64Str = Crypt.BASE64.encode(text);
         System.out.println("Base64 text encode: " + base64Str);
 
         // Decoder
-        String originText = Crypto.BASE64.decode(base64Str);
+        String originText = Crypt.BASE64.decode(base64Str);
         System.out.println("Base64 text decode: " + originText);
 
     }
@@ -50,13 +50,13 @@ public class CryptoTest {
     public void md5EncodTest() {
         String text = "Hello World";
         // lower16
-        System.out.println("lower16: " + Crypto.MD5.lower16(text));
+        System.out.println("lower16: " + Crypt.MD5.lower16(text));
         // lower32
-        System.out.println("lower32: " + Crypto.MD5.lower32(text));
+        System.out.println("lower32: " + Crypt.MD5.lower32(text));
         // upper16
-        System.out.println("upper16: " + Crypto.MD5.upper16(text));
+        System.out.println("upper16: " + Crypt.MD5.upper16(text));
         // upper32
-        System.out.println("upper32: " + Crypto.MD5.upper32(text));
+        System.out.println("upper32: " + Crypt.MD5.upper32(text));
     }
 
     /**
@@ -65,7 +65,7 @@ public class CryptoTest {
     @Test
     public void sha256EncodTest() {
         String text = "Hello World";
-        System.out.println("sha256: " + Crypto.SHA256.encode(text));
+        System.out.println("sha256: " + Crypt.SHA256.encode(text));
     }
 
     /**
@@ -73,7 +73,7 @@ public class CryptoTest {
      */
     @Test
     public void sha256FileEncodTest() {
-        System.out.println(Crypto.SHA256.encode(new File("/home/1g.7z")));
+        System.out.println(Crypt.SHA256.encode(new File("/home/1g.7z")));
     }
 
     /**
@@ -81,11 +81,11 @@ public class CryptoTest {
      */
     @Test
     public void versionGenerateTest() {
-        int version = Crypto.makeVersion(1, 8, 1);
+        int version = Crypt.makeVersion(1, 8, 1);
         System.out.println("make version = " + version);
-        System.out.println("  - major = " + Crypto.versionMajor(version));
-        System.out.println("  - minor = " + Crypto.versionMinor(version));
-        System.out.println("  - patch = " + Crypto.versionPatch(version));
+        System.out.println("  - major = " + Crypt.versionMajor(version));
+        System.out.println("  - minor = " + Crypt.versionMinor(version));
+        System.out.println("  - patch = " + Crypt.versionPatch(version));
     }
 
     /**
@@ -94,22 +94,22 @@ public class CryptoTest {
     @Test
     public void aesTest() {
         String text = "牛子一掰，全场笑歪！";
-        String secret = Crypto.nextSecretKey();
+        String secret = Crypt.randomNextSecret();
         System.out.println("AES secret key: " + secret);
 
         // Encoder
-        String key = Crypto.AES.encrypt(text, secret);;
+        String key = Crypt.AES.encrypt(text, secret);;
         System.out.println("AES text encrypt: " + key);
 
         // Decoder
-        System.out.println("AES text decrypt: " + Crypto.AES.decrypt(key, secret));
+        System.out.println("AES text decrypt: " + Crypt.AES.decrypt(key, secret));
 
     }
 
     @Test
     public void urlTest() {
         // System.out.println(Crypto.URL.encode("/audit-web/#/audit-web/settlementAudit/taskAllocationApproveEdit?taskId=19881F7C-94FE-11EF-9288-0242C0A8440E&instanceId=58AC7AA4-94FD-11EF-9288-0242C0A8440E&id=825DED38-911C-11EF-923B-0242C0A8441B"));
-        System.out.println(Crypto.URL.decode("%2Faudit-web%2F%23%2Faudit-web%2FAuditReform%2FAuditAccountabilityResult%2Fedit%2FRejectIndex%3F"));
+        System.out.println(Crypt.URL.decode("%2Faudit-web%2F%23%2Faudit-web%2FAuditReform%2FAuditAccountabilityResult%2Fedit%2FRejectIndex%3F"));
     }
 
 }

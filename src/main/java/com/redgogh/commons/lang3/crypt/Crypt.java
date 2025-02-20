@@ -1,8 +1,8 @@
-package com.redgogh.commons.lang3.crypto;
+package com.redgogh.commons.lang3.crypt;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
-|*    Copyright (C) 2023 venorze                                                    *|
+|*    Copyright (C) 2023 Red Gogh                                                   *|
 |*                                                                                  *|
 |*    This program is free software: you can redistribute it and/or modify          *|
 |*    it under the terms of the GNU General Public License as published by          *|
@@ -25,7 +25,7 @@ package com.redgogh.commons.lang3.crypto;
 
 /* Creates on 2023/5/16. */
 
-import com.redgogh.commons.lang3.crypto.codec.*;
+import com.redgogh.commons.lang3.crypt.codec.*;
 import com.redgogh.commons.lang3.string.StringUtils;
 import com.redgogh.commons.lang3.utils.BasicConverter;
 import com.redgogh.commons.lang3.utils.Capturer;
@@ -58,7 +58,7 @@ import javax.crypto.SecretKey;
  * @author RedGogh
  * @since 1.0
  */
-public final class Crypto {
+public final class Crypt {
 
     public static final Base64 BASE64 = new Base64Codec(); // BASE64
     public static final MD5    MD5    = new MD5Codec();    // MD5
@@ -143,7 +143,7 @@ public final class Crypto {
      *
      * @return 生成的随机 AES 密钥的 Base64 编码字符串
      */
-    public static String nextSecretKey() {
+    public static String randomNextSecret() {
         return Capturer.call(() -> {
             KeyGenerator keyGen = KeyGenerator.getInstance("AES");
             keyGen.init(128);

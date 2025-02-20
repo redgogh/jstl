@@ -27,6 +27,8 @@ import com.redgogh.commons.lang3.io.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
+import static com.redgogh.commons.lang3.string.StringUtils.strxmatch;
+
 /**
  * Convert 类提供了多种类型转换和比较功能。
  *
@@ -295,7 +297,7 @@ public class BasicConverter {
         if (obj instanceof Number)
             return ((Number) obj).intValue() > 0;
         String bool = atos(obj, StringUtils::uppercase);
-        return StringUtils.strxmatch(bool, "TRUE|ON|Y|YES");
+        return strxmatch(bool, "TRUE|ON|Y|YES");
     }
 
     /**
