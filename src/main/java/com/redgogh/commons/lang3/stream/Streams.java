@@ -79,7 +79,7 @@ public class Streams {
      */
     public static <T> List<T> filter(Collection<T> collection, Predicate<? super T> predicate) {
         if (Lists.isEmpty(collection))
-            return Lists.of();
+            return Lists.newArrayList();
         return configure(collection).filter(predicate).collect(Collectors.toList());
     }
 
@@ -101,7 +101,7 @@ public class Streams {
      */
     public static <T, R> List<R> map(Collection<T> collection, Function<T, R> function) {
         if (Lists.isEmpty(collection))
-            return Lists.of();
+            return Lists.newArrayList();
         return configure(collection).map(function).collect(Collectors.toList());
     }
 
@@ -120,7 +120,7 @@ public class Streams {
      */
     public static <T> List<T> distinct(Collection<T> collection) {
         if (Lists.isEmpty(collection))
-            return Lists.of();
+            return Lists.newArrayList();
         return configure(collection).distinct().collect(Collectors.toList());
     }
 
@@ -174,7 +174,7 @@ public class Streams {
      */
     public static <T> List<T> sorted(Collection<T> collection, Comparator<T> comparator) {
         if (Lists.isEmpty(collection))
-            return Lists.of();
+            return Lists.newArrayList();
         return configure(collection).sorted(comparator).collect(Collectors.toList());
     }
 

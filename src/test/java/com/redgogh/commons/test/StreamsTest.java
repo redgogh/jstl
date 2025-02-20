@@ -32,7 +32,7 @@ public class StreamsTest {
 
     @Test
     public void parallelTest() {
-        List<Integer> objects = Lists.of();
+        List<Integer> objects = Lists.newArrayList();
         for (int i = 0; i < 100000000; i++)
             objects.add(Generator.randomInt());
 

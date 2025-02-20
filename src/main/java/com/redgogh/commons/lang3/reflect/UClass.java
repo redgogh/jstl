@@ -112,7 +112,7 @@ public class UClass {
     public UClass(Class<?> descriptor) {
         this.descriptor = descriptor;
         /* init */
-        List<UField> declaredFields = scanDescriptorDeclaredFields(descriptor, Lists.of());
+        List<UField> declaredFields = scanDescriptorDeclaredFields(descriptor, Lists.newArrayList());
         for (UField field : declaredFields) {
             String name = field.getName();
             if (!fields.containsKey(name))
@@ -165,7 +165,7 @@ public class UClass {
      * @return 转换后的类型数组
      */
     public static Class<?>[] toClassArray(Object... parameters) {
-        List<Class<?>> parametersClassList = Lists.of();
+        List<Class<?>> parametersClassList = Lists.newArrayList();
         for (Object parameter : parameters)
             parametersClassList.add(parameter.getClass());
         Class<?>[] parametersClassArray = new Class<?>[parametersClassList.size()];
@@ -298,7 +298,7 @@ public class UClass {
      */
     public List<UField> getDeclaredFields(boolean isFilter) {
         if (!isFilter)
-            return Lists.of(fields.values());
+            return Lists.newArrayList(fields.values());
         /* 筛选出修饰符非 static & final 的属性列表 */
         return Streams.filter(fields.values(), value -> (!value.isStatic() && !value.isFinal()));
     }

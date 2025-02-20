@@ -248,7 +248,7 @@ public class Workbook implements Iterable<Row> {
      * @return 包含当前工作表所有行的列表
      */
     public List<Row> getRows() {
-        List<Row> retval = Lists.of();
+        List<Row> retval = Lists.newArrayList();
         forEach(retval::add);
         return Streams.filter(retval, e -> {
             for (String cell : e) {
@@ -478,7 +478,7 @@ public class Workbook implements Iterable<Row> {
     public <T> List<T> toJavaObject(Class<T> aClass) {
         UClass uClass = new UClass(aClass);
 
-        List<T> retval = Lists.of();
+        List<T> retval = Lists.newArrayList();
         Map<String, UField> mapping = Maps.of();
 
         // 获取对象中字段列表

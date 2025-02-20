@@ -18,6 +18,8 @@
 - 新增 `BeanUtils#directCopy` 直接属性拷贝方法。
 - 新增 `DateFormatter#autoParse` 支持自动根据常用格式解析。
 - 新增 `IOUtils#strread` 支持根据文件路径读取数据。
+- 新增 `Pair<A, B>` 支持两个数据的元组对象。
+- 新增 `Tuple<A, B, C>` 支持三个数据的元组对象。
 
 ## 👻 优化功能
 
@@ -27,6 +29,7 @@
 - 明确 `ByteBuffer#write` 函数写入类型。
 - `Crypto#uuid` 方法默认返回大写的 UUID。
 - 增强 `HttpClient` API 提供通用配置项配置。
+- 优化 Lists 工具类方法命名。
 
 ## 🐞 BUG 修复
 

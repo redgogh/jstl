@@ -61,7 +61,7 @@ public class StringUtilsTest {
 
     @Test
     public void globMatcherTest() {
-        List<String> paths = Lists.of();
+        List<String> paths = Lists.newArrayList();
 
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
         scheduledExecutorService.scheduleAtFixedRate(() -> System.out.print("\rsize: " + paths.size()), 0, 10, TimeUnit.MILLISECONDS);

@@ -1,6 +1,7 @@
 package com.redgogh.commons.lang3.iterator;
 
 import com.redgogh.commons.lang3.collection.Lists;
+import com.redgogh.commons.lang3.tuple.Pair;
 import com.redgogh.commons.lang3.tuple.Tuple;
 
 import java.util.Collection;
@@ -25,27 +26,26 @@ public class Itertools {
      *
      * @param lefts 第一个集合，元素将作为元组的左值
      * @param rights 第二个集合，元素将作为元组的右值
-     * @param <L> 左集合中元素的类型
-     * @param <R> 右集合中元素的类型
+     * @param <A> 左集合中元素的类型
+     * @param <B> 右集合中元素的类型
      * @return 包含配对元组的可迭代对象
      * @throws IllegalArgumentException 如果两个集合的大小不同
      */
-    public static <L, R> Iterable<Tuple<L, R>> zip(Collection<L> lefts, Collection<R> rights) {
+    public static <A, B> Iterable<Pair<A, B>> zip(Collection<A> lefts, Collection<B> rights) {
         // 计算最小总数
         int count = (lefts == null || rights == null) ? 0 : Math.min(lefts.size(), rights.size());
 
         if (count == 0)
-            return Lists.of();
+            return Lists.newArrayList();
 
-        List<Tuple<L, R>> retval = Lists.of();
+        List<Pair<A, B>> retPairs = Lists.newArrayList();
 
-        List<L> leftList = Lists.of(lefts);
-        List<R> rightList = Lists.of(rights);
+        Pair<List<A>, List<B>> zipPair = Pair.of(Lists.newArrayList(lefts), Lists.newArrayList(rights));
 
         for (int i = 0; i < count; i++)
-            retval.add(new Tuple<>(leftList.get(i), rightList.get(i)));
+            retPairs.add(new Pair<>(zipPair.first().get(i), zipPair.second().get(i)));
 
-        return retval;
+        return retPairs;
     }
 
 }

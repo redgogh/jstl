@@ -137,27 +137,8 @@ public class Lists {
     /**
      * @return 分配一个空的 {@link ArrayList} 集合对象实例。
      */
-    public static <E> List<E> of() {
+    public static <E> List<E> newArrayList() {
         return new ArrayList<>();
-    }
-
-    /**
-     * 通过传入的泛型可变参数去分配一个 {@link ArrayList} 集合对象实例。泛型可变参数不能为空
-     * 否则会抛出 {@link NullPointerException} 异常。
-     *
-     * @param a
-     *        泛型可变参数数组
-     *
-     * @return 一个新的 {@link ArrayList} 对象实例
-     *
-     * @throws NullPointerException
-     *         如果泛型参数为空值
-     *
-     * @see #of(Collection)
-     */
-    @SafeVarargs
-    public static <E> ArrayList<E> of(E... a) {
-        return of(Arrays.asList(a));
     }
 
     /**
@@ -182,11 +163,11 @@ public class Lists {
      * @throws ArrayIndexOutOfBoundsException
      *         如果 {@code len} 超出整个 {@code a} 数组大小的长度。
      *
-     * @see #of(Collection)
+     * @see #newArrayList(Collection)
      */
     @SuppressWarnings("unchecked")
-    public static <E> ArrayList<E> of(E[] a, int off, int len) {
-        return (ArrayList<E>) of(Arrays.asList(a, off, len));
+    public static <E> ArrayList<E> newArrayList(E[] a, int off, int len) {
+        return (ArrayList<E>) newArrayList(Arrays.asList(a, off, len));
     }
 
     /**
@@ -204,8 +185,27 @@ public class Lists {
      *
      * @see ArrayList#ArrayList(Collection)
      */
-    public static <E> ArrayList<E> of(Collection<? extends E> collection) {
+    public static <E> ArrayList<E> newArrayList(Collection<? extends E> collection) {
         return new ArrayList<>(collection);
+    }
+
+    /**
+     * 通过传入的泛型可变参数去分配一个 {@link ArrayList} 集合对象实例。泛型可变参数不能为空
+     * 否则会抛出 {@link NullPointerException} 异常。
+     *
+     * @param a
+     *        泛型可变参数数组
+     *
+     * @return 一个新的 {@link ArrayList} 对象实例
+     *
+     * @throws NullPointerException
+     *         如果泛型参数为空值
+     *
+     * @see #newArrayList(Collection)
+     */
+    @SafeVarargs
+    public static <E> ArrayList<E> fromVarargs(E... a) {
+        return newArrayList(Arrays.asList(a));
     }
 
     /**
@@ -226,8 +226,8 @@ public class Lists {
      *
      * @see ArrayList#ArrayList(Collection)
      */
-    public static <E> List<E> of(Collection<? extends E> a, Collection<? extends E> b) {
-        List<E> ret = of();
+    public static <E> List<E> merge(Collection<? extends E> a, Collection<? extends E> b) {
+        List<E> ret = newArrayList();
         ret.addAll(a);
         ret.addAll(b);
         return ret;
@@ -243,7 +243,7 @@ public class Lists {
      * @return 包装后的同步空列表
      */
     public static <E> List<E> newSynchronizedList() {
-        return synchronizedList(of());
+        return synchronizedList(newArrayList());
     }
 
     /**
@@ -274,7 +274,7 @@ public class Lists {
      * @return 返回通过 {@link TypeMapper} 转换后的集合实例。
      */
     public static <T, R> List<R> map(T[] a, TypeMapper<T, R> builder) {
-        return map(of(a), builder);
+        return map(fromVarargs(a), builder);
     }
 
     /**
@@ -293,7 +293,7 @@ public class Lists {
     public static <T, R> List<R> map(Collection<T> collection, TypeMapper<T, R> builder) {
         List<R> retval = null;
         if (collection != null) {
-            retval = of();
+            retval = newArrayList();
             for (T obj : collection)
                 retval.add(builder.call(obj));
         }
@@ -492,7 +492,7 @@ public class Lists {
         List<E> inter = intersection(a, b);
 
         symmdiff.removeAll(inter);
-        return (List<E>) of(symmdiff);
+        return newArrayList(symmdiff);
     }
 
     /**
