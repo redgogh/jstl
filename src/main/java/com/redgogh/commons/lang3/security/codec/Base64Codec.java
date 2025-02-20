@@ -1,7 +1,7 @@
-package com.redgogh.commons.lang3.crypt.codec;
+package com.redgogh.commons.lang3.security.codec;
 
 import com.redgogh.commons.lang3.utils.BasicConverter;
-import com.redgogh.commons.lang3.crypt.Base64;
+import com.redgogh.commons.lang3.security.Base64;
 
 import static com.redgogh.commons.lang3.utils.BasicConverter.atos;
 

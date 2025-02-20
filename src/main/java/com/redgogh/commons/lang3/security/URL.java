@@ -1,6 +1,6 @@
-package com.redgogh.commons.lang3.crypt;
+package com.redgogh.commons.lang3.security;
 
-import com.redgogh.commons.lang3.crypt.codec.URLCodec;
+import com.redgogh.commons.lang3.security.codec.URLCodec;
 
 /**
  * `URL` 接口定义了用于进行 URL 编码和解码的方法，

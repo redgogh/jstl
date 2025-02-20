@@ -1,6 +1,6 @@
-package com.redgogh.commons.lang3.crypt;
+package com.redgogh.commons.lang3.security;
 
-import com.redgogh.commons.lang3.crypt.codec.SHA256Codec;
+import com.redgogh.commons.lang3.security.codec.SHA256Codec;
 
 import java.io.File;
 

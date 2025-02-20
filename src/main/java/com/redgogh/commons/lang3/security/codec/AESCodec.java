@@ -1,9 +1,9 @@
-package com.redgogh.commons.lang3.crypt.codec;
+package com.redgogh.commons.lang3.security.codec;
 
 import com.redgogh.commons.lang3.utils.BasicConverter;
 import com.redgogh.commons.lang3.utils.Capturer;
-import com.redgogh.commons.lang3.crypt.AES;
-import com.redgogh.commons.lang3.crypt.Crypt;
+import com.redgogh.commons.lang3.security.AES;
+import com.redgogh.commons.lang3.security.Crypt;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;

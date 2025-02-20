@@ -1,6 +1,6 @@
-package com.redgogh.commons.lang3.crypt;
+package com.redgogh.commons.lang3.security;
 
-import com.redgogh.commons.lang3.crypt.codec.MD5Codec;
+import com.redgogh.commons.lang3.security.codec.MD5Codec;
 
 /**
  * `MD5` 接口定义了用于生成 MD5 哈希值的多种方法，支持 32 位和 16 位的 MD5 哈希，

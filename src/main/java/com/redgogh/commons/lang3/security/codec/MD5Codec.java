@@ -1,6 +1,6 @@
-package com.redgogh.commons.lang3.crypt.codec;
+package com.redgogh.commons.lang3.security.codec;
 
-import com.redgogh.commons.lang3.crypt.MD5;
+import com.redgogh.commons.lang3.security.MD5;
 import com.redgogh.commons.lang3.string.StringUtils;
 import com.redgogh.commons.lang3.exception.CentralRuntimeException;
 

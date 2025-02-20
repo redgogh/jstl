@@ -1,8 +1,8 @@
-package com.redgogh.commons.lang3.crypt.codec;
+package com.redgogh.commons.lang3.security.codec;
 
 import com.redgogh.commons.lang3.utils.Capturer;
-import com.redgogh.commons.lang3.crypt.Crypt;
-import com.redgogh.commons.lang3.crypt.SHA256;
+import com.redgogh.commons.lang3.security.Crypt;
+import com.redgogh.commons.lang3.security.SHA256;
 import com.redgogh.commons.lang3.exception.CentralRuntimeException;
 import com.redgogh.commons.lang3.io.IOUtils;
 import com.redgogh.commons.lang3.io.MutableFile;

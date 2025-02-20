@@ -1,8 +1,8 @@
-package com.redgogh.commons.lang3.crypt.codec;
+package com.redgogh.commons.lang3.security.codec;
 
 import com.redgogh.commons.lang3.utils.Capturer;
 import com.redgogh.commons.lang3.string.StringUtils;
-import com.redgogh.commons.lang3.crypt.URL;
+import com.redgogh.commons.lang3.security.URL;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

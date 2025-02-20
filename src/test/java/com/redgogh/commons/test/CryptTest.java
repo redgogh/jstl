@@ -18,7 +18,7 @@ package com.redgogh.commons.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.commons.lang3.crypt.Crypt;
+import com.redgogh.commons.lang3.security.Crypt;
 import org.junit.Test;
 
 import java.io.File;

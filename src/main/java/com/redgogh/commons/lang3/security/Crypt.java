@@ -1,4 +1,4 @@
-package com.redgogh.commons.lang3.crypt;
+package com.redgogh.commons.lang3.security;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -25,7 +25,7 @@ package com.redgogh.commons.lang3.crypt;
 
 /* Creates on 2023/5/16. */
 
-import com.redgogh.commons.lang3.crypt.codec.*;
+import com.redgogh.commons.lang3.security.codec.*;
 import com.redgogh.commons.lang3.string.StringUtils;
 import com.redgogh.commons.lang3.utils.BasicConverter;
 import com.redgogh.commons.lang3.utils.Capturer;
