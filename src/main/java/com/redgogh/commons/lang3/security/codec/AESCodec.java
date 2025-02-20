@@ -1,14 +1,12 @@
 package com.redgogh.commons.lang3.security.codec;
 
+import com.redgogh.commons.lang3.security.AES;
+import com.redgogh.commons.lang3.security.Codec;
 import com.redgogh.commons.lang3.utils.BasicConverter;
 import com.redgogh.commons.lang3.utils.Capturer;
-import com.redgogh.commons.lang3.security.AES;
-import com.redgogh.commons.lang3.security.Crypt;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-
-import static com.redgogh.commons.lang3.utils.BasicConverter.atos;
 
 /**
  * @author Red Gogh
@@ -26,13 +24,13 @@ public class AESCodec implements AES {
             Cipher cipher = Cipher.getInstance("AES");
             SecretKeySpec secretKeySpec = new SecretKeySpec(secret.getBytes(), "AES");
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
-            return Crypt.BASE64.encode(cipher.doFinal(bytes));
+            return Codec.BASE64.encode(cipher.doFinal(bytes));
         });
     }
 
     @Override
     public String decrypt(String data, String secret) {
-        return BasicConverter.atos(decrypt(Crypt.BASE64.decodeBytes(data), secret));
+        return BasicConverter.atos(decrypt(Codec.BASE64.decodeBytes(data), secret));
     }
 
     @Override

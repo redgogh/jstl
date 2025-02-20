@@ -21,6 +21,7 @@
 - 新增 `Pair<A, B>` 支持两个数据的元组对象。
 - 新增 `Tuple<A, B, C>` 支持三个数据的元组对象。
 - 新增 `RSACipher` 加解密工具类。
+- 新增 `Codec` 编码解码工具类。
 
 ## 👻 优化功能
 
@@ -30,7 +31,7 @@
 - 明确 `ByteBuffer#write` 函数写入类型。
 - `Crypto#uuid` 方法默认返回大写的 UUID。
 - 增强 `HttpClient` API 提供通用配置项配置。
-- 优化 Lists 工具类方法命名。
+- 优化 `Lists` 工具类方法命名。
 
 ## 🐞 BUG 修复
 

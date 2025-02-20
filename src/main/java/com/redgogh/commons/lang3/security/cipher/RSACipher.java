@@ -25,7 +25,7 @@ package com.redgogh.commons.lang3.security.cipher;
 
 /* Creates on 2025/2/20. */
 
-import com.redgogh.commons.lang3.security.Crypt;
+import com.redgogh.commons.lang3.security.Codec;
 import com.redgogh.commons.lang3.security.RSA;
 import com.redgogh.commons.lang3.security.key.RSAPrivateKey;
 import com.redgogh.commons.lang3.security.key.RSAPublicKey;
@@ -65,7 +65,7 @@ public class RSACipher implements RSA {
             Cipher cipher = Cipher.getInstance("RSA");
             cipher.init(Cipher.ENCRYPT_MODE, publicKey.toPublicKey());
             byte[] b = cipher.doFinal(atob(message));
-            return Crypt.BASE64.encode(b);
+            return Codec.BASE64.encode(b);
         });
     }
 
@@ -74,7 +74,7 @@ public class RSACipher implements RSA {
         return Capturer.call(() -> {
             Cipher cipher = Cipher.getInstance("RSA");
             cipher.init(Cipher.DECRYPT_MODE, privateKey.toPrivateKey());
-            byte[] b = cipher.doFinal(Crypt.BASE64.decodeBytes(encryptedMessage));
+            byte[] b = cipher.doFinal(Codec.BASE64.decodeBytes(encryptedMessage));
             return atos(b);
         });
     }

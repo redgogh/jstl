@@ -25,7 +25,7 @@ package com.redgogh.commons.lang3.security.key;
 
 /* Creates on 2025/2/20. */
 
-import com.redgogh.commons.lang3.security.Crypt;
+import com.redgogh.commons.lang3.security.Codec;
 
 import java.security.Key;
 
@@ -59,13 +59,13 @@ public abstract class AbstractKey {
         for (int i = 1; i < (lines.length - 1); i++) {
             remakeBuilder.append(strcut(lines[i], 0, 0));
         }
-        return Crypt.BASE64.decodeBytes(atos(remakeBuilder));
+        return Codec.BASE64.decodeBytes(atos(remakeBuilder));
     }
 
     protected static String toPEMFormat0(String keyType, byte[] encoded) {
         StringBuilder secretBuilder = new StringBuilder();
 
-        String base64Encode = Crypt.BASE64.encode(encoded);
+        String base64Encode = Codec.BASE64.encode(encoded);
         int encodeLength = strlen(base64Encode);
         int len = 64;
         int loopCount = encodeLength / len;

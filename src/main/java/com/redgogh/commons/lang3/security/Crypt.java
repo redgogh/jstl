@@ -26,16 +26,10 @@ package com.redgogh.commons.lang3.security;
 /* Creates on 2023/5/16. */
 
 import com.redgogh.commons.lang3.security.cipher.RSACipher;
-import com.redgogh.commons.lang3.security.codec.*;
-import com.redgogh.commons.lang3.string.StringUtils;
-import com.redgogh.commons.lang3.utils.BasicConverter;
-import com.redgogh.commons.lang3.utils.Capturer;
-
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
+import com.redgogh.commons.lang3.security.codec.AESCodec;
 
 /**
- * `Crypto` 是一个工具类，提供了多种加密和解密算法的实现，支持常见的加密需求。
+ * `Crypt` 是一个工具类，提供了多种加密和解密算法的实现，支持常见的加密需求。
  *
  * <p>该类包含静态方法，可以直接调用，无需实例化对象。支持的算法包括 AES、MD5、SHA-256 等，能够
  * 满足用户对数据加密和解密的需求，确保数据的安全性。
@@ -50,10 +44,7 @@ import javax.crypto.SecretKey;
  * <h2>使用示例</h2>
  * <pre>
  *     // 使用 AES 加密
- *     String encrypted = Crypto.AES.encrypt("Hello World", "mysecretkey");
- *
- *     // 使用 MD5 计算哈希
- *     String hash = Crypto.MD5.lower32("Hello World");
+ *     String encrypted = Crypt.AES.encrypt("Hello World", "mysecretkey");
  * </pre>
  *
  * @author Red Gogh
@@ -61,97 +52,7 @@ import javax.crypto.SecretKey;
  */
 public final class Crypt {
 
-    public static final Base64 BASE64 = new Base64Codec(); // BASE64
-    public static final MD5    MD5    = new MD5Codec();    // MD5
-    public static final SHA256 SHA256 = new SHA256Codec(); // SHA-256
-    public static final URL    URL    = new URLCodec();    // URL
     public static final AES    AES    = new AESCodec();    // AES
     public static final RSA    RSA    = new RSACipher();   // RSA
-
-    /**
-     * 生成一个版本号
-     *
-     * @param major
-     *        主版本号
-     *
-     * @param minor
-     *        副版本号
-     *
-     * @param patch
-     *        补丁版本
-     */
-    public static int makeVersion(int major, int minor, int patch) {
-        return major << 22 | minor << 12 | patch;
-    }
-
-    /**
-     * 解析 {@link #makeVersion(int, int, int)} 生成的版本号，获取其中
-     * 的主版本号内容并返回。
-     *
-     * @param version
-     *        版本号
-     *
-     * @return 主版本号
-     */
-    public static int versionMajor(int version) {
-        return version >> 22;
-    }
-
-    /**
-     * 解析 {@link #makeVersion(int, int, int)} 生成的版本号，获取其中
-     * 的次版本号内容并返回。
-     *
-     * @param version
-     *        版本号
-     *
-     * @return 次版本号
-     */
-    public static int versionMinor(int version) {
-        return version >> 12 & 0x3ff;
-    }
-
-    /**
-     * 解析 {@link #makeVersion(int, int, int)} 生成的版本号，获取其中
-     * 的补丁版本内容并返回。
-     *
-     * @param version
-     *        版本号
-     *
-     * @return 补丁版本
-     */
-    public static int versionPatch(int version) {
-        return version & 0xfff;
-    }
-
-    /**
-     * 字节码转 16 进制
-     */
-    public static String toByteHex(byte[] bytes) {
-        StringBuilder builder = new StringBuilder();
-        for (byte b : bytes) {
-            String tmp = Integer.toHexString(b & 0xFF);
-            if (StringUtils.strlen(tmp) == 1)
-                builder.append("0");
-            builder.append(tmp);
-        }
-        return BasicConverter.atos(builder);
-    }
-
-    /**
-     * #brief: 生成并返回下一个随机的 AES 密钥，使用 Base64 编码格式表示
-     *
-     * <p>该方法利用 `KeyGenerator` 类生成一个 128 位的 AES 密钥，并将其编码为 Base64
-     * 字符串以便于存储或传输。返回的密钥可用于加密或解密数据，确保数据的安全性。
-     *
-     * @return 生成的随机 AES 密钥的 Base64 编码字符串
-     */
-    public static String randomNextSecret() {
-        return Capturer.call(() -> {
-            KeyGenerator keyGen = KeyGenerator.getInstance("AES");
-            keyGen.init(128);
-            SecretKey secretKey = keyGen.generateKey();
-            return BASE64.encode(secretKey.getEncoded());
-        });
-    }
 
 }

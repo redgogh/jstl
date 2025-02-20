@@ -18,75 +18,12 @@ package com.redgogh.commons.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.redgogh.commons.lang3.security.Codec;
 import com.redgogh.commons.lang3.security.Crypt;
 import org.junit.Test;
 
-import java.io.File;
-
 @SuppressWarnings("ALL")
 public class CryptTest {
-
-    /**
-     * Base64 编码、解码测试
-     */
-    @Test
-    public void base64EncodAndDecodeTest() {
-        String text = "牛子一掰，全场笑歪！";
-
-        // Encoder
-        String base64Str = Crypt.BASE64.encode(text);
-        System.out.println("Base64 text encode: " + base64Str);
-
-        // Decoder
-        String originText = Crypt.BASE64.decode(base64Str);
-        System.out.println("Base64 text decode: " + originText);
-
-    }
-
-    /**
-     * md5 编码测试
-     */
-    @Test
-    public void md5EncodTest() {
-        String text = "Hello World";
-        // lower16
-        System.out.println("lower16: " + Crypt.MD5.lower16(text));
-        // lower32
-        System.out.println("lower32: " + Crypt.MD5.lower32(text));
-        // upper16
-        System.out.println("upper16: " + Crypt.MD5.upper16(text));
-        // upper32
-        System.out.println("upper32: " + Crypt.MD5.upper32(text));
-    }
-
-    /**
-     * sha256编码测试
-     */
-    @Test
-    public void sha256EncodTest() {
-        String text = "Hello World";
-        System.out.println("sha256: " + Crypt.SHA256.encode(text));
-    }
-
-    /**
-     * sha256文件编码测试
-     */
-    @Test
-    public void sha256FileEncodTest() {
-        System.out.println(Crypt.SHA256.encode(new File("/home/1g.7z")));
-    }
-
-    /**
-     * 版本生成测试
-     */
-    @Test
-    public void versionGenerateTest() {
-        int version = Crypt.makeVersion(1, 8, 1);
-        System.out.println("make version = " + version);
-        System.out.println("  - major = " + Crypt.versionMajor(version));
-        System.out.println("  - minor = " + Crypt.versionMinor(version));
-        System.out.println("  - patch = " + Crypt.versionPatch(version));
-    }
 
     /**
      * AES 编码、解码测试
@@ -94,7 +31,7 @@ public class CryptTest {
     @Test
     public void aesTest() {
         String text = "牛子一掰，全场笑歪！";
-        String secret = Crypt.randomNextSecret();
+        String secret = Codec.randomNextSecret();
         System.out.println("AES secret key: " + secret);
 
         // Encoder
@@ -104,12 +41,6 @@ public class CryptTest {
         // Decoder
         System.out.println("AES text decrypt: " + Crypt.AES.decrypt(key, secret));
 
-    }
-
-    @Test
-    public void urlTest() {
-        // System.out.println(Crypto.URL.encode("/audit-web/#/audit-web/settlementAudit/taskAllocationApproveEdit?taskId=19881F7C-94FE-11EF-9288-0242C0A8440E&instanceId=58AC7AA4-94FD-11EF-9288-0242C0A8440E&id=825DED38-911C-11EF-923B-0242C0A8441B"));
-        System.out.println(Crypt.URL.decode("%2Faudit-web%2F%23%2Faudit-web%2FAuditReform%2FAuditAccountabilityResult%2Fedit%2FRejectIndex%3F"));
     }
 
 }

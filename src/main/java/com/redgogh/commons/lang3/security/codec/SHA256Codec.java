@@ -1,11 +1,11 @@
 package com.redgogh.commons.lang3.security.codec;
 
-import com.redgogh.commons.lang3.utils.Capturer;
-import com.redgogh.commons.lang3.security.Crypt;
-import com.redgogh.commons.lang3.security.SHA256;
 import com.redgogh.commons.lang3.exception.CentralRuntimeException;
 import com.redgogh.commons.lang3.io.IOUtils;
 import com.redgogh.commons.lang3.io.MutableFile;
+import com.redgogh.commons.lang3.security.Codec;
+import com.redgogh.commons.lang3.security.SHA256;
+import com.redgogh.commons.lang3.utils.Capturer;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -33,7 +33,7 @@ public class SHA256Codec implements SHA256 {
                 while ((len = reader.read(buffer)) != IOUtils.EOF)
                     messageDigest.update(buffer, 0, len);
             });
-            return Crypt.toByteHex(messageDigest.digest());
+            return Codec.toByteHex(messageDigest.digest());
         });
     }
 
@@ -42,7 +42,7 @@ public class SHA256Codec implements SHA256 {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
             messageDigest.update(source);
-            return Crypt.toByteHex(messageDigest.digest());
+            return Codec.toByteHex(messageDigest.digest());
         } catch (Exception e) {
             throw new CentralRuntimeException(e);
         }
