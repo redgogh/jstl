@@ -17,6 +17,7 @@
 - 完善 `ByteBuffer` API。
 - 新增 `BeanUtils#directCopy` 直接属性拷贝方法。
 - 新增 `DateFormatter#autoParse` 支持自动根据常用格式解析。
+- 新增 `IOUtils#strread` 支持根据文件路径读取数据。
 
 ## 👻 优化功能
 

@@ -181,6 +181,19 @@ public class IOUtils {
     }
 
     /**
+     * 传入一个文件路径会自动从该路径的文件中读取数据流到内存，然后转换为
+     * 字符串返回。
+     *
+     * @param filepath
+     *        文件路径
+     *
+     * @return 从文件描述符中读取到的字符串文本
+     */
+    public static String strread(String filepath) {
+        return strread(new MutableFile(filepath));
+    }
+
+    /**
      * 将文件中的数据作为字符串文本读取，当前操作会读取整个文件中的数据并将它转
      * 为字符串类型返回。过后会自动关闭文件描述符，外部无需手动关闭。
      *
