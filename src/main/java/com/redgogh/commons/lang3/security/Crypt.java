@@ -31,7 +31,7 @@ import com.redgogh.commons.lang3.security.cipher.AESCipher;
 /**
  * `Crypt` 是一个工具类，提供了多种加密和解密算法的实现，支持常见的加密需求。
  *
- * <p>该类包含静态方法，可以直接调用，无需实例化对象。支持的算法包括 AES、MD5、SHA-256 等，能够
+ * <p>该类包含静态方法，可以直接调用，无需实例化对象。支持的算法包括 AES、RSA 等，能够
  * 满足用户对数据加密和解密的需求，确保数据的安全性。
  *
  * <p>本类的主要特点包括：
@@ -52,7 +52,7 @@ import com.redgogh.commons.lang3.security.cipher.AESCipher;
  */
 public final class Crypt {
 
-    public static final AES    AES    = new AESCipher();    // AES
-    public static final RSA    RSA    = new RSACipher();   // RSA
+    public static final AES AES = new AESCipher();    // AES
+    public static final RSA RSA = new RSACipher();    // RSA
 
 }
