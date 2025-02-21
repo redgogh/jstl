@@ -23,6 +23,7 @@
 - 新增 `RSACipher` 加解密工具类。
 - 新增 `Codec` 编码解码工具类。
 - 新增 `Lists#partitionBySize` 支持集合按块拆分。
+- 新增 `BeanUtils#newInstance` 根据类创建 Bean 实例。
 
 ## 👻 优化功能
 

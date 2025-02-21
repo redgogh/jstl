@@ -485,7 +485,7 @@ public class Lists {
      */
     @SuppressWarnings({"SlowAbstractSetRemoveAll"})
     public static <E> List<E> symdiff(Collection<E> a, Collection<E> b) {
-        Set<E> symmdiff = Sets.of();
+        Set<E> symmdiff = Sets.newHashSet();
         symmdiff.addAll(a);
         symmdiff.addAll(b);
 

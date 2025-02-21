@@ -40,6 +40,20 @@ import static com.redgogh.commons.lang3.string.StringUtils.strcount;
 public class BeanUtils {
 
     /**
+     * #brief: 实例化一个类对象，根据类的构造器传入参数数据
+     *
+     * <p>根据传入的构造器参数实例化类对象。如果使用空构造器，则不传入参数。
+     *
+     * @param aClass 类对象
+     * @param parameters 构造器参数，如果使用空构造器则不传
+     * @return 类对象实例
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T newInstance(Class<?> aClass, Object... parameters) {
+        return (T) UClass.newInstance(aClass, parameters);
+    }
+
+    /**
      * 将 [src] 集合列表中的对象属性拷贝到新的 [T] 对象实例列表中。
      *
      * @param src        源对象实例
