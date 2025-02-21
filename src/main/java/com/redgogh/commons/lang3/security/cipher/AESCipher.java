@@ -1,4 +1,4 @@
-package com.redgogh.commons.lang3.security.codec;
+package com.redgogh.commons.lang3.security.cipher;
 
 import com.redgogh.commons.lang3.security.AES;
 import com.redgogh.commons.lang3.security.Codec;
@@ -11,7 +11,7 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * @author Red Gogh
  */
-public class AESCodec implements AES {
+public class AESCipher implements AES {
 
     @Override
     public String encrypt(String data, String secret) {

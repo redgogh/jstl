@@ -26,7 +26,7 @@ package com.redgogh.commons.lang3.security;
 /* Creates on 2023/5/16. */
 
 import com.redgogh.commons.lang3.security.cipher.RSACipher;
-import com.redgogh.commons.lang3.security.codec.AESCodec;
+import com.redgogh.commons.lang3.security.cipher.AESCipher;
 
 /**
  * `Crypt` 是一个工具类，提供了多种加密和解密算法的实现，支持常见的加密需求。
@@ -52,7 +52,7 @@ import com.redgogh.commons.lang3.security.codec.AESCodec;
  */
 public final class Crypt {
 
-    public static final AES    AES    = new AESCodec();    // AES
+    public static final AES    AES    = new AESCipher();    // AES
     public static final RSA    RSA    = new RSACipher();   // RSA
 
 }
