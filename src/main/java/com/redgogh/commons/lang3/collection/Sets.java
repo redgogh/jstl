@@ -31,7 +31,7 @@ import java.util.*;
  *     <li>支持对 {@link Set} 集合的深拷贝，通过 {@link #copy(Set)} 方法创建一个包含相同数据的新 {@link HashSet} 实例。</li>
  *     <li>提供多种 {@code of()} 方法，支持快速创建空或包含指定元素的 Set 实例，简化了 Set 对象的初始化过程。</li>
  *     <li>支持通过集合、数组或可变参数形式传入数据，灵活性高，便于开发时使用。</li>
- *     <li>提供简单的 Set 合并功能 {@link #of(Collection, Collection)}，允许将两个集合合并为一个新的 {@link HashSet}。</li>
+ *     <li>提供简单的 Set 合并功能 {@link #newHashSet(Collection, Collection)}，允许将两个集合合并为一个新的 {@link HashSet}。</li>
  * </ul>
  *
  * <h2>使用注意事项</h2>
@@ -78,27 +78,8 @@ public class Sets {
     /**
      * @return 分配一个空的 {@link HashSet} 集合对象实例。
      */
-    public static <E> HashSet<E> of() {
+    public static <E> HashSet<E> newHashSet() {
         return new HashSet<>();
-    }
-
-    /**
-     * 通过传入的泛型可变参数去分配一个 {@link HashSet} 集合对象实例。泛型可变参数不能为空
-     * 否则会抛出 {@link NullPointerException} 异常。
-     *
-     * @param a
-     *        泛型可变参数数组
-     *
-     * @return 一个新的 {@link HashSet} 对象实例
-     *
-     * @throws NullPointerException
-     *         如果泛型参数为空值
-     *
-     * @see #of(Collection)
-     */
-    @SafeVarargs
-    public static <E> HashSet<E> of(E... a) {
-        return of(Arrays.asList(a));
     }
 
     /**
@@ -123,11 +104,11 @@ public class Sets {
      * @throws ArrayIndexOutOfBoundsException
      *         如果 {@code len} 超出整个 {@code a} 数组大小的长度。
      *
-     * @see #of(Collection)
+     * @see #newHashSet(Collection)
      */
     @SuppressWarnings("unchecked")
-    public static <E> HashSet<E> of(E[] a, int off, int len) {
-        return (HashSet<E>) of(Arrays.asList(a, off, len));
+    public static <E> HashSet<E> newHashSet(E[] a, int off, int len) {
+        return (HashSet<E>) newHashSet(Arrays.asList(a, off, len));
     }
 
     /**
@@ -145,7 +126,7 @@ public class Sets {
      *
      * @see HashSet#HashSet(Collection)
      */
-    public static <E> HashSet<E> of(Collection<? extends E> collection) {
+    public static <E> HashSet<E> newHashSet(Collection<? extends E> collection) {
         return new HashSet<>(collection);
     }
 
@@ -168,11 +149,30 @@ public class Sets {
      * @see HashSet#HashSet(Collection)
      */
     @SuppressWarnings("unchecked")
-    public static <E> HashSet<E> of(Collection<? extends E> a, Collection<? extends E> b) {
-        HashSet<E> ret = of();
+    public static <E> HashSet<E> newHashSet(Collection<? extends E> a, Collection<? extends E> b) {
+        HashSet<E> ret = newHashSet();
         ret.addAll(a);
         ret.addAll(b);
         return (HashSet<E>) ret;
+    }
+
+    /**
+     * 通过传入的泛型可变参数去分配一个 {@link HashSet} 集合对象实例。泛型可变参数不能为空
+     * 否则会抛出 {@link NullPointerException} 异常。
+     *
+     * @param a
+     *        泛型可变参数数组
+     *
+     * @return 一个新的 {@link HashSet} 对象实例
+     *
+     * @throws NullPointerException
+     *         如果泛型参数为空值
+     *
+     * @see #newHashSet(Collection)
+     */
+    @SafeVarargs
+    public static <E> HashSet<E> fromVarargs(E... a) {
+        return newHashSet(Arrays.asList(a));
     }
 
 }
