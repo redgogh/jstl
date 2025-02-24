@@ -562,38 +562,69 @@ public class Lists {
     }
 
     /**
+     * 将给定的集合按指定的子集合数量拆分成多个子集合。
+     *
+     * <p>该方法将输入集合 `collection` 分割为 `chunkNum` 个子集合，每个子集合的大小尽可能均匀。
+     * 如果集合大小不能被 `chunkNum` 整除，某些子集合可能会比其他子集合多一个元素。
+     *
+     * @param collection 要分割的集合，不能为 null
+     * @param chunkNum 要分割的子集合数量，必须为正整数
+     * @param <E> 集合中元素的类型
+     * @return 按指定数量分割后的子集合列表，不会为 null
+     * @throws IllegalArgumentException 如果 `chunkNum` 为 0 或负值
+     * @throws NullPointerException 如果 `collection` 为 null
+     */
+    @SuppressWarnings("unchecked")
+    public static <E> List<List<E>> splitIntoNChunk(Collection<E> collection, int chunkNum) {
+        List<List<E>> chunks = newArrayList();
+
+        int avgSize = collection.size() / chunkNum;
+        int remainder = collection.size() % chunkNum;
+
+        Object[] array = collection.toArray(new Object[0]);
+
+        for (int i = 0; i < chunkNum; i++)
+            chunks.add((List<E>) fromVarargs(ArrayUtils.copyOf(array, i * avgSize, avgSize)));
+
+        if (remainder != 0)
+            chunks.get(chunks.size() - 1).addAll((List<E>) fromVarargs(ArrayUtils.copyOf(array, chunkNum * avgSize, remainder)));
+
+        return chunks;
+    }
+
+    /**
      * 将给定集合按指定的大小拆分成多个子集合。
      *
      * <p>该方法将输入集合 `collection` 分割为多个子集合，每个子集合的大小不超过指定的 `bySize`。
      * 如果剩余元素不足一个完整的子集合，最后一个子集合可能会包含较少的元素。
      *
      * @param collection 要分割的集合
-     * @param bySize 每个子集合的最大大小
+     * @param chunkSize 每个子集合的最大大小
      * @param <E> 集合中元素的类型
      * @return 按指定大小分割后的子集合列表
      * @throws IllegalArgumentException 如果 `bySize` 为 0 或负值
      */
     @SuppressWarnings("unchecked")
-    public static <E> List<List<E>> partitionBySize(Collection<E> collection, int bySize) {
+    public static <E> List<List<E>> splitByChunkSize(Collection<E> collection, int chunkSize) {
         List<List<E>> chunks = newArrayList();
 
         List<E> origin = newArrayList(collection);
 
         int size = origin.size();
 
-        if (bySize >= size)
+        if (chunkSize >= size)
             return fromVarargs(origin);
 
         Object[] array = origin.toArray(new Object[0]);
 
-        int count = size / bySize;
+        int count = size / chunkSize;
 
         for (int i = 0; i < count; i++) {
-            Object[] chunk = ArrayUtils.copyOf(array, i * bySize, bySize);
+            Object[] chunk = ArrayUtils.copyOf(array, i * chunkSize, chunkSize);
             chunks.add((List<E>) fromVarargs(chunk));
         }
 
-        int copyCount = count * bySize;
+        int copyCount = count * chunkSize;
         if (size > copyCount) {
             Object[] chunk = ArrayUtils.copyOf(array, copyCount, size - copyCount);
             chunks.add((List<E>) fromVarargs(chunk));
