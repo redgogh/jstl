@@ -2,7 +2,6 @@ package com.redgogh.commons.lang3.iterator;
 
 import com.redgogh.commons.lang3.collection.Lists;
 import com.redgogh.commons.lang3.tuple.Pair;
-import com.redgogh.commons.lang3.tuple.Tuple;
 
 import java.util.Collection;
 import java.util.List;
