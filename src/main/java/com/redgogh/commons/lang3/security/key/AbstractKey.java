@@ -87,4 +87,12 @@ public abstract class AbstractKey {
         return "-----BEGIN " + keyType + "-----\n" + atos(secretBuilder) + "\n-----END " + keyType + "-----";
     }
 
+    public String toZipKeyFormat() {
+        return Codec.BASE64.encode(encoded);
+    }
+
+    @Override
+    public String toString() {
+        return toZipKeyFormat();
+    }
 }

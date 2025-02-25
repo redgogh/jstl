@@ -68,9 +68,4 @@ public class RSAPrivateKey extends AbstractKey {
         return toPEMFormat0("PRIVATE KEY", getEncoded());
     }
 
-    @Override
-    public String toString() {
-        return toPEMFormat();
-    }
-
 }

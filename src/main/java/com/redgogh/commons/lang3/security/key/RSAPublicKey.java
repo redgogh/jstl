@@ -26,17 +26,12 @@ package com.redgogh.commons.lang3.security.key;
 /* Creates on 2025/2/20. */
 
 import com.redgogh.commons.lang3.io.MutableFile;
-import com.redgogh.commons.lang3.security.Crypt;
 import com.redgogh.commons.lang3.utils.Capturer;
 
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.PublicKey;
 import java.security.spec.X509EncodedKeySpec;
-
-import static com.redgogh.commons.lang3.string.StringUtils.strcut;
-import static com.redgogh.commons.lang3.string.StringUtils.strtok;
-import static com.redgogh.commons.lang3.utils.BasicConverter.atos;
 
 /**
  * @author Red Gogh
@@ -71,11 +66,6 @@ public class RSAPublicKey extends AbstractKey {
     @Override
     public String toPEMFormat() {
         return toPEMFormat0("PUBLIC KEY", getEncoded());
-    }
-
-    @Override
-    public String toString() {
-        return toPEMFormat();
     }
 
 }
