@@ -479,7 +479,7 @@ public class Workbook implements Iterable<Row> {
         UClass uClass = new UClass(aClass);
 
         List<T> retval = Lists.newArrayList();
-        Map<String, UField> mapping = Maps.of();
+        Map<String, UField> mapping = Maps.newHashMap();
 
         // 获取对象中字段列表
         List<UField> uFields = uClass.getDeclaredFields();

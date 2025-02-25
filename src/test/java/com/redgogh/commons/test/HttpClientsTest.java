@@ -59,7 +59,7 @@ public class HttpClientsTest {
     @Test
     public void callJSONBodyTest() {
         Response response = HttpClient.open("POST", "http://127.0.0.1:8001/security/save")
-                .addRequestBody(Maps.of("id", "12138", "name", "zs", "age", "18"))
+                .addRequestBody(Maps.fromVarargs("id", "12138", "name", "zs", "age", "18"))
                 .newCall();
 
         System.out.println(response);
@@ -68,7 +68,7 @@ public class HttpClientsTest {
     @Test
     public void callGetTest() {
         QueryArgumentsBuilder queryArgumentsBuilder = new QueryArgumentsBuilder();
-        queryArgumentsBuilder.putAll(Maps.of("id", "12138", "name", "zs", "age", "18"));
+        queryArgumentsBuilder.putAll(Maps.fromVarargs("id", "12138", "name", "zs", "age", "18"));
         Response response = HttpClient.open("GET", "http://127.0.0.1:8001/security/get")
                 .setQueryArgumentsBuilder(queryArgumentsBuilder)
                 .sslVerifierDisable()

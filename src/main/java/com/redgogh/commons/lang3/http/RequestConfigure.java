@@ -36,7 +36,7 @@ public class RequestConfigure {
     private boolean sslVerificationDisable = false;
 
     /** HTTP 请求头的集合。 */
-    private final Map<String, String> headers = Maps.of();
+    private final Map<String, String> headers = Maps.newHashMap();
 
     /** 读取响应的超时时间 */
     private int readTimeout = 60000;
