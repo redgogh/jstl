@@ -78,6 +78,8 @@ import java.util.*;
  */
 public class Lists {
 
+    private static final List<?> EMPTY_LIST = Collections.emptyList();
+
     /**
      * 判断参数 {@code a} 实现了 {@link Collection} 接口的对象实例，是否为空。如果要满足函数
      * 返回 {@code false} 那么该对象不能为 {@code null} 并且该对象的 {@code size} 必须大
@@ -207,6 +209,15 @@ public class Lists {
     @SafeVarargs
     public static <E> ArrayList<E> fromVarargs(E... a) {
         return newArrayList(Arrays.asList(a));
+    }
+
+    /**
+     * 返回一个静态化的空集合，该集合通常用于确保一个集合的实例对象不会为
+     * 空对象。
+     */
+    @SuppressWarnings("unchecked")
+    public static <E> List<E> emptyList() {
+        return (List<E>) EMPTY_LIST;
     }
 
     /**
