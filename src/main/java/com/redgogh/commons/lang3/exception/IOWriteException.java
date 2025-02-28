@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * `IOWriteException` 是一个自定义的 I/O 写入异常类，继承自 `CentralRuntimeException`。
- * 当在进行 I/O 写入操作时发生错误或异常情况时，可以抛出此异常以便更好地处理和定位问题。
+ * 当在进行 I/O 写入操作时发生错误或异常情况时，可以抛出此异常以便更好地处理和定位问题。<p>
  *
  * <h2>使用场景</h2>
  * <p>适用于文件写入、流写入、网络数据发送等 I/O 操作的场景。当写入过程中出现错误或异常时，

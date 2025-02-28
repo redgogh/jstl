@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * `InvalidArgumentException` 是一个自定义的非法参数异常类，继承自 `CentralRuntimeException`。
- * 用于在方法或函数调用中，当传入的参数不合法或不符合预期时抛出。
+ * 用于在方法或函数调用中，当传入的参数不合法或不符合预期时抛出。<p>
  *
  * <h2>使用场景</h2>
  * <p>常用于参数验证、数据校验等场景。当参数值不符合预期或条件时，可以抛出此异常，

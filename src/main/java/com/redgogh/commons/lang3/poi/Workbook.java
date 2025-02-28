@@ -353,9 +353,8 @@ public class Workbook implements Iterable<Row> {
     /**
      * #brief: Workbook 的迭代器
      *
-     * <p>该内部类实现了迭代器接口，用于遍历
-     * Workbook 中的行对象。通过此迭代器，用户
-     * 可以方便地遍历工作表中的每一行。
+     * <p>该内部类实现了迭代器接口，用于遍历Workbook 中的行对象。通过此迭代器，用户
+     * 可以方便地遍历工作表中的每一行。<p>
      *
      * <h2>注意事项</h2>
      * <ul>
@@ -448,7 +447,7 @@ public class Workbook implements Iterable<Row> {
      * 将 Excel 数据转换为 Java 对象列表。
      *
      * <p>该方法根据指定的类类型，将工作簿中的数据解析并映射为 Java 对象列表。通过注解 {@link RowColumn}，
-     * 确定 Excel 列标题与 Java 类字段的对应关系，逐行解析并生成对象。
+     * 确定 Excel 列标题与 Java 类字段的对应关系，逐行解析并生成对象。<p>
      *
      * <h2>功能特点</h2>
      * <ul>

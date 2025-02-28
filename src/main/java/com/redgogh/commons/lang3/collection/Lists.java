@@ -42,7 +42,7 @@ import java.util.*;
  *         自定义处理。</li>
  * </ul>
  *
- * <p>该工具类尤其适合在需要频繁操作集合的场景中使用，能够极大地减少手动处理集合的代码量。
+ * <p>该工具类尤其适合在需要频繁操作集合的场景中使用，能够极大地减少手动处理集合的代码量。<p>
  *
  * <h2>注意事项</h2>
  * <ul>
@@ -52,7 +52,7 @@ import java.util.*;
  *         或函数式接口。</li>
  * </ul>
  *
- * <p>本类支持的集合类型包括但不限于 {@link ArrayList}、{@link LinkedList}、{@link HashSet} 等。
+ * <p>本类支持的集合类型包括但不限于 {@link ArrayList}、{@link LinkedList}、{@link HashSet} 等。<p>
  *
  * <h2>使用示例</h2>
  * <pre>

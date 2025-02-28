@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * `CentralRuntimeException` 是一个自定义的运行时异常类，用于在系统中抛出各种运行时异常。
- * 该类继承自 `RuntimeException`，提供了多种构造函数以便根据不同的异常情况创建实例。
+ * 该类继承自 `RuntimeException`，提供了多种构造函数以便根据不同的异常情况创建实例。<p>
  *
  * <h2>使用场景</h2>
  * <p>此异常类适用于在系统中抛出自定义异常，例如系统运行时错误、格式化消息的异常信息等。

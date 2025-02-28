@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * `HttpRequestException` 是一个自定义的 HTTP 请求异常类，继承自 `CentralRuntimeException`。
- * 用于在处理 HTTP 请求时出现错误或异常情况时抛出。
+ * 用于在处理 HTTP 请求时出现错误或异常情况时抛出。<p>
  *
  * <h2>使用场景</h2>
  * <p>通常用于网络请求、API 调用等操作中，当请求失败、超时或响应异常时，可以抛出此异常。

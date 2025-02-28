@@ -10,7 +10,7 @@ import org.apache.poi.ss.usermodel.DateUtil;
  * `DataCellFormatter` 是一个用于格式化 Excel 单元格数据的工具类。
  *
  * <p>该类提供了基于 Apache POI 的方法，用于将单元格内容格式化为字符串形式。
- * 根据单元格类型，该类能够处理日期格式化、数值格式化以及其他通用单元格类型。
+ * 根据单元格类型，该类能够处理日期格式化、数值格式化以及其他通用单元格类型。<p>
  *
  * <h2>功能特点</h2>
  * <ul>

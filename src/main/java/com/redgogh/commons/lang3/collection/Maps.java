@@ -31,7 +31,7 @@ import java.util.*;
  *     <li>提供对 Map 集合的空检查方法 {@link #isEmpty(Map)}，避免手动进行非空检查。</li>
  *     <li>支持 Map 对象的深拷贝，通过 {@link #copy(Map)} 方法创建一个包含相同数据的新 Map 实例。</li>
  *     <li>多种 {@code of()} 方法支持快速创建 Map 实例，允许传入多个键值对进行初始化，便于开发时使用。</li>
- *     <li>提供简单的 Map 合并功能 {@link #of(Map, Map)}，但需注意返回的结果是无序的 {@link HashMap}。</li>
+ *     <li>提供简单的 Map 合并功能 {@link #newHashMap(Map, Map)}，但需注意返回的结果是无序的 {@link HashMap}。</li>
  * </ul>
  *
  * <h2>使用注意事项</h2>
@@ -64,6 +64,7 @@ import java.util.*;
  * @see HashMap
  * @see LinkedHashMap
  * @since 1.0
+ * @noinspection DuplicatedCode
  */
 public class Maps {
 

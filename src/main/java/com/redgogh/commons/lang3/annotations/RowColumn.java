@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  * 自定义注解 `RowColumn`，用于标注字段在 Excel 中的列标题及其格式化模式。
  *
  * <p>该注解可应用于类的字段上，用于指定字段对应的 Excel 列名以及格式化模式。
- * 若字段是日期类型，可以通过 `pattern` 属性指定日期格式，默认为 "yyyy/MM/dd HH:mm:ss" 格式。
+ * 若字段是日期类型，可以通过 `pattern` 属性指定日期格式，默认为 "yyyy/MM/dd HH:mm:ss" 格式。<p>
  *
  * <h2>功能特点</h2>
  * <ul>

@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * `AssertException` 是一个自定义的断言异常类，继承自 `CentralRuntimeException`。
- * 用于在程序中断言条件失败时抛出异常，以便快速定位和处理程序逻辑错误。
+ * 用于在程序中断言条件失败时抛出异常，以便快速定位和处理程序逻辑错误。<p>
  *
  * <h2>使用场景</h2>
  * <p>通常用于在代码中进行断言检查时，当断言条件不满足时，抛出此异常。

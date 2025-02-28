@@ -24,7 +24,7 @@ package com.redgogh.commons.lang3.http;
  * <p>该接口定义了两个方法：`onFailure` 和 `onResponse`，分别用于处理请求失败时的异常
  * 和请求成功时的响应。通常用于异步 HTTP 请求的回调机制中，提供对请求结果的处理逻辑。
  *
- * <p>使用场景包括异步 HTTP 请求、网络请求回调等。
+ * <p>使用场景包括异步 HTTP 请求、网络请求回调等。<p>
  *
  * <h2>主要功能</h2>
  * <ul>

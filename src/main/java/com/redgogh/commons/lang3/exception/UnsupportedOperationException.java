@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * `UnsupportedOperationException` 是一个自定义的异常类，继承自 `CentralRuntimeException`。
- * 当操作不被支持或无法实现时，可以抛出此异常以表明该操作无法完成。
+ * 当操作不被支持或无法实现时，可以抛出此异常以表明该操作无法完成。<p>
  *
  * <h2>使用场景</h2>
  * <p>适用于不支持特定操作的场景。例如，当调用不被实现或当前环境下不允许执行的操作时，
