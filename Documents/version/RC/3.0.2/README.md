@@ -40,3 +40,4 @@
 
 - 修复 `DateFormatter#parse` 方法参数传递不正确问题。
 - 修复 `BeanUtils`拷贝空对象以及基本数据类型不能拷贝问题。
+- 修复 `Workbook#checkout` 为空校验报错提示 Sheet 已存在问题。

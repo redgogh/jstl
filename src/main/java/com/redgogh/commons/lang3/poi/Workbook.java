@@ -154,7 +154,7 @@ public class Workbook implements Iterable<Row> {
      * @throws IllegalArgumentException 如果工作表名称为 {@code null} 或空字符串。
      */
     public void checkout(String name) {
-        sheet = Optional.ifNullable(wb.getSheet(name), wb.createSheet(name));
+        sheet = Optional.ifNullable(wb.getSheet(name), () -> wb.createSheet(name));
     }
 
     /**

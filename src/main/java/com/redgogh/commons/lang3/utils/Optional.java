@@ -29,7 +29,6 @@ import com.redgogh.commons.lang3.iface.ActionFunction;
  */
 public class Optional {
 
-
     /**
      * 如果给定的值为 null，则返回指定的替代值；否则返回原值。
      *
@@ -42,6 +41,20 @@ public class Optional {
      */
     public static <T> T ifNullable(T value, T orNull) {
         return value == null ? orNull : value;
+    }
+
+    /**
+     * 如果给定的值为 null，则返回指定的替代值；否则返回原值。
+     *
+     * <p>此方法用于简化 null 检查，可以避免冗长的条件语句。
+     *
+     * @param value 要检查的值
+     * @param orNull 如果 {@code value} 为 null 时返回的替代值
+     * @param <T> 值的类型
+     * @return 如果 {@code value} 为 null，则返回 {@code orNull}，否则返回 {@code value}
+     */
+    public static <T> T ifNullable(T value, CallableFunction<T> orNull) {
+        return Capturer.call(() -> value == null ? orNull.call() : value);
     }
 
     /**
