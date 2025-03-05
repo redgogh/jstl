@@ -21,7 +21,7 @@ package com.redgogh.commons.test;
 import com.alibaba.fastjson.JSON;
 import com.redgogh.commons.lang3.annotations.RowColumn;
 import com.redgogh.commons.lang3.io.MutableFile;
-import com.redgogh.commons.lang3.poi.Workbook;
+import com.redgogh.commons.lang3.poi.WorkBook;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -29,7 +29,7 @@ import java.util.Date;
 import java.util.List;
 
 @SuppressWarnings("ALL")
-public class WorkbookTest {
+public class WorkBookTest {
 
     public static class User0 {
         @RowColumn(name = "姓名")
@@ -89,7 +89,7 @@ public class WorkbookTest {
 
     @Test
     public void generateWorkbookTest() {
-            Workbook wb = new Workbook();
+            WorkBook wb = new WorkBook();
 
             wb.checkout("一班学生");
             wb.addRow("序号", "姓名", "年龄", "性别", "班级", "学号", "身份证号码", "联系方式");
@@ -113,14 +113,14 @@ public class WorkbookTest {
 
     @Test
     public void loadWorkbookTest() {
-        Workbook wb = Workbook.load("Desktop://test.xlsx");
+        WorkBook wb = WorkBook.load("Desktop://test.xlsx");
         for (int i = 0; i < wb.rowCount(); i++)
             System.out.println(wb.getRow(i));
     }
 
     @Test
     public void workbookIteratorTest() {
-        Workbook wb = Workbook.load("Desktop://test.xlsx");
+        WorkBook wb = WorkBook.load("Desktop://test.xlsx");
         // for (Row row : wb) {
         //     System.out.println(row);
         // }
@@ -129,27 +129,27 @@ public class WorkbookTest {
 
     @Test
     public void workbookCSVTest() {
-        Workbook wb = Workbook.load("Desktop://test.xlsx");
+        WorkBook wb = WorkBook.load("Desktop://test.xlsx");
         String csvText = wb.toCSVText();
         System.out.println(csvText);
     }
 
     @Test
     public void workbookJavaObjectTest() {
-        Workbook wb = Workbook.load("Desktop://users.xlsx");
+        WorkBook wb = WorkBook.load("Desktop://users.xlsx");
         List<User> list = wb.toJavaObject(User.class);
         System.out.println(JSON.toJSONString(list));
     }
 
     @Test
     public void workbookPrintTest() {
-        Workbook wb = Workbook.load("Desktop://b.xlsx");
+        WorkBook wb = WorkBook.load("Desktop://b.xlsx");
         System.out.println(wb);
     }
 
     @Test
     public void dataFormatTest() {
-        System.out.println(Workbook.load("Desktop://b.xlsx"));
+        System.out.println(WorkBook.load("Desktop://b.xlsx"));
     }
 
 }

@@ -31,6 +31,7 @@ import com.redgogh.commons.lang3.utils.Optional;
 import com.redgogh.commons.lang3.io.MutableFile;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jetbrains.annotations.NotNull;
 import com.redgogh.commons.lang3.time.DateFormatter;
@@ -44,7 +45,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 类 {@link Workbook} 用于创建和操作 Excel 工作簿。
+ * 类 {@link WorkBook} 用于创建和操作 Excel 工作簿。
  *
  * <p>该类使用 Apache POI 库来实现工作簿的创建和行的添加。
  * 默认情况下，会创建一个名为 "Sheet1" 的工作表。
@@ -58,12 +59,12 @@ import java.util.Map;
  *
  * @author Red Gogh
  */
-public class Workbook implements Iterable<Row> {
+public class WorkBook implements Iterable<Row> {
 
     /**
      * Apache POI 工作簿实例，用于创建和操作 Excel 文件。
      */
-    private final org.apache.poi.ss.usermodel.Workbook wb;
+    private final Workbook wb;
 
     /**
      * 当前工作簿中的工作表。
@@ -81,7 +82,7 @@ public class Workbook implements Iterable<Row> {
      * <p>使用默认的 XSSFWorkbook 创建一个新的 Workbook
      * 对象。
      */
-    private Workbook() {
+    private WorkBook() {
         this(new XSSFWorkbook());
     }
 
@@ -94,7 +95,7 @@ public class Workbook implements Iterable<Row> {
      *
      * @param pathname Excel 文件的路径
      */
-    private Workbook(String pathname) {
+    private WorkBook(String pathname) {
         this(new MutableFile(pathname));
     }
 
@@ -107,7 +108,7 @@ public class Workbook implements Iterable<Row> {
      *
      * @param mutableFile Excel 文件对象
      */
-    private Workbook(MutableFile mutableFile) {
+    private WorkBook(MutableFile mutableFile) {
         this(Capturer.call(() -> new XSSFWorkbook(mutableFile)));
     }
 
@@ -120,7 +121,7 @@ public class Workbook implements Iterable<Row> {
      *
      * @param stream 输入流，需指向有效的 Excel 文件内容
      */
-    private Workbook(InputStream stream) {
+    private WorkBook(InputStream stream) {
         this(Capturer.call(() -> new XSSFWorkbook(stream)));
     }
 
@@ -132,7 +133,7 @@ public class Workbook implements Iterable<Row> {
      *
      * @param workbook 已存在的 XSSFWorkbook 对象
      */
-    private Workbook(XSSFWorkbook workbook) {
+    private WorkBook(XSSFWorkbook workbook) {
         this.wb = workbook;
         /* switch sheet. */
         if (wb.getNumberOfSheets() > 0)
@@ -147,7 +148,7 @@ public class Workbook implements Iterable<Row> {
      *
      * @return 包含默认工作表的工作簿
      */
-    public static Workbook ofSheet() {
+    public static WorkBook ofSheet() {
         return ofSheet("Sheet0", "Sheet1", "Sheet2");
     }
 
@@ -160,7 +161,7 @@ public class Workbook implements Iterable<Row> {
      * @param sheetName 工作表名称
      * @return 包含指定工作表的工作簿
      */
-    public static Workbook ofSheet(String sheetName) {
+    public static WorkBook ofSheet(String sheetName) {
         return ofSheet(new String[]{sheetName});
     }
 
@@ -173,12 +174,54 @@ public class Workbook implements Iterable<Row> {
      * @param sheets 工作表名称数组
      * @return 包含多个工作表的工作簿
      */
-    public static Workbook ofSheet(String ...sheets) {
-        Workbook workbook = new Workbook();
+    public static WorkBook ofSheet(String ...sheets) {
+        WorkBook workbook = new WorkBook();
         for (String sheet : sheets)
             workbook.createSheet(sheet);
-        workbook.checkout(sheets[0]);
+        workbook.checkout(sheets[0]); /* 默认使用第一个 Sheet */
         return workbook;
+    }
+
+    /**
+     * #brief: 根据文件路径加载 Workbook 实例
+     *
+     * <p>根据提供的文件路径，加载并返回对应的
+     * Workbook 实例。如果文件不存在或格式不正确，可能
+     * 会抛出异常。
+     *
+     * @param pathname Excel 文件的路径
+     * @return 加载的 Workbook 实例
+     */
+    public static WorkBook fromPathname(String pathname) {
+        return fromMutableFile(new MutableFile(pathname));
+    }
+
+    /**
+     * #brief: 根据 File 对象加载 Workbook 实例
+     *
+     * <p>根据提供的 File 对象，加载并返回对应的
+     * Workbook 实例。如果文件不存在或格式不正确，可能
+     * 会抛出异常。
+     *
+     * @param mutableFile Excel 文件对象
+     * @return 加载的 Workbook 实例
+     */
+    public static WorkBook fromMutableFile(MutableFile mutableFile) {
+        return new WorkBook(mutableFile);
+    }
+
+    /**
+     * #brief: 根据输入流加载 Workbook 实例
+     *
+     * <p>根据提供的输入流，加载并返回对应的
+     * Workbook 实例。输入流需指向有效的 Excel 文件内容。
+     * 如果输入流无效，可能会抛出异常。
+     *
+     * @param stream 输入流，需指向有效的 Excel 文件内容
+     * @return 加载的 Workbook 实例
+     */
+    public static WorkBook load(InputStream stream) {
+        return new WorkBook(stream);
     }
 
     /**
@@ -346,48 +389,6 @@ public class Workbook implements Iterable<Row> {
     }
 
     /**
-     * #brief: 根据文件路径加载 Workbook 实例
-     *
-     * <p>根据提供的文件路径，加载并返回对应的
-     * Workbook 实例。如果文件不存在或格式不正确，可能
-     * 会抛出异常。
-     *
-     * @param pathname Excel 文件的路径
-     * @return 加载的 Workbook 实例
-     */
-    public static Workbook load(String pathname) {
-        return load(new MutableFile(pathname));
-    }
-
-    /**
-     * #brief: 根据 File 对象加载 Workbook 实例
-     *
-     * <p>根据提供的 File 对象，加载并返回对应的
-     * Workbook 实例。如果文件不存在或格式不正确，可能
-     * 会抛出异常。
-     *
-     * @param mutableFile Excel 文件对象
-     * @return 加载的 Workbook 实例
-     */
-    public static Workbook load(MutableFile mutableFile) {
-        return new Workbook(mutableFile);
-    }
-
-    /**
-     * #brief: 根据输入流加载 Workbook 实例
-     *
-     * <p>根据提供的输入流，加载并返回对应的
-     * Workbook 实例。输入流需指向有效的 Excel 文件内容。
-     * 如果输入流无效，可能会抛出异常。
-     *
-     * @param stream 输入流，需指向有效的 Excel 文件内容
-     * @return 加载的 Workbook 实例
-     */
-    public static Workbook load(InputStream stream) {
-        return new Workbook(stream);
-    }
-
-    /**
      * 将工作簿写入指定的输出流。
      *
      * <p>使用此方法可以将当前工作簿的数据输出到文件或其他输出流中。
@@ -427,9 +428,9 @@ public class Workbook implements Iterable<Row> {
 
         private int index;
         private final int size;
-        private final Workbook wb;
+        private final WorkBook wb;
 
-        WorkbookInterator(Workbook wb) {
+        WorkbookInterator(WorkBook wb) {
             this.wb = wb;
             this.index = 0;
             this.size = wb.rowCount() + 1;
