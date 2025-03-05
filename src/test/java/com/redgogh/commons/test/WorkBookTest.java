@@ -89,7 +89,7 @@ public class WorkBookTest {
 
     @Test
     public void generateWorkbookTest() {
-            WorkBook wb = new WorkBook();
+            WorkBook wb = WorkBook.ofSheet("一班学生", "六班学生", "七班学生");
 
             wb.checkout("一班学生");
             wb.addRow("序号", "姓名", "年龄", "性别", "班级", "学号", "身份证号码", "联系方式");
@@ -113,14 +113,14 @@ public class WorkBookTest {
 
     @Test
     public void loadWorkbookTest() {
-        WorkBook wb = WorkBook.load("Desktop://test.xlsx");
+        WorkBook wb = WorkBook.fromMutableFile("Desktop://test.xlsx");
         for (int i = 0; i < wb.rowCount(); i++)
             System.out.println(wb.getRow(i));
     }
 
     @Test
     public void workbookIteratorTest() {
-        WorkBook wb = WorkBook.load("Desktop://test.xlsx");
+        WorkBook wb = WorkBook.fromMutableFile("Desktop://test.xlsx");
         // for (Row row : wb) {
         //     System.out.println(row);
         // }
@@ -129,27 +129,27 @@ public class WorkBookTest {
 
     @Test
     public void workbookCSVTest() {
-        WorkBook wb = WorkBook.load("Desktop://test.xlsx");
+        WorkBook wb = WorkBook.fromMutableFile("Desktop://test.xlsx");
         String csvText = wb.toCSVText();
         System.out.println(csvText);
     }
 
     @Test
     public void workbookJavaObjectTest() {
-        WorkBook wb = WorkBook.load("Desktop://users.xlsx");
+        WorkBook wb = WorkBook.fromMutableFile("Desktop://users.xlsx");
         List<User> list = wb.toJavaObject(User.class);
         System.out.println(JSON.toJSONString(list));
     }
 
     @Test
     public void workbookPrintTest() {
-        WorkBook wb = WorkBook.load("Desktop://b.xlsx");
+        WorkBook wb = WorkBook.fromMutableFile("Desktop://b.xlsx");
         System.out.println(wb);
     }
 
     @Test
     public void dataFormatTest() {
-        System.out.println(WorkBook.load("Desktop://b.xlsx"));
+        System.out.println(WorkBook.fromMutableFile("Desktop://b.xlsx"));
     }
 
 }

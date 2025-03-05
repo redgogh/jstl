@@ -192,7 +192,7 @@ public class WorkBook implements Iterable<Row> {
      * @param pathname Excel 文件的路径
      * @return 加载的 Workbook 实例
      */
-    public static WorkBook fromPathname(String pathname) {
+    public static WorkBook fromMutableFile(String pathname) {
         return fromMutableFile(new MutableFile(pathname));
     }
 
