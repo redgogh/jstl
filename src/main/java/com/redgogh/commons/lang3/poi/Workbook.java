@@ -81,7 +81,7 @@ public class Workbook implements Iterable<Row> {
      * <p>使用默认的 XSSFWorkbook 创建一个新的 Workbook
      * 对象。
      */
-    public Workbook() {
+    private Workbook() {
         this(new XSSFWorkbook());
     }
 
@@ -94,7 +94,7 @@ public class Workbook implements Iterable<Row> {
      *
      * @param pathname Excel 文件的路径
      */
-    public Workbook(String pathname) {
+    private Workbook(String pathname) {
         this(new MutableFile(pathname));
     }
 
@@ -107,7 +107,7 @@ public class Workbook implements Iterable<Row> {
      *
      * @param mutableFile Excel 文件对象
      */
-    public Workbook(MutableFile mutableFile) {
+    private Workbook(MutableFile mutableFile) {
         this(Capturer.call(() -> new XSSFWorkbook(mutableFile)));
     }
 
@@ -120,7 +120,7 @@ public class Workbook implements Iterable<Row> {
      *
      * @param stream 输入流，需指向有效的 Excel 文件内容
      */
-    public Workbook(InputStream stream) {
+    private Workbook(InputStream stream) {
         this(Capturer.call(() -> new XSSFWorkbook(stream)));
     }
 
@@ -132,13 +132,54 @@ public class Workbook implements Iterable<Row> {
      *
      * @param workbook 已存在的 XSSFWorkbook 对象
      */
-    public Workbook(XSSFWorkbook workbook) {
+    private Workbook(XSSFWorkbook workbook) {
         this.wb = workbook;
         /* switch sheet. */
         if (wb.getNumberOfSheets() > 0)
             this.sheet = wb.getSheet(wb.getSheetName(0));
     }
 
+    /**
+     * #brief: 创建包含默认工作表的工作簿
+     *
+     * <p>创建一个新的工作簿，并默认包含三个工作表（Sheet0, Sheet1, Sheet2）。
+     * 适用于需要快速初始化工作簿的场景。
+     *
+     * @return 包含默认工作表的工作簿
+     */
+    public static Workbook ofSheet() {
+        return ofSheet("Sheet0", "Sheet1", "Sheet2");
+    }
+
+    /**
+     * #brief: 创建包含单个工作表的工作簿
+     *
+     * <p>创建一个新的工作簿，并包含一个指定名称的工作表。
+     * 适用于需要自定义工作表名称的场景。
+     *
+     * @param sheetName 工作表名称
+     * @return 包含指定工作表的工作簿
+     */
+    public static Workbook ofSheet(String sheetName) {
+        return ofSheet(new String[]{sheetName});
+    }
+
+    /**
+     * #brief: 创建包含多个工作表的工作簿
+     *
+     * <p>创建一个新的工作簿，并包含多个指定名称的工作表。
+     * 第一个工作表会被设置为当前活动工作表。
+     *
+     * @param sheets 工作表名称数组
+     * @return 包含多个工作表的工作簿
+     */
+    public static Workbook ofSheet(String ...sheets) {
+        Workbook workbook = new Workbook();
+        for (String sheet : sheets)
+            workbook.createSheet(sheet);
+        workbook.checkout(sheets[0]);
+        return workbook;
+    }
 
     /**
      * 检查并获取指定名称的工作表。如果不存在，则创建一个新的工作表。
@@ -155,6 +196,23 @@ public class Workbook implements Iterable<Row> {
      */
     public void checkout(String name) {
         sheet = Optional.ifNullable(wb.getSheet(name), () -> wb.createSheet(name));
+    }
+
+    /**
+     * 检查并获取指定名称的工作表。如果不存在，则创建一个新的工作表。
+     *
+     * <p>此方法用于确保在操作之前工作表存在，如果指定名称的工作表不存在，将自动创建。
+     *
+     * <p>示例用法：
+     * <pre>
+     *      workbook.createSheet("Sheet2");
+     * </pre>
+     *
+     * @param name 工作表的名称。
+     * @throws IllegalArgumentException 如果工作表名称为 {@code null} 或空字符串。
+     */
+    public void createSheet(String name) {
+        Optional.ifNullable(wb.getSheet(name), () -> wb.createSheet(name));
     }
 
     /**
