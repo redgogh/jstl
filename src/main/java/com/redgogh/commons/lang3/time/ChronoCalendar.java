@@ -41,8 +41,8 @@ import java.util.Date;
  *
  * <h2>方法说明</h2>
  * <ul>
- *     <li>{@link #toZoneDateTime(String)}: 将时间转换为指定时区的 `ZonedDateTime`。</li>
- *     <li>{@link #toZoneDateTime(ZoneId)}: 使用 `ZoneId` 将时间转换为指定时区的 `ZonedDateTime`。</li>
+ *     <li>{@link #toZonedDateTime(String)}: 将时间转换为指定时区的 `ZonedDateTime`。</li>
+ *     <li>{@link #toZonedDateTime(ZoneId)}: 使用 `ZoneId` 将时间转换为指定时区的 `ZonedDateTime`。</li>
  *     <li>{@link #toZonedDateTime()}: 获取当前时间的 `ZonedDateTime`。</li>
  *     <li>{@link #getZoneId()}: 获取当前时间的时区。</li>
  *     <li>{@link #getTime()}: 获取当前时间的毫秒表示。</li>
@@ -113,7 +113,7 @@ public interface ChronoCalendar {
      * @param zoneId 时区的 ID
      * @return 转换后的 `ZonedDateTime`
      */
-    ZonedDateTime toZoneDateTime(String zoneId);
+    ZonedDateTime toZonedDateTime(String zoneId);
 
     /**
      * 将当前时间转换为指定时区的 `ZonedDateTime`。
@@ -123,7 +123,7 @@ public interface ChronoCalendar {
      * @param zoneId 时区对象
      * @return 转换后的 `ZonedDateTime`
      */
-    ZonedDateTime toZoneDateTime(ZoneId zoneId);
+    ZonedDateTime toZonedDateTime(ZoneId zoneId);
 
     /**
      * 获取当前时间的 `ZonedDateTime` 对象。
