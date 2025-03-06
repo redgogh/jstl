@@ -163,6 +163,17 @@ public enum TimeUnits {
         return retval.toDate();
     }
 
+    /**
+     * #brief: 计算两个日期之间的时间差
+     *
+     * <p>根据当前时间单位（如秒、分钟、小时等），计算两个日期之间的时间差。
+     * 支持的时间单位包括毫秒、秒、分钟、小时、天、周、月和年。
+     * 日期会被转换为系统默认时区进行计算。
+     *
+     * @param a 起始日期
+     * @param b 结束日期
+     * @return 两个日期之间的时间差，单位为当前时间单位
+     */
     public long between(Date a, Date b) {
         ChronoUnit chrono = null;
         switch (this) {
@@ -192,8 +203,8 @@ public enum TimeUnits {
                 break;
         }
         return (int) chrono.between(
-                a.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
-                b.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                a.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
+                b.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
     }
 
     /**
