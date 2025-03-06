@@ -92,6 +92,20 @@ public interface ChronoCalendar {
     boolean isThisYear();
 
     /**
+     * 获取当前时间的纳秒数（相对于某个固定时间点，例如 JVM 启动时）。
+     *
+     * @return 当前时间的纳秒数
+     */
+    long nanoTime();
+
+    /**
+     * 获取当前的时间戳，单位是毫秒。
+     *
+     * @return 当前时间的毫秒时间戳
+     */
+    long currentTimeMillis();
+
+    /**
      * 将当前时间转换为指定时区的 `ZonedDateTime`。
      *
      * <p>该方法将时间转换为指定时区（通过 `zoneId`）的 `ZonedDateTime` 对象，允许根据不同的时区进行时间操作。

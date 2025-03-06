@@ -604,6 +604,16 @@ public final class Chrono
     }
 
     @Override
+    public long nanoTime() {
+        return System.nanoTime();
+    }
+
+    @Override
+    public long currentTimeMillis() {
+        return System.currentTimeMillis();
+    }
+
+    @Override
     public ZonedDateTime toZoneDateTime(String zoneId) {
         return toZoneDateTime(ZoneId.of(zoneId));
     }
