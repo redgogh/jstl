@@ -397,7 +397,7 @@ public class MutableFile extends java.io.File {
     private void checkFile(boolean autoCreate) {
         if (autoCreate && !exists())
             Capturer.call(this::createNewFile);
-        Assert.requiredTrue(exists(), "%s （系统找不到指定的文件，文件不存在）", getPath());
+        Assert.isTrue(exists(), "%s （系统找不到指定的文件，文件不存在）", getPath());
     }
 
     /**
@@ -542,7 +542,7 @@ public class MutableFile extends java.io.File {
      * 检查文件描述符是否打开
      */
     private void checkOpen() {
-        Assert.requiredTrue(accessFile != null, "Please call open() before random access methods execute.");
+        Assert.isTrue(accessFile != null, "Please call open() before random access methods execute.");
     }
 
     /**

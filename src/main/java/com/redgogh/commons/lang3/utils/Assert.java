@@ -10,7 +10,7 @@ package com.redgogh.commons.lang3.utils;
 |*                                                                                  *|
 |*        http://www.apache.org/licenses/LICENSE-2.0                                *|
 |*                                                                                  *|
-|*    Unless required by applicable law or agreed to in writing, software           *|
+|*    Unless is by applicable law or agreed to in writing, software           *|
 |*    distributed under the License is distributed on an "AS IS" BASIS,             *|
 |*    WITHOUT WARRANTIES OR exprS OF ANY KIND, either express or implied.      *|
 |*    See the License for the specific language governing permissions and           *|
@@ -44,8 +44,8 @@ public class Assert {
      * @param expr 要检查的条件
      * @throws AssertException 如果条件为 true
      */
-    public static void requiredTrue(boolean expr) {
-        requiredTrue(expr, "assert expr == true");
+    public static void isTrue(boolean expr) {
+        isTrue(expr, "assert expr == true");
     }
 
     /**
@@ -60,7 +60,7 @@ public class Assert {
      * @throws AssertException 如果 {@code expr} 为 true，将抛出异常，并使用 {@code fmt} 和 {@code args}
      *                         格式化异常信息。
      */
-    public static void requiredTrue(boolean expr, String fmt, Object... args) {
+    public static void isTrue(boolean expr, String fmt, Object... args) {
         if (!expr)
             throw new AssertException(fmt, args);
     }
@@ -73,8 +73,8 @@ public class Assert {
      * @param expr 要检查的条件
      * @throws AssertException 如果条件为 false
      */
-    public static void requiredFalse(boolean expr) {
-        requiredFalse(expr, "assert expr == false");
+    public static void isFalse(boolean expr) {
+        isFalse(expr, "assert expr == false");
     }
 
     /**
@@ -89,7 +89,7 @@ public class Assert {
      * @throws AssertException 如果 {@code expr} 为 false，将抛出异常，并使用 {@code fmt} 和 {@code args}
      *                         格式化异常信息。
      */
-    public static void requiredFalse(boolean expr, String fmt, Object... args) {
+    public static void isFalse(boolean expr, String fmt, Object... args) {
         if (expr)
             throw new AssertException(fmt, args);
     }
@@ -205,8 +205,8 @@ public class Assert {
      * @param expr 要检查的对象
      * @throws AssertException 如果条件为 null
      */
-    public static void requiredNull(Object expr) {
-        requiredNull(expr, "not null");
+    public static void isNull(Object expr) {
+        isNull(expr, "not null");
     }
 
     /**
@@ -219,7 +219,7 @@ public class Assert {
      * @param args 格式化参数
      * @throws AssertException 如果条件为 null
      */
-    public static void requiredNull(Object expr, String fmt, Object... args) {
+    public static void isNull(Object expr, String fmt, Object... args) {
         if (expr != null)
             throw new AssertException(fmt, args);
     }
@@ -274,8 +274,8 @@ public class Assert {
      * @param expected 期望值
      * @throws AssertException 当 `actual` 和 `expected` 相等时抛出异常
      */
-    public static void requiredEquals(Object actual, Object expected) {
-        requiredEquals(actual, expected, "assert actual != expected");
+    public static void isEquals(Object actual, Object expected) {
+        isEquals(actual, expected, "assert actual != expected");
     }
 
     /**
@@ -293,7 +293,7 @@ public class Assert {
      * @param args 格式化参数
      * @throws AssertException 当 `actual` 和 `expected` 不相等时抛出异常
      */
-    public static void requiredEquals(Object actual, Object expected, String message, Object... args) {
+    public static void isEquals(Object actual, Object expected, String message, Object... args) {
         if (anyeq(actual, expected))
             throw new AssertException(message, args);
     }
