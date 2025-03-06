@@ -584,6 +584,26 @@ public final class Chrono
     }
 
     @Override
+    public boolean isToday() {
+        return isThisMonth() && (getDayOfYear() == create().getDayOfYear());
+    }
+
+    @Override
+    public boolean isThisWeek() {
+        return isThisYear() && (getWeekOfYear() == create().getWeekOfYear());
+    }
+
+    @Override
+    public boolean isThisMonth() {
+        return isThisYear() && (getMonth() == create().getMonth());
+    }
+
+    @Override
+    public boolean isThisYear() {
+        return (getYear() == create().getYear());
+    }
+
+    @Override
     public ZonedDateTime toZoneDateTime(String zoneId) {
         return toZoneDateTime(ZoneId.of(zoneId));
     }

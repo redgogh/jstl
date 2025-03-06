@@ -64,6 +64,34 @@ import java.util.Date;
 public interface ChronoCalendar {
 
     /**
+     * 判断当前时间是否是今天。
+     *
+     * @return 如果是今天，返回 true；否则返回 false
+     */
+    boolean isToday();
+
+    /**
+     * 判断当前时间是否是本周。
+     *
+     * @return 如果是本周，返回 true；否则返回 false
+     */
+    boolean isThisWeek();
+
+    /**
+     * 判断当前时间是否是本月。
+     *
+     * @return 如果是本月，返回 true；否则返回 false
+     */
+    boolean isThisMonth();
+
+    /**
+     * 判断当前时间是否是本年。
+     *
+     * @return 如果是本年，返回 true；否则返回 false
+     */
+    boolean isThisYear();
+
+    /**
      * 将当前时间转换为指定时区的 `ZonedDateTime`。
      *
      * <p>该方法将时间转换为指定时区（通过 `zoneId`）的 `ZonedDateTime` 对象，允许根据不同的时区进行时间操作。

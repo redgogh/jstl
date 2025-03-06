@@ -27,6 +27,7 @@
 - 新增 `BeanUtils#newInstance` 根据类创建 Bean 实例。
 - 新增 `WorkBook#transferTo` 支持将工作簿转文件。
 - 新增 `Chrono` 时间对象以及操作 API
+- 新增 `Chrono#isThis*` 判断时间是否是本月、今年等。
 
 ## 👻 优化功能
 
