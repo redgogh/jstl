@@ -26,7 +26,7 @@
 - 新增 `Lists#splitByChunkSize` 支持按每块大小拆分集合。
 - 新增 `BeanUtils#newInstance` 根据类创建 Bean 实例。
 - 新增 `WorkBook#transferTo` 支持将工作簿转文件。
-- 新增 `Chrono#between` 计算两个日期间隔时间。
+- 新增 `Chrono` 时间对象以及操作 API
 
 ## 👻 优化功能
 

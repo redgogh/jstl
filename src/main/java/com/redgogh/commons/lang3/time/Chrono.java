@@ -1,108 +1,347 @@
 package com.redgogh.commons.lang3.time;
 
+/* -------------------------------------------------------------------------------- *\
+|*                                                                                  *|
+|*    Copyright (C) 2019-2024 RedGogh All rights reserved.                          *|
+|*                                                                                  *|
+|*    Licensed under the Apache License, Version 2.0 (the "License");               *|
+|*    you may not use this file except in compliance with the License.              *|
+|*    You may obtain a copy of the License at                                       *|
+|*                                                                                  *|
+|*        http://www.apache.org/licenses/LICENSE-2.0                                *|
+|*                                                                                  *|
+|*    Unless required by applicable law or agreed to in writing, software           *|
+|*    distributed under the License is distributed on an "AS IS" BASIS,             *|
+|*    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.      *|
+|*    See the License for the specific language governing permissions and           *|
+|*    limitations under the License.                                                *|
+|*                                                                                  *|
+\* -------------------------------------------------------------------------------- */
+
+import org.jetbrains.annotations.NotNull;
+
+import java.io.Serializable;
 import java.time.*;
+import java.time.temporal.*;
 import java.util.Date;
+import java.util.Locale;
 
 /**
+ * `Chrono` 类表示一个时间单位，提供了对日期和时间的操作。它实现了 {@link ChronoCalendar} 接口，
+ * {@link Temporal} 接口，并且可以进行比较。该类可以用于表示时间戳、日期、时间等多种形式，并提供
+ * 丰富的日期和时间操作功能。
+ *
+ * <p>此类是不可变的，线程安全的，且支持序列化。
+ *
  * @author Red Gogh
+ * @see ChronoCalendar
+ * @see Temporal
+ * @see Comparable
+ * @see Serializable
  */
-public class Chrono implements ChronoTemporal {
+public final class Chrono
+        implements ChronoCalendar, Temporal, Comparable<Chrono>, Serializable {
 
+    /**
+     * 存储和处理核心本地时间的字段。
+     *
+     * <p>这些字段提供了与本地时间、时区、日期等相关的信息，可以用于时间的计算和转换。
+     * 其中包括本地时间、时区、日期、周字段以及时间戳。
+     */
     private final LocalDateTime _core_local_time;
 
+    /**
+     * 存储与当前对象关联的时区信息。
+     *
+     * <p>该字段用于表示当前对象的时区，使用 {@link ZoneId} 来存储时区。
+     */
     private final ZoneId zoneId;
 
+    /**
+     * 存储日期信息的字段。
+     *
+     * <p>该字段存储一个 {@link Date} 对象，表示当前对象的日期。
+     */
     private final Date date;
 
+    /**
+     * 存储本地日期信息的字段。
+     *
+     * <p>该字段存储一个 {@link LocalDate} 对象，表示当前对象的日期（不包含时间部分）。
+     */
     private final LocalDate localDate;
 
+    /**
+     * 存储周字段信息的字段。
+     *
+     * <p>该字段存储一个 {@link WeekFields} 对象，用于处理基于周的日期信息。
+     */
+    private final WeekFields weekFields;
+
+    /**
+     * 存储时间戳信息。
+     *
+     * <p>该字段表示当前时间的时间戳，以毫秒为单位。
+     */
     private final long timestamp;
 
+    /**
+     * 系统默认的时区。
+     *
+     * <p>该常量存储系统默认时区，使用 {@link ZoneId#systemDefault()} 获取。
+     */
     private static final ZoneId SYSTEM_DEFAULT_ZONE_ID = ZoneId.systemDefault();
 
     // non-required zone id
 
+    /**
+     * 默认构造方法，使用当前日期创建一个新的 {@link Chrono} 对象。
+     */
+    public Chrono() {
+        this(new Date());
+    }
+
+    /**
+     * 根据日期时间字符串创建一个新的 {@link Chrono} 对象，使用默认的日期格式解析器。
+     *
+     * @param text 日期时间字符串
+     */
+    public Chrono(String text) {
+        this(DateFormatter.parse(text));
+    }
+
+    /**
+     * 根据日期时间字符串和指定的日期格式创建一个新的 {@link Chrono} 对象。
+     *
+     * @param text 日期时间字符串
+     * @param pattern 日期格式模式
+     */
+    public Chrono(String text, String pattern) {
+        this(DateFormatter.parse(text, pattern));
+    }
+
+    /**
+     * 根据年份和月份创建一个新的 {@link Chrono} 对象，默认日期为该月的第一天，时间为00:00:00。
+     *
+     * @param year  年份
+     * @param month 月份
+     */
     public Chrono(int year, int month) {
         this(year, month, 1, 0, 0, 0, 0);
     }
 
+    /**
+     * 根据年份、月份和日期创建一个新的 {@link Chrono} 对象，时间为00:00:00。
+     *
+     * @param year  年份
+     * @param month 月份
+     * @param day   日期
+     */
     public Chrono(int year, int month, int day) {
         this(year, month, day, 0, 0, 0);
     }
 
+    /**
+     * 根据年份、月份、日期和小时创建一个新的 {@link Chrono} 对象，分钟和秒为00。
+     *
+     * @param year  年份
+     * @param month 月份
+     * @param day   日期
+     * @param hour  小时
+     */
     public Chrono(int year, int month, int day, int hour) {
         this(year, month, day, hour, 0, 0, 0);
     }
 
+    /**
+     * 根据年份、月份、日期、小时和分钟创建一个新的 {@link Chrono} 对象，秒和毫秒为00。
+     *
+     * @param year   年份
+     * @param month  月份
+     * @param day    日期
+     * @param hour   小时
+     * @param minute 分钟
+     */
     public Chrono(int year, int month, int day, int hour, int minute) {
         this(year, month, day, hour, minute, 0, 0);
     }
 
+    /**
+     * 根据年份、月份、日期、小时、分钟和秒创建一个新的 {@link Chrono} 对象，毫秒为00。
+     *
+     * @param year   年份
+     * @param month  月份
+     * @param day    日期
+     * @param hour   小时
+     * @param minute 分钟
+     * @param second 秒
+     */
     public Chrono(int year, int month, int day, int hour, int minute, int second) {
         this(year, month, day, hour, minute, second, 0);
     }
 
+    /**
+     * 根据年份、月份、日期、小时、分钟、秒和毫秒创建一个新的 {@link Chrono} 对象。
+     *
+     * @param year   年份
+     * @param month  月份
+     * @param day    日期
+     * @param hour   小时
+     * @param minute 分钟
+     * @param second 秒
+     * @param millis 毫秒
+     */
     public Chrono(int year, int month, int day, int hour, int minute, int second, int millis) {
         this(LocalDateTime.of(year, month, day, hour, minute, second, millis));
     }
 
+    /**
+     * 使用 {@link LocalDateTime} 对象创建一个新的 {@link Chrono} 对象。
+     *
+     * @param localDateTime {@link LocalDateTime} 对象
+     */
     public Chrono(LocalDateTime localDateTime) {
         this(localDateTime.atZone(SYSTEM_DEFAULT_ZONE_ID).toInstant().toEpochMilli());
     }
 
+    /**
+     * 使用时间戳（毫秒）和系统默认时区创建一个新的 {@link Chrono} 对象。
+     *
+     * @param timestamp 时间戳
+     */
     public Chrono(long timestamp) {
         this(timestamp, SYSTEM_DEFAULT_ZONE_ID);
     }
 
     // required zone id
 
+    /**
+     * 根据年份、月份和时区创建一个新的 {@link Chrono} 对象，默认日期为该月的第一天，时间为00:00:00。
+     *
+     * @param year   年份
+     * @param month  月份
+     * @param zoneId 时区
+     */
     public Chrono(int year, int month, ZoneId zoneId) {
         this(year, month, 1, 0, 0, 0, 0, zoneId);
     }
 
+    /**
+     * 根据年份、月份、日期和时区创建一个新的 {@link Chrono} 对象，时间为00:00:00。
+     *
+     * @param year   年份
+     * @param month  月份
+     * @param day    日期
+     * @param zoneId 时区
+     */
     public Chrono(int year, int month, int day, ZoneId zoneId) {
         this(year, month, day, 0, 0, 0, zoneId);
     }
 
+    /**
+     * 根据年份、月份、日期、小时和时区创建一个新的 {@link Chrono} 对象，分钟和秒为00。
+     *
+     * @param year   年份
+     * @param month  月份
+     * @param day    日期
+     * @param hour   小时
+     * @param zoneId 时区
+     */
     public Chrono(int year, int month, int day, int hour, ZoneId zoneId) {
         this(year, month, day, hour, 0, 0, 0, zoneId);
     }
 
+    /**
+     * 根据年份、月份、日期、小时、分钟和时区创建一个新的 {@link Chrono} 对象，秒和毫秒为00。
+     *
+     * @param year   年份
+     * @param month  月份
+     * @param day    日期
+     * @param hour   小时
+     * @param minute 分钟
+     * @param zoneId 时区
+     */
     public Chrono(int year, int month, int day, int hour, int minute, ZoneId zoneId) {
         this(year, month, day, hour, minute, 0, 0, zoneId);
     }
 
+    /**
+     * 根据年份、月份、日期、小时、分钟、秒和时区创建一个新的 {@link Chrono} 对象，毫秒为00。
+     *
+     * @param year   年份
+     * @param month  月份
+     * @param day    日期
+     * @param hour   小时
+     * @param minute 分钟
+     * @param second 秒
+     * @param zoneId 时区
+     */
     public Chrono(int year, int month, int day, int hour, int minute, int second, ZoneId zoneId) {
         this(year, month, day, hour, minute, second, 0, zoneId);
     }
 
+    /**
+     * 根据年份、月份、日期、小时、分钟、秒、毫秒和时区创建一个新的 {@link Chrono} 对象。
+     *
+     * @param year   年份
+     * @param month  月份
+     * @param day    日期
+     * @param hour   小时
+     * @param minute 分钟
+     * @param second 秒
+     * @param millis 毫秒
+     * @param zoneId 时区
+     */
     public Chrono(int year, int month, int day, int hour, int minute, int second, int millis, ZoneId zoneId) {
         this(LocalDateTime.of(year, month, day, hour, minute, second, millis), zoneId);
     }
 
+    /**
+     * 根据 {@link Date} 对象创建一个新的 {@link Chrono} 对象，使用系统默认时区。
+     *
+     * @param date {@link Date} 对象
+     */
+    public Chrono(Date date) {
+        this(date.getTime(), SYSTEM_DEFAULT_ZONE_ID);
+    }
+
+    /**
+     * 根据 {@link LocalDateTime} 和时区创建一个新的 {@link Chrono} 对象。
+     *
+     * @param localDateTime {@link LocalDateTime} 对象
+     * @param zoneId        时区
+     */
     public Chrono(LocalDateTime localDateTime, ZoneId zoneId) {
         this(localDateTime.atZone(zoneId).toInstant().toEpochMilli(), zoneId);
     }
 
+    /**
+     * 根据时间戳和时区创建一个新的 {@link Chrono} 对象。
+     *
+     * @param timestamp 时间戳（毫秒）
+     * @param zoneId    时区
+     */
     public Chrono(long timestamp, ZoneId zoneId) {
-        // serialize to _local_time
+        // 将时间戳转为 LocalDateTime 对象
         _core_local_time = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), zoneId);
 
-        // initialize
+        // 初始化属性
         this.zoneId = zoneId;
         this.timestamp = _core_local_time.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
         this.date = new Date(timestamp);
         this.localDate = _core_local_time.toLocalDate();
+        this.weekFields = WeekFields.of(Locale.getDefault());
     }
 
-    public static void main(String[] args) {
-        Chrono chrono = new Chrono(2025, 3, 6);
-
-        System.out.printf("plus Weeks 1: %s\n", chrono.plusWeeks(1));
-
-        System.out.printf("Day of week: %s\n", chrono.getDayOfWeek());
-        System.out.printf("Day of month: %s\n", chrono.getDayOfMonth());
-        System.out.printf("Day of year: %s\n", chrono.getDayOfYear());
+    /**
+     * 返回当前时间的 `Chrono` 实例。
+     *
+     * <p>该方法会使用系统默认时区获取当前的时间，并创建一个新的 `Chrono` 对象表示当前时间。
+     *
+     * @return 当前时间的 `Chrono` 实例
+     */
+    public static Chrono now() {
+        return new Chrono();
     }
 
     @Override
@@ -237,111 +476,116 @@ public class Chrono implements ChronoTemporal {
 
     @Override
     public long betweenNanos(Chrono chrono) {
-        return 0;
+        return Duration.between(this, chrono).toNanos();
     }
 
     @Override
     public long betweenMillis(Chrono chrono) {
-        return 0;
+        return Duration.between(this, chrono).toMillis();
     }
 
     @Override
     public long betweenSeconds(Chrono chrono) {
-        return 0;
+        return Duration.between(this, chrono).toSeconds();
     }
 
     @Override
     public long betweenMinutes(Chrono chrono) {
-        return 0;
+        return Duration.between(this, chrono).toMinutes();
     }
 
     @Override
     public long betweenHours(Chrono chrono) {
-        return 0;
+        return Duration.between(this, chrono).toHours();
     }
 
     @Override
     public long betweenDays(Chrono chrono) {
-        return 0;
+        return Duration.between(this, chrono).toDays();
     }
 
     @Override
     public long betweenWeeks(Chrono chrono) {
-        return 0;
+        return ChronoUnit.WEEKS.between(this, chrono);
     }
 
     @Override
     public long betweenMonths(Chrono chrono) {
-        return 0;
+        return ChronoUnit.MONTHS.between(this, chrono);
     }
 
     @Override
     public long betweenYears(Chrono chrono) {
-        return 0;
+        return ChronoUnit.YEARS.between(this, chrono);
     }
 
     @Override
     public long betweenNanos(Date date) {
-        return 0;
+        return betweenNanos(new Chrono(date));
     }
 
     @Override
     public long betweenMillis(Date date) {
-        return 0;
+        return betweenMillis(new Chrono(date));
     }
 
     @Override
     public long betweenSeconds(Date date) {
-        return 0;
+        return betweenSeconds(new Chrono(date));
     }
 
     @Override
     public long betweenMinutes(Date date) {
-        return 0;
+        return betweenMinutes(new Chrono(date));
     }
 
     @Override
     public long betweenHours(Date date) {
-        return 0;
+        return betweenHours(new Chrono(date));
     }
 
     @Override
     public long betweenDays(Date date) {
-        return 0;
+        return betweenDays(new Chrono(date));
     }
 
     @Override
     public long betweenWeeks(Date date) {
-        return 0;
+        return betweenWeeks(new Chrono(date));
     }
 
     @Override
     public long betweenMonths(Date date) {
-        return 0;
+        return betweenMonths(new Chrono(date));
     }
 
     @Override
     public long betweenYears(Date date) {
-        return 0;
+        return betweenYears(new Chrono(date));
     }
 
     @Override
-    public int getMillis() {
-        return getSeconds() * 1000;
+    public int getNano() {
+        return _core_local_time.getNano();
     }
 
     @Override
-    public int getSeconds() {
+    public int getMilli() {
+        return getNano() / 1000000;
+    }
+
+    @Override
+    public int getSecond() {
         return _core_local_time.getSecond();
     }
 
     @Override
-    public int getMinutes() {
+    public int getMinute() {
         return _core_local_time.getMinute();
     }
 
     @Override
-    public int getHours() {
+    public int getHour() {
         return _core_local_time.getHour();
     }
 
@@ -362,22 +606,22 @@ public class Chrono implements ChronoTemporal {
 
     @Override
     public int getWeekOfMonth() {
-        return 0;
+        return _core_local_time.get(weekFields.weekOfMonth());
     }
 
     @Override
     public int getWeekOfYear() {
-        return 0;
+        return _core_local_time.get(weekFields.weekOfYear());
     }
 
     @Override
-    public int getMonths() {
-        return 0;
+    public int getMonth() {
+        return _core_local_time.getMonth().getValue();
     }
 
     @Override
-    public int getYears() {
-        return 0;
+    public int getYear() {
+        return _core_local_time.getYear();
     }
 
     @Override
@@ -394,4 +638,49 @@ public class Chrono implements ChronoTemporal {
     public String toString() {
         return format();
     }
+
+    /////////////////////////////////////////////////////////////////////////
+    /// Temporal
+    /////////////////////////////////////////////////////////////////////////
+
+    @Override
+    public boolean isSupported(TemporalUnit unit) {
+        return _core_local_time.isSupported(unit);
+    }
+
+    @Override
+    public Temporal with(TemporalField field, long newValue) {
+        return _core_local_time.with(field, newValue);
+    }
+
+    @Override
+    public Temporal plus(long amountToAdd, TemporalUnit unit) {
+        return _core_local_time.plus(amountToAdd, unit);
+    }
+
+    @Override
+    public long until(Temporal endExclusive, TemporalUnit unit) {
+        return _core_local_time.until(endExclusive, unit);
+    }
+
+    @Override
+    public boolean isSupported(TemporalField field) {
+        return _core_local_time.isSupported(field);
+    }
+
+    @Override
+    public long getLong(TemporalField field) {
+        return _core_local_time.getLong(field);
+    }
+
+    /////////////////////////////////////////////////////////////////////////
+    /// Comparable
+    /////////////////////////////////////////////////////////////////////////
+
+
+    @Override
+    public int compareTo(@NotNull Chrono o) {
+        return _core_local_time.compareTo(o._core_local_time);
+    }
+
 }
