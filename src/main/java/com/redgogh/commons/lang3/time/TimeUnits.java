@@ -25,6 +25,8 @@ import com.redgogh.commons.lang3.utils.Assert;
 import com.redgogh.commons.lang3.utils.Enumerate;
 import org.joda.time.DateTime;
 
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -159,6 +161,39 @@ public enum TimeUnits {
         }
 
         return retval.toDate();
+    }
+
+    public long between(Date a, Date b) {
+        ChronoUnit chrono = null;
+        switch (this) {
+            case MILLISECONDS:
+                chrono = ChronoUnit.MILLIS;
+                break;
+            case SECONDS:
+                chrono = ChronoUnit.SECONDS;
+                break;
+            case MINUTES:
+                chrono = ChronoUnit.MINUTES;
+                break;
+            case HOURS:
+                chrono = ChronoUnit.HOURS;
+                break;
+            case DAYS:
+                chrono = ChronoUnit.DAYS;
+                break;
+            case WEEKS:
+                chrono = ChronoUnit.WEEKS;
+                break;
+            case MONTHS:
+                chrono = ChronoUnit.MONTHS;
+                break;
+            case YEARS:
+                chrono = ChronoUnit.YEARS;
+                break;
+        }
+        return (int) chrono.between(
+                a.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                b.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     }
 
     /**
