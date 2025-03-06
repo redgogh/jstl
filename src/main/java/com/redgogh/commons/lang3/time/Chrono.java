@@ -97,7 +97,7 @@ public final class Chrono
     /**
      * 默认构造方法，使用当前日期创建一个新的 {@link Chrono} 对象。
      */
-    public Chrono() {
+    private Chrono() {
         this(new Date());
     }
 
@@ -106,7 +106,7 @@ public final class Chrono
      *
      * @param text 日期时间字符串
      */
-    public Chrono(String text) {
+    private Chrono(String text) {
         this(DateFormatter.parse(text));
     }
 
@@ -116,7 +116,7 @@ public final class Chrono
      * @param text 日期时间字符串
      * @param pattern 日期格式模式
      */
-    public Chrono(String text, String pattern) {
+    private Chrono(String text, String pattern) {
         this(DateFormatter.parse(text, pattern));
     }
 
@@ -126,7 +126,7 @@ public final class Chrono
      * @param year  年份
      * @param month 月份
      */
-    public Chrono(int year, int month) {
+    private Chrono(int year, int month) {
         this(year, month, 1, 0, 0, 0, 0);
     }
 
@@ -137,7 +137,7 @@ public final class Chrono
      * @param month 月份
      * @param day   日期
      */
-    public Chrono(int year, int month, int day) {
+    private Chrono(int year, int month, int day) {
         this(year, month, day, 0, 0, 0);
     }
 
@@ -149,7 +149,7 @@ public final class Chrono
      * @param day   日期
      * @param hour  小时
      */
-    public Chrono(int year, int month, int day, int hour) {
+    private Chrono(int year, int month, int day, int hour) {
         this(year, month, day, hour, 0, 0, 0);
     }
 
@@ -162,7 +162,7 @@ public final class Chrono
      * @param hour   小时
      * @param minute 分钟
      */
-    public Chrono(int year, int month, int day, int hour, int minute) {
+    private Chrono(int year, int month, int day, int hour, int minute) {
         this(year, month, day, hour, minute, 0, 0);
     }
 
@@ -176,7 +176,7 @@ public final class Chrono
      * @param minute 分钟
      * @param second 秒
      */
-    public Chrono(int year, int month, int day, int hour, int minute, int second) {
+    private Chrono(int year, int month, int day, int hour, int minute, int second) {
         this(year, month, day, hour, minute, second, 0);
     }
 
@@ -191,7 +191,7 @@ public final class Chrono
      * @param second 秒
      * @param millis 毫秒
      */
-    public Chrono(int year, int month, int day, int hour, int minute, int second, int millis) {
+    private Chrono(int year, int month, int day, int hour, int minute, int second, int millis) {
         this(LocalDateTime.of(year, month, day, hour, minute, second, millis));
     }
 
@@ -200,7 +200,7 @@ public final class Chrono
      *
      * @param localDateTime {@link LocalDateTime} 对象
      */
-    public Chrono(LocalDateTime localDateTime) {
+    private Chrono(LocalDateTime localDateTime) {
         this(localDateTime.atZone(SYSTEM_DEFAULT_ZONE_ID).toInstant().toEpochMilli());
     }
 
@@ -209,7 +209,7 @@ public final class Chrono
      *
      * @param timestamp 时间戳
      */
-    public Chrono(long timestamp) {
+    private Chrono(long timestamp) {
         this(timestamp, SYSTEM_DEFAULT_ZONE_ID);
     }
 
@@ -222,7 +222,7 @@ public final class Chrono
      * @param month  月份
      * @param zoneId 时区
      */
-    public Chrono(int year, int month, ZoneId zoneId) {
+    private Chrono(int year, int month, ZoneId zoneId) {
         this(year, month, 1, 0, 0, 0, 0, zoneId);
     }
 
@@ -234,7 +234,7 @@ public final class Chrono
      * @param day    日期
      * @param zoneId 时区
      */
-    public Chrono(int year, int month, int day, ZoneId zoneId) {
+    private Chrono(int year, int month, int day, ZoneId zoneId) {
         this(year, month, day, 0, 0, 0, zoneId);
     }
 
@@ -247,7 +247,7 @@ public final class Chrono
      * @param hour   小时
      * @param zoneId 时区
      */
-    public Chrono(int year, int month, int day, int hour, ZoneId zoneId) {
+    private Chrono(int year, int month, int day, int hour, ZoneId zoneId) {
         this(year, month, day, hour, 0, 0, 0, zoneId);
     }
 
@@ -261,7 +261,7 @@ public final class Chrono
      * @param minute 分钟
      * @param zoneId 时区
      */
-    public Chrono(int year, int month, int day, int hour, int minute, ZoneId zoneId) {
+    private Chrono(int year, int month, int day, int hour, int minute, ZoneId zoneId) {
         this(year, month, day, hour, minute, 0, 0, zoneId);
     }
 
@@ -276,7 +276,7 @@ public final class Chrono
      * @param second 秒
      * @param zoneId 时区
      */
-    public Chrono(int year, int month, int day, int hour, int minute, int second, ZoneId zoneId) {
+    private Chrono(int year, int month, int day, int hour, int minute, int second, ZoneId zoneId) {
         this(year, month, day, hour, minute, second, 0, zoneId);
     }
 
@@ -292,7 +292,7 @@ public final class Chrono
      * @param millis 毫秒
      * @param zoneId 时区
      */
-    public Chrono(int year, int month, int day, int hour, int minute, int second, int millis, ZoneId zoneId) {
+    private Chrono(int year, int month, int day, int hour, int minute, int second, int millis, ZoneId zoneId) {
         this(LocalDateTime.of(year, month, day, hour, minute, second, millis), zoneId);
     }
 
@@ -301,7 +301,7 @@ public final class Chrono
      *
      * @param date {@link Date} 对象
      */
-    public Chrono(Date date) {
+    private Chrono(Date date) {
         this(date.getTime(), SYSTEM_DEFAULT_ZONE_ID);
     }
 
@@ -311,7 +311,7 @@ public final class Chrono
      * @param localDateTime {@link LocalDateTime} 对象
      * @param zoneId        时区
      */
-    public Chrono(LocalDateTime localDateTime, ZoneId zoneId) {
+    private Chrono(LocalDateTime localDateTime, ZoneId zoneId) {
         this(localDateTime.atZone(zoneId).toInstant().toEpochMilli(), zoneId);
     }
 
@@ -321,7 +321,7 @@ public final class Chrono
      * @param timestamp 时间戳（毫秒）
      * @param zoneId    时区
      */
-    public Chrono(long timestamp, ZoneId zoneId) {
+    private Chrono(long timestamp, ZoneId zoneId) {
         // 将时间戳转为 LocalDateTime 对象
         _core_local_time = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), zoneId);
 
@@ -334,14 +334,253 @@ public final class Chrono
     }
 
     /**
-     * 返回当前时间的 `Chrono` 实例。
-     *
-     * <p>该方法会使用系统默认时区获取当前的时间，并创建一个新的 `Chrono` 对象表示当前时间。
+     * 创建当前时间的 `Chrono` 实例。
      *
      * @return 当前时间的 `Chrono` 实例
      */
-    public static Chrono now() {
+    public static Chrono create() {
         return new Chrono();
+    }
+
+    /**
+     * 使用文本日期字符串创建 `Chrono` 实例。
+     *
+     * @param text 日期字符串
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(String text) {
+        return new Chrono(text);
+    }
+
+    /**
+     * 使用文本日期字符串和自定义日期格式创建 `Chrono` 实例。
+     *
+     * @param text 日期字符串
+     * @param pattern 日期格式
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(String text, String pattern) {
+        return new Chrono(text, pattern);
+    }
+
+    /**
+     * 创建具有指定年份和月份的 `Chrono` 实例。
+     *
+     * @param year 年份
+     * @param month 月份
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(int year, int month) {
+        return new Chrono(year, month);
+    }
+
+    /**
+     * 创建具有指定年份、月份和日期的 `Chrono` 实例。
+     *
+     * @param year 年份
+     * @param month 月份
+     * @param day 日期
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(int year, int month, int day) {
+        return new Chrono(year, month, day);
+    }
+
+    /**
+     * 创建具有指定年份、月份、日期和小时的 `Chrono` 实例。
+     *
+     * @param year 年份
+     * @param month 月份
+     * @param day 日期
+     * @param hour 小时
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(int year, int month, int day, int hour) {
+        return new Chrono(year, month, day, hour);
+    }
+
+    /**
+     * 创建具有指定年份、月份、日期、小时和分钟的 `Chrono` 实例。
+     *
+     * @param year 年份
+     * @param month 月份
+     * @param day 日期
+     * @param hour 小时
+     * @param minute 分钟
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(int year, int month, int day, int hour, int minute) {
+        return new Chrono(year, month, day, hour, minute);
+    }
+
+    /**
+     * 创建具有指定年份、月份、日期、小时、分钟和秒钟的 `Chrono` 实例。
+     *
+     * @param year 年份
+     * @param month 月份
+     * @param day 日期
+     * @param hour 小时
+     * @param minute 分钟
+     * @param second 秒钟
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(int year, int month, int day, int hour, int minute, int second) {
+        return new Chrono(year, month, day, hour, minute, second);
+    }
+
+    /**
+     * 创建具有指定年份、月份、日期、小时、分钟、秒钟和毫秒的 `Chrono` 实例。
+     *
+     * @param year 年份
+     * @param month 月份
+     * @param day 日期
+     * @param hour 小时
+     * @param minute 分钟
+     * @param second 秒钟
+     * @param millis 毫秒
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(int year, int month, int day, int hour, int minute, int second, int millis) {
+        return new Chrono(year, month, day, hour, minute, second, millis);
+    }
+
+    /**
+     * 使用 `LocalDateTime` 创建 `Chrono` 实例。
+     *
+     * @param localDateTime `LocalDateTime` 对象
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(LocalDateTime localDateTime) {
+        return new Chrono(localDateTime);
+    }
+
+    /**
+     * 使用时间戳创建 `Chrono` 实例。
+     *
+     * @param timestamp 时间戳（毫秒）
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(long timestamp) {
+        return new Chrono(timestamp);
+    }
+
+    /**
+     * 创建具有指定年份、月份和时区的 `Chrono` 实例。
+     *
+     * @param year 年份
+     * @param month 月份
+     * @param zoneId 时区
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(int year, int month, ZoneId zoneId) {
+        return new Chrono(year, month, zoneId);
+    }
+
+    /**
+     * 创建具有指定年份、月份、日期和时区的 `Chrono` 实例。
+     *
+     * @param year 年份
+     * @param month 月份
+     * @param day 日期
+     * @param zoneId 时区
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(int year, int month, int day, ZoneId zoneId) {
+        return new Chrono(year, month, day, zoneId);
+    }
+
+    /**
+     * 创建具有指定年份、月份、日期、小时和时区的 `Chrono` 实例。
+     *
+     * @param year 年份
+     * @param month 月份
+     * @param day 日期
+     * @param hour 小时
+     * @param zoneId 时区
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(int year, int month, int day, int hour, ZoneId zoneId) {
+        return new Chrono(year, month, day, hour, zoneId);
+    }
+
+    /**
+     * 创建具有指定年份、月份、日期、小时、分钟和时区的 `Chrono` 实例。
+     *
+     * @param year 年份
+     * @param month 月份
+     * @param day 日期
+     * @param hour 小时
+     * @param minute 分钟
+     * @param zoneId 时区
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(int year, int month, int day, int hour, int minute, ZoneId zoneId) {
+        return new Chrono(year, month, day, hour, minute, zoneId);
+    }
+
+    /**
+     * 创建具有指定年份、月份、日期、小时、分钟、秒钟和时区的 `Chrono` 实例。
+     *
+     * @param year 年份
+     * @param month 月份
+     * @param day 日期
+     * @param hour 小时
+     * @param minute 分钟
+     * @param second 秒钟
+     * @param zoneId 时区
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(int year, int month, int day, int hour, int minute, int second, ZoneId zoneId) {
+        return new Chrono(year, month, day, hour, minute, second, zoneId);
+    }
+
+    /**
+     * 创建具有指定年份、月份、日期、小时、分钟、秒钟、毫秒和时区的 `Chrono` 实例。
+     *
+     * @param year 年份
+     * @param month 月份
+     * @param day 日期
+     * @param hour 小时
+     * @param minute 分钟
+     * @param second 秒钟
+     * @param millis 毫秒
+     * @param zoneId 时区
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(int year, int month, int day, int hour, int minute, int second, int millis, ZoneId zoneId) {
+        return new Chrono(year, month, day, hour, minute, second, millis, zoneId);
+    }
+
+    /**
+     * 使用 `Date` 对象创建 `Chrono` 实例。
+     *
+     * @param date `Date` 对象
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(Date date) {
+        return new Chrono(date);
+    }
+
+    /**
+     * 使用 `LocalDateTime` 和时区创建 `Chrono` 实例。
+     *
+     * @param localDateTime `LocalDateTime` 对象
+     * @param zoneId 时区
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(LocalDateTime localDateTime, ZoneId zoneId) {
+        return new Chrono(localDateTime, zoneId);
+    }
+
+    /**
+     * 使用时间戳和时区创建 `Chrono` 实例。
+     *
+     * @param timestamp 时间戳（毫秒）
+     * @param zoneId 时区
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono create(long timestamp, ZoneId zoneId) {
+        return new Chrono(timestamp, zoneId);
     }
 
     @Override
