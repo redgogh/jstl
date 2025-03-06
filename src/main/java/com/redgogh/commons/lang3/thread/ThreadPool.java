@@ -1,7 +1,6 @@
 package com.redgogh.commons.lang3.thread;
 
 import com.redgogh.commons.lang3.system.OSEnvironment;
-import com.redgogh.commons.lang3.time.TimeUnits;
 
 import java.util.concurrent.*;
 
@@ -83,10 +82,10 @@ public class ThreadPool {
      *
      * @param runnable 要调度的任务
      * @param t 延迟时间
-     * @param timeUnits 时间单位转换器
+     * @param timeUnit 时间单位
      */
-    public static void schedule(Runnable runnable, long t, TimeUnits timeUnits) {
-        scheduledThreadPool.schedule(runnable, t, timeUnits.toTimeUnit());
+    public static void schedule(Runnable runnable, long t, TimeUnit timeUnit) {
+        scheduledThreadPool.schedule(runnable, t, timeUnit);
     }
 
     /**
@@ -96,12 +95,12 @@ public class ThreadPool {
      *
      * @param callable 要调度的任务
      * @param t 延迟时间
-     * @param timeUnits 时间单位转换器
+     * @param timeUnit 时间单位
      * @param <V> 任务返回值的类型
      * @return 任务的 `Future` 对象
      */
-    public static <V> Future<V> schedule(Callable<V> callable, long t, TimeUnits timeUnits) {
-        return scheduledThreadPool.schedule(callable, t, timeUnits.toTimeUnit());
+    public static <V> Future<V> schedule(Callable<V> callable, long t, TimeUnit timeUnit) {
+        return scheduledThreadPool.schedule(callable, t, timeUnit);
     }
 
 }
