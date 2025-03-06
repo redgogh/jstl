@@ -41,7 +41,7 @@ public class FileByteWriter extends FileOutputStream {
     }
 
     public interface FileByteWriterResource {
-        void call(FileByteWriter byteWriter);
+        void call(FileByteWriter byteWriter) throws Throwable;
     }
 
     /**
@@ -65,7 +65,7 @@ public class FileByteWriter extends FileOutputStream {
     public void call(FileByteWriterResource fileByteReaderResource) {
         try {
             fileByteReaderResource.call(this);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             throw new IOWriteException(e);
         } finally {
             IOUtils.closeQuietly(this);

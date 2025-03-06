@@ -25,6 +25,7 @@
 - 新增 `Lists#splitIntoNChunk` 支持按块拆分集合。
 - 新增 `Lists#splitByChunkSize` 支持按每块大小拆分集合。
 - 新增 `BeanUtils#newInstance` 根据类创建 Bean 实例。
+- 新增 `WorkBook#transferTo` 支持将工作簿转文件。
 
 ## 👻 优化功能
 
