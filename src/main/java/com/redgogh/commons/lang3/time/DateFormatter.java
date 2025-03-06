@@ -26,7 +26,7 @@ import com.redgogh.commons.lang3.utils.Capturer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.redgogh.commons.lang3.string.StringUtils.strcount;
+import static com.redgogh.commons.lang3.string.StringUtils.strcunt;
 import static com.redgogh.commons.lang3.string.StringUtils.strlen;
 
 /**
@@ -169,19 +169,19 @@ public class DateFormatter {
         int match = strlen(text);
         switch (match) {
             case STRING_TEMP_DATE_MONTH: {
-                return strcount(text, "-")
+                return strcunt(text, "-")
                         ? parse(text, "yyyy-MM")
                         : parse(text, "yyyy/MM");
             }
 
             case STRING_TEMP_DATE_DAY: {
-                return strcount(text, "-")
+                return strcunt(text, "-")
                         ? parse(text, "yyyy-MM-dd")
                         : parse(text, "yyyy/MM/dd");
             }
 
             case STRING_TEMP_DATE_TIME: {
-                return strcount(text, "-")
+                return strcunt(text, "-")
                         ? parse(text, "yyyy-MM-dd HH:mm:ss")
                         : parse(text, "yyyy/MM/dd HH:mm:ss");
             }

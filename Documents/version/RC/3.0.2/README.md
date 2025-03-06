@@ -29,7 +29,7 @@
 
 ## 👻 优化功能
 
-- `anyclude -> anycount`。
+- `anyclude -> anycunt`。
 - `BeanUtils#copyProperties` 方法支持使用 `set/get` 拷贝。
 - `Optional#ifNull -> Optional#ifNullable`。
 - 明确 `ByteBuffer#write` 函数写入类型。

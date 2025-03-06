@@ -338,7 +338,7 @@ public class MutableFile extends java.io.File {
      *         否则返回 {@code false}
      */
     public boolean typeMatch(String... extensions) {
-        return StringUtils.strcount(getExtension(), extensions);
+        return StringUtils.strcunt(getExtension(), extensions);
     }
 
     /**

@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static com.redgogh.commons.lang3.string.StringUtils.strcount;
+import static com.redgogh.commons.lang3.string.StringUtils.strcunt;
 
 /**
  * Bean工具类，方便实现对两个对象之间的属性拷贝，这属于浅拷贝。如果需要
@@ -97,7 +97,7 @@ public class BeanUtils {
         UClass dstClass = new UClass(dst);
         for (UField field : dstClass.getDeclaredFields()) {
             String name = field.getName();
-            if (ignores.length > 0 && strcount(name, ignores))
+            if (ignores.length > 0 && strcunt(name, ignores))
                 continue;
             Capturer.icall(() -> copyValue(src, new UClass(src), dst, dstClass, field));
         }
@@ -117,7 +117,7 @@ public class BeanUtils {
         UClass dstClass = new UClass(dst);
         for (UField dstField : dstClass.getDeclaredFields()) {
             String name = dstField.getName();
-            if (ignores.length > 0 && strcount(name, ignores))
+            if (ignores.length > 0 && strcunt(name, ignores))
                 continue;
             Capturer.icall(() -> dstField.write(dst, srcClass.readFieldValue(name, src)));
         }
