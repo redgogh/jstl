@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Red Gogh   
  */
-public enum TimeUnits {
+public enum Chrono {
 
     /** 毫秒 */
     MILLISECONDS,
@@ -57,7 +57,7 @@ public enum TimeUnits {
 
     private final TimeUnit timeUnit;
 
-    TimeUnits() {
+    Chrono() {
         timeUnit = Enumerate.find(TimeUnit.class, name());
     }
 
@@ -69,7 +69,7 @@ public enum TimeUnits {
      * #brief：将指定日期对象加上 unit + 当前枚举<p>
      *
      * 将指定日期对象加上 unit + 当前枚举。假设需要让一个日期对象加一天，可以
-     * 这样使用：{@code TimeUnits.DAYS.plus(date, 1L)}。
+     * 这样使用：{@code Chrono.DAYS.plus(date, 1L)}。
      *
      * @param date
      *        日期对象实例
@@ -77,7 +77,7 @@ public enum TimeUnits {
      * @param unit
      *        添加的单位数
      *
-     * @return 加上对应 TimeUnits + unit 后的日期
+     * @return 加上对应 Chrono + unit 后的日期
      */
     public Date plus(Date date, int unit) {
         DateTime calc = new DateTime(date);
@@ -120,7 +120,7 @@ public enum TimeUnits {
      * #brief：将指定日期对象减去 unit - 当前枚举<p>
      *
      * 将指定日期对象减去 unit - 当前枚举。假设需要让一个日期对象加一天，可以
-     * 这样使用：{@code TimeUnits.DAYS.plus(date, 1L)}。
+     * 这样使用：{@code Chrono.DAYS.plus(date, 1L)}。
      *
      * @param date
      *        日期对象实例
@@ -128,7 +128,7 @@ public enum TimeUnits {
      * @param unit
      *        添加的单位数
      *
-     * @return 减去对应 TimeUnits - unit 后的日期
+     * @return 减去对应 Chrono - unit 后的日期
      */
     public Date minus(Date date, int unit) {
         DateTime calc = new DateTime(date);

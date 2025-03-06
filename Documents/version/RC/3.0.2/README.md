@@ -26,17 +26,18 @@
 - 新增 `Lists#splitByChunkSize` 支持按每块大小拆分集合。
 - 新增 `BeanUtils#newInstance` 根据类创建 Bean 实例。
 - 新增 `WorkBook#transferTo` 支持将工作簿转文件。
-- 新增 `TimeUnits#between` 计算两个日期间隔时间。
+- 新增 `Chrono#between` 计算两个日期间隔时间。
 
 ## 👻 优化功能
 
-- `anyclude -> anycunt`。
-- `BeanUtils#copyProperties` 方法支持使用 `set/get` 拷贝。
-- `Optional#ifNull -> Optional#ifNullable`。
+- 优化 `anyclude -> anycunt`。
+- 优化 `BeanUtils#copyProperties` 方法支持使用 `set/get` 拷贝。
+- 优化 `Optional#ifNull -> Optional#ifNullable`。
 - 明确 `ByteBuffer#write` 函数写入类型。
-- `Crypto#uuid` 方法默认返回大写的 UUID。
+- 优化 `Crypto#uuid` 方法默认返回大写的 UUID。
 - 增强 `HttpClient` API 提供通用配置项配置。
 - 优化 `Lists` 工具类方法命名。
+- 优化 `TimeUnits -> Chrono`。
 
 ## 🐞 BUG 修复
 

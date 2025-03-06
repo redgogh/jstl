@@ -18,18 +18,18 @@ package com.redgogh.commons.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.commons.lang3.time.TimeUnits;
+import com.redgogh.commons.lang3.time.Chrono;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")
-public class TimeUnitsTest {
+public class ChronoTest {
 
     /**
      * TimeUnitOperator：时间加一天
      */
     @Test
     public void timeUnitAddOperateTest() {
-        System.out.printf("TimeUnitOperator DAY add 1 example: %s\n", TimeUnits.DAYS.plus(1));
+        System.out.printf("TimeUnitOperator DAY add 1 example: %s\n", Chrono.DAYS.plus(1));
     }
 
     /**
@@ -37,7 +37,7 @@ public class TimeUnitsTest {
      */
     @Test
     public void timeUnitMinusOperateTest() {
-        System.out.printf("TimeUnitOperator DAY minus 1 example: %s\n", TimeUnits.DAYS.minus(1));
+        System.out.printf("TimeUnitOperator DAY minus 1 example: %s\n", Chrono.DAYS.minus(1));
     }
 
 }
