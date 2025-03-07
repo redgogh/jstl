@@ -62,7 +62,7 @@ import java.util.Date;
  * @see Chrono
  */
 @SuppressWarnings("unused")
-public interface ChronoCalendar {
+public interface Calendar {
 
     /**
      * 判断当前时间是否是今天。
