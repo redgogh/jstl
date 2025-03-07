@@ -451,7 +451,7 @@ public final class Chrono
      * @param localDateTime `LocalDateTime` 对象
      * @return 相应的 `Chrono` 实例
      */
-    public static Chrono of(LocalDateTime localDateTime) {
+    public static Chrono wrap(LocalDateTime localDateTime) {
         return new Chrono(localDateTime);
     }
 
@@ -558,7 +558,7 @@ public final class Chrono
      * @param date `Date` 对象
      * @return 相应的 `Chrono` 实例
      */
-    public static Chrono of(Date date) {
+    public static Chrono wrap(Date date) {
         return new Chrono(date);
     }
 
@@ -569,7 +569,7 @@ public final class Chrono
      * @param zoneId 时区
      * @return 相应的 `Chrono` 实例
      */
-    public static Chrono of(LocalDateTime localDateTime, ZoneId zoneId) {
+    public static Chrono wrap(LocalDateTime localDateTime, ZoneId zoneId) {
         return new Chrono(localDateTime, zoneId);
     }
 

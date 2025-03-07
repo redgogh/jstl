@@ -77,7 +77,7 @@ public class ChronoTest {
     }
 
     public static void main(String[] args) {
-        Chrono chrono = Chrono.of(new Date());
+        Chrono chrono = Chrono.wrap(new Date());
 
         System.out.printf("plus Weeks 1: %s\n", chrono.plusWeeks(1));
 
