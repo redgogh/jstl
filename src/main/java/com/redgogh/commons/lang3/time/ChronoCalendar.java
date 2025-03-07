@@ -626,8 +626,20 @@ public interface ChronoCalendar {
      */
     Chrono withHour(int value);
 
+    /**
+     * 返回一个新的 Chrono 实例，将当前日期调整为指定的月份中的某一天。
+     *
+     * @param value 目标日（1-31），如果超出该月天数，可能抛出异常
+     * @return 具有更新日期的 Chrono 实例
+     */
     Chrono withDayOfMonth(int value);
 
+    /**
+     * 返回一个新的 Chrono 实例，将当前日期调整为指定年份中的某一天。
+     *
+     * @param value 目标日（1-366），如果超出该年天数，可能抛出异常
+     * @return 具有更新日期的 Chrono 实例
+     */
     Chrono withDayOfYear(int value);
 
     /**
