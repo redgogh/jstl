@@ -38,6 +38,7 @@ import java.util.Locale;
  * @see Temporal
  * @see Comparable
  * @see Serializable
+ * @noinspection unused
  */
 public final class Chrono
         implements ChronoCalendar, Temporal, Comparable<Chrono>, Serializable {
@@ -604,6 +605,36 @@ public final class Chrono
     }
 
     @Override
+    public boolean isBefore(Date date) {
+        return isBefore(new Chrono(date));
+    }
+
+    @Override
+    public boolean isBefore(LocalDateTime localDateTime) {
+        return isBefore(new Chrono(localDateTime));
+    }
+
+    @Override
+    public boolean isBefore(Chrono chrono) {
+        return _core_local_time.isBefore(chrono._core_local_time);
+    }
+
+    @Override
+    public boolean isAfter(Date date) {
+        return isAfter(new Chrono(date));
+    }
+
+    @Override
+    public boolean isAfter(LocalDateTime localDateTime) {
+        return isAfter(new Chrono(localDateTime));
+    }
+
+    @Override
+    public boolean isAfter(Chrono chrono) {
+        return _core_local_time.isAfter(chrono._core_local_time);
+    }
+
+    @Override
     public long nanoTime() {
         return System.nanoTime();
     }
@@ -636,6 +667,16 @@ public final class Chrono
     @Override
     public long getTime() {
         return timestamp;
+    }
+
+    @Override
+    public Chrono getLastDayOfMonth() {
+        return new Chrono(_core_local_time.with(TemporalAdjusters.lastDayOfMonth()));
+    }
+
+    @Override
+    public Chrono getLastDayOfYear() {
+        return new Chrono(_core_local_time.with(TemporalAdjusters.lastDayOfYear()));
     }
 
     @Override
@@ -834,6 +875,41 @@ public final class Chrono
     }
 
     @Override
+    public Chrono withSecond(int value) {
+        return new Chrono(_core_local_time.withSecond(value));
+    }
+
+    @Override
+    public Chrono withMinute(int value) {
+        return new Chrono(_core_local_time.withMinute(value));
+    }
+
+    @Override
+    public Chrono withHour(int value) {
+        return new Chrono(_core_local_time.withHour(value));
+    }
+
+    @Override
+    public Chrono withDayOfMonth(int value) {
+        return new Chrono(_core_local_time.withDayOfMonth(value));
+    }
+
+    @Override
+    public Chrono withDayOfYear(int value) {
+        return new Chrono(_core_local_time.withDayOfYear(value));
+    }
+
+    @Override
+    public Chrono withMonth(int value) {
+        return new Chrono(_core_local_time.withMonth(value));
+    }
+
+    @Override
+    public Chrono withYear(int value) {
+        return new Chrono(_core_local_time.withYear(value));
+    }
+
+    @Override
     public int getNano() {
         return _core_local_time.getNano();
     }
@@ -945,7 +1021,6 @@ public final class Chrono
     /////////////////////////////////////////////////////////////////////////
     /// Comparable
     /////////////////////////////////////////////////////////////////////////
-
 
     @Override
     public int compareTo(@NotNull Chrono o) {

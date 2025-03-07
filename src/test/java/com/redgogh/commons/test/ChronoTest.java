@@ -19,14 +19,50 @@ package com.redgogh.commons.test;
 \* -------------------------------------------------------------------------------- */
 
 import com.redgogh.commons.lang3.time.Chrono;
+import com.redgogh.commons.lang3.time.DateFormatter;
+import org.junit.Test;
 
 import java.util.Date;
 
 @SuppressWarnings("ALL")
 public class ChronoTest {
 
+    @Test
+    public void beforeOrAfterTest() {
+        Chrono chrono = Chrono.create();
+        System.out.printf("is before: %s\n", chrono.isBefore(DateFormatter.parse("2024-01-01")));
+        System.out.printf("is after: %s\n", chrono.isAfter(DateFormatter.parse("2024-01-01")));
+    }
+
+    @Test
+    public void getLastDayTest() {
+        Chrono chrono = Chrono.create("2026-02-01 20:30:59");
+        System.out.printf("Last day of month: %s\n", chrono.getLastDayOfMonth());
+        System.out.printf("Last day of year: %s\n", chrono.getLastDayOfYear());
+    }
+
+    @Test
+    public void withTest() {
+        Chrono chrono = Chrono.create("2024-02-01");
+        System.out.printf("With second: %s\n", chrono.withSecond(59));
+        System.out.printf("With minute: %s\n", chrono.withMinute(59));
+        System.out.printf("With day: %s\n", chrono.withDayOfMonth(28));
+    }
+
+    @Test
+    public void getWeekOfMonthTest() {
+        Chrono chrono = Chrono.create("2024-02-01");
+        System.out.println(chrono.getWeekOfMonth());
+    }
+
+    @Test
+    public void getWeekOfYearTest() {
+        Chrono chrono = Chrono.create("2024-02-01");
+        System.out.println(chrono.getWeekOfYear());
+    }
+
     public static void main(String[] args) {
-        Chrono chrono = new Chrono(new Date());
+        Chrono chrono = Chrono.create(new Date());
 
         System.out.printf("plus Weeks 1: %s\n", chrono.plusWeeks(1));
 
@@ -46,8 +82,8 @@ public class ChronoTest {
         System.out.printf("Milli: %s\n", chrono.getMilli());
         System.out.printf("Nano: %s\n", chrono.getNano());
 
-        Chrono c1 = new Chrono(2023, 2, 1, 19, 3, 10);
-        Chrono c2 = new Chrono(2025, 3, 2, 23, 5, 23);
+        Chrono c1 = Chrono.create(2023, 2, 1, 19, 3, 10);
+        Chrono c2 = Chrono.create(2025, 3, 2, 23, 5, 23);
         System.out.printf("Between Nanos: %s\n", c1.betweenNanos(c2));
         System.out.printf("Between Millis: %s\n", c1.betweenMillis(c2));
         System.out.printf("Between Seconds: %s\n", c1.betweenSeconds(c2));

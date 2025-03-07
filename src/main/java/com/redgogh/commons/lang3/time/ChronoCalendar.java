@@ -61,6 +61,7 @@ import java.util.Date;
  * @see ZonedDateTime
  * @see Chrono
  */
+@SuppressWarnings("unused")
 public interface ChronoCalendar {
 
     /**
@@ -90,6 +91,54 @@ public interface ChronoCalendar {
      * @return 如果是本年，返回 true；否则返回 false
      */
     boolean isThisYear();
+
+    /**
+     * 判断当前时间是否早于指定的 Date 对象。
+     *
+     * @param date 要比较的 Date 对象
+     * @return 如果当前时间早于指定时间，则返回 true，否则返回 false
+     */
+    boolean isBefore(Date date);
+
+    /**
+     * 判断当前时间是否早于指定的 LocalDateTime 对象。
+     *
+     * @param localDateTime 要比较的 LocalDateTime 对象
+     * @return 如果当前时间早于指定时间，则返回 true，否则返回 false
+     */
+    boolean isBefore(LocalDateTime localDateTime);
+
+    /**
+     * 判断当前时间是否早于指定的 Chrono 实例。
+     *
+     * @param chrono 要比较的 Chrono 实例
+     * @return 如果当前时间早于指定时间，则返回 true，否则返回 false
+     */
+    boolean isBefore(Chrono chrono);
+
+    /**
+     * 判断当前时间是否晚于指定的 Date 对象。
+     *
+     * @param date 要比较的 Date 对象
+     * @return 如果当前时间晚于指定时间，则返回 true，否则返回 false
+     */
+    boolean isAfter(Date date);
+
+    /**
+     * 判断当前时间是否晚于指定的 LocalDateTime 对象。
+     *
+     * @param localDateTime 要比较的 LocalDateTime 对象
+     * @return 如果当前时间晚于指定时间，则返回 true，否则返回 false
+     */
+    boolean isAfter(LocalDateTime localDateTime);
+
+    /**
+     * 判断当前时间是否晚于指定的 Chrono 实例。
+     *
+     * @param chrono 要比较的 Chrono 实例
+     * @return 如果当前时间晚于指定时间，则返回 true，否则返回 false
+     */
+    boolean isAfter(Chrono chrono);
 
     /**
      * 获取当前时间的纳秒数（相对于某个固定时间点，例如 JVM 启动时）。
@@ -151,6 +200,20 @@ public interface ChronoCalendar {
      * @return 当前时间的毫秒表示
      */
     long getTime();
+
+    /**
+     * 获取当前月份的最后一天，并返回新的 Chrono 实例。
+     *
+     * @return 该月份最后一天的 Chrono 实例
+     */
+    Chrono getLastDayOfMonth();
+
+    /**
+     * 获取当前年份的最后一天，并返回新的 Chrono 实例。
+     *
+     * @return 当前年份最后一天的 Chrono 实例
+     */
+    Chrono getLastDayOfYear();
 
     /**
      * 将当前时间转换为 `Date` 对象。
@@ -538,6 +601,50 @@ public interface ChronoCalendar {
      * @return 两个时间之间的年数差
      */
     long betweenYears(Date date);
+
+    /**
+     * 设置秒数，并返回新的 Chrono 实例。
+     *
+     * @param value 目标秒数
+     * @return 具有指定秒数的新 Chrono 实例
+     */
+    Chrono withSecond(int value);
+
+    /**
+     * 设置分钟数，并返回新的 Chrono 实例。
+     *
+     * @param value 目标分钟数
+     * @return 具有指定分钟数的新 Chrono 实例
+     */
+    Chrono withMinute(int value);
+
+    /**
+     * 设置小时数，并返回新的 Chrono 实例。
+     *
+     * @param value 目标小时数
+     * @return 具有指定小时数的新 Chrono 实例
+     */
+    Chrono withHour(int value);
+
+    Chrono withDayOfMonth(int value);
+
+    Chrono withDayOfYear(int value);
+
+    /**
+     * 设置月份，并返回新的 Chrono 实例。
+     *
+     * @param value 目标月份（1-12）
+     * @return 具有指定月份的新 Chrono 实例
+     */
+    Chrono withMonth(int value);
+
+    /**
+     * 设置年份，并返回新的 Chrono 实例。
+     *
+     * @param value 目标年份
+     * @return 具有指定年份的新 Chrono 实例
+     */
+    Chrono withYear(int value);
 
     /**
      * 获取当前时间的纳秒部分。
