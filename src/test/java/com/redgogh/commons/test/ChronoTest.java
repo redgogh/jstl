@@ -28,32 +28,37 @@ import java.util.Date;
 public class ChronoTest {
 
     @Test
+    public void formatTest() {
+        System.out.println(Chrono.now().getDayOfWeek());
+    }
+
+    @Test
     public void getLastDayOfMonthTest() {
-        System.out.printf("2024年是否是闰年：%s\n", Chrono.create(2024, 01).isLeap());
-        System.out.printf("2024年一共有%s天\n", Chrono.create(2024, 01).lengthOfYear());
+        System.out.printf("2024年是否是闰年：%s\n", Chrono.of(2024, 01).isLeap());
+        System.out.printf("2024年一共有%s天\n", Chrono.of(2024, 01).lengthOfYear());
         for (int i = 1; i < 13; i++) {
-            Chrono chrono = Chrono.create(2025, i);
+            Chrono chrono = Chrono.of(2025, i);
             System.out.printf("2025年%s月份一共有%s天\n", i, chrono.lengthOfMonth());
         }
     }
 
     @Test
     public void beforeOrAfterTest() {
-        Chrono chrono = Chrono.create();
+        Chrono chrono = Chrono.now();
         System.out.printf("is before: %s\n", chrono.isBefore(DateFormatter.parse("2024-01-01")));
         System.out.printf("is after: %s\n", chrono.isAfter(DateFormatter.parse("2024-01-01")));
     }
 
     @Test
     public void getLastDayTest() {
-        Chrono chrono = Chrono.create("2026-02-01 20:30:59");
+        Chrono chrono = Chrono.of("2026-02-01 20:30:59");
         System.out.printf("Last day of month: %s\n", chrono.getLastDayOfMonth());
         System.out.printf("Last day of year: %s\n", chrono.getLastDayOfYear());
     }
 
     @Test
     public void withTest() {
-        Chrono chrono = Chrono.create("2024-02-01");
+        Chrono chrono = Chrono.of("2024-02-01");
         System.out.printf("With second: %s\n", chrono.withSecond(59));
         System.out.printf("With minute: %s\n", chrono.withMinute(59));
         System.out.printf("With day: %s\n", chrono.withDayOfMonth(28));
@@ -61,18 +66,18 @@ public class ChronoTest {
 
     @Test
     public void getWeekOfMonthTest() {
-        Chrono chrono = Chrono.create("2024-02-01");
+        Chrono chrono = Chrono.of("2024-02-01");
         System.out.println(chrono.getWeekOfMonth());
     }
 
     @Test
     public void getWeekOfYearTest() {
-        Chrono chrono = Chrono.create("2024-02-01");
+        Chrono chrono = Chrono.of("2024-02-01");
         System.out.println(chrono.getWeekOfYear());
     }
 
     public static void main(String[] args) {
-        Chrono chrono = Chrono.create(new Date());
+        Chrono chrono = Chrono.of(new Date());
 
         System.out.printf("plus Weeks 1: %s\n", chrono.plusWeeks(1));
 
@@ -92,8 +97,8 @@ public class ChronoTest {
         System.out.printf("Milli: %s\n", chrono.getMilli());
         System.out.printf("Nano: %s\n", chrono.getNano());
 
-        Chrono c1 = Chrono.create(2023, 2, 1, 19, 3, 10);
-        Chrono c2 = Chrono.create(2025, 3, 2, 23, 5, 23);
+        Chrono c1 = Chrono.of(2023, 2, 1, 19, 3, 10);
+        Chrono c2 = Chrono.of(2025, 3, 2, 23, 5, 23);
         System.out.printf("Between Nanos: %s\n", c1.betweenNanos(c2));
         System.out.printf("Between Millis: %s\n", c1.betweenMillis(c2));
         System.out.printf("Between Seconds: %s\n", c1.betweenSeconds(c2));
@@ -103,6 +108,10 @@ public class ChronoTest {
         System.out.printf("Between Months: %s\n", c1.betweenMonths(c2));
         System.out.printf("Between Weeks: %s\n", c1.betweenWeeks(c2));
         System.out.printf("Between Year: %s\n", c1.betweenYears(c2));
+
+        System.out.printf("Today: %s\n", Chrono.getToday());
+        System.out.printf("Current month: %s\n", Chrono.getCurrentMonth());
+        System.out.printf("Current year: %s\n", Chrono.getCurrentYear());
     }
 
 }

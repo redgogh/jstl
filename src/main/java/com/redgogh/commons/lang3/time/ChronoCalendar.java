@@ -76,21 +76,21 @@ public interface ChronoCalendar {
      *
      * @return 如果是本周，返回 true；否则返回 false
      */
-    boolean isThisWeek();
+    boolean isCurrentWeek();
 
     /**
      * 判断当前时间是否是本月。
      *
      * @return 如果是本月，返回 true；否则返回 false
      */
-    boolean isThisMonth();
+    boolean isCurrentMonth();
 
     /**
      * 判断当前时间是否是本年。
      *
      * @return 如果是本年，返回 true；否则返回 false
      */
-    boolean isThisYear();
+    boolean isCurrentYear();
 
     /**
      * 判断当前年份是否为闰年。
