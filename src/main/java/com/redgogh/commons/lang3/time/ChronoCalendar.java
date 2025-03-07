@@ -93,6 +93,13 @@ public interface ChronoCalendar {
     boolean isThisYear();
 
     /**
+     * 判断当前年份是否为闰年。
+     *
+     * @return 如果是闰年返回 true，否则返回 false
+     */
+    boolean isLeap();
+
+    /**
      * 判断当前时间是否早于指定的 Date 对象。
      *
      * @param date 要比较的 Date 对象
@@ -214,6 +221,20 @@ public interface ChronoCalendar {
      * @return 当前年份最后一天的 Chrono 实例
      */
     Chrono getLastDayOfYear();
+
+    /**
+     * 返回当前月份的天数（28、29、30 或 31）。
+     *
+     * @return 当前月份的总天数
+     */
+    int lengthOfMonth();
+
+    /**
+     * 返回当前年份的天数（365 或 366，闰年为 366）。
+     *
+     * @return 当前年份的总天数
+     */
+    int lengthOfYear();
 
     /**
      * 将当前时间转换为 `Date` 对象。

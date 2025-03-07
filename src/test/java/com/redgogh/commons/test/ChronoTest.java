@@ -28,6 +28,16 @@ import java.util.Date;
 public class ChronoTest {
 
     @Test
+    public void getLastDayOfMonthTest() {
+        System.out.printf("2024年是否是闰年：%s\n", Chrono.create(2024, 01).isLeap());
+        System.out.printf("2024年一共有%s天\n", Chrono.create(2024, 01).lengthOfYear());
+        for (int i = 1; i < 13; i++) {
+            Chrono chrono = Chrono.create(2025, i);
+            System.out.printf("2025年%s月份一共有%s天\n", i, chrono.lengthOfMonth());
+        }
+    }
+
+    @Test
     public void beforeOrAfterTest() {
         Chrono chrono = Chrono.create();
         System.out.printf("is before: %s\n", chrono.isBefore(DateFormatter.parse("2024-01-01")));

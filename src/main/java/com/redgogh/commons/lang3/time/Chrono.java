@@ -605,6 +605,11 @@ public final class Chrono
     }
 
     @Override
+    public boolean isLeap() {
+        return Year.of(_core_local_time.getYear()).isLeap();
+    }
+
+    @Override
     public boolean isBefore(Date date) {
         return isBefore(new Chrono(date));
     }
@@ -677,6 +682,16 @@ public final class Chrono
     @Override
     public Chrono getLastDayOfYear() {
         return new Chrono(_core_local_time.with(TemporalAdjusters.lastDayOfYear()));
+    }
+
+    @Override
+    public int lengthOfMonth() {
+        return _core_local_time.getMonth().length(Year.isLeap(_core_local_time.getYear()));
+    }
+
+    @Override
+    public int lengthOfYear() {
+        return Year.of(_core_local_time.getYear()).length();
     }
 
     @Override
