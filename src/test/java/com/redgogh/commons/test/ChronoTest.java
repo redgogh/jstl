@@ -108,10 +108,6 @@ public class ChronoTest {
         System.out.printf("Between Months: %s\n", c1.betweenMonths(c2));
         System.out.printf("Between Weeks: %s\n", c1.betweenWeeks(c2));
         System.out.printf("Between Year: %s\n", c1.betweenYears(c2));
-
-        System.out.printf("Today: %s\n", Chrono.getToday());
-        System.out.printf("Current month: %s\n", Chrono.getCurrentMonth());
-        System.out.printf("Current year: %s\n", Chrono.getCurrentYear());
     }
 
 }

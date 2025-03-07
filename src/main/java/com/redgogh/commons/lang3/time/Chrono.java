@@ -594,21 +594,12 @@ public final class Chrono
     }
 
     /**
-     * 获取当前月份。
+     * 获取当前月份的周数。
      *
-     * @return 当前月份（1到12之间）
+     * @return 当前月份的周数
      */
-    public static int getCurrentMonth() {
-        return now().getMonth();
-    }
-
-    /**
-     * 获取当前年份。
-     *
-     * @return 当前年份
-     */
-    public static int getCurrentYear() {
-        return now().getYear();
+    public static int getCurrentWeekOfMonth() {
+        return now().getWeekOfMonth();
     }
 
     @Override
