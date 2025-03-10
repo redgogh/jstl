@@ -98,7 +98,7 @@ public enum StringExtensionsInterface {
     STRING_IFACE_REMOVE_SPACES_EXT {
         @Override
         public String apply(String input) {
-            return strrep(input, "\\s+", "");
+            return strrexp(input, "\\s+", "");
         }
     },
 

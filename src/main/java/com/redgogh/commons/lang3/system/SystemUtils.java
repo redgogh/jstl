@@ -23,7 +23,7 @@ import com.redgogh.commons.lang3.time.Chrono;
 import java.util.Map;
 
 import static com.redgogh.commons.lang3.string.StringUtils.stricunt;
-import static com.redgogh.commons.lang3.string.StringUtils.strrep;
+import static com.redgogh.commons.lang3.string.StringUtils.strrexp;
 
 /**
  * `SystemUtils` 是一个类，用于管理和操作操作系统环境变量。
@@ -141,7 +141,7 @@ public class SystemUtils {
      * @return 返回当前用户的主目录路径，如果 {@code concat} 不为空，则在路径后附加该子路径
      */
     public static String getUserHome(String sub) {
-        String home = strrep(System.getProperty("user.home"), "\\\\", "/");
+        String home = strrexp(System.getProperty("user.home"), "\\\\", "/");
         if (sub != null)
             return home + "/" + sub;
         return home;

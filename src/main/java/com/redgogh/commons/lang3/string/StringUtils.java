@@ -403,7 +403,7 @@ public class StringUtils {
      * @param iface 后处理选项
      * @return 替换后的字符串
      */
-    public static String strrep(Object wstr, String regexp, String value, StringExtensionsInterface... iface) {
+    public static String strrexp(Object wstr, String regexp, String value, StringExtensionsInterface... iface) {
         return pipelineExecutor(atos(wstr).replaceAll(regexp, value), iface);
     }
 
