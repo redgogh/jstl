@@ -76,11 +76,12 @@ public class SystemUtils {
      */
     private static OperatorSystem getos() {
         // initialize
-        if (stricunt(OS_NAME, "Windows"))
+        String _OS_NAME = System.getProperty("os.name");
+        if (stricunt(_OS_NAME, "Windows"))
             return OperatorSystem.WINDOWS;
-        else if (stricunt(OS_NAME, "Linux"))
+        else if (stricunt(_OS_NAME, "Linux"))
             return OperatorSystem.LINUX;
-        else if (stricunt(OS_NAME, "Mac"))
+        else if (stricunt(_OS_NAME, "Mac"))
             return OperatorSystem.MACOS;
         return OperatorSystem.UNKNOWN;
     }

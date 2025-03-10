@@ -22,6 +22,7 @@ import com.redgogh.commons.lang3.exception.InvalidArgumentException;
 import com.redgogh.commons.lang3.exception.UnsupportedOperationException;
 import com.redgogh.commons.lang3.iface.TypeMapper;
 import com.redgogh.commons.lang3.reflect.UClass;
+import com.redgogh.commons.lang3.string.StringExtensionsInterface;
 import com.redgogh.commons.lang3.string.StringUtils;
 import com.redgogh.commons.lang3.io.ByteBuffer;
 
@@ -414,8 +415,8 @@ public class BasicConverter {
      *
      * @see String#valueOf(Object)
      */
-    public static String atos(Object obj, TypeMapper<String, String> mapper) {
-        return mapper.call(atos(obj));
+    public static String atos(Object obj, TypeMapper<String, String> mapper, StringExtensionsInterface ...iface) {
+        return StringExtensionsInterface.pipelineExecutor(mapper.call(atos(obj)), iface);
     }
 
     /**
@@ -430,18 +431,18 @@ public class BasicConverter {
      *
      * @see String#valueOf(Object)
      */
-    public static String atos(Object obj) {
+    public static String atos(Object obj, StringExtensionsInterface ...iface) {
         if (obj == null)
             return "";
         if (obj instanceof String)
-            return (String) obj;
+            return StringExtensionsInterface.pipelineExecutor((String) obj, iface);
         /* 字节数组转字符串 */
         if (obj instanceof byte[])
-            return atos((byte[]) obj, 0, ((byte[]) obj).length);
+            return atos((byte[]) obj, 0, ((byte[]) obj).length,  iface);
         /* 字符数组转字符串 */
         if (obj instanceof char[])
-            return atos((char[]) obj, 0, ((char[]) obj).length);
-        return String.valueOf(obj);
+            return atos((char[]) obj, 0, ((char[]) obj).length, iface);
+        return StringExtensionsInterface.pipelineExecutor(String.valueOf(obj), iface);
     }
 
     /**
@@ -465,10 +466,8 @@ public class BasicConverter {
      *
      * @throws ArrayIndexOutOfBoundsException
      *          如果参数 {@code len} 超出整个子字符串的大小后会抛出数组越界异常。
-     *
-     * @see #atos(String, int, int)
      */
-    public static String atos(Object obj, int off, int len) {
+    public static String atos(Object obj, int off, int len, StringExtensionsInterface ...iface) {
         return atos(atos(obj), off, len);
     }
 
@@ -494,10 +493,8 @@ public class BasicConverter {
      *
      * @throws ArrayIndexOutOfBoundsException
      *          如果参数 {@code len} 超出整个子字符串的大小后会抛出数组越界异常。
-     *
-     * @see #atos(char[], int, int)
      */
-    public static String atos(String sub, int off, int len) {
+    public static String atos(String sub, int off, int len, StringExtensionsInterface ...iface) {
         return atos(sub.toCharArray(), off, len);
     }
 
@@ -513,7 +510,7 @@ public class BasicConverter {
      *
      * @see String#String(byte[])
      */
-    public static String atos(byte[] b) {
+    public static String atos(byte[] b, StringExtensionsInterface ...iface) {
         return atos(b, 0, b.length);
     }
 
@@ -540,8 +537,8 @@ public class BasicConverter {
      *
      * @see String#String(byte[], int, int)
      */
-    public static String atos(byte[] b, int off, int len) {
-        return new String(ArrayUtils.copyOf(b, off, len));
+    public static String atos(byte[] b, int off, int len, StringExtensionsInterface ...iface) {
+        return StringExtensionsInterface.pipelineExecutor(new String(ArrayUtils.copyOf(b, off, len)), iface);
     }
 
     /**
@@ -567,15 +564,15 @@ public class BasicConverter {
      *
      * @see String#String(char[], int, int)
      */
-    public static String atos(char[] a, int off, int len) {
-        return new String(ArrayUtils.copyOf(a, off, len));
+    public static String atos(char[] a, int off, int len, StringExtensionsInterface ...iface) {
+        return StringExtensionsInterface.pipelineExecutor(new String(ArrayUtils.copyOf(a, off, len)), iface);
     }
 
     /**
      * 将对象转换为指定类型的值。
      *
      * <p>该方法尝试将给定的对象转换为指定类型的值。首先将对象转为字符串形式，
-     * 然后根据目标类型进行转换。如果目标类型是基本数据类型，使用反射调用其 `valueOf` 方法进行转换。
+     * 然后根据目标类型进行转换。如果目标类型是基本数据类型，使用反射调用其 `valueOf` 方法进行转换。<p>
      *
      * <h2>功能特点</h2>
      * <ul>

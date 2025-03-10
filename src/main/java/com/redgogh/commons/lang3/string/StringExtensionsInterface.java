@@ -116,4 +116,36 @@ public enum StringExtensionsInterface {
     /** 应用字符串操作 */
     public abstract String apply(String input);
 
+    /**
+     * #brief：根据指定的字符串操作类型数组，对源字符串执行一系列操作。
+     *
+     * <p>该方法根据传入的操作数组，依次对源字符串进行处理。目前仅支持对字符串进行修剪操作，
+     * 其他操作可以在未来扩展。若操作数组为 null，则直接返回源字符串。<p>
+     *
+     * <h2>功能特点</h2>
+     * <ul>
+     *     <li>支持对字符串进行按需操作（例如修剪空白字符）。</li>
+     *     <li>通过枚举类型 {@link StringExtensionsInterface} 扩展支持更多操作。</li>
+     * </ul>
+     *
+     * <h2>使用示例</h2>
+     * <pre>
+     *     String result = pipelineExecutor("  Hello World  ", new StringOperator[]{StringOperator.STRING_OPERATOR_TRIM});
+     *     // 返回 "Hello World"
+     * </pre>
+     *
+     * @param source   源字符串
+     * @param iface 要应用的字符串操作数组
+     * @return 操作后的字符串
+     */
+    public static String pipelineExecutor(String source, StringExtensionsInterface[] iface) {
+        if (iface == null)
+            return source;
+
+        for (StringExtensionsInterface iface_ext : iface)
+            source = iface_ext.apply(source);
+
+        return source;
+    }
+
 }

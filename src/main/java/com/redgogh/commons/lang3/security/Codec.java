@@ -26,13 +26,18 @@ package com.redgogh.commons.lang3.security;
 /* Creates on 2025/2/20. */
 
 
-import com.redgogh.commons.lang3.security.codec.*;
+import com.redgogh.commons.lang3.security.codec.Base64Codec;
+import com.redgogh.commons.lang3.security.codec.MD5Codec;
+import com.redgogh.commons.lang3.security.codec.SHA256Codec;
+import com.redgogh.commons.lang3.security.codec.URLCodec;
 import com.redgogh.commons.lang3.string.StringUtils;
-import com.redgogh.commons.lang3.utils.BasicConverter;
 import com.redgogh.commons.lang3.utils.Capturer;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+
+import static com.redgogh.commons.lang3.string.StringExtensionsInterface.STRING_IFACE_UPPER_CASE_EXT;
+import static com.redgogh.commons.lang3.utils.BasicConverter.atos;
 
 /**
  * `Codec` 类用于数据的编码和解码操作。它提供了将数据从一种格式转换为另一种格式的功能，
@@ -125,7 +130,7 @@ public class Codec {
                 builder.append("0");
             builder.append(tmp);
         }
-        return BasicConverter.atos(builder);
+        return atos(builder, STRING_IFACE_UPPER_CASE_EXT);
     }
 
     /**

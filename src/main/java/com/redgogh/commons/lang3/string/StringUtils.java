@@ -76,38 +76,6 @@ public class StringUtils {
     private static final Map<String, PathMatcher> pathMatcherCache = new WeakHashMap<>();
 
     /**
-     * #brief：根据指定的字符串操作类型数组，对源字符串执行一系列操作。
-     *
-     * <p>该方法根据传入的操作数组，依次对源字符串进行处理。目前仅支持对字符串进行修剪操作，
-     * 其他操作可以在未来扩展。若操作数组为 null，则直接返回源字符串。
-     *
-     * <h2>功能特点</h2>
-     * <ul>
-     *     <li>支持对字符串进行按需操作（例如修剪空白字符）。</li>
-     *     <li>通过枚举类型 {@link StringExtensionsInterface} 扩展支持更多操作。</li>
-     * </ul>
-     *
-     * <h2>使用示例</h2>
-     * <pre>
-     *     String result = pipelineExecutor("  Hello World  ", new StringOperator[]{StringOperator.STRING_OPERATOR_TRIM});
-     *     // 返回 "Hello World"
-     * </pre>
-     *
-     * @param source   源字符串
-     * @param iface 要应用的字符串操作数组
-     * @return 操作后的字符串
-     */
-    private static String pipelineExecutor(String source, StringExtensionsInterface[] iface) {
-        if (iface == null)
-            return source;
-
-        for (StringExtensionsInterface iface_ext : iface)
-            source = iface_ext.apply(source);
-
-        return source;
-    }
-
-    /**
      * 获取字符串的长度。
      *
      * <p>此方法用于计算并返回输入字符串的字符数。支持任意类型的对象，
@@ -167,7 +135,7 @@ public class StringUtils {
      * @return 转换后的小写字符串；如果输入为 null，则返回 null
      */
     public static String lowercase(Object wstr, StringExtensionsInterface... iface) {
-        return pipelineExecutor(atos(wstr, String::toLowerCase), iface);
+        return StringExtensionsInterface.pipelineExecutor(atos(wstr, String::toLowerCase), iface);
     }
 
     /**
@@ -181,7 +149,7 @@ public class StringUtils {
      * @return 转换后的大写字符串；如果输入为 null，则返回 null
      */
     public static String uppercase(Object wstr, StringExtensionsInterface... iface) {
-        return pipelineExecutor(atos(wstr, String::toUpperCase), iface);
+        return StringExtensionsInterface.pipelineExecutor(atos(wstr, String::toUpperCase), iface);
     }
 
 
@@ -198,7 +166,7 @@ public class StringUtils {
     public static String strcap(Object wstr, StringExtensionsInterface... iface) {
         StringBuilder builder = new StringBuilder(atos(wstr));
         builder.replace(0, 1, uppercase(builder.charAt(0)));
-        return pipelineExecutor(atos(builder), iface);
+        return StringExtensionsInterface.pipelineExecutor(atos(builder), iface);
     }
 
     /**
@@ -404,7 +372,7 @@ public class StringUtils {
      * @return 替换后的字符串
      */
     public static String strrexp(Object wstr, String regexp, String value, StringExtensionsInterface... iface) {
-        return pipelineExecutor(atos(wstr).replaceAll(regexp, value), iface);
+        return StringExtensionsInterface.pipelineExecutor(atos(wstr).replaceAll(regexp, value), iface);
     }
 
     /**
@@ -422,7 +390,7 @@ public class StringUtils {
 
         if (iface != null) {
             for (int i = 0; i < origins.length; i++) {
-                origins[i] = pipelineExecutor(origins[i], iface);
+                origins[i] = StringExtensionsInterface.pipelineExecutor(origins[i], iface);
             }
         }
 
@@ -441,7 +409,7 @@ public class StringUtils {
      * @return 截取后的字符串
      */
     public static String strcut(Object wstr, int off, int len, StringExtensionsInterface... iface) {
-        return pipelineExecutor(atos(wstr, off, len), iface);
+        return StringExtensionsInterface.pipelineExecutor(atos(wstr, off, len), iface);
     }
 
     /**
@@ -551,7 +519,7 @@ public class StringUtils {
      * @return 去除前后空白后的字符串
      */
     public static String strip(Object wstr, StringExtensionsInterface... iface) {
-        return pipelineExecutor(atos(wstr).trim(), iface);
+        return StringExtensionsInterface.pipelineExecutor(atos(wstr).trim(), iface);
     }
 
     /**
@@ -597,7 +565,7 @@ public class StringUtils {
             buffer.append(append);
         }
 
-        return pipelineExecutor(buffer.toString(), iface);
+        return StringExtensionsInterface.pipelineExecutor(buffer.toString(), iface);
     }
 
 }
