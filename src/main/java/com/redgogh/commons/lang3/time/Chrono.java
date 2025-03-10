@@ -446,26 +446,6 @@ public final class Chrono
     }
 
     /**
-     * 使用 `LocalDateTime` 创建 `Chrono` 实例。
-     *
-     * @param localDateTime `LocalDateTime` 对象
-     * @return 相应的 `Chrono` 实例
-     */
-    public static Chrono wrap(LocalDateTime localDateTime) {
-        return new Chrono(localDateTime);
-    }
-
-    /**
-     * 使用时间戳创建 `Chrono` 实例。
-     *
-     * @param timestamp 时间戳（毫秒）
-     * @return 相应的 `Chrono` 实例
-     */
-    public static Chrono of(long timestamp) {
-        return new Chrono(timestamp);
-    }
-
-    /**
      * 创建具有指定年份、月份和时区的 `Chrono` 实例。
      *
      * @param year 年份
@@ -553,6 +533,36 @@ public final class Chrono
     }
 
     /**
+     * 使用 `LocalDate` 创建 `Chrono` 实例。
+     *
+     * @param localDate `localDate` 对象
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono wrap(LocalDate localDate) {
+        return new Chrono(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
+    }
+
+    /**
+     * 使用 `LocalDateTime` 创建 `Chrono` 实例。
+     *
+     * @param localDateTime `LocalDateTime` 对象
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono wrap(LocalDateTime localDateTime) {
+        return new Chrono(localDateTime);
+    }
+
+    /**
+     * 使用时间戳创建 `Chrono` 实例。
+     *
+     * @param timestamp 时间戳（毫秒）
+     * @return 相应的 `Chrono` 实例
+     */
+    public static Chrono wrap(long timestamp) {
+        return new Chrono(timestamp);
+    }
+
+    /**
      * 使用 `Date` 对象创建 `Chrono` 实例。
      *
      * @param date `Date` 对象
@@ -580,7 +590,7 @@ public final class Chrono
      * @param zoneId 时区
      * @return 相应的 `Chrono` 实例
      */
-    public static Chrono of(long timestamp, ZoneId zoneId) {
+    public static Chrono wrap(long timestamp, ZoneId zoneId) {
         return new Chrono(timestamp, zoneId);
     }
 

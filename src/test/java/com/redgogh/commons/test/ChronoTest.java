@@ -22,10 +22,16 @@ import com.redgogh.commons.lang3.time.Chrono;
 import com.redgogh.commons.lang3.time.DateFormatter;
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @SuppressWarnings("ALL")
 public class ChronoTest {
+
+    @Test
+    public void wrapTest() {
+        System.out.println(Chrono.wrap(LocalDate.now()));
+    }
 
     @Test
     public void formatTest() {
