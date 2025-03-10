@@ -18,15 +18,15 @@ package com.redgogh.commons.lang3.system;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.commons.lang3.string.StringUtils;
+import com.redgogh.commons.lang3.time.Chrono;
 
-import java.util.Date;
 import java.util.Map;
 
+import static com.redgogh.commons.lang3.string.StringUtils.stricount;
 import static com.redgogh.commons.lang3.string.StringUtils.strrep;
 
 /**
- * `OSEnvironment` 是一个类，用于管理和操作操作系统环境变量。
+ * `SystemUtils` 是一个类，用于管理和操作操作系统环境变量。
  *
  * <p>该类提供了访问和检索操作系统环境变量的功能。主要功能包括获取指定名称的环境
  * 变量值等。可以通过静态方法访问环境变量，无需实例化该类。
@@ -47,30 +47,18 @@ import static com.redgogh.commons.lang3.string.StringUtils.strrep;
  * @see System
  * @since 1.0
  */
-public class OSEnvironment {
+public class SystemUtils {
 
     /**
-     * 未知操作系统
+     * 当前操作系统枚举
      */
-    public static final byte UNKNOWN = 0x0000;
-    /**
-     * Windows 操作系统
-     */
-    public static final byte WINDOWS = 0x0001;
-    /**
-     * Linux 操作系统
-     */
-    public static final byte LINUX   = 0x0002;
-    /**
-     * MacOS 操作系统
-     */
-    public static final byte MACOS   = 0x0004;
+    public static final OperatorSystem OPERATOR_SYSTEM = getos();
 
     /**
      * 该常量用于获取并保存当前运行环境的操作系统名称。
      * 通过调用 {@code System.getProperty("os.name")} 来初始化，
      * 返回的操作系统名称可能是 "Windows", "Linux", "Mac OS X" 等。
-     *
+     * <p>
      * 注意事项：
      * - 该值在 JVM 启动时被初始化，不会随操作系统的变化而更新。
      * - 使用此常量时，确保不会直接依赖于操作系统名称进行特定逻辑操作，
@@ -81,60 +69,59 @@ public class OSEnvironment {
     /**
      * 操作系统环境变量
      */
-    private static final Map<String, String> environments = System.getenv();
+    private static final Map<String, String> ENV = System.getenv();
 
     /**
-     * 操作系统枚举类
+     * @return 返回当前操作系统枚举对象
      */
-    private static byte OS_FLAG = UNKNOWN;
-
-    static {
+    private static OperatorSystem getos() {
         // initialize
-        if (StringUtils.stricount(OS_NAME, "Windows"))
-            OS_FLAG = WINDOWS;
-        else if (StringUtils.stricount(OS_NAME, "Linux"))
-            OS_FLAG = LINUX;
-        else if (StringUtils.stricount(OS_NAME, "Mac"))
-            OS_FLAG = MACOS;
+        if (stricount(OS_NAME, "Windows"))
+            return OperatorSystem.WINDOWS;
+        else if (stricount(OS_NAME, "Linux"))
+            return OperatorSystem.LINUX;
+        else if (stricount(OS_NAME, "Mac"))
+            return OperatorSystem.MACOS;
+        return OperatorSystem.UNKNOWN;
     }
 
     /**
      * #brief: 检查当前操作系统是否为 Windows
      *
-     * 该函数用于判断当前运行环境是否为 Windows 操作系统。
+     * <p>该函数用于判断当前运行环境是否为 Windows 操作系统。
      *
      * @return 如果操作系统是 Windows，返回 {@code true}，否则返回 {@code false}
      */
     public static boolean isWindows() {
-        return OS_FLAG == WINDOWS;
+        return OPERATOR_SYSTEM == OperatorSystem.WINDOWS;
     }
 
     /**
      * #brief: 检查当前操作系统是否为 Linux
      *
-     * 该函数用于判断当前运行环境是否为 Linux 操作系统。
+     * <p>该函数用于判断当前运行环境是否为 Linux 操作系统。
      *
      * @return 如果操作系统是 Linux，返回 {@code true}，否则返回 {@code false}
      */
     public static boolean isLinux() {
-        return OS_FLAG == LINUX;
+        return OPERATOR_SYSTEM == OperatorSystem.LINUX;
     }
 
     /**
      * #brief: 检查当前操作系统是否为 MacOS
      *
-     * 该函数用于判断当前运行环境是否为 MacOS 操作系统。
+     * <p>该函数用于判断当前运行环境是否为 MacOS 操作系统。
      *
      * @return 如果操作系统是 MacOS，返回 {@code true}，否则返回 {@code false}
      */
     public static boolean isMacOS() {
-        return OS_FLAG == MACOS;
+        return OPERATOR_SYSTEM == OperatorSystem.MACOS;
     }
 
     /**
      * #brief: 获取当前用户的主目录路径
      *
-     * 该函数返回当前用户的主目录路径，路径中的所有反斜杠（\）会被替换为正斜杠（/）。
+     * <p>该函数返回当前用户的主目录路径，路径中的所有反斜杠（\）会被替换为正斜杠（/）。
      *
      * @return 返回当前用户的主目录路径
      */
@@ -145,7 +132,7 @@ public class OSEnvironment {
     /**
      * #brief: 获取当前用户的主目录路径，并可选择性地附加一个子路径
      *
-     * 该函数返回当前用户的主目录路径，路径中的所有反斜杠（\）会被替换为正斜杠（/）。
+     * <p>该函数返回当前用户的主目录路径，路径中的所有反斜杠（\）会被替换为正斜杠（/）。
      * 可以通过传入 {@code concat} 参数，在主目录路径后附加一个子路径。
      *
      * @param sub
@@ -161,6 +148,13 @@ public class OSEnvironment {
     }
 
     /**
+     * @return 获取所有环境变量
+     */
+    public static Map<String, String> getenv() {
+        return ENV;
+    }
+
+    /**
      * #brief: 根据名称获取对应的环境变量值
      *
      * <p>从环境变量集合中查找指定名称的环境变量，并返回其对应的值。
@@ -169,8 +163,8 @@ public class OSEnvironment {
      * @param name 环境变量的名称
      * @return 对应名称的环境变量值，如果名称未找到，则返回 `null`
      */
-    public static String getEnvironment(String name) {
-        return environments.get(name);
+    public static String getenv(String name) {
+        return ENV.get(name);
     }
 
     /**
@@ -183,22 +177,22 @@ public class OSEnvironment {
      *
      * @return 当前时间的毫秒数
      */
-    public static long time() {
+    public static long timestamp() {
         return System.currentTimeMillis();
     }
 
     /**
-     * #brief: 返回当前系统时间的 `Date` 对象
+     * #brief: 返回当前系统时间的 `Chrono` 对象
      *
-     * <p>该方法基于当前时间的毫秒数创建并返回一个新的 `Date` 对象。当前时间是通过调用
+     * <p>该方法基于当前时间的毫秒数创建并返回一个新的 `Chrono` 对象。当前时间是通过调用
      * `time()` 方法获取的，该方法返回自 Unix 纪元（1970-01-01 00:00:00 UTC）以来的毫秒数。
      *
-     * <p>该方法适用于需要获取当前时间的 `Date` 表示的场景。
+     * <p>该方法适用于需要获取当前时间的 `Chrono` 表示的场景。
      *
-     * @return 当前时间的 `Date` 对象
+     * @return 当前时间的 `Chrono` 对象
      */
-    public static Date date() {
-        return new Date(time());
+    public static Chrono chrono() {
+        return Chrono.now();
     }
 
     /**

@@ -21,7 +21,7 @@ package com.redgogh.commons.lang3.io;
 import com.redgogh.commons.lang3.collection.Lists;
 import com.redgogh.commons.lang3.exception.IOReadException;
 import com.redgogh.commons.lang3.string.StringUtils;
-import com.redgogh.commons.lang3.system.OSEnvironment;
+import com.redgogh.commons.lang3.system.SystemUtils;
 import com.redgogh.commons.lang3.utils.Assert;
 import com.redgogh.commons.lang3.utils.Capturer;
 import com.redgogh.commons.lang3.utils.Optional;
@@ -88,10 +88,10 @@ public class MutableFile extends java.io.File {
      *         否则，返回原始路径
      */
     private static String quickAccessPath(String pathname) {
-        if (OSEnvironment.isWindows() || OSEnvironment.isMacOS()) {
+        if (SystemUtils.isWindows() || SystemUtils.isMacOS()) {
             /* Conversation Desktop */
             if (pathname.startsWith(PATHNAME_DESKTOP_VARIABLE))
-                return pathname.replace(PATHNAME_DESKTOP_VARIABLE, OSEnvironment.getUserHome("Desktop/"));
+                return pathname.replace(PATHNAME_DESKTOP_VARIABLE, SystemUtils.getUserHome("Desktop/"));
         }
 
         return pathname;

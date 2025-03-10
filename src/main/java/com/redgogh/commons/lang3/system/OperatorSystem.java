@@ -1,4 +1,4 @@
-package com.redgogh.commons.test;
+package com.redgogh.commons.lang3.system;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -18,28 +18,33 @@ package com.redgogh.commons.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.junit.Test;
-import com.redgogh.commons.lang3.stream.Streams;
-import com.redgogh.commons.lang3.collection.Lists;
-import com.redgogh.commons.lang3.utils.Generator;
+/**
+ * 操作系统枚举类
+ *
+ * @author Red Gogh
+ */
+public enum OperatorSystem {
 
-import java.util.List;
+    /**
+     * 未知操作系统
+     */
+    UNKNOWN,
 
-import static com.redgogh.commons.lang3.system.SystemUtils.time;
+    /**
+     * Windows
+     */
+    WINDOWS,
 
-@SuppressWarnings("ALL")
-public class StreamsTest {
+    /**
+     * MacOS
+     */
+    MACOS,
 
-    @Test
-    public void parallelTest() {
-        List<Integer> objects = Lists.newArrayList();
-        for (int i = 0; i < 100000000; i++)
-            objects.add(Generator.randomInt());
+    /**
+     * Linux 或其他发行版
+     */
+    LINUX,
 
-        long start = time();
-        System.out.println(Streams.count(objects, o -> o > 1024 && o < Integer.MAX_VALUE));
-        long end = time();
-        System.out.printf("非并行计算耗时：%sms\n", (end - start));
-    }
+    ;
 
 }

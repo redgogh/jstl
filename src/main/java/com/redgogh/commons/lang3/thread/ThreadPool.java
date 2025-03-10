@@ -1,6 +1,6 @@
 package com.redgogh.commons.lang3.thread;
 
-import com.redgogh.commons.lang3.system.OSEnvironment;
+import com.redgogh.commons.lang3.system.SystemUtils;
 
 import java.util.concurrent.*;
 
@@ -37,7 +37,7 @@ public class ThreadPool {
     /**
      * 当前可用的处理器数量
      */
-    public static final int N_THREAD = OSEnvironment.availableProcessors();
+    public static final int N_THREAD = SystemUtils.availableProcessors();
 
     /**
      * 固定线程池，用于执行提交的任务
