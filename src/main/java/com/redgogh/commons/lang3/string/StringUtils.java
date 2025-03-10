@@ -341,7 +341,7 @@ public class StringUtils {
      * @param cmp 要检查的子串
      * @return 忽略大小写后，如果 `wstr` 包含 `cmp`，返回 true；否则返回 false
      */
-    public static boolean stricount(Object wstr, String cmp) {
+    public static boolean stricunt(Object wstr, String cmp) {
         return strcunt(uppercase(wstr), uppercase(cmp));
     }
 
@@ -354,7 +354,7 @@ public class StringUtils {
      * @param list 要检查的字符串列表
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean stricount(Object wstr, Object... list) {
+    public static boolean stricunt(Object wstr, Object... list) {
         if (list == null)
             return false;
 
@@ -374,8 +374,8 @@ public class StringUtils {
      * @param list 要检查的字符串数组
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean stricount(Object wstr, String... list) {
-        return stricount(wstr, (Object[]) list);
+    public static boolean stricunt(Object wstr, String... list) {
+        return stricunt(wstr, (Object[]) list);
     }
 
     /**
@@ -387,8 +387,8 @@ public class StringUtils {
      * @param list 要检查的字符串集合
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean stricount(Object wstr, Collection<String> list) {
-        return stricount(wstr, list.toArray());
+    public static boolean stricunt(Object wstr, Collection<String> list) {
+        return stricunt(wstr, list.toArray());
     }
 
     /**

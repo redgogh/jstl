@@ -22,7 +22,7 @@ import com.redgogh.commons.lang3.time.Chrono;
 
 import java.util.Map;
 
-import static com.redgogh.commons.lang3.string.StringUtils.stricount;
+import static com.redgogh.commons.lang3.string.StringUtils.stricunt;
 import static com.redgogh.commons.lang3.string.StringUtils.strrep;
 
 /**
@@ -76,11 +76,11 @@ public class SystemUtils {
      */
     private static OperatorSystem getos() {
         // initialize
-        if (stricount(OS_NAME, "Windows"))
+        if (stricunt(OS_NAME, "Windows"))
             return OperatorSystem.WINDOWS;
-        else if (stricount(OS_NAME, "Linux"))
+        else if (stricunt(OS_NAME, "Linux"))
             return OperatorSystem.LINUX;
-        else if (stricount(OS_NAME, "Mac"))
+        else if (stricunt(OS_NAME, "Mac"))
             return OperatorSystem.MACOS;
         return OperatorSystem.UNKNOWN;
     }

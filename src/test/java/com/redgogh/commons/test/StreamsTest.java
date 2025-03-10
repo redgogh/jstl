@@ -25,7 +25,7 @@ import com.redgogh.commons.lang3.utils.Generator;
 
 import java.util.List;
 
-import static com.redgogh.commons.lang3.system.SystemUtils.time;
+import static com.redgogh.commons.lang3.system.SystemUtils.timestamp;
 
 @SuppressWarnings("ALL")
 public class StreamsTest {
@@ -36,9 +36,9 @@ public class StreamsTest {
         for (int i = 0; i < 100000000; i++)
             objects.add(Generator.randomInt());
 
-        long start = time();
+        long start = timestamp();
         System.out.println(Streams.count(objects, o -> o > 1024 && o < Integer.MAX_VALUE));
-        long end = time();
+        long end = timestamp();
         System.out.printf("非并行计算耗时：%sms\n", (end - start));
     }
 
