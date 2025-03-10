@@ -46,6 +46,10 @@
 - 修复 `BeanUtils`拷贝空对象以及基本数据类型不能拷贝问题。
 - 修复 `Workbook#checkout` 为空校验报错提示 Sheet 已存在问题。
 
+## 🔨 构建工具
+
+- 抑制 `Javadoc` 中文错误、乱码以及警告。
+
 ## ☠️已弃用的 API
 
 - 弃用并移除 `TimeUnits` API。
