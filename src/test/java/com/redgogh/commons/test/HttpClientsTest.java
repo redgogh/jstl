@@ -25,14 +25,15 @@ package com.redgogh.commons.test;
 
 /* Creates on 2022/8/8. */
 
-import com.redgogh.commons.lang3.collection.Maps;
+import com.redgogh.jstl.collection.Maps;
 import com.redgogh.commons.lang3.http.*;
-import com.redgogh.commons.lang3.io.MutableFile;
+import com.redgogh.jstl.http.*;
+import com.redgogh.jstl.io.MutableFile;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.redgogh.commons.lang3.io.IOUtils.stdout;
+import static com.redgogh.jstl.io.IOUtils.stdout;
 
 @SuppressWarnings("ALL")
 public class HttpClientsTest {

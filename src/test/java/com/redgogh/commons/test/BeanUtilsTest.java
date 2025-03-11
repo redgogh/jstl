@@ -21,7 +21,7 @@ package com.redgogh.commons.test;
 import com.alibaba.fastjson.JSON;
 import com.redgogh.commons.student.HighStudent;
 import com.redgogh.commons.student.PrimaryStudent;
-import com.redgogh.commons.lang3.bean.BeanUtils;
+import com.redgogh.jstl.bean.BeanUtils;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")

@@ -18,8 +18,8 @@ package com.redgogh.commons.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.commons.lang3.time.Chrono;
-import com.redgogh.commons.lang3.time.DateFormatter;
+import com.redgogh.jstl.time.Chrono;
+import com.redgogh.jstl.time.DateFormatter;
 import org.junit.Test;
 
 import java.time.LocalDate;

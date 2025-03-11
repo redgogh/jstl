@@ -18,10 +18,10 @@ package com.redgogh.commons.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.commons.lang3.io.MutableFile;
+import com.redgogh.jstl.io.MutableFile;
 import org.junit.Test;
 
-import static com.redgogh.commons.lang3.utils.BasicConverter.atos;
+import static com.redgogh.jstl.utils.BasicConverter.atos;
 
 @SuppressWarnings("ALL")
 public class MutableFileTest {

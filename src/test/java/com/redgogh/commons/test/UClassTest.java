@@ -18,8 +18,8 @@ package com.redgogh.commons.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.commons.lang3.reflect.UClass;
-import com.redgogh.commons.lang3.reflect.UField;
+import com.redgogh.jstl.reflect.UClass;
+import com.redgogh.jstl.reflect.UField;
 import org.junit.Test;
 
 import java.awt.*;

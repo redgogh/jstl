@@ -18,8 +18,8 @@ package com.redgogh.commons.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.commons.lang3.security.Codec;
-import com.redgogh.commons.lang3.security.Crypt;
+import com.redgogh.jstl.security.Codec;
+import com.redgogh.jstl.security.Crypt;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")

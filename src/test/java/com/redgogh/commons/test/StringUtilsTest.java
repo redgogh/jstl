@@ -19,18 +19,18 @@ package com.redgogh.commons.test;
 \* -------------------------------------------------------------------------------- */
 
 import org.junit.Test;
-import com.redgogh.commons.lang3.utils.BasicConverter;
-import com.redgogh.commons.lang3.string.StringUtils;
-import com.redgogh.commons.lang3.collection.Lists;
-import com.redgogh.commons.lang3.utils.Generator;
+import com.redgogh.jstl.utils.BasicConverter;
+import com.redgogh.jstl.string.StringUtils;
+import com.redgogh.jstl.collection.Lists;
+import com.redgogh.jstl.utils.Generator;
 
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import static com.redgogh.commons.lang3.string.StringUtils.strcut;
-import static com.redgogh.commons.lang3.string.StringExtensionsInterface.*;
+import static com.redgogh.jstl.string.StringUtils.strcut;
+import static com.redgogh.jstl.string.StringExtensionsInterface.*;
 
 @SuppressWarnings("ALL")
 public class StringUtilsTest {

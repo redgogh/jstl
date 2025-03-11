@@ -18,7 +18,7 @@ package com.redgogh.commons.experiment;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.commons.lang3.utils.Generator;
+import com.redgogh.jstl.utils.Generator;
 import org.junit.Test;
 
 import java.util.Random;

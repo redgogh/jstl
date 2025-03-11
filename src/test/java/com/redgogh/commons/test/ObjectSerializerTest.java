@@ -18,8 +18,8 @@ package com.redgogh.commons.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.commons.lang3.io.MutableFile;
-import com.redgogh.commons.lang3.reflect.ObjectSerializer;
+import com.redgogh.jstl.io.MutableFile;
+import com.redgogh.jstl.reflect.ObjectSerializer;
 import org.junit.Test;
 
 import java.io.Serializable;

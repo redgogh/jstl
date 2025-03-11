@@ -20,7 +20,7 @@ package com.redgogh.commons.test;
 
 import org.junit.Test;
 
-import static com.redgogh.commons.lang3.utils.BasicConverter.atobool;
+import static com.redgogh.jstl.utils.BasicConverter.atobool;
 
 @SuppressWarnings("ALL")
 public class RedGoghTest {

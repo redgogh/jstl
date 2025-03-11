@@ -18,10 +18,10 @@ package com.redgogh.commons.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.commons.lang3.utils.Assert;
-import com.redgogh.commons.lang3.utils.Optional;
+import com.redgogh.jstl.utils.Assert;
+import com.redgogh.jstl.utils.Optional;
 import org.junit.Test;
-import com.redgogh.commons.lang3.exception.AssertException;
+import com.redgogh.jstl.exception.AssertException;
 
 import java.util.ArrayList;
 import java.util.List;

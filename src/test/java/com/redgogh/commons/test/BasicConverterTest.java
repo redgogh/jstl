@@ -22,7 +22,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static com.redgogh.commons.lang3.utils.BasicConverter.atob;
+import static com.redgogh.jstl.utils.BasicConverter.atob;
 
 @SuppressWarnings("ALL")
 public class BasicConverterTest {

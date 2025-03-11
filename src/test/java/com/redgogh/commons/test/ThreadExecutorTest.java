@@ -18,8 +18,8 @@ package com.redgogh.commons.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.commons.lang3.collection.Lists;
-import com.redgogh.commons.lang3.utils.Generator;
+import com.redgogh.jstl.collection.Lists;
+import com.redgogh.jstl.utils.Generator;
 import org.junit.Test;
 
 import java.util.List;

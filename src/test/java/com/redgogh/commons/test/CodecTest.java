@@ -18,7 +18,7 @@ package com.redgogh.commons.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import com.redgogh.commons.lang3.security.Codec;
+import com.redgogh.jstl.security.Codec;
 import org.junit.Test;
 
 import java.io.File;

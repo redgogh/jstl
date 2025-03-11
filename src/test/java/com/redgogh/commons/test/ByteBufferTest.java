@@ -19,7 +19,7 @@ package com.redgogh.commons.test;
 \* -------------------------------------------------------------------------------- */
 
 import org.junit.Test;
-import com.redgogh.commons.lang3.io.ByteBuffer;
+import com.redgogh.jstl.io.ByteBuffer;
 
 @SuppressWarnings("ALL")
 public class ByteBufferTest {

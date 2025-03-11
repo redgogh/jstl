@@ -19,13 +19,13 @@ package com.redgogh.commons.test;
 \* -------------------------------------------------------------------------------- */
 
 import org.junit.Test;
-import com.redgogh.commons.lang3.stream.Streams;
-import com.redgogh.commons.lang3.collection.Lists;
-import com.redgogh.commons.lang3.utils.Generator;
+import com.redgogh.jstl.stream.Streams;
+import com.redgogh.jstl.collection.Lists;
+import com.redgogh.jstl.utils.Generator;
 
 import java.util.List;
 
-import static com.redgogh.commons.lang3.system.SystemUtils.timestamp;
+import static com.redgogh.jstl.system.SystemUtils.timestamp;
 
 @SuppressWarnings("ALL")
 public class StreamsTest {
