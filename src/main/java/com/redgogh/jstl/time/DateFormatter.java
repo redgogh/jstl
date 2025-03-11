@@ -33,7 +33,7 @@ import static com.redgogh.jstl.string.StringUtils.strlen;
  * `DateFormatter` 类提供日期和时间的格式化和解析功能。
  *
  * <p>该类支持将日期对象格式化为指定的字符串格式，以及将符合格式的字符串解析为日期对象。
- * 支持默认格式和自定义格式。
+ * 支持默认格式和自定义格式。<p>
  *
  * <h2>主要功能</h2>
  * <ul>
@@ -165,6 +165,7 @@ public class DateFormatter {
         return compileFormatter(pattern).format(date);
     }
 
+    @SuppressWarnings("EnhancedSwitchMigration")
     public static Date parse(String text) {
         int match = strlen(text);
         switch (match) {
