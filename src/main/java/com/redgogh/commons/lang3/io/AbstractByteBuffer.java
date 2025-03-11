@@ -31,7 +31,7 @@ import com.redgogh.commons.lang3.utils.ArrayUtils;
 public abstract class AbstractByteBuffer extends ByteBuffer {
 
     /** 读写指针 */
-    protected int position;
+    protected int index;
 
     /** 字节缓冲区内部真实数据大小 */
     protected int capacity;
@@ -48,17 +48,17 @@ public abstract class AbstractByteBuffer extends ByteBuffer {
     }
 
     public int readableBytes() {
-        return capacity - position;
+        return capacity - index;
     }
 
     @Override
     public int writeableBytes() {
-        return size() - position;
+        return size() - index;
     }
 
     @Override
-    public int position() {
-        return position;
+    public int index() {
+        return index;
     }
 
     @Override
@@ -67,17 +67,17 @@ public abstract class AbstractByteBuffer extends ByteBuffer {
     }
 
     public ByteBuffer seekSet(int off) {
-        position = off;
+        index = off;
         return this;
     }
 
     public ByteBuffer seekCur(int off) {
-        position += off;
+        index += off;
         return this;
     }
 
     public ByteBuffer seekEnd(int off) {
-        position = capacity - off;
+        index = capacity - off;
         return this;
     }
 
@@ -88,19 +88,19 @@ public abstract class AbstractByteBuffer extends ByteBuffer {
 
     @Override
     public ByteBuffer markIndex() {
-        markIndex = position;
+        markIndex = index;
         return this;
     }
 
     @Override
     public ByteBuffer reset() {
-        position = markIndex;
+        index = markIndex;
         return this;
     }
 
     @Override
     public ByteBuffer rewind() {
-        position = 0;
+        index = 0;
         return this;
     }
 
@@ -163,7 +163,7 @@ public abstract class AbstractByteBuffer extends ByteBuffer {
 
     public int readBytes(byte[] b, int off, int len) {
         ArrayUtils.checkIndexSize(off, len, b.length);
-        int remcap = capacity - position;
+        int remcap = capacity - index;
         if (remcap == 0)
             return IOUtils.EOF;
         if (len > remcap)
@@ -248,6 +248,6 @@ public abstract class AbstractByteBuffer extends ByteBuffer {
 
     @Override
     public String toString() {
-        return StringUtils.strwfmt("%s [size=%s, cap=%s, index=%s]", super.toString(), size(), capacity(), position());
+        return StringUtils.strwfmt("%s [size=%s, cap=%s, index=%s]", super.toString(), size(), capacity(), index());
     }
 }

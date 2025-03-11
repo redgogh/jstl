@@ -37,9 +37,9 @@ public class HeapByteBuffer extends AbstractByteBuffer {
     /** 确保数据写入时缓冲区内部容量足够 */
     private void ensureCapacity(int size) {
         if (buf.length < (capacity + size)) {
-            byte[] nbuf = new byte[(buf.length + size) + initializeCapacity];
-            System.arraycopy(buf, 0, nbuf, 0, buf.length);
-            buf = nbuf;
+            byte[] n = new byte[(buf.length + size) + initializeCapacity];
+            System.arraycopy(buf, 0, n, 0, buf.length);
+            buf = n;
         }
     }
 
@@ -50,24 +50,24 @@ public class HeapByteBuffer extends AbstractByteBuffer {
 
     @Override
     public void read0(byte[] b, int off, int len) {
-        System.arraycopy(buf, position, b, off, len);
-        position += len;
+        System.arraycopy(buf, index, b, off, len);
+        index += len;
     }
 
     @Override
     void write0(byte[] a, int off, int len) {
         ensureCapacity(len);
-        System.arraycopy(a, off, buf, position, len);
-        position += len;
+        System.arraycopy(a, off, buf, index, len);
+        index += len;
         capacity += len;
     }
 
     @Override
     public ByteBuffer compact() {
         if (size() > capacity) {
-            byte[] nbuf = new byte[capacity];
-            System.arraycopy(buf, 0, nbuf, 0, capacity);
-            buf = nbuf;
+            byte[] n = new byte[capacity];
+            System.arraycopy(buf, 0, n, 0, capacity);
+            buf = n;
         }
         return this;
     }

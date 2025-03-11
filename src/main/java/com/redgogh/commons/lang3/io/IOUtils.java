@@ -54,7 +54,7 @@ public class IOUtils {
     /**
      * 推荐缓冲区默认大小
      */
-    public static final int DEFAULT_BYTE_BUFFER_SIZE = KB * 4;
+    public static final int DEFAULT_BYTE_BUFFER_SIZE = KB;
     /**
      * 标准输出缓冲区
      */

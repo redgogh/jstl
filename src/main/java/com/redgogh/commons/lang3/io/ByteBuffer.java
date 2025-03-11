@@ -126,7 +126,7 @@ public abstract class ByteBuffer {
     /**
      * @return 返回当前读写索引位置
      */
-    public abstract int position();
+    public abstract int index();
 
     /**
      * @return 当前有效的缓冲区大小（单位：字节）。
