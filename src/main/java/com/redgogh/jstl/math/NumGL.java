@@ -25,6 +25,10 @@ package com.redgogh.jstl.math;
  */
 public class NumGL {
 
+    public static int round(float x) {
+        return (int) (x + 0.5f);
+    }
+
     public static int abs(short x) {
         return x <= 0 ? -x : x;
     }
@@ -98,8 +102,8 @@ public class NumGL {
         return q;
     }
 
-    public static float degrees(float angrad) {
-        return angrad * (180.0f / (float) Math.PI);
+    public static int degrees(float angrad) {
+        return round(angrad * (180.0f / (float) Math.PI));
     }
 
     public static float radians(float angdeg) {
@@ -107,13 +111,16 @@ public class NumGL {
     }
 
     public static float err(float a, float b) {
-        return abs(Math.round((abs(a - b) / a * 100.0f) * 100.0f) / 100.0f);
+        return abs(round((abs(a - b) / a * 100.0f) * 100.0f) / 100.0f);
     }
 
     public static void main(String[] args) {
-        float a = radians(361);
+        float a = radians(261);
         float v1 = 0.0f;
         float v2 = 0.0f;
+
+        System.out.println("radians = " + a);
+        System.out.println("degrees = " + degrees(a));
 
         v1 = (float) Math.sin(a);
         v2 = NumGL.sin(a);
