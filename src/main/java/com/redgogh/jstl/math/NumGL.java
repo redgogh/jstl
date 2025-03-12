@@ -114,11 +114,33 @@ public class NumGL {
         return abs(round((abs(a - b) / a * 100.0f) * 100.0f) / 100.0f);
     }
 
+    public static float sqrt(float a) {
+        if (a == 0)
+            return a;
+
+        int maxIter = 1000;
+
+        float x = a;
+        for (int i = 0; i < maxIter; i++) {
+            float n = 0.5f * (x + a / x);
+
+            if (abs(n - x) < (float) 1e-10)
+                return n;
+
+            x = n;
+        }
+
+        return x;
+    }
+
     public static void main(String[] args) {
         float a = radians(261);
         float v1 = 0.0f;
         float v2 = 0.0f;
 
+        float sqrt_v = 32;
+
+        System.out.printf("sqrt(%s) = %s\n", sqrt_v, sqrt(sqrt_v));
         System.out.println("radians = " + a);
         System.out.println("degrees = " + degrees(a));
 
