@@ -28,9 +28,9 @@
     <description>标准库</description>
 
     <scm>
-        <connection>scm:git@github.com:redgogh/devtools.git</connection>
-        <developerConnection>scm:git@github.com:redgogh/devtools.git</developerConnection>
-        <url>https://github.com/redgogh/devtools</url>
+        <connection>scm:git@github.com:redgogh/jstl.git</connection>
+        <developerConnection>scm:git@github.com:redgogh/jstl.git</developerConnection>
+        <url>https://github.com/redgogh/jstl</url>
     </scm>
 
     <properties>
