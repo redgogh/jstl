@@ -3,10 +3,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <name>JSTL</name>
+    <name>Karasuba</name>
 
     <groupId>io.github.redgogh</groupId>
-    <artifactId>jstl</artifactId>
+    <artifactId>karasuba-io</artifactId>
     <version>3.0.2</version>
 
     <developers>
@@ -24,14 +24,21 @@
         </license>
     </licenses>
 
-    <url>https://github.com/redgogh/devtools</url>
+    <url>https://github.com/redgogh/karasuba-io</url>
     <description>标准库</description>
 
     <scm>
-        <connection>scm:git@github.com:redgogh/devtools.git</connection>
-        <developerConnection>scm:git@github.com:redgogh/devtools.git</developerConnection>
-        <url>https://github.com/redgogh/devtools</url>
+        <connection>scm:git@github.com:redgogh/karasuba-io.git</connection>
+        <developerConnection>scm:git@github.com:redgogh/karasuba-io.git</developerConnection>
+        <url>https://github.com/redgogh/karasuba-io</url>
     </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <properties>
         <fastjson.version>2.0.26</fastjson.version>

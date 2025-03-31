@@ -1,4 +1,4 @@
-= Java STL In Team 3.0
+= karasuba-io v3.0.2
 
 image:Documents/svg/offical.svg[offical]
 image:Documents/svg/test.svg[test]
@@ -41,7 +41,7 @@ image:Documents/svg/build.svg[build]
 ----
 <dependency>
     <groupId>io.github.redgogh</groupId>
-    <artifactId>jstl</artifactId>
+    <artifactId>karasuba-io</artifactId>
     <version>3.0.2</version>
 </dependency>
 ----
