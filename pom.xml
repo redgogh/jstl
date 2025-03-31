@@ -25,7 +25,7 @@
     </licenses>
 
     <url>https://github.com/redgogh/karasuba-io</url>
-    <description>标准库</description>
+    <description>提升项目开发效率，可以作为团队中的标准库使用</description>
 
     <scm>
         <connection>scm:git@github.com:redgogh/karasuba-io.git</connection>
