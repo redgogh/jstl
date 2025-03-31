@@ -2,7 +2,7 @@ package com.redgogh.jstl.security.codec;
 
 import com.redgogh.jstl.security.MD5;
 import com.redgogh.jstl.string.StringUtils;
-import com.redgogh.jstl.exception.CentralRuntimeException;
+import com.redgogh.jstl.exception.SystemRuntimeException;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -78,7 +78,7 @@ public class MD5Codec implements MD5 {
             int flag = n > 16 ? 0 : 8;
             return StringUtils.strcut(chars, flag, (n + flag));
         } catch (NoSuchAlgorithmException e) {
-            throw new CentralRuntimeException(e);
+            throw new SystemRuntimeException(e);
         }
     }
 

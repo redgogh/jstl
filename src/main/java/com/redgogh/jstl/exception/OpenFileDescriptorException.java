@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Red Gogh
  * @since 1.0
  */
-public class OpenFileDescriptorException extends CentralRuntimeException {
+public class OpenFileDescriptorException extends SystemRuntimeException {
 
     /**
      * 默认构造函数。

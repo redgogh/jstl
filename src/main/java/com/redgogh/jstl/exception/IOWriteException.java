@@ -37,7 +37,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Red Gogh
  * @since 1.0
  */
-public class IOWriteException extends CentralRuntimeException {
+public class IOWriteException extends SystemRuntimeException {
 
     /**
      * 默认构造函数。

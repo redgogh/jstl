@@ -13,10 +13,10 @@ import org.jetbrains.annotations.NotNull;
  *
  * <h2>构造函数</h2>
  * <ul>
- *     <li>{@link #CentralRuntimeException()} - 默认构造函数，不带任何参数。</li>
- *     <li>{@link #CentralRuntimeException(Throwable e)} - 通过已有的异常创建一个新的运行时异常。</li>
- *     <li>{@link #CentralRuntimeException(String vfmt, Object... args)} - 根据格式化字符串和参数创建异常信息。</li>
- *     <li>{@link #CentralRuntimeException(String vfmt, Throwable e, Object... args)} - 根据格式化字符串、已有异常和参数创建异常信息。</li>
+ *     <li>{@link #SystemRuntimeException()} - 默认构造函数，不带任何参数。</li>
+ *     <li>{@link #SystemRuntimeException(Throwable e)} - 通过已有的异常创建一个新的运行时异常。</li>
+ *     <li>{@link #SystemRuntimeException(String vfmt, Object... args)} - 根据格式化字符串和参数创建异常信息。</li>
+ *     <li>{@link #SystemRuntimeException(String vfmt, Throwable e, Object... args)} - 根据格式化字符串、已有异常和参数创建异常信息。</li>
  * </ul>
  *
  * <h2>使用示例</h2>
@@ -38,12 +38,12 @@ import org.jetbrains.annotations.NotNull;
  * @author Red Gogh
  * @since 1.0
  */
-public class CentralRuntimeException extends RuntimeException {
+public class SystemRuntimeException extends RuntimeException {
 
     /**
      * 默认构造函数。
      */
-    public CentralRuntimeException() {
+    public SystemRuntimeException() {
     }
 
     /**
@@ -51,7 +51,7 @@ public class CentralRuntimeException extends RuntimeException {
      *
      * @param e 原始异常，不能为 null。
      */
-    public CentralRuntimeException(@NotNull Throwable e) {
+    public SystemRuntimeException(@NotNull Throwable e) {
         super(e);
     }
 
@@ -61,7 +61,7 @@ public class CentralRuntimeException extends RuntimeException {
      * @param vfmt 格式化字符串，不能为 null。
      * @param args 格式化参数。
      */
-    public CentralRuntimeException(@NotNull String vfmt, @NotNull Object... args) {
+    public SystemRuntimeException(@NotNull String vfmt, @NotNull Object... args) {
         super(StringUtils.strwfmt(vfmt, args));
     }
 
@@ -72,7 +72,7 @@ public class CentralRuntimeException extends RuntimeException {
      * @param e 原始异常，不能为 null。
      * @param args 格式化参数。
      */
-    public CentralRuntimeException(@NotNull String vfmt, @NotNull Throwable e, @NotNull Object... args) {
+    public SystemRuntimeException(@NotNull String vfmt, @NotNull Throwable e, @NotNull Object... args) {
         super(StringUtils.strwfmt(vfmt, args), e);
     }
 }

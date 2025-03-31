@@ -37,7 +37,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Red Gogh
  * @since 1.0
  */
-public class UnsupportedOperationException extends CentralRuntimeException {
+public class UnsupportedOperationException extends SystemRuntimeException {
 
     /**
      * 默认构造函数。

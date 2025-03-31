@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Red Gogh
  * @since 1.0
  */
-public class ValidationException extends CentralRuntimeException {
+public class ValidationException extends SystemRuntimeException {
 
     /**
      * 默认构造函数。

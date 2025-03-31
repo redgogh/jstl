@@ -1,6 +1,6 @@
 package com.redgogh.jstl.security.codec;
 
-import com.redgogh.jstl.exception.CentralRuntimeException;
+import com.redgogh.jstl.exception.SystemRuntimeException;
 import com.redgogh.jstl.io.IOUtils;
 import com.redgogh.jstl.io.MutableFile;
 import com.redgogh.jstl.security.Codec;
@@ -44,7 +44,7 @@ public class SHA256Codec implements SHA256 {
             messageDigest.update(source);
             return Codec.toByteHex(messageDigest.digest());
         } catch (Exception e) {
-            throw new CentralRuntimeException(e);
+            throw new SystemRuntimeException(e);
         }
     }
 
