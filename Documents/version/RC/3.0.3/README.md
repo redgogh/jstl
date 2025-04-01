@@ -20,6 +20,7 @@
 
 ## 🔨 构建工具
 
-- 新增 `com.nimbusds:nimbus-jose-jwt:10.0.2` 依赖。
+- 新增 `com.nimbusds:nimbus-jose-jwt:10.0.2` 依赖包。
+- 移除 `joda-time:joda-time:2.12.2` 依赖包。
 
 ## ☠️ 已弃用的 API
