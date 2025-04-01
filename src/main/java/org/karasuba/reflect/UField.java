@@ -22,7 +22,7 @@ package org.karasuba.reflect;
 
 import org.karasuba.string.StringUtils;
 import org.karasuba.utils.Assert;
-import org.karasuba.utils.Capturer;
+import org.karasuba.utils.Captor;
 import org.karasuba.utils.Optional;
 
 import java.lang.annotation.Annotation;
@@ -157,13 +157,13 @@ public class UField {
          * 获取当前属性中的值
          */
         public Object read() {
-            return Capturer.call(() -> field.get(instance));
+            return Captor.call(() -> field.get(instance));
         }
         /**
          * 设置当前属性中的值
          */
         public void write(Object value) {
-            Capturer.call(() -> field.set(instance, value));
+            Captor.call(() -> field.set(instance, value));
         }
     }
 
@@ -262,7 +262,7 @@ public class UField {
      *        目标对象实例
      */
     public static void copyIgnoreError(Object src, Object dest, String name) {
-        Capturer.icall(() -> copy(src, dest, name));
+        Captor.icall(() -> copy(src, dest, name));
     }
 
     /**

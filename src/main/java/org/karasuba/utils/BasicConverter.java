@@ -585,7 +585,7 @@ public class BasicConverter {
      */
     @SuppressWarnings("unchecked")
     public static <T> T toPrimitiveValue(Object obj, Class<T> aClass) {
-        return Capturer.icall(() -> (T) new UClass(aClass).staticInvoke("valueOf", obj));
+        return Captor.icall(() -> (T) new UClass(aClass).staticInvoke("valueOf", obj));
     }
 
 }

@@ -23,7 +23,7 @@ package org.karasuba.bean;
 import org.karasuba.reflect.UField;
 import org.karasuba.reflect.UClass;
 import org.karasuba.string.StringUtils;
-import org.karasuba.utils.Capturer;
+import org.karasuba.utils.Captor;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -97,7 +97,7 @@ public class BeanUtils {
             String name = field.getName();
             if (ignores.length > 0 && StringUtils.strcunt(name, ignores))
                 continue;
-            Capturer.icall(() -> copyValue(src, new UClass(src), dst, dstClass, field));
+            Captor.icall(() -> copyValue(src, new UClass(src), dst, dstClass, field));
         }
     }
 
@@ -117,7 +117,7 @@ public class BeanUtils {
             String name = dstField.getName();
             if (ignores.length > 0 && StringUtils.strcunt(name, ignores))
                 continue;
-            Capturer.icall(() -> dstField.write(dst, srcClass.readFieldValue(name, src)));
+            Captor.icall(() -> dstField.write(dst, srcClass.readFieldValue(name, src)));
         }
     }
 

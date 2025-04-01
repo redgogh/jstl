@@ -9,7 +9,7 @@ import com.nimbusds.jwt.SignedJWT;
 import org.karasuba.reflect.UClass;
 import org.karasuba.time.Chrono;
 import org.karasuba.utils.Assert;
-import org.karasuba.utils.Capturer;
+import org.karasuba.utils.Captor;
 
 import static org.karasuba.utils.BasicConverter.atob;
 import static org.karasuba.utils.Generator.*;
@@ -43,7 +43,7 @@ public class JWTGrantor {
     }
 
     public String signWith(String secret) {
-        return Capturer.call(() -> {
+        return Captor.call(() -> {
             JWSSigner signer = new MACSigner(atob(secret));
 
             JWTClaimsSet.Builder claimsBuilder = new JWTClaimsSet.Builder()
@@ -68,7 +68,7 @@ public class JWTGrantor {
 
     public static void main(String[] args) {
         JWTGrantor hs256Grantor = new JWTGrantor("karasuba-io", "Red Gogh", "Karasuba", 30, "HS256");
-        System.out.println(hs256Grantor.signWith(b256md5()));
+        System.out.println(hs256Grantor.signWith("b256md5()"));
     }
 
 }

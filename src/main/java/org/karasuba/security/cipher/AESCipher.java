@@ -3,7 +3,7 @@ package org.karasuba.security.cipher;
 import org.karasuba.security.AES;
 import org.karasuba.security.Codec;
 import org.karasuba.utils.BasicConverter;
-import org.karasuba.utils.Capturer;
+import org.karasuba.utils.Captor;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -20,7 +20,7 @@ public class AESCipher implements AES {
 
     @Override
     public String encrypt(byte[] bytes, String secret) {
-        return Capturer.call(() -> {
+        return Captor.call(() -> {
             Cipher cipher = Cipher.getInstance("AES");
             SecretKeySpec secretKeySpec = new SecretKeySpec(secret.getBytes(), "AES");
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
@@ -35,7 +35,7 @@ public class AESCipher implements AES {
 
     @Override
     public byte[] decrypt(byte[] bytes, String secret) {
-        return Capturer.call(() -> {
+        return Captor.call(() -> {
             Cipher cipher = Cipher.getInstance("AES");
             SecretKeySpec secretKeySpec = new SecretKeySpec(secret.getBytes(), "AES");
             cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);

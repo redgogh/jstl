@@ -30,8 +30,7 @@ import org.karasuba.exception.SystemRuntimeException;
 import org.karasuba.utils.Assert;
 import org.karasuba.utils.BasicConverter;
 import org.karasuba.stream.Streams;
-import org.karasuba.string.StringUtils;
-import org.karasuba.utils.Capturer;
+import org.karasuba.utils.Captor;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
@@ -129,7 +128,7 @@ public class UClass {
      * @return {@link UClass} 实例
      */
     public static UClass forName(String className) {
-        return new UClass(Capturer.call(() -> Class.forName(className)));
+        return new UClass(Captor.call(() -> Class.forName(className)));
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -454,7 +453,7 @@ public class UClass {
      * @return 方法调用的返回值。如果目标方法的返回类型是 `void`，则返回 `null`。
      */
     private Object invoke0(Object obj, String name, Object... args) {
-        return Capturer.call(() -> {
+        return Captor.call(() -> {
             Method method = args == null ? descriptor.getDeclaredMethod(name) :
                     descriptor.getDeclaredMethod(name, toClassArray(args));
             method.setAccessible(true);

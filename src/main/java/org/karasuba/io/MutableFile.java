@@ -23,7 +23,7 @@ import org.karasuba.exception.IOReadException;
 import org.karasuba.string.StringUtils;
 import org.karasuba.system.SystemUtils;
 import org.karasuba.utils.Assert;
-import org.karasuba.utils.Capturer;
+import org.karasuba.utils.Captor;
 import org.karasuba.utils.Optional;
 import org.jetbrains.annotations.Nullable;
 
@@ -396,7 +396,7 @@ public class MutableFile extends java.io.File {
      */
     private void checkFile(boolean autoCreate) {
         if (autoCreate && !exists())
-            Capturer.call(this::createNewFile);
+            Captor.call(this::createNewFile);
         Assert.isTrue(exists(), "%s （系统找不到指定的文件，文件不存在）", getPath());
     }
 
@@ -412,7 +412,7 @@ public class MutableFile extends java.io.File {
      */
     private FileByteReader openByteReader(boolean autoCreate) {
         checkFile(autoCreate);
-        return Capturer.call(() -> new FileByteReader(this));
+        return Captor.call(() -> new FileByteReader(this));
     }
 
     /**
@@ -427,7 +427,7 @@ public class MutableFile extends java.io.File {
      */
     private FileByteWriter openByteWriter(boolean autoCreate) {
         checkFile(autoCreate);
-        return Capturer.call(() -> new FileByteWriter(this));
+        return Captor.call(() -> new FileByteWriter(this));
     }
 
     /**
@@ -562,7 +562,7 @@ public class MutableFile extends java.io.File {
      */
     public int skipBytes(int n) {
         checkOpen();
-        return Capturer.call(() -> accessFile.skipBytes(n));
+        return Captor.call(() -> accessFile.skipBytes(n));
     }
 
     /**
@@ -579,7 +579,7 @@ public class MutableFile extends java.io.File {
      */
     public void seek(long pos) {
         checkOpen();
-        Capturer.call(() -> accessFile.seek(pos));
+        Captor.call(() -> accessFile.seek(pos));
     }
 
     /**
@@ -597,7 +597,7 @@ public class MutableFile extends java.io.File {
      */
     public int read() {
         checkOpen();
-        return Capturer.call(() -> accessFile.read());
+        return Captor.call(() -> accessFile.read());
     }
 
     /**
@@ -612,7 +612,7 @@ public class MutableFile extends java.io.File {
      */
     public void read(byte[] b) {
         checkOpen();
-        Capturer.call(() -> accessFile.read(b));
+        Captor.call(() -> accessFile.read(b));
     }
 
     /**
@@ -631,7 +631,7 @@ public class MutableFile extends java.io.File {
      */
     public void read(byte[] b, int off, int len) {
         checkOpen();
-        Capturer.call(() -> accessFile.read(b, off, len));
+        Captor.call(() -> accessFile.read(b, off, len));
     }
 
     /**
@@ -646,7 +646,7 @@ public class MutableFile extends java.io.File {
      */
     public int readInt() {
         checkOpen();
-        return Capturer.call(() -> accessFile.readInt());
+        return Captor.call(() -> accessFile.readInt());
     }
 
     /**
@@ -661,7 +661,7 @@ public class MutableFile extends java.io.File {
      */
     public long readLong() {
         checkOpen();
-        return Capturer.call(() -> accessFile.readLong());
+        return Captor.call(() -> accessFile.readLong());
     }
 
     /**
@@ -676,7 +676,7 @@ public class MutableFile extends java.io.File {
      */
     public float readFloat() {
         checkOpen();
-        return Capturer.call(() -> accessFile.readFloat());
+        return Captor.call(() -> accessFile.readFloat());
     }
 
     /**
@@ -691,7 +691,7 @@ public class MutableFile extends java.io.File {
      */
     public double readDouble() {
         checkOpen();
-        return Capturer.call(() -> accessFile.readDouble());
+        return Captor.call(() -> accessFile.readDouble());
     }
 
     /**
@@ -705,7 +705,7 @@ public class MutableFile extends java.io.File {
      */
     public void write(byte b) {
         checkOpen();
-        Capturer.call(() -> accessFile.write(b));
+        Captor.call(() -> accessFile.write(b));
     }
 
     /**
@@ -719,7 +719,7 @@ public class MutableFile extends java.io.File {
      */
     public void write(byte[] b) {
         checkOpen();
-        Capturer.call(() -> accessFile.write(b));
+        Captor.call(() -> accessFile.write(b));
     }
 
     /**
@@ -738,7 +738,7 @@ public class MutableFile extends java.io.File {
      */
     public void write(byte[] b, int off, int len) {
         checkOpen();
-        Capturer.call(() -> accessFile.write(b, off, len));
+        Captor.call(() -> accessFile.write(b, off, len));
     }
 
     /**
@@ -752,7 +752,7 @@ public class MutableFile extends java.io.File {
      */
     public void writeInt(int value) {
         checkOpen();
-        Capturer.call(() -> accessFile.writeInt(value));
+        Captor.call(() -> accessFile.writeInt(value));
     }
 
     /**
@@ -766,7 +766,7 @@ public class MutableFile extends java.io.File {
      */
     public void writeLong(long value) {
         checkOpen();
-        Capturer.call(() -> accessFile.writeLong(value));
+        Captor.call(() -> accessFile.writeLong(value));
     }
 
     /**
@@ -780,7 +780,7 @@ public class MutableFile extends java.io.File {
      */
     public void writeFloat(float value) {
         checkOpen();
-        Capturer.call(() -> accessFile.writeFloat(value));
+        Captor.call(() -> accessFile.writeFloat(value));
     }
 
     /**
@@ -794,7 +794,7 @@ public class MutableFile extends java.io.File {
      */
     public void writeDouble(double value) {
         checkOpen();
-        Capturer.call(() -> accessFile.writeDouble(value));
+        Captor.call(() -> accessFile.writeDouble(value));
     }
 
     /**

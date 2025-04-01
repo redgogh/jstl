@@ -33,7 +33,7 @@ import org.karasuba.security.codec.URLCodec;
 import org.karasuba.string.StringExtensionsInterface;
 import org.karasuba.string.StringUtils;
 import org.karasuba.utils.BasicConverter;
-import org.karasuba.utils.Capturer;
+import org.karasuba.utils.Captor;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -143,7 +143,7 @@ public class Codec {
      * @return 生成的随机 AES 密钥的 Base64 编码字符串
      */
     public static String randomNextSecret() {
-        return Capturer.call(() -> {
+        return Captor.call(() -> {
             KeyGenerator keyGen = KeyGenerator.getInstance("AES");
             keyGen.init(128);
             SecretKey secretKey = keyGen.generateKey();

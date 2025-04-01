@@ -30,7 +30,7 @@ import org.karasuba.security.RSA;
 import org.karasuba.security.key.RSAPrivateKey;
 import org.karasuba.security.key.RSAPublicKey;
 import org.karasuba.tuple.Pair;
-import org.karasuba.utils.Capturer;
+import org.karasuba.utils.Captor;
 
 import javax.crypto.Cipher;
 import java.security.KeyPair;
@@ -53,7 +53,7 @@ public class RSACipher implements RSA {
     @Override
     public Pair<RSAPublicKey, RSAPrivateKey> generateKeyPair(int size) {
         KeyPairGenerator keyPairGenerator =
-                Capturer.icall(() -> KeyPairGenerator.getInstance("RSA"));
+                Captor.icall(() -> KeyPairGenerator.getInstance("RSA"));
         keyPairGenerator.initialize(size);
         KeyPair keyPair = keyPairGenerator.generateKeyPair();
         return Pair.of(new RSAPublicKey(keyPair.getPublic()), new RSAPrivateKey(keyPair.getPrivate()));
@@ -61,7 +61,7 @@ public class RSACipher implements RSA {
 
     @Override
     public String encrypt(String message, RSAPublicKey publicKey) {
-        return Capturer.call(() -> {
+        return Captor.call(() -> {
             Cipher cipher = Cipher.getInstance("RSA");
             cipher.init(Cipher.ENCRYPT_MODE, publicKey.toPublicKey());
             byte[] b = cipher.doFinal(atob(message));
@@ -71,7 +71,7 @@ public class RSACipher implements RSA {
 
     @Override
     public String decrypt(String encryptedMessage, RSAPrivateKey privateKey) {
-        return Capturer.call(() -> {
+        return Captor.call(() -> {
             Cipher cipher = Cipher.getInstance("RSA");
             cipher.init(Cipher.DECRYPT_MODE, privateKey.toPrivateKey());
             byte[] b = cipher.doFinal(Codec.BASE64.decodeBytes(encryptedMessage));

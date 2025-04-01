@@ -23,7 +23,7 @@ package org.karasuba.io;
 import org.karasuba.exception.IOReadException;
 import org.karasuba.exception.IOWriteException;
 import org.karasuba.utils.Assert;
-import org.karasuba.utils.Capturer;
+import org.karasuba.utils.Captor;
 
 import java.io.*;
 
@@ -70,7 +70,7 @@ public class IOUtils {
      */
     public static void closeQuietly(AutoCloseable closeable) {
         if (closeable != null)
-            Capturer.call(closeable::close);
+            Captor.call(closeable::close);
     }
 
     /**
@@ -377,7 +377,7 @@ public class IOUtils {
      */
     public static void write(byte[] b, int off, int len,
                              OutputStream stream) {
-        Capturer.call(() -> stream.write(b, off, len));
+        Captor.call(() -> stream.write(b, off, len));
     }
 
 }

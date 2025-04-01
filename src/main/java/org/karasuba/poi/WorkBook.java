@@ -27,7 +27,7 @@ import org.karasuba.stream.Streams;
 import org.karasuba.string.StringUtils;
 import org.karasuba.time.DateFormatter;
 import org.karasuba.utils.BasicConverter;
-import org.karasuba.utils.Capturer;
+import org.karasuba.utils.Captor;
 import org.karasuba.utils.Optional;
 import org.karasuba.io.MutableFile;
 import org.apache.poi.ss.usermodel.Cell;
@@ -110,7 +110,7 @@ public class WorkBook implements Iterable<Row> {
      * @param mutableFile Excel 文件对象
      */
     private WorkBook(MutableFile mutableFile) {
-        this(Capturer.call(() -> new XSSFWorkbook(mutableFile)));
+        this(Captor.call(() -> new XSSFWorkbook(mutableFile)));
     }
 
     /**
@@ -123,7 +123,7 @@ public class WorkBook implements Iterable<Row> {
      * @param stream 输入流，需指向有效的 Excel 文件内容
      */
     private WorkBook(InputStream stream) {
-        this(Capturer.call(() -> new XSSFWorkbook(stream)));
+        this(Captor.call(() -> new XSSFWorkbook(stream)));
     }
 
     /**
@@ -407,7 +407,7 @@ public class WorkBook implements Iterable<Row> {
      *
      */
     public void write(OutputStream stream) {
-        Capturer.call(() -> wb.write(stream));
+        Captor.call(() -> wb.write(stream));
     }
 
     /**

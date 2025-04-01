@@ -25,7 +25,7 @@ package org.karasuba.security.key;
 
 /* Creates on 2025/2/20. */
 
-import org.karasuba.utils.Capturer;
+import org.karasuba.utils.Captor;
 import org.karasuba.io.MutableFile;
 
 import java.security.Key;
@@ -47,7 +47,7 @@ public class RSAPrivateKey extends AbstractKey {
     }
 
     public PrivateKey toPrivateKey() {
-        return Capturer.call(() -> {
+        return Captor.call(() -> {
             PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(getEncoded());
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             return keyFactory.generatePrivate(keySpec);

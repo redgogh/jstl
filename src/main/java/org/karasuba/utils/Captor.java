@@ -19,13 +19,14 @@ package org.karasuba.utils;
 \* -------------------------------------------------------------------------------- */
 
 import org.karasuba.exception.AssertException;
+import org.karasuba.exception.SystemRuntimeException;
 import org.karasuba.iface.ActionFunction;
 import org.karasuba.iface.CallableFunction;
 
 /**
  * @author Red Gogh
  */
-public class Capturer {
+public class Captor {
 
     /**
      * 执行指定的无返回值函数，如果发生任何异常则忽略并不处理。
@@ -74,7 +75,7 @@ public class Capturer {
         try {
             function.call();
         } catch (Throwable e) {
-            throw new AssertException(e.getMessage());
+            throw new SystemRuntimeException(e.getMessage());
         }
     }
 
@@ -92,7 +93,7 @@ public class Capturer {
         try {
             function.call();
         } catch (Throwable e) {
-            throw new AssertException(fmt, args);
+            throw new SystemRuntimeException(fmt, args);
         }
     }
 
@@ -110,7 +111,7 @@ public class Capturer {
         try {
             return function.call();
         } catch (Throwable e) {
-            throw new AssertException(e.getMessage());
+            throw new SystemRuntimeException(e.getMessage());
         }
     }
 
@@ -130,7 +131,7 @@ public class Capturer {
         try {
             return function.call();
         } catch (Throwable e) {
-            throw new AssertException(fmt, args);
+            throw new SystemRuntimeException(fmt, args);
         }
     }
 

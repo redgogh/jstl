@@ -1,6 +1,6 @@
 package org.karasuba.security.codec;
 
-import org.karasuba.utils.Capturer;
+import org.karasuba.utils.Captor;
 import org.karasuba.string.StringUtils;
 import org.karasuba.security.URL;
 
@@ -45,7 +45,7 @@ public class URLCodec implements URL {
 
     @Override
     public String decode(String source, String enc) {
-        return Capturer.call(() -> URLDecoder.decode(source, enc));
+        return Captor.call(() -> URLDecoder.decode(source, enc));
     }
 
 }

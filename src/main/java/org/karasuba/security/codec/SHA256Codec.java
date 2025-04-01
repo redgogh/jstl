@@ -5,7 +5,7 @@ import org.karasuba.io.IOUtils;
 import org.karasuba.io.MutableFile;
 import org.karasuba.security.Codec;
 import org.karasuba.security.SHA256;
-import org.karasuba.utils.Capturer;
+import org.karasuba.utils.Captor;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -24,7 +24,7 @@ public class SHA256Codec implements SHA256 {
     @Override
     @SuppressWarnings("resource")
     public String encode(File f0) {
-        return Capturer.icall(() -> {
+        return Captor.icall(() -> {
             MutableFile mutableFile = new MutableFile(f0);
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
             mutableFile.openByteReader().call(reader -> {

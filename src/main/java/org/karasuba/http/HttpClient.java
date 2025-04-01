@@ -24,7 +24,7 @@ import org.karasuba.exception.HttpRequestException;
 import org.karasuba.string.StringUtils;
 import org.karasuba.utils.Assert;
 import org.karasuba.utils.BasicConverter;
-import org.karasuba.utils.Capturer;
+import org.karasuba.utils.Captor;
 import org.karasuba.utils.Optional;
 import org.karasuba.io.MutableFile;
 import okhttp3.*;
@@ -364,7 +364,7 @@ public class HttpClient {
      * @return 一个新的 {@link StreamResponse} 实例。
      */
     public StreamResponse newStreamCall(StreamCallback callback) {
-        return new StreamResponse(Capturer.call(() -> newCall0(callback)));
+        return new StreamResponse(Captor.call(() -> newCall0(callback)));
     }
 
     /**

@@ -21,7 +21,7 @@ package org.karasuba.time;
 /* Creates on 2022/3/30. */
 
 import org.karasuba.exception.ValidationException;
-import org.karasuba.utils.Capturer;
+import org.karasuba.utils.Captor;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -89,7 +89,7 @@ public class DateFormatter {
 
         @Override
         public Date parse(String text) {
-            return Capturer.call(() -> sdf.parse(text));
+            return Captor.call(() -> sdf.parse(text));
         }
     }
 
