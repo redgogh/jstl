@@ -18,8 +18,6 @@ package org.karasuba.time;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.Serializable;
 import java.time.*;
 import java.time.temporal.*;
