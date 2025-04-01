@@ -5,7 +5,9 @@ import org.karasuba.time.Chrono;
 import org.karasuba.utils.Transformer;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
+import static org.karasuba.string.StringUtils.strempty;
 import static org.karasuba.utils.Transformer.atol;
 import static org.karasuba.utils.Transformer.atos;
 
@@ -31,6 +33,68 @@ import static org.karasuba.utils.Transformer.atos;
  */
 public class JWTClaims extends HashMap<String, Object> {
 
+    public JWTClaims() {
+        setIssuedAt(Chrono.now());
+    }
+
+    /**
+     * 设置 JWT 的主题（Subject）。
+     *
+     * <p>该方法用于将指定的主题信息存入 JWT 的声明中，通常表示该令牌的持有者。
+     *
+     * @param subject JWT 的主题
+     */
+    public void setSubject(String subject) {
+        put("sub", subject);
+    }
+
+    /**
+     * 设置 JWT 的受众（Audience）。
+     *
+     * <p>该方法用于指定 JWT 适用的受众，即该令牌预期的使用者。
+     *
+     * @param audience JWT 的受众
+     */
+    public void setAudience(String audience) {
+        put("aud", audience);
+    }
+
+    /**
+     * 设置 JWT 的签发者（Issuer）。
+     *
+     * <p>该方法用于记录 JWT 的签发者信息，通常用于验证令牌来源的可信度。
+     *
+     * @param issuer JWT 的签发者
+     */
+    public void setIssuer(String issuer) {
+        put("iss", issuer);
+    }
+
+    /**
+     * 设置 JWT 的签发时间（Issued At）。
+     *
+     * <p>该方法用于存储 JWT 的签发时间，表示令牌何时创建。签发时间通常用于验证
+     * 令牌的有效性，例如防止令牌在未来时间点之前使用。
+     *
+     * @param duration 签发时间，使用 {@link Chrono} 表示
+     */
+    public void setIssuedAt(Chrono duration) {
+        put("iat", duration.getTime());
+    }
+
+    /**
+     * 设置 JWT 的过期时间（Expiration）。
+     *
+     * <p>该方法计算基于当前时间的过期时间戳，并存入 JWT 声明中。JWT 过期时间用于
+     * 指定令牌的有效期，超过该时间后令牌将被视为无效。
+     *
+     * @param duration 过期时间的时长
+     * @param timeUnit 时间单位（如 {@link TimeUnit#SECONDS}, {@link TimeUnit#MINUTES}, {@link TimeUnit#HOURS}）
+     */
+    public void setExpirationTime(long duration, TimeUnit timeUnit) {
+        put("exp", System.currentTimeMillis() + timeUnit.toMillis(duration));
+    }
+
     /**
      * #brief: 获取 JWT 中的 subject（主题）
      *
@@ -39,7 +103,7 @@ public class JWTClaims extends HashMap<String, Object> {
      * @return JWT 中的 subject 字段值
      */
     public String getSubject() {
-        return atos(get("subject"));
+        return getAttribute("sub", Transformer::atos);
     }
 
     /**
@@ -50,7 +114,7 @@ public class JWTClaims extends HashMap<String, Object> {
      * @return JWT 中的 audience 字段值
      */
     public String getAudience() {
-        return atos(get("audience"));
+        return getAttribute("aud", Transformer::atos);
     }
 
     /**
@@ -61,7 +125,7 @@ public class JWTClaims extends HashMap<String, Object> {
      * @return JWT 中的 issuer 字段值
      */
     public String getIssuer() {
-        return atos(get("iss"));
+        return getAttribute("iss", Transformer::atos);
     }
 
     /**
@@ -71,8 +135,8 @@ public class JWTClaims extends HashMap<String, Object> {
      *
      * @return JWT 的签发时间
      */
-    public Chrono getIssuedAt() {
-        return Chrono.from(atol(get("iat")) * 1000);
+    public long getIssuedAt() {
+        return getAttribute("iat", Transformer::atol);
     }
 
     /**
@@ -82,8 +146,8 @@ public class JWTClaims extends HashMap<String, Object> {
      *
      * @return JWT 的过期时间
      */
-    public Chrono getExpiration() {
-        return Chrono.from(atol(get("exp")) * 1000);
+    public long getExpirationTime() {
+        return getAttribute("exp", Transformer::atol);
     }
 
     /**
@@ -94,7 +158,19 @@ public class JWTClaims extends HashMap<String, Object> {
      * @return 如果 JWT 已过期，返回 `true`；否则返回 `false`
      */
     public boolean isExpiration() {
-        return getExpiration().isBefore(Chrono.now());
+        return Chrono.from(getExpirationTime()).isBefore(Chrono.now());
+    }
+
+    /**
+     * 获取 JWT 的唯一标识（JWT ID）。
+     *
+     * <p>JWT ID (JTI) 是一个唯一标识符，通常用于防止令牌重放攻击（Replay Attack）。
+     * 该方法从 JWT 声明中提取 JTI 并转换为字符串。
+     *
+     * @return JWT 的唯一标识符 (JTI)，如果不存在则返回 null。
+     */
+    public String getJwtId() {
+        return getAttribute("jti", Transformer::atos);
     }
 
     /**

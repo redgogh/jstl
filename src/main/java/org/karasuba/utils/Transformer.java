@@ -263,7 +263,9 @@ public class Transformer {
      *
      * @return 转换后的 int 类型数据。
      */
-    public static int atoi(Object obj) {
+    public static Integer atoi(Object obj) {
+        if (obj == null)
+            return null;
         if (obj instanceof Integer)
             return (Integer) obj;
         if (obj instanceof byte[])
@@ -322,7 +324,9 @@ public class Transformer {
      *
      * @return 转换后的 long 类型数据。
      */
-    public static long atol(Object obj) {
+    public static Long atol(Object obj) {
+        if (obj == null)
+            return null;
         if (obj instanceof Long)
             return (Long) obj;
         if (obj instanceof Number)
@@ -431,7 +435,7 @@ public class Transformer {
      */
     public static String atos(Object obj, StringInterface...iface) {
         if (obj == null)
-            return "";
+            return null;
         if (obj instanceof String)
             return StringInterface.pipelineExecutor((String) obj, iface);
         /* 字节数组转字符串 */

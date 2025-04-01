@@ -8,13 +8,13 @@ import com.nimbusds.jose.crypto.RSASSASigner;
 import com.nimbusds.jose.crypto.RSASSAVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
+import org.karasuba.collection.Maps;
 import org.karasuba.exception.SystemRuntimeException;
 import org.karasuba.security.Codec;
 import org.karasuba.time.Chrono;
 import org.karasuba.utils.Captor;
 
 import java.security.PrivateKey;
-import java.util.concurrent.TimeUnit;
 
 import static com.nimbusds.jose.JWSAlgorithm.*;
 import static org.karasuba.utils.Generator.uuid;
@@ -43,25 +43,7 @@ import static org.karasuba.utils.Transformer.checkin;
  * @author Red Gogh
  * @since 1.0
  */
-public class JWTGrantor {
-
-    /**
-     * `subject` 是一个字符串，表示该对象所描述的主体（通常是 JWT 中的 `sub` 字段）。
-     * 它通常用于标识认证的用户或系统。
-     */
-    private String subject;
-
-    /**
-     * `issuer` 是一个字符串，表示该对象的签发者（通常是 JWT 中的 `iss` 字段）。
-     * 它指明该对象的来源或认证系统。
-     */
-    private String issuer;
-
-    /**
-     * `audience` 是一个字符串，表示该对象的目标受众（通常是 JWT 中的 `aud` 字段）。
-     * 它用于指定该对象的接收方。
-     */
-    private String audience;
+public class JWTSigner {
 
     /**
      * `algorithm` 表示用于签名和验证的 JWS 算法（如 `HS256`, `RS256` 等）。
@@ -89,7 +71,7 @@ public class JWTGrantor {
      *
      * @param secret 用于加密和解密的对称密钥
      */
-    public JWTGrantor(Object secret) {
+    public JWTSigner(Object secret) {
         this.encryptKey = secret;
         this.decryptKey = secret;
         this.algorithm = JWSAlgorithm.parse("HS256");
@@ -101,10 +83,10 @@ public class JWTGrantor {
      * <p>该构造函数使用公钥和私钥初始化 JWTGrantor，适用于非对称加密算法（如 RS256）。私钥用于加密，公钥用于解密。
      * 默认使用 RS256 算法。
      *
-     * @param publicKey 用于解密的公钥
+     * @param publicKey  用于解密的公钥
      * @param privateKey 用于加密的私钥
      */
-    public JWTGrantor(Object publicKey, Object privateKey) {
+    public JWTSigner(Object publicKey, Object privateKey) {
         this.encryptKey = privateKey;
         this.decryptKey = publicKey;
         this.algorithm = JWSAlgorithm.parse("RS256");
@@ -137,34 +119,7 @@ public class JWTGrantor {
      * @return 签名后的 JWT 字符串
      */
     public String signWith() {
-        return signWith(2, TimeUnit.HOURS, null);
-    }
-
-    /**
-     * #brief: 使用默认加密算法和有效期生成签名的 JWT 字符串
-     *
-     * <p>该方法使用默认加密算法（HS256 或 RS256）和指定的有效期生成签名的 JWT 字符串。
-     * 如果没有提供额外的 JWT 声明，将使用默认声明。
-     *
-     * @param duration JWT 的有效期，单位为秒
-     * @return 签名后的 JWT 字符串
-     */
-    public String signWith(long duration) {
-        return signWith(duration, null);
-    }
-
-    /**
-     * #brief: 使用默认加密算法和有效期生成签名的 JWT 字符串，并支持传入自定义声明
-     *
-     * <p>该方法使用默认加密算法（HS256 或 RS256）和指定的有效期生成签名的 JWT 字符串。
-     * 可以传入额外的 JWT 声明以扩展默认声明。
-     *
-     * @param duration JWT 的有效期，单位为秒
-     * @param claims 自定义的 JWT 声明
-     * @return 签名后的 JWT 字符串
-     */
-    public String signWith(long duration, JWTClaims claims) {
-        return signWith(duration, TimeUnit.SECONDS, claims);
+        return signWith(new JWTClaims());
     }
 
     /**
@@ -173,29 +128,31 @@ public class JWTGrantor {
      * <p>该方法使用指定的加密算法和有效期生成签名的 JWT 字符串。可以通过传入时间单位来调整有效期单位。
      * 还可以传入自定义的 JWT 声明。
      *
-     * @param duration JWT 的有效期
-     * @param timeUnit 时间单位，默认为秒
      * @param claims 自定义的 JWT 声明
      * @return 签名后的 JWT 字符串
      */
-    public String signWith(long duration, TimeUnit timeUnit, JWTClaims claims) {
+    public String signWith(JWTClaims claims) {
         return Captor.call(() -> {
             JWSSigner signer = newSigner(encryptKey, algorithm);
 
             JWTClaimsSet.Builder builder = new JWTClaimsSet.Builder()
-                    .subject(subject)
+                    .subject(claims.getSubject())
                     .issueTime(Chrono.now())
-                    .issuer(issuer)
-                    .expirationTime(Chrono.moments(duration, timeUnit))
+                    .issuer(claims.getIssuer())
+                    .expirationTime(Chrono.from(claims.getExpirationTime()))
                     .jwtID(Codec.BASE64.encode(uuid()))
-                    .audience(audience);
+                    .audience(claims.getAudience());
 
-            if (claims != null)
-                claims.forEach(builder::claim);
+            claims.forEach(builder::claim);
 
             JWTClaimsSet claimsSet = builder.build();
 
-            SignedJWT signed = new SignedJWT(new JWSHeader(algorithm), claimsSet);
+            JWSHeader header = JWSHeader.parse(Maps.fromVarargs(
+                    "alg", algorithm.getName(),
+                    "typ", "JWT"
+            ));
+
+            SignedJWT signed = new SignedJWT(header, claimsSet);
 
             signed.sign(signer);
 
@@ -235,10 +192,10 @@ public class JWTGrantor {
      * <p>根据给定的密钥和加密算法，创建适当的签名器。如果使用 HMAC 算法（如 HS256），则返回 MACSigner；
      * 如果使用 RSA 算法（如 RS256、RS384、RS512），则返回 RSASSASigner。如果算法无效或不支持，抛出异常。
      *
-     * @param key 用于签名的密钥
+     * @param key       用于签名的密钥
      * @param algorithm 使用的 JWS 加密算法
      * @return 返回适配的 JWSSigner 对象
-     * @throws KeyLengthException 如果密钥长度不符合要求
+     * @throws KeyLengthException       如果密钥长度不符合要求
      * @throws IllegalArgumentException 如果加密算法无效或不支持
      */
     private static JWSSigner newSigner(Object key, JWSAlgorithm algorithm) throws KeyLengthException {
@@ -257,10 +214,10 @@ public class JWTGrantor {
      * <p>根据给定的密钥和加密算法，创建适当的验证器。如果使用 HMAC 算法（如 HS256），则返回 MACVerifier；
      * 如果使用 RSA 算法（如 RS256、RS384、RS512），则返回 RSASSAVerifier。如果算法无效或不支持，抛出异常。
      *
-     * @param key 用于验证的密钥
+     * @param key       用于验证的密钥
      * @param algorithm 使用的 JWS 加密算法
      * @return 返回适配的 JWSVerifier 对象
-     * @throws JOSEException 如果创建验证器时出现错误
+     * @throws JOSEException            如果创建验证器时出现错误
      * @throws IllegalArgumentException 如果加密算法无效或不支持
      */
     private static JWSVerifier newVerifier(Object key, JWSAlgorithm algorithm) throws JOSEException {
@@ -271,45 +228,6 @@ public class JWTGrantor {
             return new RSASSAVerifier((java.security.interfaces.RSAPublicKey) key);
 
         throw new IllegalArgumentException("无效或不支持的加密算法 " + algorithm.getName());
-    }
-
-    /**
-     * #brief: 设置 JWT 的主题
-     *
-     * <p>该方法设置 JWT 的主题（通常为 `sub` 字段）。主题表示 JWT 所描述的主体（通常是用户或系统的标识）。
-     *
-     * @param subject JWT 的主题
-     * @return 当前 JWTGrantor 对象，用于链式调用
-     */
-    public JWTGrantor subject(String subject) {
-        this.subject = subject;
-        return this;
-    }
-
-    /**
-     * #brief: 设置 JWT 的签发者
-     *
-     * <p>该方法设置 JWT 的签发者（通常为 `iss` 字段）。签发者指示 JWT 的来源或认证系统。
-     *
-     * @param issuer JWT 的签发者
-     * @return 当前 JWTGrantor 对象，用于链式调用
-     */
-    public JWTGrantor issuer(String issuer) {
-        this.issuer = issuer;
-        return this;
-    }
-
-    /**
-     * #brief: 设置 JWT 的受众
-     *
-     * <p>该方法设置 JWT 的目标受众（通常为 `aud` 字段）。受众指示 JWT 的接收方。
-     *
-     * @param audience JWT 的受众
-     * @return 当前 JWTGrantor 对象，用于链式调用
-     */
-    public JWTGrantor audience(String audience) {
-        this.audience = audience;
-        return this;
     }
 
 }
