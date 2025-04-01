@@ -23,14 +23,14 @@ import org.karasuba.io.ByteBuffer;
 import org.karasuba.exception.InvalidArgumentException;
 import org.karasuba.exception.UnsupportedOperationException;
 import org.karasuba.reflect.UClass;
-import org.karasuba.string.StringExtensionsInterface;
+import org.karasuba.string.StringInterface;
 import org.karasuba.string.StringUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 /**
- * Convert 类提供了多种类型转换和比较功能。
+ * Transformer 类提供了多种类型转换和比较功能。
  *
  * <p>该类支持将对象转换为基本数据类型，如 int、long、boolean 和 String。
  * 通过自动识别对象类型，该类简化了数据转换过程，确保类型安全。
@@ -45,7 +45,7 @@ import java.util.Objects;
  * @author Red Gogh
  * @see java.util.Objects
  */
-public class BasicConverter {
+public class Transformer {
 
     /**
      * #brief: 比较模式常量 - 等于
@@ -143,7 +143,7 @@ public class BasicConverter {
      * @param anys 要比较的一组对象
      * @return 如果目标对象与提供的任意一个对象相等，则返回 true；否则返回 false
      */
-    public static boolean anycunt(Object a, Object... anys) {
+    public static boolean checkin(Object a, Object... anys) {
         for (Object b : anys) {
             if (anyeq(a, b))
                 return true;
@@ -413,8 +413,8 @@ public class BasicConverter {
      *
      * @see String#valueOf(Object)
      */
-    public static String atos(Object obj, TypeMapper<String, String> mapper, StringExtensionsInterface...iface) {
-        return StringExtensionsInterface.pipelineExecutor(mapper.call(atos(obj)), iface);
+    public static String atos(Object obj, TypeMapper<String, String> mapper, StringInterface...iface) {
+        return StringInterface.pipelineExecutor(mapper.call(atos(obj)), iface);
     }
 
     /**
@@ -429,18 +429,18 @@ public class BasicConverter {
      *
      * @see String#valueOf(Object)
      */
-    public static String atos(Object obj, StringExtensionsInterface ...iface) {
+    public static String atos(Object obj, StringInterface...iface) {
         if (obj == null)
             return "";
         if (obj instanceof String)
-            return StringExtensionsInterface.pipelineExecutor((String) obj, iface);
+            return StringInterface.pipelineExecutor((String) obj, iface);
         /* 字节数组转字符串 */
         if (obj instanceof byte[])
             return atos((byte[]) obj, 0, ((byte[]) obj).length,  iface);
         /* 字符数组转字符串 */
         if (obj instanceof char[])
             return atos((char[]) obj, 0, ((char[]) obj).length, iface);
-        return StringExtensionsInterface.pipelineExecutor(String.valueOf(obj), iface);
+        return StringInterface.pipelineExecutor(String.valueOf(obj), iface);
     }
 
     /**
@@ -465,7 +465,7 @@ public class BasicConverter {
      * @throws ArrayIndexOutOfBoundsException
      *          如果参数 {@code len} 超出整个子字符串的大小后会抛出数组越界异常。
      */
-    public static String atos(Object obj, int off, int len, StringExtensionsInterface ...iface) {
+    public static String atos(Object obj, int off, int len, StringInterface...iface) {
         return atos(atos(obj), off, len);
     }
 
@@ -492,7 +492,7 @@ public class BasicConverter {
      * @throws ArrayIndexOutOfBoundsException
      *          如果参数 {@code len} 超出整个子字符串的大小后会抛出数组越界异常。
      */
-    public static String atos(String sub, int off, int len, StringExtensionsInterface ...iface) {
+    public static String atos(String sub, int off, int len, StringInterface...iface) {
         return atos(sub.toCharArray(), off, len);
     }
 
@@ -508,7 +508,7 @@ public class BasicConverter {
      *
      * @see String#String(byte[])
      */
-    public static String atos(byte[] b, StringExtensionsInterface ...iface) {
+    public static String atos(byte[] b, StringInterface...iface) {
         return atos(b, 0, b.length);
     }
 
@@ -535,8 +535,8 @@ public class BasicConverter {
      *
      * @see String#String(byte[], int, int)
      */
-    public static String atos(byte[] b, int off, int len, StringExtensionsInterface ...iface) {
-        return StringExtensionsInterface.pipelineExecutor(new String(ArrayUtils.copyOf(b, off, len)), iface);
+    public static String atos(byte[] b, int off, int len, StringInterface...iface) {
+        return StringInterface.pipelineExecutor(new String(ArrayUtils.copyOf(b, off, len)), iface);
     }
 
     /**
@@ -562,8 +562,8 @@ public class BasicConverter {
      *
      * @see String#String(char[], int, int)
      */
-    public static String atos(char[] a, int off, int len, StringExtensionsInterface ...iface) {
-        return StringExtensionsInterface.pipelineExecutor(new String(ArrayUtils.copyOf(a, off, len)), iface);
+    public static String atos(char[] a, int off, int len, StringInterface...iface) {
+        return StringInterface.pipelineExecutor(new String(ArrayUtils.copyOf(a, off, len)), iface);
     }
 
     /**

@@ -13,6 +13,7 @@
 - 移除二级包名路径 `redgogh`。
 - 优化 `Capturer` 命名更新为 `Captor`。
 - 优化 `Captor` 所有捕获异常抛出 `SystemRuntimeException`。
+- 优化 `BasicConverter` 命名更新为 `Transformer`。
 
 ## 🐞 BUG 修复
 

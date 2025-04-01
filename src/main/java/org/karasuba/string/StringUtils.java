@@ -18,7 +18,7 @@ package org.karasuba.string;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karasuba.utils.BasicConverter;
+import org.karasuba.utils.Transformer;
 import org.karasuba.utils.Optional;
 
 import java.nio.file.FileSystems;
@@ -29,7 +29,8 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.regex.Pattern;
 
-import static org.karasuba.utils.BasicConverter.atos;
+import static org.karasuba.utils.Transformer.anyeq;
+import static org.karasuba.utils.Transformer.atos;
 
 /**
  * `StringUtils` 是一个工具类，提供了一系列针对字符串的操作方法。这些方法用于处理
@@ -46,7 +47,7 @@ import static org.karasuba.utils.BasicConverter.atos;
  *     <li>包含正则表达式的匹配功能，并支持正则表达式的编译缓存。</li>
  * </ul>
  *
- * <p>该工具类特别适合在需要频繁处理字符串的场景中使用，能有效减少代码的复杂性。
+ * <p>该工具类特别适合在需要频繁处理字符串的场景中使用，能有效减少代码的复杂性。<p>
  *
  * <h2>注意事项</h2>
  * <ul>
@@ -85,7 +86,7 @@ public class StringUtils {
      * @return 字符串的长度；如果输入为 null，则返回 0
      */
     public static int strlen(Object wstr) {
-        return BasicConverter.atos(wstr).length();
+        return atos(wstr).length();
     }
 
     /**
@@ -134,8 +135,8 @@ public class StringUtils {
      * @param iface 后处理选项
      * @return 转换后的小写字符串；如果输入为 null，则返回 null
      */
-    public static String lowercase(Object wstr, StringExtensionsInterface... iface) {
-        return StringExtensionsInterface.pipelineExecutor(BasicConverter.atos(wstr, String::toLowerCase), iface);
+    public static String lowercase(Object wstr, StringInterface... iface) {
+        return StringInterface.pipelineExecutor(atos(wstr, String::toLowerCase), iface);
     }
 
     /**
@@ -148,8 +149,8 @@ public class StringUtils {
      * @param iface 后处理选项
      * @return 转换后的大写字符串；如果输入为 null，则返回 null
      */
-    public static String uppercase(Object wstr, StringExtensionsInterface... iface) {
-        return StringExtensionsInterface.pipelineExecutor(BasicConverter.atos(wstr, String::toUpperCase), iface);
+    public static String uppercase(Object wstr, StringInterface... iface) {
+        return StringInterface.pipelineExecutor(atos(wstr, String::toUpperCase), iface);
     }
 
 
@@ -157,16 +158,16 @@ public class StringUtils {
      * 将字符串的首字母大写，并根据指定的操作数组执行进一步的字符串处理。
      *
      * <p>该方法将传入的字符串的首字母转换为大写，并根据提供的操作数组（如修剪、转换大小写等）对字符串进行处理。
-     * 通过 {@link StringExtensionsInterface} 枚举支持链式操作。
+     * 通过 {@link StringInterface} 枚举支持链式操作。
      *
      * @param wstr      需要处理的字符串对象
      * @param iface 要应用的字符串操作数组
      * @return 处理后的字符串
      */
-    public static String strcap(Object wstr, StringExtensionsInterface... iface) {
-        StringBuilder builder = new StringBuilder(BasicConverter.atos(wstr));
+    public static String strcap(Object wstr, StringInterface... iface) {
+        StringBuilder builder = new StringBuilder(atos(wstr));
         builder.replace(0, 1, uppercase(builder.charAt(0)));
-        return StringExtensionsInterface.pipelineExecutor(BasicConverter.atos(builder), iface);
+        return StringInterface.pipelineExecutor(atos(builder), iface);
     }
 
     /**
@@ -180,7 +181,7 @@ public class StringUtils {
      * @return 如果两个字符串相等，则返回 true；否则返回 false
      */
     public static boolean streq(Object a, Object b) {
-        return BasicConverter.anyeq(BasicConverter.atos(a), BasicConverter.atos(b));
+        return anyeq(atos(a), atos(b));
     }
 
     /**
@@ -208,7 +209,7 @@ public class StringUtils {
      * @return 如果两个字符串相等，则返回 true；否则返回 false
      */
     public static boolean strieq(Object a, Object b) {
-        return BasicConverter.anyeq(uppercase(a), uppercase(b));
+        return anyeq(uppercase(a), uppercase(b));
     }
 
     /**
@@ -236,7 +237,7 @@ public class StringUtils {
      * @return 格式化后的字符串
      */
     public static String strwfmt(Object wstr, Object... args) {
-        return String.format(BasicConverter.atos(wstr), args);
+        return String.format(atos(wstr), args);
     }
 
     /**
@@ -248,8 +249,8 @@ public class StringUtils {
      * @param cmp 要检查的子串
      * @return 如果 `wstr` 包含 `cmp`，返回 true；否则返回 false
      */
-    public static boolean strcunt(Object wstr, String cmp) {
-        return BasicConverter.atos(wstr).contains(cmp);
+    public static boolean strcheckin(Object wstr, String cmp) {
+        return atos(wstr).contains(cmp);
     }
 
     /**
@@ -262,7 +263,7 @@ public class StringUtils {
      * @param list 要检查的字符串列表
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean strcunt(Object wstr, Object... list) {
+    public static boolean strcheckin(Object wstr, Object... list) {
         if (list == null)
             return false;
 
@@ -283,8 +284,8 @@ public class StringUtils {
      * @param list 要检查的字符串数组
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean strcunt(Object wstr, String... list) {
-        return strcunt(wstr, (Object[]) list);
+    public static boolean strcheckin(Object wstr, String... list) {
+        return strcheckin(wstr, (Object[]) list);
     }
 
     /**
@@ -296,8 +297,8 @@ public class StringUtils {
      * @param list 要检查的字符串集合
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean strcunt(Object wstr, Collection<String> list) {
-        return strcunt(wstr, list.toArray());
+    public static boolean strcheckin(Object wstr, Collection<String> list) {
+        return strcheckin(wstr, list.toArray());
     }
 
     /**
@@ -309,8 +310,8 @@ public class StringUtils {
      * @param cmp 要检查的子串
      * @return 忽略大小写后，如果 `wstr` 包含 `cmp`，返回 true；否则返回 false
      */
-    public static boolean stricunt(Object wstr, String cmp) {
-        return strcunt(uppercase(wstr), uppercase(cmp));
+    public static boolean stricheckin(Object wstr, String cmp) {
+        return strcheckin(uppercase(wstr), uppercase(cmp));
     }
 
     /**
@@ -322,7 +323,7 @@ public class StringUtils {
      * @param list 要检查的字符串列表
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean stricunt(Object wstr, Object... list) {
+    public static boolean stricheckin(Object wstr, Object... list) {
         if (list == null)
             return false;
 
@@ -342,8 +343,8 @@ public class StringUtils {
      * @param list 要检查的字符串数组
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean stricunt(Object wstr, String... list) {
-        return stricunt(wstr, (Object[]) list);
+    public static boolean stricheckin(Object wstr, String... list) {
+        return stricheckin(wstr, (Object[]) list);
     }
 
     /**
@@ -355,8 +356,8 @@ public class StringUtils {
      * @param list 要检查的字符串集合
      * @return 如果存在则返回 true，否则返回 false
      */
-    public static boolean stricunt(Object wstr, Collection<String> list) {
-        return stricunt(wstr, list.toArray());
+    public static boolean stricheckin(Object wstr, Collection<String> list) {
+        return stricheckin(wstr, list.toArray());
     }
 
     /**
@@ -371,8 +372,8 @@ public class StringUtils {
      * @param iface 后处理选项
      * @return 替换后的字符串
      */
-    public static String strrexp(Object wstr, String regexp, String value, StringExtensionsInterface... iface) {
-        return StringExtensionsInterface.pipelineExecutor(BasicConverter.atos(wstr).replaceAll(regexp, value), iface);
+    public static String strrexp(Object wstr, String regexp, String value, StringInterface... iface) {
+        return StringInterface.pipelineExecutor(atos(wstr).replaceAll(regexp, value), iface);
     }
 
     /**
@@ -385,12 +386,12 @@ public class StringUtils {
      * @param delim 用于拆分的分隔符
      * @return 拆分后的字符串数组
      */
-    public static String[] strtok(Object wstr, String delim, StringExtensionsInterface... iface) {
-        String[] origins = BasicConverter.atos(wstr).split(delim);
+    public static String[] strtok(Object wstr, String delim, StringInterface... iface) {
+        String[] origins = atos(wstr).split(delim);
 
         if (iface != null) {
             for (int i = 0; i < origins.length; i++) {
-                origins[i] = StringExtensionsInterface.pipelineExecutor(origins[i], iface);
+                origins[i] = StringInterface.pipelineExecutor(origins[i], iface);
             }
         }
 
@@ -408,8 +409,8 @@ public class StringUtils {
      * @param len 截取的长度
      * @return 截取后的字符串
      */
-    public static String strcut(Object wstr, int off, int len, StringExtensionsInterface... iface) {
-        return StringExtensionsInterface.pipelineExecutor(BasicConverter.atos(wstr, off, len), iface);
+    public static String strcut(Object wstr, int off, int len, StringInterface... iface) {
+        return StringInterface.pipelineExecutor(atos(wstr, off, len), iface);
     }
 
     /**
@@ -423,7 +424,7 @@ public class StringUtils {
      */
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static boolean strdig(Object wstr) {
-        return Optional.ifError(() -> Double.parseDouble(BasicConverter.atos(wstr)), true, false);
+        return Optional.ifError(() -> Double.parseDouble(atos(wstr)), true, false);
     }
 
     /**
@@ -481,7 +482,7 @@ public class StringUtils {
     private static boolean strxmatch(Object obj, String regexp, boolean enablePatternCache) {
         Pattern pattern = enablePatternCache ? _patternCacheComputeIfAbsent(regexp) : Pattern.compile(regexp);
         assert pattern != null;
-        return pattern.matcher(BasicConverter.atos(obj)).find();
+        return pattern.matcher(atos(obj)).find();
     }
 
     /**
@@ -501,7 +502,7 @@ public class StringUtils {
     public static boolean strant(Object wstr, String pattern) {
         PathMatcher pathMatcher =
                 pathMatcherCache.computeIfAbsent(pattern, k -> compilePathMatcher(pattern));
-        return pathMatcher.matches(Paths.get(BasicConverter.atos(wstr)));
+        return pathMatcher.matches(Paths.get(atos(wstr)));
     }
 
     private static PathMatcher compilePathMatcher(String pattern) {
@@ -518,8 +519,8 @@ public class StringUtils {
      * @param iface 后处理操作
      * @return 去除前后空白后的字符串
      */
-    public static String strip(Object wstr, StringExtensionsInterface... iface) {
-        return StringExtensionsInterface.pipelineExecutor(BasicConverter.atos(wstr).trim(), iface);
+    public static String strip(Object wstr, StringInterface... iface) {
+        return StringInterface.pipelineExecutor(atos(wstr).trim(), iface);
     }
 
     /**
@@ -533,7 +534,7 @@ public class StringUtils {
      */
     @Deprecated
     public static String strxip(Object wstr) {
-        return BasicConverter.atos(wstr).replaceAll("[\r\n]+", "");
+        return atos(wstr).replaceAll("[\r\n]+", "");
     }
 
     /**
@@ -545,8 +546,8 @@ public class StringUtils {
      * @param obj 要处理的字符串对象
      * @return 转换为驼峰风格后的字符串
      */
-    public static String strlinehmp(Object obj, StringExtensionsInterface... iface) {
-        char[] charArray = BasicConverter.atos(obj).toCharArray();
+    public static String strlinehmp(Object obj, StringInterface... iface) {
+        char[] charArray = atos(obj).toCharArray();
         StringBuilder buffer = new StringBuilder();
 
         boolean next = false;
@@ -565,7 +566,7 @@ public class StringUtils {
             buffer.append(append);
         }
 
-        return StringExtensionsInterface.pipelineExecutor(buffer.toString(), iface);
+        return StringInterface.pipelineExecutor(buffer.toString(), iface);
     }
 
 }

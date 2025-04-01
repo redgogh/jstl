@@ -18,7 +18,9 @@ package org.karasuba.tuple;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karasuba.utils.BasicConverter;
+import org.karasuba.utils.Transformer;
+
+import static org.karasuba.utils.Transformer.anyeq;
 
 /**
  * 表示包含三个元素的元组。
@@ -104,7 +106,7 @@ public class Tuple<A, B, C> {
      * @return 如果元组的三个元素都相等，则返回 `true`，否则返回 `false`
      */
     public boolean equals(Tuple<A, B, C> tuple) {
-        return BasicConverter.anyeq(first, tuple.first) && BasicConverter.anyeq(second, tuple.second) && BasicConverter.anyeq(third, tuple.third);
+        return anyeq(first, tuple.first) && anyeq(second, tuple.second) && anyeq(third, tuple.third);
     }
 
 }

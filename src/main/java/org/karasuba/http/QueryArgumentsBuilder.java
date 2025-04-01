@@ -21,12 +21,12 @@ package org.karasuba.http;
 /* Creates on 2023/6/26. */
 
 import org.karasuba.string.StringUtils;
-import org.karasuba.utils.BasicConverter;
+import org.karasuba.utils.Transformer;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static org.karasuba.utils.BasicConverter.atos;
+import static org.karasuba.utils.Transformer.atos;
 
 /**
  * `QueryBuilder` 是一个继承自 `LinkedHashMap<String, String>` 的类，用于构建 HTTP 请求的查询参数。
@@ -97,7 +97,7 @@ public class QueryArgumentsBuilder extends LinkedHashMap<String, String> {
 
         for (Map.Entry<String, String> entry : entrySet())
             builder.append(StringUtils.strwfmt("%s=%s&", entry.getKey(), entry.getValue()));
-        String finalArguments = BasicConverter.atos(builder, 0, -1); /* 删掉最后一个字符 ‘&’ */
+        String finalArguments = atos(builder, 0, -1); /* 删掉最后一个字符 ‘&’ */
 
         return StringUtils.strwfmt("%s?%s", url, finalArguments);
     }

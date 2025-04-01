@@ -18,9 +18,9 @@ package org.karasuba.string;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karasuba.utils.BasicConverter;
+import org.karasuba.utils.Transformer;
 
-import static org.karasuba.utils.BasicConverter.atos;
+import static org.karasuba.utils.Transformer.atos;
 
 /**
  * 定义字符串操作类型的枚举类。
@@ -41,7 +41,7 @@ import static org.karasuba.utils.BasicConverter.atos;
  * @author Red Gogh
  * @since 1.0
  */
-public enum StringExtensionsInterface {
+public enum StringInterface {
 
     /**
      * 字符串修剪操作，去除字符串前后的空白字符
@@ -89,7 +89,7 @@ public enum StringExtensionsInterface {
     STRING_IFACE_REVERSE_EXT {
         @Override
         public String apply(String input) {
-            return BasicConverter.atos(new StringBuilder(input).reverse());
+            return atos(new StringBuilder(input).reverse());
         }
     },
 
@@ -126,7 +126,7 @@ public enum StringExtensionsInterface {
      * <h2>功能特点</h2>
      * <ul>
      *     <li>支持对字符串进行按需操作（例如修剪空白字符）。</li>
-     *     <li>通过枚举类型 {@link StringExtensionsInterface} 扩展支持更多操作。</li>
+     *     <li>通过枚举类型 {@link StringInterface} 扩展支持更多操作。</li>
      * </ul>
      *
      * <h2>使用示例</h2>
@@ -139,11 +139,11 @@ public enum StringExtensionsInterface {
      * @param iface 要应用的字符串操作数组
      * @return 操作后的字符串
      */
-    public static String pipelineExecutor(String source, StringExtensionsInterface[] iface) {
+    public static String pipelineExecutor(String source, StringInterface[] iface) {
         if (iface == null)
             return source;
 
-        for (StringExtensionsInterface iface_ext : iface)
+        for (StringInterface iface_ext : iface)
             source = iface_ext.apply(source);
 
         return source;

@@ -1,9 +1,9 @@
 package org.karasuba.security.codec;
 
-import org.karasuba.utils.BasicConverter;
+import org.karasuba.utils.Transformer;
 import org.karasuba.security.Base64;
 
-import static org.karasuba.utils.BasicConverter.atos;
+import static org.karasuba.utils.Transformer.atos;
 
 /**
  * @author Red Gogh
@@ -21,7 +21,7 @@ public class Base64Codec implements Base64 {
 
     @Override
     public String decode(String src) {
-        return BasicConverter.atos(decodeBytes(src));
+        return atos(decodeBytes(src));
     }
 
     @Override

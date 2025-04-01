@@ -22,12 +22,13 @@ package org.karasuba.bean;
 
 import org.karasuba.reflect.UField;
 import org.karasuba.reflect.UClass;
-import org.karasuba.string.StringUtils;
 import org.karasuba.utils.Captor;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import static org.karasuba.string.StringUtils.*;
 
 /**
  * Bean工具类，方便实现对两个对象之间的属性拷贝，这属于浅拷贝。如果需要
@@ -95,7 +96,7 @@ public class BeanUtils {
         UClass dstClass = new UClass(dst);
         for (UField field : dstClass.getDeclaredFields()) {
             String name = field.getName();
-            if (ignores.length > 0 && StringUtils.strcunt(name, ignores))
+            if (ignores.length > 0 && strcheckin(name, ignores))
                 continue;
             Captor.icall(() -> copyValue(src, new UClass(src), dst, dstClass, field));
         }
@@ -115,7 +116,7 @@ public class BeanUtils {
         UClass dstClass = new UClass(dst);
         for (UField dstField : dstClass.getDeclaredFields()) {
             String name = dstField.getName();
-            if (ignores.length > 0 && StringUtils.strcunt(name, ignores))
+            if (ignores.length > 0 && strcheckin(name, ignores))
                 continue;
             Captor.icall(() -> dstField.write(dst, srcClass.readFieldValue(name, src)));
         }
@@ -123,8 +124,8 @@ public class BeanUtils {
 
     /** 拷贝数据 */
     private static void copyValue(Object src, UClass srcClass, Object dst, UClass dstClass, UField dstField) {
-        String setMethod = "set" + StringUtils.strcap(dstField.getName());
-        String getMethod = "get" + StringUtils.strcap(dstField.getName());
+        String setMethod = "set" + strcap(dstField.getName());
+        String getMethod = "get" + strcap(dstField.getName());
         if (dstClass.hasMethod(setMethod, dstField.getOriginType())) {
             if (srcClass.hasMethod(getMethod)) {
                 Object param = srcClass.invoke(src, getMethod);

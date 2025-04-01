@@ -19,16 +19,16 @@ package org.karasuba.test;
 \* -------------------------------------------------------------------------------- */
 
 import org.junit.Test;
-import org.karasuba.utils.BasicConverter;
+import org.karasuba.utils.Transformer;
 
 import java.util.Arrays;
 
 @SuppressWarnings("ALL")
-public class BasicConverterTest {
+public class TransformerTest {
 
     @Test
     public void atobTest() {
-        System.out.println(Arrays.toString(BasicConverter.atob(114514)));
+        System.out.println(Arrays.toString(Transformer.atob(114514)));
     }
 
 }

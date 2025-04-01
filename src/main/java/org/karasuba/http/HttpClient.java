@@ -23,7 +23,7 @@ import org.karasuba.collection.Maps;
 import org.karasuba.exception.HttpRequestException;
 import org.karasuba.string.StringUtils;
 import org.karasuba.utils.Assert;
-import org.karasuba.utils.BasicConverter;
+import org.karasuba.utils.Transformer;
 import org.karasuba.utils.Captor;
 import org.karasuba.utils.Optional;
 import org.karasuba.io.MutableFile;
@@ -34,7 +34,8 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static org.karasuba.string.StringUtils.strcunt;
+import static org.karasuba.string.StringUtils.strcheckin;
+import static org.karasuba.utils.Transformer.atos;
 
 /**
  * `HttpClient` 是一个用于发送 HTTP 请求的客户端工具类。该类支持多种 HTTP 请求方法，
@@ -291,7 +292,7 @@ public class HttpClient {
      * @return 当前 `HttpClient` 实例，以支持链式调用
      */
     public HttpClient addRequestBody(Object object) {
-        if (strcunt(method, HttpMethod.GET, HttpMethod.HEAD))
+        if (strcheckin(method, HttpMethod.GET, HttpMethod.HEAD))
             throw new HttpRequestException("GET 或 HEAD 方法不支持请求主体。");
 
         this.object = object;
@@ -467,7 +468,7 @@ public class HttpClient {
                     builder.addFormDataPart(entry.getKey(), mutableFile.getName(),
                             RequestBody.create(mutableFile, MediaType.parse("text/plain")));
                 } else {
-                    builder.addFormDataPart(entry.getKey(), BasicConverter.atos(value));
+                    builder.addFormDataPart(entry.getKey(), atos(value));
                 }
             }
 

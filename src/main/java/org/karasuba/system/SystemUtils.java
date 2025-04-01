@@ -22,7 +22,7 @@ import org.karasuba.time.Chrono;
 
 import java.util.Map;
 
-import static org.karasuba.string.StringUtils.stricunt;
+import static org.karasuba.string.StringUtils.stricheckin;
 import static org.karasuba.string.StringUtils.strrexp;
 
 /**
@@ -77,11 +77,11 @@ public class SystemUtils {
     private static OperatorSystem getos() {
         // initialize
         String _OS_NAME = System.getProperty("os.name");
-        if (stricunt(_OS_NAME, "Windows"))
+        if (stricheckin(_OS_NAME, "Windows"))
             return OperatorSystem.WINDOWS;
-        else if (stricunt(_OS_NAME, "Linux"))
+        else if (stricheckin(_OS_NAME, "Linux"))
             return OperatorSystem.LINUX;
-        else if (stricunt(_OS_NAME, "Mac"))
+        else if (stricheckin(_OS_NAME, "Mac"))
             return OperatorSystem.MACOS;
         return OperatorSystem.UNKNOWN;
     }

@@ -624,8 +624,8 @@ public final class Chrono extends Date
      * @param duration 未来时间的间隔，单位为秒
      * @return 计算后的 `Chrono` 时间点
      */
-    public static Chrono futureMoments(int duration) {
-        return futureMoments(duration, TimeUnit.SECONDS);
+    public static Chrono moments(long duration) {
+        return moments(duration, TimeUnit.SECONDS);
     }
 
     /**
@@ -638,8 +638,8 @@ public final class Chrono extends Date
      * @param unit 时间单位，决定 `duration` 的计算方式
      * @return 计算后的 `Chrono` 时间点
      */
-    public static Chrono futureMoments(int duration, TimeUnit unit) {
-        return now().futureMoments((long) duration, unit);
+    public static Chrono moments(long duration, TimeUnit unit) {
+        return now().futureMoments(duration, unit);
     }
 
     @Override
@@ -1033,11 +1033,13 @@ public final class Chrono extends Date
     }
 
     @Override
+    @SuppressWarnings({"deprecation", "MagicConstant"})
     public int getMonth() {
         return _core_local_time.getMonth().getValue();
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public int getYear() {
         return _core_local_time.getYear();
     }

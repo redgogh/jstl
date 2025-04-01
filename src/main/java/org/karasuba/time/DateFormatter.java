@@ -26,7 +26,7 @@ import org.karasuba.utils.Captor;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static org.karasuba.string.StringUtils.strcunt;
+import static org.karasuba.string.StringUtils.strcheckin;
 import static org.karasuba.string.StringUtils.strlen;
 
 /**
@@ -170,19 +170,19 @@ public class DateFormatter {
         int match = strlen(text);
         switch (match) {
             case STRING_TEMP_DATE_MONTH: {
-                return strcunt(text, "-")
+                return strcheckin(text, "-")
                         ? parse(text, "yyyy-MM")
                         : parse(text, "yyyy/MM");
             }
 
             case STRING_TEMP_DATE_DAY: {
-                return strcunt(text, "-")
+                return strcheckin(text, "-")
                         ? parse(text, "yyyy-MM-dd")
                         : parse(text, "yyyy/MM/dd");
             }
 
             case STRING_TEMP_DATE_TIME: {
-                return strcunt(text, "-")
+                return strcheckin(text, "-")
                         ? parse(text, "yyyy-MM-dd HH:mm:ss")
                         : parse(text, "yyyy/MM/dd HH:mm:ss");
             }

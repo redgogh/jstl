@@ -2,11 +2,13 @@ package org.karasuba.security.cipher;
 
 import org.karasuba.security.AES;
 import org.karasuba.security.Codec;
-import org.karasuba.utils.BasicConverter;
+import org.karasuba.utils.Transformer;
 import org.karasuba.utils.Captor;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+
+import static org.karasuba.utils.Transformer.atos;
 
 /**
  * @author Red Gogh
@@ -30,7 +32,7 @@ public class AESCipher implements AES {
 
     @Override
     public String decrypt(String data, String secret) {
-        return BasicConverter.atos(decrypt(Codec.BASE64.decodeBytes(data), secret));
+        return atos(decrypt(Codec.BASE64.decodeBytes(data), secret));
     }
 
     @Override

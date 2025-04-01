@@ -32,7 +32,7 @@
 
 ## 👻 优化功能
 
-- 优化 `anyclude -> anycunt`。
+- 优化 `anyclude -> checkin`。
 - 优化 `BeanUtils#copyProperties` 方法支持使用 `set/get` 拷贝。
 - 优化 `Optional#ifNull -> Optional#ifNullable`。
 - 明确 `ByteBuffer#write` 函数写入类型。

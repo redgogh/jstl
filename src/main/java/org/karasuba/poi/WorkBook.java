@@ -18,23 +18,23 @@ package org.karasuba.poi;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karasuba.annotations.RowColumn;
-import org.karasuba.collection.Lists;
-import org.karasuba.collection.Maps;
-import org.karasuba.reflect.UClass;
-import org.karasuba.reflect.UField;
-import org.karasuba.stream.Streams;
-import org.karasuba.string.StringUtils;
-import org.karasuba.time.DateFormatter;
-import org.karasuba.utils.BasicConverter;
-import org.karasuba.utils.Captor;
-import org.karasuba.utils.Optional;
-import org.karasuba.io.MutableFile;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jetbrains.annotations.NotNull;
+import org.karasuba.annotations.RowColumn;
+import org.karasuba.collection.Lists;
+import org.karasuba.collection.Maps;
+import org.karasuba.io.MutableFile;
+import org.karasuba.reflect.UClass;
+import org.karasuba.reflect.UField;
+import org.karasuba.stream.Streams;
+import org.karasuba.string.StringUtils;
+import org.karasuba.time.DateFormatter;
+import org.karasuba.utils.Captor;
+import org.karasuba.utils.Optional;
+import org.karasuba.utils.Transformer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -44,6 +44,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import static org.karasuba.utils.Transformer.atos;
 
 /**
  * 类 {@link WorkBook} 用于创建和操作 Excel 工作簿。
@@ -276,7 +278,7 @@ public class WorkBook implements Iterable<Row> {
      *
      */
     public void addRow(Object... values) {
-        addRow(new Row(Lists.map(values, BasicConverter::atos)));
+        addRow(new Row(Lists.map(values, Transformer::atos)));
     }
 
     /**
@@ -301,7 +303,7 @@ public class WorkBook implements Iterable<Row> {
         int rowNum = sheet.getLastRowNum();
         org.apache.poi.ss.usermodel.Row row = sheet.createRow(rowNum + 1);
         for (int i = 0; i < rowUnit.size(); i++) {
-            row.createCell(i).setCellValue(BasicConverter.atos(rowUnit.get(i)));
+            row.createCell(i).setCellValue(atos(rowUnit.get(i)));
         }
     }
 
@@ -479,7 +481,7 @@ public class WorkBook implements Iterable<Row> {
             builder.append("\n");
         }
 
-        return BasicConverter.atos(builder);
+        return atos(builder);
     }
 
     private void initializeData(Object obj, UField uField, String value) {
@@ -488,7 +490,7 @@ public class WorkBook implements Iterable<Row> {
 
         /* 基础数据类型 */
         if (uField.isPrimitiveCheck())
-            uField.write(obj, BasicConverter.toPrimitiveValue(value, uField.getOriginType()));
+            uField.write(obj, Transformer.toPrimitiveValue(value, uField.getOriginType()));
 
         /* 日期类型 */
         else if (uField.typecheck(Date.class))
@@ -573,7 +575,7 @@ public class WorkBook implements Iterable<Row> {
         StringBuilder builder = new StringBuilder();
         getRows().forEach(row -> builder.append(row).append("\n"));
         int len = builder.length();
-        return BasicConverter.atos(builder.delete(len - 1, len));
+        return atos(builder.delete(len - 1, len));
     }
 
     /**

@@ -30,15 +30,15 @@ import org.karasuba.security.codec.Base64Codec;
 import org.karasuba.security.codec.MD5Codec;
 import org.karasuba.security.codec.SHA256Codec;
 import org.karasuba.security.codec.URLCodec;
-import org.karasuba.string.StringExtensionsInterface;
+import org.karasuba.string.StringInterface;
 import org.karasuba.string.StringUtils;
-import org.karasuba.utils.BasicConverter;
+import org.karasuba.utils.Transformer;
 import org.karasuba.utils.Captor;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
-import static org.karasuba.utils.BasicConverter.atos;
+import static org.karasuba.utils.Transformer.atos;
 
 /**
  * `Codec` 类用于数据的编码和解码操作。它提供了将数据从一种格式转换为另一种格式的功能，
@@ -131,7 +131,7 @@ public class Codec {
                 builder.append("0");
             builder.append(tmp);
         }
-        return BasicConverter.atos(builder, StringExtensionsInterface.STRING_IFACE_UPPER_CASE_EXT);
+        return atos(builder, StringInterface.STRING_IFACE_UPPER_CASE_EXT);
     }
 
     /**

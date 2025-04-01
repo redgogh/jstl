@@ -19,7 +19,8 @@ package org.karasuba.test;
 \* -------------------------------------------------------------------------------- */
 
 import org.junit.Test;
-import org.karasuba.utils.BasicConverter;
+
+import static org.karasuba.utils.Transformer.atobool;
 
 @SuppressWarnings("ALL")
 public class RedGoghTest {
@@ -30,14 +31,14 @@ public class RedGoghTest {
     @Test
     public void atoboolTest() {
         System.out.printf("----------------------------\n");
-        System.out.printf("atobool 'y' example: %s\n", BasicConverter.atobool("y"));
-        System.out.printf("atobool 'n' example: %s\n", BasicConverter.atobool("n"));
+        System.out.printf("atobool 'y' example: %s\n", atobool("y"));
+        System.out.printf("atobool 'n' example: %s\n", atobool("n"));
         System.out.printf("----------------------------\n");
-        System.out.printf("atobool '1' example: %s\n", BasicConverter.atobool(1));
-        System.out.printf("atobool '0' example: %s\n", BasicConverter.atobool(0));
+        System.out.printf("atobool '1' example: %s\n", atobool(1));
+        System.out.printf("atobool '0' example: %s\n", atobool(0));
         System.out.printf("----------------------------\n");
-        System.out.printf("atobool 'true' example: %s\n", BasicConverter.atobool("true"));
-        System.out.printf("atobool 'false' example: %s\n", BasicConverter.atobool("false"));
+        System.out.printf("atobool 'true' example: %s\n", atobool("true"));
+        System.out.printf("atobool 'false' example: %s\n", atobool("false"));
         System.out.printf("----------------------------\n");
     }
 

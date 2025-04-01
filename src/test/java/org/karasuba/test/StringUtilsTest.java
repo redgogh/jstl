@@ -19,7 +19,7 @@ package org.karasuba.test;
 \* -------------------------------------------------------------------------------- */
 
 import org.junit.Test;
-import org.karasuba.utils.BasicConverter;
+import org.karasuba.utils.Transformer;
 import org.karasuba.string.StringUtils;
 import org.karasuba.collection.Lists;
 import org.karasuba.utils.Generator;
@@ -48,8 +48,8 @@ public class StringUtilsTest {
     @Test
     public void atosTest() {
         String vanGogh = "Vincent Van Gogh";
-        System.out.printf("atos: byte array to string: %s\n", BasicConverter.atos(vanGogh.getBytes()));
-        System.out.printf("atos: byte array [7 - len] to string: %s\n", BasicConverter.atos(vanGogh.getBytes(), 7, 0));
+        System.out.printf("atos: byte array to string: %s\n", Transformer.atos(vanGogh.getBytes()));
+        System.out.printf("atos: byte array [7 - len] to string: %s\n", Transformer.atos(vanGogh.getBytes(), 7, 0));
     }
 
     @Test

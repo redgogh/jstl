@@ -1,7 +1,7 @@
 package org.karasuba.utils;
 
 import org.karasuba.security.Codec;
-import org.karasuba.string.StringExtensionsInterface;
+import org.karasuba.string.StringInterface;
 import org.karasuba.string.StringUtils;
 
 import java.util.Random;
@@ -57,7 +57,7 @@ public class Generator {
      * @param iface 字符串扩展接口
      * @return 生成不带符号的UUID
      */
-    public static String uuid(StringExtensionsInterface... iface) {
+    public static String uuid(StringInterface... iface) {
         return StringUtils.uppercase(UUID.randomUUID(), iface)
                 .replace("-", "");
     }
@@ -70,7 +70,7 @@ public class Generator {
      *
      * @return 返回没有任何符号的 UUID
      */
-    public static String uuid(int n, StringExtensionsInterface... iface) {
+    public static String uuid(int n, StringInterface... iface) {
         return StringUtils.strcut(uuid(iface), 0, n);
     }
 

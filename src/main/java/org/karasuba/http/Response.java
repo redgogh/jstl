@@ -21,7 +21,7 @@ package org.karasuba.http;
 import com.alibaba.fastjson.JSONObject;
 import org.karasuba.io.ByteBuffer;
 import org.karasuba.string.StringUtils;
-import org.karasuba.utils.BasicConverter;
+import org.karasuba.utils.Transformer;
 import org.karasuba.utils.Optional;
 import org.karasuba.io.IOUtils;
 import okhttp3.Headers;
@@ -29,7 +29,8 @@ import okhttp3.ResponseBody;
 
 import java.util.Map;
 
-import static org.karasuba.utils.BasicConverter.atos;
+import static org.karasuba.utils.Transformer.anyeq;
+import static org.karasuba.utils.Transformer.atos;
 
 /**
  * `Response` 是一个继承自 `JSONObject` 的类，用于表示一个包含状态码和数据的响应对象。
@@ -115,7 +116,7 @@ public class Response extends JSONObject {
         Object object = Optional.ifError(() -> JSONObject.parseObject(content), content);
 
         if (object instanceof String)
-            this.message = BasicConverter.atos(object, StringUtils::strip);
+            this.message = atos(object, StringUtils::strip);
 
         if (object instanceof Map)
             putAll((Map<String, Object>) object);
@@ -168,7 +169,7 @@ public class Response extends JSONObject {
      * @return 如果两个值相等，则返回 {@code true}，否则返回 {@code false}
      */
     public boolean valueEquals(String name, Object value) {
-        return BasicConverter.anyeq(get(name), value);
+        return anyeq(get(name), value);
     }
 
     /**

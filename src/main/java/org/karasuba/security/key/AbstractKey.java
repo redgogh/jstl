@@ -26,12 +26,12 @@ package org.karasuba.security.key;
 /* Creates on 2025/2/20. */
 
 import org.karasuba.string.StringUtils;
-import org.karasuba.utils.BasicConverter;
+import org.karasuba.utils.Transformer;
 import org.karasuba.security.Codec;
 
 import java.security.Key;
 
-import static org.karasuba.utils.BasicConverter.atos;
+import static org.karasuba.utils.Transformer.atos;
 
 /**
  * @author Red Gogh
@@ -60,7 +60,7 @@ public abstract class AbstractKey {
         for (int i = 1; i < (lines.length - 1); i++) {
             remakeBuilder.append(StringUtils.strcut(lines[i], 0, 0));
         }
-        return Codec.BASE64.decodeBytes(BasicConverter.atos(remakeBuilder));
+        return Codec.BASE64.decodeBytes(atos(remakeBuilder));
     }
 
     protected static String toPEMFormat0(String keyType, byte[] encoded) {
@@ -85,7 +85,7 @@ public abstract class AbstractKey {
             secretBuilder.append(StringUtils.strcut(base64Encode, copyLength, 0)).append("\n");
 
         secretBuilder.delete(secretBuilder.length() - 1, secretBuilder.length());
-        return "-----BEGIN " + keyType + "-----\n" + BasicConverter.atos(secretBuilder) + "\n-----END " + keyType + "-----";
+        return "-----BEGIN " + keyType + "-----\n" + atos(secretBuilder) + "\n-----END " + keyType + "-----";
     }
 
     public String toZipKeyFormat() {

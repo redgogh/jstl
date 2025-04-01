@@ -20,13 +20,13 @@ package org.karasuba.poi;
 
 import org.karasuba.collection.Lists;
 import org.karasuba.iface.TypeMapper;
-import org.karasuba.utils.BasicConverter;
+import org.karasuba.utils.Transformer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static org.karasuba.utils.BasicConverter.atos;
+import static org.karasuba.utils.Transformer.atos;
 
 /**
  * 表示一行数据，继承自 {@link ArrayList}，用于存储字符串类型的单元格数据。
@@ -102,6 +102,6 @@ public class Row extends ArrayList<String> {
             builder.append(text).append(" ");
         int len = builder.length();
         builder.delete(len - 1, len);
-        return BasicConverter.atos(builder);
+        return atos(builder);
     }
 }

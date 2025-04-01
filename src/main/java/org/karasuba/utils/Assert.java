@@ -26,6 +26,8 @@ import org.karasuba.string.StringUtils;
 import java.util.Collection;
 import java.util.Map;
 
+import static org.karasuba.utils.Transformer.anyeq;
+
 /**
  * 运行时断言工具类，这个类断言失败后并不会直接停止整个程序，而是会将所有失败的断言
  * 信息作为 Runtime 异常抛出。
@@ -255,7 +257,7 @@ public class Assert {
      * @throws AssertException 当 `actual` 和 `expected` 相等时抛出异常
      */
     public static void notEquals(Object actual, Object expected, String message, Object... args) {
-        if (BasicConverter.anyeq(actual, expected))
+        if (anyeq(actual, expected))
             throw new AssertException(message, args);
     }
 
@@ -292,7 +294,7 @@ public class Assert {
      * @throws AssertException 当 `actual` 和 `expected` 不相等时抛出异常
      */
     public static void isEquals(Object actual, Object expected, String message, Object... args) {
-        if (BasicConverter.anyeq(actual, expected))
+        if (anyeq(actual, expected))
             throw new AssertException(message, args);
     }
 

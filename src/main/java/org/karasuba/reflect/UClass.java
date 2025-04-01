@@ -28,7 +28,7 @@ package org.karasuba.reflect;
 import org.karasuba.collection.Lists;
 import org.karasuba.exception.SystemRuntimeException;
 import org.karasuba.utils.Assert;
-import org.karasuba.utils.BasicConverter;
+import org.karasuba.utils.Transformer;
 import org.karasuba.stream.Streams;
 import org.karasuba.utils.Captor;
 
@@ -42,6 +42,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import static org.karasuba.string.StringUtils.streq;
+import static org.karasuba.utils.Transformer.checkin;
 
 /**
  * `UClass` 是一个用于处理 Java 类元数据的工具类。它封装了一个 `Class` 对象，并提供了一些方法来
@@ -500,7 +501,7 @@ public class UClass {
     public boolean isPrimitiveCheck() {
         if (descriptor.isPrimitive())
             return true;
-        return BasicConverter.anycunt(descriptor, Short.class, Integer.class, Long.class,
+        return checkin(descriptor, Short.class, Integer.class, Long.class,
                 Float.class, Double.class, Character.class, Boolean.class);
     }
 
