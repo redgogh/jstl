@@ -30,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.karasuba.string.StringInterface.*;
 import static org.karasuba.string.StringUtils.strcut;
+import static org.karasuba.utils.Transformer.atos;
 
 @SuppressWarnings("ALL")
 public class StringUtilsTest {
@@ -48,8 +49,8 @@ public class StringUtilsTest {
     @Test
     public void atosTest() {
         String vanGogh = "Vincent Van Gogh";
-        System.out.printf("atos: byte array to string: %s\n", Transformer.atos(vanGogh.getBytes()));
-        System.out.printf("atos: byte array [7 - len] to string: %s\n", Transformer.atos(vanGogh.getBytes(), 7, 0));
+        System.out.printf("atos: byte array to string: %s\n", atos(vanGogh.getBytes()));
+        System.out.printf("atos: byte array [7 - len] to string: %s\n", atos(vanGogh.getBytes(), 7, 0));
     }
 
     @Test

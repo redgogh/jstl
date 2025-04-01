@@ -18,9 +18,9 @@ package org.karasuba.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import org.junit.Test;
 import org.karasuba.time.Chrono;
 import org.karasuba.time.DateFormatter;
-import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -30,7 +30,7 @@ public class ChronoTest {
 
     @Test
     public void wrapTest() {
-        System.out.println(Chrono.wrap(LocalDate.now()));
+        System.out.println(Chrono.from(LocalDate.now()));
     }
 
     @Test
@@ -57,14 +57,14 @@ public class ChronoTest {
 
     @Test
     public void getLastDayTest() {
-        Chrono chrono = Chrono.of("2026-02-01 20:30:59");
+        Chrono chrono = Chrono.from("2026-02-01 20:30:59");
         System.out.printf("Last day of month: %s\n", chrono.getLastDayOfMonth());
         System.out.printf("Last day of year: %s\n", chrono.getLastDayOfYear());
     }
 
     @Test
     public void withTest() {
-        Chrono chrono = Chrono.of("2024-02-01");
+        Chrono chrono = Chrono.from("2024-02-01");
         System.out.printf("With second: %s\n", chrono.withSecond(59));
         System.out.printf("With minute: %s\n", chrono.withMinute(59));
         System.out.printf("With day: %s\n", chrono.withDayOfMonth(28));
@@ -72,18 +72,18 @@ public class ChronoTest {
 
     @Test
     public void getWeekOfMonthTest() {
-        Chrono chrono = Chrono.of("2024-02-01");
+        Chrono chrono = Chrono.from("2024-02-01");
         System.out.println(chrono.getWeekOfMonth());
     }
 
     @Test
     public void getWeekOfYearTest() {
-        Chrono chrono = Chrono.of("2024-02-01");
+        Chrono chrono = Chrono.from("2024-02-01");
         System.out.println(chrono.getWeekOfYear());
     }
 
     public static void main(String[] args) {
-        Chrono chrono = Chrono.wrap(new Date());
+        Chrono chrono = Chrono.from(new Date());
 
         System.out.printf("plus Weeks 1: %s\n", chrono.plusWeeks(1));
 

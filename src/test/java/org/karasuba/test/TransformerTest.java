@@ -22,12 +22,14 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
+import static org.karasuba.utils.Transformer.atob;
+
 @SuppressWarnings("ALL")
 public class TransformerTest {
 
     @Test
     public void atobTest() {
-        System.out.println(Arrays.toString(Transformer.atob(114514)));
+        System.out.println(Arrays.toString(atob(114514)));
     }
 
 }
