@@ -21,7 +21,6 @@ package org.karasuba.http;
 import com.alibaba.fastjson.JSONObject;
 import org.karasuba.io.ByteBuffer;
 import org.karasuba.string.StringUtils;
-import org.karasuba.utils.Transformer;
 import org.karasuba.utils.Optional;
 import org.karasuba.io.IOUtils;
 import okhttp3.Headers;

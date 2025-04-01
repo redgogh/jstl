@@ -18,7 +18,6 @@ package org.karasuba.tuple;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karasuba.utils.Transformer;
 
 import static org.karasuba.utils.Transformer.anyeq;
 

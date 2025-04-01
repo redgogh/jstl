@@ -2,7 +2,6 @@ package org.karasuba.security.cipher;
 
 import org.karasuba.security.AES;
 import org.karasuba.security.Codec;
-import org.karasuba.utils.Transformer;
 import org.karasuba.utils.Captor;
 
 import javax.crypto.Cipher;

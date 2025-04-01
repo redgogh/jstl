@@ -32,7 +32,6 @@ import org.karasuba.security.codec.SHA256Codec;
 import org.karasuba.security.codec.URLCodec;
 import org.karasuba.string.StringInterface;
 import org.karasuba.string.StringUtils;
-import org.karasuba.utils.Transformer;
 import org.karasuba.utils.Captor;
 
 import javax.crypto.KeyGenerator;

@@ -34,7 +34,6 @@ import org.karasuba.string.StringUtils;
 import org.karasuba.time.DateFormatter;
 import org.karasuba.utils.Captor;
 import org.karasuba.utils.Optional;
-import org.karasuba.utils.Transformer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;

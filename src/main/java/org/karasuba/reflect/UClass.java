@@ -28,7 +28,6 @@ package org.karasuba.reflect;
 import org.karasuba.collection.Lists;
 import org.karasuba.exception.SystemRuntimeException;
 import org.karasuba.utils.Assert;
-import org.karasuba.utils.Transformer;
 import org.karasuba.stream.Streams;
 import org.karasuba.utils.Captor;
 

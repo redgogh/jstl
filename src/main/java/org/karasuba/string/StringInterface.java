@@ -18,7 +18,6 @@ package org.karasuba.string;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karasuba.utils.Transformer;
 
 import static org.karasuba.utils.Transformer.atos;
 

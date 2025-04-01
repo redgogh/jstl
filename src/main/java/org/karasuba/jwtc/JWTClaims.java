@@ -2,7 +2,6 @@ package org.karasuba.jwtc;
 
 import org.karasuba.iface.TypeMapper;
 import org.karasuba.time.Chrono;
-import org.karasuba.utils.Transformer;
 
 import java.util.HashMap;
 

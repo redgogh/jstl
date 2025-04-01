@@ -19,7 +19,6 @@ package org.karasuba.test;
 \* -------------------------------------------------------------------------------- */
 
 import org.junit.Test;
-import org.karasuba.utils.Transformer;
 
 import java.util.Arrays;
 

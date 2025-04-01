@@ -1,6 +1,5 @@
 package org.karasuba.security.codec;
 
-import org.karasuba.utils.Transformer;
 import org.karasuba.security.Base64;
 
 import static org.karasuba.utils.Transformer.atos;

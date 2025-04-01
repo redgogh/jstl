@@ -23,7 +23,6 @@ import org.karasuba.collection.Maps;
 import org.karasuba.exception.HttpRequestException;
 import org.karasuba.string.StringUtils;
 import org.karasuba.utils.Assert;
-import org.karasuba.utils.Transformer;
 import org.karasuba.utils.Captor;
 import org.karasuba.utils.Optional;
 import org.karasuba.io.MutableFile;

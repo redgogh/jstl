@@ -19,7 +19,6 @@ package org.karasuba.test;
 \* -------------------------------------------------------------------------------- */
 
 import org.junit.Test;
-import org.karasuba.utils.Transformer;
 import org.karasuba.string.StringUtils;
 import org.karasuba.collection.Lists;
 import org.karasuba.utils.Generator;
