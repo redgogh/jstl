@@ -1,5 +1,6 @@
 package org.karasuba.utils;
 
+import org.karasuba.security.Codec;
 import org.karasuba.string.StringExtensionsInterface;
 import org.karasuba.string.StringUtils;
 
@@ -339,6 +340,61 @@ public class Generator {
      */
     public static boolean randomBoolean() {
         return new Random().nextBoolean();
+    }
+
+    /**
+     * #brief: 生成 UUID 的 16 位小写 MD5 哈希值
+     *
+     * <p>该方法基于随机生成的 UUID，计算其 MD5 哈希值，并返回前 16 位的小写字符串。
+     *
+     * @return 16 位小写 MD5 哈希值
+     */
+    public static String b16md5() {
+        return Codec.MD5.lower16(uuid());
+    }
+
+    /**
+     * #brief: 生成 UUID 的 32 位小写 MD5 哈希值
+     *
+     * <p>该方法基于随机生成的 UUID，计算其完整的 32 位小写 MD5 哈希值。
+     *
+     * @return 32 位小写 MD5 哈希值
+     */
+    public static String b32md5() {
+        return Codec.MD5.lower32(uuid());
+    }
+
+    /**
+     * #brief: 生成 UUID 的 64 位小写 MD5 哈希值
+     *
+     * <p>该方法通过拼接两个 32 位 MD5 哈希值，生成 64 位的哈希字符串。
+     *
+     * @return 64 位小写 MD5 哈希值
+     */
+    public static String b64md5() {
+        return b32md5() + b32md5();
+    }
+
+    /**
+     * #brief: 生成 UUID 的 128 位小写 MD5 哈希值
+     *
+     * <p>该方法通过拼接两个 64 位 MD5 哈希值，生成 128 位的哈希字符串。
+     *
+     * @return 128 位小写 MD5 哈希值
+     */
+    public static String b128md5() {
+        return b64md5() + b64md5();
+    }
+
+    /**
+     * #brief: 生成 UUID 的 256 位小写 MD5 哈希值
+     *
+     * <p>该方法通过拼接两个 128 位 MD5 哈希值，生成 256 位的哈希字符串。
+     *
+     * @return 256 位小写 MD5 哈希值
+     */
+    public static String b256md5() {
+        return b128md5() + b128md5();
     }
 
 }

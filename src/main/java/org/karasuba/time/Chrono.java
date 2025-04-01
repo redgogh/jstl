@@ -25,6 +25,7 @@ import java.time.*;
 import java.time.temporal.*;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 /**
  * `Chrono` 类表示一个时间单位，提供了对日期和时间的操作。它实现了 {@link Calendar} 接口，
@@ -40,8 +41,8 @@ import java.util.Locale;
  * @see Serializable
  * @noinspection unused
  */
-public final class Chrono
-        implements Calendar, Temporal, Comparable<Chrono>, Serializable {
+public final class Chrono extends Date
+        implements Calendar, Temporal, Serializable {
 
     /**
      * 存储和处理核心本地时间的字段。
@@ -323,6 +324,8 @@ public final class Chrono
      * @param zoneId    时区
      */
     private Chrono(long timestamp, ZoneId zoneId) {
+        super(timestamp);
+
         // 将时间戳转为 LocalDateTime 对象
         _core_local_time = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), zoneId);
 
@@ -349,7 +352,7 @@ public final class Chrono
      * @param text 日期字符串
      * @return 相应的 `Chrono` 实例
      */
-    public static Chrono of(String text) {
+    public static Chrono from(String text) {
         return new Chrono(text);
     }
 
@@ -360,7 +363,7 @@ public final class Chrono
      * @param pattern 日期格式
      * @return 相应的 `Chrono` 实例
      */
-    public static Chrono of(String text, String pattern) {
+    public static Chrono from(String text, String pattern) {
         return new Chrono(text, pattern);
     }
 
@@ -538,7 +541,7 @@ public final class Chrono
      * @param localDate `localDate` 对象
      * @return 相应的 `Chrono` 实例
      */
-    public static Chrono wrap(LocalDate localDate) {
+    public static Chrono from(LocalDate localDate) {
         return new Chrono(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
     }
 
@@ -548,7 +551,7 @@ public final class Chrono
      * @param localDateTime `LocalDateTime` 对象
      * @return 相应的 `Chrono` 实例
      */
-    public static Chrono wrap(LocalDateTime localDateTime) {
+    public static Chrono from(LocalDateTime localDateTime) {
         return new Chrono(localDateTime);
     }
 
@@ -558,7 +561,7 @@ public final class Chrono
      * @param timestamp 时间戳（毫秒）
      * @return 相应的 `Chrono` 实例
      */
-    public static Chrono wrap(long timestamp) {
+    public static Chrono from(long timestamp) {
         return new Chrono(timestamp);
     }
 
@@ -568,7 +571,7 @@ public final class Chrono
      * @param date `Date` 对象
      * @return 相应的 `Chrono` 实例
      */
-    public static Chrono wrap(Date date) {
+    public static Chrono from(Date date) {
         return new Chrono(date);
     }
 
@@ -579,7 +582,7 @@ public final class Chrono
      * @param zoneId 时区
      * @return 相应的 `Chrono` 实例
      */
-    public static Chrono wrap(LocalDateTime localDateTime, ZoneId zoneId) {
+    public static Chrono from(LocalDateTime localDateTime, ZoneId zoneId) {
         return new Chrono(localDateTime, zoneId);
     }
 
@@ -590,7 +593,7 @@ public final class Chrono
      * @param zoneId 时区
      * @return 相应的 `Chrono` 实例
      */
-    public static Chrono wrap(long timestamp, ZoneId zoneId) {
+    public static Chrono from(long timestamp, ZoneId zoneId) {
         return new Chrono(timestamp, zoneId);
     }
 
@@ -610,6 +613,33 @@ public final class Chrono
      */
     public static int getCurrentWeekOfMonth() {
         return now().getWeekOfMonth();
+    }
+
+    /**
+     * #brief: 获取指定时间间隔后的时间点
+     *
+     * <p>该方法基于当前时间，计算并返回指定时间间隔后的 `Chrono` 对象。
+     * 时间间隔以毫秒为单位。
+     *
+     * @param duration 未来时间的间隔，单位为秒
+     * @return 计算后的 `Chrono` 时间点
+     */
+    public static Chrono futureMoments(int duration) {
+        return futureMoments(duration, TimeUnit.SECONDS);
+    }
+
+    /**
+     * #brief: 获取指定时间间隔后的时间点（自定义时间单位）
+     *
+     * <p>该方法基于当前时间，计算并返回指定时间间隔后的 `Chrono` 对象。
+     * 允许自定义时间单位，如秒、分钟、小时等。
+     *
+     * @param duration 未来时间的间隔
+     * @param unit 时间单位，决定 `duration` 的计算方式
+     * @return 计算后的 `Chrono` 时间点
+     */
+    public static Chrono futureMoments(int duration, TimeUnit unit) {
+        return now().futureMoments((long) duration, unit);
     }
 
     @Override
@@ -738,13 +768,13 @@ public final class Chrono
     }
 
     @Override
-    public Chrono plusNanos(int value) {
+    public Chrono plusNanos(long value) {
         return new Chrono(_core_local_time.plusNanos(value));
     }
 
     @Override
-    public Chrono plusMillis(int value) {
-        return new Chrono(_core_local_time.plusNanos((long) value * 1000));
+    public Chrono plusMillis(long value) {
+        return new Chrono(_core_local_time.plusNanos(value * 1_000_000));
     }
 
     @Override
@@ -1023,6 +1053,16 @@ public final class Chrono
     }
 
     @Override
+    public Chrono futureMoments(long duration) {
+        return futureMoments(duration, TimeUnit.SECONDS);
+    }
+
+    @Override
+    public Chrono futureMoments(long duration, TimeUnit unit) {
+        return plusMillis(unit.toMillis(duration));
+    }
+
+    @Override
     public String toString() {
         return format();
     }
@@ -1059,15 +1099,6 @@ public final class Chrono
     @Override
     public long getLong(TemporalField field) {
         return _core_local_time.getLong(field);
-    }
-
-    /////////////////////////////////////////////////////////////////////////
-    /// Comparable
-    /////////////////////////////////////////////////////////////////////////
-
-    @Override
-    public int compareTo(@NotNull Chrono o) {
-        return _core_local_time.compareTo(o._core_local_time);
     }
 
 }

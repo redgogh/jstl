@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 处理时间的接口，提供多种时间转换、计算和格式化方法。
@@ -49,7 +50,7 @@ import java.util.Date;
  *     <li>{@link #toDate()}: 将时间转换为 `Date` 类型。</li>
  *     <li>{@link #toLocalDate()}: 将时间转换为 `LocalDate`。</li>
  *     <li>{@link #toLocalDateTime()}: 将时间转换为 `LocalDateTime`。</li>
- *     <li>加时间：{@link #plusNanos(int)}, {@link #plusMillis(int)}, {@link #plusSeconds(int)}, ...</li>
+ *     <li>加时间：{@link #plusNanos(long)}, {@link #plusMillis(long)}, {@link #plusSeconds(int)}, ...</li>
  *     <li>减时间：{@link #minusNanos(int)}, {@link #minusMillis(int)}, {@link #minusSeconds(int)}, ...</li>
  *     <li>计算时间差：如 {@link #betweenNanos(Chrono)}, {@link #betweenMillis(Date)}, ...</li>
  *     <li>获取时间组件：如 {@link #getNano()}, {@link #getDayOfWeek()}, {@link #getYear()}, ...</li>
@@ -271,7 +272,7 @@ public interface Calendar {
      * @param value 要增加的纳秒数
      * @return 增加后的时间对象
      */
-    Chrono plusNanos(int value);
+    Chrono plusNanos(long value);
 
     /**
      * 将当前时间加上指定的毫秒数。
@@ -281,7 +282,7 @@ public interface Calendar {
      * @param value 要增加的毫秒数
      * @return 增加后的时间对象
      */
-    Chrono plusMillis(int value);
+    Chrono plusMillis(long value);
 
     /**
      * 将当前时间加上指定的秒数。
@@ -805,5 +806,28 @@ public interface Calendar {
      * @return 当前时间按指定模式格式化后的字符串表示
      */
     String format(String pattern);
+
+    /**
+     * #brief: 获取指定时间间隔后的时间点
+     *
+     * <p>该方法基于当前时间，计算并返回指定时间间隔后的 `Chrono` 对象。
+     * 时间间隔以毫秒为单位。
+     *
+     * @param duration 未来时间的间隔，单位为毫秒
+     * @return 计算后的 `Chrono` 时间点
+     */
+    Chrono futureMoments(long duration);
+
+    /**
+     * #brief: 获取指定时间间隔后的时间点（自定义时间单位）
+     *
+     * <p>该方法基于当前时间，计算并返回指定时间间隔后的 `Chrono` 对象。
+     * 允许自定义时间单位，如秒、分钟、小时等。
+     *
+     * @param duration 未来时间的间隔
+     * @param unit 时间单位，决定 `duration` 的计算方式
+     * @return 计算后的 `Chrono` 时间点
+     */
+    Chrono futureMoments(long duration, TimeUnit unit);
 
 }

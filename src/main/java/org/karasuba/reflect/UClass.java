@@ -42,6 +42,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import static org.karasuba.string.StringUtils.streq;
+
 /**
  * `UClass` 是一个用于处理 Java 类元数据的工具类。它封装了一个 `Class` 对象，并提供了一些方法来
  * 访问和操作该类的属性和方法。可以通过该类实例化对象、获取类的属性列表以及调用静态方法等。
@@ -133,6 +135,28 @@ public class UClass {
     ////////////////////////////////////////////////////////////////////////////
     // static
     ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * #brief: 根据字段名称查找并返回指定类的常量值
+     *
+     * <p>该方法通过反射查找指定类中的常量字段，并返回与提供的名称匹配的常量值。
+     * 如果找到匹配的字段并且该字段是 `static` 且 `final`，则返回其值。
+     * 如果没有找到匹配的常量字段，则返回 `null`。
+     *
+     * @param aClass 需要查找常量的类的 `Class` 对象
+     * @param name 要查找的常量字段名称
+     * @param <T> 常量值的类型
+     * @return 与提供名称匹配的常量值，如果未找到则返回 `null`
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T getConstant(Class<?> aClass, String name) {
+        UClass uClass = new UClass(aClass);
+        for (UField field : uClass.fields.values()) {
+            if (field.isStatic() && field.isFinal() && streq(field.getName(), name))
+                return (T) field.read(null);
+        }
+        return null;
+    }
 
     /**
      * #brief: 实例化一个类对象，根据类的构造器传入参数数据
@@ -268,7 +292,7 @@ public class UClass {
      */
     public UField getDeclaredField(String name) {
         for (UField field : getDeclaredFields()) {
-            if (StringUtils.streq(field.getName(), name))
+            if (streq(field.getName(), name))
                 return field;
         }
         return null;
