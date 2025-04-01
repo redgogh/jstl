@@ -16,6 +16,7 @@ import org.karasuba.utils.Assert;
 import org.karasuba.utils.Captor;
 
 import java.security.PrivateKey;
+import java.util.Date;
 
 import static com.nimbusds.jose.JWSAlgorithm.*;
 import static org.karasuba.utils.Generator.uuid;
@@ -130,13 +131,10 @@ public class JWTSigner {
         return Captor.call(() -> {
             JWSSigner signer = newSigner(encryptKey, algorithm);
 
-            JWTClaimsSet.Builder builder = new JWTClaimsSet.Builder()
-                    .subject(claims.getSubject())
-                    .issueTime(Chrono.now())
-                    .issuer(claims.getIssuer())
-                    .expirationTime(Chrono.from(claims.getExpirationTime()))
-                    .jwtID(Codec.BASE64.encode(uuid()))
-                    .audience(claims.getAudience());
+            JWTClaimsSet.Builder builder = new JWTClaimsSet.Builder();
+
+            builder.claim("iat", System.currentTimeMillis());
+            builder.claim("jti", Codec.BASE64.encode(uuid()));
 
             claims.forEach(builder::claim);
 

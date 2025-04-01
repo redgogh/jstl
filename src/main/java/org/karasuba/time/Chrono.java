@@ -989,7 +989,7 @@ public final class Chrono extends Date
 
     @Override
     public int getMilli() {
-        return getNano() / 1000000;
+        return getNano() / 1_000_000;
     }
 
     @Override
