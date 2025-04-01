@@ -33,10 +33,6 @@ import static org.karasuba.utils.Transformer.atos;
  */
 public class JWTClaims extends HashMap<String, Object> {
 
-    public JWTClaims() {
-        setIssuedAt(Chrono.now());
-    }
-
     /**
      * 设置 JWT 的主题（Subject）。
      *

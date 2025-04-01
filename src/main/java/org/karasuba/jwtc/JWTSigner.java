@@ -12,6 +12,7 @@ import org.karasuba.collection.Maps;
 import org.karasuba.exception.SystemRuntimeException;
 import org.karasuba.security.Codec;
 import org.karasuba.time.Chrono;
+import org.karasuba.utils.Assert;
 import org.karasuba.utils.Captor;
 
 import java.security.PrivateKey;
@@ -112,17 +113,6 @@ public class JWTSigner {
     }
 
     /**
-     * #brief: 使用默认有效期（2小时）生成签名的 JWT 字符串
-     *
-     * <p>该方法使用默认有效期（2小时）生成签名的 JWT 字符串。如果没有提供额外的 JWT 声明，将使用默认声明。
-     *
-     * @return 签名后的 JWT 字符串
-     */
-    public String signWith() {
-        return signWith(new JWTClaims());
-    }
-
-    /**
      * #brief: 使用指定的加密算法和有效期生成签名的 JWT 字符串
      *
      * <p>该方法使用指定的加密算法和有效期生成签名的 JWT 字符串。可以通过传入时间单位来调整有效期单位。
@@ -132,6 +122,11 @@ public class JWTSigner {
      * @return 签名后的 JWT 字符串
      */
     public String signWith(JWTClaims claims) {
+        Assert.notNull(claims, "签发 Token 必须要有 JWTClaims 对象");
+
+        if (!claims.containsKey("exp"))
+            throw new IllegalArgumentException("Token 签发失败 Claims 必须包含过期时间");
+
         return Captor.call(() -> {
             JWSSigner signer = newSigner(encryptKey, algorithm);
 
