@@ -29,6 +29,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import static org.karasuba.string.StringInterface.*;
 import static org.karasuba.string.StringUtils.strcut;
 
 @SuppressWarnings("ALL")

@@ -18,7 +18,6 @@ package org.karasuba.string;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karasuba.utils.Transformer;
 import org.karasuba.utils.Optional;
 
 import java.nio.file.FileSystems;
