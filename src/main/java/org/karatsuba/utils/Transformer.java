@@ -435,7 +435,7 @@ public class Transformer {
      */
     public static String atos(Object obj, StringInterface...iface) {
         if (obj == null)
-            return null;
+            return "";
         if (obj instanceof String)
             return StringInterface.pipelineExecutor((String) obj, iface);
         /* 字节数组转字符串 */
