@@ -19,7 +19,6 @@ package org.karasuba.io;
 \* -------------------------------------------------------------------------------- */
 
 import org.karasuba.exception.IOWriteException;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 
@@ -28,15 +27,15 @@ import java.io.*;
  */
 public class FileByteWriter extends FileOutputStream {
 
-    public FileByteWriter(@NotNull String name) throws FileNotFoundException {
+    public FileByteWriter(String name) throws FileNotFoundException {
         super(name);
     }
 
-    public FileByteWriter(@NotNull MutableFile mutableFile) throws FileNotFoundException {
+    public FileByteWriter(MutableFile mutableFile) throws FileNotFoundException {
         super(mutableFile);
     }
 
-    public FileByteWriter(@NotNull FileDescriptor fdObj) {
+    public FileByteWriter(FileDescriptor fdObj) {
         super(fdObj);
     }
 

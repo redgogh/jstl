@@ -19,50 +19,49 @@ package org.karasuba.exception;
 \* -------------------------------------------------------------------------------- */
 
 /**
- * `SerializationException` 表示序列化或反序列化过程中发生的异常。
+ * `UnauthorizedException` 表示未经授权的异常。
  *
- * <p>该异常通常用于对象转换为字节流、JSON、XML 或其他格式失败的情况，
- * 以及从这些格式恢复对象时遇到的问题。
+ * <p>该异常用于在用户未通过身份验证或没有足够权限访问某些资源时抛出。
+ * 通常用于 API 访问控制或安全性检查的场景。
  *
  * <p>支持多种构造方式，可直接创建异常、携带异常原因或格式化错误消息。
  */
-public class SerializationException extends SystemRuntimeException {
+public class UnauthorizedException extends SystemRuntimeException {
 
     /**
-     * 无参构造，创建默认的序列化异常。
+     * 无参构造，创建默认的未经授权异常。
      */
-    public SerializationException() {
+    public UnauthorizedException() {
     }
 
     /**
-     * 使用指定的异常作为原因创建序列化异常。
+     * 使用指定的异常作为原因创建未经授权异常。
      *
      * @param e 异常原因
      */
-    public SerializationException(Throwable e) {
+    public UnauthorizedException(Throwable e) {
         super(e);
     }
 
     /**
-     * 使用格式化字符串创建序列化异常。
+     * 使用格式化字符串创建未经授权异常。
      *
      * @param fmt  错误消息格式
      * @param args 格式化参数
      */
-    public SerializationException(String fmt, Object... args) {
+    public UnauthorizedException(String fmt, Object... args) {
         super(fmt, args);
     }
 
     /**
-     * 使用格式化字符串和异常原因创建序列化异常。
+     * 使用格式化字符串和异常原因创建未经授权异常。
      *
      * @param fmt  错误消息格式
      * @param e    异常原因
      * @param args 格式化参数
      */
-    public SerializationException(String fmt, Throwable e, Object... args) {
+    public UnauthorizedException(String fmt, Throwable e, Object... args) {
         super(fmt, e, args);
     }
-
 }
 

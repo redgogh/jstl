@@ -1,9 +1,26 @@
 package org.karasuba.exception;
 
-import org.jetbrains.annotations.NotNull;
+/* -------------------------------------------------------------------------------- *\
+|*                                                                                  *|
+|*    Copyright (C) 2019-2024 RedGogh All rights reserved.                          *|
+|*                                                                                  *|
+|*    Licensed under the Apache License, Version 2.0 (the "License");               *|
+|*    you may not use this file except in compliance with the License.              *|
+|*    You may obtain a copy of the License at                                       *|
+|*                                                                                  *|
+|*        http://www.apache.org/licenses/LICENSE-2.0                                *|
+|*                                                                                  *|
+|*    Unless required by applicable law or agreed to in writing, software           *|
+|*    distributed under the License is distributed on an "AS IS" BASIS,             *|
+|*    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.      *|
+|*    See the License for the specific language governing permissions and           *|
+|*    limitations under the License.                                                *|
+|*                                                                                  *|
+\* -------------------------------------------------------------------------------- */
+
 
 /**
- * `AssertException` 是一个自定义的断言异常类，继承自 `CentralRuntimeException`。
+ * `AssertException` 是一个自定义的断言异常类，继承自 `SystemRuntimeException`。
  * 用于在程序中断言条件失败时抛出异常，以便快速定位和处理程序逻辑错误。<p>
  *
  * <h2>使用场景</h2>
@@ -14,8 +31,8 @@ import org.jetbrains.annotations.NotNull;
  * <ul>
  *     <li>{@link #AssertException()} - 默认构造函数，不带任何参数。</li>
  *     <li>{@link #AssertException(Throwable e)} - 通过已有的异常创建一个新的断言异常。</li>
- *     <li>{@link #AssertException(String vfmt, Object... args)} - 根据格式化字符串和参数创建异常信息。</li>
- *     <li>{@link #AssertException(String vfmt, Throwable e, Object... args)} - 根据格式化字符串、已有异常和参数创建异常信息。</li>
+ *     <li>{@link #AssertException(String fmt, Object... args)} - 根据格式化字符串和参数创建异常信息。</li>
+ *     <li>{@link #AssertException(String fmt, Throwable e, Object... args)} - 根据格式化字符串、已有异常和参数创建异常信息。</li>
  * </ul>
  *
  * <h2>使用示例</h2>
@@ -50,28 +67,28 @@ public class AssertException extends SystemRuntimeException {
      *
      * @param e 原始异常，不能为 null。
      */
-    public AssertException(@NotNull Throwable e) {
+    public AssertException(Throwable e) {
         super(e);
     }
 
     /**
      * 根据格式化字符串和参数创建异常信息。
      *
-     * @param vfmt 格式化字符串，不能为 null。
+     * @param fmt 格式化字符串，不能为 null。
      * @param args 格式化参数。
      */
-    public AssertException(@NotNull String vfmt, @NotNull Object... args) {
-        super(vfmt, args);
+    public AssertException(String fmt, Object... args) {
+        super(fmt, args);
     }
 
     /**
      * 根据格式化字符串、已有异常和参数创建异常信息。
      *
-     * @param vfmt 格式化字符串，不能为 null。
+     * @param fmt 格式化字符串，不能为 null。
      * @param e 原始异常，不能为 null。
      * @param args 格式化参数。
      */
-    public AssertException(@NotNull String vfmt, @NotNull Throwable e, @NotNull Object... args) {
-        super(vfmt, e, args);
+    public AssertException(String fmt, Throwable e, Object... args) {
+        super(fmt, e, args);
     }
 }

@@ -27,7 +27,6 @@ import org.karasuba.utils.Captor;
 import org.karasuba.utils.Optional;
 import org.karasuba.io.MutableFile;
 import okhttp3.*;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.Map;
@@ -537,12 +536,12 @@ public class HttpClient {
     private void async(Call call, Callback callback) {
         call.enqueue(new okhttp3.Callback() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+            public void onFailure(Call call, IOException e) {
                 callback.onFailure(e);
             }
 
             @Override
-            public void onResponse(@NotNull Call call, @NotNull okhttp3.Response response) throws IOException {
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 callback.onResponse(newCallResponse(response));
             }
         });
@@ -552,12 +551,12 @@ public class HttpClient {
     private void async(Call call, StreamCallback callback) {
         call.enqueue(new okhttp3.Callback() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+            public void onFailure(Call call, IOException e) {
                 callback.onFailure(e);
             }
 
             @Override
-            public void onResponse(@NotNull Call call, @NotNull okhttp3.Response response) throws IOException {
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 callback.onResponse(new StreamResponse(response));
             }
         });

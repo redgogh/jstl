@@ -19,7 +19,6 @@ package org.karasuba.io;
 \* -------------------------------------------------------------------------------- */
 
 import org.karasuba.exception.IOReadException;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileDescriptor;
@@ -31,15 +30,15 @@ import java.io.FileNotFoundException;
  */
 public class FileByteReader extends FileInputStream {
 
-    public FileByteReader(@NotNull String name) throws FileNotFoundException {
+    public FileByteReader(String name) throws FileNotFoundException {
         super(name);
     }
 
-    public FileByteReader(@NotNull File file) throws FileNotFoundException {
+    public FileByteReader(File file) throws FileNotFoundException {
         super(file);
     }
 
-    public FileByteReader(@NotNull FileDescriptor fdObj) {
+    public FileByteReader(FileDescriptor fdObj) {
         super(fdObj);
     }
 

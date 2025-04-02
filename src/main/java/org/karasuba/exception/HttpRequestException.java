@@ -1,9 +1,26 @@
 package org.karasuba.exception;
 
-import org.jetbrains.annotations.NotNull;
+/* -------------------------------------------------------------------------------- *\
+|*                                                                                  *|
+|*    Copyright (C) 2019-2024 RedGogh All rights reserved.                          *|
+|*                                                                                  *|
+|*    Licensed under the Apache License, Version 2.0 (the "License");               *|
+|*    you may not use this file except in compliance with the License.              *|
+|*    You may obtain a copy of the License at                                       *|
+|*                                                                                  *|
+|*        http://www.apache.org/licenses/LICENSE-2.0                                *|
+|*                                                                                  *|
+|*    Unless required by applicable law or agreed to in writing, software           *|
+|*    distributed under the License is distributed on an "AS IS" BASIS,             *|
+|*    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.      *|
+|*    See the License for the specific language governing permissions and           *|
+|*    limitations under the License.                                                *|
+|*                                                                                  *|
+\* -------------------------------------------------------------------------------- */
+
 
 /**
- * `HttpRequestException` 是一个自定义的 HTTP 请求异常类，继承自 `CentralRuntimeException`。
+ * `HttpRequestException` 是一个自定义的 HTTP 请求异常类，继承自 `SystemRuntimeException`。
  * 用于在处理 HTTP 请求时出现错误或异常情况时抛出。<p>
  *
  * <h2>使用场景</h2>
@@ -14,8 +31,8 @@ import org.jetbrains.annotations.NotNull;
  * <ul>
  *     <li>{@link #HttpRequestException()} - 默认构造函数，不带任何参数。</li>
  *     <li>{@link #HttpRequestException(Throwable e)} - 通过已有的异常创建一个新的 HTTP 请求异常。</li>
- *     <li>{@link #HttpRequestException(String vfmt, Object... args)} - 根据格式化字符串和参数创建异常信息。</li>
- *     <li>{@link #HttpRequestException(String vfmt, Throwable e, Object... args)} - 根据格式化字符串、已有异常和参数创建异常信息。</li>
+ *     <li>{@link #HttpRequestException(String fmt, Object... args)} - 根据格式化字符串和参数创建异常信息。</li>
+ *     <li>{@link #HttpRequestException(String fmt, Throwable e, Object... args)} - 根据格式化字符串、已有异常和参数创建异常信息。</li>
  * </ul>
  *
  * <h2>使用示例</h2>
@@ -50,29 +67,29 @@ public class HttpRequestException extends SystemRuntimeException {
      *
      * @param e 原始异常，不能为 null。
      */
-    public HttpRequestException(@NotNull Throwable e) {
+    public HttpRequestException(Throwable e) {
         super(e);
     }
 
     /**
      * 根据格式化字符串和参数创建异常信息。
      *
-     * @param vfmt 格式化字符串，不能为 null。
+     * @param fmt 格式化字符串，不能为 null。
      * @param args 格式化参数。
      */
-    public HttpRequestException(@NotNull String vfmt, @NotNull Object... args) {
-        super(vfmt, args);
+    public HttpRequestException(String fmt, Object... args) {
+        super(fmt, args);
     }
 
     /**
      * 根据格式化字符串、已有异常和参数创建异常信息。
      *
-     * @param vfmt 格式化字符串，不能为 null。
+     * @param fmt 格式化字符串，不能为 null。
      * @param e 原始异常，不能为 null。
      * @param args 格式化参数。
      */
-    public HttpRequestException(@NotNull String vfmt, @NotNull Throwable e, @NotNull Object... args) {
-        super(vfmt, e, args);
+    public HttpRequestException(String fmt, Throwable e, Object... args) {
+        super(fmt, e, args);
     }
 }
 

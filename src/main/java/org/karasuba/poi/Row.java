@@ -20,7 +20,6 @@ package org.karasuba.poi;
 
 import org.karasuba.collection.Lists;
 import org.karasuba.iface.TypeMapper;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -62,7 +61,7 @@ public class Row extends ArrayList<String> {
      *
      * @param c 用于初始化行的字符串集合。
      */
-    public Row(@NotNull Collection<? extends String> c) {
+    public Row(Collection<? extends String> c) {
         super(c);
     }
 
@@ -103,4 +102,5 @@ public class Row extends ArrayList<String> {
         builder.delete(len - 1, len);
         return atos(builder);
     }
+
 }
