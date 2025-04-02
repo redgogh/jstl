@@ -600,7 +600,7 @@ public final class Chrono extends Date
      *
      * @return 当前日期的天数
      */
-    public static int getToday() {
+    public static int today() {
         return now().getDayOfMonth();
     }
 
@@ -609,35 +609,17 @@ public final class Chrono extends Date
      *
      * @return 当前月份的周数
      */
-    public static int getCurrentWeekOfMonth() {
+    public static int weekOfMonth() {
         return now().getWeekOfMonth();
     }
 
     /**
-     * #brief: 获取指定时间间隔后的时间点
+     * 获取当前年份的周数。
      *
-     * <p>该方法基于当前时间，计算并返回指定时间间隔后的 `Chrono` 对象。
-     * 时间间隔以毫秒为单位。
-     *
-     * @param duration 未来时间的间隔，单位为秒
-     * @return 计算后的 `Chrono` 时间点
+     * @return 当前年份的周数
      */
-    public static Chrono moments(long duration) {
-        return moments(duration, TimeUnit.SECONDS);
-    }
-
-    /**
-     * #brief: 获取指定时间间隔后的时间点（自定义时间单位）
-     *
-     * <p>该方法基于当前时间，计算并返回指定时间间隔后的 `Chrono` 对象。
-     * 允许自定义时间单位，如秒、分钟、小时等。
-     *
-     * @param duration 未来时间的间隔
-     * @param unit 时间单位，决定 `duration` 的计算方式
-     * @return 计算后的 `Chrono` 时间点
-     */
-    public static Chrono moments(long duration, TimeUnit unit) {
-        return now().futureMoments(duration, unit);
+    public static int weekOfYear() {
+        return now().getWeekOfYear();
     }
 
     @Override
