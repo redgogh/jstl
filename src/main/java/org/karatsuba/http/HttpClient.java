@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static org.karatsuba.string.StringUtils.strcheckin;
-import static org.karatsuba.utils.Transformer.atos;
+import static org.karatsuba.utils.TypeCvt.atos;
 
 /**
  * `HttpClient` 是一个用于发送 HTTP 请求的客户端工具类。该类支持多种 HTTP 请求方法，

@@ -34,7 +34,7 @@ import org.karatsuba.string.StringUtils;
 import org.karatsuba.time.DateFormatter;
 import org.karatsuba.utils.Captor;
 import org.karatsuba.utils.Optional;
-import org.karatsuba.utils.Transformer;
+import org.karatsuba.utils.TypeCvt;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -45,7 +45,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import static org.karatsuba.utils.Transformer.atos;
+import static org.karatsuba.utils.TypeCvt.atos;
 
 /**
  * 类 {@link WorkBook} 用于创建和操作 Excel 工作簿。
@@ -278,7 +278,7 @@ public class WorkBook implements Iterable<Row> {
      *
      */
     public void addRow(Object... values) {
-        addRow(new Row(Lists.map(values, Transformer::atos)));
+        addRow(new Row(Lists.map(values, TypeCvt::atos)));
     }
 
     /**
@@ -490,7 +490,7 @@ public class WorkBook implements Iterable<Row> {
 
         /* 基础数据类型 */
         if (uField.isPrimitiveCheck())
-            uField.write(obj, Transformer.toPrimitiveValue(value, uField.getOriginType()));
+            uField.write(obj, TypeCvt.toPrimitiveValue(value, uField.getOriginType()));
 
         /* 日期类型 */
         else if (uField.typecheck(Date.class))

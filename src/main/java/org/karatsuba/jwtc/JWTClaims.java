@@ -2,13 +2,13 @@ package org.karatsuba.jwtc;
 
 import org.karatsuba.iface.TypeMapper;
 import org.karatsuba.time.Chrono;
-import org.karatsuba.utils.Transformer;
+import org.karatsuba.utils.TypeCvt;
 
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
-import static org.karatsuba.utils.Transformer.atol;
-import static org.karatsuba.utils.Transformer.atos;
+import static org.karatsuba.utils.TypeCvt.atol;
+import static org.karatsuba.utils.TypeCvt.atos;
 
 /**
  * `JWTClaims` 是一个扩展自 {@link HashMap} 的类，表示 JWT 中的声明部分。
@@ -98,7 +98,7 @@ public class JWTClaims extends HashMap<String, Object> {
      * @return JWT 中的 subject 字段值
      */
     public String getSubject() {
-        return getAttribute("sub", Transformer::atos);
+        return getAttribute("sub", TypeCvt::atos);
     }
 
     /**
@@ -109,7 +109,7 @@ public class JWTClaims extends HashMap<String, Object> {
      * @return JWT 中的 audience 字段值
      */
     public String getAudience() {
-        return getAttribute("aud", Transformer::atos);
+        return getAttribute("aud", TypeCvt::atos);
     }
 
     /**
@@ -120,7 +120,7 @@ public class JWTClaims extends HashMap<String, Object> {
      * @return JWT 中的 issuer 字段值
      */
     public String getIssuer() {
-        return getAttribute("iss", Transformer::atos);
+        return getAttribute("iss", TypeCvt::atos);
     }
 
     /**
@@ -131,7 +131,7 @@ public class JWTClaims extends HashMap<String, Object> {
      * @return JWT 的签发时间
      */
     public long getIssuedAt() {
-        return getAttribute("iat", Transformer::atol);
+        return getAttribute("iat", TypeCvt::atol);
     }
 
     /**
@@ -142,7 +142,7 @@ public class JWTClaims extends HashMap<String, Object> {
      * @return JWT 的过期时间
      */
     public long getExpirationTime() {
-        return getAttribute("exp", Transformer::atol);
+        return getAttribute("exp", TypeCvt::atol);
     }
 
     /**
@@ -165,7 +165,7 @@ public class JWTClaims extends HashMap<String, Object> {
      * @return JWT 的唯一标识符 (JTI)，如果不存在则返回 null。
      */
     public String getJwtId() {
-        return getAttribute("jti", Transformer::atos);
+        return getAttribute("jti", TypeCvt::atos);
     }
 
     /**
@@ -177,7 +177,7 @@ public class JWTClaims extends HashMap<String, Object> {
      * @return 属性的值
      */
     public String getAttribute(String key) {
-        return getAttribute(key, Transformer::atos);
+        return getAttribute(key, TypeCvt::atos);
     }
 
     /**

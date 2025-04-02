@@ -25,7 +25,7 @@ import org.karatsuba.string.StringUtils;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static org.karatsuba.utils.Transformer.atos;
+import static org.karatsuba.utils.TypeCvt.atos;
 
 /**
  * `QueryBuilder` 是一个继承自 `LinkedHashMap<String, String>` 的类，用于构建 HTTP 请求的查询参数。

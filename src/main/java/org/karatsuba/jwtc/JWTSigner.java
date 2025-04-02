@@ -18,8 +18,8 @@ import java.security.PrivateKey;
 
 import static com.nimbusds.jose.JWSAlgorithm.*;
 import static org.karatsuba.utils.Generator.uuid;
-import static org.karatsuba.utils.Transformer.atob;
-import static org.karatsuba.utils.Transformer.checkin;
+import static org.karatsuba.utils.TypeCvt.atob;
+import static org.karatsuba.utils.TypeCvt.checkin;
 
 /**
  * `JWTGrantor` 是一个用于生成和验证 JSON Web Token (JWT) 的类。

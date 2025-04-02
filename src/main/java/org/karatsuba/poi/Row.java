@@ -24,7 +24,7 @@ import org.karatsuba.iface.TypeMapper;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static org.karatsuba.utils.Transformer.atos;
+import static org.karatsuba.utils.TypeCvt.atos;
 
 /**
  * 表示一行数据，继承自 {@link ArrayList}，用于存储字符串类型的单元格数据。

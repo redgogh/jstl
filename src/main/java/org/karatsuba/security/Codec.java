@@ -37,7 +37,7 @@ import org.karatsuba.utils.Captor;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
-import static org.karatsuba.utils.Transformer.atos;
+import static org.karatsuba.utils.TypeCvt.atos;
 
 /**
  * `Codec` 类用于数据的编码和解码操作。它提供了将数据从一种格式转换为另一种格式的功能，

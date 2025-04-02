@@ -7,7 +7,7 @@ import org.karatsuba.utils.Captor;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-import static org.karatsuba.utils.Transformer.atos;
+import static org.karatsuba.utils.TypeCvt.atos;
 
 /**
  * @author Red Gogh

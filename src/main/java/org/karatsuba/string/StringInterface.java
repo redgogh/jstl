@@ -19,7 +19,7 @@ package org.karatsuba.string;
 \* -------------------------------------------------------------------------------- */
 
 
-import static org.karatsuba.utils.Transformer.atos;
+import static org.karatsuba.utils.TypeCvt.atos;
 
 /**
  * 定义字符串操作类型的枚举类。

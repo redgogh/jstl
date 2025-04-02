@@ -30,7 +30,7 @@ import org.karatsuba.security.Codec;
 
 import java.security.Key;
 
-import static org.karatsuba.utils.Transformer.atos;
+import static org.karatsuba.utils.TypeCvt.atos;
 
 /**
  * @author Red Gogh

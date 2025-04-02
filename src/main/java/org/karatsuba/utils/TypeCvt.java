@@ -30,7 +30,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 /**
- * Transformer 类提供了多种类型转换和比较功能。
+ * TypeCvt 类提供了多种类型转换和比较功能。
  *
  * <p>该类支持将对象转换为基本数据类型，如 int、long、boolean 和 String。
  * 通过自动识别对象类型，该类简化了数据转换过程，确保类型安全。
@@ -45,7 +45,7 @@ import java.util.Objects;
  * @author Red Gogh
  * @see java.util.Objects
  */
-public class Transformer {
+public class TypeCvt {
 
     /**
      * #brief: 比较模式常量 - 等于

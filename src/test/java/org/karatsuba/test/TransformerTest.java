@@ -22,10 +22,10 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.karatsuba.utils.Transformer.atob;
+import static org.karatsuba.utils.TypeCvt.atob;
 
 @SuppressWarnings("ALL")
-public class TransformerTest {
+public class TypeCvtTest {
 
     @Test
     public void atobTest() {

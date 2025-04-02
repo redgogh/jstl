@@ -41,7 +41,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import static org.karatsuba.string.StringUtils.streq;
-import static org.karatsuba.utils.Transformer.checkin;
+import static org.karatsuba.utils.TypeCvt.checkin;
 
 /**
  * `UClass` 是一个用于处理 Java 类元数据的工具类。它封装了一个 `Class` 对象，并提供了一些方法来

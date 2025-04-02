@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.karatsuba.string.StringInterface.*;
 import static org.karatsuba.string.StringUtils.strcut;
-import static org.karatsuba.utils.Transformer.atos;
+import static org.karatsuba.utils.TypeCvt.atos;
 
 @SuppressWarnings("ALL")
 public class StringUtilsTest {

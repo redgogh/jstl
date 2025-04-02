@@ -36,8 +36,8 @@ import javax.crypto.Cipher;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 
-import static org.karatsuba.utils.Transformer.atob;
-import static org.karatsuba.utils.Transformer.atos;
+import static org.karatsuba.utils.TypeCvt.atob;
+import static org.karatsuba.utils.TypeCvt.atos;
 
 /**
  * @author Red Gogh

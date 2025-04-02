@@ -21,7 +21,7 @@ package org.karatsuba.test;
 import org.karatsuba.io.MutableFile;
 import org.junit.Test;
 
-import static org.karatsuba.utils.Transformer.atos;
+import static org.karatsuba.utils.TypeCvt.atos;
 
 @SuppressWarnings("ALL")
 public class MutableFileTest {

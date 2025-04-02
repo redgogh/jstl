@@ -2,7 +2,7 @@ package org.karatsuba.security.codec;
 
 import org.karatsuba.security.Base64;
 
-import static org.karatsuba.utils.Transformer.atos;
+import static org.karatsuba.utils.TypeCvt.atos;
 
 /**
  * @author Red Gogh

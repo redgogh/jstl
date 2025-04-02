@@ -28,8 +28,8 @@ import okhttp3.ResponseBody;
 
 import java.util.Map;
 
-import static org.karatsuba.utils.Transformer.anyeq;
-import static org.karatsuba.utils.Transformer.atos;
+import static org.karatsuba.utils.TypeCvt.anyeq;
+import static org.karatsuba.utils.TypeCvt.atos;
 
 /**
  * `Response` 是一个继承自 `JSONObject` 的类，用于表示一个包含状态码和数据的响应对象。

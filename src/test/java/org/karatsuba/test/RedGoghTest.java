@@ -20,7 +20,7 @@ package org.karatsuba.test;
 
 import org.junit.Test;
 
-import static org.karatsuba.utils.Transformer.atobool;
+import static org.karatsuba.utils.TypeCvt.atobool;
 
 @SuppressWarnings("ALL")
 public class RedGoghTest {
