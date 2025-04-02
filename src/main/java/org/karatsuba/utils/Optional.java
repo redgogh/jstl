@@ -20,9 +20,9 @@ package org.karatsuba.utils;
 
 /* Creates on 2023/4/29. */
 
-import org.karatsuba.iface.CallableFunction;
+import org.karatsuba.iface.Callable;
 import org.karatsuba.string.StringUtils;
-import org.karatsuba.iface.ActionFunction;
+import org.karatsuba.iface.Action;
 
 /**
  * @author Red Gogh
@@ -53,7 +53,7 @@ public class Optional {
      * @param <T> 值的类型
      * @return 如果 {@code value} 为 null，则返回 {@code orNull}，否则返回 {@code value}
      */
-    public static <T> T ifNullable(T value, CallableFunction<T> orNull) {
+    public static <T> T ifNullable(T value, Callable<T> orNull) {
         return Captor.call(() -> value == null ? orNull.call() : value);
     }
 
@@ -71,7 +71,7 @@ public class Optional {
     }
 
     /**
-     * 执行给定的 {@link ActionFunction}，如果没有抛出异常，则返回 {@code orSuccess}，
+     * 执行给定的 {@link Action}，如果没有抛出异常，则返回 {@code orSuccess}，
      * 否则返回 {@code orError}。
      *
      * <p>此方法用于捕获可能抛出的异常，简化异常处理流程。成功执行时返回成功值，
@@ -83,7 +83,7 @@ public class Optional {
      *
      * @return {@code orSuccess} 如果函数成功执行，{@code orError} 如果函数抛出异常
      */
-    public static <T> T ifError(ActionFunction function, T orSuccess, T orError) {
+    public static <T> T ifError(Action function, T orSuccess, T orError) {
         try {
             function.call();
             return orSuccess;
@@ -102,7 +102,7 @@ public class Optional {
      * @param <T> 返回值的类型
      * @return 函数执行的返回值；如果发生异常，则返回 {@code orError}
      */
-    public static <T> T ifError(CallableFunction<T> function, T orError) {
+    public static <T> T ifError(Callable<T> function, T orError) {
         try {
             return function.call();
         } catch (Throwable e) {

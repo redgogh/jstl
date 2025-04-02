@@ -13,6 +13,7 @@
 - 移除 `Chrono#moments` 函数。
 - 优化 `Transformer` 命名更新为 `TypeCvt`。
 - 优化 `any*、checkin` 等函数移动到 `Comparators` 类中。
+- 优化 `iface` 包下的函数式接口命名。
 
 ## 🐞 BUG 修复
 

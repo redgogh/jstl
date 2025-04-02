@@ -20,8 +20,8 @@ package org.karatsuba.utils;
 
 import org.karatsuba.exception.AssertException;
 import org.karatsuba.exception.SystemRuntimeException;
-import org.karatsuba.iface.ActionFunction;
-import org.karatsuba.iface.CallableFunction;
+import org.karatsuba.iface.Action;
+import org.karatsuba.iface.Callable;
 
 /**
  * @author Red Gogh
@@ -35,7 +35,7 @@ public class Captor {
      *
      * @param function 要执行的函数
      */
-    public static void icall(ActionFunction function) {
+    public static void icall(Action function) {
         try {
             function.call();
         } catch (Throwable e) {
@@ -55,7 +55,7 @@ public class Captor {
      * @param <T> 返回值的类型
      * @return 回调函数的返回值，若发生异常则返回 `null`
      */
-    public static <T> T icall(CallableFunction<T> function) {
+    public static <T> T icall(Callable<T> function) {
         try {
             return function.call();
         } catch (Throwable e) {
@@ -71,7 +71,7 @@ public class Captor {
      * @param function 要执行的函数
      * @throws AssertException 如果函数执行时发生异常
      */
-    public static void call(ActionFunction function) {
+    public static void call(Action function) {
         try {
             function.call();
         } catch (Throwable e) {
@@ -89,7 +89,7 @@ public class Captor {
      * @param args 格式化参数
      * @throws AssertException 如果函数执行时发生异常
      */
-    public static void call(ActionFunction function, String fmt, Object... args) {
+    public static void call(Action function, String fmt, Object... args) {
         try {
             function.call();
         } catch (Throwable e) {
@@ -107,7 +107,7 @@ public class Captor {
      * @return 函数返回的值；如果发生异常，则抛出 {@link AssertException}
      * @throws AssertException 如果函数执行时发生异常
      */
-    public static <T> T call(CallableFunction<T> function) {
+    public static <T> T call(Callable<T> function) {
         try {
             return function.call();
         } catch (Throwable e) {
@@ -127,7 +127,7 @@ public class Captor {
      * @return 函数返回的值；如果发生异常，则抛出 {@link AssertException}
      * @throws AssertException 如果函数执行时发生异常
      */
-    public static <T> T call(CallableFunction<T> function, String fmt, Object... args) {
+    public static <T> T call(Callable<T> function, String fmt, Object... args) {
         try {
             return function.call();
         } catch (Throwable e) {
