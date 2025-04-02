@@ -1,4 +1,4 @@
-= karasuba-io v3.0.2-RC1
+= karatsuba-io v3.0.2-RC1
 
 image:Documents/svg/offical.svg[offical]
 image:Documents/svg/test.svg[test]
