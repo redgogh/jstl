@@ -7,7 +7,7 @@
 
     <groupId>io.github.redgogh</groupId>
     <artifactId>karatsuba-io</artifactId>
-    <version>3.0.2-RC2</version>
+    <version>3.0.3</version>
 
     <developers>
         <developer>
