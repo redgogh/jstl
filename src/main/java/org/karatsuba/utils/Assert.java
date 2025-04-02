@@ -26,7 +26,7 @@ import org.karatsuba.string.StringUtils;
 import java.util.Collection;
 import java.util.Map;
 
-import static org.karatsuba.utils.TypeCvt.anyeq;
+import static org.karatsuba.utils.Comparators.anyeq;
 
 /**
  * 运行时断言工具类，这个类断言失败后并不会直接停止整个程序，而是会将所有失败的断言

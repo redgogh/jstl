@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.regex.Pattern;
 
-import static org.karatsuba.utils.TypeCvt.anyeq;
+import static org.karatsuba.utils.Comparators.anyeq;
 import static org.karatsuba.utils.TypeCvt.atos;
 
 /**

@@ -30,7 +30,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.concurrent.TimeUnit;
 
-import static org.karatsuba.utils.Generator.b32md5;
+import static org.karatsuba.generator.Generator.b32md5;
 
 @SuppressWarnings("ALL")
 public class JWTSignerTest {

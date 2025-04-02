@@ -1,4 +1,4 @@
-package org.karatsuba.utils;
+package org.karatsuba.generator;
 
 import org.karatsuba.security.Codec;
 import org.karatsuba.string.StringInterface;
@@ -395,6 +395,20 @@ public class Generator {
      */
     public static String b256md5() {
         return b128md5() + b128md5();
+    }
+
+    /**
+     * #brief: 生成基于 Snowflake 算法的唯一 ID
+     *
+     * <p>该方法使用 `SnowflakeGenerator` 生成一个 64 位的唯一 ID。
+     * Snowflake 算法由 Twitter 设计，适用于分布式系统，确保 ID 的全局唯一性和趋势递增性。
+     *
+     * @param dataCenterId 数据中心 ID，区分不同数据中心
+     * @param machineId    机器 ID，区分同一数据中心下的不同节点
+     * @return 生成的唯一 ID
+     */
+    public static long snowflake(int dataCenterId, int machineId) {
+        return SnowflakeGenerator.nextId(dataCenterId, machineId);
     }
 
 }

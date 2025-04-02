@@ -18,7 +18,7 @@ package org.karatsuba.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karatsuba.utils.Generator;
+import org.karatsuba.generator.Generator;
 import org.junit.Test;
 
 @SuppressWarnings("ALL")

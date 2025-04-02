@@ -18,7 +18,7 @@ package org.karatsuba.experiment;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karatsuba.utils.Generator;
+import org.karatsuba.generator.Generator;
 import org.junit.Test;
 
 import java.util.Random;

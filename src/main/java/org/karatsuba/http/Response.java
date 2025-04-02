@@ -28,7 +28,7 @@ import okhttp3.ResponseBody;
 
 import java.util.Map;
 
-import static org.karatsuba.utils.TypeCvt.anyeq;
+import static org.karatsuba.utils.Comparators.anyeq;
 import static org.karatsuba.utils.TypeCvt.atos;
 
 /**

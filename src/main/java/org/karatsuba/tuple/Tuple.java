@@ -19,7 +19,7 @@ package org.karatsuba.tuple;
 \* -------------------------------------------------------------------------------- */
 
 
-import static org.karatsuba.utils.TypeCvt.anyeq;
+import static org.karatsuba.utils.Comparators.anyeq;
 
 /**
  * 表示包含三个元素的元组。

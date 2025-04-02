@@ -30,6 +30,7 @@ import org.karatsuba.exception.SystemRuntimeException;
 import org.karatsuba.utils.Assert;
 import org.karatsuba.stream.Streams;
 import org.karatsuba.utils.Captor;
+import org.karatsuba.utils.Comparators;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
@@ -41,7 +42,6 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import static org.karatsuba.string.StringUtils.streq;
-import static org.karatsuba.utils.TypeCvt.checkin;
 
 /**
  * `UClass` 是一个用于处理 Java 类元数据的工具类。它封装了一个 `Class` 对象，并提供了一些方法来
@@ -500,7 +500,7 @@ public class UClass {
     public boolean isPrimitiveCheck() {
         if (descriptor.isPrimitive())
             return true;
-        return checkin(descriptor, Short.class, Integer.class, Long.class,
+        return Comparators.checkin(descriptor, Short.class, Integer.class, Long.class,
                 Float.class, Double.class, Character.class, Boolean.class);
     }
 

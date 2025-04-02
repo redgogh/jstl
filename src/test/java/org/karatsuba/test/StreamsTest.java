@@ -21,7 +21,7 @@ package org.karatsuba.test;
 import org.junit.Test;
 import org.karatsuba.stream.Streams;
 import org.karatsuba.collection.Lists;
-import org.karatsuba.utils.Generator;
+import org.karatsuba.generator.Generator;
 import org.karatsuba.system.SystemUtils;
 
 import java.util.List;

@@ -13,13 +13,13 @@ import org.karatsuba.exception.SystemRuntimeException;
 import org.karatsuba.security.Codec;
 import org.karatsuba.utils.Assert;
 import org.karatsuba.utils.Captor;
+import org.karatsuba.utils.Comparators;
 
 import java.security.PrivateKey;
 
 import static com.nimbusds.jose.JWSAlgorithm.*;
-import static org.karatsuba.utils.Generator.uuid;
+import static org.karatsuba.generator.Generator.uuid;
 import static org.karatsuba.utils.TypeCvt.atob;
-import static org.karatsuba.utils.TypeCvt.checkin;
 
 /**
  * `JWTGrantor` 是一个用于生成和验证 JSON Web Token (JWT) 的类。
@@ -190,10 +190,10 @@ public class JWTSigner {
      * @throws IllegalArgumentException 如果加密算法无效或不支持
      */
     private static JWSSigner newSigner(Object key, JWSAlgorithm algorithm) throws KeyLengthException {
-        if (checkin(algorithm, HS256))
+        if (Comparators.checkin(algorithm, HS256))
             return new MACSigner(atob(key));
 
-        if (checkin(algorithm, RS256, RS384, RS512))
+        if (Comparators.checkin(algorithm, RS256, RS384, RS512))
             return new RSASSASigner((PrivateKey) key);
 
         throw new IllegalArgumentException("无效或不支持的加密算法 " + algorithm.getName());
@@ -212,10 +212,10 @@ public class JWTSigner {
      * @throws IllegalArgumentException 如果加密算法无效或不支持
      */
     private static JWSVerifier newVerifier(Object key, JWSAlgorithm algorithm) throws JOSEException {
-        if (checkin(algorithm, HS256))
+        if (Comparators.checkin(algorithm, HS256))
             return new MACVerifier(atob(key));
 
-        if (checkin(algorithm, RS256, RS384, RS512))
+        if (Comparators.checkin(algorithm, RS256, RS384, RS512))
             return new RSASSAVerifier((java.security.interfaces.RSAPublicKey) key);
 
         throw new IllegalArgumentException("无效或不支持的加密算法 " + algorithm.getName());

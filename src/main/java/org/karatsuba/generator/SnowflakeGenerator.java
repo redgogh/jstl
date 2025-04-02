@@ -1,4 +1,4 @@
-package org.karatsuba.utils;
+package org.karatsuba.generator;
 
 /* -------------------------------------------------------------------------------- *\
 |*                                                                                  *|
@@ -25,7 +25,7 @@ package org.karatsuba.utils;
  *
  * @author Red Gogh
  */
-public final class SnowflakeGenerator {
+final class SnowflakeGenerator {
 
     //起始时间戳( 2020-12-26 00:00:00 )
     private static final long START_STAMP = 1608912000000L;
