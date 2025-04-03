@@ -63,7 +63,7 @@ import java.util.concurrent.TimeUnit;
  * @see Chrono
  */
 @SuppressWarnings("unused")
-public interface Calendar {
+public interface ChronoTemporal {
 
     /**
      * 判断当前时间是否是今天。

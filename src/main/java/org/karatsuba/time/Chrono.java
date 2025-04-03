@@ -26,21 +26,21 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 /**
- * `Chrono` 类表示一个时间单位，提供了对日期和时间的操作。它实现了 {@link Calendar} 接口，
+ * `Chrono` 类表示一个时间单位，提供了对日期和时间的操作。它实现了 {@link ChronoTemporal} 接口，
  * {@link Temporal} 接口，并且可以进行比较。该类可以用于表示时间戳、日期、时间等多种形式，并提供
  * 丰富的日期和时间操作功能。
  *
  * <p>此类是不可变的，线程安全的，且支持序列化。
  *
  * @author Red Gogh
- * @see Calendar
+ * @see ChronoTemporal
  * @see Temporal
  * @see Comparable
  * @see Serializable
  * @noinspection unused
  */
 public final class Chrono extends Date
-        implements Calendar, Temporal, Serializable {
+        implements ChronoTemporal, Temporal, Serializable {
 
     /**
      * 存储和处理核心本地时间的字段。
