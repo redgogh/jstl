@@ -22,11 +22,15 @@ import org.karatsuba.collection.Lists;
 import org.karatsuba.exception.IOReadException;
 import org.karatsuba.string.StringUtils;
 import org.karatsuba.system.SystemUtils;
+import org.karatsuba.utils.ArrayUtils;
 import org.karatsuba.utils.Assert;
 import org.karatsuba.utils.Captor;
 import org.karatsuba.utils.Optional;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.RandomAccessFile;
 import java.net.URI;
 import java.nio.file.Path;
@@ -55,20 +59,56 @@ import java.util.Properties;
  * @see java.io.File
  * @since 1.0
  * @author Red Gogh
+ * @noinspection UnusedReturnValue
  */
 public class PhysicalFile extends java.io.File {
 
     /**
-     * 空的 <code>File</code> 数组对象
+     * 空文件数组常量，避免不必要的对象创建。
      */
-    private static final java.io.File[] EMPTY_FILE_ARRAY = new java.io.File[0];
+    private static final PhysicalFile[] EMPTY_PHYSICAL_FILE_ARRAY = new PhysicalFile[0];
 
+    /**
+     * 桌面路径变量标识符，用于指示桌面目录的路径替换。
+     */
     private static final String PATHNAME_DESKTOP_VARIABLE = "Desktop://";
 
     /**
-     * 文件随机读写访问对象
+     * `RandomAccessFile` 实例，用于支持文件的随机读写操作。
      */
     private RandomAccessFile accessFile;
+
+    /**
+     * `FileInputStreamResource` 用于处理 `FileInputStream` 资源的函数式接口。
+     *
+     * <p>该接口定义了一个 `apply` 方法，允许对 `FileInputStream` 进行自定义处理。
+     * 适用于资源管理，如文件读取、解析等操作。
+     */
+    public interface FileInputStreamResource {
+        /**
+         * 处理 `FileInputStream` 资源。
+         *
+         * @param inputStream 文件输入流
+         * @throws Exception 处理过程中可能抛出的异常
+         */
+        void apply(FileInputStream inputStream) throws Exception;
+    }
+
+    /**
+     * `FileOutputStreamResource` 用于处理 `FileOutputStream` 资源的函数式接口。
+     *
+     * <p>该接口定义了一个 `apply` 方法，允许对 `FileOutputStream` 进行自定义处理。
+     * 适用于资源管理，如文件写入、加密等操作。
+     */
+    public interface FileOutputStreamResource {
+        /**
+         * 处理 `FileOutputStream` 资源。
+         *
+         * @param outputStream 文件输出流
+         * @throws Throwable 处理过程中可能抛出的异常
+         */
+        void apply(FileOutputStream outputStream) throws Throwable;
+    }
 
     /**
      * #brief: 快速访问指定路径
@@ -300,10 +340,12 @@ public class PhysicalFile extends java.io.File {
     @Nullable
     @Override
     public PhysicalFile[] listFiles() {
-        List<PhysicalFile> list = Lists.map(super.listFiles(), PhysicalFile::from);
-        PhysicalFile[] fs = new PhysicalFile[list.size()];
-        list.toArray(fs);
-        return fs;
+        File[] a = super.listFiles();
+
+        if (a == null || a.length == 0)
+            return EMPTY_PHYSICAL_FILE_ARRAY;
+
+        return Lists.map(a, PhysicalFile::from).toArray(new PhysicalFile[0]);
     }
 
     /**
@@ -329,7 +371,7 @@ public class PhysicalFile extends java.io.File {
     /**
      * #brief: 检查文件扩展名是否匹配
      *
-     * 该函数用于检查当前对象的文件扩展名是否匹配指定的扩展名列表。
+     * <p>该函数用于检查当前对象的文件扩展名是否匹配指定的扩展名列表。
      *
      * @param extensions
      *        需要匹配的文件扩展名列表，可变参数形式
@@ -342,14 +384,19 @@ public class PhysicalFile extends java.io.File {
     }
 
     /**
-     * @return 返回文件扩展名（后缀）
+     * 获取文件扩展名（不包含 `.`）。
+     *
+     * <p>该方法查找文件名中的 `.` 符号，并返回 `.` 之后的部分作为扩展名。
+     * 如果文件名中没有 `.`，则返回空字符串。
+     *
+     * @return 文件扩展名（无 `.` 前缀），如果没有扩展名则返回 `""`
      */
     public String getExtension() {
         String name = getName();
         int index = name.indexOf(".");
         if (index == -1)
             return "";
-        return StringUtils.strcut(getName(), index, 0);
+        return StringUtils.strcut(name, index, 0);
     }
 
     private boolean forceDeleteDirectory(PhysicalFile dir) {
@@ -410,9 +457,9 @@ public class PhysicalFile extends java.io.File {
      * @param autoCreate 文件不存在时是否创建
      * @return 打开描述符后的文件输入流对象
      */
-    private PhysicalFileInputStream openInputStream(boolean autoCreate) {
+    private FileInputStream openInputStream(boolean autoCreate) {
         checkFile(autoCreate);
-        return Captor.call(() -> new PhysicalFileInputStream(this));
+        return Captor.call(() -> new FileInputStream(this));
     }
 
     /**
@@ -425,9 +472,9 @@ public class PhysicalFile extends java.io.File {
      * @param autoCreate 文件不存在时是否创建
      * @return 打开描述符后的文件输出流对象
      */
-    private PhysicalFileOutputStream openOutputStream(boolean autoCreate) {
+    private FileOutputStream openOutputStream(boolean autoCreate) {
         checkFile(autoCreate);
-        return Captor.call(() -> new PhysicalFileOutputStream(this));
+        return Captor.call(() -> new FileOutputStream(this));
     }
 
     /**
@@ -436,7 +483,7 @@ public class PhysicalFile extends java.io.File {
      *
      * @return 打开描述符后的文件输入流对象
      */
-    public PhysicalFileInputStream openInputStream() {
+    public FileInputStream openInputStream() {
         return openInputStream(true);
     }
 
@@ -446,7 +493,7 @@ public class PhysicalFile extends java.io.File {
      *
      * @return 打开描述符后的文件输入流对象
      */
-    public PhysicalFileOutputStream openOutputStream() {
+    public FileOutputStream openOutputStream() {
         return openOutputStream(true);
     }
 
@@ -456,7 +503,7 @@ public class PhysicalFile extends java.io.File {
      *
      * @return 打开描述符后的文件输入流对象
      */
-    public PhysicalFileInputStream openByteReaderDisabled() {
+    public FileInputStream dopenInputStream() {
         return openInputStream(false);
     }
 
@@ -466,18 +513,42 @@ public class PhysicalFile extends java.io.File {
      *
      * @return 打开描述符后的文件输出流对象
      */
-    public PhysicalFileOutputStream openByteWriterDisabled() {
+    public FileOutputStream dopenOutputStream() {
         return openOutputStream(false);
     }
 
     /**
-     * 将整个文件以字符串的形式读取到内存中，并将字符串对象引用返回
-     * 出去。
+     * 安全地执行 `FileInputStream` 操作，确保资源正确关闭。
      *
-     * @return 文件内容
+     * <p>该方法使用 `try-with-resources` 结构，确保 `FileInputStream` 资源在操作完成后自动关闭。
+     * 若操作过程中发生异常，则会抛出 `IOReadException`。
+     *
+     * @param resource 需要执行的 `FileInputStreamResource` 操作
+     * @throws IOReadException 如果文件读取过程中发生错误
      */
-    public String strread() {
-        return IOUtils.strread(openInputStream());
+    public void tryInputStream(FileInputStreamResource resource) {
+        try (FileInputStream stream = openInputStream()) {
+            resource.apply(stream);
+        } catch (Throwable e) {
+            throw new IOReadException(e);
+        }
+    }
+
+    /**
+     * 安全地执行 `FileOutputStream` 操作，确保资源正确关闭。
+     *
+     * <p>该方法使用 `try-with-resources` 结构，确保 `FileOutputStream` 资源在操作完成后自动关闭。
+     * 若操作过程中发生异常，则会抛出 `IOReadException`。
+     *
+     * @param resource 需要执行的 `FileOutputStreamResource` 操作
+     * @throws IOReadException 如果文件写入过程中发生错误
+     */
+    public void tryOutputStream(FileOutputStreamResource resource) {
+        try (FileOutputStream stream = openOutputStream()) {
+            resource.apply(stream);
+        } catch (Throwable e) {
+            throw new IOReadException(e);
+        }
     }
 
     /**
@@ -491,7 +562,7 @@ public class PhysicalFile extends java.io.File {
      *
      * @return 包含文件内容的字节数组
      */
-    public byte[] readBytes() {
+    public byte[] readAllBytes() {
         open();
         byte[] b = new byte[(int) length()];
         read(b);
@@ -816,10 +887,10 @@ public class PhysicalFile extends java.io.File {
      *
      * @return 加载的 `Properties` 对象，包含从配置文件中读取的所有键值对。
      */
-    public Properties loadProperties() {
+    public Properties toProperties() {
         Properties properties = new Properties();
-        try(PhysicalFileInputStream physicalFileInputStream = openByteReaderDisabled()) {
-            properties.load(physicalFileInputStream);
+        try(FileInputStream FileInputStream = dopenInputStream()) {
+            properties.load(FileInputStream);
         } catch (Exception e) {
             throw new IOReadException(e);
         }

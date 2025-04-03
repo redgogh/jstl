@@ -22,12 +22,11 @@ public class SHA256Codec implements SHA256 {
     }
 
     @Override
-    @SuppressWarnings("resource")
     public String encode(File f0) {
         return Captor.icall(() -> {
             PhysicalFile physicalFile = new PhysicalFile(f0);
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            physicalFile.openInputStream().call(reader -> {
+            physicalFile.tryInputStream(reader -> {
                 int len = 0;
                 byte[] buffer = new byte[IOUtils.MB];
                 while ((len = reader.read(buffer)) != IOUtils.EOF)

@@ -18,6 +18,7 @@ package org.karatsuba.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import org.karatsuba.io.PhysicalFile;
 import org.karatsuba.security.Codec;
 import org.junit.Test;
 
@@ -73,7 +74,7 @@ public class CodecTest {
      */
     @Test
     public void sha256FileEncodTest() {
-        System.out.println(Codec.SHA256.encode(new File("/home/1g.7z")));
+        System.out.println(Codec.SHA256.encode(PhysicalFile.from("Desktop://import.7z")));
     }
 
     /**

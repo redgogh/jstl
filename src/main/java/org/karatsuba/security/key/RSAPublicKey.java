@@ -33,6 +33,8 @@ import java.security.KeyFactory;
 import java.security.PublicKey;
 import java.security.spec.X509EncodedKeySpec;
 
+import static org.karatsuba.io.IOUtils.strread;
+
 /**
  * @author Red Gogh
  */
@@ -56,7 +58,7 @@ public class RSAPublicKey extends AbstractKey {
 
     public static RSAPublicKey fromKeyFile(String filepath) {
         PhysicalFile keyfile = new PhysicalFile(filepath);
-        return fromPEMFormat(keyfile.strread());
+        return fromPEMFormat(strread(keyfile));
     }
 
     public static RSAPublicKey fromPEMFormat(String pem) {

@@ -25,6 +25,7 @@ package org.karatsuba.security.key;
 
 /* Creates on 2025/2/20. */
 
+import org.karatsuba.io.IOUtils;
 import org.karatsuba.io.PhysicalFile;
 import org.karatsuba.utils.Captor;
 
@@ -32,6 +33,8 @@ import java.security.Key;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
+
+import static org.karatsuba.io.IOUtils.strread;
 
 /**
  * @author Red Gogh
@@ -56,7 +59,7 @@ public class RSAPrivateKey extends AbstractKey {
 
     public static RSAPrivateKey fromKeyFile(String filepath) {
         PhysicalFile keyfile = new PhysicalFile(filepath);
-        return fromPEMFormat(keyfile.strread());
+        return fromPEMFormat(strread(keyfile));
     }
 
     public static RSAPrivateKey fromPEMFormat(String pem) {

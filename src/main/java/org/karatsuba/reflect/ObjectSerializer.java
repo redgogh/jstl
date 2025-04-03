@@ -20,12 +20,8 @@ package org.karatsuba.reflect;
 
 import org.karatsuba.exception.SerializationException;
 import org.karatsuba.io.PhysicalFile;
-import org.karatsuba.io.PhysicalFileInputStream;
-import org.karatsuba.io.PhysicalFileOutputStream;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 /**
  * #brief: 提供对象的序列化和反序列化功能
@@ -51,8 +47,8 @@ public class ObjectSerializer {
      * @param physicalFile 要写入的文件
      */
     public static void serialize(Object object, PhysicalFile physicalFile) {
-        try (PhysicalFileOutputStream physicalFileOutputStream = physicalFile.openOutputStream();
-             ObjectOutputStream objectOutputStream = new ObjectOutputStream(physicalFileOutputStream)) {
+        try (FileOutputStream FileOutputStream = physicalFile.openOutputStream();
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(FileOutputStream)) {
             objectOutputStream.writeObject(object);
         } catch (IOException e) {
             throw new SerializationException(e);
@@ -70,7 +66,7 @@ public class ObjectSerializer {
      * @throws SerializationException 如果反序列化失败
      */
     public static Object deserialize(PhysicalFile physicalFile) {
-        try (PhysicalFileInputStream physicalFileInputStream = physicalFile.openInputStream();
+        try (FileInputStream physicalFileInputStream = physicalFile.openInputStream();
              ObjectInputStream objectInputStream = new ObjectInputStream(physicalFileInputStream)) {
             return objectInputStream.readObject();
         } catch (Exception e) {

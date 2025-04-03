@@ -84,7 +84,7 @@ public class PhysicalFileTest {
 
     @Test
     public void readBytesTest() {
-        System.out.println(atos(new PhysicalFile("Desktop://log.txt").readBytes()));
+        System.out.println(atos(new PhysicalFile("Desktop://log.txt").readAllBytes()));
     }
 
     @Test

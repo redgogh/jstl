@@ -599,7 +599,7 @@ public class WorkBook implements Iterable<Row> {
      * @param file 目标可变文件对象
      */
     public void transferTo(PhysicalFile file) {
-        file.openOutputStream().call(writer -> writer.write(toByteArray()));
+        file.tryOutputStream(stream -> stream.write(toByteArray()));
     }
 
     public byte[] toByteArray() {

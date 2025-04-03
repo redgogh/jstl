@@ -239,7 +239,7 @@ public class IOUtils {
      *        {@link PhysicalFile} 文件对象实例（如果文件不存在，则会创建）
      */
     public static void write(InputStream input, PhysicalFile physicalFile) {
-        PhysicalFileOutputStream writer = null;
+        FileOutputStream writer = null;
         try {
             writer = physicalFile.openOutputStream();
             write(input, writer);
@@ -280,9 +280,9 @@ public class IOUtils {
      *        指定输出流
      */
     public static void write(byte[] b, PhysicalFile physicalFile) {
-        PhysicalFileOutputStream writer = null;
+        FileOutputStream writer = null;
         try {
-            writer = physicalFile.openByteWriterDisabled();
+            writer = physicalFile.dopenOutputStream();
             write(b, writer);
         } catch (Throwable e) {
             throw new IOWriteException(e);
