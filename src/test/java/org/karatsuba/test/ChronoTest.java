@@ -86,7 +86,16 @@ public class ChronoTest {
     @Test
     public void toNewYorkZonedTest() {
         Chrono duration = Chrono.now();
-        System.out.println(duration.toZoned(Chrono.AMERICA_NEW_YORK));;
+        System.out.println(duration.toZoned("America/New_York"));;
+    }
+
+    @Test
+    public void betweenTest() {
+        Chrono chrono = Chrono.of(2025, 03, 02, 14, 04, 01);
+        System.out.println(chrono.isBetween(
+                Chrono.of(2025, 03, 02, 14, 03, 58),
+                Chrono.of(2025, 03, 02, 14, 04, 00)
+        ));
     }
 
     public static void main(String[] args) {

@@ -570,7 +570,9 @@ public final class Chrono extends Date
      * @return 相应的 `Chrono` 实例
      */
     public static Chrono from(Date date) {
-        return new Chrono(date);
+        return date instanceof Chrono
+                ? (Chrono) date
+                : new Chrono(date);
     }
 
     /**
@@ -698,6 +700,26 @@ public final class Chrono extends Date
     }
 
     @Override
+    public boolean isBetween(LocalDate start, LocalDate end) {
+        return isBetween(from(start), from(end));
+    }
+
+    @Override
+    public boolean isBetween(LocalDateTime start, LocalDateTime end) {
+        return isBetween(from(start), from(end));
+    }
+
+    @Override
+    public boolean isBetween(Date start, Date end) {
+        return isBetween(from(start), from(end));
+    }
+
+    @Override
+    public boolean isBetween(Chrono start, Chrono end) {
+        return isAfter(start) && isBefore(end);
+    }
+
+    @Override
     public long nanoTime() {
         return System.nanoTime();
     }
@@ -763,7 +785,7 @@ public final class Chrono extends Date
     }
 
     @Override
-    public Date toDate() {
+    public Date toLegacyDate() {
         return date;
     }
 
@@ -1061,7 +1083,7 @@ public final class Chrono extends Date
 
     @Override
     public String format(String pattern) {
-        return DateFormatter.format(toDate(), pattern);
+        return DateFormatter.format(toLegacyDate(), pattern);
     }
 
     @Override

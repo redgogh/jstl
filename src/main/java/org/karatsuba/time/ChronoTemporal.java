@@ -163,6 +163,42 @@ public interface ChronoTemporal {
     boolean isAfterNow();
 
     /**
+     * 检查当前日期是否介于指定的开始日期和结束日期之间（包含边界值）。
+     *
+     * @param start 起始日期（包含）
+     * @param end 结束日期（包含）
+     * @return 如果当前日期在 start 和 end 之间（包含边界值）则返回 true，否则返回 false
+     */
+    boolean isBetween(LocalDate start, LocalDate end);
+
+    /**
+     * 检查当前日期时间是否介于指定的开始日期时间和结束日期时间之间（包含边界值）。
+     *
+     * @param start 起始日期时间（包含）
+     * @param end 结束日期时间（包含）
+     * @return 如果当前日期时间在 start 和 end 之间（包含边界值）则返回 true，否则返回 false
+     */
+    boolean isBetween(LocalDateTime start, LocalDateTime end);
+
+    /**
+     * 检查当前日期是否介于指定的开始日期和结束日期之间（包含边界值）。
+     *
+     * @param start 起始日期（包含）
+     * @param end 结束日期（包含）
+     * @return 如果当前日期在 start 和 end 之间（包含边界值）则返回 true，否则返回 false
+     */
+    boolean isBetween(Date start, Date end);
+
+    /**
+     * 检查当前时间是否介于指定的开始时间和结束时间之间（包含边界值）。
+     *
+     * @param start 起始时间（包含）
+     * @param end 结束时间（包含）
+     * @return 如果当前时间在 start 和 end 之间（包含边界值）则返回 true，否则返回 false
+     */
+    boolean isBetween(Chrono start, Chrono end);
+
+    /**
      * 获取当前时间的纳秒数（相对于某个固定时间点，例如 JVM 启动时）。
      *
      * @return 当前时间的纳秒数
@@ -274,7 +310,7 @@ public interface ChronoTemporal {
      *
      * @return 当前时间的 `Date` 表示
      */
-    Date toDate();
+    Date toLegacyDate();
 
     /**
      * 将当前时间转换为 `LocalDate` 对象。
