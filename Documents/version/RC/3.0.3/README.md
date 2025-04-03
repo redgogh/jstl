@@ -7,6 +7,8 @@
 - 新增 `Chrono#weekOfYear` 函数获取今天是今年内的第几周。
 - 新增 `PhysicalFile` 对象用于代替 `MutableFile`。
 - 新增 `PhysicalFile#openRandomAccess` 随机读写访问函数。
+- 新增 `IOUtils#copy` 拷贝文件或文件夹函数。
+- 新增 `IOUtils#move` 移动文件或文件夹函数。
 
 ## 👻 优化功能
 
