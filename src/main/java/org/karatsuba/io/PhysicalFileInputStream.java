@@ -28,22 +28,22 @@ import java.io.FileNotFoundException;
 /**
  * 文件输入流
  */
-public class FileByteReader extends FileInputStream {
+public class PhysicalFileInputStream extends FileInputStream {
 
-    public FileByteReader(String name) throws FileNotFoundException {
+    public PhysicalFileInputStream(String name) throws FileNotFoundException {
         super(name);
     }
 
-    public FileByteReader(File file) throws FileNotFoundException {
+    public PhysicalFileInputStream(File file) throws FileNotFoundException {
         super(file);
     }
 
-    public FileByteReader(FileDescriptor fdObj) {
+    public PhysicalFileInputStream(FileDescriptor fdObj) {
         super(fdObj);
     }
 
     public interface FileByteReaderResource {
-        void call(FileByteReader byteReader) throws Exception;
+        void call(PhysicalFileInputStream byteReader) throws Exception;
     }
 
     /**

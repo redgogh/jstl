@@ -86,7 +86,7 @@ public class IOUtils {
      */
     public static byte[] read(java.io.File file) {
         Assert.isTrue(file != null && file.isFile(), "文件不能为空且不能是目录！");
-        return read(new MutableFile(file).openByteReader());
+        return read(new PhysicalFile(file).openInputStream());
     }
 
     /**
@@ -190,7 +190,7 @@ public class IOUtils {
      * @return 从文件描述符中读取到的字符串文本
      */
     public static String strread(String filepath) {
-        return strread(new MutableFile(filepath));
+        return strread(new PhysicalFile(filepath));
     }
 
     /**
@@ -235,13 +235,13 @@ public class IOUtils {
      * @param input
      *        输入流
      *
-     * @param mutableFile
-     *        {@link MutableFile} 文件对象实例（如果文件不存在，则会创建）
+     * @param physicalFile
+     *        {@link PhysicalFile} 文件对象实例（如果文件不存在，则会创建）
      */
-    public static void write(InputStream input, MutableFile mutableFile) {
-        FileByteWriter writer = null;
+    public static void write(InputStream input, PhysicalFile physicalFile) {
+        PhysicalFileOutputStream writer = null;
         try {
-            writer = mutableFile.openByteWriter();
+            writer = physicalFile.openOutputStream();
             write(input, writer);
         } catch (Exception e) {
             throw new IOWriteException(e);
@@ -260,11 +260,11 @@ public class IOUtils {
      * @param input
      *        字符串
      *
-     * @param mutableFile
-     *        {@link MutableFile} 文件对象实例（如果文件不存在，则会创建）
+     * @param physicalFile
+     *        {@link PhysicalFile} 文件对象实例（如果文件不存在，则会创建）
      */
-    public static void write(String input, MutableFile mutableFile) {
-        write(input.getBytes(), mutableFile);
+    public static void write(String input, PhysicalFile physicalFile) {
+        write(input.getBytes(), physicalFile);
     }
 
     /**
@@ -276,13 +276,13 @@ public class IOUtils {
      * @param b
      *        字节数组缓冲区
      *
-     * @param mutableFile
+     * @param physicalFile
      *        指定输出流
      */
-    public static void write(byte[] b, MutableFile mutableFile) {
-        FileByteWriter writer = null;
+    public static void write(byte[] b, PhysicalFile physicalFile) {
+        PhysicalFileOutputStream writer = null;
         try {
-            writer = mutableFile.openByteWriterDisabled();
+            writer = physicalFile.openByteWriterDisabled();
             write(b, writer);
         } catch (Throwable e) {
             throw new IOWriteException(e);

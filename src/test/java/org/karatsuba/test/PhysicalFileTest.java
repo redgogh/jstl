@@ -18,44 +18,44 @@ package org.karatsuba.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karatsuba.io.MutableFile;
+import org.karatsuba.io.PhysicalFile;
 import org.junit.Test;
 
 import static org.karatsuba.utils.TypeCvt.atos;
 
 @SuppressWarnings("ALL")
-public class MutableFileTest {
+public class PhysicalFileTest {
 
     /**
      * 随机读写访问测试
      */
     @Test
     public void randomAccessTest() {
-        MutableFile mutableFile = new MutableFile(".dat");
+        PhysicalFile physicalFile = new PhysicalFile(".dat");
 
         // write float
-        mutableFile.open();
+        physicalFile.open();
         {
             float writeValue = 114.514f;
-            mutableFile.writeFloat(writeValue);
+            physicalFile.writeFloat(writeValue);
             System.out.printf("-------------------------------------------------------------------\n");
             System.out.printf("File random access write float example, write value: %f\n", writeValue);
         }
-        mutableFile.close();
+        physicalFile.close();
 
             System.out.printf("-------------------------------------------------------------------\n");
 
         // read float
-        mutableFile.open();
+        physicalFile.open();
         {
             float readValue = 0.0f;
-            readValue = mutableFile.readFloat();
+            readValue = physicalFile.readFloat();
             System.out.printf("File random access read float example, read value: %f\n", readValue);
             System.out.printf("-------------------------------------------------------------------\n");
         }
-        mutableFile.close();
+        physicalFile.close();
 
-        mutableFile.forceDelete();
+        physicalFile.forceDelete();
     }
 
     /**
@@ -63,34 +63,34 @@ public class MutableFileTest {
      */
     @Test
     public void randomAccessWriteTest() {
-        MutableFile mutableFile = new MutableFile(".dat");
+        PhysicalFile physicalFile = new PhysicalFile(".dat");
 
-        mutableFile.open();
+        physicalFile.open();
 
-        mutableFile.writeInt(1001);
-        mutableFile.writeInt(1002);
-        mutableFile.writeInt(1003);
+        physicalFile.writeInt(1001);
+        physicalFile.writeInt(1002);
+        physicalFile.writeInt(1003);
 
-        mutableFile.seek(0);
+        physicalFile.seek(0);
 
         System.out.printf("----------------------------------------------------\n");
-        System.out.printf("random access write example read(0): %s\n", mutableFile.readInt());
-        System.out.printf("random access write example read(1): %s\n", mutableFile.readInt());
-        System.out.printf("random access write example read(2): %s\n", mutableFile.readInt());
+        System.out.printf("random access write example read(0): %s\n", physicalFile.readInt());
+        System.out.printf("random access write example read(1): %s\n", physicalFile.readInt());
+        System.out.printf("random access write example read(2): %s\n", physicalFile.readInt());
         System.out.printf("----------------------------------------------------\n");
 
-        mutableFile.forceDelete();
+        physicalFile.forceDelete();
     }
 
     @Test
     public void readBytesTest() {
-        System.out.println(atos(new MutableFile("Desktop://log.txt").readBytes()));
+        System.out.println(atos(new PhysicalFile("Desktop://log.txt").readBytes()));
     }
 
     @Test
     public void listFileTest() {
-        for (MutableFile mutableFile : new MutableFile("D:/aaaa").listFiles()) {
-            System.out.println(mutableFile.getPath());
+        for (PhysicalFile physicalFile : new PhysicalFile("D:/aaaa").listFiles()) {
+            System.out.println(physicalFile.getPath());
         }
     }
 

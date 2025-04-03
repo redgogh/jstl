@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import org.karatsuba.annotations.RowColumn;
 import org.karatsuba.collection.Lists;
 import org.karatsuba.collection.Maps;
-import org.karatsuba.io.MutableFile;
+import org.karatsuba.io.PhysicalFile;
 import org.karatsuba.reflect.UClass;
 import org.karatsuba.reflect.UField;
 import org.karatsuba.stream.Streams;
@@ -99,7 +99,7 @@ public class WorkBook implements Iterable<Row> {
      * @param pathname Excel 文件的路径
      */
     private WorkBook(String pathname) {
-        this(new MutableFile(pathname));
+        this(new PhysicalFile(pathname));
     }
 
     /**
@@ -109,10 +109,10 @@ public class WorkBook implements Iterable<Row> {
      * 实例。如果文件不存在或格式不正确，可能会抛出
      * 异常。
      *
-     * @param mutableFile Excel 文件对象
+     * @param physicalFile Excel 文件对象
      */
-    private WorkBook(MutableFile mutableFile) {
-        this(Captor.call(() -> new XSSFWorkbook(mutableFile)));
+    private WorkBook(PhysicalFile physicalFile) {
+        this(Captor.call(() -> new XSSFWorkbook(physicalFile)));
     }
 
     /**
@@ -196,7 +196,7 @@ public class WorkBook implements Iterable<Row> {
      * @return 加载的 Workbook 实例
      */
     public static WorkBook load(String pathname) {
-        return load(new MutableFile(pathname));
+        return load(new PhysicalFile(pathname));
     }
 
     /**
@@ -206,11 +206,11 @@ public class WorkBook implements Iterable<Row> {
      * Workbook 实例。如果文件不存在或格式不正确，可能
      * 会抛出异常。
      *
-     * @param mutableFile Excel 文件对象
+     * @param physicalFile Excel 文件对象
      * @return 加载的 Workbook 实例
      */
-    public static WorkBook load(MutableFile mutableFile) {
-        return new WorkBook(mutableFile);
+    public static WorkBook load(PhysicalFile physicalFile) {
+        return new WorkBook(physicalFile);
     }
 
     /**
@@ -587,19 +587,19 @@ public class WorkBook implements Iterable<Row> {
      * @param pathname 目标文件的路径
      */
     public void transferTo(String pathname) {
-        transferTo(new MutableFile(pathname));
+        transferTo(new PhysicalFile(pathname));
     }
 
     /**
      * #brief: 将数据转移到指定的可变文件
      *
-     * <p>将当前数据写入到指定的 {@link MutableFile} 对象中。
+     * <p>将当前数据写入到指定的 {@link PhysicalFile} 对象中。
      * 通过文件对象的字节写入器将数据写入文件。
      *
      * @param file 目标可变文件对象
      */
-    public void transferTo(MutableFile file) {
-        file.openByteWriter().call(writer -> writer.write(toByteArray()));
+    public void transferTo(PhysicalFile file) {
+        file.openOutputStream().call(writer -> writer.write(toByteArray()));
     }
 
     public byte[] toByteArray() {

@@ -2,7 +2,7 @@ package org.karatsuba.security.codec;
 
 import org.karatsuba.exception.SystemRuntimeException;
 import org.karatsuba.io.IOUtils;
-import org.karatsuba.io.MutableFile;
+import org.karatsuba.io.PhysicalFile;
 import org.karatsuba.security.Codec;
 import org.karatsuba.security.SHA256;
 import org.karatsuba.utils.Captor;
@@ -25,9 +25,9 @@ public class SHA256Codec implements SHA256 {
     @SuppressWarnings("resource")
     public String encode(File f0) {
         return Captor.icall(() -> {
-            MutableFile mutableFile = new MutableFile(f0);
+            PhysicalFile physicalFile = new PhysicalFile(f0);
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            mutableFile.openByteReader().call(reader -> {
+            physicalFile.openInputStream().call(reader -> {
                 int len = 0;
                 byte[] buffer = new byte[IOUtils.MB];
                 while ((len = reader.read(buffer)) != IOUtils.EOF)

@@ -19,9 +19,9 @@ package org.karatsuba.reflect;
 \* -------------------------------------------------------------------------------- */
 
 import org.karatsuba.exception.SerializationException;
-import org.karatsuba.io.FileByteReader;
-import org.karatsuba.io.FileByteWriter;
-import org.karatsuba.io.MutableFile;
+import org.karatsuba.io.PhysicalFile;
+import org.karatsuba.io.PhysicalFileInputStream;
+import org.karatsuba.io.PhysicalFileOutputStream;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -37,7 +37,7 @@ import java.io.ObjectOutputStream;
  * 或恢复对象状态。
  *
  * @author Red Gogh
- * @see MutableFile
+ * @see PhysicalFile
  */
 public class ObjectSerializer {
 
@@ -48,11 +48,11 @@ public class ObjectSerializer {
      * 错误信息到日志中，方便后续调试和错误排查。
      *
      * @param object 要序列化的对象
-     * @param mutableFile 要写入的文件
+     * @param physicalFile 要写入的文件
      */
-    public static void serialize(Object object, MutableFile mutableFile) {
-        try (FileByteWriter fileByteWriter = mutableFile.openByteWriter();
-             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileByteWriter)) {
+    public static void serialize(Object object, PhysicalFile physicalFile) {
+        try (PhysicalFileOutputStream physicalFileOutputStream = physicalFile.openOutputStream();
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(physicalFileOutputStream)) {
             objectOutputStream.writeObject(object);
         } catch (IOException e) {
             throw new SerializationException(e);
@@ -65,13 +65,13 @@ public class ObjectSerializer {
      * <p>从指定文件中读取字节流，并将其反序列化为对象。如果反序列化过程中出现错误，相关
      * 错误信息将被记录，并抛出 DeserializeException，以便调用者进行处理。
      *
-     * @param mutableFile 要读取的文件
+     * @param physicalFile 要读取的文件
      * @return 反序列化得到的对象
      * @throws SerializationException 如果反序列化失败
      */
-    public static Object deserialize(MutableFile mutableFile) {
-        try (FileByteReader fileByteReader = mutableFile.openByteReader();
-             ObjectInputStream objectInputStream = new ObjectInputStream(fileByteReader)) {
+    public static Object deserialize(PhysicalFile physicalFile) {
+        try (PhysicalFileInputStream physicalFileInputStream = physicalFile.openInputStream();
+             ObjectInputStream objectInputStream = new ObjectInputStream(physicalFileInputStream)) {
             return objectInputStream.readObject();
         } catch (Exception e) {
             throw new SerializationException(e);

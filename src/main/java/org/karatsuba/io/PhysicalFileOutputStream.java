@@ -25,22 +25,22 @@ import java.io.*;
 /**
  * 文件输出流
  */
-public class FileByteWriter extends FileOutputStream {
+public class PhysicalFileOutputStream extends FileOutputStream {
 
-    public FileByteWriter(String name) throws FileNotFoundException {
+    public PhysicalFileOutputStream(String name) throws FileNotFoundException {
         super(name);
     }
 
-    public FileByteWriter(MutableFile mutableFile) throws FileNotFoundException {
-        super(mutableFile);
+    public PhysicalFileOutputStream(PhysicalFile physicalFile) throws FileNotFoundException {
+        super(physicalFile);
     }
 
-    public FileByteWriter(FileDescriptor fdObj) {
+    public PhysicalFileOutputStream(FileDescriptor fdObj) {
         super(fdObj);
     }
 
     public interface FileByteWriterResource {
-        void call(FileByteWriter byteWriter) throws Throwable;
+        void call(PhysicalFileOutputStream byteWriter) throws Throwable;
     }
 
     /**

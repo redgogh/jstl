@@ -18,7 +18,7 @@ package org.karatsuba.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karatsuba.io.MutableFile;
+import org.karatsuba.io.PhysicalFile;
 import org.karatsuba.reflect.ObjectSerializer;
 import org.junit.Test;
 
@@ -39,15 +39,15 @@ public class ObjectSerializerTest {
 
     @Test
     public void serializeTest() {
-        ObjectSerializer.serialize(new User("Judy"), new MutableFile("Desktop://judy.ser"));
+        ObjectSerializer.serialize(new User("Judy"), new PhysicalFile("Desktop://judy.ser"));
     }
 
     @Test
     public void deserializeTest() {
-        MutableFile mutableFile = new MutableFile("Desktop://judy.ser");
-        User user = (User) ObjectSerializer.deserialize(mutableFile);
+        PhysicalFile physicalFile = new PhysicalFile("Desktop://judy.ser");
+        User user = (User) ObjectSerializer.deserialize(physicalFile);
         System.out.println(user);
-        mutableFile.forceDelete();
+        physicalFile.forceDelete();
     }
 
 

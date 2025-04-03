@@ -18,8 +18,8 @@ package org.karatsuba.http;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import org.karatsuba.io.PhysicalFile;
 import org.karatsuba.utils.Assert;
-import org.karatsuba.io.MutableFile;
 import org.karatsuba.io.IOUtils;
 import okhttp3.ResponseBody;
 
@@ -47,15 +47,15 @@ public class StreamResponse implements Closeable {
     /**
      * 将响应体内容传输到指定路径的文件。
      *
-     * <p>此方法通过调用 {@link #transferTo(MutableFile)} 实现，
-     * 将给定路径 {@code path} 转换为 {@link MutableFile} 对象，
+     * <p>此方法通过调用 {@link #transferTo(PhysicalFile)} 实现，
+     * 将给定路径 {@code path} 转换为 {@link PhysicalFile} 对象，
      * 并将响应体内容写入该文件。
      *
      * @param path 要传输内容的目标文件路径
-     * @return 传输完成的 {@link MutableFile} 对象
+     * @return 传输完成的 {@link PhysicalFile} 对象
      */
-    public MutableFile transferTo(String path) {
-        return transferTo(MutableFile.wrap(path));
+    public PhysicalFile transferTo(String path) {
+        return transferTo(PhysicalFile.from(path));
     }
 
     /**
@@ -65,27 +65,27 @@ public class StreamResponse implements Closeable {
      * 并返回该文件。
      *
      * @param file 要传输内容的目标文件
-     * @return 传输完成的 {@link MutableFile} 对象
+     * @return 传输完成的 {@link PhysicalFile} 对象
      */
-    public MutableFile transferTo(java.io.File file) {
-        return transferTo(MutableFile.wrap(file));
+    public PhysicalFile transferTo(java.io.File file) {
+        return transferTo(PhysicalFile.from(file));
     }
 
     /**
-     * 将响应体内容传输到指定的 {@link MutableFile} 对象。
+     * 将响应体内容传输到指定的 {@link PhysicalFile} 对象。
      *
      * <p>从响应体中获取输入流，并将其内容写入提供的
-     * {@link MutableFile} 实例，然后返回该文件。
+     * {@link PhysicalFile} 实例，然后返回该文件。
      *
-     * @param mutableFile 要传输内容的目标 {@link MutableFile} 对象
-     * @return 传输完成的 {@link MutableFile} 对象
+     * @param physicalFile 要传输内容的目标 {@link PhysicalFile} 对象
+     * @return 传输完成的 {@link PhysicalFile} 对象
      */
-    public MutableFile transferTo(MutableFile mutableFile) {
+    public PhysicalFile transferTo(PhysicalFile physicalFile) {
         ResponseBody body = response.body();
         Assert.notNull(body, "没有数据响应。");
-        IOUtils.write(body.byteStream(), mutableFile);
+        IOUtils.write(body.byteStream(), physicalFile);
         close();
-        return mutableFile;
+        return physicalFile;
     }
 
     @Override

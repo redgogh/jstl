@@ -25,8 +25,8 @@ package org.karatsuba.security.key;
 
 /* Creates on 2025/2/20. */
 
+import org.karatsuba.io.PhysicalFile;
 import org.karatsuba.utils.Captor;
-import org.karatsuba.io.MutableFile;
 
 import java.security.Key;
 import java.security.KeyFactory;
@@ -55,7 +55,7 @@ public class RSAPublicKey extends AbstractKey {
     }
 
     public static RSAPublicKey fromKeyFile(String filepath) {
-        MutableFile keyfile = new MutableFile(filepath);
+        PhysicalFile keyfile = new PhysicalFile(filepath);
         return fromPEMFormat(keyfile.strread());
     }
 

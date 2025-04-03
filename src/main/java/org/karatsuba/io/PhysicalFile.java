@@ -56,7 +56,7 @@ import java.util.Properties;
  * @since 1.0
  * @author Red Gogh
  */
-public class MutableFile extends java.io.File {
+public class PhysicalFile extends java.io.File {
 
     /**
      * 空的 <code>File</code> 数组对象
@@ -106,7 +106,7 @@ public class MutableFile extends java.io.File {
      * @throws  NullPointerException
      *          If the <code>pathname</code> argument is <code>null</code>
      */
-    public MutableFile(String pathname) {
+    public PhysicalFile(String pathname) {
         super(quickAccessPath(pathname));
     }
 
@@ -135,7 +135,7 @@ public class MutableFile extends java.io.File {
      * @throws  NullPointerException
      *          If <code>child</code> is <code>null</code>
      */
-    public MutableFile(String parent, String child) {
+    public PhysicalFile(String parent, String child) {
         super(parent, child);
     }
 
@@ -164,7 +164,7 @@ public class MutableFile extends java.io.File {
      * @throws  NullPointerException
      *          If <code>child</code> is <code>null</code>
      */
-    public MutableFile(java.io.File parent, String child) {
+    public PhysicalFile(java.io.File parent, String child) {
         super(parent, child);
     }
 
@@ -204,17 +204,17 @@ public class MutableFile extends java.io.File {
      * @see java.net.URI
      * @since 1.4
      */
-    public MutableFile(URI uri) {
+    public PhysicalFile(URI uri) {
         super(uri);
     }
 
     /**
-     * 通过一个 {@link java.io.File} 对象来构建一个 {@link MutableFile} 对象实例，并且参数 File
+     * 通过一个 {@link java.io.File} 对象来构建一个 {@link PhysicalFile} 对象实例，并且参数 File
      * 不能是空的。
      *
      * @param file java.io 下的 File 对象实例
      */
-    public MutableFile(java.io.File file) {
+    public PhysicalFile(java.io.File file) {
         this(file.getPath());
     }
 
@@ -226,8 +226,8 @@ public class MutableFile extends java.io.File {
      * @param pathname 要包装的文件路径名字符串。
      * @return 一个新的 `File` 对象，包装了传入的文件路径名字符串。
      */
-    public static MutableFile wrap(String pathname) {
-        return new MutableFile(pathname);
+    public static PhysicalFile from(String pathname) {
+        return new PhysicalFile(pathname);
     }
 
     /**
@@ -238,8 +238,8 @@ public class MutableFile extends java.io.File {
      * @param file 要包装的 `java.io.File` 对象。
      * @return 一个新的 `File` 对象，包装了传入的 `java.io.File` 对象。
      */
-    public static MutableFile wrap(java.io.File file) {
-        return new MutableFile(file);
+    public static PhysicalFile from(java.io.File file) {
+        return new PhysicalFile(file);
     }
 
     /**
@@ -259,9 +259,9 @@ public class MutableFile extends java.io.File {
      * @since 1.2
      */
     @Override
-    public MutableFile getParentFile() {
+    public PhysicalFile getParentFile() {
         java.io.File parentFile = super.getParentFile();
-        return parentFile != null ? wrap(parentFile) : null;
+        return parentFile != null ? from(parentFile) : null;
     }
 
     /**
@@ -273,7 +273,7 @@ public class MutableFile extends java.io.File {
      * is returned, one for each file or directory in the directory.  Pathnames
      * denoting the directory itself and the directory's parent directory are
      * not included in the result.  Each resulting abstract pathname is
-     * constructed from this abstract pathname using the {@link #MutableFile(java.io.File,
+     * constructed from this abstract pathname using the {@link #PhysicalFile(java.io.File,
      * String) File(File,&nbsp;String)} constructor.  Therefore if this
      * pathname is absolute then each resulting pathname is absolute; if this
      * pathname is relative then each resulting pathname will be relative to
@@ -299,9 +299,9 @@ public class MutableFile extends java.io.File {
      */
     @Nullable
     @Override
-    public MutableFile[] listFiles() {
-        List<MutableFile> list = Lists.map(super.listFiles(), MutableFile::wrap);
-        MutableFile[] fs = new MutableFile[list.size()];
+    public PhysicalFile[] listFiles() {
+        List<PhysicalFile> list = Lists.map(super.listFiles(), PhysicalFile::from);
+        PhysicalFile[] fs = new PhysicalFile[list.size()];
         list.toArray(fs);
         return fs;
     }
@@ -352,9 +352,9 @@ public class MutableFile extends java.io.File {
         return StringUtils.strcut(getName(), index, 0);
     }
 
-    private boolean forceDeleteDirectory(MutableFile dir) {
-        List<MutableFile> children = Lists.map(dir.listFiles(), MutableFile::new);
-        for (MutableFile child : children) {
+    private boolean forceDeleteDirectory(PhysicalFile dir) {
+        List<PhysicalFile> children = Lists.map(dir.listFiles(), PhysicalFile::new);
+        for (PhysicalFile child : children) {
             if (child.isFile()) {
                 child.forceDeleteFile();
             } else {
@@ -410,9 +410,9 @@ public class MutableFile extends java.io.File {
      * @param autoCreate 文件不存在时是否创建
      * @return 打开描述符后的文件输入流对象
      */
-    private FileByteReader openByteReader(boolean autoCreate) {
+    private PhysicalFileInputStream openInputStream(boolean autoCreate) {
         checkFile(autoCreate);
-        return Captor.call(() -> new FileByteReader(this));
+        return Captor.call(() -> new PhysicalFileInputStream(this));
     }
 
     /**
@@ -425,9 +425,9 @@ public class MutableFile extends java.io.File {
      * @param autoCreate 文件不存在时是否创建
      * @return 打开描述符后的文件输出流对象
      */
-    private FileByteWriter openByteWriter(boolean autoCreate) {
+    private PhysicalFileOutputStream openOutputStream(boolean autoCreate) {
         checkFile(autoCreate);
-        return Captor.call(() -> new FileByteWriter(this));
+        return Captor.call(() -> new PhysicalFileOutputStream(this));
     }
 
     /**
@@ -436,8 +436,8 @@ public class MutableFile extends java.io.File {
      *
      * @return 打开描述符后的文件输入流对象
      */
-    public FileByteReader openByteReader() {
-        return openByteReader(true);
+    public PhysicalFileInputStream openInputStream() {
+        return openInputStream(true);
     }
 
     /**
@@ -446,8 +446,8 @@ public class MutableFile extends java.io.File {
      *
      * @return 打开描述符后的文件输入流对象
      */
-    public FileByteWriter openByteWriter() {
-        return openByteWriter(true);
+    public PhysicalFileOutputStream openOutputStream() {
+        return openOutputStream(true);
     }
 
     /**
@@ -456,8 +456,8 @@ public class MutableFile extends java.io.File {
      *
      * @return 打开描述符后的文件输入流对象
      */
-    public FileByteReader openByteReaderDisabled() {
-        return openByteReader(false);
+    public PhysicalFileInputStream openByteReaderDisabled() {
+        return openInputStream(false);
     }
 
     /**
@@ -466,8 +466,8 @@ public class MutableFile extends java.io.File {
      *
      * @return 打开描述符后的文件输出流对象
      */
-    public FileByteWriter openByteWriterDisabled() {
-        return openByteWriter(false);
+    public PhysicalFileOutputStream openByteWriterDisabled() {
+        return openOutputStream(false);
     }
 
     /**
@@ -477,7 +477,7 @@ public class MutableFile extends java.io.File {
      * @return 文件内容
      */
     public String strread() {
-        return IOUtils.strread(openByteReader());
+        return IOUtils.strread(openInputStream());
     }
 
     /**
@@ -818,8 +818,8 @@ public class MutableFile extends java.io.File {
      */
     public Properties loadProperties() {
         Properties properties = new Properties();
-        try(FileByteReader fileByteReader = openByteReaderDisabled()) {
-            properties.load(fileByteReader);
+        try(PhysicalFileInputStream physicalFileInputStream = openByteReaderDisabled()) {
+            properties.load(physicalFileInputStream);
         } catch (Exception e) {
             throw new IOReadException(e);
         }
