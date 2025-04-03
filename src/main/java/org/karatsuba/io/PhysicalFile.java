@@ -18,6 +18,8 @@ package org.karatsuba.io;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.karatsuba.collection.Lists;
 import org.karatsuba.exception.IOReadException;
 import org.karatsuba.string.StringUtils;
@@ -887,6 +889,8 @@ public class PhysicalFile extends java.io.File {
         accessFile = null;
     }
 
+    // -- cvt --
+
     /**
      * 加载配置文件的属性。
      * <p>
@@ -903,6 +907,30 @@ public class PhysicalFile extends java.io.File {
             throw new IOReadException(e);
         }
         return properties;
+    }
+
+    /**
+     * 将文件内容解析为 {@link JSONObject}。
+     *
+     * <p>该方法假定文件内容是合法的 JSON 格式，并尝试将其解析为 {@link JSONObject} 对象。
+     * 如果解析失败，可能会抛出 JSON 解析异常。
+     *
+     * @return 解析后的 {@link JSONObject} 对象
+     */
+    public JSONObject toJSONObject() {
+        return (JSONObject) JSONObject.parse(readAllBytes());
+    }
+
+    /**
+     * 将文件内容解析为 {@link JSONArray}。
+     *
+     * <p>该方法假定文件内容是合法的 JSON 数组格式，并尝试将其解析为 {@link JSONArray} 对象。
+     * 如果解析失败，可能会抛出 JSON 解析异常。
+     *
+     * @return 解析后的 {@link JSONArray} 对象
+     */
+    public JSONArray toJSONArray() {
+        return (JSONArray) JSONArray.parse(readAllBytes());
     }
 
 }
