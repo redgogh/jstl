@@ -44,6 +44,7 @@ import static org.karatsuba.utils.Comparators.anyeq;
  * @param <B> 第二个元素的类型
  * @author Red Gogh
  */
+@SuppressWarnings("ClassCanBeRecord")
 public class Pair<A, B> {
 
     /**

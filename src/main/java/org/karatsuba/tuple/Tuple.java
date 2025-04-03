@@ -25,7 +25,7 @@ import static org.karatsuba.utils.Comparators.anyeq;
  * 表示包含三个元素的元组。
  *
  * <p>该类用于表示一个由三个不同类型的元素组成的元组。提供访问这三个元素的方法，并重写了 `equals` 方法，
- * 以支持元组之间的比较。该类可用于需要返回多个相关值的场景，如方法返回多个值时。
+ * 以支持元组之间的比较。该类可用于需要返回多个相关值的场景，如方法返回多个值时。<p>
  *
  * <h2>功能特点</h2>
  * <ul>
@@ -47,6 +47,7 @@ import static org.karatsuba.utils.Comparators.anyeq;
  * @param <C> 元组的第三个元素类型
  * @author Red Gogh
  */
+@SuppressWarnings("ClassCanBeRecord")
 public class Tuple<A, B, C> {
 
     private final A first;
