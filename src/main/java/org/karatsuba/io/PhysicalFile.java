@@ -22,7 +22,6 @@ import org.karatsuba.collection.Lists;
 import org.karatsuba.exception.IOReadException;
 import org.karatsuba.string.StringUtils;
 import org.karatsuba.system.SystemUtils;
-import org.karatsuba.utils.ArrayUtils;
 import org.karatsuba.utils.Assert;
 import org.karatsuba.utils.Captor;
 import org.karatsuba.utils.Optional;
@@ -72,6 +71,11 @@ public class PhysicalFile extends java.io.File {
      * 桌面路径变量标识符，用于指示桌面目录的路径替换。
      */
     private static final String PATHNAME_DESKTOP_VARIABLE = "Desktop://";
+
+    /**
+     * 用户主目录路径变量标识符，用于指示用户主目录的路径替换。
+     */
+    private static final String PATHNAME_USER_HOME_VARIABLE = "Home://";
 
     /**
      * `RandomAccessFile` 实例，用于支持文件的随机读写操作。
@@ -132,6 +136,10 @@ public class PhysicalFile extends java.io.File {
             /* Conversation Desktop */
             if (pathname.startsWith(PATHNAME_DESKTOP_VARIABLE))
                 return pathname.replace(PATHNAME_DESKTOP_VARIABLE, SystemUtils.getUserHome("Desktop/"));
+
+            /* Conversation Home */
+            if (pathname.startsWith(PATHNAME_USER_HOME_VARIABLE))
+                return pathname.replace(PATHNAME_USER_HOME_VARIABLE, SystemUtils.getUserHome(""));
         }
 
         return pathname;

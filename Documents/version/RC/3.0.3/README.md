@@ -9,6 +9,7 @@
 
 ## 👻 优化功能
 
+- 优化 `PhysicalFile` 新增 `Home://` 目录。
 - 优化 `Chrono#getToday` 函数命名更新 `Chrono#today`。
 - 优化 `Chrono#getWeekOfMonth` 函数命名更新 `Chrono#weekOfMonth`。
 - 移除 `Chrono#moments` 函数。
