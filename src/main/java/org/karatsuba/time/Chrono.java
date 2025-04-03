@@ -663,6 +663,11 @@ public final class Chrono extends Date
     }
 
     @Override
+    public boolean isBeforeNow() {
+        return isBefore(now());
+    }
+
+    @Override
     public boolean isAfter(Date date) {
         return isAfter(new Chrono(date));
     }
@@ -675,6 +680,11 @@ public final class Chrono extends Date
     @Override
     public boolean isAfter(Chrono chrono) {
         return _core_local_time.isAfter(chrono._core_local_time);
+    }
+
+    @Override
+    public boolean isAfterNow() {
+        return isAfter(now());
     }
 
     @Override

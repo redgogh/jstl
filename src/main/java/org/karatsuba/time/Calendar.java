@@ -125,6 +125,13 @@ public interface Calendar {
     boolean isBefore(Chrono chrono);
 
     /**
+     * 判断当前时间是否早于系统当前时间。
+     *
+     * @return 如果当前时间早于系统时间，则返回 {@code true}，否则返回 {@code false}
+     */
+    boolean isBeforeNow();
+
+    /**
      * 判断当前时间是否晚于指定的 Date 对象。
      *
      * @param date 要比较的 Date 对象
@@ -147,6 +154,13 @@ public interface Calendar {
      * @return 如果当前时间晚于指定时间，则返回 true，否则返回 false
      */
     boolean isAfter(Chrono chrono);
+
+    /**
+     * 判断当前时间是否晚于系统当前时间。
+     *
+     * @return 如果当前时间晚于系统时间，则返回 {@code true}，否则返回 {@code false}
+     */
+    boolean isAfterNow();
 
     /**
      * 获取当前时间的纳秒数（相对于某个固定时间点，例如 JVM 启动时）。
