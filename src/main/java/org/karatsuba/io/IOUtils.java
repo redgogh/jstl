@@ -22,6 +22,7 @@ package org.karatsuba.io;
 
 import org.karatsuba.exception.IOReadException;
 import org.karatsuba.exception.IOWriteException;
+import org.karatsuba.reflect.ObjectSerializer;
 import org.karatsuba.utils.Assert;
 import org.karatsuba.utils.Captor;
 
@@ -531,6 +532,14 @@ public class IOUtils {
         if (src == null || dst == null)
             throw new IllegalArgumentException("源文件和目标文件不能为空");
         Captor.call(() -> Files.move(src.toPath(), dst.toPath(), StandardCopyOption.REPLACE_EXISTING));
+    }
+
+    public static void serialize(Object object, PhysicalFile file) {
+        ObjectSerializer.serialize(object, file);
+    }
+
+    public static Object deserialize(PhysicalFile file) {
+        return ObjectSerializer.deserialize(file);
     }
 
 }

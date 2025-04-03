@@ -9,6 +9,8 @@
 - 新增 `PhysicalFile#openRandomAccess` 随机读写访问函数。
 - 新增 `IOUtils#copy` 拷贝文件或文件夹函数。
 - 新增 `IOUtils#move` 移动文件或文件夹函数。
+- 新增 `IOUtils#serialize` 序列化对象函数。
+- 新增 `IOUtils#deserialize` 反序列化对象函数。
 
 ## 👻 优化功能
 
