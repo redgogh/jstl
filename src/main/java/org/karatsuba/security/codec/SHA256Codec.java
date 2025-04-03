@@ -26,7 +26,7 @@ public class SHA256Codec implements SHA256 {
         return Captor.icall(() -> {
             PhysicalFile physicalFile = new PhysicalFile(f0);
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            physicalFile.tryInputStream(reader -> {
+            physicalFile.tryInput(reader -> {
                 int len = 0;
                 byte[] buffer = new byte[IOUtils.MB];
                 while ((len = reader.read(buffer)) != IOUtils.EOF)

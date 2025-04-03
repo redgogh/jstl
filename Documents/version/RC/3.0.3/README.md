@@ -5,6 +5,7 @@
 ## ⭐ 新增新能
 
 - 新增 `Chrono#weekOfYear` 函数获取今天是今年内的第几周。
+- 新增 `PhysicalFile` 对象用于代替 `MutableFile`。
 
 ## 👻 优化功能
 
@@ -14,6 +15,7 @@
 - 优化 `Transformer` 命名更新为 `TypeCvt`。
 - 优化 `any*、checkin` 等函数移动到 `Comparators` 类中。
 - 优化 `iface` 包下的函数式接口命名。
+- 移除 `MutableFile` 对象。
 
 ## 🐞 BUG 修复
 

@@ -526,7 +526,7 @@ public class PhysicalFile extends java.io.File {
      * @param resource 需要执行的 `FileInputStreamResource` 操作
      * @throws IOReadException 如果文件读取过程中发生错误
      */
-    public void tryInputStream(FileInputStreamResource resource) {
+    public void tryInput(FileInputStreamResource resource) {
         try (FileInputStream stream = openInputStream()) {
             resource.apply(stream);
         } catch (Throwable e) {
@@ -543,7 +543,7 @@ public class PhysicalFile extends java.io.File {
      * @param resource 需要执行的 `FileOutputStreamResource` 操作
      * @throws IOReadException 如果文件写入过程中发生错误
      */
-    public void tryOutputStream(FileOutputStreamResource resource) {
+    public void tryOutput(FileOutputStreamResource resource) {
         try (FileOutputStream stream = openOutputStream()) {
             resource.apply(stream);
         } catch (Throwable e) {
