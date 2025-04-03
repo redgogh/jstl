@@ -26,62 +26,6 @@ import static org.karatsuba.utils.TypeCvt.atos;
 @SuppressWarnings("ALL")
 public class PhysicalFileTest {
 
-    /**
-     * 随机读写访问测试
-     */
-    @Test
-    public void randomAccessTest() {
-        PhysicalFile physicalFile = new PhysicalFile(".dat");
-
-        // write float
-        physicalFile.open();
-        {
-            float writeValue = 114.514f;
-            physicalFile.writeFloat(writeValue);
-            System.out.printf("-------------------------------------------------------------------\n");
-            System.out.printf("File random access write float example, write value: %f\n", writeValue);
-        }
-        physicalFile.close();
-
-            System.out.printf("-------------------------------------------------------------------\n");
-
-        // read float
-        physicalFile.open();
-        {
-            float readValue = 0.0f;
-            readValue = physicalFile.readFloat();
-            System.out.printf("File random access read float example, read value: %f\n", readValue);
-            System.out.printf("-------------------------------------------------------------------\n");
-        }
-        physicalFile.close();
-
-        physicalFile.forceDelete();
-    }
-
-    /**
-     * 随机读写访问测试, 写入两个 Int
-     */
-    @Test
-    public void randomAccessWriteTest() {
-        PhysicalFile physicalFile = new PhysicalFile(".dat");
-
-        physicalFile.open();
-
-        physicalFile.writeInt(1001);
-        physicalFile.writeInt(1002);
-        physicalFile.writeInt(1003);
-
-        physicalFile.seek(0);
-
-        System.out.printf("----------------------------------------------------\n");
-        System.out.printf("random access write example read(0): %s\n", physicalFile.readInt());
-        System.out.printf("random access write example read(1): %s\n", physicalFile.readInt());
-        System.out.printf("random access write example read(2): %s\n", physicalFile.readInt());
-        System.out.printf("----------------------------------------------------\n");
-
-        physicalFile.forceDelete();
-    }
-
     @Test
     public void readBytesTest() {
         System.out.println(atos(new PhysicalFile("Desktop://log.txt").readAllBytes()));

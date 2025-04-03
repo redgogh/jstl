@@ -11,6 +11,7 @@
 - 新增 `IOUtils#move` 移动文件或文件夹函数。
 - 新增 `IOUtils#serialize` 序列化对象函数。
 - 新增 `IOUtils#deserialize` 反序列化对象函数。
+- 新增 `Chrono#toZoned` 函数用于转换时区。
 
 ## 👻 优化功能
 

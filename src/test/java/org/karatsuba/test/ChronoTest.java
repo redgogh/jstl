@@ -23,6 +23,7 @@ import org.karatsuba.time.Chrono;
 import org.karatsuba.time.DateFormatter;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 @SuppressWarnings("ALL")
@@ -80,6 +81,12 @@ public class ChronoTest {
     public void getWeekOfYearTest() {
         Chrono chrono = Chrono.from("2024-02-01");
         System.out.println(chrono.getWeekOfYear());
+    }
+
+    @Test
+    public void toNewYorkZonedTest() {
+        Chrono duration = Chrono.now();
+        System.out.println(duration.toZoned("America/New_York").toZoned("America/New_York").toZoned("America/New_York"));;
     }
 
     public static void main(String[] args) {

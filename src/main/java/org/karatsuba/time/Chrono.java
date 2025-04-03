@@ -596,6 +596,16 @@ public final class Chrono extends Date
     }
 
     /**
+     * 从 {@code Instant} 实例创建一个 {@code Chrono} 实例。
+     *
+     * @param instant 要转换的 {@code Instant} 实例
+     * @return 转换后的 {@code Chrono} 实例
+     */
+    public static Chrono from(Instant instant) {
+        return from(Date.from(instant));
+    }
+
+    /**
      * 获取今天的日期（日）。
      *
      * @return 当前日期的天数
@@ -695,6 +705,11 @@ public final class Chrono extends Date
     @Override
     public long currentTimeMillis() {
         return System.currentTimeMillis();
+    }
+
+    @Override
+    public Chrono toZoned(String zoneId) {
+        return Chrono.from(toZonedDateTime(zoneId).toInstant());
     }
 
     @Override
