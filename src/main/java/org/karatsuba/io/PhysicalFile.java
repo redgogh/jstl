@@ -22,6 +22,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.karatsuba.collection.Lists;
 import org.karatsuba.exception.IOReadException;
+import org.karatsuba.exception.IllegalOperatorException;
+import org.karatsuba.exception.SystemRuntimeException;
 import org.karatsuba.string.StringUtils;
 import org.karatsuba.system.SystemUtils;
 import org.karatsuba.utils.Assert;
@@ -29,14 +31,12 @@ import org.karatsuba.utils.Captor;
 import org.karatsuba.utils.Optional;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.net.URI;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Properties;
+import java.util.TreeMap;
 
 /**
  * 扩展了 `java.io.File` 的自定义文件类，提供了增强的文件操作功能。
@@ -78,11 +78,6 @@ public class PhysicalFile extends java.io.File {
      * 用户主目录路径变量标识符，用于指示用户主目录的路径替换。
      */
     private static final String PATHNAME_USER_HOME_VARIABLE = "Home://";
-
-    /**
-     * `RandomAccessFile` 实例，用于支持文件的随机读写操作。
-     */
-    private RandomAccessFile accessFile;
 
     /**
      * `FileInputStreamResource` 用于处理 `FileInputStream` 资源的函数式接口。
@@ -536,7 +531,7 @@ public class PhysicalFile extends java.io.File {
      * @param resource 需要执行的 `FileInputStreamResource` 操作
      * @throws IOReadException 如果文件读取过程中发生错误
      */
-    public void tryInput(FileInputStreamResource resource) {
+    public void openInputStream(FileInputStreamResource resource) {
         try (FileInputStream stream = openInputStream()) {
             resource.apply(stream);
         } catch (Throwable e) {
@@ -553,7 +548,7 @@ public class PhysicalFile extends java.io.File {
      * @param resource 需要执行的 `FileOutputStreamResource` 操作
      * @throws IOReadException 如果文件写入过程中发生错误
      */
-    public void tryOutput(FileOutputStreamResource resource) {
+    public void openOutputStream(FileOutputStreamResource resource) {
         try (FileOutputStream stream = openOutputStream()) {
             resource.apply(stream);
         } catch (Throwable e) {
@@ -573,10 +568,8 @@ public class PhysicalFile extends java.io.File {
      * @return 包含文件内容的字节数组
      */
     public byte[] readAllBytes() {
-        open();
         byte[] b = new byte[(int) length()];
-        read(b);
-        close();
+        openRandomAccess(fd -> fd.read(b));
         return b;
     }
 
@@ -585,311 +578,46 @@ public class PhysicalFile extends java.io.File {
     //////////////////////////////////////////////////////////////////////////////
 
     /**
-     * 打开文件描述符，使得 <code>File</code> 文件对象支持系统随机读写
-     * 访问。随机读写机制能够更灵活的操作文件内容，并写入。性能更高。
-     * 同时当文件打开成功以后，当前对象将支持所有随机读写访问函数。
+     * 定义一个接口，用于在随机访问文件中执行特定的操作。
      * <p>
+     * 该接口接受一个 {@link RandomAccessFile} 对象，并返回操作的结果。
+     * </p>
      *
-     * 当调用 <code>open()</code> 函数时，操作系统会打开一个文件描述符，
-     * 该描述符由操作系统中的文件系统管理，
+     * @param <T> 操作结果的类型
+     */
+    public interface RandomAccessResource<T> {
+        /**
+         * 在 {@link RandomAccessFile} 上执行操作。
+         *
+         * @param fd {@link RandomAccessFile} 文件描述符
+         * @return 操作的结果
+         * @throws Throwable 在操作过程中发生异常时抛出
+         */
+        T apply(RandomAccessFile fd) throws Throwable;
+    }
+
+    /**
+     * 打开一个随机访问文件并执行指定的操作。
      * <p>
+     * 在执行完操作后，文件会自动关闭。若操作过程中发生异常，
+     * 将会抛出一个 {@link IllegalOperatorException} 异常。
+     * </p>
      *
-     * 默认同时支持读写操作。
-     *
-     * @return 描述符是否打开成功
+     * @param <T> 操作结果的类型
+     * @param resource 要执行的操作
+     * @return 操作结果
      */
-    public boolean open() {
-        return open("rwd");
+    public <T> T openRandomAccess(RandomAccessResource<T> resource) {
+        try (RandomAccessFile fd = new RandomAccessFile(this, "rwd")) {
+            return resource.apply(fd);
+        } catch (Throwable e) {
+            throw new IllegalOperatorException(e);
+        }
     }
 
-    /**
-     * 打开文件描述符，使得 <code>File</code> 文件对象支持系统随机读写
-     * 访问。随机读写机制能够更灵活的操作文件内容，并写入。性能更高。
-     * 同时当文件打开成功以后，当前对象将支持所有随机读写访问函数。
-     *
-     * <p>当调用 <code>open()</code> 函数时，操作系统会打开一个文件描述符，
-     * 该描述符由操作系统中的文件系统管理，
-     *
-     * @param mode 打开模式，r 表示支持读取，w 表示支持写入，也可以
-     *             连起来写，rw 表示同时支持读取和写入
-     *
-     * @return 描述符是否打开成功
-     */
-    public boolean open(String mode) {
-        return (accessFile = Optional.ifError(() -> new RandomAccessFile(this, mode), null)) != null;
-    }
-
-    /**
-     * 检查文件描述符是否打开
-     */
-    private void checkOpen() {
-        Assert.isTrue(accessFile != null, "Please call open() before random access methods execute.");
-    }
-
-    /**
-     * Attempts to skip over {@code n} bytes of input discarding the
-     * skipped bytes.
-     * <p>
-     *
-     * This method may skip over some smaller number of bytes, possibly zero.
-     * This may result from any of a number of conditions; reaching end of
-     * file before {@code n} bytes have been skipped is only one
-     * possibility. This method never throws an {@code EOFException}.
-     * The actual number of bytes skipped is returned.  If {@code n}
-     * is negative, no bytes are skipped.
-     *
-     * @param      n   the number of bytes to be skipped.
-     * @return     the actual number of bytes skipped.
-     */
-    public int skipBytes(int n) {
-        checkOpen();
-        return Captor.call(() -> accessFile.skipBytes(n));
-    }
-
-    /**
-     * Sets the file-pointer offset, measured from the beginning of this
-     * file, at which the next read or write occurs.  The offset may be
-     * set beyond the end of the file. Setting the offset beyond the end
-     * of the file does not change the file length.  The file length will
-     * change only by writing after the offset has been set beyond the end
-     * of the file.
-     *
-     * @param      pos   the offset position, measured in bytes from the
-     *                   beginning of the file, at which to set the file
-     *                   pointer.
-     */
-    public void seek(long pos) {
-        checkOpen();
-        Captor.call(() -> accessFile.seek(pos));
-    }
-
-    /**
-     * 从当前文件数据中读取一个字节并返回，返回的字节类型时一个 int
-     * 类型，int 的取值范围是从 0 - 255，<code>0x00-0x0ff</code>，
-     * 这个方法会阻塞执行。
-     * <p>
-     * 使用随机读写函数前，请务必先打开文件随机读写访问对象，使用
-     * <code>open()</code> 函数打开随机读写访问对象，否则禁止使用
-     * 随机读写函数。
-     *
-     * @return 返回一个取值范围从 0-255 的字节数据，如果返回
-     *         值等于 <code>-1</code> 那么表示文件已读取到
-     *         末尾。
-     */
-    public int read() {
-        checkOpen();
-        return Captor.call(() -> accessFile.read());
-    }
-
-    /**
-     * 从当前文件的数据中读取 <code>b.length</code> 字节到 <code>b</code> 字节
-     * 缓冲区数组中，这个方法会阻塞执行。
-     * <p>
-     * 使用随机读写函数前，请务必先打开文件随机读写访问对象，使用
-     * <code>open()</code> 函数打开随机读写访问对象，否则禁止使用
-     * 随机读写函数。
-     *
-     * @param b   字节缓冲区数组
-     */
-    public void read(byte[] b) {
-        checkOpen();
-        Captor.call(() -> accessFile.read(b));
-    }
-
-    /**
-     * 从当前文件的数据中读取 <code>len</code> 字节到 <code>b</code> 字节
-     * 缓冲区数组中，这个方法会阻塞执行。
-     * <p>
-     * 使用随机读写函数前，请务必先打开文件随机读写访问对象，使用
-     * <code>open()</code> 函数打开随机读写访问对象，否则禁止使用
-     * 随机读写函数。
-     *
-     * @param b   字节缓冲区数组
-     * @param off 缓冲区偏移量，表示从 <code>b</code> 缓冲区的 <code>off</code>
-     *            位置开始写入。
-     * @param len 数据读取长度，表示要从文件中读取 <code>len</code> 个字节
-     *            数据到字节缓冲区中。
-     */
-    public void read(byte[] b, int off, int len) {
-        checkOpen();
-        Captor.call(() -> accessFile.read(b, off, len));
-    }
-
-    /**
-     * 从当前访问偏移量的位置在文件数据中往后读取 {@link Integer#BYTES} 个
-     * 字节数据，并将读取到的字节数据转换成一个 int 类型的数据。
-     * <p>
-     * 使用随机读写函数前，请务必先打开文件随机读写访问对象，使用
-     * <code>open()</code> 函数打开随机读写访问对象，否则禁止使用
-     * 随机读写函数。
-     *
-     * @return 返回从文件中读取到的 int 数据
-     */
-    public int readInt() {
-        checkOpen();
-        return Captor.call(() -> accessFile.readInt());
-    }
-
-    /**
-     * 从当前访问偏移量的位置在文件数据中往后读取 {@link Long#BYTES} 个
-     * 字节数据，并将读取到的字节数据转换成一个 long 类型的数据类。
-     * <p>
-     * 使用随机读写函数前，请务必先打开文件随机读写访问对象，使用
-     * <code>open()</code> 函数打开随机读写访问对象，否则禁止使用
-     * 随机读写函数。
-     *
-     * @return 返回从文件中读取到的 long 数据
-     */
-    public long readLong() {
-        checkOpen();
-        return Captor.call(() -> accessFile.readLong());
-    }
-
-    /**
-     * 从当前访问偏移量的位置在文件数据中往后读取 {@link Float#BYTES} 个
-     * 字节数据，并将读取到的字节数据转换成一个 float 类型的数据类。
-     * <p>
-     * 使用随机读写函数前，请务必先打开文件随机读写访问对象，使用
-     * <code>open()</code> 函数打开随机读写访问对象，否则禁止使用
-     * 随机读写函数。
-     *
-     * @return 返回从文件中读取到的 float 数据
-     */
-    public float readFloat() {
-        checkOpen();
-        return Captor.call(() -> accessFile.readFloat());
-    }
-
-    /**
-     * 从当前访问偏移量的位置在文件数据中往后读取 {@link Double#BYTES} 个
-     * 字节数据，并将读取到的字节数据转换成一个 double 类型的数据类。
-     * <p>
-     * 使用随机读写函数前，请务必先打开文件随机读写访问对象，使用
-     * <code>open()</code> 函数打开随机读写访问对象，否则禁止使用
-     * 随机读写函数。
-     *
-     * @return 返回从文件中读取到的 double 数据
-     */
-    public double readDouble() {
-        checkOpen();
-        return Captor.call(() -> accessFile.readDouble());
-    }
-
-    /**
-     * 写入一个字节数据到当前的文件中。
-     * <p>
-     * 使用随机读写函数前，请务必先打开文件随机读写访问对象，使用
-     * <code>open()</code> 函数打开随机读写访问对象，否则禁止使用
-     * 随机读写函数。
-     *
-     * @param b 需要写入的字节数据
-     */
-    public void write(byte b) {
-        checkOpen();
-        Captor.call(() -> accessFile.write(b));
-    }
-
-    /**
-     * 写入一个字节数组数据到当前的文件中。
-     * <p>
-     * 使用随机读写函数前，请务必先打开文件随机读写访问对象，使用
-     * <code>open()</code> 函数打开随机读写访问对象，否则禁止使用
-     * 随机读写函数。
-     *
-     * @param b 需要写入的字节数组
-     */
-    public void write(byte[] b) {
-        checkOpen();
-        Captor.call(() -> accessFile.write(b));
-    }
-
-    /**
-     * 根据提供的偏移量和长度写入将字节数组中的数据写入到当前
-     * 文件中。
-     * <p>
-     * 使用随机读写函数前，请务必先打开文件随机读写访问对象，使用
-     * <code>open()</code> 函数打开随机读写访问对象，否则禁止使用
-     * 随机读写函数。
-     *
-     * @param b   字节缓冲区数组
-     * @param off 缓冲区偏移量，表示从 <code>b</code> 缓冲区的 <code>off</code>
-     *            位置开始写入。
-     * @param len 数据写入长度，表示要从字节缓冲区中读取 <code>len</code> 个字节
-     *            数据文件中。
-     */
-    public void write(byte[] b, int off, int len) {
-        checkOpen();
-        Captor.call(() -> accessFile.write(b, off, len));
-    }
-
-    /**
-     * 写入一个 Integer 数据到文件中。
-     * <p>
-     * 使用随机读写函数前，请务必先打开文件随机读写访问对象，使用
-     * <code>open()</code> 函数打开随机读写访问对象，否则禁止使用
-     * 随机读写函数。
-     *
-     * @param value 需要写入的 Integer 数据。
-     */
-    public void writeInt(int value) {
-        checkOpen();
-        Captor.call(() -> accessFile.writeInt(value));
-    }
-
-    /**
-     * 写入一个 Long 数据到文件中。
-     * <p>
-     * 使用随机读写函数前，请务必先打开文件随机读写访问对象，使用
-     * <code>open()</code> 函数打开随机读写访问对象，否则禁止使用
-     * 随机读写函数。
-     *
-     * @param value 需要写入的 Long 数据。
-     */
-    public void writeLong(long value) {
-        checkOpen();
-        Captor.call(() -> accessFile.writeLong(value));
-    }
-
-    /**
-     * 写入一个 Float 数据到文件中。
-     * <p>
-     * 使用随机读写函数前，请务必先打开文件随机读写访问对象，使用
-     * <code>open()</code> 函数打开随机读写访问对象，否则禁止使用
-     * 随机读写函数。
-     *
-     * @param value 需要写入的 Float 数据。
-     */
-    public void writeFloat(float value) {
-        checkOpen();
-        Captor.call(() -> accessFile.writeFloat(value));
-    }
-
-    /**
-     * 写入一个 Double 数据到文件中。
-     * <p>
-     * 使用随机读写函数前，请务必先打开文件随机读写访问对象，使用
-     * <code>open()</code> 函数打开随机读写访问对象，否则禁止使用
-     * 随机读写函数。
-     *
-     * @param value 需要写入的 Double 数据。
-     */
-    public void writeDouble(double value) {
-        checkOpen();
-        Captor.call(() -> accessFile.writeDouble(value));
-    }
-
-    /**
-     * 关闭文件描述符，当文件描述符被关闭后，<code>File</code> 对象将
-     * 不再支持随机读写访问，并释放出文件描述符句柄。如果需要重新使用
-     * 随机读写访问功能，重新打开文件描述符即可，
-     */
-    public void close() {
-        checkOpen();
-        IOUtils.closeQuietly(accessFile);
-        accessFile = null;
-    }
-
-    // -- cvt --
+    //////////////////////////////////////////////////////////////////////////////
+    /// CVT
+    //////////////////////////////////////////////////////////////////////////////
 
     /**
      * 加载配置文件的属性。

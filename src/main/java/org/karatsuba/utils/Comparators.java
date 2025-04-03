@@ -1,6 +1,6 @@
 package org.karatsuba.utils;
 
-import org.karatsuba.exception.InvalidArgumentException;
+import org.karatsuba.exception.IllegalArgumentException;
 
 import java.util.Objects;
 
@@ -126,7 +126,7 @@ public class Comparators {
      * @param b 第二个比较对象
      * @param mode 位掩码组合的比较模式（使用 COMPARE_MODE_* 常量）
      * @return 当满足任一激活的比较模式时返回 true
-     * @throws InvalidArgumentException 当模式参数不合法时抛出
+     * @throws IllegalArgumentException 当模式参数不合法时抛出
      */
     public static <T extends Comparable<T>> boolean anycmp(T a, T b, int mode) {
         if ((mode & COMPARE_MODE_EQ) != 0) {
@@ -148,7 +148,7 @@ public class Comparators {
         if ((mode & COMPARE_MODE_GT) != 0)
             return a.compareTo(b) > 0;
 
-        throw new InvalidArgumentException("比较模式不正确");
+        throw new IllegalArgumentException("比较模式不正确");
     }
 
 }

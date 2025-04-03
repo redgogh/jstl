@@ -20,7 +20,7 @@ package org.karatsuba.exception;
 
 
 /**
- * `InvalidArgumentException` 是一个自定义的非法参数异常类，继承自 `SystemRuntimeException`。
+ * `IllegalArgumentException` 是一个自定义的非法参数异常类，继承自 `SystemRuntimeException`。
  * 用于在方法或函数调用中，当传入的参数不合法或不符合预期时抛出。<p>
  *
  * <h2>使用场景</h2>
@@ -29,10 +29,10 @@ package org.karatsuba.exception;
  *
  * <h2>构造函数</h2>
  * <ul>
- *     <li>{@link #InvalidArgumentException()} - 默认构造函数，不带任何参数。</li>
- *     <li>{@link #InvalidArgumentException(Throwable e)} - 通过已有的异常创建一个新的非法参数异常。</li>
- *     <li>{@link #InvalidArgumentException(String fmt, Object... args)} - 根据格式化字符串和参数创建异常信息。</li>
- *     <li>{@link #InvalidArgumentException(String fmt, Throwable e, Object... args)} - 根据格式化字符串、已有异常和参数创建异常信息。</li>
+ *     <li>{@link #IllegalArgumentException()} - 默认构造函数，不带任何参数。</li>
+ *     <li>{@link #IllegalArgumentException(Throwable e)} - 通过已有的异常创建一个新的非法参数异常。</li>
+ *     <li>{@link #IllegalArgumentException(String fmt, Object... args)} - 根据格式化字符串和参数创建异常信息。</li>
+ *     <li>{@link #IllegalArgumentException(String fmt, Throwable e, Object... args)} - 根据格式化字符串、已有异常和参数创建异常信息。</li>
  * </ul>
  *
  * <h2>使用示例</h2>
@@ -54,12 +54,12 @@ package org.karatsuba.exception;
  * @author Red Gogh
  * @since 1.0
  */
-public class InvalidArgumentException extends SystemRuntimeException {
+public class IllegalArgumentException extends SystemRuntimeException {
 
     /**
      * 默认构造函数。
      */
-    public InvalidArgumentException() {
+    public IllegalArgumentException() {
     }
 
     /**
@@ -67,7 +67,7 @@ public class InvalidArgumentException extends SystemRuntimeException {
      *
      * @param e 原始异常，不能为 null。
      */
-    public InvalidArgumentException(Throwable e) {
+    public IllegalArgumentException(Throwable e) {
         super(e);
     }
 
@@ -77,7 +77,7 @@ public class InvalidArgumentException extends SystemRuntimeException {
      * @param fmt 格式化字符串，不能为 null。
      * @param args 格式化参数。
      */
-    public InvalidArgumentException(String fmt, Object... args) {
+    public IllegalArgumentException(String fmt, Object... args) {
         super(fmt, args);
     }
 
@@ -88,7 +88,7 @@ public class InvalidArgumentException extends SystemRuntimeException {
      * @param e 原始异常，不能为 null。
      * @param args 格式化参数。
      */
-    public InvalidArgumentException(String fmt, Throwable e, Object... args) {
+    public IllegalArgumentException(String fmt, Throwable e, Object... args) {
         super(fmt, e, args);
     }
 }

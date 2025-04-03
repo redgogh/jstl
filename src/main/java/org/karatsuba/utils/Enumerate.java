@@ -20,7 +20,7 @@ package org.karatsuba.utils;
 
 /* Create on 2019/6/14 */
 
-import org.karatsuba.exception.InvalidArgumentException;
+import org.karatsuba.exception.IllegalArgumentException;
 import org.karatsuba.reflect.UClass;
 import org.karatsuba.string.StringUtils;
 
@@ -58,7 +58,7 @@ import org.karatsuba.string.StringUtils;
  * @author Red Gogh
  *
  * @see Enum
- * @see InvalidArgumentException
+ * @see IllegalArgumentException
  * @since 1.0
  */
 public class Enumerate {

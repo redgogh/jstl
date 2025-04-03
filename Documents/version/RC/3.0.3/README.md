@@ -6,6 +6,7 @@
 
 - 新增 `Chrono#weekOfYear` 函数获取今天是今年内的第几周。
 - 新增 `PhysicalFile` 对象用于代替 `MutableFile`。
+- 新增 `PhysicalFile#openRandomAccess` 随机读写访问函数。
 
 ## 👻 优化功能
 
@@ -17,6 +18,7 @@
 - 优化 `any*、checkin` 等函数移动到 `Comparators` 类中。
 - 优化 `iface` 包下的函数式接口命名。
 - 移除 `MutableFile` 对象。
+- 移除 `PhysicalFile` 对象中所有随机读写访问接口。
 
 ## 🐞 BUG 修复
 
