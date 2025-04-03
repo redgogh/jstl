@@ -1,51 +1,53 @@
-= karatsuba-io
+= Karatsuba-IO
 
-image:Documents/svg/offical.svg[offical]
-image:Documents/svg/test.svg[test]
-image:Documents/svg/license.svg[license]
-image:Documents/svg/build.svg[build]
+image:Documents/svg/offical.svg[官方认证,width=64]
+image:Documents/svg/test.svg[测试覆盖率,width=64]
+image:Documents/svg/license.svg[Apache 2.0 许可证,width=64]
+image:Documents/svg/build.svg[构建状态,width=64]
 
-标准开发工具包。
+基于核心项目基础设施抽象提炼的企业级Java工具包，提供生产级开发支持与标准化解决方案
 
-== 开发文档
+== 开发规范
 
-项目规范文档列表（开发前请阅读）：
+在提交代码前请严格阅读：
+• link:Documents/codestyle.adoc[《代码规范》] - 变量命名/类结构/注释要求
+• link:Documents/commit-style.adoc[《提交规范》] - Git commit message 格式标准
 
-- link:Documents/codestyle.adoc[代码规范文档]
-- link:Documents/commit-style.adoc[提交规范文档]
+== 环境要求
 
-== 构建环境要求
+最低运行时要求：
+▸ JDK 1.8+（推荐 JDK 21）
+▸ Maven 3.6.3+
 
-此项目使用 Maven toolchains 进行构建操作，JDK要求1.8及以上，JDK版本最低要求 1.8。
-
+可选JDK发行版：
 * link:https://openjdk.org/projects/jdk/21/[OpenJDK]
-* link:https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html[Oracle OpenJDK]
-* link:https://aws.amazon.com/cn/corretto/?filtered-posts.sort-by=item.additionalFields.createdDate&filtered-posts.sort-order=desc[Aws Corretto]
+* link:https://aws.amazon.com/cn/corretto/[AWS Corretto]
 * link:https://github.com/dragonwell-project/dragonwell21[Alibaba Dragonwell]
 
-=== 构建
+=== 构建指南
 
-本项目使用 Maven 进行构建，你需要在你本地的环境变量中添加 Maven 的 `/bin` 目录地址，并指定 Maven Home
+1. 设置环境变量：
 
-    MAVEN_HOME=<your maven home>
+[source,bash]
+----
+export MAVEN_HOME=/path/to/maven
+export PATH=$MAVEN_HOME/bin:$PATH
+mvn clean package -DskipTests
+----
 
-相信如何添加环境变量对于任何一个程序员来说都是最基础的操作这里就不再过多的赘述。
-
-在终端上执行 `mvn clean package` 对项目进行构建。
-
-== Maven Central
-
-项目的依赖包已经上传到了 Maven Central，你可以在任意项目中直接引入依赖。
+== Maven 中央仓库
 
 [source,xml]
 ----
 <dependency>
-    <groupId>io.github.redgogh</groupId>
-    <artifactId>karasuba-io</artifactId>
-    <version>3.0.3</version>
+  <groupId>io.github.redgogh</groupId>
+  <artifactId>karasuba-io</artifactId>
+  <version>3.0.3</version>
 </dependency>
 ----
 
-== License
+== 许可证
 
-本项目采用 Apache License 2.0 许可证，详情见 link:LICENSE[LICENSE]
+Copyright © 2019 Karatsuba-IO Contributors.
+
+采用 link:LICENSE[Apache License 2.0] 开源协议。
