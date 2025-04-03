@@ -10,19 +10,16 @@ image:Documents/svg/build.svg[构建状态,width=64]
 == 开发规范
 
 在提交代码前请严格阅读：
-• link:Documents/codestyle.adoc[《代码规范》] - 变量命名/类结构/注释要求
-• link:Documents/commit-style.adoc[《提交规范》] - Git commit message 格式标准
+
+- link:Documents/codestyle.adoc[《代码规范》] - 变量命名/类结构/注释要求
+- link:Documents/commit-style.adoc[《提交规范》] - Git commit message 格式标准
 
 == 环境要求
 
 最低运行时要求：
-▸ JDK 1.8+（推荐 JDK 21）
-▸ Maven 3.6.3+
 
-可选JDK发行版：
-* link:https://openjdk.org/projects/jdk/21/[OpenJDK]
-* link:https://aws.amazon.com/cn/corretto/[AWS Corretto]
-* link:https://github.com/dragonwell-project/dragonwell21[Alibaba Dragonwell]
+- JDK 1.9+（推荐 JDK 21）
+- Maven 3.9.0+
 
 === 构建指南
 
@@ -32,6 +29,11 @@ image:Documents/svg/build.svg[构建状态,width=64]
 ----
 export MAVEN_HOME=/path/to/maven
 export PATH=$MAVEN_HOME/bin:$PATH
+----
+
+2. 执行构建
+[source, bash]
+----
 mvn clean package -DskipTests
 ----
 
