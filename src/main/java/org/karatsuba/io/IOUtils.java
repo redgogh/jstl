@@ -534,10 +534,26 @@ public class IOUtils {
         Captor.call(() -> Files.move(src.toPath(), dst.toPath(), StandardCopyOption.REPLACE_EXISTING));
     }
 
+    /**
+     * 将给定的 {@code object} 序列化并保存到指定的 {@code file} 文件中。
+     * <p>
+     * 序列化过程将会把对象转换为字节流并写入到文件中，文件路径由 {@code file} 提供。
+     *
+     * @param object  要序列化的对象
+     * @param file    目标文件
+     */
     public static void serialize(Object object, PhysicalFile file) {
         ObjectSerializer.serialize(object, file);
     }
 
+    /**
+     * 从指定的 {@code file} 文件中反序列化对象。
+     * <p>
+     * 该方法会读取文件中的字节流并将其转换为原始的对象。
+     *
+     * @param file  源文件
+     * @return      反序列化后的对象
+     */
     public static Object deserialize(PhysicalFile file) {
         return ObjectSerializer.deserialize(file);
     }
