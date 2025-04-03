@@ -86,7 +86,7 @@ public class ChronoTest {
     @Test
     public void toNewYorkZonedTest() {
         Chrono duration = Chrono.now();
-        System.out.println(duration.toZoned("America/New_York").toZoned("America/New_York").toZoned("America/New_York"));;
+        System.out.println(duration.toZoned(Chrono.AMERICA_NEW_YORK));;
     }
 
     public static void main(String[] args) {

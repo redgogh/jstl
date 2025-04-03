@@ -185,6 +185,14 @@ public interface ChronoTemporal {
     Chrono toZoned(String zoneId);
 
     /**
+     * 将当前时间转换为指定时区的 {@code Chrono} 实例。
+     *
+     * @param zoneId 时区标识符
+     * @return 转换后的 {@code Chrono} 实例
+     */
+    Chrono toZoned(ZoneId zoneId);
+
+    /**
      * 将当前时间转换为指定时区的 `ZonedDateTime`。
      *
      * <p>该方法将时间转换为指定时区（通过 `zoneId`）的 `ZonedDateTime` 对象，允许根据不同的时区进行时间操作。

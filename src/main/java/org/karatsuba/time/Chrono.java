@@ -709,6 +709,11 @@ public final class Chrono extends Date
 
     @Override
     public Chrono toZoned(String zoneId) {
+        return toZoned(ZoneId.of(zoneId));
+    }
+
+    @Override
+    public Chrono toZoned(ZoneId zoneId) {
         return Chrono.from(toZonedDateTime(zoneId).toInstant());
     }
 
