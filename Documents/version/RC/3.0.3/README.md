@@ -23,6 +23,7 @@
 - 优化 `iface` 包下的函数式接口命名。
 - 移除 `MutableFile` 对象。
 - 移除 `PhysicalFile` 对象中所有随机读写访问接口。
+- 优化 `Pair` 内存布局。
 
 ## 🐞 BUG 修复
 

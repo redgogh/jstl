@@ -18,12 +18,14 @@ package org.karatsuba.tuple;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import static org.karatsuba.utils.Comparators.anyeq;
+
 /**
- * `Pair` 是一个泛型类，用于表示一对具有不同类型的元素。该类封装了一个 `Tuple` 实例，提供了对这两个元素的访问方法。
+ * `Pair` 是一个泛型类，用于表示一对具有不同类型的元素。
  *
  * <p>此类的主要功能是存储和访问一对值，其中每个值可以是任意类型。通过 `first()` 和 `second()` 方法，可以分别获取该对值的第一个和第二个元素。
  *
- * <p>该类支持 `hashCode` 和 `equals` 方法，确保能够根据封装的 `Tuple` 对象进行比较和哈希操作。
+ * <p>该类支持 `hashCode` 和 `equals` 方法，确保能够根据封装的 `Tuple` 对象进行比较和哈希操作。<p>
  *
  * <h2>注意事项</h2>
  * <ul>
@@ -40,15 +42,19 @@ package org.karatsuba.tuple;
  *
  * @param <A> 第一个元素的类型
  * @param <B> 第二个元素的类型
- * @see Tuple
  * @author Red Gogh
  */
 public class Pair<A, B> {
 
     /**
-     * 内部储存数据的元组对象
+     * 第一个元素
      */
-    private final Tuple<A, B, Void> tuple;
+    private final A first;
+
+    /**
+     * 第二个元素
+     */
+    private final B second;
 
     /**
      * 构造一个 `Pair` 实例，封装两个指定的元素。
@@ -57,7 +63,8 @@ public class Pair<A, B> {
      * @param second 作为第二个元素的值
      */
     public Pair(A first, B second) {
-        this.tuple = new Tuple<>(first, second, null);
+        this.first = first;
+        this.second = second;
     }
 
     /**
@@ -66,7 +73,7 @@ public class Pair<A, B> {
      * @return `Pair` 中的第一个元素
      */
     public A first() {
-        return tuple.first();
+        return first;
     }
 
     /**
@@ -75,7 +82,7 @@ public class Pair<A, B> {
      * @return `Pair` 中的第二个元素
      */
     public B second() {
-        return tuple.second();
+        return second;
     }
 
     public static <A, B> Pair<A, B> of(A first, B second) {
@@ -89,7 +96,7 @@ public class Pair<A, B> {
      */
     @Override
     public int hashCode() {
-        return tuple.hashCode();
+        return super.hashCode();
     }
 
     /**
@@ -100,7 +107,7 @@ public class Pair<A, B> {
      * @return 如果两个 `Pair` 相等，返回 `true`，否则返回 `false`
      */
     public boolean equals(Pair<A, B> pair) {
-        return tuple.equals(pair.tuple);
+        return anyeq(first, pair.first) && anyeq(second, pair.second);
     }
 
 }
