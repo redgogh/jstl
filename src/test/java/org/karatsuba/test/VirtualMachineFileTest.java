@@ -18,23 +18,23 @@ package org.karatsuba.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karatsuba.io.PhysicalFile;
+import org.karatsuba.io.VirtualMachineFile;
 import org.junit.Test;
 
 import static org.karatsuba.utils.TypeCvt.atos;
 
 @SuppressWarnings("ALL")
-public class PhysicalFileTest {
+public class VirtualMachineFileTest {
 
     @Test
     public void readBytesTest() {
-        System.out.println(atos(new PhysicalFile("Desktop://log.txt").readAllBytes()));
+        System.out.println(atos(new VirtualMachineFile("Desktop://log.txt").readAllBytes()));
     }
 
     @Test
     public void listFileTest() {
-        for (PhysicalFile physicalFile : new PhysicalFile("D:/aaaa").listFiles()) {
-            System.out.println(physicalFile.getPath());
+        for (VirtualMachineFile virtualMachineFile : new VirtualMachineFile("D:/aaaa").listFiles()) {
+            System.out.println(virtualMachineFile.getPath());
         }
     }
 

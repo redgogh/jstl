@@ -62,12 +62,12 @@ import java.util.Properties;
  * @author Red Gogh
  * @noinspection UnusedReturnValue
  */
-public class PhysicalFile extends java.io.File {
+public class VirtualMachineFile extends java.io.File {
 
     /**
      * 空文件数组常量，避免不必要的对象创建。
      */
-    private static final PhysicalFile[] EMPTY_PHYSICAL_FILE_ARRAY = new PhysicalFile[0];
+    private static final VirtualMachineFile[] EMPTY_PHYSICAL_FILE_ARRAY = new VirtualMachineFile[0];
 
     /**
      * 桌面路径变量标识符，用于指示桌面目录的路径替换。
@@ -151,7 +151,7 @@ public class PhysicalFile extends java.io.File {
      * @throws  NullPointerException
      *          If the <code>pathname</code> argument is <code>null</code>
      */
-    public PhysicalFile(String pathname) {
+    public VirtualMachineFile(String pathname) {
         super(quickAccessPath(pathname));
     }
 
@@ -180,7 +180,7 @@ public class PhysicalFile extends java.io.File {
      * @throws  NullPointerException
      *          If <code>child</code> is <code>null</code>
      */
-    public PhysicalFile(String parent, String child) {
+    public VirtualMachineFile(String parent, String child) {
         super(parent, child);
     }
 
@@ -209,7 +209,7 @@ public class PhysicalFile extends java.io.File {
      * @throws  NullPointerException
      *          If <code>child</code> is <code>null</code>
      */
-    public PhysicalFile(java.io.File parent, String child) {
+    public VirtualMachineFile(java.io.File parent, String child) {
         super(parent, child);
     }
 
@@ -249,17 +249,17 @@ public class PhysicalFile extends java.io.File {
      * @see java.net.URI
      * @since 1.4
      */
-    public PhysicalFile(URI uri) {
+    public VirtualMachineFile(URI uri) {
         super(uri);
     }
 
     /**
-     * 通过一个 {@link java.io.File} 对象来构建一个 {@link PhysicalFile} 对象实例，并且参数 File
+     * 通过一个 {@link java.io.File} 对象来构建一个 {@link VirtualMachineFile} 对象实例，并且参数 File
      * 不能是空的。
      *
      * @param file java.io 下的 File 对象实例
      */
-    public PhysicalFile(java.io.File file) {
+    public VirtualMachineFile(java.io.File file) {
         this(file.getPath());
     }
 
@@ -271,8 +271,8 @@ public class PhysicalFile extends java.io.File {
      * @param pathname 要包装的文件路径名字符串。
      * @return 一个新的 `File` 对象，包装了传入的文件路径名字符串。
      */
-    public static PhysicalFile from(String pathname) {
-        return new PhysicalFile(pathname);
+    public static VirtualMachineFile from(String pathname) {
+        return new VirtualMachineFile(pathname);
     }
 
     /**
@@ -283,8 +283,10 @@ public class PhysicalFile extends java.io.File {
      * @param file 要包装的 `java.io.File` 对象。
      * @return 一个新的 `File` 对象，包装了传入的 `java.io.File` 对象。
      */
-    public static PhysicalFile from(java.io.File file) {
-        return new PhysicalFile(file);
+    public static VirtualMachineFile from(java.io.File file) {
+        if (file instanceof VirtualMachineFile)
+            return (VirtualMachineFile) file;
+        return new VirtualMachineFile(file);
     }
 
     /**
@@ -304,7 +306,7 @@ public class PhysicalFile extends java.io.File {
      * @since 1.2
      */
     @Override
-    public PhysicalFile getParentFile() {
+    public VirtualMachineFile getParentFile() {
         java.io.File parentFile = super.getParentFile();
         return parentFile != null ? from(parentFile) : null;
     }
@@ -318,7 +320,7 @@ public class PhysicalFile extends java.io.File {
      * is returned, one for each file or directory in the directory.  Pathnames
      * denoting the directory itself and the directory's parent directory are
      * not included in the result.  Each resulting abstract pathname is
-     * constructed from this abstract pathname using the {@link #PhysicalFile(java.io.File,
+     * constructed from this abstract pathname using the {@link #VirtualMachineFile(java.io.File,
      * String) File(File,&nbsp;String)} constructor.  Therefore if this
      * pathname is absolute then each resulting pathname is absolute; if this
      * pathname is relative then each resulting pathname will be relative to
@@ -344,13 +346,13 @@ public class PhysicalFile extends java.io.File {
      */
     @Nullable
     @Override
-    public PhysicalFile[] listFiles() {
+    public VirtualMachineFile[] listFiles() {
         File[] a = super.listFiles();
 
         if (a == null || a.length == 0)
             return EMPTY_PHYSICAL_FILE_ARRAY;
 
-        return Lists.map(a, PhysicalFile::from).toArray(new PhysicalFile[0]);
+        return Lists.map(a, VirtualMachineFile::from).toArray(new VirtualMachineFile[0]);
     }
 
     /**
@@ -404,9 +406,9 @@ public class PhysicalFile extends java.io.File {
         return StringUtils.strcut(name, index, 0);
     }
 
-    private boolean forceDeleteDirectory(PhysicalFile dir) {
-        List<PhysicalFile> children = Lists.map(dir.listFiles(), PhysicalFile::new);
-        for (PhysicalFile child : children) {
+    private boolean forceDeleteDirectory(VirtualMachineFile dir) {
+        List<VirtualMachineFile> children = Lists.map(dir.listFiles(), VirtualMachineFile::new);
+        for (VirtualMachineFile child : children) {
             if (child.isFile()) {
                 child.forceDeleteFile();
             } else {

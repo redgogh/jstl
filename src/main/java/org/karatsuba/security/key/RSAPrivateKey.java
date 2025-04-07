@@ -25,8 +25,7 @@ package org.karatsuba.security.key;
 
 /* Creates on 2025/2/20. */
 
-import org.karatsuba.io.IOUtils;
-import org.karatsuba.io.PhysicalFile;
+import org.karatsuba.io.VirtualMachineFile;
 import org.karatsuba.utils.Captor;
 
 import java.security.Key;
@@ -58,7 +57,7 @@ public class RSAPrivateKey extends AbstractKey {
     }
 
     public static RSAPrivateKey fromKeyFile(String filepath) {
-        PhysicalFile keyfile = new PhysicalFile(filepath);
+        VirtualMachineFile keyfile = new VirtualMachineFile(filepath);
         return fromPEMFormat(strread(keyfile));
     }
 

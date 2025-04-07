@@ -89,7 +89,7 @@ public class IOUtils {
      */
     public static byte[] read(java.io.File file) {
         Assert.isTrue(file != null && file.isFile(), "文件不能为空且不能是目录！");
-        return read(new PhysicalFile(file).openInputStream());
+        return read(new VirtualMachineFile(file).openInputStream());
     }
 
     /**
@@ -193,7 +193,7 @@ public class IOUtils {
      * @return 从文件描述符中读取到的字符串文本
      */
     public static String strread(String filepath) {
-        return strread(new PhysicalFile(filepath));
+        return strread(new VirtualMachineFile(filepath));
     }
 
     /**
@@ -238,13 +238,13 @@ public class IOUtils {
      * @param input
      *        输入流
      *
-     * @param physicalFile
-     *        {@link PhysicalFile} 文件对象实例（如果文件不存在，则会创建）
+     * @param virtualMachineFile
+     *        {@link VirtualMachineFile} 文件对象实例（如果文件不存在，则会创建）
      */
-    public static void write(InputStream input, PhysicalFile physicalFile) {
+    public static void write(InputStream input, VirtualMachineFile virtualMachineFile) {
         FileOutputStream writer = null;
         try {
-            writer = physicalFile.openOutputStream();
+            writer = virtualMachineFile.openOutputStream();
             write(input, writer);
         } catch (Exception e) {
             throw new IOWriteException(e);
@@ -263,11 +263,11 @@ public class IOUtils {
      * @param input
      *        字符串
      *
-     * @param physicalFile
-     *        {@link PhysicalFile} 文件对象实例（如果文件不存在，则会创建）
+     * @param virtualMachineFile
+     *        {@link VirtualMachineFile} 文件对象实例（如果文件不存在，则会创建）
      */
-    public static void write(String input, PhysicalFile physicalFile) {
-        write(input.getBytes(), physicalFile);
+    public static void write(String input, VirtualMachineFile virtualMachineFile) {
+        write(input.getBytes(), virtualMachineFile);
     }
 
     /**
@@ -279,13 +279,13 @@ public class IOUtils {
      * @param b
      *        字节数组缓冲区
      *
-     * @param physicalFile
+     * @param virtualMachineFile
      *        指定输出流
      */
-    public static void write(byte[] b, PhysicalFile physicalFile) {
+    public static void write(byte[] b, VirtualMachineFile virtualMachineFile) {
         FileOutputStream writer = null;
         try {
-            writer = physicalFile.openOutputStream();
+            writer = virtualMachineFile.openOutputStream();
             write(b, writer);
         } catch (Throwable e) {
             throw new IOWriteException(e);
@@ -394,7 +394,7 @@ public class IOUtils {
      * @param dst  目标文件路径
      */
     public static void copy(String src, String dst) {
-        copy(PhysicalFile.from(src), PhysicalFile.from(dst));
+        copy(VirtualMachineFile.from(src), VirtualMachineFile.from(dst));
     }
 
     /**
@@ -408,12 +408,12 @@ public class IOUtils {
      * @param dst  目标文件路径
      */
     public static void copy(File src, String dst) {
-        copy(PhysicalFile.from(src), PhysicalFile.from(dst));
+        copy(VirtualMachineFile.from(src), VirtualMachineFile.from(dst));
     }
 
     /**
      * 复制 {@code src} 文件或目录到 {@code dst} 目标路径。该方法支持
-     * {@link PhysicalFile} 类型文件对象，可直接操作文件的物理存储。
+     * {@link VirtualMachineFile} 类型文件对象，可直接操作文件的物理存储。
      * <p>
      * 当目标路径为目录时，会保持原文件名不变；当目标路径为文件时，
      * 直接覆盖目标文件。该方法会保证数据完整性，适用于高并发文件操作环境。
@@ -421,7 +421,7 @@ public class IOUtils {
      * @param src  源物理文件对象
      * @param dst  目标物理文件对象
      */
-    public static void copy(PhysicalFile src, PhysicalFile dst) {
+    public static void copy(VirtualMachineFile src, VirtualMachineFile dst) {
         copy(src, (File) dst);
     }
 
@@ -441,8 +441,8 @@ public class IOUtils {
         if (src == null || dst == null)
             throw new IllegalArgumentException("源文件和目标文件不能为空");
 
-        PhysicalFile srcFile = !(src instanceof PhysicalFile) ? PhysicalFile.from(src) : (PhysicalFile) src;
-        PhysicalFile dstFile = !(dst instanceof PhysicalFile) ? PhysicalFile.from(dst) : (PhysicalFile) dst;
+        VirtualMachineFile srcFile = !(src instanceof VirtualMachineFile) ? VirtualMachineFile.from(src) : (VirtualMachineFile) src;
+        VirtualMachineFile dstFile = !(dst instanceof VirtualMachineFile) ? VirtualMachineFile.from(dst) : (VirtualMachineFile) dst;
 
         Path srcPath = Paths.get(srcFile.getPath());
         Path dstPath = Paths.get(dstFile.getPath());
@@ -486,7 +486,7 @@ public class IOUtils {
      * @param dst  目标文件路径
      */
     public static void move(String src, String dst) {
-        move(PhysicalFile.from(src), PhysicalFile.from(dst));
+        move(VirtualMachineFile.from(src), VirtualMachineFile.from(dst));
     }
 
     /**
@@ -499,7 +499,7 @@ public class IOUtils {
      * @param dst  目标文件路径
      */
     public static void move(File src, String dst) {
-        move(PhysicalFile.from(src), PhysicalFile.from(dst));
+        move(VirtualMachineFile.from(src), VirtualMachineFile.from(dst));
     }
 
     /**
@@ -512,7 +512,7 @@ public class IOUtils {
      * @param src  源物理文件对象
      * @param dst  目标物理文件对象
      */
-    public static void move(PhysicalFile src, PhysicalFile dst) {
+    public static void move(VirtualMachineFile src, VirtualMachineFile dst) {
         move(src, (File) dst);
     }
 
@@ -542,7 +542,7 @@ public class IOUtils {
      * @param object  要序列化的对象
      * @param file    目标文件
      */
-    public static void serialize(Object object, PhysicalFile file) {
+    public static void serialize(Object object, VirtualMachineFile file) {
         ObjectSerializer.serialize(object, file);
     }
 
@@ -554,7 +554,7 @@ public class IOUtils {
      * @param file  源文件
      * @return      反序列化后的对象
      */
-    public static Object deserialize(PhysicalFile file) {
+    public static Object deserialize(VirtualMachineFile file) {
         return ObjectSerializer.deserialize(file);
     }
 
