@@ -18,7 +18,7 @@ package org.karatsuba.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karatsuba.io.FileResource;
+import org.karatsuba.io.SystemResource;
 import org.karatsuba.reflect.ObjectSerializer;
 import org.junit.Test;
 
@@ -39,15 +39,15 @@ public class ObjectSerializerTest {
 
     @Test
     public void serializeTest() {
-        ObjectSerializer.serialize(new User("Judy"), new FileResource("Desktop://judy.ser"));
+        ObjectSerializer.serialize(new User("Judy"), new SystemResource("Desktop://judy.ser"));
     }
 
     @Test
     public void deserializeTest() {
-        FileResource fileResource = new FileResource("Desktop://judy.ser");
-        User user = (User) ObjectSerializer.deserialize(fileResource);
+        SystemResource systemResource = new SystemResource("Desktop://judy.ser");
+        User user = (User) ObjectSerializer.deserialize(systemResource);
         System.out.println(user);
-        fileResource.forceDelete();
+        systemResource.forceDelete();
     }
 
 

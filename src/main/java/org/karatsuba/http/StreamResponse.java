@@ -18,7 +18,7 @@ package org.karatsuba.http;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karatsuba.io.FileResource;
+import org.karatsuba.io.SystemResource;
 import org.karatsuba.utils.Assert;
 import org.karatsuba.io.IOUtils;
 import okhttp3.ResponseBody;
@@ -47,15 +47,15 @@ public class StreamResponse implements Closeable {
     /**
      * 将响应体内容传输到指定路径的文件。
      *
-     * <p>此方法通过调用 {@link #transferTo(FileResource)} 实现，
-     * 将给定路径 {@code path} 转换为 {@link FileResource} 对象，
+     * <p>此方法通过调用 {@link #transferTo(SystemResource)} 实现，
+     * 将给定路径 {@code path} 转换为 {@link SystemResource} 对象，
      * 并将响应体内容写入该文件。
      *
      * @param path 要传输内容的目标文件路径
-     * @return 传输完成的 {@link FileResource} 对象
+     * @return 传输完成的 {@link SystemResource} 对象
      */
-    public FileResource transferTo(String path) {
-        return transferTo(FileResource.from(path));
+    public SystemResource transferTo(String path) {
+        return transferTo(new SystemResource(path));
     }
 
     /**
@@ -65,27 +65,27 @@ public class StreamResponse implements Closeable {
      * 并返回该文件。
      *
      * @param file 要传输内容的目标文件
-     * @return 传输完成的 {@link FileResource} 对象
+     * @return 传输完成的 {@link SystemResource} 对象
      */
-    public FileResource transferTo(java.io.File file) {
-        return transferTo(FileResource.from(file));
+    public SystemResource transferTo(java.io.File file) {
+        return transferTo(SystemResource.from(file));
     }
 
     /**
-     * 将响应体内容传输到指定的 {@link FileResource} 对象。
+     * 将响应体内容传输到指定的 {@link SystemResource} 对象。
      *
      * <p>从响应体中获取输入流，并将其内容写入提供的
-     * {@link FileResource} 实例，然后返回该文件。
+     * {@link SystemResource} 实例，然后返回该文件。
      *
-     * @param fileResource 要传输内容的目标 {@link FileResource} 对象
-     * @return 传输完成的 {@link FileResource} 对象
+     * @param systemResource 要传输内容的目标 {@link SystemResource} 对象
+     * @return 传输完成的 {@link SystemResource} 对象
      */
-    public FileResource transferTo(FileResource fileResource) {
+    public SystemResource transferTo(SystemResource systemResource) {
         ResponseBody body = response.body();
         Assert.notNull(body, "没有数据响应。");
-        IOUtils.write(body.byteStream(), fileResource);
+        IOUtils.write(body.byteStream(), systemResource);
         close();
-        return fileResource;
+        return systemResource;
     }
 
     @Override

@@ -89,7 +89,7 @@ public class IOUtils {
      */
     public static byte[] read(java.io.File file) {
         Assert.isTrue(file != null && file.isFile(), "文件不能为空且不能是目录！");
-        return read(new FileResource(file).openInputStream());
+        return read(SystemResource.from(file).openInputStream());
     }
 
     /**
@@ -187,13 +187,13 @@ public class IOUtils {
      * 传入一个文件路径会自动从该路径的文件中读取数据流到内存，然后转换为
      * 字符串返回。
      *
-     * @param filepath
+     * @param path
      *        文件路径
      *
      * @return 从文件描述符中读取到的字符串文本
      */
-    public static String strread(String filepath) {
-        return strread(new FileResource(filepath));
+    public static String strread(String path) {
+        return strread(new SystemResource(path));
     }
 
     /**
@@ -238,13 +238,13 @@ public class IOUtils {
      * @param input
      *        输入流
      *
-     * @param fileResource
-     *        {@link FileResource} 文件对象实例（如果文件不存在，则会创建）
+     * @param systemResource
+     *        {@link SystemResource} 文件对象实例（如果文件不存在，则会创建）
      */
-    public static void write(InputStream input, FileResource fileResource) {
+    public static void write(InputStream input, SystemResource systemResource) {
         FileOutputStream writer = null;
         try {
-            writer = fileResource.openOutputStream();
+            writer = systemResource.openOutputStream();
             write(input, writer);
         } catch (Exception e) {
             throw new IOWriteException(e);
@@ -263,11 +263,11 @@ public class IOUtils {
      * @param input
      *        字符串
      *
-     * @param fileResource
-     *        {@link FileResource} 文件对象实例（如果文件不存在，则会创建）
+     * @param systemResource
+     *        {@link SystemResource} 文件对象实例（如果文件不存在，则会创建）
      */
-    public static void write(String input, FileResource fileResource) {
-        write(input.getBytes(), fileResource);
+    public static void write(String input, SystemResource systemResource) {
+        write(input.getBytes(), systemResource);
     }
 
     /**
@@ -279,13 +279,13 @@ public class IOUtils {
      * @param b
      *        字节数组缓冲区
      *
-     * @param fileResource
+     * @param systemResource
      *        指定输出流
      */
-    public static void write(byte[] b, FileResource fileResource) {
+    public static void write(byte[] b, SystemResource systemResource) {
         FileOutputStream writer = null;
         try {
-            writer = fileResource.openOutputStream();
+            writer = systemResource.openOutputStream();
             write(b, writer);
         } catch (Throwable e) {
             throw new IOWriteException(e);
@@ -394,7 +394,7 @@ public class IOUtils {
      * @param dst  目标文件路径
      */
     public static void copy(String src, String dst) {
-        copy(FileResource.from(src), FileResource.from(dst));
+        copy(new SystemResource(src), new SystemResource(dst));
     }
 
     /**
@@ -408,12 +408,12 @@ public class IOUtils {
      * @param dst  目标文件路径
      */
     public static void copy(File src, String dst) {
-        copy(FileResource.from(src), FileResource.from(dst));
+        copy(SystemResource.from(src), new SystemResource(dst));
     }
 
     /**
      * 复制 {@code src} 文件或目录到 {@code dst} 目标路径。该方法支持
-     * {@link FileResource} 类型文件对象，可直接操作文件的物理存储。
+     * {@link SystemResource} 类型文件对象，可直接操作文件的物理存储。
      * <p>
      * 当目标路径为目录时，会保持原文件名不变；当目标路径为文件时，
      * 直接覆盖目标文件。该方法会保证数据完整性，适用于高并发文件操作环境。
@@ -421,7 +421,7 @@ public class IOUtils {
      * @param src  源物理文件对象
      * @param dst  目标物理文件对象
      */
-    public static void copy(FileResource src, FileResource dst) {
+    public static void copy(SystemResource src, SystemResource dst) {
         copy(src, (File) dst);
     }
 
@@ -441,8 +441,8 @@ public class IOUtils {
         if (src == null || dst == null)
             throw new IllegalArgumentException("源文件和目标文件不能为空");
 
-        FileResource srcFile = !(src instanceof FileResource) ? FileResource.from(src) : (FileResource) src;
-        FileResource dstFile = !(dst instanceof FileResource) ? FileResource.from(dst) : (FileResource) dst;
+        SystemResource srcFile = !(src instanceof SystemResource) ? SystemResource.from(src) : (SystemResource) src;
+        SystemResource dstFile = !(dst instanceof SystemResource) ? SystemResource.from(dst) : (SystemResource) dst;
 
         Path srcPath = Paths.get(srcFile.getPath());
         Path dstPath = Paths.get(dstFile.getPath());
@@ -486,7 +486,7 @@ public class IOUtils {
      * @param dst  目标文件路径
      */
     public static void move(String src, String dst) {
-        move(FileResource.from(src), FileResource.from(dst));
+        move(new SystemResource(src), new SystemResource(dst));
     }
 
     /**
@@ -499,7 +499,7 @@ public class IOUtils {
      * @param dst  目标文件路径
      */
     public static void move(File src, String dst) {
-        move(FileResource.from(src), FileResource.from(dst));
+        move(SystemResource.from(src), new SystemResource(dst));
     }
 
     /**
@@ -512,7 +512,7 @@ public class IOUtils {
      * @param src  源物理文件对象
      * @param dst  目标物理文件对象
      */
-    public static void move(FileResource src, FileResource dst) {
+    public static void move(SystemResource src, SystemResource dst) {
         move(src, (File) dst);
     }
 
@@ -542,7 +542,7 @@ public class IOUtils {
      * @param object  要序列化的对象
      * @param file    目标文件
      */
-    public static void serialize(Object object, FileResource file) {
+    public static void serialize(Object object, SystemResource file) {
         ObjectSerializer.serialize(object, file);
     }
 
@@ -554,7 +554,7 @@ public class IOUtils {
      * @param file  源文件
      * @return      反序列化后的对象
      */
-    public static Object deserialize(FileResource file) {
+    public static Object deserialize(SystemResource file) {
         return ObjectSerializer.deserialize(file);
     }
 

@@ -27,7 +27,7 @@ package org.karatsuba.test;
 
 import org.karatsuba.collection.Maps;
 import org.karatsuba.http.*;
-import org.karatsuba.io.FileResource;
+import org.karatsuba.io.SystemResource;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -47,7 +47,7 @@ public class HttpClientsTest {
     @Test
     public void callMultipartBodyTest() {
         MultipartBody multipartBody = new MultipartBody();
-        multipartBody.put("document", new FileResource("src/main/java/com/redgogh/tools/ArrayUtils.java"));
+        multipartBody.put("document", new SystemResource("src/main/java/com/redgogh/tools/ArrayUtils.java"));
 
         Response response = HttpClient.open("POST", "http://127.0.0.1:8001/security/check/file")
                 .addRequestBody(multipartBody)
@@ -111,7 +111,7 @@ public class HttpClientsTest {
         StreamResponse octet = HttpClient.open("GET", "https://repo.huaweicloud.com/java/jdk/8u202-b08-demos/jdk-8u202-windows-x64-demos.zip")
                 .sslVerifierDisable()
                 .newStreamCall();
-        octet.transferTo(new FileResource("Desktop://jdk-8u202-windows-x64-demos.zip"));
+        octet.transferTo(new SystemResource("Desktop://jdk-8u202-windows-x64-demos.zip"));
     }
 
     @Test
@@ -126,7 +126,7 @@ public class HttpClientsTest {
 
                     @Override
                     public void onResponse(StreamResponse response) {
-                        response.transferTo(new FileResource("Desktop://jdk-8u202-windows-x64-demos.zip"));
+                        response.transferTo(new SystemResource("Desktop://jdk-8u202-windows-x64-demos.zip"));
                     }
                 });
     }

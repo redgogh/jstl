@@ -21,7 +21,7 @@ package org.karatsuba.http;
 import com.alibaba.fastjson.JSON;
 import org.karatsuba.collection.Maps;
 import org.karatsuba.exception.HttpRequestException;
-import org.karatsuba.io.FileResource;
+import org.karatsuba.io.SystemResource;
 import org.karatsuba.string.StringUtils;
 import org.karatsuba.utils.Assert;
 import org.karatsuba.utils.Captor;
@@ -461,10 +461,10 @@ public class HttpClient {
 
             for (Map.Entry<String, Object> entry : multipartBody.entrySet()) {
                 Object value = entry.getValue();
-                if (value instanceof FileResource) {
-                    FileResource fileResource = (FileResource) value;
-                    builder.addFormDataPart(entry.getKey(), fileResource.getName(),
-                            RequestBody.create(fileResource, MediaType.parse("text/plain")));
+                if (value instanceof SystemResource) {
+                    SystemResource systemResource = (SystemResource) value;
+                    builder.addFormDataPart(entry.getKey(), systemResource.getName(),
+                            RequestBody.create(systemResource, MediaType.parse("text/plain")));
                 } else {
                     builder.addFormDataPart(entry.getKey(), atos(value));
                 }

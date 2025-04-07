@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import org.karatsuba.annotations.RowColumn;
 import org.karatsuba.collection.Lists;
 import org.karatsuba.collection.Maps;
-import org.karatsuba.io.FileResource;
+import org.karatsuba.io.SystemResource;
 import org.karatsuba.reflect.UClass;
 import org.karatsuba.reflect.UField;
 import org.karatsuba.stream.Streams;
@@ -96,10 +96,10 @@ public class WorkBook implements Iterable<Row> {
      * 实例。如果文件不存在或格式不正确，可能会抛出
      * 异常。
      *
-     * @param pathname Excel 文件的路径
+     * @param path Excel 文件的路径
      */
-    private WorkBook(String pathname) {
-        this(new FileResource(pathname));
+    private WorkBook(String path) {
+        this(new SystemResource(path));
     }
 
     /**
@@ -109,10 +109,10 @@ public class WorkBook implements Iterable<Row> {
      * 实例。如果文件不存在或格式不正确，可能会抛出
      * 异常。
      *
-     * @param fileResource Excel 文件对象
+     * @param systemResource Excel 文件对象
      */
-    private WorkBook(FileResource fileResource) {
-        this(Captor.call(() -> new XSSFWorkbook(fileResource)));
+    private WorkBook(SystemResource systemResource) {
+        this(Captor.call(() -> new XSSFWorkbook(systemResource)));
     }
 
     /**
@@ -196,7 +196,7 @@ public class WorkBook implements Iterable<Row> {
      * @return 加载的 Workbook 实例
      */
     public static WorkBook load(String pathname) {
-        return load(new FileResource(pathname));
+        return load(new SystemResource(pathname));
     }
 
     /**
@@ -206,11 +206,11 @@ public class WorkBook implements Iterable<Row> {
      * Workbook 实例。如果文件不存在或格式不正确，可能
      * 会抛出异常。
      *
-     * @param fileResource Excel 文件对象
+     * @param systemResource Excel 文件对象
      * @return 加载的 Workbook 实例
      */
-    public static WorkBook load(FileResource fileResource) {
-        return new WorkBook(fileResource);
+    public static WorkBook load(SystemResource systemResource) {
+        return new WorkBook(systemResource);
     }
 
     /**
@@ -584,21 +584,21 @@ public class WorkBook implements Iterable<Row> {
      * <p>将当前数据写入到指定路径的文件中。如果文件不存在，则会创建新文件；
      * 如果文件已存在，则会覆盖其内容。
      *
-     * @param pathname 目标文件的路径
+     * @param path 目标文件的路径
      */
-    public void transferTo(String pathname) {
-        transferTo(new FileResource(pathname));
+    public void transferTo(String path) {
+        transferTo(new SystemResource(path));
     }
 
     /**
      * #brief: 将数据转移到指定的可变文件
      *
-     * <p>将当前数据写入到指定的 {@link FileResource} 对象中。
+     * <p>将当前数据写入到指定的 {@link SystemResource} 对象中。
      * 通过文件对象的字节写入器将数据写入文件。
      *
      * @param file 目标可变文件对象
      */
-    public void transferTo(FileResource file) {
+    public void transferTo(SystemResource file) {
         file.openOutputStream(stream -> stream.write(toByteArray()));
     }
 

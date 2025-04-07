@@ -18,23 +18,23 @@ package org.karatsuba.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karatsuba.io.FileResource;
+import org.karatsuba.io.SystemResource;
 import org.junit.Test;
 
 import static org.karatsuba.utils.TypeCvt.atos;
 
 @SuppressWarnings("ALL")
-public class FileResourceTest {
+public class SystemResourceTest {
 
     @Test
     public void readBytesTest() {
-        System.out.println(atos(new FileResource("Desktop://log.txt").readAllBytes()));
+        System.out.println(atos(new SystemResource("Desktop://log.txt").readAllBytes()));
     }
 
     @Test
     public void listFileTest() {
-        for (FileResource fileResource : new FileResource("D:/aaaa").listFiles()) {
-            System.out.println(fileResource.getPath());
+        for (SystemResource systemResource : new SystemResource("D:/aaaa").listFiles()) {
+            System.out.println(systemResource.getPath());
         }
     }
 
