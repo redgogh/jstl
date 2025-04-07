@@ -18,7 +18,7 @@ package org.karatsuba.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karatsuba.io.VirtualMachineFile;
+import org.karatsuba.io.FileResource;
 import org.karatsuba.security.Codec;
 import org.junit.Test;
 
@@ -72,7 +72,7 @@ public class CodecTest {
      */
     @Test
     public void sha256FileEncodTest() {
-        System.out.println(Codec.SHA256.encode(VirtualMachineFile.from("Desktop://import.7z")));
+        System.out.println(Codec.SHA256.encode(FileResource.from("Desktop://import.7z")));
     }
 
     /**

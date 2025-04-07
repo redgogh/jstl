@@ -2,7 +2,7 @@ package org.karatsuba.security.codec;
 
 import org.karatsuba.exception.SystemRuntimeException;
 import org.karatsuba.io.IOUtils;
-import org.karatsuba.io.VirtualMachineFile;
+import org.karatsuba.io.FileResource;
 import org.karatsuba.security.Codec;
 import org.karatsuba.security.SHA256;
 import org.karatsuba.utils.Captor;
@@ -24,9 +24,9 @@ public class SHA256Codec implements SHA256 {
     @Override
     public String encode(File f0) {
         return Captor.icall(() -> {
-            VirtualMachineFile virtualMachineFile = new VirtualMachineFile(f0);
+            FileResource fileResource = new FileResource(f0);
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            virtualMachineFile.openInputStream(reader -> {
+            fileResource.openInputStream(reader -> {
                 int len = 0;
                 byte[] buffer = new byte[IOUtils.MB];
                 while ((len = reader.read(buffer)) != IOUtils.EOF)

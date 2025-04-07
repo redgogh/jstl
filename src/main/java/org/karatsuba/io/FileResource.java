@@ -62,12 +62,12 @@ import java.util.Properties;
  * @author Red Gogh
  * @noinspection UnusedReturnValue
  */
-public class VirtualMachineFile extends java.io.File {
+public class FileResource extends java.io.File {
 
     /**
      * 空文件数组常量，避免不必要的对象创建。
      */
-    private static final VirtualMachineFile[] EMPTY_PHYSICAL_FILE_ARRAY = new VirtualMachineFile[0];
+    private static final FileResource[] EMPTY_PHYSICAL_FILE_ARRAY = new FileResource[0];
 
     /**
      * 桌面路径变量标识符，用于指示桌面目录的路径替换。
@@ -151,7 +151,7 @@ public class VirtualMachineFile extends java.io.File {
      * @throws  NullPointerException
      *          If the <code>pathname</code> argument is <code>null</code>
      */
-    public VirtualMachineFile(String pathname) {
+    public FileResource(String pathname) {
         super(quickAccessPath(pathname));
     }
 
@@ -180,7 +180,7 @@ public class VirtualMachineFile extends java.io.File {
      * @throws  NullPointerException
      *          If <code>child</code> is <code>null</code>
      */
-    public VirtualMachineFile(String parent, String child) {
+    public FileResource(String parent, String child) {
         super(parent, child);
     }
 
@@ -209,7 +209,7 @@ public class VirtualMachineFile extends java.io.File {
      * @throws  NullPointerException
      *          If <code>child</code> is <code>null</code>
      */
-    public VirtualMachineFile(java.io.File parent, String child) {
+    public FileResource(java.io.File parent, String child) {
         super(parent, child);
     }
 
@@ -249,17 +249,17 @@ public class VirtualMachineFile extends java.io.File {
      * @see java.net.URI
      * @since 1.4
      */
-    public VirtualMachineFile(URI uri) {
+    public FileResource(URI uri) {
         super(uri);
     }
 
     /**
-     * 通过一个 {@link java.io.File} 对象来构建一个 {@link VirtualMachineFile} 对象实例，并且参数 File
+     * 通过一个 {@link java.io.File} 对象来构建一个 {@link FileResource} 对象实例，并且参数 File
      * 不能是空的。
      *
      * @param file java.io 下的 File 对象实例
      */
-    public VirtualMachineFile(java.io.File file) {
+    public FileResource(java.io.File file) {
         this(file.getPath());
     }
 
@@ -271,8 +271,8 @@ public class VirtualMachineFile extends java.io.File {
      * @param pathname 要包装的文件路径名字符串。
      * @return 一个新的 `File` 对象，包装了传入的文件路径名字符串。
      */
-    public static VirtualMachineFile from(String pathname) {
-        return new VirtualMachineFile(pathname);
+    public static FileResource from(String pathname) {
+        return new FileResource(pathname);
     }
 
     /**
@@ -283,10 +283,10 @@ public class VirtualMachineFile extends java.io.File {
      * @param file 要包装的 `java.io.File` 对象。
      * @return 一个新的 `File` 对象，包装了传入的 `java.io.File` 对象。
      */
-    public static VirtualMachineFile from(java.io.File file) {
-        if (file instanceof VirtualMachineFile)
-            return (VirtualMachineFile) file;
-        return new VirtualMachineFile(file);
+    public static FileResource from(java.io.File file) {
+        if (file instanceof FileResource)
+            return (FileResource) file;
+        return new FileResource(file);
     }
 
     /**
@@ -306,7 +306,7 @@ public class VirtualMachineFile extends java.io.File {
      * @since 1.2
      */
     @Override
-    public VirtualMachineFile getParentFile() {
+    public FileResource getParentFile() {
         java.io.File parentFile = super.getParentFile();
         return parentFile != null ? from(parentFile) : null;
     }
@@ -320,7 +320,7 @@ public class VirtualMachineFile extends java.io.File {
      * is returned, one for each file or directory in the directory.  Pathnames
      * denoting the directory itself and the directory's parent directory are
      * not included in the result.  Each resulting abstract pathname is
-     * constructed from this abstract pathname using the {@link #VirtualMachineFile(java.io.File,
+     * constructed from this abstract pathname using the {@link #FileResource(java.io.File,
      * String) File(File,&nbsp;String)} constructor.  Therefore if this
      * pathname is absolute then each resulting pathname is absolute; if this
      * pathname is relative then each resulting pathname will be relative to
@@ -346,13 +346,13 @@ public class VirtualMachineFile extends java.io.File {
      */
     @Nullable
     @Override
-    public VirtualMachineFile[] listFiles() {
+    public FileResource[] listFiles() {
         File[] a = super.listFiles();
 
         if (a == null || a.length == 0)
             return EMPTY_PHYSICAL_FILE_ARRAY;
 
-        return Lists.map(a, VirtualMachineFile::from).toArray(new VirtualMachineFile[0]);
+        return Lists.map(a, FileResource::from).toArray(new FileResource[0]);
     }
 
     /**
@@ -406,9 +406,9 @@ public class VirtualMachineFile extends java.io.File {
         return StringUtils.strcut(name, index, 0);
     }
 
-    private boolean forceDeleteDirectory(VirtualMachineFile dir) {
-        List<VirtualMachineFile> children = Lists.map(dir.listFiles(), VirtualMachineFile::new);
-        for (VirtualMachineFile child : children) {
+    private boolean forceDeleteDirectory(FileResource dir) {
+        List<FileResource> children = Lists.map(dir.listFiles(), FileResource::new);
+        for (FileResource child : children) {
             if (child.isFile()) {
                 child.forceDeleteFile();
             } else {

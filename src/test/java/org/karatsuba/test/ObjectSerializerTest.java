@@ -18,7 +18,7 @@ package org.karatsuba.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karatsuba.io.VirtualMachineFile;
+import org.karatsuba.io.FileResource;
 import org.karatsuba.reflect.ObjectSerializer;
 import org.junit.Test;
 
@@ -39,15 +39,15 @@ public class ObjectSerializerTest {
 
     @Test
     public void serializeTest() {
-        ObjectSerializer.serialize(new User("Judy"), new VirtualMachineFile("Desktop://judy.ser"));
+        ObjectSerializer.serialize(new User("Judy"), new FileResource("Desktop://judy.ser"));
     }
 
     @Test
     public void deserializeTest() {
-        VirtualMachineFile virtualMachineFile = new VirtualMachineFile("Desktop://judy.ser");
-        User user = (User) ObjectSerializer.deserialize(virtualMachineFile);
+        FileResource fileResource = new FileResource("Desktop://judy.ser");
+        User user = (User) ObjectSerializer.deserialize(fileResource);
         System.out.println(user);
-        virtualMachineFile.forceDelete();
+        fileResource.forceDelete();
     }
 
 

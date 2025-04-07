@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import org.karatsuba.annotations.RowColumn;
 import org.karatsuba.collection.Lists;
 import org.karatsuba.collection.Maps;
-import org.karatsuba.io.VirtualMachineFile;
+import org.karatsuba.io.FileResource;
 import org.karatsuba.reflect.UClass;
 import org.karatsuba.reflect.UField;
 import org.karatsuba.stream.Streams;
@@ -99,7 +99,7 @@ public class WorkBook implements Iterable<Row> {
      * @param pathname Excel 文件的路径
      */
     private WorkBook(String pathname) {
-        this(new VirtualMachineFile(pathname));
+        this(new FileResource(pathname));
     }
 
     /**
@@ -109,10 +109,10 @@ public class WorkBook implements Iterable<Row> {
      * 实例。如果文件不存在或格式不正确，可能会抛出
      * 异常。
      *
-     * @param virtualMachineFile Excel 文件对象
+     * @param fileResource Excel 文件对象
      */
-    private WorkBook(VirtualMachineFile virtualMachineFile) {
-        this(Captor.call(() -> new XSSFWorkbook(virtualMachineFile)));
+    private WorkBook(FileResource fileResource) {
+        this(Captor.call(() -> new XSSFWorkbook(fileResource)));
     }
 
     /**
@@ -196,7 +196,7 @@ public class WorkBook implements Iterable<Row> {
      * @return 加载的 Workbook 实例
      */
     public static WorkBook load(String pathname) {
-        return load(new VirtualMachineFile(pathname));
+        return load(new FileResource(pathname));
     }
 
     /**
@@ -206,11 +206,11 @@ public class WorkBook implements Iterable<Row> {
      * Workbook 实例。如果文件不存在或格式不正确，可能
      * 会抛出异常。
      *
-     * @param virtualMachineFile Excel 文件对象
+     * @param fileResource Excel 文件对象
      * @return 加载的 Workbook 实例
      */
-    public static WorkBook load(VirtualMachineFile virtualMachineFile) {
-        return new WorkBook(virtualMachineFile);
+    public static WorkBook load(FileResource fileResource) {
+        return new WorkBook(fileResource);
     }
 
     /**
@@ -587,18 +587,18 @@ public class WorkBook implements Iterable<Row> {
      * @param pathname 目标文件的路径
      */
     public void transferTo(String pathname) {
-        transferTo(new VirtualMachineFile(pathname));
+        transferTo(new FileResource(pathname));
     }
 
     /**
      * #brief: 将数据转移到指定的可变文件
      *
-     * <p>将当前数据写入到指定的 {@link VirtualMachineFile} 对象中。
+     * <p>将当前数据写入到指定的 {@link FileResource} 对象中。
      * 通过文件对象的字节写入器将数据写入文件。
      *
      * @param file 目标可变文件对象
      */
-    public void transferTo(VirtualMachineFile file) {
+    public void transferTo(FileResource file) {
         file.openOutputStream(stream -> stream.write(toByteArray()));
     }
 
