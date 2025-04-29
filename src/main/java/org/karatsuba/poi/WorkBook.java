@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import org.karatsuba.annotations.RowColumn;
 import org.karatsuba.collection.Lists;
 import org.karatsuba.collection.Maps;
-import org.karatsuba.io.SystemResource;
+import org.karatsuba.io.IOUtils;
 import org.karatsuba.reflect.UClass;
 import org.karatsuba.reflect.UField;
 import org.karatsuba.stream.Streams;
@@ -37,6 +37,7 @@ import org.karatsuba.utils.Optional;
 import org.karatsuba.utils.TypeCvt;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
@@ -99,7 +100,7 @@ public class WorkBook implements Iterable<Row> {
      * @param path Excel 文件的路径
      */
     private WorkBook(String path) {
-        this(new SystemResource(path));
+        this(new File(path));
     }
 
     /**
@@ -109,10 +110,10 @@ public class WorkBook implements Iterable<Row> {
      * 实例。如果文件不存在或格式不正确，可能会抛出
      * 异常。
      *
-     * @param systemResource Excel 文件对象
+     * @param file Excel 文件对象
      */
-    private WorkBook(SystemResource systemResource) {
-        this(Captor.call(() -> new XSSFWorkbook(systemResource)));
+    private WorkBook(File file) {
+        this(Captor.call(() -> new XSSFWorkbook(file)));
     }
 
     /**
@@ -196,7 +197,7 @@ public class WorkBook implements Iterable<Row> {
      * @return 加载的 Workbook 实例
      */
     public static WorkBook load(String pathname) {
-        return load(new SystemResource(pathname));
+        return load(new File(pathname));
     }
 
     /**
@@ -209,7 +210,7 @@ public class WorkBook implements Iterable<Row> {
      * @param systemResource Excel 文件对象
      * @return 加载的 Workbook 实例
      */
-    public static WorkBook load(SystemResource systemResource) {
+    public static WorkBook load(File systemResource) {
         return new WorkBook(systemResource);
     }
 
@@ -587,19 +588,19 @@ public class WorkBook implements Iterable<Row> {
      * @param path 目标文件的路径
      */
     public void transferTo(String path) {
-        transferTo(new SystemResource(path));
+        transferTo(new File(path));
     }
 
     /**
      * #brief: 将数据转移到指定的可变文件
      *
-     * <p>将当前数据写入到指定的 {@link SystemResource} 对象中。
+     * <p>将当前数据写入到指定的 {@link File} 对象中。
      * 通过文件对象的字节写入器将数据写入文件。
      *
      * @param file 目标可变文件对象
      */
-    public void transferTo(SystemResource file) {
-        file.openOutputStream(stream -> stream.write(toByteArray()));
+    public void transferTo(File file) {
+        IOUtils.write(file, toByteArray());
     }
 
     public byte[] toByteArray() {

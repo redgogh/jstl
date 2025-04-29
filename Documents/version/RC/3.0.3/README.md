@@ -5,7 +5,6 @@
 ## ⭐ 新增新能
 
 - 新增 `Chrono#weekOfYear` 函数获取今天是今年内的第几周。
-- 新增 `FileResource#openRandomAccess` 随机读写访问函数。
 - 新增 `IOUtils#copy` 拷贝文件或文件夹函数。
 - 新增 `IOUtils#move` 移动文件或文件夹函数。
 - 新增 `IOUtils#serialize` 序列化对象函数。
@@ -21,9 +20,8 @@
 - 优化 `Transformer` 命名更新为 `TypeCvt`。
 - 优化 `any*、checkin` 等函数移动到 `Comparators` 类中。
 - 优化 `iface` 包下的函数式接口命名。
-- 移除 `FileResource` 对象中所有随机读写访问接口。
 - 优化 `Pair` 内存布局。
-- 优化 `FileResource#from` 函数避免重复创建对象
+- 移除 `SystemResource` 对象。
 
 ## 🐞 BUG 修复
 

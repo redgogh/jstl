@@ -25,7 +25,6 @@ package org.karatsuba.security.key;
 
 /* Creates on 2025/2/20. */
 
-import org.karatsuba.io.SystemResource;
 import org.karatsuba.utils.Captor;
 
 import java.security.Key;
@@ -56,9 +55,8 @@ public class RSAPrivateKey extends AbstractKey {
         });
     }
 
-    public static RSAPrivateKey fromKeyFile(String filepath) {
-        SystemResource keyfile = new SystemResource(filepath);
-        return fromPEMFormat(strread(keyfile));
+    public static RSAPrivateKey fromKeyFile(String path) {
+        return fromPEMFormat(strread(path));
     }
 
     public static RSAPrivateKey fromPEMFormat(String pem) {

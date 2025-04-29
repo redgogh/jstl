@@ -18,9 +18,10 @@ package org.karatsuba.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karatsuba.io.SystemResource;
 import org.karatsuba.security.Codec;
 import org.junit.Test;
+
+import java.io.File;
 
 @SuppressWarnings("ALL")
 public class CodecTest {
@@ -72,7 +73,7 @@ public class CodecTest {
      */
     @Test
     public void sha256FileEncodTest() {
-        System.out.println(Codec.SHA256.encode(new SystemResource("Desktop://import.7z")));
+        System.out.println(Codec.SHA256.encode(new File("import.7z")));
     }
 
     /**

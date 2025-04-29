@@ -18,10 +18,10 @@ package org.karatsuba.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.karatsuba.io.SystemResource;
 import org.karatsuba.reflect.ObjectSerializer;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.Serializable;
 
 @SuppressWarnings("ALL")
@@ -39,15 +39,14 @@ public class ObjectSerializerTest {
 
     @Test
     public void serializeTest() {
-        ObjectSerializer.serialize(new User("Judy"), new SystemResource("Desktop://judy.ser"));
+        ObjectSerializer.serialize(new User("Judy"), new File("Desktop://judy.ser"));
     }
 
     @Test
     public void deserializeTest() {
-        SystemResource systemResource = new SystemResource("Desktop://judy.ser");
+        File systemResource = new File("Desktop://judy.ser");
         User user = (User) ObjectSerializer.deserialize(systemResource);
         System.out.println(user);
-        systemResource.forceDelete();
     }
 
 

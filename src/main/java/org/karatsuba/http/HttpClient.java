@@ -21,13 +21,13 @@ package org.karatsuba.http;
 import com.alibaba.fastjson.JSON;
 import org.karatsuba.collection.Maps;
 import org.karatsuba.exception.HttpRequestException;
-import org.karatsuba.io.SystemResource;
 import org.karatsuba.string.StringUtils;
 import org.karatsuba.utils.Assert;
 import org.karatsuba.utils.Captor;
 import org.karatsuba.utils.Optional;
 import okhttp3.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -461,10 +461,9 @@ public class HttpClient {
 
             for (Map.Entry<String, Object> entry : multipartBody.entrySet()) {
                 Object value = entry.getValue();
-                if (value instanceof SystemResource) {
-                    SystemResource systemResource = (SystemResource) value;
-                    builder.addFormDataPart(entry.getKey(), systemResource.getName(),
-                            RequestBody.create(systemResource, MediaType.parse("text/plain")));
+                if (value instanceof File) {
+                    File file = (File) value;
+                    builder.addFormDataPart(entry.getKey(), file.getName(), RequestBody.create(file, MediaType.parse("text/plain")));
                 } else {
                     builder.addFormDataPart(entry.getKey(), atos(value));
                 }

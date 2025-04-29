@@ -89,7 +89,7 @@ public class IOUtils {
      */
     public static byte[] read(java.io.File file) {
         Assert.isTrue(file != null && file.isFile(), "文件不能为空且不能是目录！");
-        return read(SystemResource.from(file).openInputStream());
+        return Captor.call(() -> read(new FileInputStream(file)));
     }
 
     /**
@@ -193,7 +193,7 @@ public class IOUtils {
      * @return 从文件描述符中读取到的字符串文本
      */
     public static String strread(String path) {
-        return strread(new SystemResource(path));
+        return strread(new File(path));
     }
 
     /**
@@ -238,14 +238,14 @@ public class IOUtils {
      * @param input
      *        输入流
      *
-     * @param systemResource
-     *        {@link SystemResource} 文件对象实例（如果文件不存在，则会创建）
+     * @param file
+     *        {@link File} 文件对象实例（如果文件不存在，则会创建）
      */
-    public static void write(InputStream input, SystemResource systemResource) {
+    public static void write(InputStream input, File file) {
         FileOutputStream writer = null;
         try {
-            writer = systemResource.openOutputStream();
-            write(input, writer);
+            writer = new FileOutputStream(file);
+            write(writer, input);
         } catch (Exception e) {
             throw new IOWriteException(e);
         } finally {
@@ -255,19 +255,20 @@ public class IOUtils {
 
     /**
      * 写入字符串 {@code input} 到指定的文件输出流中，字符串以字节流的形式写入。
-     * 如果比较关注字符串编码建议使用 {@link #write(byte[], OutputStream)}
+     * 如果比较关注字符串编码建议使用 {@link #write(OutputStream, byte[])}
      * 函数来代替当前函数做写入操作。<p>
      *
      * 数据写入完成后会自动关闭文件的输出流。
      *
+     * @param file
+     *        {@link File} 文件对象实例（如果文件不存在，则会创建）
+     *
      * @param input
      *        字符串
      *
-     * @param systemResource
-     *        {@link SystemResource} 文件对象实例（如果文件不存在，则会创建）
      */
-    public static void write(String input, SystemResource systemResource) {
-        write(input.getBytes(), systemResource);
+    public static void write(File file, String input) {
+        write(file, input.getBytes());
     }
 
     /**
@@ -276,17 +277,18 @@ public class IOUtils {
      *
      * 数据写入完成后会自动关闭文件的输出流。
      *
+     * @param file
+     *        指定输出流
+     *
      * @param b
      *        字节数组缓冲区
      *
-     * @param systemResource
-     *        指定输出流
      */
-    public static void write(byte[] b, SystemResource systemResource) {
+    public static void write(File file, byte[] b) {
         FileOutputStream writer = null;
         try {
-            writer = systemResource.openOutputStream();
-            write(b, writer);
+            writer = new FileOutputStream(file);
+            write(writer, b);
         } catch (Throwable e) {
             throw new IOWriteException(e);
         } finally {
@@ -304,18 +306,19 @@ public class IOUtils {
      * <p>
      * 这个函数会自动关闭 {@code input} 输入流，无需调用者手动关闭输入流。
      *
+     * @param stream
+     *        指定输出流
+     *
      * @param input
      *        输入流
      *
-     * @param stream
-     *        指定输出流
      */
-    public static void write(InputStream input, OutputStream stream) {
+    public static void write(OutputStream stream, InputStream input) {
         try {
             byte[] buf = new byte[DEFAULT_BYTE_BUFFER_SIZE];
             int len;
             while ((len = read(buf, input)) != EOF)
-                write(buf, 0, len, stream);
+                write(stream, buf, 0, len);
         } catch (Throwable e) {
             throw new IOWriteException(e);
         } finally {
@@ -327,32 +330,34 @@ public class IOUtils {
 
     /**
      * 写入字符串 {@code input} 到指定的输出流中，字符串以字节流的形式写入。如果比较
-     * 关注字符串编码建议使用 {@link #write(byte[], OutputStream)} 函数来代替当前
+     * 关注字符串编码建议使用 {@link #write(OutputStream,byte[])} 函数来代替当前
      * 函数做写入操作。
+     *
+     * @param stream
+     *        指定输出流
      *
      * @param input
      *        字符串
      *
-     * @param stream
-     *        指定输出流
      */
-    public static void write(String input, OutputStream stream) {
+    public static void write(OutputStream stream, String input) {
         byte[] bytes = input.getBytes();
-        write(bytes, 0, bytes.length, stream);
+        write(stream, bytes, 0, bytes.length);
     }
 
     /**
      * 将整个 {@code b} 字节数组缓冲区的内容写入到指定的输出流 {@code stream}。
      * 这个函数不需要捕获任何异常，它能 “安静” 的写入数据。
      *
+     * @param stream
+     *        指定输出流
+     *
      * @param b
      *        字节数组缓冲区
      *
-     * @param stream
-     *        指定输出流
      */
-    public static void write(byte[] b, OutputStream stream) {
-        write(b, 0, b.length, stream);
+    public static void write(OutputStream stream, byte[] b) {
+        write(stream, b, 0, b.length);
     }
 
     /**
@@ -363,6 +368,9 @@ public class IOUtils {
      * 去捕获异常信息。
      * <p>
      * 该函数可以写入任何继承了 {@link OutputStream} 的子类。
+     *
+     * @param stream
+     *        继承了 {@link OutputStream} 的所有子类
      *
      * @param b
      *        要写入的字节数组
@@ -375,11 +383,8 @@ public class IOUtils {
      *        写入数据的总长度，这个长度不能大于 {@code b.length} 同时它也
      *        不能小于 {@code off}
      *
-     * @param stream
-     *        继承了 {@link OutputStream} 的所有子类
      */
-    public static void write(byte[] b, int off, int len,
-                             OutputStream stream) {
+    public static void write(OutputStream stream, byte[] b, int off, int len) {
         Captor.call(() -> stream.write(b, off, len));
     }
 
@@ -394,7 +399,7 @@ public class IOUtils {
      * @param dst  目标文件路径
      */
     public static void copy(String src, String dst) {
-        copy(new SystemResource(src), new SystemResource(dst));
+        copy(new File(src), new File(dst));
     }
 
     /**
@@ -408,21 +413,7 @@ public class IOUtils {
      * @param dst  目标文件路径
      */
     public static void copy(File src, String dst) {
-        copy(SystemResource.from(src), new SystemResource(dst));
-    }
-
-    /**
-     * 复制 {@code src} 文件或目录到 {@code dst} 目标路径。该方法支持
-     * {@link SystemResource} 类型文件对象，可直接操作文件的物理存储。
-     * <p>
-     * 当目标路径为目录时，会保持原文件名不变；当目标路径为文件时，
-     * 直接覆盖目标文件。该方法会保证数据完整性，适用于高并发文件操作环境。
-     *
-     * @param src  源物理文件对象
-     * @param dst  目标物理文件对象
-     */
-    public static void copy(SystemResource src, SystemResource dst) {
-        copy(src, (File) dst);
+        copy(src, new File(dst));
     }
 
     /**
@@ -441,14 +432,11 @@ public class IOUtils {
         if (src == null || dst == null)
             throw new IllegalArgumentException("源文件和目标文件不能为空");
 
-        SystemResource srcFile = !(src instanceof SystemResource) ? SystemResource.from(src) : (SystemResource) src;
-        SystemResource dstFile = !(dst instanceof SystemResource) ? SystemResource.from(dst) : (SystemResource) dst;
-
-        Path srcPath = Paths.get(srcFile.getPath());
-        Path dstPath = Paths.get(dstFile.getPath());
+        Path srcPath = Paths.get(src.getPath());
+        Path dstPath = Paths.get(dst.getPath());
 
         // 如果是文件，直接复制
-        if (srcFile.isFile()) {
+        if (src.isFile()) {
             Captor.call(() -> Files.copy(srcPath, dstPath, StandardCopyOption.REPLACE_EXISTING));
             return;
         }
@@ -486,7 +474,7 @@ public class IOUtils {
      * @param dst  目标文件路径
      */
     public static void move(String src, String dst) {
-        move(new SystemResource(src), new SystemResource(dst));
+        move(new File(src), new File(dst));
     }
 
     /**
@@ -499,21 +487,7 @@ public class IOUtils {
      * @param dst  目标文件路径
      */
     public static void move(File src, String dst) {
-        move(SystemResource.from(src), new SystemResource(dst));
-    }
-
-    /**
-     * 移动 {@code src} 物理文件或目录到 {@code dst} 物理目标路径。该方法
-     * 适用于文件系统底层操作，确保高效性和可靠性。
-     * <p>
-     * 如果目标路径为目录，则会保持原文件名不变；如果目标路径为文件，
-     * 直接覆盖目标文件。
-     *
-     * @param src  源物理文件对象
-     * @param dst  目标物理文件对象
-     */
-    public static void move(SystemResource src, SystemResource dst) {
-        move(src, (File) dst);
+        move(src, new File(dst));
     }
 
     /**
@@ -542,7 +516,7 @@ public class IOUtils {
      * @param object  要序列化的对象
      * @param file    目标文件
      */
-    public static void serialize(Object object, SystemResource file) {
+    public static void serialize(Object object, File file) {
         ObjectSerializer.serialize(object, file);
     }
 
@@ -554,7 +528,7 @@ public class IOUtils {
      * @param file  源文件
      * @return      反序列化后的对象
      */
-    public static Object deserialize(SystemResource file) {
+    public static Object deserialize(File file) {
         return ObjectSerializer.deserialize(file);
     }
 
