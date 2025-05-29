@@ -339,7 +339,7 @@ public class UClass {
     }
 
     /**
-     * #brief: 读取指定名称的字段值（不允许为 null）
+     * #brief: 读取指定名称的字段值
      *
      * <p>根据字段名称从当前实例中读取字段值。如果未找到该字段，将抛出异常。
      * 该方法确保字段存在，以避免潜在的 `null` 值处理。
@@ -355,7 +355,7 @@ public class UClass {
     }
 
     /**
-     * #brief: 读取指定名称的字段值（不允许为 null）
+     * #brief: 读取指定名称的字段值
      *
      * <p>根据字段名称从当前实例中读取字段值。如果未找到该字段，将抛出异常。
      * 该方法确保字段存在，以避免潜在的 `null` 值处理。
@@ -377,6 +377,7 @@ public class UClass {
                 case RETURN_NULL -> {
                     return null;
                 }
+                default -> throw new IllegalStateException("不支持的 OnMissing 枚举类型");
             }
         }
 
