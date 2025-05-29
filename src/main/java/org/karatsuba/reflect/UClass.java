@@ -350,7 +350,6 @@ public class UClass {
      * @return 指定字段的值
      * @throws IllegalArgumentException 如果未找到指定字段
      */
-    @SuppressWarnings("unchecked")
     public <R> R unveil(String name, Object instance) {
         return unveil(name, instance, OnMissing.THROW_EXCEPTION);
     }
