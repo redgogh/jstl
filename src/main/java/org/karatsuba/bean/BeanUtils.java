@@ -20,6 +20,7 @@ package org.karatsuba.bean;
 
 /* Creates on 2023/4/29. */
 
+import org.karatsuba.reflect.OnMissing;
 import org.karatsuba.reflect.UField;
 import org.karatsuba.reflect.UClass;
 import org.karatsuba.utils.Captor;
@@ -118,7 +119,7 @@ public class BeanUtils {
             String name = dstField.getName();
             if (ignores.length > 0 && strcheckin(name, ignores))
                 continue;
-            Captor.icall(() -> dstField.write(dst, srcClass.readFieldValue(name, src)));
+            Captor.icall(() -> dstField.write(dst, srcClass.unveil(name, src)));
         }
     }
 

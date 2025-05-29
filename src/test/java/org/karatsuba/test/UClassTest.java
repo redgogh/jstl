@@ -18,6 +18,7 @@ package org.karatsuba.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
+import org.karatsuba.reflect.OnMissing;
 import org.karatsuba.reflect.UClass;
 import org.karatsuba.reflect.UField;
 import org.junit.Test;
@@ -63,7 +64,7 @@ public class UClassTest {
     @Test
     public void readFieldValueTest() {
         User judy = new User("Judy");
-        System.out.println((String) new UClass(judy).readFieldValue("name", judy));
+        System.out.println((String) new UClass(judy).unveil("name", judy, OnMissing.THROW_EXCEPTION));
     }
 
     @Test
