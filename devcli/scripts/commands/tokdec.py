@@ -17,12 +17,13 @@
 """
 import console
 import base64
+import json
 
 pathname = __file__.replace('\\', '/')
 script_name = pathname.split('/')[-1].split('.')[0]
 
 configure = {
-    'desc': 'Base64解码器',
+    'desc': 'JWT解码器',
     'sys': 'Windows/Linux/MacOS',
 }
 
@@ -36,8 +37,7 @@ def reg(subparsers):
     :param subparsers: argparse 模块创建的子解析器对象，用于添加子命令。
     """
     parser = subparsers.add_parser(script_name, help=f"{configure['desc']} ({configure['sys']})")
-    parser.add_argument('value', type=str, help='Base64字符串')
-    parser.add_argument('--url-safe', action='store_true', help='使用URL安全字符编码')
+    parser.add_argument('token', type=str, help='Token')
 
 def handle(args):
     """
@@ -48,9 +48,22 @@ def handle(args):
 
     :param args: argparse 模块解析后的参数对象，包含用户输入的参数及选项。
     """
-    original_bytes = args.value.encode('UTF-8')
+    token = args.token.strip()
 
-    if args.url_safe:
-        console.write(base64.urlsafe_b64decode(original_bytes).decode('utf-8'))
-    else:
-        console.write(base64.b64decode(original_bytes))
+    if token.startswith('Bearer '):
+        token = token[len('Bearer '):]
+
+    console.write('-- JWT Token --', color=console.RED)
+    console.write(f'{token}\n')
+    parts = token.split('.')
+
+    console.write('-- JWT Header --', color=console.RED)
+    header_decode = base64.urlsafe_b64decode(parts[0]).decode('utf-8')
+    console.write(f'{json.dumps(json.loads(header_decode), indent=2, ensure_ascii=False)}', color=console.GREEN)
+
+    console.write('') # 换行
+
+    console.write('-- JWT Payload --', color=console.RED)
+    padding = '=' * (-len(parts[1]) % 4)
+    payload_decode = base64.urlsafe_b64decode(parts[1] + padding).decode('utf-8')
+    console.write(f'{json.dumps(json.loads(payload_decode), indent=2, ensure_ascii=False)}', color=console.GREEN)
