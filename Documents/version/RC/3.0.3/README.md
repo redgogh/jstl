@@ -23,6 +23,7 @@
 - 优化 `Pair` 内存布局。
 - 移除 `SystemResource` 对象。
 - 优化 `Lists` 取第一个和最后一个元素方法。
+- 优化 `fromVarargs` 函数，改名为 `of`。
 
 ## 🐞 BUG 修复
 

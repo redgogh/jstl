@@ -138,7 +138,7 @@ public class JWTSigner {
 
             JWTClaimsSet claimsSet = builder.build();
 
-            JWSHeader header = JWSHeader.parse(Maps.fromVarargs(
+            JWSHeader header = JWSHeader.parse(Maps.of(
                     "alg", algorithm.getName(),
                     "typ", "JWT"
             ));
