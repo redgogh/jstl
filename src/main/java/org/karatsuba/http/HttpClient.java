@@ -93,7 +93,7 @@ public class HttpClient {
     private HttpClient(String method, String url) {
         String upperMethod = StringUtils.uppercase(method);
         this.method = Optional.ifError(() -> HttpMethod.valueOf(upperMethod), null);
-        Assert.notNull(this.method, "不支持的请求方式 - %s", this.method.name());
+        Assert.notNull(this.method, "不支持的请求方式 - %s", this.method);
         this.url = url;
     }
 
