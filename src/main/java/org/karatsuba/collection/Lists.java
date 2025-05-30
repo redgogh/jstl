@@ -78,8 +78,6 @@ import java.util.*;
  */
 public class Lists {
 
-    private static final List<?> EMPTY_LIST = Collections.emptyList();
-
     /**
      * 判断参数 {@code a} 实现了 {@link Collection} 接口的对象实例，是否为空。如果要满足函数
      * 返回 {@code false} 那么该对象不能为 {@code null} 并且该对象的 {@code size} 必须大
@@ -106,24 +104,20 @@ public class Lists {
      * @return 返回 {@link Collection} 接口实例中的第一个元素，如果 {@link Collection}
      *         对象为 {@code null} 或 {@code size} == 0 那么则会返回 {@code null}
      */
-    @SuppressWarnings("unchecked")
-    public static <E> E beg(Collection<E> collection) {
-        if (collection == null || collection.isEmpty())
+    public static <E> E firstElement(List<E> list) {
+        if (list == null || list.isEmpty())
             return null;
-        Object[] array = collection.toArray();
-        return (E) array[0];
+        return list.get(0);
     }
 
     /**
      * @return 返回 {@link Collection} 接口实例中的最后一个元素，如果 {@link Collection}
      *         对象为 {@code null} 或 {@code size} == 0 那么则会返回 {@code null}
      */
-    @SuppressWarnings("unchecked")
-    public static <E> E end(Collection<E> collection) {
-        if (collection == null || collection.isEmpty())
+    public static <E> E endElement(List<E> list) {
+        if (list == null || list.isEmpty())
             return null;
-        Object[] array = collection.toArray();
-        return (E) array[array.length - 1];
+        return list.get(list.size() - 1);
     }
 
     /**
@@ -134,7 +128,7 @@ public class Lists {
      * @return 拷贝后的新 {@link ArrayList} 对象实例
      */
     public static <E> List<E> copy(Collection<E> a) {
-        return new ArrayList<>(a);
+        return a == null ? newArrayList() : newArrayList(a);
     }
 
     /**
@@ -168,9 +162,8 @@ public class Lists {
      *
      * @see #newArrayList(Collection)
      */
-    @SuppressWarnings("unchecked")
     public static <E> ArrayList<E> newArrayList(E[] a, int off, int len) {
-        return (ArrayList<E>) newArrayList(Arrays.asList(a, off, len));
+        return newArrayList(Arrays.asList(Arrays.copyOfRange(a, off, off + len)));
     }
 
     /**
@@ -215,9 +208,8 @@ public class Lists {
      * 返回一个静态化的空集合，该集合通常用于确保一个集合的实例对象不会为
      * 空对象。
      */
-    @SuppressWarnings("unchecked")
     public static <E> List<E> emptyList() {
-        return (List<E>) EMPTY_LIST;
+        return Collections.emptyList();
     }
 
     /**

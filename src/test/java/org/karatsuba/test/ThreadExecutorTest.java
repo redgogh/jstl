@@ -49,7 +49,7 @@ public class ThreadExecutorTest {
         executor.awaitTermination(30, TimeUnit.SECONDS);
 
         Integer sum = numbers.stream().reduce(0, Integer::sum);
-        System.out.println("beg="+ Lists.beg(numbers) + ", sum=" + sum);
+        System.out.println("beg="+ Lists.firstElement(numbers) + ", sum=" + sum);
     }
 
 }
