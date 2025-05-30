@@ -80,6 +80,8 @@ public class HttpClient {
         GET, POST, PUT, PATCH, DELETE, HEAD
     }
 
+    private static final OkHttpClient CLIENT = new OkHttpClient();
+
     /**
      * #brief: 构造一个 `HttpClient` 实例
      *
@@ -412,7 +414,7 @@ public class HttpClient {
         if (queryArgumentsBuilder != null)
             url = queryArgumentsBuilder.argConcatBuild(url);
 
-        OkHttpClient.Builder clientBuilder = new OkHttpClient().newBuilder();
+        OkHttpClient.Builder clientBuilder = CLIENT.newBuilder();
         clientBuilder.connectTimeout(configure.getConnectTimeout(), TimeUnit.MILLISECONDS);
         clientBuilder.readTimeout(configure.getReadTimeout(), TimeUnit.MILLISECONDS);
 
