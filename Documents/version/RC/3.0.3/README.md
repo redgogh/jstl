@@ -27,4 +27,6 @@
 
 ## 🐞 BUG 修复
 
+- 修复 `HttpClient#post(String, RequestConfigure)` 死循环递归调用问题。
+
 ## 🔨 构建工具

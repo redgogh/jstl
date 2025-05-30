@@ -209,7 +209,7 @@ public class HttpClient {
      * @return 响应
      */
     public static org.karatsuba.http.Response post(String url, RequestConfigure configure) {
-        return post(url, configure);
+        return post(url, configure, null);
     }
 
     /**
