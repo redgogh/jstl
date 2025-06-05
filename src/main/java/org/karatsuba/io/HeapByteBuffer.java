@@ -37,7 +37,7 @@ public class HeapByteBuffer extends AbstractByteBuffer {
     /** 确保数据写入时缓冲区内部容量足够 */
     private void ensureCapacity(int size) {
         if (buf.length < (capacity + size)) {
-            byte[] n = new byte[(buf.length + size) + initializeCapacity];
+            byte[] n = new byte[(buf.length + size) * 2];
             System.arraycopy(buf, 0, n, 0, buf.length);
             buf = n;
         }
