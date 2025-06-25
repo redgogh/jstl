@@ -24,6 +24,7 @@ import org.valhalla.iface.TypeMapper;
 import org.valhalla.utils.ArrayUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * `Lists` 是一个工具类，提供了各种对集合（特别是 {@link List} 和 {@link Collection}）
@@ -634,6 +635,23 @@ public class Lists {
         }
 
         return chunks;
+    }
+
+    /**
+     * 对给定集合去重，返回按元素首次出现顺序的列表。
+     *
+     * <p>该方法使用流式处理将输入集合中重复元素移除，返回包含唯一元素的新 List。
+     * 元素的去重依据为其 {@link Object#equals(Object)} 方法。返回结果中元素顺序
+     * 与原集合中首次出现时一致。
+     *
+     * @param collection 要去重的集合，不能为 null
+     * @param <E> 集合中元素的类型
+     * @return 去重后的列表，元素顺序保持原集合中第一次出现顺序
+     * @throws NullPointerException 如果 `collection` 为 null
+     */
+    public static <E> List<E> distinct(Collection<E> collection) {
+        return newArrayList(collection).stream().distinct()
+                .collect(Collectors.toList());
     }
 
 }
