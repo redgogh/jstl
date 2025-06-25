@@ -1,4 +1,4 @@
-# Karatsuba-IO
+# Valhalla
 
 ![offical](Documents/svg/offical.svg)
 ![test](Documents/svg/test.svg)
@@ -42,11 +42,11 @@ mvn clean package -DskipTests
 ```xml
 <dependency>
   <groupId>io.github.redgogh</groupId>
-  <artifactId>karasuba-io</artifactId>
+  <artifactId>valhalla</artifactId>
   <version>3.0.3</version>
 </dependency>
 ```
 
 ## 许可证
 
-Copyright © 2019 Karatsuba-IO Contributors.
+**Copyright © 2019 Valhalla Contributors.**
