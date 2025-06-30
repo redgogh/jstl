@@ -18,38 +18,19 @@ package org.valhalla.test;
 |*                                                                                  *|
 \* -------------------------------------------------------------------------------- */
 
-import org.valhalla.collection.Lists;
-import org.valhalla.generator.Generator;
 import org.junit.Test;
+import org.valhalla.collection.Lists;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
-/**
- * @author Red Gogh
- */
 @SuppressWarnings("ALL")
-public class ThreadExecutorTest {
+public class ListsTest {
 
     @Test
-    public void newExecutorFixedPoolTest() throws InterruptedException {
-        ExecutorService executor = Executors.newFixedThreadPool(128);
-
-        List<Integer> numbers = Lists.newSynchronizedList();
-
-        for (int i = 0; i < (1024 * 1024); i++) {
-            executor.execute(() -> {
-                numbers.add(Generator.randomInt(6) + Generator.randomInt(6));
-            });
-        }
-
-        executor.shutdown();
-        executor.awaitTermination(30, TimeUnit.SECONDS);
-
-        Integer sum = numbers.stream().reduce(0, Integer::sum);
-        System.out.println("beg="+ Lists.first(numbers) + ", sum=" + sum);
+    public void splitByChunkSizeTest() {
+        List<String> list = Lists.of("a", "b", "c");
+        List<List<String>> lists = Lists.splitByChunkSize(list, 3);
+        System.out.println(lists.size());
     }
 
 }

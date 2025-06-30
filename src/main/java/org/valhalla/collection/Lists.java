@@ -105,7 +105,7 @@ public class Lists {
      * @return 返回 {@link Collection} 接口实例中的第一个元素，如果 {@link Collection}
      *         对象为 {@code null} 或 {@code size} == 0 那么则会返回 {@code null}
      */
-    public static <E> E firstElement(List<E> list) {
+    public static <E> E first(List<E> list) {
         if (list == null || list.isEmpty())
             return null;
         return list.get(0);
@@ -115,7 +115,7 @@ public class Lists {
      * @return 返回 {@link Collection} 接口实例中的最后一个元素，如果 {@link Collection}
      *         对象为 {@code null} 或 {@code size} == 0 那么则会返回 {@code null}
      */
-    public static <E> E endElement(List<E> list) {
+    public static <E> E last(List<E> list) {
         if (list == null || list.isEmpty())
             return null;
         return list.get(list.size() - 1);
@@ -201,7 +201,7 @@ public class Lists {
      * @see #newArrayList(Collection)
      */
     @SafeVarargs
-    public static <E> ArrayList<E> of(E... a) {
+    public static <E> List<E> of(E... a) {
         return newArrayList(Arrays.asList(a));
     }
 

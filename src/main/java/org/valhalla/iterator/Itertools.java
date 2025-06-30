@@ -35,16 +35,16 @@ public class Itertools {
         int count = (lefts == null || rights == null) ? 0 : Math.min(lefts.size(), rights.size());
 
         if (count == 0)
-            return Lists.newArrayList();
+            return Lists.emptyList();
 
-        List<Pair<A, B>> retPairs = Lists.newArrayList();
+        List<Pair<A, B>> pairs = Lists.newArrayList();
 
         Pair<List<A>, List<B>> zipPair = Pair.of(Lists.newArrayList(lefts), Lists.newArrayList(rights));
 
         for (int i = 0; i < count; i++)
-            retPairs.add(new Pair<>(zipPair.first().get(i), zipPair.second().get(i)));
+            pairs.add(new Pair<>(zipPair.first().get(i), zipPair.second().get(i)));
 
-        return retPairs;
+        return pairs;
     }
 
 }

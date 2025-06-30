@@ -24,6 +24,7 @@
 - 移除 `SystemResource` 对象。
 - 优化 `Lists` 取第一个和最后一个元素方法。
 - 优化 `fromVarargs` 函数，改名为 `of`。
+- 优化 `firstElement/lastElement` 方法命名，改为 `first/last`。
 
 ## 🐞 BUG 修复
 
