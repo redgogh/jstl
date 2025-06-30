@@ -1,7 +1,8 @@
-[FE] <Feature>
-[OP] <Optimize>
-[RE] <Refactor>
-[BF] <Bugfix>
-[DC] <Document>
-[TS] <Test>
-[VD] <Vendor/Dependency>
+[FE]   <Feature>
+[OP]   <Optimize>
+[RE]   <Refactor>
+[BUG]  <Bugfix>
+[DOC]  <Document>
+[TEST] <Test>
+[DEP]  <Dependency>
+[CI]   <CI/CD>
