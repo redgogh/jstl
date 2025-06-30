@@ -19,13 +19,14 @@ package org.veronica.utils;
 \* -------------------------------------------------------------------------------- */
 
 import org.veronica.iface.TypeMapper;
-import org.veronica.io.ByteBuffer;
 import org.veronica.exception.UnsupportedOperationException;
 import org.veronica.reflect.UClass;
 import org.veronica.string.StringInterface;
 import org.veronica.string.StringUtils;
 
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 /**
  * TypeCvt 类提供了多种类型转换和比较功能。
@@ -88,22 +89,23 @@ public class TypeCvt {
 
         // int
         if (obj instanceof Integer) {
-            ByteBuffer buffer = ByteBuffer.allocate();
-            buffer.writeInt((int) obj);
-            return buffer.seekSet(0).toByteArray();
+            int writeBytes = Integer.BYTES;
+            ByteBuffer buffer = ByteBuffer.allocate(writeBytes);
+            buffer.putInt((int) obj);
+            return Arrays.copyOf(buffer.array(), writeBytes);
         }
 
         // long
         if (obj instanceof Long) {
-            ByteBuffer buffer = ByteBuffer.allocate();
-            buffer.writeLong((long) obj);
-            return buffer.seekSet(0).toByteArray();
+            int writeBytes = Long.BYTES;
+            ByteBuffer buffer = ByteBuffer.allocate(writeBytes);
+            buffer.putLong((long) obj);
+            return Arrays.copyOf(buffer.array(), writeBytes);
         }
 
         // string or hex string
-        if (obj instanceof String) {
+        if (obj instanceof String)
             return ((String) obj).getBytes(StandardCharsets.UTF_8);
-        }
 
         throw new UnsupportedOperationException("atob：暂不支持当前类型【%s】转字节数组", new UClass(obj));
     }
@@ -161,8 +163,11 @@ public class TypeCvt {
      * @return 转换后的 int 类型数据。
      */
     public static int atoi(byte[] b, int off) {
-        return ByteBuffer.wrap(b, off, Integer.BYTES)
-                .seekSet(0).readInt();
+        int readBytes = Integer.BYTES;
+        if (b == null || off < 0 ||  (b.length - off) < readBytes)
+            throw new IndexOutOfBoundsException("无法读取 int，数组长度=" + (b == null ? "null" : b.length) + "，偏移量=" + off);
+
+        return ByteBuffer.wrap(b, off, readBytes).getInt();
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////
@@ -224,8 +229,11 @@ public class TypeCvt {
      * @return 转换后的 long 类型数据。
      */
     public static long atol(byte[] b, int off) {
-        return ByteBuffer.wrap(b, off, Long.BYTES)
-                .seekSet(0).readLong();
+        int readBytes = Long.BYTES;
+        if (b == null || off < 0 ||  (b.length - off) < readBytes)
+            throw new IndexOutOfBoundsException("无法读取 long，数组长度=" + (b == null ? "null" : b.length) + "，偏移量=" + off);
+
+        return ByteBuffer.wrap(b, off, readBytes).getLong();
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////

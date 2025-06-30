@@ -19,7 +19,6 @@ package org.veronica.http;
 \* -------------------------------------------------------------------------------- */
 
 import com.alibaba.fastjson.JSONObject;
-import org.veronica.io.ByteBuffer;
 import org.veronica.string.StringUtils;
 import org.veronica.utils.Optional;
 import org.veronica.io.IOUtils;
@@ -89,12 +88,6 @@ public class Response extends JSONObject {
      * 响应头
      */
     private final Headers headers;
-
-    /**
-     * 文件或二进制资源
-     */
-    private transient final ByteBuffer byteBuffer =
-            ByteBuffer.allocate(16 * IOUtils.KB);
 
     /**
      * #brief: 使用状态码和 JSON 字符串初始化响应对象
